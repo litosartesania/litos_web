@@ -125,6 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!form) return;
 
     form.addEventListener('submit', async (e) => {
+        // If it's a Google Forms URL, let the browser handle it natively (with the hidden iframe)
+        if (form.action && form.action.includes('docs.google.com/forms')) {
+            return;
+        }
+
         e.preventDefault();
 
         // — Validación local —
