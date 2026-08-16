@@ -239,7 +239,7 @@
         </div>
     </section>
 
-    <!-- ===================== CONTACTO ===================== -->
+   <!-- ===================== CONTACTO ===================== -->
     <section id="contacto" class="contacto fade-in">
         <div class="container-narrow">
             <div class="contacto-header">
@@ -252,35 +252,22 @@
                 </div>
             </div>
 
-            <!--
-                FORMULARIO CON FORMSPREE — Envío real a litos.artesania@gmail.com
-                ────────────────────────────────────────────────────────────────
-                Para activarlo (es gratuito):
-                  1. Ve a https://formspree.io y crea una cuenta gratuita
-                  2. Haz clic en "+ New Form", pon el email litos.artesania@gmail.com
-                  3. Copia tu ID de formulario (ej: xpwzgkab)
-                  4. Sustituye YOUR_FORM_ID en el action de abajo por ese ID
-                ────────────────────────────────────────────────────────────────
-            -->
+            <!-- Formulario conectado directamente a Google Forms (Envío nativo sin JS) -->
             <form
                 id="contact-form"
                 class="b2b-form"
-                action="https://formspree.io/f/YOUR_FORM_ID"
+                action="https://docs.google.com/forms/d/e/1FAIpQLSfzOECml2XR6rWViL2FMk-73OZIZPLdsUB4AukcFFuloiEPDQ/formResponse"
                 method="POST"
-                novalidate>
-
-                <input type="hidden" name="_subject" value="Nueva solicitud de proyecto — Litos Web">
-                <!-- Anti-spam honeypot -->
-                <input type="text" name="_gotcha" style="display:none">
+                target="hidden_iframe">
 
                 <div class="form-group row">
                     <div class="input-wrapper">
-                        <input type="text" id="nombre" name="nombre" required placeholder=" " autocomplete="name">
+                        <input type="text" id="nombre" name="entry.279852228" required placeholder=" " autocomplete="name">
                         <label for="nombre">Nombre / Estudio</label>
                         <span class="error-msg">Por favor, introduzca su nombre o estudio.</span>
                     </div>
                     <div class="input-wrapper">
-                        <input type="email" id="email" name="email" required placeholder=" " autocomplete="email">
+                        <input type="email" id="email" name="entry.845205969" required placeholder=" " autocomplete="email">
                         <label for="email">Correo Electrónico</label>
                         <span class="error-msg">Por favor, introduzca un correo válido.</span>
                     </div>
@@ -288,18 +275,18 @@
 
                 <div class="form-group row">
                     <div class="input-wrapper">
-                        <input type="tel" id="telefono" name="telefono" placeholder=" " autocomplete="tel">
+                        <input type="tel" id="telefono" name="entry.1813010176" placeholder=" " autocomplete="tel">
                         <label for="telefono">Teléfono (opcional)</label>
                     </div>
                     <div class="input-wrapper">
-                        <input type="text" id="tipo-proyecto" name="tipo_proyecto" placeholder=" ">
+                        <input type="text" id="tipo-proyecto" name="entry.1039029663" placeholder=" ">
                         <label for="tipo-proyecto">Tipo de proyecto</label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="input-wrapper">
-                        <textarea id="mensaje" name="mensaje" rows="5" required placeholder=" "></textarea>
+                        <textarea id="mensaje" name="entry.293461064" rows="5" required placeholder=" "></textarea>
                         <label for="mensaje">Detalles del Proyecto</label>
                         <span class="error-msg">Por favor, proporcione detalles del proyecto.</span>
                     </div>
@@ -308,20 +295,28 @@
                 <div class="form-footer">
                     <button type="submit" class="btn btn-dark" id="submit-btn">
                         <span class="btn-text">Enviar Solicitud</span>
-                        <span class="btn-loading" aria-hidden="true">Enviando…</span>
                     </button>
                     <p class="form-note">Respondemos en menos de 48 h.</p>
                 </div>
 
-                <div id="form-success" class="form-success hidden" role="alert">
+                <!-- Mensaje de éxito integrado que aparecerá al enviar -->
+                <div id="form-success" class="form-success hidden" role="alert" style="margin-top: 1rem; color: #2e7d32;">
                     <p>✦ Gracias. Hemos recibido su solicitud y nos pondremos en contacto a la mayor brevedad.</p>
                 </div>
-                <div id="form-error" class="form-error-msg hidden" role="alert">
-                    <p>Ha ocurrido un error al enviar. Por favor, contáctenos directamente en <a href="mailto:litos.artesania@gmail.com">litos.artesania@gmail.com</a></p>
-                </div>
             </form>
+
+            <!-- Iframe oculto para evitar que la página recargue o salte a Google Forms -->
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { document.getElementById('form-success').classList.remove('hidden'); document.getElementById('contact-form').reset(); }"></iframe>
         </div>
     </section>
+
+    <script>
+        // Variable de control para mostrar el mensaje de éxito al completarse el iframe oculto
+        let submitted = false;
+        document.getElementById('contact-form').addEventListener('submit', function() {
+            submitted = true;
+        });
+    </script>
 
     <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
