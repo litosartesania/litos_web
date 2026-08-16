@@ -4,57 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Litos - La Materia en su Estado más Noble. Mobiliario escultórico B2B.">
+    <meta name="description" content="Litos — Mobiliario monolítico en piedra natural. Fabricación artesanal a medida para proyectos de arquitectura e interiorismo de alto nivel.">
+    <meta name="keywords" content="mobiliario piedra, mármol, diseño artesanal, interiorismo, arquitectura, extremadura, litos">
+    <meta property="og:title" content="Litos | Mobiliario Escultórico en Piedra Natural">
+    <meta property="og:description" content="La Materia en su Estado más Noble. Taller artesanal en Extremadura.">
     <title>Litos | Mobiliario Escultórico</title>
 
     <!-- Tipografía: Playfair Display (Headers) & Montserrat (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <!-- Navegación -->
-    <nav class="navbar fade-in">
-        <div class="logo">LITOS</div>
-        <a href="#contacto" class="nav-link">Contacto</a>
+    <!-- ===================== NAVEGACIÓN ===================== -->
+    <nav class="navbar" id="navbar">
+        <a href="#hero" class="logo">LITOS</a>
+
+        <!-- Menú desktop -->
+        <ul class="nav-links">
+            <li><a href="#manifiesto" class="nav-link">Nosotros</a></li>
+            <li><a href="#coleccion" class="nav-link">Colección</a></li>
+            <li><a href="#proceso" class="nav-link">Proceso</a></li>
+            <li><a href="#contacto" class="nav-link nav-cta">Iniciar Proyecto</a></li>
+        </ul>
+
+        <!-- Hamburger (móvil) -->
+        <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Menú móvil overlay -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <ul>
+            <li><a href="#manifiesto" class="mobile-link">Nosotros</a></li>
+            <li><a href="#coleccion" class="mobile-link">Colección</a></li>
+            <li><a href="#proceso" class="mobile-link">Proceso</a></li>
+            <li><a href="#contacto" class="mobile-link">Iniciar Proyecto</a></li>
+        </ul>
+    </div>
+
+    <!-- ===================== HERO ===================== -->
     <header id="hero" class="hero fade-in">
         <div class="hero-content">
+            <p class="hero-eyebrow">Taller Artesanal · Extremadura</p>
             <h1 class="hero-title">Litos</h1>
             <p class="hero-subtitle">
                 Mobiliario monolítico en piedra natural.<br>
                 Fabricación a medida para proyectos de arquitectura e interiorismo.
             </p>
-            <a href="#coleccion" class="btn js-scroll">Descubrir las piezas</a>
+            <div class="hero-actions">
+                <a href="#coleccion" class="btn js-scroll">Descubrir las piezas</a>
+                <a href="#contacto" class="btn btn-ghost js-scroll">Iniciar proyecto</a>
+            </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </header>
 
-    <!-- Manifiesto -->
+    <!-- ===================== MANIFIESTO ===================== -->
     <section id="manifiesto" class="manifiesto fade-in delay-1">
         <div class="container-narrow">
             <h2 class="visually-hidden">Manifiesto</h2>
             <p class="manifiesto-text">
                 <span class="highlight">Litos: La Materia en su Estado más Noble.</span><br><br>
-                En el corazón de Extremadura, donde el oficio se hereda y la piedra dicta sus propias reglas...<br>
+                En el corazón de Extremadura, donde el oficio se hereda y la piedra dicta sus propias reglas,<br>
+                cada pieza nace de un único bloque —sin ensamblajes, sin disimulos.<br><br>
                 De la cantera al estudio.<br>
                 Del bloque a la forma.
             </p>
+            <div class="manifiesto-stats">
+                <div class="stat">
+                    <span class="stat-num">100%</span>
+                    <span class="stat-label">Piedra Natural</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-num">A medida</span>
+                    <span class="stat-label">Cada proyecto</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-num">B2B</span>
+                    <span class="stat-label">Arquitectura &amp; Interiorismo</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Colección (Grid) -->
+    <!-- ===================== COLECCIÓN ===================== -->
     <section id="coleccion" class="coleccion fade-in">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Archivo de Obras</h2>
+                <p class="section-eyebrow">Archivo de Obras</p>
+                <h2 class="section-title">Colección</h2>
                 <div class="divider"></div>
             </div>
 
@@ -146,65 +195,166 @@
                         <p>Módulos independientes de apoyo</p>
                     </div>
                 </article>
-
             </div>
         </div>
     </section>
 
-    <!-- Contacto -->
+    <!-- ===================== PROCESO ===================== -->
+    <section id="proceso" class="proceso fade-in">
+        <div class="container-narrow">
+            <div class="section-header">
+                <p class="section-eyebrow">Cómo trabajamos</p>
+                <h2 class="section-title">El Proceso</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="proceso-steps">
+                <div class="step scroll-reveal">
+                    <span class="step-num">01</span>
+                    <div class="step-content">
+                        <h3>Consulta inicial</h3>
+                        <p>Recibimos su proyecto y analizamos materiales, medidas y necesidades específicas del espacio.</p>
+                    </div>
+                </div>
+                <div class="step scroll-reveal delay-1">
+                    <span class="step-num">02</span>
+                    <div class="step-content">
+                        <h3>Selección de piedra</h3>
+                        <p>Elegimos conjuntamente el tipo de piedra —mármol, granito, pizarra, travertino— de nuestra cantera de confianza.</p>
+                    </div>
+                </div>
+                <div class="step scroll-reveal">
+                    <span class="step-num">03</span>
+                    <div class="step-content">
+                        <h3>Talla artesanal</h3>
+                        <p>Cada pieza se trabaja a mano en nuestro taller de Extremadura. Sin moldes, sin atajos.</p>
+                    </div>
+                </div>
+                <div class="step scroll-reveal delay-1">
+                    <span class="step-num">04</span>
+                    <div class="step-content">
+                        <h3>Entrega e instalación</h3>
+                        <p>Gestionamos el transporte y la colocación en el espacio final, coordinados con el equipo de obra.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACTO ===================== -->
     <section id="contacto" class="contacto fade-in">
         <div class="container-narrow">
             <div class="contacto-header">
-                <h2 class="section-title">Inicie un proyecto</h2>
+                <p class="section-eyebrow">Hablemos</p>
+                <h2 class="section-title">Inicie un Proyecto</h2>
                 <div class="divider"></div>
-                <p>Para presupuesto póngase en contacto con nosotros.</p>
+                <p>Trabajamos exclusivamente con estudios de arquitectura, interiorismo y promotores de proyecto. Cuéntenos su idea.</p>
                 <div class="contact-email">
                     <a href="mailto:litos.artesania@gmail.com">litos.artesania@gmail.com</a>
                 </div>
             </div>
 
-            <form id="contact-form" class="b2b-form" novalidate>
+            <!--
+                FORMULARIO CON FORMSPREE — Envío real a litos.artesania@gmail.com
+                ────────────────────────────────────────────────────────────────
+                Para activarlo (es gratuito):
+                  1. Ve a https://formspree.io y crea una cuenta gratuita
+                  2. Haz clic en "+ New Form", pon el email litos.artesania@gmail.com
+                  3. Copia tu ID de formulario (ej: xpwzgkab)
+                  4. Sustituye YOUR_FORM_ID en el action de abajo por ese ID
+                ────────────────────────────────────────────────────────────────
+            -->
+            <form
+                id="contact-form"
+                class="b2b-form"
+                action="https://formspree.io/f/YOUR_FORM_ID"
+                method="POST"
+                novalidate>
+
+                <input type="hidden" name="_subject" value="Nueva solicitud de proyecto — Litos Web">
+                <!-- Anti-spam honeypot -->
+                <input type="text" name="_gotcha" style="display:none">
+
                 <div class="form-group row">
                     <div class="input-wrapper">
-                        <input type="text" id="nombre" name="nombre" required placeholder=" ">
+                        <input type="text" id="nombre" name="nombre" required placeholder=" " autocomplete="name">
                         <label for="nombre">Nombre / Estudio</label>
                         <span class="error-msg">Por favor, introduzca su nombre o estudio.</span>
                     </div>
                     <div class="input-wrapper">
-                        <input type="email" id="email" name="email" required placeholder=" ">
+                        <input type="email" id="email" name="email" required placeholder=" " autocomplete="email">
                         <label for="email">Correo Electrónico</label>
                         <span class="error-msg">Por favor, introduzca un correo válido.</span>
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <div class="input-wrapper">
+                        <input type="tel" id="telefono" name="telefono" placeholder=" " autocomplete="tel">
+                        <label for="telefono">Teléfono (opcional)</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="tipo-proyecto" name="tipo_proyecto" placeholder=" ">
+                        <label for="tipo-proyecto">Tipo de proyecto</label>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="input-wrapper">
-                        <textarea id="mensaje" name="mensaje" rows="4" required placeholder=" "></textarea>
+                        <textarea id="mensaje" name="mensaje" rows="5" required placeholder=" "></textarea>
                         <label for="mensaje">Detalles del Proyecto</label>
                         <span class="error-msg">Por favor, proporcione detalles del proyecto.</span>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-dark">Enviar Solicitud</button>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-dark" id="submit-btn">
+                        <span class="btn-text">Enviar Solicitud</span>
+                        <span class="btn-loading" aria-hidden="true">Enviando…</span>
+                    </button>
+                    <p class="form-note">Respondemos en menos de 48 h.</p>
+                </div>
 
-                <div id="form-success" class="form-success hidden">
-                    <p>Gracias. Hemos recibido su solicitud y nos pondremos en contacto a la mayor brevedad.</p>
+                <div id="form-success" class="form-success hidden" role="alert">
+                    <p>✦ Gracias. Hemos recibido su solicitud y nos pondremos en contacto a la mayor brevedad.</p>
+                </div>
+                <div id="form-error" class="form-error-msg hidden" role="alert">
+                    <p>Ha ocurrido un error al enviar. Por favor, contáctenos directamente en <a href="mailto:litos.artesania@gmail.com">litos.artesania@gmail.com</a></p>
                 </div>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">LITOS</div>
-                <p class="footer-tagline">Taller Artesanal</p>
+        <div class="container footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#hero" class="footer-logo">LITOS</a>
+                    <p class="footer-tagline">La Materia en su Estado más Noble.</p>
+                    <p class="footer-location">Taller Artesanal · Extremadura, España</p>
+                </div>
+                <nav class="footer-nav" aria-label="Navegación secundaria">
+                    <div class="footer-nav-col">
+                        <h4>Menú</h4>
+                        <ul>
+                            <li><a href="#manifiesto">Nosotros</a></li>
+                            <li><a href="#coleccion">Colección</a></li>
+                            <li><a href="#proceso">Proceso</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-nav-col">
+                        <h4>Contacto</h4>
+                        <ul>
+                            <li><a href="mailto:litos.artesania@gmail.com">litos.artesania@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-            <div class="footer-links">
-                <a href="mailto:litos.artesania@gmail.com">litos.artesania@gmail.com</a>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Litos Artesanía. Todos los derechos reservados.</p>
+                <p>Diseñado a mano, como nuestras piezas.</p>
             </div>
-            <div class="footer-copy">&copy; 2026 Litos. Todos los derechos reservados.</div>
         </div>
     </footer>
 
