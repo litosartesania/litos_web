@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Carpetas de trabajo no necesarias en la web
+IMÁGENES/
