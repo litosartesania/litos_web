@@ -5,7 +5,7 @@ from pathlib import Path
 import re,sys
 from urllib.parse import unquote,urlsplit
 root=Path(sys.argv[1] if len(sys.argv)>1 else '_site').resolve()
-pages=['index.html','funerario.html','mobiliario.html']
+pages=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']
 class Inspect(HTMLParser):
  def __init__(self):
   super().__init__(); self.ids=set();self.hrefs=[];self.assets=[];self.forms=[];self.cards=0;self.prices=0
@@ -50,6 +50,13 @@ for page,count in [('funerario.html',3),('mobiliario.html',4)]:
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert len(p.forms)==1 and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
+for page in pages:
+ assert 'href="aviso-legal.html"' in htmls[page],(page,'missing legal link')
+ assert 'href="privacidad.html"' in htmls[page],(page,'missing privacy link')
+for page in ('aviso-legal.html','privacidad.html'):
+ assert not parsers[page].forms,(page,'legal pages must not collect data')
+assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'],'host IP logs must be disclosed'
+assert '[[PENDIENTE_TITULAR_FISCAL]]' in htmls['aviso-legal.html']
 assert 'mobiliario' not in htmls['funerario.html'].lower()
 assert 'funerario' not in htmls['mobiliario.html'].lower()
 assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls['index.html'].lower()
@@ -59,5 +66,6 @@ for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
  if not link.startswith(('data:','#','https:','http:')):assert (root/link).is_file(),link
 if '--production' in sys.argv:
  assert not any('Información legal completa pendiente de validación' in html for html in htmls.values()),'release blocked: legal identity/privacy unverified'
+ assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: 3 distinct pages, {len(actual)} allowed files, prices/routes/privacy audited')
+print(f'PASS: 3 separate commercial pages plus 2 legal drafts; {len(actual)} allowlisted files')
