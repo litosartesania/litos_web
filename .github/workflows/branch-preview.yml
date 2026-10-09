@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'work/luz-rasante-*'
+      - 'work/lote-30-*'
   pull_request:
     branches:
       - main
