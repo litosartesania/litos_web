@@ -1,190 +1,77 @@
-/**
- * LITOS — Script principal
- * Navbar scroll, menú móvil, scroll reveal, envío de formulario con Formspree
- */
+const menuButton = document.querySelector('.menu-button');
+const mobileMenu = document.querySelector('.mobile-menu');
+const menuLinks = mobileMenu ? [...mobileMenu.querySelectorAll('a')] : [];
+const content = document.querySelector('main');
+const footer = document.querySelector('.site-footer');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-document.addEventListener('DOMContentLoaded', () => {
+function setMenu(open, returnFocus = true) {
+  if (!menuButton || !mobileMenu) return;
+  menuButton.setAttribute('aria-expanded', String(open));
+  mobileMenu.hidden = !open;
+  document.body.classList.toggle('menu-open', open);
+  if (content) content.inert = open;
+  if (footer) footer.inert = open;
+  if (open) menuLinks[0]?.focus();
+  else if (returnFocus) menuButton.focus();
+}
 
-    // ─────────────────────────────────────────────
-    // 1. NAVBAR — Efecto glassmorphism al hacer scroll
-    // ─────────────────────────────────────────────
-    const navbar = document.getElementById('navbar');
+menuButton?.addEventListener('click', () => {
+  setMenu(menuButton.getAttribute('aria-expanded') !== 'true');
+});
+menuLinks.forEach((link) => link.addEventListener('click', () => setMenu(false, false)));
 
-    const handleScroll = () => {
-        if (window.scrollY > 60) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Ejecutar al cargar por si empieza con scroll
-
-
-    // ─────────────────────────────────────────────
-    // 2. MENÚ MÓVIL — Hamburger toggle
-    // ─────────────────────────────────────────────
-    const hamburger   = document.getElementById('hamburger');
-    const mobileMenu  = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-
-    const openMenu = () => {
-        hamburger.classList.add('open');
-        mobileMenu.classList.add('open');
-        hamburger.setAttribute('aria-expanded', 'true');
-        mobileMenu.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-    };
-
-    const closeMenu = () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-    };
-
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.contains('open') ? closeMenu() : openMenu();
-    });
-
-    // Cerrar al pulsar un enlace del menú móvil
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-
-    // Cerrar con tecla Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-    });
-
-
-    // ─────────────────────────────────────────────
-    // 3. ANIMACIONES — Intersection Observer
-    // ─────────────────────────────────────────────
-    const fadeElements = document.querySelectorAll('.fade-in, .scroll-reveal');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-
-        fadeElements.forEach(el => observer.observe(el));
-    } else {
-        fadeElements.forEach(el => el.classList.add('visible'));
+document.addEventListener('keydown', (event) => {
+  if (menuButton?.getAttribute('aria-expanded') !== 'true') return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    setMenu(false);
+  }
+  if (event.key === 'Tab') {
+    const focusable = [menuButton, ...menuLinks];
+    const index = focusable.indexOf(document.activeElement);
+    if (event.shiftKey && index <= 0) {
+      event.preventDefault();
+      focusable[focusable.length - 1].focus();
+    } else if (!event.shiftKey && index === focusable.length - 1) {
+      event.preventDefault();
+      focusable[0].focus();
     }
+  }
+});
 
-    // Hero y Navbar siempre visibles al cargar
-    setTimeout(() => {
-        const hero = document.querySelector('.hero');
-        if (hero) hero.classList.add('visible');
-        if (navbar) navbar.classList.add('visible');
-    }, 100);
+const mobileBreakpoint = window.matchMedia('(max-width: 1080px)');
+mobileBreakpoint.addEventListener('change', () => {
+  if (!mobileBreakpoint.matches && menuButton?.getAttribute('aria-expanded') === 'true') setMenu(false, false);
+});
 
+const hero = document.querySelector('.hero');
+if (hero && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+  hero.addEventListener('pointermove', (event) => {
+    const position = Math.max(12, Math.min(82, (event.clientX / window.innerWidth) * 100));
+    hero.style.setProperty('--light-x', `${position}%`);
+  }, { passive: true });
+}
 
-    // ─────────────────────────────────────────────
-    // 4. SMOOTH SCROLL — Todos los anchors internos
-    // ─────────────────────────────────────────────
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId.length <= 1) return;
-            const target = document.querySelector(targetId);
-            if (!target) return;
-            e.preventDefault();
-            const navH = navbar ? navbar.offsetHeight : 0;
-            const top = target.getBoundingClientRect().top + window.scrollY - navH;
-            window.scrollTo({ top, behavior: 'smooth' });
-        });
-    });
-
-
-    // ─────────────────────────────────────────────
-    // 5. FORMULARIO — Floating labels & validación & envío Formspree
-    // ─────────────────────────────────────────────
-    const form       = document.getElementById('contact-form');
-    const submitBtn  = document.getElementById('submit-btn');
-    const successMsg = document.getElementById('form-success');
-    const errorMsg   = document.getElementById('form-error');
-    const inputs     = document.querySelectorAll('.input-wrapper input, .input-wrapper textarea');
-
-    // Limpiar estado de error al escribir
-    inputs.forEach(input => {
-        input.addEventListener('input', () => {
-            input.closest('.input-wrapper').classList.remove('error');
-        });
-    });
-
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-        // If it's a Google Forms URL, let the browser handle it natively (with the hidden iframe)
-        if (form.action && form.action.includes('docs.google.com/forms')) {
-            return;
-        }
-
-        e.preventDefault();
-
-        // — Validación local —
-        let isValid = true;
-        inputs.forEach(input => {
-            if (!input.hasAttribute('required')) return;
-            const wrapper = input.closest('.input-wrapper');
-            const empty   = input.value.trim() === '';
-            const badEmail = input.type === 'email' && !validateEmail(input.value);
-
-            if (empty || badEmail) {
-                wrapper.classList.add('error');
-                isValid = false;
-            } else {
-                wrapper.classList.remove('error');
-            }
-        });
-
-        if (!isValid) return;
-
-        // — Estado loading —
-        submitBtn.classList.add('loading');
-        successMsg.classList.add('hidden');
-        errorMsg.classList.add('hidden');
-
-        // — Envío a Formspree —
-        try {
-            const data     = new FormData(form);
-            const response = await fetch(form.action, {
-                method:  'POST',
-                body:    data,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                // ✅ Éxito
-                form.reset();
-                inputs.forEach(i => i.closest('.input-wrapper').classList.remove('error'));
-                successMsg.classList.remove('hidden');
-                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                // ❌ Error del servidor
-                errorMsg.classList.remove('hidden');
-            }
-        } catch (_) {
-            // ❌ Error de red
-            errorMsg.classList.remove('hidden');
-        } finally {
-            submitBtn.classList.remove('loading');
-        }
-    });
-
-    // Helper de validación de email
-    function validateEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
-    }
-
+// Privacy-first contact: no third-party embedded form or automatic transmission.
+// The visitor reviews and sends the message explicitly from their own mail app.
+const form = document.querySelector('#contact-form');
+const formStatus = document.querySelector('#form-status');
+form?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const get = (key) => String(data.get(key) || '').trim();
+  const subject = `Consulta LITOS — ${get('tipo') || 'Proyecto a medida'}`;
+  const body = [
+    `Nombre o estudio: ${get('nombre')}`,
+    `Correo de contacto: ${get('correo')}`,
+    `Teléfono: ${get('telefono') || 'No indicado'}`,
+    `Tipo de proyecto: ${get('tipo') || 'No indicado'}`,
+    '',
+    'Consulta:',
+    get('mensaje'),
+  ].join('\n');
+  const draft = `mailto:litos.artesania@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (formStatus) formStatus.textContent = 'Se abrirá un borrador en su correo. Revíselo y pulse Enviar; todavía no se ha enviado nada.';
+  window.location.href = draft;
 });

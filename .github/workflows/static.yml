@@ -33,13 +33,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Build explicitly allowlisted site
-        run: node tools/build-preview.mjs --production
+      - name: Validate and build privacy-safe artifact
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+          node --check script.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Only reviewed site files; never publish the repository root.
-          path: 'dist/'
+          # Publish only allowlisted public web files, never repository documents.
+          path: '_site'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

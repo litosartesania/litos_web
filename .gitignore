@@ -1,24 +1,25 @@
-# macOS and local tooling
+# macOS
 .DS_Store
+
+# Carpetas de trabajo no necesarias en la web
+IMÁGENES/
+
+# Generated output and local previews
+_site/
+__pycache__/
+*.zip
+
+# Privacidad y archivos de trabajo
 .env
 .env.*
 !.env.example
 *.pem
 *.key
 *.p12
-*.pfx
-*.sqlite
-*.db
 private/
 secrets/
 backups/
-tmp/
-node_modules/
-dist/
 preview/
-*.zip
-*.bundle
-# Local source exports — do not commit; manually approve individual assets.
+dist/
+node_modules/
 IMÁGENES/
-IMÁGENES/
-LITOS_LUZ_RASANTE*/
