@@ -14,23 +14,36 @@ const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-const image=(p)=>{
- const slug=p[4];if(slug&&imageSources[slug])return imageSources[slug];if(!slug)return '<div class="material-placeholder" aria-label="Sin imagen concreta"><div class="material-placeholder-symbol" aria-hidden="true"></div><span>Propuesta sin imagen propia</span></div>';
- return '<div class="piece-photos">'+[1,2].map(n=>'<figure class="piece-figure"><img src="assets/catalogo/litos-'+slug+'-0'+n+'.webp" loading="lazy" decoding="async" width="720" height="900" alt="Imagen conceptual '+safe(p[1])+' variante '+n+'"><figcaption>Imagen conceptual '+n+' · material visual original</figcaption></figure>').join('')+'</div>';
+// Only files that passed source-image and material-specific visual QA belong here.
+// The 30 manifest entries are still planned; a planned path is never a rendered asset.
+const approvedVariants=Object.freeze({});
+const referenceImage=(p)=>{
+ const slug=p[4];
+ if(slug&&imageSources[slug])return imageSources[slug];
+ if(!slug)return '';
+ return '<div class="piece-photos">'+[1,2].map(n=>'<figure class="piece-figure"><img src="assets/catalogo/litos-'+slug+'-0'+n+'.webp" loading="lazy" decoding="async" width="720" height="900" alt="Imagen conceptual original '+safe(p[1])+' variante '+n+'"><figcaption>Referencia visual original · piedra sin identificar</figcaption></figure>').join('')+'</div>';
 };
-grid.innerHTML=products.map((p,i)=>'<article class="piece-card product-model" data-product="'+safe(p[0])+'" data-category="'+safe(p[2])+'" data-base="'+p[3]+'">'+image(p)+'<div class="piece-details"><p class="piece-index">'+String(i+1).padStart(2,'0')+' / '+safe(p[2].toUpperCase())+' · '+(p[7]?'COMPARABLE':'EXTRAPOLACIÓN')+'</p><h3>'+safe(p[1])+'</h3><p>'+safe(p[6])+'.</p><div class="piece-benchmark"><span>Estimación en <span class="card-material">travertino</span></span><strong class="piece-amount">'+formatter.format(p[3])+'</strong></div><p class="piece-comparison">Referencia externa: <a href="'+links[p[5]]+'" target="_blank" rel="noopener noreferrer">consultar fuente ↗</a>. '+(p[7]?'Precio orientado por artículo o familia comparable.':'Extrapolación de categoría, sin comparable idéntico.')+' No es tarifa de LITOS.</p></div></article>').join('');
-// Browser-only tonal mock-up; the photographic background is recolored too.
- // This is not a physical simulation of stone, its veins, surface or manufacturability.
-const visual={
-travertino:['none',0],caliza:['sepia(.08) saturate(.8) brightness(1.05)',.12],
-macael:['grayscale(.85) brightness(1.13) contrast(.9)',.25],
-carrara:['grayscale(.95) brightness(1.05) contrast(1.16)',.22],
-marquina:['grayscale(1) brightness(.48) contrast(1.55)',.45],
-granito:['grayscale(1) brightness(.78) contrast(1.18)',.25],
-cuarcita:['grayscale(.68) sepia(.17) brightness(.92)',.20],
-calacatta:['grayscale(.55) sepia(.1) brightness(1.12)',.15],
-'verde-alpi':['sepia(.85) saturate(1.45) hue-rotate(70deg) brightness(.75) contrast(1.2)',.64]
+const showMaterial=(card,material)=>{
+ const host=card.querySelector('.material-preview'), key=card.dataset.product+'__'+material[0];
+ const file=approvedVariants[key];
+ if(file){
+  if(!/^assets\\/catalogo\\/variantes\\/[a-z0-9-]+__[a-z0-9-]+\\.webp$/.test(file))throw Error('Unapproved asset path: '+file);
+  host.replaceChildren();
+  const figure=document.createElement('figure');figure.className='material-variant-figure';
+  const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=720;img.height=900;
+  img.alt='Imagen conceptual de '+card.querySelector('h3').textContent+' en '+material[1];
+  const cap=document.createElement('figcaption');cap.textContent='Imagen conceptual de '+material[1]+' · No es una obra ejecutada';
+  figure.append(img,cap);host.append(figure);
+ } else {
+  // On an unavailable combination do not show a photograph of another stone.
+  host.innerHTML='<div class="material-placeholder" role="status"><div class="material-placeholder-symbol" aria-hidden="true"></div><strong>Vista no disponible para este material</strong><span class="material-placeholder-text"></span></div>';
+  host.querySelector('.material-placeholder-text').textContent=material[1]+' · imagen propia pendiente de validación';
+ }
 };
+grid.innerHTML=products.map((p,i)=>'<article class="piece-card product-model" data-product="'+safe(p[0])+'" data-category="'+safe(p[2])+'" data-base="'+p[3]+'">'+
+'<div class="material-preview" aria-label="Vista del material elegido"></div>'+
+(referenceImage(p)?'<details class="concept-reference"><summary>Ver concepto original (piedra no verificada)</summary>'+referenceImage(p)+'</details>':'')+
+'<div class="piece-details"><p class="piece-index">'+String(i+1).padStart(2,'0')+' / '+safe(p[2].toUpperCase())+' · '+(p[7]?'COMPARABLE':'EXTRAPOLACIÓN')+'</p><h3>'+safe(p[1])+'</h3><p>'+safe(p[6])+'.</p><div class="piece-benchmark"><span>Estimación en <span class="card-material">travertino</span></span><strong class="piece-amount">'+formatter.format(p[3])+'</strong></div><p class="piece-comparison">Referencia externa: <a href="'+links[p[5]]+'" target="_blank" rel="noopener noreferrer">consultar fuente ↗</a>. '+(p[7]?'Precio orientado por artículo o familia comparable.':'Extrapolación de categoría, sin comparable idéntico.')+' No es tarifa de LITOS.</p></div></article>').join('');
 const swatch=root.querySelector('#material-color');
 swatch?.addEventListener('click',()=>{
  try{if(typeof picker.showPicker==='function')picker.showPicker();
@@ -45,14 +58,7 @@ function render(){
  const a=root.querySelector('#material-source');a.href=m[4];a.title='Consultar precio índice de '+m[1];
  root.querySelector('#material-color').style.backgroundColor=m[3];
  root.dataset.selectedStone=m[0];
- root.style.setProperty('--stone-photo-filter',visual[m[0]]?.[0]||'none');
- root.style.setProperty('--stone-preview-tint',m[3]);
- root.style.setProperty('--stone-preview-opacity',String(visual[m[0]]?.[1]||0));
  swatch?.setAttribute('aria-label','Elegir otra piedra. Actual: '+m[1]);
- for(const caption of grid.querySelectorAll('.piece-figure figcaption')){
-   caption.textContent=m[0]==='travertino'?'Imagen conceptual original · acabado beige':
-     'Simulación tonal: '+m[1]+' · no reproduce la veta real';
- }
  let count=0;
  for(const card of grid.querySelectorAll('.product-model')){
   card.hidden=category!=='Todos'&&card.dataset.category!==category;
@@ -60,12 +66,12 @@ function render(){
   const base=Number(card.dataset.base),raw=base*(.7+.3*m[2]/70);
   card.querySelector('.piece-amount').textContent=formatter.format(Math.round(raw/10)*10);
   card.querySelector('.card-material').textContent=m[1];
-  card.style.setProperty('--material-swatch',m[3]);
+  showMaterial(card,m);
  }
  root.querySelector('#catalog-count').textContent=count+' propuestas en '+m[1];
 }
 picker.addEventListener('change',render);
 filters.forEach(btn=>btn.addEventListener('click',()=>{category=btn.dataset.categoryFilter;filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));render()}));
 render();
-window.LITOS_CATALOG_INFO=Object.freeze({materials:materials.length,products:products.length,modelSensitivity:0.3,tonalMockup:true});
+window.LITOS_CATALOG_INFO=Object.freeze({materials:materials.length,products:products.length,modelSensitivity:0.3,tonalMockup:false,approvedVariantImages:Object.keys(approvedVariants).length});
 })();
