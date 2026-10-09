@@ -47,3 +47,6 @@ La web no necesita servidor privado ni servicios de pago. No hay formularios com
 Los rangos publicados son **comparables externos, no precios ni presupuestos de LITOS**. Investigación y fuentes: `docs/MARKET_STUDY_2026-10.md`. Para validar el contenido público ejecutar `sh scripts/build-site.sh && python3 scripts/check-site.py _site` y `python3 scripts/visual-qa.py`.
 
 **Límite de la versión pública:** escaparate personal sin monetización ni encargos. Si se promociona un negocio con actividad económica (aunque no permita contratar en línea), puede exigirse identificar al prestador conforme al art. 10 LSSI. No reutilizar estas páginas legales para ventas sin esa revisión.
+
+## Comparador de materiales (9/10/2026)
+La sección de mobiliario presenta 21 ideas y 8 piedras seleccionables. Su precio orientativo reacciona al cambio sin contactar servidores. La fórmula usa una sensibilidad hipotética de 30 % a índices de piedra €/m² de placa; **no es presupuesto ni PVP de LITOS** y no confirma viabilidad de tallas escultóricas. No se generaron imágenes nuevas.
