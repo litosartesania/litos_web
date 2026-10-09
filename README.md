@@ -1,25 +1,25 @@
-# LITOS — Web comercial
+# LITOS — Escaparate informativo
 
 Presentación de LITOS Artesanía: por ahora no se aceptan encargos, ventas ni solicitudes de presupuesto y LITOS todavía no emite facturas propias (según el usuario).
 
-## Arquitectura comercial (separación obligatoria)
+## Arquitectura expositiva (separación obligatoria)
 - `index.html`: portada neutral. El visitante elige una especialidad; **no hay catálogos ni precios en esta página**.
 - `funerario.html`: vista independiente de arte funerario, con sus tres familias de trabajo, referencias de precios funerarios sin formularios de captación comercial.
 - `mobiliario.html`: vista independiente de mobiliario y objetos, cuatro familias con precios de mercado de mobiliario sin formularios de captación comercial.
 - Ninguna subpágina mezcla el contenido o la navegación con la otra. El visitante puede volver al inicio y elegir.
 - `scripts/build-site.sh` genera tres páginas de presentación, dos documentos legales provisionales y los recursos permitidos. Un único JS y CSS compartidos.
-- El PR #1 es borrador; **no fusionar hasta completar validación legal y privacidad**.
+- El PR #1 es la entrega aprobada por el usuario para revisión de producción; la fusión solo debe realizarse cuando la auditoría estática, de privacidad y de navegador sea satisfactoria.
 
 
 ## Aviso legal y privacidad
-- `aviso-legal.html`: borrador con identificación fiscal, NIF, domicilio profesional y registro (si procede).
-- `privacidad.html`: explica la ausencia de formularios comerciales, los correos legales voluntarios y el tratamiento técnico de IP por GitHub Pages.
-- **Ambos textos son provisionales**. En esta rama pública no se han publicado nombres civiles, direcciones o identificadores tributarios de particulares.
+- `aviso-legal.html`: aviso de muestra no comercial y futura revisión legal si la web promueve servicios económicos.
+- `privacidad.html`: explica la ausencia de formularios, ingresos publicitarios, correos de contacto y el tratamiento técnico de IP por GitHub Pages.
+- Los avisos describen la fase expositiva no comercial y no divulgan datos fiscales inventados ni información familiar.
 - Fuente LSSI: https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758
 - Fuente AEPD: https://www.aepd.es/derechos-y-deberes/conoce-tus-derechos/derecho-de-informacion
 - Fuente alojamiento: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
-- Para completar campos `[[PENDIENTE_...]]` hay que confirmar quién presta y factura realmente los servicios. Es distinto de la persona que creó las imágenes o administra la web.
-- `python3 scripts/check-site.py _site --production` debe **fallar** hasta que los datos y los textos legales estén verificados. Ningún cambio puede habilitar Pages borrando esta comprobación.
+- Antes de admitir pedidos, anunciar una actividad económica o generar ingresos, se debe revisar la aplicación de la LSSI y publicar la identificación del prestador que corresponda.
+- `python3 scripts/check-site.py _site --production` exige ausencia de formularios y correo comercial, no monetización, aviso legal no provisional y transparencia del tratamiento técnico de IP. No eliminar esta comprobación.
 
 ## Desarrollo local
 
@@ -41,9 +41,9 @@ El contexto del producto, el benchmark, las decisiones de diseño y el estado de
 
 Consultar [`AGENTS.md`](AGENTS.md) y [`docs/HANDOFF.md`](docs/HANDOFF.md). La publicación produce `_site/` mediante `scripts/build-site.sh` y verifica la lista de archivos públicos con `scripts/check-site.py`.
 
-La web no necesita servidor privado ni servicios de pago. No hay formularios comerciales, pedidos ni presupuesto: las dos áreas son escaparates conceptuales. El correo indicado en páginas legales se limita a cuestiones relativas al sitio y privacidad. Aviso legal aún pendiente de validación.
+La web no necesita servidor privado ni servicios de pago. No hay formularios comerciales, pedidos ni presupuesto: las dos áreas son escaparates conceptuales. No se publica un buzón para recibir consultas o pedidos. La información publicada es únicamente para el supuesto de web sin actividad económica; revisar obligaciones si cambia el uso.
 
 ## Precio orientativo y pruebas de liberación
 Los rangos publicados son **comparables externos, no precios ni presupuestos de LITOS**. Investigación y fuentes: `docs/MARKET_STUDY_2026-10.md`. Para validar el contenido público ejecutar `sh scripts/build-site.sh && python3 scripts/check-site.py _site` y `python3 scripts/visual-qa.py`.
 
-**Bloqueo de lanzamiento:** `python3 scripts/check-site.py _site --production` sigue rechazando el aviso legal provisional. No sustituir la web pública antes de acreditar titularidad, contacto legal, derechos de las imágenes y privacidad.
+**Límite de la versión pública:** escaparate personal sin monetización ni encargos. Si se promociona un negocio con actividad económica (aunque no permita contratar en línea), puede exigirse identificar al prestador conforme al art. 10 LSSI. No reutilizar estas páginas legales para ventas sin esa revisión.
