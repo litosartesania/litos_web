@@ -1,0 +1,580 @@
+{
+  "project": "LITOS COMERCIAL",
+  "date": "2026-10-09",
+  "phase": "option-b-planning",
+  "expected_count": 30,
+  "status": "planning-only",
+  "product_source": "catalogo-precios.js",
+  "asset_destination": "assets/catalogo/variantes/",
+  "materials": [
+    {
+      "id": "travertino",
+      "label": "Travertino beige",
+      "appearance": "Beige cálido, poros y bandas minerales discretas"
+    },
+    {
+      "id": "macael",
+      "label": "Mármol Blanco Macael",
+      "appearance": "Blanco luminoso, irregularidad natural sutil; no confundir con Carrara"
+    },
+    {
+      "id": "verde-alpi",
+      "label": "Mármol Verde Alpi",
+      "appearance": "Verde profundo con vetas blancas o claras irregulares"
+    },
+    {
+      "id": "granito",
+      "label": "Granito gris",
+      "appearance": "Estructura granular de cristales, no vetas de mármol"
+    },
+    {
+      "id": "marquina",
+      "label": "Mármol Negro Marquina",
+      "appearance": "Negro natural con venas calcíticas blancas"
+    }
+  ],
+  "products": [
+    {
+      "id": "mesa-comedor-oval",
+      "label": "Mesa de comedor ovalada",
+      "reference": [
+        "assets/catalogo/litos-mesa-comedor-01.webp",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "priority": "P0",
+      "brief": "Tablero ovalado de gran formato y dos apoyos escultóricos; mantener escala y patas"
+    },
+    {
+      "id": "mesa-centro-mon",
+      "label": "Mesa de centro monolítica",
+      "reference": [
+        "assets/catalogo/litos-mesa-centro-01.webp",
+        "assets/catalogo/litos-mesa-centro-02.webp"
+      ],
+      "priority": "P0",
+      "brief": "Volumen bajo mineral para salón; conservar aristas, apoyos y proporciones"
+    },
+    {
+      "id": "consola-esc",
+      "label": "Consola escultórica",
+      "reference": [
+        "assets/catalogo/litos-consola-01.webp",
+        "assets/catalogo/litos-consola-02.webp"
+      ],
+      "priority": "P1",
+      "brief": "Sobre y apoyos arquitectónicos de consola; conservar proporción estrecha"
+    },
+    {
+      "id": "lavabo-ped",
+      "label": "Lavabo pedestal",
+      "reference": [
+        "assets/catalogo/litos-lavabo-01.webp",
+        "assets/catalogo/litos-lavabo-02.webp"
+      ],
+      "priority": "P1",
+      "brief": "Taza circular y apoyo de pedestal; no inventar desagüe o fontanería"
+    },
+    {
+      "id": "banco-esc",
+      "label": "Banco escultórico",
+      "reference": [
+        "assets/catalogo/litos-banco-01.webp",
+        "assets/catalogo/litos-banco-02.webp"
+      ],
+      "priority": "P2",
+      "brief": "Asiento pétreo con cantos suaves, sin afirmar resistencia o producción"
+    },
+    {
+      "id": "mesa-aux-ped",
+      "label": "Mesa auxiliar pedestal",
+      "reference": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp",
+        "assets/catalogo/litos-mesa-auxiliar-02.webp"
+      ],
+      "priority": "P2",
+      "brief": "Sobre compacto y apoyo mineral, mantener proporciones"
+    }
+  ],
+  "jobs": [
+    {
+      "sequence": 1,
+      "priority": "P0",
+      "product_id": "mesa-comedor-oval",
+      "product_name": "Mesa de comedor ovalada",
+      "material_id": "travertino",
+      "material_name": "Travertino beige",
+      "output": "assets/catalogo/variantes/mesa-comedor-oval__travertino.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-comedor-01.webp",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 2,
+      "priority": "P0",
+      "product_id": "mesa-comedor-oval",
+      "product_name": "Mesa de comedor ovalada",
+      "material_id": "macael",
+      "material_name": "Mármol Blanco Macael",
+      "output": "assets/catalogo/variantes/mesa-comedor-oval__macael.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-comedor-01.webp",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 3,
+      "priority": "P0",
+      "product_id": "mesa-comedor-oval",
+      "product_name": "Mesa de comedor ovalada",
+      "material_id": "verde-alpi",
+      "material_name": "Mármol Verde Alpi",
+      "output": "assets/catalogo/variantes/mesa-comedor-oval__verde-alpi.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-comedor-01.webp",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 4,
+      "priority": "P0",
+      "product_id": "mesa-comedor-oval",
+      "product_name": "Mesa de comedor ovalada",
+      "material_id": "granito",
+      "material_name": "Granito gris",
+      "output": "assets/catalogo/variantes/mesa-comedor-oval__granito.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-comedor-01.webp",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 5,
+      "priority": "P0",
+      "product_id": "mesa-comedor-oval",
+      "product_name": "Mesa de comedor ovalada",
+      "material_id": "marquina",
+      "material_name": "Mármol Negro Marquina",
+      "output": "assets/catalogo/variantes/mesa-comedor-oval__marquina.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-comedor-01.webp",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 6,
+      "priority": "P0",
+      "product_id": "mesa-centro-mon",
+      "product_name": "Mesa de centro monolítica",
+      "material_id": "travertino",
+      "material_name": "Travertino beige",
+      "output": "assets/catalogo/variantes/mesa-centro-mon__travertino.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-centro-01.webp",
+        "assets/catalogo/litos-mesa-centro-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 7,
+      "priority": "P0",
+      "product_id": "mesa-centro-mon",
+      "product_name": "Mesa de centro monolítica",
+      "material_id": "macael",
+      "material_name": "Mármol Blanco Macael",
+      "output": "assets/catalogo/variantes/mesa-centro-mon__macael.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-centro-01.webp",
+        "assets/catalogo/litos-mesa-centro-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 8,
+      "priority": "P0",
+      "product_id": "mesa-centro-mon",
+      "product_name": "Mesa de centro monolítica",
+      "material_id": "verde-alpi",
+      "material_name": "Mármol Verde Alpi",
+      "output": "assets/catalogo/variantes/mesa-centro-mon__verde-alpi.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-centro-01.webp",
+        "assets/catalogo/litos-mesa-centro-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 9,
+      "priority": "P0",
+      "product_id": "mesa-centro-mon",
+      "product_name": "Mesa de centro monolítica",
+      "material_id": "granito",
+      "material_name": "Granito gris",
+      "output": "assets/catalogo/variantes/mesa-centro-mon__granito.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-centro-01.webp",
+        "assets/catalogo/litos-mesa-centro-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 10,
+      "priority": "P0",
+      "product_id": "mesa-centro-mon",
+      "product_name": "Mesa de centro monolítica",
+      "material_id": "marquina",
+      "material_name": "Mármol Negro Marquina",
+      "output": "assets/catalogo/variantes/mesa-centro-mon__marquina.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-centro-01.webp",
+        "assets/catalogo/litos-mesa-centro-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 11,
+      "priority": "P1",
+      "product_id": "consola-esc",
+      "product_name": "Consola escultórica",
+      "material_id": "travertino",
+      "material_name": "Travertino beige",
+      "output": "assets/catalogo/variantes/consola-esc__travertino.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-consola-01.webp",
+        "assets/catalogo/litos-consola-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 12,
+      "priority": "P1",
+      "product_id": "consola-esc",
+      "product_name": "Consola escultórica",
+      "material_id": "macael",
+      "material_name": "Mármol Blanco Macael",
+      "output": "assets/catalogo/variantes/consola-esc__macael.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-consola-01.webp",
+        "assets/catalogo/litos-consola-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 13,
+      "priority": "P1",
+      "product_id": "consola-esc",
+      "product_name": "Consola escultórica",
+      "material_id": "verde-alpi",
+      "material_name": "Mármol Verde Alpi",
+      "output": "assets/catalogo/variantes/consola-esc__verde-alpi.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-consola-01.webp",
+        "assets/catalogo/litos-consola-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 14,
+      "priority": "P1",
+      "product_id": "consola-esc",
+      "product_name": "Consola escultórica",
+      "material_id": "granito",
+      "material_name": "Granito gris",
+      "output": "assets/catalogo/variantes/consola-esc__granito.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-consola-01.webp",
+        "assets/catalogo/litos-consola-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 15,
+      "priority": "P1",
+      "product_id": "consola-esc",
+      "product_name": "Consola escultórica",
+      "material_id": "marquina",
+      "material_name": "Mármol Negro Marquina",
+      "output": "assets/catalogo/variantes/consola-esc__marquina.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-consola-01.webp",
+        "assets/catalogo/litos-consola-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 16,
+      "priority": "P1",
+      "product_id": "lavabo-ped",
+      "product_name": "Lavabo pedestal",
+      "material_id": "travertino",
+      "material_name": "Travertino beige",
+      "output": "assets/catalogo/variantes/lavabo-ped__travertino.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-lavabo-01.webp",
+        "assets/catalogo/litos-lavabo-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 17,
+      "priority": "P1",
+      "product_id": "lavabo-ped",
+      "product_name": "Lavabo pedestal",
+      "material_id": "macael",
+      "material_name": "Mármol Blanco Macael",
+      "output": "assets/catalogo/variantes/lavabo-ped__macael.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-lavabo-01.webp",
+        "assets/catalogo/litos-lavabo-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 18,
+      "priority": "P1",
+      "product_id": "lavabo-ped",
+      "product_name": "Lavabo pedestal",
+      "material_id": "verde-alpi",
+      "material_name": "Mármol Verde Alpi",
+      "output": "assets/catalogo/variantes/lavabo-ped__verde-alpi.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-lavabo-01.webp",
+        "assets/catalogo/litos-lavabo-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 19,
+      "priority": "P1",
+      "product_id": "lavabo-ped",
+      "product_name": "Lavabo pedestal",
+      "material_id": "granito",
+      "material_name": "Granito gris",
+      "output": "assets/catalogo/variantes/lavabo-ped__granito.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-lavabo-01.webp",
+        "assets/catalogo/litos-lavabo-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 20,
+      "priority": "P1",
+      "product_id": "lavabo-ped",
+      "product_name": "Lavabo pedestal",
+      "material_id": "marquina",
+      "material_name": "Mármol Negro Marquina",
+      "output": "assets/catalogo/variantes/lavabo-ped__marquina.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-lavabo-01.webp",
+        "assets/catalogo/litos-lavabo-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 21,
+      "priority": "P2",
+      "product_id": "banco-esc",
+      "product_name": "Banco escultórico",
+      "material_id": "travertino",
+      "material_name": "Travertino beige",
+      "output": "assets/catalogo/variantes/banco-esc__travertino.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-banco-01.webp",
+        "assets/catalogo/litos-banco-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 22,
+      "priority": "P2",
+      "product_id": "banco-esc",
+      "product_name": "Banco escultórico",
+      "material_id": "macael",
+      "material_name": "Mármol Blanco Macael",
+      "output": "assets/catalogo/variantes/banco-esc__macael.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-banco-01.webp",
+        "assets/catalogo/litos-banco-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 23,
+      "priority": "P2",
+      "product_id": "banco-esc",
+      "product_name": "Banco escultórico",
+      "material_id": "verde-alpi",
+      "material_name": "Mármol Verde Alpi",
+      "output": "assets/catalogo/variantes/banco-esc__verde-alpi.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-banco-01.webp",
+        "assets/catalogo/litos-banco-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 24,
+      "priority": "P2",
+      "product_id": "banco-esc",
+      "product_name": "Banco escultórico",
+      "material_id": "granito",
+      "material_name": "Granito gris",
+      "output": "assets/catalogo/variantes/banco-esc__granito.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-banco-01.webp",
+        "assets/catalogo/litos-banco-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 25,
+      "priority": "P2",
+      "product_id": "banco-esc",
+      "product_name": "Banco escultórico",
+      "material_id": "marquina",
+      "material_name": "Mármol Negro Marquina",
+      "output": "assets/catalogo/variantes/banco-esc__marquina.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-banco-01.webp",
+        "assets/catalogo/litos-banco-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 26,
+      "priority": "P2",
+      "product_id": "mesa-aux-ped",
+      "product_name": "Mesa auxiliar pedestal",
+      "material_id": "travertino",
+      "material_name": "Travertino beige",
+      "output": "assets/catalogo/variantes/mesa-aux-ped__travertino.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp",
+        "assets/catalogo/litos-mesa-auxiliar-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 27,
+      "priority": "P2",
+      "product_id": "mesa-aux-ped",
+      "product_name": "Mesa auxiliar pedestal",
+      "material_id": "macael",
+      "material_name": "Mármol Blanco Macael",
+      "output": "assets/catalogo/variantes/mesa-aux-ped__macael.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp",
+        "assets/catalogo/litos-mesa-auxiliar-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 28,
+      "priority": "P2",
+      "product_id": "mesa-aux-ped",
+      "product_name": "Mesa auxiliar pedestal",
+      "material_id": "verde-alpi",
+      "material_name": "Mármol Verde Alpi",
+      "output": "assets/catalogo/variantes/mesa-aux-ped__verde-alpi.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp",
+        "assets/catalogo/litos-mesa-auxiliar-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 29,
+      "priority": "P2",
+      "product_id": "mesa-aux-ped",
+      "product_name": "Mesa auxiliar pedestal",
+      "material_id": "granito",
+      "material_name": "Granito gris",
+      "output": "assets/catalogo/variantes/mesa-aux-ped__granito.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp",
+        "assets/catalogo/litos-mesa-auxiliar-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    },
+    {
+      "sequence": 30,
+      "priority": "P2",
+      "product_id": "mesa-aux-ped",
+      "product_name": "Mesa auxiliar pedestal",
+      "material_id": "marquina",
+      "material_name": "Mármol Negro Marquina",
+      "output": "assets/catalogo/variantes/mesa-aux-ped__marquina.webp",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp",
+        "assets/catalogo/litos-mesa-auxiliar-02.webp"
+      ],
+      "status": "planned",
+      "source_type": "concept",
+      "note": "La ruta es objetivo futuro: NO existe archivo generado en el repositorio."
+    }
+  ]
+}
