@@ -32,8 +32,8 @@ p=Inspector();p.feed(html)
 assert p.views==['inicio','funerario','mobiliario','aviso-legal','privacidad'],p.views
 assert p.images>=5 and p.styles>=1 and p.scripts>=1
 assert not p.external,p.external
-assert len(p.forms)==2 and all(f.get('action','') in ('#','') for f in p.forms)
-assert html.count('<button type="submit" disabled>')==2
+assert not p.forms, 'preview must not contain forms'
+assert 'type="submit"' not in html and 'id="contact-form"' not in html
 assert p.routes=={'index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'},p.routes
 assert 'name="robots" content="noindex,nofollow"' in html
 assert 'src="assets/' not in html and '<script src=' not in html
@@ -42,5 +42,5 @@ for page in ('index.html','funerario.html','mobiliario.html'):
 assert '<form' not in (root/'index.html').read_text()
 for page in ('funerario.html','mobiliario.html'):
  content=(root/page).read_text()
- assert 'onsubmit="return false"' in content and '<button type="submit" disabled>' in content
-print('PASS: portable five-view preview is self-contained, images embedded and forms disabled')
+ assert '<form' not in content and 'solicitar presupuesto' not in content.lower()
+print('PASS: portable five-view preview is self-contained, images embedded and commercial forms absent')

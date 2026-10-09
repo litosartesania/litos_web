@@ -53,25 +53,4 @@ if (hero && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
   }, { passive: true });
 }
 
-// Privacy-first contact: no third-party embedded form or automatic transmission.
-// The visitor reviews and sends the message explicitly from their own mail app.
-const form = document.querySelector('#contact-form');
-const formStatus = document.querySelector('#form-status');
-form?.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const data = new FormData(form);
-  const get = (key) => String(data.get(key) || '').trim();
-  const subject = `Consulta LITOS — ${get('tipo') || 'Proyecto a medida'}`;
-  const body = [
-    `Nombre o estudio: ${get('nombre')}`,
-    `Correo de contacto: ${get('correo')}`,
-    `Teléfono: ${get('telefono') || 'No indicado'}`,
-    `Tipo de proyecto: ${get('tipo') || 'No indicado'}`,
-    '',
-    'Consulta:',
-    get('mensaje'),
-  ].join('\n');
-  const draft = `mailto:litos.artesania@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  if (formStatus) formStatus.textContent = 'Se abrirá un borrador en su correo. Revíselo y pulse Enviar; todavía no se ha enviado nada.';
-  window.location.href = draft;
-});
+// No commercial contact form handlers: LITOS does not accept orders or quotations.

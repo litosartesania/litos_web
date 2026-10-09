@@ -42,7 +42,9 @@ with sync_playwright() as app:
    elif file in ('funerario.html','mobiliario.html'):
     assert page.locator('.catalog-card').count()==(3 if file=='funerario.html' else 4)
     assert page.locator('.catalog-price').count()==page.locator('.catalog-card').count()
-    assert page.locator('#contact-form').get_attribute('action').startswith('mailto:')
+    assert page.locator('form').count()==0
+    assert page.locator('.project-status').count()==1
+    assert page.get_by_text('Por ahora no aceptamos encargos.').count()==1
    else:
     assert page.locator('.legal-content h2').count()>3
     assert page.locator('form').count()==0

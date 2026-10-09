@@ -309,3 +309,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .legal-identification dt{font-weight:600}
 .legal-identification dd{margin:0;overflow-wrap:anywhere}
 @media(max-width:760px){.legal-identification{grid-template-columns:1fr;gap:.15rem}.legal-identification dd{margin-bottom:1rem}.legal-intro{padding-top:8rem}}
+
+/* Current phase: informative showcase, with no commercial lead capture. */
+.project-status{padding:clamp(5rem,9vw,9rem) var(--gutter);color:var(--limestone-light);background:var(--graphite)}
+.project-status-inner{max-width:68rem;margin:auto}
+.project-status h2{max-width:18ch;margin:0 0 2rem;font:400 clamp(3rem,6vw,6rem)/1 var(--serif);letter-spacing:-.045em}
+.project-status-inner>p:not(.catalog-eyebrow){max-width:50rem;font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.65}
+.project-status .catalog-eyebrow{color:var(--bronze)}
+.project-status a{text-underline-offset:.25rem}
+.status-legal-link{padding-top:1.5rem;font-size:.92rem!important}
+.catalog-availability{max-width:40rem;margin:2.25rem 0 0;padding:1rem 1.25rem;border-left:2px solid currentColor;font-weight:600;line-height:1.6}
+.pricing-hold-note{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line-light);font-weight:600}

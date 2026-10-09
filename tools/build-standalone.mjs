@@ -1,5 +1,5 @@
-// Standalone review: all CSS/images in one HTML, with three separate full views.
-// Never published, and all contact submission is blocked by the preview builder.
+// Standalone review: all CSS/images in one HTML, with three commercial pages and two legal views.
+// Not published. Informational only: no commercial lead-capture elements.
 import {readFileSync,writeFileSync} from 'node:fs';
 const files=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'];
 const names=['inicio','funerario','mobiliario','aviso-legal','privacidad'];
@@ -54,11 +54,11 @@ const script=String.raw`
    view.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>set(false)));
    document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
  });
- document.querySelectorAll('form').forEach(form=>form.addEventListener('submit',e=>e.preventDefault()));
+ if (document.querySelector('form')) throw new Error('Unexpected form in informational preview');
  window.addEventListener('hashchange',()=>show(selected()));
  window.addEventListener('popstate',()=>show(selected()));
  show(selected());
 })();`;
-const html='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>LITOS — Vista previa</title><style>'+css+'</style><style>[data-view][hidden]{display:none!important}.preview-label{position:fixed;bottom:0;right:0;z-index:2147483646;background:#261f19;color:#fff;padding:7px 11px;font:12px sans-serif;pointer-events:none}</style></head><body>'+bodies.join('')+'<div role="status" class="preview-label">LITOS · VISTA PREVIA · <span id="preview-view">inicio</span> · sin envíos</div><script>'+script+'</script></body></html>';
+const html='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>LITOS — Vista previa</title><style>'+css+'</style><style>[data-view][hidden]{display:none!important}.preview-label{position:fixed;bottom:0;right:0;z-index:2147483646;background:#261f19;color:#fff;padding:7px 11px;font:12px sans-serif;pointer-events:none}</style></head><body>'+bodies.join('')+'<div role="status" class="preview-label">LITOS · VISTA PREVIA · <span id="preview-view">inicio</span> · sin encargos</div><script>'+script+'</script></body></html>';
 writeFileSync('preview/LITOS_PREVISUALIZACION_AUTONOMA.html',html);
-console.log('Standalone offline preview built, embedded assets and three full views');
+console.log('Standalone offline preview built, embedded assets and five linked views');

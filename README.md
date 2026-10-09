@@ -1,19 +1,19 @@
 # LITOS — Web comercial
 
-Web pública de LITOS Artesanía, taller de artesanía en piedra.
+Presentación de LITOS Artesanía: por ahora no se aceptan encargos, ventas ni solicitudes de presupuesto y LITOS todavía no emite facturas propias (según el usuario).
 
 ## Arquitectura comercial (separación obligatoria)
 - `index.html`: portada neutral. El visitante elige una especialidad; **no hay catálogos ni precios en esta página**.
-- `funerario.html`: vista independiente de arte funerario, con sus tres familias de trabajo, referencias de precios funerarios y su propio formulario de contacto (borrador de correo).
-- `mobiliario.html`: vista independiente de mobiliario y objetos, cuatro familias con precios de mercado de mobiliario y su formulario específico.
+- `funerario.html`: vista independiente de arte funerario, con sus tres familias de trabajo, referencias de precios funerarios sin formularios de captación comercial.
+- `mobiliario.html`: vista independiente de mobiliario y objetos, cuatro familias con precios de mercado de mobiliario sin formularios de captación comercial.
 - Ninguna subpágina mezcla el contenido o la navegación con la otra. El visitante puede volver al inicio y elegir.
-- `scripts/build-site.sh` publica exclusivamente los tres HTML y los recursos permitidos. Un único JS y CSS compartidos.
+- `scripts/build-site.sh` genera tres páginas de presentación, dos documentos legales provisionales y los recursos permitidos. Un único JS y CSS compartidos.
 - El PR #1 es borrador; **no fusionar hasta completar validación legal y privacidad**.
 
 
 ## Aviso legal y privacidad
 - `aviso-legal.html`: borrador con identificación fiscal, NIF, domicilio profesional y registro (si procede).
-- `privacidad.html`: describe el flujo `mailto:`, el uso de Gmail para consultas y el tratamiento técnico de IP por GitHub Pages.
+- `privacidad.html`: explica la ausencia de formularios comerciales, los correos legales voluntarios y el tratamiento técnico de IP por GitHub Pages.
 - **Ambos textos son provisionales**. En esta rama pública no se han publicado nombres civiles, direcciones o identificadores tributarios de particulares.
 - Fuente LSSI: https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758
 - Fuente AEPD: https://www.aepd.es/derechos-y-deberes/conoce-tus-derechos/derecho-de-informacion
@@ -41,7 +41,7 @@ El contexto del producto, el benchmark, las decisiones de diseño y el estado de
 
 Consultar [`AGENTS.md`](AGENTS.md) y [`docs/HANDOFF.md`](docs/HANDOFF.md). La publicación produce `_site/` mediante `scripts/build-site.sh` y verifica la lista de archivos públicos con `scripts/check-site.py`.
 
-La web no necesita servidor privado ni servicios de pago. El formulario actual prepara un borrador para el programa de correo del visitante (no envía nada automáticamente). El aviso legal debe validarse antes de publicar.
+La web no necesita servidor privado ni servicios de pago. No hay formularios comerciales, pedidos ni presupuesto: las dos áreas son escaparates conceptuales. El correo indicado en páginas legales se limita a cuestiones relativas al sitio y privacidad. Aviso legal aún pendiente de validación.
 
 ## Precio orientativo y pruebas de liberación
 Los rangos publicados son **comparables externos, no precios ni presupuestos de LITOS**. Investigación y fuentes: `docs/MARKET_STUDY_2026-10.md`. Para validar el contenido público ejecutar `sh scripts/build-site.sh && python3 scripts/check-site.py _site` y `python3 scripts/visual-qa.py`.

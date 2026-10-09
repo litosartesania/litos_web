@@ -43,12 +43,12 @@ for page,html in htmls.items():
     target=Inspect();target.feed(htmls.get(name,(root/name).read_text()))
     assert unquote(u.fragment) in target.ids
   elif u.fragment:assert unquote(u.fragment) in p.ids,(page,uri)
- for form in p.forms:assert form.get('action','').startswith('mailto:')
+ assert not p.forms,(page,'informational-only website must not include forms')
 assert not parsers['index.html'].forms and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
 for page,count in [('funerario.html',3),('mobiliario.html',4)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
- assert len(p.forms)==1 and 'id="precios"' in htmls[page]
+ assert not p.forms and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
 for page in pages:
  assert 'href="aviso-legal.html"' in htmls[page],(page,'missing legal link')
@@ -59,8 +59,16 @@ assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.
 assert 'mobiliario' not in htmls['funerario.html'].lower()
 assert 'funerario' not in htmls['mobiliario.html'].lower()
 assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls['index.html'].lower()
+for page in ('index.html','funerario.html','mobiliario.html'):
+ assert not parsers[page].forms,(page,'lead collection forbidden')
+ assert 'href="#contacto"' not in htmls[page],(page,'lead link forbidden')
+ assert 'id="contact-form"' not in htmls[page],(page,'form ID forbidden')
+ assert 'solicitar presupuesto' not in htmls[page].lower(),(page,'outdated CTA')
+ assert 'no acepta encargos' in htmls[page].lower() or 'no aceptamos encargos' in htmls[page].lower(),(page,'current availability missing')
+assert 'no acepta pedidos' in htmls['privacidad.html'].lower() and 'no contiene formularios' in htmls['privacidad.html'].lower()
+assert 'no acepta encargos' in htmls['aviso-legal.html'].lower()
 css=(root/'styles.css').read_text();js=(root/'script.js').read_text()
-assert 'formResponse' not in js and 'fonts.googleapis.com' not in css
+assert 'formResponse' not in js and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
 for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
  if not link.startswith(('data:','#','https:','http:')):assert (root/link).is_file(),link
 if '--production' in sys.argv:
