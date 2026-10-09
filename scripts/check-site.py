@@ -21,7 +21,7 @@ class Inspect(HTMLParser):
   if tag=='form':self.forms.append(a)
   if tag=='article' and 'catalog-card' in a.get('class','').split():self.cards+=1
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
-expected=set(pages+['styles.css','script.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
+expected=set(pages+['styles.css','script.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
@@ -51,7 +51,7 @@ for page,count in [('funerario.html',3)]:
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert not p.forms and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
-assert 'id="precios"' in htmls['mobiliario.html']
+assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==8
 assert htmls['mobiliario.html'].count('class="piece-card"')==6
 assert htmls['mobiliario.html'].count('class="piece-amount"')==6
 assert all(htmls['mobiliario.html'].count('src="assets/catalogo/litos-'+x+'.webp"')==1 for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
@@ -75,7 +75,7 @@ for page in ('index.html','funerario.html','mobiliario.html'):
 assert 'no acepta pedidos' in htmls['privacidad.html'].lower() and 'no contiene formularios' in htmls['privacidad.html'].lower()
 assert 'no acepta encargos' in htmls['aviso-legal.html'].lower()
 css=(root/'styles.css').read_text();js=(root/'script.js').read_text()
-assert 'formResponse' not in js and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
+assert 'formResponse' not in js and 'fetch(' not in (root/'catalogo-precios.js').read_text() and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
 for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
  if not link.startswith(('data:','#','https:','http:')):assert (root/link).is_file(),link
 if '--production' in sys.argv:
@@ -87,4 +87,4 @@ if '--production' in sys.argv:
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: 3 separate commercial pages plus 2 legal drafts; {len(actual)} allowlisted files')
+print(f'PASS: five pages, eight material options, 12 source images, no collection; {len(actual)} allowlisted files')
