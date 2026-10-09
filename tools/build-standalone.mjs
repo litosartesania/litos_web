@@ -3,7 +3,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const files=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'];
 const names=['inicio','funerario','mobiliario','aviso-legal','privacidad'];
-const assets=['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp'];
+const assets=['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp',"catalogo/litos-banco-01.webp","catalogo/litos-banco-02.webp","catalogo/litos-consola-01.webp","catalogo/litos-consola-02.webp","catalogo/litos-lavabo-01.webp","catalogo/litos-lavabo-02.webp","catalogo/litos-mesa-auxiliar-01.webp","catalogo/litos-mesa-auxiliar-02.webp","catalogo/litos-mesa-centro-01.webp","catalogo/litos-mesa-centro-02.webp","catalogo/litos-mesa-comedor-01.webp","catalogo/litos-mesa-comedor-02.webp"];
 const replace=(original)=>{
   let text=original;
   for(const n of assets){

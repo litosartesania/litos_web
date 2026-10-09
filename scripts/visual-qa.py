@@ -9,7 +9,7 @@ def inline(page):
  html=(site/page).read_text()
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
- assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']
+ assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
  for asset in assets:
   uri='data:image/webp;base64,'+base64.b64encode((site/'assets'/asset).read_bytes()).decode()
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
@@ -40,8 +40,13 @@ with sync_playwright() as app:
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
     assert page.locator('form').count()==0
    elif file in ('funerario.html','mobiliario.html'):
-    assert page.locator('.catalog-card').count()==(3 if file=='funerario.html' else 4)
-    assert page.locator('.catalog-price').count()==page.locator('.catalog-card').count()
+    if file=='funerario.html':
+     assert page.locator('.catalog-card').count()==3
+     assert page.locator('.catalog-price').count()==3
+    else:
+     assert page.locator('.piece-card').count()==6
+     assert page.locator('.piece-photos img').count()==12
+     assert page.locator('.piece-amount').count()==6
     assert page.locator('form').count()==0
     assert page.locator('.project-status').count()==1
     assert page.get_by_text('Por ahora no aceptamos encargos.').count()==1
