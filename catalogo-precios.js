@@ -12,6 +12,8 @@ const imageSources=Object.fromEntries(['mesa-comedor','mesa-centro','consola','b
 const picker=root.querySelector('#material-picker');
 const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
+const materialHelp=root.querySelector('.material-heading > p');
+if(materialHelp){materialHelp.textContent='Selecciona una piedra. Mostramos una vista solo si existe una imagen propia y validada para esa combinación. Los conceptos originales están separados y no representan la piedra seleccionada.';materialHelp.style.visibility='visible';}
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 // Only files that passed source-image and material-specific visual QA belong here.
@@ -27,7 +29,7 @@ const showMaterial=(card,material)=>{
  const host=card.querySelector('.material-preview'), key=card.dataset.product+'__'+material[0];
  const file=approvedVariants[key];
  if(file){
-  if(!/^assets\\/catalogo\\/variantes\\/[a-z0-9-]+__[a-z0-9-]+\\.webp$/.test(file))throw Error('Unapproved asset path: '+file);
+  if(!file.startsWith('assets/catalogo/variantes/') || !file.endsWith('.webp') || file.includes('..')) throw Error('Unapproved asset path: '+file);
   host.replaceChildren();
   const figure=document.createElement('figure');figure.className='material-variant-figure';
   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=720;img.height=900;
