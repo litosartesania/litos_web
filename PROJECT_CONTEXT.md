@@ -45,3 +45,13 @@ Actualizado: 2026-10-09 · Repositorio exclusivo: `litosartesania/litos_web`
 
 ## Para ChatGPT/Codex
 Empezar leyendo este fichero y el repositorio. No dar por recuperado «Luz rasante» hasta inspeccionar sus archivos originales. Registrar cambios, pruebas, capturas revisadas y riesgos concretos aquí. Mientras los bytes de los ZIP permanezcan inaccesibles, limitarse a cambios de infraestructura/documentación reversibles. No declarar recuperado ni probado el diseño original.
+
+
+## Recuperación confirmada — 2026-10-09 (adjunto directo)
+- **ZIP realmente abierto, sin recrear:** `LITOS_CODIGO_REVISADO(1).zip`, SHA-256 `738ee11596b1913f248ed38e8491e2be6fdf6c8e671d7190d69dadf7a935e792`, 18 ficheros, aproximadamente 613 KB sin comprimir. Fuente: adjunto directo al chat; contiene HTML, CSS, JS, imágenes WebP/SVG, AGENTS, HANDOFF y scripts originales revisados por Codex.
+- Contenido auditado localmente: diseño `Luz rasante` genuino con hero editorial, arte funerario, línea de piezas conceptuales, taller, proceso y contacto vía borrador `mailto:`; etiquetas explícitas de imágenes conceptuales.
+- **Pruebas reales sobre los bytes recuperados:** `sh scripts/build-site.sh`, `python3 scripts/check-site.py _site`, `node --check script.js`, `python scripts/visual-qa.py`; todas correctas en 390×844, 820×1180 y 1440×900, sin errores JS, sin imágenes rotas ni desbordamiento. `check-site.py _site --production` FALLA intencionadamente por privacidad legal provisional: NO publicar.
+- Fallo visual localizado y corregido **en la copia revisada local**: el subtítulo del hero quedaba cortado en escritorio. Se cambió el dimensionado de `.hero` en `styles.css` a `min-height:46rem;height:78svh;max-height:56rem`, y se añadió aserción geométrica al script visual. Validación extra sin overflow ni recorte en 320, 390, 820, 1440 y 1920 px.
+- Se ha preparado una vista previa **HTML autónoma sin red**, con imágenes y estilos embebidos, y contacto deshabilitado. Es una revisión local, no producción.
+- **Limitación de transferencia a GitHub:** el conector puede crear archivos UTF-8 o blobs a partir de texto explícito, pero no ingiere directamente los bytes del ZIP montado en el entorno de ejecución. **Por tanto, el diseño original completo y sus binarios NO se han subido todavía a esta rama remota.** No afirmar que el PR contiene la nueva web. La copia recuperada para continuar está empaquetada como entregable descargable del chat.
+- El PR #1 permanece borrador sin merge ni publicación. `main` no alterada. Próximo paso: incorporar al PR **todos** los archivos del paquete revisado, incluidas imágenes aprobadas, mediante un mecanismo de transferencia binaria autorizado; validar el CI contra el árbol completo.
