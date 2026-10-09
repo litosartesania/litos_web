@@ -18,6 +18,7 @@ def inline(page):
   uri='data:image/webp;base64,'+base64.b64encode((site/'assets'/asset).read_bytes()).decode()
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
+ html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
  html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261009-2">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
