@@ -142,3 +142,13 @@ Consultar `AGENTS.md` y `docs/HANDOFF.md` para reglas de trabajo más completas.
 - Nuevo material `verde-alpi`, Mármol Verde Alpi natural, coste índice **262 €/m²**, de baldosa de 1 cm de Colour of Stone: https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/ (precio de referencia 261,80 €/m² en octubre 2026). Es índice de revestimiento, NO tarifa de bloque escultórico o coste real del taller.
 - Se mantiene fórmula previa de sensibilidad hipotética del 30 %, 21 productos, separación funeraria, ausencia de formularios/encargos, uso gratuito y privacidad.
 - Nuevas pruebas responsive verifican 9 opciones, precio en granito vs mármol verde, valores visuales CSS realmente cambiantes, etiquetas honestas de simulación y fuente verde. No publicar hasta CI completa.
+
+
+## 2026-10-09 — Opción B seleccionada: primer lote de 30 variantes reales de piedra (PLAN, sin imágenes)
+- Se fija y registra el plan **6 modelos × 5 piedras = 30** en `docs/MOBILIARIO_LOTE_30.md` y el manifiesto para integración futura en `docs/MOBILIARIO_LOTE_30.json`.
+- Se parte exclusivamente de las seis fichas del catálogo existente: `mesa-comedor-oval`, `mesa-centro-mon`, `consola-esc`, `lavabo-ped`, `banco-esc`, `mesa-aux-ped`. Materiales: `travertino`, `macael`, `verde-alpi`, `granito`, `marquina`.
+- Orden: P0 mesas comedor+centro (1–10), P1 consola+lavabo (11–20), P2 banco+mesa auxiliar (21–30). Cada grupo cubre primero las cinco piedras del mismo modelo, manteniendo composición/cámara idénticas y cambiando solo la piedra del objeto.
+- Se conserva el arte original aportado por el usuario como referencia de forma, sin adjudicar material auténtico ni obra ejecutada. Las 30 rutas son **futuras**: no se ha generado ni subido un solo WebP de este lote.
+- El recoloreado de toda la fotografía de la rama base es técnicamente inadecuado y **se debe revertir en una siguiente fase antes de integrar variantes**. Para una combinación ausente, mostrar `Vista no disponible en este material`; no reutilizar fotografía de otra piedra como si correspondiera al material elegido.
+- Solo repositorio `litosartesania/litos_web`; rama hija aislada `work/lote-30-imagenes-plan-20261009`, creada desde `work/fijar-vista-material-verde-20261009`. Sin merge, sin producción, sin backend, sin nuevos servicios, sin acceso a sistemas internos.
+- Única entrega realizada: documentación y manifiesto para trabajo posterior. No afirmar que las imágenes están generadas, que hay preview de ellas o que pasaron QA.
