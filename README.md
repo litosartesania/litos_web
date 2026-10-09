@@ -50,3 +50,6 @@ Los rangos publicados son **comparables externos, no precios ni presupuestos de 
 
 ## Comparador de materiales (9/10/2026)
 La sección de mobiliario presenta 21 ideas y 8 piedras seleccionables. Su precio orientativo reacciona al cambio sin contactar servidores. La fórmula usa una sensibilidad hipotética de 30 % a índices de piedra €/m² de placa; **no es presupuesto ni PVP de LITOS** y no confirma viabilidad de tallas escultóricas. No se generaron imágenes nuevas.
+
+## Visualización de piedras (9/10/2026)
+El comparador incluye **9 materiales**. Se recolorean en el navegador las imágenes conceptuales originales (sin crear archivos nuevos), como **simulación tonal no realista de la veta**; también cambia el precio hipotético. Se incorpora Mármol Verde Alpi con índice **262 €/m² de baldosa natural**, fuente Colour of Stone (ver enlace desde la web). El entorno fotográfico puede recolorearse igualmente. No son presupuestos ni trabajos ejecutados.
