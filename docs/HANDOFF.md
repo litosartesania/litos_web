@@ -142,3 +142,11 @@
 - Nuevo material `verde-alpi`, Mármol Verde Alpi natural, coste índice **262 €/m²**, de baldosa de 1 cm de Colour of Stone: https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/ (precio de referencia 261,80 €/m² en octubre 2026). Es índice de revestimiento, NO tarifa de bloque escultórico o coste real del taller.
 - Se mantiene fórmula previa de sensibilidad hipotética del 30 %, 21 productos, separación funeraria, ausencia de formularios/encargos, uso gratuito y privacidad.
 - Nuevas pruebas responsive verifican 9 opciones, precio en granito vs mármol verde, valores visuales CSS realmente cambiantes, etiquetas honestas de simulación y fuente verde. No publicar hasta CI completa.
+
+
+## 2026-10-09 — Handoff de lote de imágenes (Opción B, solo planificación)
+- **Rama:** `work/lote-30-imagenes-plan-20261009` (aislada desde `work/fijar-vista-material-verde-20261009`, no publicar).
+- **Nuevos ficheros:** `docs/MOBILIARIO_LOTE_30.md` (30 filenames, prioridades, brief y criterios de QA) y `docs/MOBILIARIO_LOTE_30.json` (30 trabajos `status: planned`).
+- **Ejecución real:** plan de producción concretado; **0 de 30** imágenes nuevas producidas o cargadas. No existe preview del lote. Los originales existentes de Codex/usuario no se reinterpretan como acabados certificados de ninguna piedra.
+- **Pendiente:** materializar cada variante con forma y escena constantes y mineral propio, examinar visualmente, guardar WebP, cambiar estado a `ready`, incorporar a catálogo y a allowlist, quitar simulación CSS de color (afecta al entorno), y probar la interacción y navegación.
+- **No se modificó** `main`, la web publicada, funeraria ni otros repositorios. No se han modificado archivos ejecutables por esta tarea; los checks de aplicación y QA visual se deben ejecutar en el trabajo de integración.
