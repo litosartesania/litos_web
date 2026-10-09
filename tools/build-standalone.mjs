@@ -19,7 +19,7 @@ const bodies=files.map((file,i)=>{
   const src=readFileSync('preview/'+file,'utf8');
   const m=src.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   if(!m)throw Error('Body missing: '+file);
-  const body=replace(m[1].replace(/<script\s+src="script\.js"\s*><\/script>/g,''));
+  const body=replace(m[1].replace(/<script\s+src="(?:script|catalogo-precios)\.js"\s*><\/script>/g,''));
   if(body.includes('src="assets/'))throw Error('Unresolved resource: '+file);
   return '<div data-view="'+names[i]+'"'+(i?' hidden':'')+'>'+body+'</div>';
 });
@@ -60,5 +60,5 @@ const script=String.raw`
  show(selected());
 })();`;
 const html='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>LITOS — Vista previa</title><style>'+css+'</style><style>[data-view][hidden]{display:none!important}.preview-label{position:fixed;bottom:0;right:0;z-index:2147483646;background:#261f19;color:#fff;padding:7px 11px;font:12px sans-serif;pointer-events:none}</style></head><body>'+bodies.join('')+'<div role="status" class="preview-label">LITOS · VISTA PREVIA · <span id="preview-view">inicio</span> · sin encargos</div><script>'+script+'</script></body></html>';
-writeFileSync('preview/LITOS_PREVISUALIZACION_AUTONOMA.html',html);
+writeFileSync('preview/LITOS_PREVISUALIZACION_AUTONOMA.html',html.replace('</body>','<script>'+readFileSync('preview/catalogo-precios.js','utf8')+'</script></body>'));
 console.log('Standalone offline preview built, embedded assets and five linked views');
