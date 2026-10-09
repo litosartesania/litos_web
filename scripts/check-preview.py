@@ -36,7 +36,9 @@ assert not p.forms, 'preview must not contain forms'
 assert 'type="submit"' not in html and 'id="contact-form"' not in html
 assert p.routes=={'index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'},p.routes
 assert 'name="robots" content="noindex,nofollow"' in html
-assert 'src="assets/' not in html and '<script src=' not in html
+# The catalog's inline JavaScript contains literal image-path templates, not loaded resources.
+# Inspector above validates actual img/script tags and refuses any remote or relative src.
+assert 'window.LITOS_CATALOG_INFO' in html, 'interactive catalog code must be embedded'
 for page in ('index.html','funerario.html','mobiliario.html'):
  assert (root/page).is_file(),page
 assert '<form' not in (root/'index.html').read_text()
