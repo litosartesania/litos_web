@@ -164,3 +164,11 @@ Consultar `AGENTS.md` y `docs/HANDOFF.md` para reglas de trabajo más completas.
 - Se actualizaron los tests estáticos y responsive para rechazar recoloreado y comprobar 21 estados sin imagen validada, cinco vistas separadas, seis desplegables originales, precios y cambios de filtro. El workflow de revisión ahora se ejecuta también al hacer push a `work/lote-30-*`. Confirmar que CI acaba correctamente antes de marcar pruebas como satisfactorias.
 - Mantener otras 20 variantes como previstas, sin cambios; el catálogo real todavía tiene **0 de 30** imágenes específicas aprobadas de piedra (aunque conserva 12 conceptos).
 - No se ha modificado `main`, producción, funeraria, otros repositorios, servicios de pago ni sistemas internos; no hay datos personales nuevos.
+
+
+## 2026-10-09 — Resultado de QA automático y candidata privada
+- GitHub Actions, ejecución `37986064635` en commit `720736c0fe9f2361e2dc4328bc587dc8d6d8a07b`: **SUCCESS**. Incluye syntax check de JS, build allowlist, check-site, guard de producción, navegador responsive Playwright y preview autocontenida. Enlace: https://github.com/litosartesania/litos_web/actions/runs/37986064635
+- Se generó UNA **candidata** de `mesa-centro-mon__verde-alpi` con mesa rectangular y dos apoyos geométricos; WebP 720×900, 151608 bytes. Se guardó **solo en Library privada** `/LITOS_COMERCIAL/MOBILIARIO_2026_10_09/CANDIDATAS/mesa-centro-mon__verde-alpi__REVISION.webp`. **NO** se incorporó al repositorio o al manifiesto como lista, porque el entorno y geometría todavía no pueden declararse idénticos a la fuente; requiere revisión editorial.
+- Las hojas 2×5 y 6×5 probadas no se usarán como assets: cambian modelos y cada celda tiene resolución insuficiente. No derivar imágenes individuales de ellas ni fingir que hay 10 variantes terminadas.
+- **Estado cuantitativo sin ambigüedad:** 1 candidata privada / 0 aprobadas / 0 integradas en web / 10 P0 pendientes de aprobar. El lote 30 global sigue 0/30 validado y listo.
+- Nota técnica: sustitución del texto heredado de simulación en `mobiliario.html` solo en tiempo de ejecución; cambio de fuente HTML pendiente por bloqueo de seguridad del conector al editar ese archivo. Se mantiene rama no publicada.
