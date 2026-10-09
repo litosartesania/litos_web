@@ -32,6 +32,8 @@ jobs:
         run: |
           node tools/build-preview.mjs
           node tools/build-standalone.mjs
+      - name: Validate self-contained review HTML and disabled contact forms
+        run: python3 scripts/check-preview.py preview
       - name: Upload local review package (not a Pages deployment)
         uses: actions/upload-artifact@v4
         with:
