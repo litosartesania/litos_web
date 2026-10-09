@@ -1,5 +1,24 @@
-# macOS
+# macOS and local tooling
 .DS_Store
-
-# Carpetas de trabajo no necesarias en la web
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.db
+private/
+secrets/
+backups/
+tmp/
+node_modules/
+dist/
+preview/
+*.zip
+*.bundle
+# Local source exports — do not commit; manually approve individual assets.
+IMÁGENES/
 IMÁGENES/
+LITOS_LUZ_RASANTE*/
