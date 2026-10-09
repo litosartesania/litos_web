@@ -153,3 +153,15 @@
 - **Limitación conocida:** el HTML fuente heredado aún contiene texto antiguo sobre simulaciones. El CSS lo oculta y el JS lo reemplaza inmediatamente por texto preciso. Conviene corregir el HTML de origen en una edición posterior autorizada, porque sin JS se omite ese párrafo.
 - PR de corrección: https://github.com/litosartesania/litos_web/pull/5. **No afirmar despliegue hasta verificar QA y GitHub Pages**.
 - El lote de treinta variantes sigue sin imágenes específicas aprobadas; el hotfix no las inventa ni las publica.
+
+
+## 2026-10-09 — Hotfix 2: texto fuente y caché real de GitHub Pages
+- Tras el PR #5 (commit `eb04bdb6`, Actions SUCCESS) el usuario seguía viendo fotos teñidas y el texto de simulación en `mobiliario.html#catalogo`.
+- Hallazgo verificable: `main` conservaba **en el HTML fuente** «simulación digital de tonalidad» y enlaces sin versión (`styles.css` y `catalogo-precios.js`). El nuevo JS/CSS sí estaba en Git, pero el navegador/CDN aún podía servir recursos antiguos.
+- Rama de arreglo `work/fix-material-cache-20261009` creada desde `main`, sin tocar otros repositorios o información interna.
+- El texto engañoso se reemplaza **en el HTML, también sin JavaScript**; se elimina `visibility:hidden` que ocultaba el texto antiguo hasta la carga del JS.
+- `mobiliario.html` incorpora referencias versionadas `styles.css?v=stone-20261009-2` y `catalogo-precios.js?v=stone-20261009-2`. Conserva URLs locales estáticas y GitHub Pages gratuito.
+- `scripts/visual-qa.py`, `tools/build-standalone.mjs` y `scripts/check-site.py` adaptados a las URLs con query, con aserciones contra la copia obsoleta.
+- `scripts/check-live-deployment.py` y workflow Pages: después del despliegue, se comprueba **directamente la URL pública**, incluyendo que entrega el HTML correcto y CSS/JS sin tintados, con parámetros de cache busting y reintentos por propagación.
+- Sin render nuevo aprobado para Verde Alpi ni otros materiales: se debe mostrar «Vista no disponible para este material» con fotos originales como **referencia conceptual aparte**, nunca pintadas como si fueran otra piedra.
+- No afirmar que se publicó hasta aprobar la CI de PR, fusionar el hotfix y obtener el resultado de comprobación pública del workflow. Mantener guard de no venta/no captación, privacidad y separación funeraria.

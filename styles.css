@@ -342,7 +342,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Price explorer: local, accessible and zero tracking. */
 .material-planner{max-width:1360px;margin:0 auto 2.5rem;padding:clamp(1.2rem,3vw,2.5rem);border:1px solid var(--line-dark);background:rgba(255,255,255,.045)}
-.catalog-mobiliario .material-heading > p{visibility:hidden} /* Dynamic JS updates the inherited copy and reveals it */
 .material-heading{display:grid;grid-template-columns:1.15fr 1fr;gap:1.5rem 3rem;align-items:end}
 .material-heading h3{margin:0;font:400 clamp(1.85rem,3.7vw,3.25rem)/1.08 var(--serif);letter-spacing:-.025em}
 .material-heading>p{max-width:46ch;margin:0;color:rgba(240,233,226,.75);font-size:.88rem;line-height:1.7}
