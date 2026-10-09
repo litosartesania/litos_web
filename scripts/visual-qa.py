@@ -16,6 +16,9 @@ def inline(page):
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
+ if page=='mobiliario.html':
+  catalog=(site/'catalogo-precios.js').read_text()
+  html=html.replace('<script src="catalogo-precios.js"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
@@ -44,9 +47,19 @@ with sync_playwright() as app:
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
     else:
-     assert page.locator('.piece-card').count()==6
+     assert page.locator('.piece-card').count()==21
      assert page.locator('.piece-photos img').count()==12
-     assert page.locator('.piece-amount').count()==6
+     assert page.locator('.piece-amount').count()==21
+     assert page.locator('#material-picker option').count()==8
+     before=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
+     page.locator('#material-picker').select_option('calacatta')
+     after=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
+     assert before!=after,(width,before,after)
+     assert 'Calacatta' in page.locator('#catalog-count').inner_text()
+     page.locator('[data-category-filter="Baño"]').click()
+     assert page.locator('.piece-card:visible').count()==3
+     page.locator('[data-category-filter="Todos"]').click()
+     assert page.locator('.piece-card:visible').count()==21
     assert page.locator('form').count()==0
     assert page.locator('.project-status').count()==1
     assert page.get_by_text('Por ahora no aceptamos encargos.').count()==1
