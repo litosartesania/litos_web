@@ -2,6 +2,14 @@
 
 Web pública de LITOS Artesanía, taller de artesanía en piedra.
 
+## Arquitectura comercial (separación obligatoria)
+- `index.html`: portada neutral. El visitante elige una especialidad; **no hay catálogos ni precios en esta página**.
+- `funerario.html`: vista independiente de arte funerario, con sus tres familias de trabajo, referencias de precios funerarios y su propio formulario de contacto (borrador de correo).
+- `mobiliario.html`: vista independiente de mobiliario y objetos, cuatro familias con precios de mercado de mobiliario y su formulario específico.
+- Ninguna subpágina mezcla el contenido o la navegación con la otra. El visitante puede volver al inicio y elegir.
+- `scripts/build-site.sh` publica exclusivamente los tres HTML y los recursos permitidos. Un único JS y CSS compartidos.
+- El PR #1 es borrador; **no fusionar hasta completar validación legal y privacidad**.
+
 ## Desarrollo local
 
 El sitio es estático y no requiere instalación:
