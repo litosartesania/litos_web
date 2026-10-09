@@ -52,3 +52,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+      - name: Verify actual public HTML CSS and JS after Pages deployment
+        run: python3 scripts/check-live-deployment.py
