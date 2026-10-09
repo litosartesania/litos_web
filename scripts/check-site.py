@@ -56,7 +56,6 @@ for page in pages:
 for page in ('aviso-legal.html','privacidad.html'):
  assert not parsers[page].forms,(page,'legal pages must not collect data')
 assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'],'host IP logs must be disclosed'
-assert '[[PENDIENTE_TITULAR_FISCAL]]' in htmls['aviso-legal.html']
 assert 'mobiliario' not in htmls['funerario.html'].lower()
 assert 'funerario' not in htmls['mobiliario.html'].lower()
 assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls['index.html'].lower()
@@ -65,7 +64,7 @@ assert 'formResponse' not in js and 'fonts.googleapis.com' not in css
 for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
  if not link.startswith(('data:','#','https:','http:')):assert (root/link).is_file(),link
 if '--production' in sys.argv:
- assert not any('Información legal completa pendiente de validación' in html for html in htmls.values()),'release blocked: legal identity/privacy unverified'
+ assert not any('[[PENDIENTE_' in html for html in htmls.values()), 'release blocked: missing verified legal identity/address/tax ID'
  assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
 print(f'PASS: 3 separate commercial pages plus 2 legal drafts; {len(actual)} allowlisted files')
