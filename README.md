@@ -10,6 +10,17 @@ Web pública de LITOS Artesanía, taller de artesanía en piedra.
 - `scripts/build-site.sh` publica exclusivamente los tres HTML y los recursos permitidos. Un único JS y CSS compartidos.
 - El PR #1 es borrador; **no fusionar hasta completar validación legal y privacidad**.
 
+
+## Aviso legal y privacidad
+- `aviso-legal.html`: borrador con identificación fiscal, NIF, domicilio profesional y registro (si procede).
+- `privacidad.html`: describe el flujo `mailto:`, el uso de Gmail para consultas y el tratamiento técnico de IP por GitHub Pages.
+- **Ambos textos son provisionales**. En esta rama pública no se han publicado nombres civiles, direcciones o identificadores tributarios de particulares.
+- Fuente LSSI: https://www.boe.es/buscar/act.php?id=BOE-A-2002-13758
+- Fuente AEPD: https://www.aepd.es/derechos-y-deberes/conoce-tus-derechos/derecho-de-informacion
+- Fuente alojamiento: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
+- Para completar campos `[[PENDIENTE_...]]` hay que confirmar quién presta y factura realmente los servicios. Es distinto de la persona que creó las imágenes o administra la web.
+- `python3 scripts/check-site.py _site --production` debe **fallar** hasta que los datos y los textos legales estén verificados. Ningún cambio puede habilitar Pages borrando esta comprobación.
+
 ## Desarrollo local
 
 El sitio es estático y no requiere instalación:
