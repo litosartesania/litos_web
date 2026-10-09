@@ -74,5 +74,10 @@ for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
 if '--production' in sys.argv:
  assert not any('[[PENDIENTE_' in html for html in htmls.values()), 'release blocked: missing verified legal identity/address/tax ID'
  assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
+ assert all('mailto:' not in htmls[p] for p in pages), 'release blocked: mail contact or lead collection present'
+ assert all(not parsers[p].forms for p in pages), 'release blocked: form present'
+ assert 'no acepta encargos' in htmls['aviso-legal.html'].lower(), 'release blocked: commercial scope not declared'
+ assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
+ assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
 print(f'PASS: 3 separate commercial pages plus 2 legal drafts; {len(actual)} allowlisted files')
