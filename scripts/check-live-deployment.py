@@ -10,16 +10,16 @@ BASE = "https://litosartesania.github.io/litos_web/"
 RELEASE = os.getenv("GITHUB_SHA", "manual-check")
 FILES = {
     "mobiliario.html": (
-        "Mostraremos una imagen específica",
-        "styles.css?v=stone-20261009-2",
-        "catalogo-precios.js?v=stone-20261009-2",
+        "Explora las imágenes conceptuales originales",
+        "styles.css?v=stone-20261009-3",
+        "catalogo-precios.js?v=stone-20261009-3",
     ),
     "styles.css": (
         ".material-preview",
-        ".concept-reference",
+        ".concept-availability",
     ),
     "catalogo-precios.js": (
-        "Vista no disponible para este material",
+        "Referencias visuales originales",
         "tonalMockup:false",
     ),
 }
