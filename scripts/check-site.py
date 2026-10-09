@@ -51,7 +51,10 @@ for page,count in [('funerario.html',3)]:
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert not p.forms and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
-assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==8
+assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==9
+assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
+assert 'simulación digital de tonalidad' in htmls['mobiliario.html']
+assert 'https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/' in (root/'catalogo-precios.js').read_text()
 assert htmls['mobiliario.html'].count('class="piece-card"')==6
 assert htmls['mobiliario.html'].count('class="piece-amount"')==6
 assert all(htmls['mobiliario.html'].count('src="assets/catalogo/litos-'+x+'.webp"')==1 for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
