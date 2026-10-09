@@ -234,3 +234,61 @@ button, a { -webkit-tap-highlight-color: transparent; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   .raking-light { display: none; }
 }
+
+
+/* Separate full-page catalogues. Entry page has no pricing or detailed inventory. */
+.landing-choices{background:var(--limestone-light)}
+.landing-heading{padding:clamp(4rem,7vw,7rem) var(--gutter) 2rem}
+.landing-heading h2{max-width:17ch;margin:0;font:400 clamp(2.8rem,5vw,5.5rem)/1.05 var(--serif);letter-spacing:-.035em}
+.landing-choices .path h3{margin:3.5rem 0 .75rem;font:400 clamp(2.3rem,4vw,4rem)/1 var(--serif)}
+.landing-note{padding:4rem var(--gutter);color:var(--limestone-light);background:var(--carbon);font:400 clamp(1.4rem,2.6vw,2.2rem)/1.4 var(--serif)}
+.landing-note p{max-width:52rem;margin:0}
+.section-hero{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:min(85svh,48rem);padding:10rem var(--gutter) 7rem;overflow:hidden;color:var(--limestone-light);background:var(--carbon)}
+.section-hero::before{position:absolute;z-index:-1;inset:0;content:"";background:linear-gradient(90deg,rgba(7,6,5,.85),rgba(7,6,5,.28)),linear-gradient(0deg,rgba(7,6,5,.36),transparent 55%)}
+.section-hero>img{position:absolute;z-index:-2;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-funerary>img{object-position:center 38%}
+.hero-furniture>img{object-position:center 46%}
+.section-hero-copy{max-width:55rem}
+.section-hero-label{margin:0 0 1.5rem;font:500 .8rem var(--sans);letter-spacing:.16em}
+.section-hero h1{margin:0;font:400 clamp(3.3rem,7vw,7.25rem)/.96 var(--serif);letter-spacing:-.046em}
+.section-hero-copy>p:not(.section-hero-label){max-width:36rem;margin:1.5rem 0;font-size:clamp(1.05rem,2vw,1.35rem)}
+.section-hero-copy>a{display:inline-flex;align-items:center;gap:1rem;margin-top:1rem;padding:.9rem 1.4rem;color:inherit;border:1px solid currentColor;text-decoration:none}
+.section-hero-disclaimer{position:absolute;right:var(--gutter);bottom:1rem;left:var(--gutter);margin:0;text-align:right;font-size:.72rem;color:rgba(255,255,255,.75)}
+.catalog-section{padding:clamp(5rem,9vw,10rem) var(--gutter)}
+.catalog-funerary{background:var(--limestone-light);color:var(--carbon)}
+.catalog-mobiliario{background:var(--carbon);color:var(--limestone-light)}
+.catalog-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(18rem,.72fr);gap:1.2rem 4rem;max-width:1360px;margin:0 auto 3.5rem;align-items:end}
+.catalog-eyebrow{margin:0 0 1rem;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:#675a4b}
+.catalog-heading-dark .catalog-eyebrow{color:rgba(240,233,226,.68)}
+.catalog-heading h2{margin:0;font:400 clamp(3.25rem,6.1vw,6.5rem)/.95 var(--serif);letter-spacing:-.045em}
+.catalog-intro{margin:0;max-width:34rem;line-height:1.7}
+.catalog-heading-dark .catalog-intro{color:rgba(240,233,226,.72)}
+.catalog-heading .concept-key{margin-top:1rem}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;max-width:1360px;margin:0 auto}
+.catalog-card{display:grid;grid-template-rows:auto 1fr;min-width:0;border:1px solid rgba(20,18,16,.14);background:rgba(255,255,255,.56)}
+.catalog-card-dark{border-color:var(--line-dark);background:var(--carbon-soft)}
+.catalog-card figure{margin:0;aspect-ratio:1.26/1;overflow:hidden;background:rgba(20,18,16,.08)}
+.catalog-card img{height:100%;object-fit:cover}
+.catalog-copy{display:flex;flex-direction:column;gap:.8rem;padding:1.25rem}
+.catalog-kicker{margin:0;font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;color:#6f614f}
+.catalog-card-dark .catalog-kicker{color:#ccb292}
+.catalog-copy h3{margin:0;font:400 1.55rem/1.08 var(--serif)}
+.catalog-copy>p{margin:0}
+.catalog-card-dark .catalog-copy>p:not(.catalog-price):not(.catalog-kicker){color:rgba(240,233,226,.72)}
+.catalog-price{margin-top:.2rem!important;font:400 clamp(1.9rem,3vw,2.5rem)/1.05 var(--serif);letter-spacing:-.03em}
+.catalog-card-dark .catalog-price{color:var(--limestone-light)}
+.catalog-price small{font:400 .72rem var(--sans)}
+.catalog-note{margin-top:auto!important;font-size:.8rem;line-height:1.65;color:#5f5548}
+.catalog-card-dark .catalog-note{color:rgba(240,233,226,.58)!important}
+.catalog-link{position:relative;display:inline-block;margin:2.25rem auto 0;padding:.85rem 4rem .85rem 0;font-size:.86rem;text-decoration:none}
+.catalog-link i{position:absolute;right:.2rem;bottom:1.55rem;width:2.2rem;height:1px;background:currentColor;transition:transform .3s ease}
+.catalog-link i::after{position:absolute;top:-3px;right:0;width:7px;height:7px;content:"";border-top:1px solid;border-right:1px solid;transform:rotate(45deg)}
+.catalog-link:hover i,.catalog-link:focus-visible i{transform:translateX(.55rem)}
+.page-pricing{display:grid;grid-template-columns:1fr 1fr;gap:3rem;padding:clamp(4rem,8vw,8rem) var(--gutter);color:var(--carbon);background:#e9e1d8}
+.page-pricing h2{max-width:12ch;margin:0;font:400 clamp(2.7rem,5vw,5rem)/1 var(--serif)}
+.page-pricing>div:last-child{max-width:38rem;line-height:1.7}
+.page-pricing .price-sources{font-size:.84rem}
+.page-pricing a{text-underline-offset:.2rem}
+@media (min-width:1081px){.catalog-mobiliario .catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1100px}}
+@media (max-width:1080px){.catalog-heading{grid-template-columns:1fr}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.section-hero{min-height:44rem;padding:9rem var(--gutter) 6rem}.section-hero-disclaimer{text-align:left}.section-hero h1{font-size:clamp(3.1rem,13.5vw,5rem)}.page-pricing{grid-template-columns:1fr}.landing-choices .path h3{font-size:2.5rem}.catalog-heading{margin-bottom:2.5rem}.catalog-heading h2{font-size:clamp(3rem,14vw,5.2rem)}.catalog-grid{grid-template-columns:1fr}.catalog-link{margin-top:1.5rem}}
