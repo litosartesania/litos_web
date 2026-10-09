@@ -320,3 +320,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .status-legal-link{padding-top:1.5rem;font-size:.92rem!important}
 .catalog-availability{max-width:40rem;margin:2.25rem 0 0;padding:1rem 1.25rem;border-left:2px solid currentColor;font-weight:600;line-height:1.6}
 .pricing-hold-note{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line-light);font-weight:600}
+
+/* LITOS / experimental editorial stone-furniture gallery, no commerce. */
+.piece-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;max-width:1360px;margin:0 auto}
+.piece-card{min-width:0;background:var(--carbon-soft);border:1px solid var(--line-dark)}
+.piece-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;padding:.65rem}
+.piece-figure{margin:0;min-width:0;overflow:hidden;background:#554a3c}
+.piece-figure img{width:100%;height:auto;aspect-ratio:720/900;object-fit:cover}
+.piece-figure figcaption{padding:.45rem .25rem;color:rgba(240,233,226,.67);font-size:.67rem;letter-spacing:.04em}
+.piece-details{padding:clamp(1.15rem,2vw,1.85rem)}
+.piece-index{font-size:.68rem!important;letter-spacing:.13em!important;color:var(--bronze)!important}
+.piece-details h3{margin:.7rem 0 1rem;font:400 clamp(1.85rem,3vw,2.65rem)/1.1 var(--serif);letter-spacing:-.02em}
+.piece-details>p{max-width:58ch;margin:0 0 1rem;font-size:.92rem;line-height:1.65;color:rgba(240,233,226,.78)}
+.piece-benchmark{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.5rem 1.25rem;margin:1.4rem 0 .8rem;padding:1.1rem 0 .7rem;border-top:1px solid var(--line-dark)}
+.piece-benchmark span{font-size:.72rem;color:rgba(240,233,226,.72)}
+.piece-amount{font:400 clamp(2rem,3.7vw,3rem)/1.05 var(--serif);white-space:nowrap;letter-spacing:-.035em}
+.piece-comparison{font-size:.72rem!important;color:rgba(240,233,226,.65)!important;line-height:1.7!important}
+.piece-comparison a{display:inline-block;color:var(--limestone-light);text-underline-offset:3px}
+@media(max-width:790px){.piece-grid{grid-template-columns:1fr}.piece-details{padding:1.25rem}.piece-photos{gap:.4rem;padding:.4rem}.piece-figure figcaption{font-size:.63rem}.piece-details h3{font-size:2rem}}

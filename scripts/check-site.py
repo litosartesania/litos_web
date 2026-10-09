@@ -22,6 +22,7 @@ class Inspect(HTMLParser):
   if tag=='article' and 'catalog-card' in a.get('class','').split():self.cards+=1
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
+expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
 assert sum(x.stat().st_size for x in root.rglob('*') if x.is_file())<2500000
@@ -45,11 +46,17 @@ for page,html in htmls.items():
   elif u.fragment:assert unquote(u.fragment) in p.ids,(page,uri)
  assert not p.forms,(page,'informational-only website must not include forms')
 assert not parsers['index.html'].forms and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
-for page,count in [('funerario.html',3),('mobiliario.html',4)]:
+for page,count in [('funerario.html',3)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert not p.forms and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
+assert 'id="precios"' in htmls['mobiliario.html']
+assert htmls['mobiliario.html'].count('class="piece-card"')==6
+assert htmls['mobiliario.html'].count('class="piece-amount"')==6
+assert all(htmls['mobiliario.html'].count('src="assets/catalogo/litos-'+x+'.webp"')==1 for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
+assert all('–' not in x and '€' in x for x in ["4.600 €","2.200 €","3.500 €","1.900 €","2.500 €","1.200 €"])
+assert 'No son precios de venta ni ofertas de LITOS' in htmls['mobiliario.html']
 for page in pages:
  assert 'href="aviso-legal.html"' in htmls[page],(page,'missing legal link')
  assert 'href="privacidad.html"' in htmls[page],(page,'missing privacy link')
