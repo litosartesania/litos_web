@@ -19,7 +19,7 @@ const bodies=files.map((file,i)=>{
   const src=readFileSync('preview/'+file,'utf8');
   const m=src.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   if(!m)throw Error('Body missing: '+file);
-  const body=replace(m[1].replace(/<script\s+src="(?:script|catalogo-precios)\.js"\s*><\/script>/g,''));
+  const body=replace(m[1].replace(/<script\s+src="(?:script|catalogo-precios)\.js(?:\?[^"]+)?"\s*><\/script>/g,''));
   if(body.includes('src="assets/'))throw Error('Unresolved resource: '+file);
   return '<div data-view="'+names[i]+'"'+(i?' hidden':'')+'>'+body+'</div>';
 });
