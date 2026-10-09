@@ -25,7 +25,7 @@ FILES = {
 }
 FORBIDDEN = {
     "mobiliario.html": ("simulación digital de tonalidad",),
-    "styles.css": ("--stone-photo-filter", "--stone-preview-tint", "visibility:hidden"),
+    "styles.css": ("--stone-photo-filter", "--stone-preview-tint", ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
     "catalogo-precios.js": ("--stone-photo-filter", "const visual="),
 }
 
