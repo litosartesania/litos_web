@@ -20,7 +20,7 @@ def inline(page):
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
  for width,height in [(390,844),(820,1180),(1440,900)]:
-  for file in ['index.html','funerario.html','mobiliario.html']:
+  for file in ['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']:
    page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
    errors=[]
    page.on('pageerror',lambda e:errors.append(str(e)))
@@ -39,10 +39,13 @@ with sync_playwright() as app:
     assert page.locator('a.path[href="funerario.html"]').count()==1
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
     assert page.locator('form').count()==0
-   else:
+   elif file in ('funerario.html','mobiliario.html'):
     assert page.locator('.catalog-card').count()==(3 if file=='funerario.html' else 4)
     assert page.locator('.catalog-price').count()==page.locator('.catalog-card').count()
     assert page.locator('#contact-form').get_attribute('action').startswith('mailto:')
+   else:
+    assert page.locator('.legal-content h2').count()>3
+    assert page.locator('form').count()==0
    print('PASS',file,width)
    page.close()
  browser.close()
