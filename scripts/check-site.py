@@ -53,7 +53,8 @@ for page,count in [('funerario.html',3)]:
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
 assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==9
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
-assert 'simulación digital de tonalidad' in htmls['mobiliario.html']
+assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
+assert '--stone-photo-filter' not in (root/'styles.css').read_text() and '--stone-preview-tint' not in (root/'styles.css').read_text()
 assert 'https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/' in (root/'catalogo-precios.js').read_text()
 assert htmls['mobiliario.html'].count('class="piece-card"')==6
 assert htmls['mobiliario.html'].count('class="piece-amount"')==6
@@ -90,4 +91,4 @@ if '--production' in sys.argv:
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: five pages, eight material options, 12 source images, no collection; {len(actual)} allowlisted files')
+print(f'PASS: five pages, nine material options, 12 source images, no false stone tint, no collection; {len(actual)} allowlisted files')
