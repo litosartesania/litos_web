@@ -292,3 +292,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (min-width:1081px){.catalog-mobiliario .catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1100px}}
 @media (max-width:1080px){.catalog-heading{grid-template-columns:1fr}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.section-hero{min-height:44rem;padding:9rem var(--gutter) 6rem}.section-hero-disclaimer{text-align:left}.section-hero h1{font-size:clamp(3.1rem,13.5vw,5rem)}.page-pricing{grid-template-columns:1fr}.landing-choices .path h3{font-size:2.5rem}.catalog-heading{margin-bottom:2.5rem}.catalog-heading h2{font-size:clamp(3rem,14vw,5.2rem)}.catalog-grid{grid-template-columns:1fr}.catalog-link{margin-top:1.5rem}}
+
+/* Dedicated legal/privacy pages; these are unpublishable drafts until verified. */
+.legal-main{min-height:70vh;background:var(--limestone-light);color:var(--carbon)}
+.legal-intro{padding:clamp(9rem,15vw,14rem) var(--gutter) clamp(3rem,6vw,5rem);background:var(--carbon);color:var(--limestone-light)}
+.legal-intro .catalog-eyebrow{color:var(--bronze)}
+.legal-intro h1{margin:0;font:400 clamp(3rem,7vw,6rem)/.96 var(--serif);letter-spacing:-.04em}
+.legal-intro>p:last-child{max-width:47rem;margin:1.6rem 0 0;color:rgba(240,233,226,.78);line-height:1.65}
+.legal-content{max-width:65rem;padding:clamp(2rem,6vw,5rem) var(--gutter) 7rem;margin:auto}
+.legal-content section{padding:2rem 0;border-bottom:1px solid var(--line-light)}
+.legal-content section:last-child{border-bottom:0}
+.legal-content h2{margin:0 0 1rem;font:400 clamp(1.75rem,3vw,2.5rem)/1.12 var(--serif)}
+.legal-content p{max-width:70ch;line-height:1.7}
+.legal-content a,.footer-legal a{color:inherit;text-underline-offset:.25em}
+.legal-identification{display:grid;grid-template-columns:minmax(12rem,1fr) minmax(0,1fr);gap:.75rem 1.5rem;border-top:1px solid var(--line-light);padding-top:1.25rem}
+.legal-identification dt{font-weight:600}
+.legal-identification dd{margin:0;overflow-wrap:anywhere}
+@media(max-width:760px){.legal-identification{grid-template-columns:1fr;gap:.15rem}.legal-identification dd{margin-bottom:1rem}.legal-intro{padding-top:8rem}}
