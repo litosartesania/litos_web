@@ -13,7 +13,7 @@ const picker=root.querySelector('#material-picker');
 const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
 const materialHelp=root.querySelector('.material-heading > p');
-if(materialHelp){materialHelp.textContent='Selecciona una piedra. Mostramos una vista solo si existe una imagen propia y validada para esa combinación. Los conceptos originales están separados y no representan la piedra seleccionada.';materialHelp.style.visibility='visible';}
+if(materialHelp){materialHelp.textContent='Explora las piezas originales y selecciona una piedra para actualizar los valores orientativos. Las fotos son referencias conceptuales: no muestran necesariamente la piedra elegida. Una variante de material solo se mostrará como tal cuando tenga su propia imagen validada.';}
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 // Only files that passed source-image and material-specific visual QA belong here.
@@ -25,26 +25,42 @@ const referenceImage=(p)=>{
  if(!slug)return '';
  return '<div class="piece-photos">'+[1,2].map(n=>'<figure class="piece-figure"><img src="assets/catalogo/litos-'+slug+'-0'+n+'.webp" loading="lazy" decoding="async" width="720" height="900" alt="Imagen conceptual original '+safe(p[1])+' variante '+n+'"><figcaption>Referencia visual original · piedra sin identificar</figcaption></figure>').join('')+'</div>';
 };
+// Keep original concepts visible without asserting that their stone is the selected one.
+const referenceByProduct=Object.fromEntries(products.map(p=>[p[0],referenceImage(p)]));
 const showMaterial=(card,material)=>{
- const host=card.querySelector('.material-preview'), key=card.dataset.product+'__'+material[0];
+ const host=card.querySelector('.material-preview');
+ const key=card.dataset.product+'__'+material[0];
  const file=approvedVariants[key];
  if(file){
   if(!file.startsWith('assets/catalogo/variantes/') || !file.endsWith('.webp') || file.includes('..')) throw Error('Unapproved asset path: '+file);
-  host.replaceChildren();
-  const figure=document.createElement('figure');figure.className='material-variant-figure';
-  const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=720;img.height=900;
-  img.alt='Imagen conceptual de '+card.querySelector('h3').textContent+' en '+material[1];
-  const cap=document.createElement('figcaption');cap.textContent='Imagen conceptual de '+material[1]+' · No es una obra ejecutada';
-  figure.append(img,cap);host.append(figure);
- } else {
-  // On an unavailable combination do not show a photograph of another stone.
-  host.innerHTML='<div class="material-placeholder" role="status"><div class="material-placeholder-symbol" aria-hidden="true"></div><strong>Vista no disponible para este material</strong><span class="material-placeholder-text"></span></div>';
-  host.querySelector('.material-placeholder-text').textContent=material[1]+' · imagen propia pendiente de validación';
+  if(host.dataset.view!==key){
+   host.replaceChildren();
+   const figure=document.createElement('figure');figure.className='material-variant-figure';
+   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=720;img.height=900;
+   img.alt='Imagen conceptual de '+card.querySelector('h3').textContent+' en '+material[1];
+   const cap=document.createElement('figcaption');cap.textContent='Imagen conceptual de '+material[1]+' · No es una obra ejecutada';
+   figure.append(img,cap);host.append(figure);
+   host.dataset.view=key;
+  }
+  return;
+ }
+ const original=referenceByProduct[card.dataset.product];
+ if(original){
+  if(host.dataset.view!=='reference'){
+   host.innerHTML='<div class="concept-images">'+original+'</div><div class="concept-availability" role="status"><strong>Referencias visuales originales</strong><span class="concept-material-note"></span></div>';
+   host.dataset.view='reference';
+  }
+  host.querySelector('.concept-material-note').textContent='No son una vista en '+material[1]+'; la imagen específica de esta piedra está pendiente.';
+ }else{
+  if(host.dataset.view!=='unavailable'){
+   host.innerHTML='<div class="material-placeholder" role="status"><div class="material-placeholder-symbol" aria-hidden="true"></div><strong>Propuesta conceptual sin imagen propia</strong><span class="material-placeholder-text"></span></div>';
+   host.dataset.view='unavailable';
+  }
+  host.querySelector('.material-placeholder-text').textContent='Vista en '+material[1]+' pendiente · sin fotografía de este modelo';
  }
 };
 grid.innerHTML=products.map((p,i)=>'<article class="piece-card product-model" data-product="'+safe(p[0])+'" data-category="'+safe(p[2])+'" data-base="'+p[3]+'">'+
-'<div class="material-preview" aria-label="Vista del material elegido"></div>'+
-(referenceImage(p)?'<details class="concept-reference"><summary>Ver concepto original (piedra no verificada)</summary>'+referenceImage(p)+'</details>':'')+
+'<div class="material-preview" aria-label="Imagen del modelo y disponibilidad del material"></div>'+
 '<div class="piece-details"><p class="piece-index">'+String(i+1).padStart(2,'0')+' / '+safe(p[2].toUpperCase())+' · '+(p[7]?'COMPARABLE':'EXTRAPOLACIÓN')+'</p><h3>'+safe(p[1])+'</h3><p>'+safe(p[6])+'.</p><div class="piece-benchmark"><span>Estimación en <span class="card-material">travertino</span></span><strong class="piece-amount">'+formatter.format(p[3])+'</strong></div><p class="piece-comparison">Referencia externa: <a href="'+links[p[5]]+'" target="_blank" rel="noopener noreferrer">consultar fuente ↗</a>. '+(p[7]?'Precio orientado por artículo o familia comparable.':'Extrapolación de categoría, sin comparable idéntico.')+' No es tarifa de LITOS.</p></div></article>').join('');
 const swatch=root.querySelector('#material-color');
 swatch?.addEventListener('click',()=>{

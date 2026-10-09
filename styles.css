@@ -374,6 +374,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .material-preview .material-placeholder{min-height:clamp(14rem,24vw,23rem);background:#292723;color:var(--limestone-light);border:1px solid rgba(240,233,226,.18)}
 .material-placeholder strong{font:400 clamp(1.1rem,2vw,1.45rem)/1.25 var(--serif)}
 .material-placeholder-text{font-size:.78rem;color:rgba(240,233,226,.72)}
+.material-preview .concept-images .piece-photos{padding:0;gap:.55rem}
+.material-preview .concept-images .piece-figure{background:#52463b}
+.material-preview .concept-images .piece-figure img{display:block;width:100%;filter:none;aspect-ratio:4/5;object-fit:cover}
+.material-preview .concept-images .piece-figure figcaption{padding:.5rem .3rem;font-size:.7rem;color:rgba(240,233,226,.78)}
+.concept-availability{display:flex;flex-direction:column;gap:.35rem;padding:.9rem 1rem;margin-top:.5rem;background:rgba(240,233,226,.055);border-left:2px solid var(--bronze);line-height:1.55}
+.concept-availability strong{color:var(--limestone-light);font-size:.81rem;font-weight:600}
+.concept-availability span{color:rgba(240,233,226,.78);font-size:.79rem}
+.material-preview .material-placeholder{min-height:12rem}
 .material-preview .material-variant-figure{margin:0;overflow:hidden}
 .material-variant-figure img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
 .material-variant-figure figcaption{font-size:.72rem;color:var(--limestone-light);padding:.5rem}

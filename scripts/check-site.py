@@ -54,9 +54,11 @@ for page,count in [('funerario.html',3)]:
 assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==9
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261009-2' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261009-2' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261009-3' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261009-3' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
+assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
+assert 'Explora las imágenes conceptuales originales' in htmls['mobiliario.html']
 assert '--stone-photo-filter' not in (root/'styles.css').read_text() and '--stone-preview-tint' not in (root/'styles.css').read_text()
 assert 'https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/' in (root/'catalogo-precios.js').read_text()
 assert htmls['mobiliario.html'].count('class="piece-card"')==6
