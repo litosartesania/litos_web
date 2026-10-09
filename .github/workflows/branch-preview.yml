@@ -28,15 +28,14 @@ jobs:
         run: |
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site
-      - name: Ensure legal placeholders block production deployment
+      - name: Validate publication safety gate without deploying
+        run: python3 scripts/check-site.py _site --production
+      - name: Set up Chromium for responsive visual QA
         run: |
-          if grep -Fq '[[PENDIENTE_' aviso-legal.html; then
-            if python3 scripts/check-site.py _site --production; then
-              echo "::error::Release guard incorrectly accepted unresolved legal identity."
-              exit 1
-            fi
-            echo "Legal release gate correctly blocks publication."
-          fi
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Run browser checks on all five pages and three viewport sizes
+        run: python3 scripts/visual-qa.py
       - name: Prepare preview with disabled form submission
         run: |
           node tools/build-preview.mjs
