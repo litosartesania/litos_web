@@ -142,3 +142,14 @@ Consultar `AGENTS.md` y `docs/HANDOFF.md` para reglas de trabajo más completas.
 - Nuevo material `verde-alpi`, Mármol Verde Alpi natural, coste índice **262 €/m²**, de baldosa de 1 cm de Colour of Stone: https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/ (precio de referencia 261,80 €/m² en octubre 2026). Es índice de revestimiento, NO tarifa de bloque escultórico o coste real del taller.
 - Se mantiene fórmula previa de sensibilidad hipotética del 30 %, 21 productos, separación funeraria, ausencia de formularios/encargos, uso gratuito y privacidad.
 - Nuevas pruebas responsive verifican 9 opciones, precio en granito vs mármol verde, valores visuales CSS realmente cambiantes, etiquetas honestas de simulación y fuente verde. No publicar hasta CI completa.
+
+
+## 2026-10-09 — Corrección inmediata propuesta para la web pública (PR #5)
+- La captura mostraba las imágenes de todo el salón teñidas de verde cuando el selector elegía Mármol Verde Alpi. Se comprobó que `main` todavía contenía `--stone-photo-filter` y `--stone-preview-tint`; el cambio anterior existía solo en una rama, por lo que GitHub Pages no lo había publicado.
+- Se creó `work/hotfix-material-sin-tintado-20261009` desde el `main` actual, sin arrastrar experimentos de imágenes o documentación de otras ramas.
+- Solo cuatro ficheros de código/pruebas cambiados: `catalogo-precios.js`, `styles.css`, `scripts/check-site.py` y `scripts/visual-qa.py`. Se elimina todo tintado del entorno fotográfico.
+- La tarjeta de cada material seleccionado muestra `Vista no disponible para este material` si no hay imagen específica **aprobada**. Las doce imágenes de seis familias siguen visibles en `Ver concepto original (piedra no verificada)`, separadas del selector y sin alteraciones.
+- Se conservan las 21 propuestas, nueve materiales, precios orientativos externos, ausencia de compras, formularios y nuevos servicios de pago.
+- **Limitación conocida:** el HTML fuente heredado aún contiene texto antiguo sobre simulaciones. El CSS lo oculta y el JS lo reemplaza inmediatamente por texto preciso. Conviene corregir el HTML de origen en una edición posterior autorizada, porque sin JS se omite ese párrafo.
+- PR de corrección: https://github.com/litosartesania/litos_web/pull/5. **No afirmar despliegue hasta verificar QA y GitHub Pages**.
+- El lote de treinta variantes sigue sin imágenes específicas aprobadas; el hotfix no las inventa ni las publica.
