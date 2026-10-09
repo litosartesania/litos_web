@@ -1,0 +1,51 @@
+name: LITOS isolated preview audit
+
+on:
+  push:
+    branches:
+      - 'work/luz-rasante-*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    name: Static audit and downloadable preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this branch
+        uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check script.js
+          node --check tools/build-preview.mjs
+          node --check tools/build-standalone.mjs
+      - name: Build and audit Codex public-site allowlist
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site
+      - name: Validate publication safety gate without deploying
+        run: python3 scripts/check-site.py _site --production
+      - name: Set up Chromium for responsive visual QA
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Run browser checks on all five pages and three viewport sizes
+        run: python3 scripts/visual-qa.py
+      - name: Prepare preview with disabled form submission
+        run: |
+          node tools/build-preview.mjs
+          node tools/build-standalone.mjs
+      - name: Validate self-contained review HTML and disabled contact forms
+        run: python3 scripts/check-preview.py preview
+      - name: Upload local review package (not a Pages deployment)
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-offline-preview
+          path: preview/
+          if-no-files-found: error
+          retention-days: 7

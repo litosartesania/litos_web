@@ -3,3 +3,23 @@
 
 # Carpetas de trabajo no necesarias en la web
 IMÁGENES/
+
+# Generated output and local previews
+_site/
+__pycache__/
+*.zip
+
+# Privacidad y archivos de trabajo
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+private/
+secrets/
+backups/
+preview/
+dist/
+node_modules/
+IMÁGENES/
