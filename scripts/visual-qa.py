@@ -59,17 +59,21 @@ with sync_playwright() as app:
      assert 'Calacatta' in page.locator('#catalog-count').inner_text()
      page.locator('#material-picker').select_option('granito')
      assert page.locator('#catalog-count').inner_text().endswith('Granito gris')
+     assert page.locator('.material-preview .material-placeholder').count()==21
+     assert page.locator('.material-preview img').count()==0
+     assert page.locator('.concept-reference').count()==6
+     assert 'Vista no disponible para este material' in page.locator('.material-preview').first.inner_text()
+     assert 'no representan la piedra' in page.locator('.material-heading > p').inner_text()
      granite_filter=page.locator('.piece-figure img').first.evaluate('(e)=>getComputedStyle(e).filter')
-     assert granite_filter!='none',(width,granite_filter)
-     assert 'Simulación tonal' in page.locator('.piece-figure figcaption').first.inner_text()
+     assert granite_filter=='none',(width,granite_filter)
      granite_price=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
      page.locator('#material-picker').select_option('verde-alpi')
      green_price=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
      green_filter=page.locator('.piece-figure img').first.evaluate('(e)=>getComputedStyle(e).filter')
-     assert green_filter!=granite_filter,(width,granite_filter,green_filter)
+     assert green_filter=='none',(width,green_filter)
      assert 'Verde Alpi' in page.locator('#catalog-count').inner_text()
      assert green_price!=granite_price,(width,green_price,granite_price)
-     assert 'Verde Alpi' in page.locator('.piece-figure figcaption').first.inner_text()
+     assert 'Verde Alpi' in page.locator('.material-placeholder-text').first.inner_text()
      assert 'colourofstone.com' in page.locator('#material-source').get_attribute('href')
      page.locator('[data-category-filter="Baño"]').click()
      assert page.locator('.piece-card:visible').count()==3
