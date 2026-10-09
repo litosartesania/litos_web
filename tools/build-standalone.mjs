@@ -1,8 +1,8 @@
 // Standalone review: all CSS/images in one HTML, with three separate full views.
 // Never published, and all contact submission is blocked by the preview builder.
 import {readFileSync,writeFileSync} from 'node:fs';
-const files=['index.html','funerario.html','mobiliario.html'];
-const names=['inicio','funerario','mobiliario'];
+const files=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'];
+const names=['inicio','funerario','mobiliario','aviso-legal','privacidad'];
 const assets=['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp'];
 const replace=(original)=>{
   let text=original;
@@ -26,8 +26,8 @@ const bodies=files.map((file,i)=>{
 const script=String.raw`
 (()=>{
  const all=[...document.querySelectorAll('[data-view]')];
- const route=href=>({'index.html':'inicio','funerario.html':'funerario','mobiliario.html':'mobiliario'})[href.split(/[?#]/)[0]];
- const selected=()=>location.hash.match(/^#!(inicio|funerario|mobiliario)$/)?.[1]||'inicio';
+ const route=href=>({'index.html':'inicio','funerario.html':'funerario','mobiliario.html':'mobiliario','aviso-legal.html':'aviso-legal','privacidad.html':'privacidad'})[href.split(/[?#]/)[0]];
+ const selected=()=>location.hash.match(/^#!(inicio|funerario|mobiliario|aviso-legal|privacidad)$/)?.[1]||'inicio';
  let current;
  function show(name,push=false){
   if(!all.some(x=>x.dataset.view===name))name='inicio';
