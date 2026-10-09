@@ -23,12 +23,15 @@ jobs:
         run: |
           node --check script.js
           node --check tools/build-preview.mjs
+          node --check tools/build-standalone.mjs
       - name: Build and audit Codex public-site allowlist
         run: |
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site
       - name: Prepare preview with disabled form submission
-        run: node tools/build-preview.mjs
+        run: |
+          node tools/build-preview.mjs
+          node tools/build-standalone.mjs
       - name: Upload local review package (not a Pages deployment)
         uses: actions/upload-artifact@v4
         with:
