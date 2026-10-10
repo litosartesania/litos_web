@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'">
+<title>LITOS · Vista previa de materiales</title>
+<style>
+:root{background:#171715;color:#f4eee7;font:16px/1.5 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0}.wrap{max-width:1160px;margin:auto;padding:28px 18px}
+header{border-bottom:1px solid #585047}h1{font:normal clamp(32px,5vw,56px)/1.1 Georgia,serif;margin:12px 0}
+small,.muted{color:#bdb4a6}.eye{color:#e6b887;letter-spacing:.2em;font-size:12px}
+.alert{margin:24px 0;padding:16px 20px;border-left:3px solid #b98d56;background:#2d2924}
+nav{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}
+button{background:#282520;color:#f4eee7;border:1px solid #827868;border-radius:99px;padding:10px 15px;cursor:pointer;font:inherit}
+button[aria-pressed="true"]{background:#f0e6d6;color:#161514}
+button:focus-visible{outline:3px solid #eebd7c;outline-offset:3px}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+article{padding:10px;background:#24221f}h2{font:normal clamp(19px,3vw,30px) Georgia,serif}
+article img{display:block;width:100%;aspect-ratio:4/5;object-fit:contain;background:#111}
+.label{color:#cfc4b8;font-size:14px;padding-top:8px}
+#compare{margin:25px 0}footer{border-top:1px solid #585047;color:#a49b91}
+@media(max-width:600px){.wrap{padding:16px 10px}.gallery{gap:8px}article{padding:6px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="eye">LITOS · REVISION INTERNA</div><h1>Una pieza. Diferentes piedras.</h1>
+<p class="muted">Dos modelos originales · cinco piedras · diez simulaciones por máscaras sobre fotografía conceptual.</p></div></header>
+<main class="wrap">
+<p class="alert"><strong>Material en revisión; NO es catálogo publicado.</strong> Las vetas son simulaciones artísticas: no certifican piedra real ni piezas fabricadas. Los dos acabados de travertino reutilizan las imágenes originales. Está prohibido presentarlas como obras ejecutadas.</p>
+<nav id="stones" aria-label="Piedras para comparar"></nav>
+<div class="gallery">
+<article><h2>Mesa de comedor ovalada</h2><img id="dining" alt="Mesa de comedor ovalada, simulación conceptual"><p class="label" id="dining-label"></p></article>
+<article><h2>Mesa de centro</h2><img id="coffee" alt="Mesa de centro, simulación conceptual"><p class="label" id="coffee-label"></p></article>
+</div>
+<button type="button" id="compare" aria-pressed="false">Ver originales</button>
+<p class="muted">Toda la interacción es local. Sin analítica, cookies de seguimiento, formularios ni peticiones a terceros.</p>
+</main><footer><div class="wrap">LITOS — prototipo revisable en rama aislada. No mezclar con producción.</div></footer>
+<script>
+(() => {
+  const materials=[['travertino','Travertino beige'],['macael','Blanco Macael'],['verde-alpi','Verde Alpi'],['granito','Granito gris'],['marquina','Negro Marquina']];
+  const models=[['mesa-comedor-oval','litos-mesa-comedor-01.webp','dining'],['mesa-centro-mon','litos-mesa-centro-01.webp','coffee']];
+  const buttons=document.querySelector('#stones');
+  let stone='verde-alpi',original=false;
+  for(const [slug,name] of materials) {
+    const b=document.createElement('button'); b.textContent=name;b.type='button';b.dataset.stone=slug;
+    b.addEventListener('click',()=>{stone=slug;original=false;render()});buttons.append(b);
+  }
+  document.querySelector('#compare').addEventListener('click',()=>{original=!original;render()});
+  function render(){
+    const label=materials.find(x=>x[0]===stone)[1];
+    for(const [model,file,id] of models) {
+      const img=document.querySelector('#'+id);
+      img.src=original?'../assets/catalogo/'+file:'../assets/catalogo/variantes/'+model+'__'+stone+'.webp';
+      img.alt=(original?'Referencia original de ':'Simulación conceptual de ')+model+(original?'':' en '+label);
+      document.querySelector('#'+id+'-label').textContent=original?'Fotografía conceptual original':label+' · simulación no aprobada';
+    }
+    for(const b of buttons.children)b.setAttribute('aria-pressed',String(b.dataset.stone===stone));
+    const compare=document.querySelector('#compare');
+    compare.textContent=original?'Ver variantes':'Ver originales';
+    compare.setAttribute('aria-pressed',String(original));
+  }
+  render();
+})();
+</script>
+</body></html>
