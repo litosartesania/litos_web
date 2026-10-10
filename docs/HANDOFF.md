@@ -184,3 +184,11 @@
 - **Pendiente:** el lote binario aún NO ha sido transferido a GitHub. No se activó ninguna ruta en `approvedVariants`; la documentación y control de integridad viven en la nueva rama `work/stone-variants-review-20261010`. Las imágenes aún necesitan verificación humana de vetas reales, detalles de bordes y calidad de material (conceptuales, NO fotos de obra ni prueba de piedra genuina).
 - Nuevo validador `scripts/check-stone-variants.py` para revisar ficheros e impedir integración de un lote incompleto mediante `--require-all`. Documentación de relevo en `docs/STONE_VARIANTS_QA.md`.
 - No se modificó `main`, Pages ni otros repositorios, ni se añadió un servicio de pago o un proceso de captación. Sin autorización para desplegar estos candidatos.
+
+
+### 2026-10-10 — Estado final posterior a la generación remota (prevalece sobre el bloqueo inicial)
+- Los diez WebP **ahora sí están subidos** a `assets/catalogo/variantes/` en esta rama; GitHub Actions ejecutó `scripts/generate-stone-variants.py` y `scripts/check-stone-variants.py --require-all` con resultado correcto. Sin variaciones en `main` ni despliegue Pages.
+- El flujo `stone-variants-review.yml` empaqueta un comparador HTML local `review/stone-variants.html`, los 10 WebP y las dos imágenes base; no es una URL de staging ni contiene formularios/tracking.
+- El PR borrador `#8` permanece en revisión. Las diez imágenes son simulaciones **procedurales conceptuales**, no pruebas del aspecto auténtico de una muestra de Macael/Marquina/Verde Alpi, ni obras construidas. Travertino reutiliza las fotos originales.
+- `approvedVariants` sigue vacío deliberadamente. Pendiente revisión visual real, aceptación de texturas/cantos/sombras y modificación del allowlist y frontend **solo después de aprobar**.
+- Advertencia de relevo: el ZIP HTML entregado en la conversación es un lote local inicial y puede diferir en acabado o compresión de los binarios reproducibles de GitHub. En caso de discrepancia tomar los del remoto como última fuente para QA, no mezclar los dos lotes.
