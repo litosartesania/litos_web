@@ -46,6 +46,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: litos-stone-variants-review-only
-          path: assets/catalogo/variantes/*.webp
+          path: |
+            review/stone-variants.html
+            assets/catalogo/variantes/*.webp
+            assets/catalogo/litos-mesa-comedor-01.webp
+            assets/catalogo/litos-mesa-centro-01.webp
           if-no-files-found: error
           retention-days: 7
