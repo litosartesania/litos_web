@@ -1,0 +1,51 @@
+name: Build LITOS draft stone variants (no deployment)
+on:
+  push:
+    branches:
+      - work/stone-variants-review-20261010
+    paths:
+      - scripts/generate-stone-variants.py
+      - .github/workflows/stone-variants-review.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: litos-stone-candidates-20261010
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.repository == 'litosartesania/litos_web' && github.ref == 'refs/heads/work/stone-variants-review-20261010'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout only this isolated branch
+        uses: actions/checkout@v4
+        with:
+          ref: work/stone-variants-review-20261010
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install open-source offline imaging dependencies
+        run: python -m pip install --disable-pip-version-check pillow numpy opencv-python-headless
+      - name: Create images from original LITOS model photos
+        run: python scripts/generate-stone-variants.py
+      - name: Verify all ten candidate WebP assets
+        run: python scripts/check-stone-variants.py --require-all
+      - name: Save binaries only on this isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/catalogo/variantes/
+          if ! git diff --cached --quiet; then
+            git commit -m "assets: 10 provisional table-stone WebP variants for QA only"
+            git push origin HEAD:refs/heads/work/stone-variants-review-20261010
+          fi
+      - name: Retain separate QA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-stone-variants-review-only
+          path: assets/catalogo/variantes/*.webp
+          if-no-files-found: error
+          retention-days: 7
