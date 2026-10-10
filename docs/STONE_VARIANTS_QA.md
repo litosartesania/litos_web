@@ -33,3 +33,11 @@ Ruta prevista por candidato: `assets/catalogo/variantes/<slug-modelo>__<slug-mat
 
 ## Estado de esta rama
 **Documentación y controles de integración únicamente**. No contiene aún los nuevos WebP. `approvedVariants` permanece intencionadamente vacío en la web.
+
+
+## Actualización de verificación — 2026-10-10 (prevalece sobre estado inicial)
+- Las 10 imágenes WebP candidatas **SÍ constan ya en GitHub**: `assets/catalogo/variantes/`, rama `work/stone-variants-review-20261010`. Un workflow restringido a esa rama (`.github/workflows/stone-variants-review.yml`) las generó a partir de los originales versionados, pasó `scripts/check-stone-variants.py --require-all` y confirmó commit remoto.
+- El algoritmo reproducible usado **en el servidor GitHub** está en `scripts/generate-stone-variants.py`. Usa únicamente dos imágenes originales del mismo repositorio, máscaras geométricas y texturas conceptuales procedurales. No utiliza los datos personales ni servicios externos, ni descarga recursos del exterior al renderizar; las librerías se instalan del ecosistema Python.
+- Las imágenes exactas del remoto deben revisarse desde `review/stone-variants.html`, un visor de selección que se incluye, junto con los dos originales y los diez WebP, en el artefacto de GitHub Actions `litos-stone-variants-review-only`. El visor offline carga archivos relativos, no solicita información al visitante.
+- Advertencia: el ZIP local de la conversación se preparó **con un lote inicial diferente**, que incorpora materiales de referencia generados y una candidata privada de Verde Alpi; no coincide byte a byte con las imágenes producidas por el generador reproducible en GitHub. La versión del remoto es la única candidata para integrar en el sitio. Nunca confundir los dos lotes ni sus hashes.
+- El renderizado técnico y la presencia de diez binarios se han verificado; **aún falta aprobar material/geología, perspectiva, costuras en máscaras, iluminación y contenido visual**. No añadir rutas a `approvedVariants` ni desplegar Pages sin esa aprobación.
