@@ -1,0 +1,18 @@
+name: LITOS · Integridad de 20 PNG
+on:
+  push:
+    branches:
+      - work/imagenes-recibidas-20261011
+    paths:
+      - 'assets/catalogo/variantes/*.png'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  image-integrity:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact original PNGs and labels
+        run: python3 scripts/verify-received-images.py
