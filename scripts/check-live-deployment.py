@@ -1,56 +1,93 @@
 #!/usr/bin/env python3
-"""Confirm GitHub Pages serves the corrected stone explorer, not merely a successful deployment."""
+"""Verify the deployed LITOS catalog and all 10 original PNGs from the public Pages URL."""
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
+from pathlib import Path
+import hashlib
+import json
 import os
 import sys
 import time
 
 BASE = "https://litosartesania.github.io/litos_web/"
 RELEASE = os.getenv("GITHUB_SHA", "manual-check")
+ROOT = Path(__file__).resolve().parents[1]
+MANIFEST = json.loads((ROOT / "docs/LOTE_10_IMAGENES_20261011.json").read_text(encoding="utf-8"))
+assert MANIFEST["count_expected"] == len(MANIFEST["items"]) == 10
 FILES = {
     "mobiliario.html": (
-        "Explora las imágenes conceptuales originales",
-        "styles.css?v=stone-20261009-3",
-        "catalogo-precios.js?v=stone-20261009-3",
+        "Elige la piedra para consultar imágenes conceptuales específicas",
+        "styles.css?v=stone-20261011-10png",
+        "catalogo-precios.js?v=stone-20261011-10png",
+        "Por ahora no aceptamos encargos.",
+        "Imágenes conceptuales, no portfolio ejecutado",
     ),
     "styles.css": (
         ".material-preview",
         ".concept-availability",
+        "object-fit:contain",
+        "filter:none",
     ),
     "catalogo-precios.js": (
-        "Referencias visuales originales",
+        "const approvedVariants=Object.freeze(",
+        "consola-esc__travertino",
+        "banco-esc__marquina",
         "tonalMockup:false",
     ),
 }
 FORBIDDEN = {
-    "mobiliario.html": ("simulación digital de tonalidad",),
-    "styles.css": ("--stone-photo-filter", "--stone-preview-tint", ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
-    "catalogo-precios.js": ("--stone-photo-filter", "const visual="),
+    "mobiliario.html": ("simulación digital de tonalidad", "<form"),
+    "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
+                   ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
+    "catalogo-precios.js": ("--stone-photo-filter", "const visual=",
+                           "const approvedVariants=Object.freeze({});"),
 }
+
+def read_live(file, attempt):
+    url = BASE + file + "?verification=" + RELEASE[:12] + "-" + str(attempt)
+    req = Request(url, headers={
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
+        "User-Agent": "LITOS-release-verification/2.0",
+    })
+    with urlopen(req, timeout=30) as response:
+        if response.status != 200:
+            raise AssertionError(f"{file}: HTTP {response.status}")
+        content = response.read()
+        print(f"  {file}: HTTP 200, bytes={len(content)}, "
+              f"cache-age={response.headers.get('Age','unknown')}", flush=True)
+        return content
 
 def check(attempt):
     for file, expected in FILES.items():
-        url = BASE + file + "?verification=" + RELEASE[:12] + "-" + str(attempt)
-        req = Request(url, headers={"Cache-Control":"no-cache", "Pragma":"no-cache", "User-Agent":"LITOS-release-verification/1.0"})
-        with urlopen(req, timeout=18) as res:
-            content = res.read().decode("utf-8")
-            age = res.headers.get("Age", "unknown")
-            print(f"  {file}: HTTP {res.status}, bytes={len(content)}, cache-age={age}", flush=True)
+        content = read_live(file, attempt).decode("utf-8")
         for needle in expected:
             if needle not in content:
-                raise AssertionError(f"{file}: expected text not visible: {needle}")
+                raise AssertionError(f"{file}: missing release marker: {needle}")
         for needle in FORBIDDEN.get(file, ()):
             if needle in content:
-                raise AssertionError(f"{file}: stale or misleading text still served: {needle}")
+                raise AssertionError(f"{file}: stale or forbidden content: {needle}")
+        if file == "catalogo-precios.js":
+            for item in MANIFEST["items"]:
+                if content.count(item["path"]) != 1:
+                    raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
+    for item in MANIFEST["items"]:
+        rel = item["path"]
+        if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
+            raise AssertionError(f"Unexpected manifest path: {rel}")
+        data = read_live(rel, attempt)
+        if len(data) != item["size_bytes"]:
+            raise AssertionError(f"{rel}: unexpected file size")
+        if hashlib.sha256(data).hexdigest() != item["sha256"]:
+            raise AssertionError(f"{rel}: SHA-256 differs from original")
 
 for attempt in range(1, 25):
     try:
         check(attempt)
-        print("PASS: GitHub Pages serves corrected material HTML, CSS and JS.",flush=True)
+        print("PASS: live Pages HTML/CSS/JS and all 10 unmodified PNG originals.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
-        print(f"WAIT {attempt}/24: {exc}",flush=True)
+        print(f"WAIT {attempt}/24: {exc}", flush=True)
         if attempt < 24:
             time.sleep(10)
-raise SystemExit("FAIL: public Pages URL has not reflected the expected release; inspect caching/deployment.")
+raise SystemExit("FAIL: public GitHub Pages did not pass release verification.")
