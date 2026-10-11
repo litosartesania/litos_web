@@ -71,5 +71,5 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - Referencia geométrica: `assets/catalogo/litos-mesa-comedor-02.webp` (mesa ovalada, dos pedestales cilíndricos), no reemplazada.
 - Rutas y SHA-256 del lote: `docs/LOTE_9_MESA_OVAL_20261012.json`.
 - Rama de importación: `work/catalogo-mesa-oval-9png-20261012` / PR #15 (borrador).
-- Estado de transferencia: **dos ZIP binarios pendientes de subir por GitHub Web**, sin publicación.
+- Estado de transferencia: **9/9 PNG importados byte a byte y verificados, pruebas responsive superadas en PR #15; web pública todavía sin cambios**.
 - **No cambiar las nueve casillas a ✅ hasta disponer de 27/27 originales en Pages y comprobar la navegación pública.** El contador público se mantiene en **18/189 (9,5 %)**; 171 pendientes.
