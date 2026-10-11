@@ -393,3 +393,53 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .material-swatch:hover{outline:2px solid var(--limestone-light);outline-offset:3px}
 .material-swatch:focus-visible{outline:3px solid var(--limestone-light);outline-offset:4px}
 
+
+/* LITOS 2026-10-11: slim sticky material menu beside full, untouched concept artwork. */
+.catalog-workspace{max-width:1360px;margin:0 auto;min-width:0}
+.catalog-workspace>.piece-grid{min-width:0}
+@media(min-width:1100px){
+.catalog-mobiliario .catalog-workspace{display:grid;grid-template-columns:clamp(255px,23vw,310px) minmax(0,1fr);gap:clamp(1rem,2.1vw,2rem);align-items:start}
+.catalog-workspace>.material-planner{position:sticky;top:1.2rem;max-height:calc(100dvh - 2.4rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;min-width:0;margin:0;padding:1rem 1.15rem}
+.catalog-workspace .material-heading{display:block}
+.catalog-workspace .material-heading h3{font-size:clamp(1.55rem,1.9vw,1.95rem);line-height:1.09}
+.catalog-workspace .material-heading>p{max-width:100%;margin-top:.65rem;font-size:.78rem;line-height:1.55}
+.catalog-workspace .catalog-eyebrow{font-size:.64rem;line-height:1.4;margin-bottom:.55rem}
+.catalog-workspace .material-inputs{display:flex;flex-direction:column;align-items:stretch;gap:.65rem;padding:1rem 0 .85rem}
+.catalog-workspace .material-field{flex:initial;min-width:0;width:100%}
+.catalog-workspace .material-field select{height:44px;padding:.35rem .65rem;font-size:.85rem}
+.catalog-workspace .material-meta{min-width:0;gap:.55rem}
+.catalog-workspace .material-swatch{width:34px;height:34px;min-width:34px;min-height:34px}
+.catalog-workspace .material-meta strong{font-size:.75rem}
+.catalog-workspace .material-meta small{font-size:.66rem}
+.catalog-workspace .material-source{min-height:0;font-size:.72rem}
+.catalog-workspace .material-formula{margin:0 0 .9rem;padding:.75rem 0;font-size:.7rem;line-height:1.5}
+.catalog-workspace .category-filter-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem}
+.catalog-workspace .category-filter-bar button{min-width:0;min-height:37px;padding:.45rem .25rem;font-size:.72rem}
+.catalog-workspace .catalog-count{margin:.75rem 0 0!important;font-size:.72rem;line-height:1.4}
+.catalog-workspace>.piece-grid{width:100%;max-width:none;margin:0;grid-template-columns:minmax(0,1fr);gap:1.25rem}
+.catalog-workspace .piece-card{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);align-items:start}
+.catalog-workspace .piece-details{min-width:0;padding:clamp(1rem,1.5vw,1.55rem)}
+.catalog-workspace .piece-details h3{font-size:clamp(1.5rem,2.4vw,2.15rem)}
+.catalog-workspace .piece-details>p{font-size:.84rem;line-height:1.5}
+.catalog-workspace .piece-benchmark{margin:.85rem 0 .65rem;padding:.8rem 0 .4rem}
+.catalog-workspace .piece-amount{font-size:clamp(1.65rem,2.7vw,2.35rem)}
+.catalog-workspace .material-preview{min-width:0;padding:.55rem}
+.catalog-workspace .material-variant-figure img{width:100%;height:auto;max-height:70dvh;aspect-ratio:1122/1402;object-fit:contain;filter:none}
+.catalog-workspace .concept-images .piece-figure img{object-fit:contain;filter:none}
+}
+@media(min-width:791px) and (max-width:1099px){
+.catalog-workspace>.material-planner{margin-bottom:1.25rem}
+.catalog-workspace>.piece-grid{grid-template-columns:minmax(0,1fr)}
+.catalog-workspace .piece-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.catalog-workspace .material-variant-figure img{object-fit:contain;filter:none}
+}
+@media(max-width:790px){
+.catalog-workspace>.material-planner{margin-bottom:1rem}
+.catalog-workspace .material-heading h3{font-size:1.7rem}
+.catalog-workspace .material-heading>p{font-size:.8rem;line-height:1.5}
+.catalog-workspace .material-inputs{gap:.75rem;padding:1rem 0}
+.catalog-workspace .material-formula{font-size:.72rem;line-height:1.5}
+.catalog-workspace .category-filter-bar{gap:.35rem}
+.catalog-workspace .category-filter-bar button{padding:.55rem .65rem}
+.catalog-workspace .material-variant-figure img{object-fit:contain;filter:none}
+}

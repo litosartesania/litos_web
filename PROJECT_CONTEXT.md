@@ -261,3 +261,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Workflow Pages `38159245695`: SUCCESS, incluye 5 páginas, controles de privacidad, QA responsive y verificación HTTP 200 + SHA-256 de los 18 originales directamente en la web pública.
 - Consola escultórica: 9/9 materiales publicados; banco escultórico: 9/9. Progreso global HECHO = 18/189 (9,5 %); faltan 171. «Hecho» equivale únicamente a una variante visible y correctamente servida en Pages.
 - Actualización de matriz de progreso `docs/PROGRESO_CATALOGO.md` y evidencia detallada `docs/PUBLICACION_18PNG_20261011.md` en PR de documentación posterior aislado. El sitio sigue siendo informativo, sin venta ni captación, coste 0 €, imágenes originales intactas.
+
+## 2026-10-11 — Menú lateral compacto (propuesta sin publicar)
+- Captura y petición: controles de selección/filtros a la izquierda de la imagen; ver producto completo y menú simultáneamente.
+- Rama exclusiva `work/catalogo-sidebar-imagen-20261011`, basada en `main` `74fca759463d0aedfc6221764b4117ce7ea388ef`. CSS/HTML responsivos y texto de ayuda breve; sin cambiar precio, imágenes (18 PNG originales), producto, hashes, privacidad, servicios ni otros repositorios.
+- Desde 1100px: menú lateral pegajoso con desplazamiento interno y fichas de imagen (sin recorte) junto al texto; entre 791 y 1099px controles arriba y fichas con imagen/texto lado a lado; en móvil controles y fichas apilados. Página de catálogo única.
+- Prueba específica `scripts/qa-catalog-sidebar.py` en 390,820,1100,1440,1600 px, diseño, filtro, 2 PNG naturales, sin filtros y sin desbordamiento. Workflow de revisión genera capturas de pantalla y previsualización offline, no Pages.
+- **NO PUBLICAR** sin auditoría integral y revisión visual. La tabla de progreso conserva 18/189.

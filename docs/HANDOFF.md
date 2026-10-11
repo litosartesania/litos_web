@@ -229,3 +229,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Consola escultórica y banco escultórico terminados en las nueve piedras; progreso total publicado **18/189 (9,5 %)**. Los otros 19 modelos no tienen imágenes específicas verificadas. Restan 171 combinaciones.
 - Referencia vigente: `docs/PROGRESO_CATALOGO.md` y `docs/PUBLICACION_18PNG_20261011.md`. Las notas previas de transferencia/revisión se conservan como historial, pero su estado de “no publicado” ya quedó superado.
 - Mantener cuenta y repositorio `litosartesania/litos_web`, privacidad, cero gasto adicional, integridad de PNG y web exclusivamente informativa, sin encargos.
+
+## 2026-10-11 — Menú lateral compacto (propuesta sin publicar)
+- Captura y petición: controles de selección/filtros a la izquierda de la imagen; ver producto completo y menú simultáneamente.
+- Rama exclusiva `work/catalogo-sidebar-imagen-20261011`, basada en `main` `74fca759463d0aedfc6221764b4117ce7ea388ef`. CSS/HTML responsivos y texto de ayuda breve; sin cambiar precio, imágenes (18 PNG originales), producto, hashes, privacidad, servicios ni otros repositorios.
+- Desde 1100px: menú lateral pegajoso con desplazamiento interno y fichas de imagen (sin recorte) junto al texto; entre 791 y 1099px controles arriba y fichas con imagen/texto lado a lado; en móvil controles y fichas apilados. Página de catálogo única.
+- Prueba específica `scripts/qa-catalog-sidebar.py` en 390,820,1100,1440,1600 px, diseño, filtro, 2 PNG naturales, sin filtros y sin desbordamiento. Workflow de revisión genera capturas de pantalla y previsualización offline, no Pages.
+- **NO PUBLICAR** sin auditoría integral y revisión visual. La tabla de progreso conserva 18/189.
