@@ -259,3 +259,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Validación específica **SUCCESS** https://github.com/litosartesania/litos_web/actions/runs/38179720303: 27/27 PNG intactos, 9 tipos de piedra × 3 productos y 21 fichas, 390/820/1440px, vista previa descargable `litos-mesa-oval-27-originales-vista-previa`. No desplegó Pages.
 - PR #15 sigue en borrador y no fusionado. **La web pública y `main` permanecen con 18/189 combinaciones hechas.** Las 9 de la mesa están preparadas y validadas pero no se consideran hechas hasta autorización expresa, publicación Pages y verificación HTTP 200/SHA-256 de 27 originales.
 - Ningún otro repositorio afectado; 0 € de coste adicional; privacidad, carácter conceptual y archivos originales conservados.
+
+
+## 2026-10-12 — Mesa ovalada 9/9 PUBLICADA y progreso 27/189 verificado
+- El usuario autorizó expresamente «Aprobado, publica». PR #15 fusionado mediante squash en `main`, SHA `8e728cdfcbcfe625ed333bef9c26d04de7dbe585`.
+- Pages https://github.com/litosartesania/litos_web/actions/runs/38180458652: **SUCCESS**, con 5 páginas, controles responsive/privacidad y verificación de **27/27 PNG originales** mediante HTTP 200, tamaño y SHA-256 desde producción.
+- Mesa comedor ovalada Concepto 2: 9/9 variantes publicadas. Consola escultórica y banco escultórico permanecen 9/9. **HECHO = 27/189 (14,3 %); 162 pendientes**. Los archivos originales y precios no se modificaron.
+- Matriz vigente: `docs/PROGRESO_CATALOGO.md`; manifiesto: `docs/LOTE_9_MESA_OVAL_20261012.json`; esta sección actual sustituye las notas históricas de «no publicado». 0 € extra, privacidad estricta, sin aceptar encargos y sin tocar otros repositorios.
