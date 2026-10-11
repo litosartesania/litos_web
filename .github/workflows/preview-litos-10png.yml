@@ -1,0 +1,57 @@
+name: LITOS · Vista previa de 10 PNG (sin despliegue)
+on:
+  push:
+    branches:
+      - 'work/preview-consola-banco-10png-20261011'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout isolated preview branch
+        uses: actions/checkout@v4
+      - name: Original PNGs SHA-256 integrity and JavaScript syntax
+        run: |
+          python3 scripts/verify-litos-10-png.py
+          node --check catalogo-precios.js
+          node --check script.js
+      - name: Run existing public-site safety QA (before adding review-only images)
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site
+      - name: Add only the ten approved-for-review PNGs to offline preview
+        run: |
+          mkdir -p _site/assets/catalogo/variantes
+          python3 - <<'PY'
+          import json,shutil
+          from pathlib import Path
+          data=json.loads(Path('docs/LOTE_10_IMAGENES_20261011.json').read_text())
+          for item in data['items']:
+            path=Path(item['path'])
+            shutil.copyfile(path,Path('_site')/path)
+          PY
+      - name: Install browser for mobile, tablet and desktop
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Verify 10 exact displayed variants in browser
+        run: python3 scripts/qa-litos-10-preview.py
+      - name: Label and package navigable offline review
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('_site/mobiliario.html')
+          html=p.read_text()
+          banner='<div role="status" style="position:fixed;bottom:0;right:0;z-index:2147483647;background:#271f1a;color:white;padding:9px;font:12px sans-serif">LITOS · VISTA PREVIA PRIVADA · SIN PUBLICAR</div>'
+          p.write_text(html.replace('</body>',banner+'</body>'))
+          PY
+      - name: Upload review-only artifact, never GitHub Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-vista-previa-10-materiales
+          path: _site/
+          retention-days: 7
+          if-no-files-found: error
