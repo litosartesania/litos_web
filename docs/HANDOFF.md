@@ -199,3 +199,11 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 | banco-esc | verde-alpi | efdf2634d369ffdf37b50faf447816022b4a92d3a8496b7b43ad492e08441b41 |
 | banco-esc | granito | e6e159b5dde97962387b0d7e7ebe3bb157fdbf869f2c468916bffef055eef035 |
 | banco-esc | marquina | eeb4f4b4586d2f182293bf863d67018d4d18cf207edbd0d04e88b74ba090474a |
+
+
+## 2026-10-11 — Cierre técnico verificado: CI verde; publicación retenida
+- Commit de código fuente e integración: 20ebe328aa03fc6629334d1b8a6eac8a03a56314. Ajuste posterior de aserción de QA: 1f50a213f89fc3c94fd2b04496671d8e2c5c0720. La rama conserva todos los 10 PNG intactos, como muestran SHA Git y tamaños idénticos entre árboles previo y posterior.
+- Acciones del commit final: auditoría general de 5 vistas, JavaScript, build allowlist, privacidad, guard de publicación y Chromium responsive (390/820/1440): SUCCESS https://github.com/litosartesania/litos_web/actions/runs/38150455480 ; verificación 10 PNG SHA-256 + review copy + selección 5 piedras en banco y consola en tres tamaños: SUCCESS https://github.com/litosartesania/litos_web/actions/runs/38150452502 .
+- Previsualización completa navegable: descargar artefacto litos-10-originales-vista-previa de la segunda acción y abrir site/mobiliario.html (incluye también index.html y otras vistas). La vista previa no está desplegada en ninguna URL pública; los archivos originales sí están en la rama pública de GitHub.
+- PR borrador #9: https://github.com/litosartesania/litos_web/pull/9 . No fusionado, no se modifica main, no se ejecuta deploy Pages. Única aprobación pendiente: inspección estética humana y autorización explícita antes de cualquier publicación, además de la revisión legal/privacidad asociada al uso comercial futuro.
+- Riesgo de rendimiento: paquete con diez PNG adicionales (~32 MB). Mantener originales sin comprimir durante la revisión. Si se exige optimización de red futura, plantear una entrega derivada separada conservando los originales y solo con autorización.
