@@ -1,0 +1,33 @@
+name: LITOS · Materializar 10 PNG originales sin compresión
+on:
+  push:
+    branches:
+      - work/catalogo-consola-banco-10png-20261011
+    paths:
+      - 'transfer/imagenes-20261011/**'
+permissions:
+  contents: write
+jobs:
+  materialize-originals:
+    if: github.repository == 'litosartesania/litos_web' && github.ref == 'refs/heads/work/catalogo-consola-banco-10png-20261011'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: litos-consola-banco-materialize
+      cancel-in-progress: false
+    steps:
+      - name: Checkout only the isolated review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Reconstruct original PNG bytes and verify SHA-256
+        run: python3 scripts/materialize-litos-10-png.py
+      - name: Record verified images only on review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets/catalogo/variantes/*.png
+          git rm -r --ignore-unmatch transfer/imagenes-20261011
+          if ! git diff --cached --quiet; then
+            git commit -m "assets: materialize 10 original PNGs with verified SHA-256"
+            git push origin HEAD:work/catalogo-consola-banco-10png-20261011
+          fi

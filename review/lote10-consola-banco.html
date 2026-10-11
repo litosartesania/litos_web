@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171915">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>LITOS · Validación de consola y banco · 10 originales</title>
+<style>
+:root{color-scheme:dark;--base:#151817;--paper:#efece4;--muted:#acaca5;--line:#474d49;--accent:#bd9e75}
+*{box-sizing:border-box}
+body{margin:0;background:var(--base);color:var(--paper);font:15px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header,.intro,main,footer{max-width:1380px;margin:0 auto;padding-left:clamp(18px,4vw,60px);padding-right:clamp(18px,4vw,60px)}
+header{padding-top:22px;padding-bottom:22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.wordmark{font:500 27px/1.1 Georgia,serif;letter-spacing:.28em}
+.eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.17em;color:var(--accent)}
+header .eyebrow{margin:0}
+.intro{padding-top:40px}
+h1{font:400 clamp(34px,5vw,68px)/1.05 Georgia,serif;letter-spacing:-.025em;max-width:850px;margin:.6rem 0 1rem}
+h1 em{color:var(--accent);font-style:italic}
+.lead{max-width:920px;color:#d0cfc8}
+.notice{margin:25px 0 0;border-left:3px solid var(--accent);padding:12px 16px;background:#292b28;color:#e7e1d7;font-size:13px}
+.chooser{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 26px}
+.chooser button{border:1px solid #71736d;color:var(--paper);background:transparent;cursor:pointer;padding:11px 16px;font:600 13px/1.3 inherit;min-height:48px;border-radius:3px}
+.chooser button[aria-pressed="true"]{background:var(--paper);color:#252a28}
+.chooser button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,3vw,38px);padding-bottom:60px}
+.product{border:1px solid var(--line);background:#242723;min-width:0}
+figure{margin:0}
+.photo{background:#d0beb1}
+.product img{display:block;width:100%;height:auto;aspect-ratio:1122/1402;object-fit:cover;filter:none!important}
+.detail{padding:16px 18px 21px}
+.detail h2{margin:3px 0 8px;font:400 clamp(24px,3vw,36px)/1.1 Georgia,serif}
+.detail p{margin:0;color:#bbbcb6}
+.detail .stone{font-weight:600;color:#e1c5a2}
+footer{border-top:1px solid var(--line);padding-top:18px;padding-bottom:32px;color:var(--muted);font-size:.8rem}
+@media(max-width:740px){.grid{grid-template-columns:1fr}.intro{padding-top:28px}header{align-items:start;flex-direction:column}.chooser button{flex:1 1 142px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background .15s,color .15s}}
+</style>
+</head>
+<body>
+<header><div class="wordmark">LITOS</div><p class="eyebrow">Catálogo · revisión privada de diseño, archivos publicados en rama pública</p></header>
+<section class="intro">
+<p class="eyebrow">Lote 01 · 11 octubre 2026 · 10 PNG verificados</p>
+<h1>Una pieza.<br><em>Cinco piedras.</em></h1>
+<p class="lead">Compara los originales recibidos, sin recoloración digital, filtros ni texturas generadas automáticamente. La selección muestra una imagen PNG diferente para cada producto y piedra.</p>
+<div class="notice" role="note">VISTA PREVIA · Son imágenes conceptuales generadas mediante IA, no obras ejecutadas, materiales certificados ni productos disponibles para venta. Este documento no incluye formularios, analítica, rastreo ni servicios externos.</div>
+<nav class="chooser" role="group" aria-label="Elegir el tipo de piedra">
+<button type="button" data-stone="travertino" aria-pressed="true">Travertino beige</button>
+<button type="button" data-stone="macael" aria-pressed="false">Blanco Macael</button>
+<button type="button" data-stone="verde-alpi" aria-pressed="false">Verde Alpi</button>
+<button type="button" data-stone="granito" aria-pressed="false">Granito gris</button>
+<button type="button" data-stone="marquina" aria-pressed="false">Negro Marquina</button>
+</nav>
+<noscript>Sin JavaScript se muestran las dos propuestas en travertino beige.</noscript>
+</section>
+<main class="grid" id="catalogo" aria-live="polite">
+<article class="product" data-product="consola-esc">
+<figure class="photo"><img src="../assets/catalogo/variantes/consola-esc__travertino.png" width="1122" height="1402" alt="Imagen conceptual de consola escultórica en travertino beige" decoding="async"></figure>
+<div class="detail"><p class="eyebrow">01 / Consolas</p><h2>Consola escultórica</h2><p>Material de la imagen: <span class="stone">Travertino beige</span></p></div>
+</article>
+<article class="product" data-product="banco-esc">
+<figure class="photo"><img src="../assets/catalogo/variantes/banco-esc__travertino.png" width="1122" height="1402" alt="Imagen conceptual de banco escultórico en travertino beige" decoding="async"></figure>
+<div class="detail"><p class="eyebrow">02 / Bancos</p><h2>Banco escultórico</h2><p>Material de la imagen: <span class="stone">Travertino beige</span></p></div>
+</article>
+</main>
+<footer>Esta página solo permite revisar los diez archivos originales de este lote. No modifica la web pública ni implica aprobación para comercializar las piezas.</footer>
+<script>
+(()=>{'use strict';
+const labels=Object.freeze({'travertino':'Travertino beige','macael':'Blanco Macael','verde-alpi':'Verde Alpi','granito':'Granito gris','marquina':'Negro Marquina'});
+const products=Object.freeze({'consola-esc':'Consola escultórica','banco-esc':'Banco escultórico'});
+const buttons=Array.from(document.querySelectorAll('[data-stone]'));
+const cards=Array.from(document.querySelectorAll('[data-product]'));
+for(const button of buttons){
+ button.addEventListener('click',()=>{
+  const id=button.dataset.stone;
+  if(!Object.prototype.hasOwnProperty.call(labels,id))return;
+  for(const b of buttons)b.setAttribute('aria-pressed',String(b===button));
+  for(const card of cards){
+   const p=card.dataset.product;
+   if(!Object.prototype.hasOwnProperty.call(products,p))continue;
+   const img=card.querySelector('img');
+   img.src='../assets/catalogo/variantes/'+p+'__'+id+'.png';
+   img.alt='Imagen conceptual de '+products[p]+' en '+labels[id];
+   card.querySelector('.stone').textContent=labels[id];
+  }
+ });
+}
+})();
+</script>
+</body></html>

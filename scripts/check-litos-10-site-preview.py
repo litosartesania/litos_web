@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""Safety audit of full catalog offline review; no production deployment."""
+from pathlib import Path
+import hashlib,json
+root=Path(__file__).resolve().parents[1]
+site=root/'review-package/site'
+manifest=json.loads((root/'docs/LOTE_10_IMAGENES_20261011.json').read_text(encoding='utf-8'))
+assert (site/'mobiliario.html').is_file()
+source=(root/'catalogo-precios.js').read_text(encoding='utf-8')
+assert 'const approvedVariants=Object.freeze({});' not in source, 'Review branch must contain mapping; main stays unchanged'
+changed=(site/'catalogo-precios.js').read_text(encoding='utf-8')
+assert source==changed, 'Review copy must preserve exact source JavaScript'
+assert 'png|webp' in changed and 'img.width=1122;img.height=1402' in changed
+for item in manifest['items']:
+    path=item['path']
+    assert changed.count(path)==1, path
+    remote_copy=site/path
+    assert remote_copy.is_file()
+    assert hashlib.sha256(remote_copy.read_bytes()).hexdigest()==item['sha256'],path
+for page in ('index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'):
+    html=(site/page).read_text(encoding='utf-8')
+    assert '<form' not in html.lower(),page
+    assert 'fonts.googleapis.com' not in html,page
+assert 'LITOS · PREVISUALIZACIÓN DEL CATÁLOGO · SIN PUBLICAR' in (site/'mobiliario.html').read_text(encoding='utf-8')
+print('PASS: ten source mappings on review branch, 10 original PNGs hashed, no forms, isolated preview.')

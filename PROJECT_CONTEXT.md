@@ -174,3 +174,69 @@ Consultar `AGENTS.md` y `docs/HANDOFF.md` para reglas de trabajo más completas.
 - **UX:** todas las tarjetas mantienen nombre, categorías, estimación orientativa, fuente externa, materiales seleccionables y swatch. El usuario puede ver las seis familias de inmediato sin desplegar fotos ni mirar un bloque vacío. La selección de piedra modifica textos y cifras, no los píxeles del salón.
 - **Archivos:** `catalogo-precios.js`, `styles.css`, `mobiliario.html`, pruebas estáticas y responsive, y comprobación de la URL pública. URLs CSS y JS versionadas `stone-20261009-3` para invalidar versiones previas en caché. No se alteran repositorios ajenos, secciones funerarias, servicios, permisos ni datos personales.
 - **Validación pendiente** hasta completar CI del PR: 12 fotos visibles, 15 propuestas sin foto, cambio de piedra con imágenes inmutables, ausencia de tintado, no overflow y audit completo en 390/820/1440 px. No publicar sin controles satisfactorios y posterior confirmación contra URL real de GitHub Pages.
+
+## 2026-10-11 — Lote de 10 PNG aportados por el usuario, consola y banco (11:36)
+- Objetivo: registrar **solo las primeras diez imágenes** del nuevo envío: cinco variaciones de `consola-esc` y cinco de `banco-esc`, cada una en travertino, Blanco Macael, Verde Alpi, granito gris y Negro Marquina. Archivos originales PNG RGBA 1122×1402 px. No regenerar, alterar píxeles, aplicar máscaras, ajustar piedras ni recomprimir.
+- Archivos **del envío actual**: diez PNG distintos, con nombres definidos `assets/catalogo/variantes/<producto>__<material>.png`. Huellas exactas SHA-256 y tamaño en `docs/LOTE_10_IMAGENES_20261011.json`. Estas huellas corresponden al envío de 11:36, que no se debe confundir con lotes previos de nombres similares; preservar sin sobrescribir hasta confirmar identidad.
+- Rama `work/catalogo-consola-banco-10png-20261011` creada desde `main`; la conexión verificada con GitHub tiene permisos administrativos como `litosartesania`. Manifest, README, comprobador `scripts/verify-litos-10-png.py` y workflow dedicado añadidos sin cambiar `main`, `catalogo-precios.js` ni producción.
+- **Bloqueo real: los diez PNG todavía no están en GitHub.** El conector disponible escribe texto GitHub y objetos Git pero no admite referencia de archivo binario local, mientras el contenedor con los PNG no tiene acceso de red/credenciales a GitHub. No confundir un SHA catalogado con un blob efectivamente subido.
+- Se entregó `LITOS_10_CONSOLA_BANCO_ETIQUETADAS_20261011.zip` con los diez PNG exactos y manifiesto. La subida pendiente puede hacerse desde el Mac en la rama especificada vía GitHub web `Add file > Upload files`, seleccionando los 10 PNG extraídos. Cada PNG cabe en el límite de subida web. No cargar el ZIP directamente.
+- La acción `LITOS · Verificar 10 imágenes de consola y banco` comprobará hashes SHA-256, tamaño, dimensiones y PNG real; **solo declarar subida íntegra tras comprobar 10/10 en remoto y workflow verde**.
+- Las imágenes representan conceptos generados por IA y no acreditan obras ya ejecutadas. GitHub es **público**, incluso ramas: solo se autoriza contenido comercial preparado y etiquetado, sin datos de clientes/familia/operativa.
+- Mantener `approvedVariants` sin activar, no publicar en Pages, no usar rama anterior con las 10 texturas procedurales rechazadas. Continuar con otros productos solo tras consolidar este primer lote.
+
+## 2026-10-11 16:30 — Diez imágenes originales RECEPCIONADAS Y VERIFICADAS
+- El usuario subió los 10 PNG de consola y banco al repo `litosartesania/litos_web` en rama `work/catalogo-consola-banco-10png-20261011`, inicialmente en `assets/catalogo/` en vez de `assets/catalogo/variantes/`.
+- Se verificaron sus diez objetos Git SHA-1 contra el ZIP original aportado por el usuario: **coincidencia 10/10 de bytes originales**; medidas 1122×1402; sin reformatear ni recomprimir. Se reubicaron los diez blobs por SHA en el árbol Git a las rutas canónicas `assets/catalogo/variantes/`; commit `50d31be7042c4e545f16cf16ddea2ef4f5d97f78`. No quedaron duplicados en la carpeta anterior.
+- GitHub Actions `LITOS · Verificar 10 imágenes de consola y banco` terminó **SUCCESS**: https://github.com/litosartesania/litos_web/actions/runs/38147236466. El bloqueo de subida documentado previamente queda **resuelto**.
+- Se creó un visor HTML independiente de `mobiliario.html`, `review/lote10-consola-banco.html`, que muestra las imágenes recibidas por producto/material. No aplica filtros ni simulación digital de piedra. Se añadió compilador/test de paquete offline (`scripts/build-litos-10-review.py`, `scripts/check-litos-10-review.py`) y workflow `review-litos-10-originals.yml`, que solo sube artefacto de revisión, **no GitHub Pages**.
+- La rama conserva `catalogo-precios.js` sin cambios y `approvedVariants={}`: **el catálogo real de producción aún NO cambia**; la revisión del lote requiere aprobación visual. Ninguna fotografía se presenta como trabajo realmente ejecutado ni como material natural certificado.
+- Para el relevo: revisar/verificar workflow de vista previa y su artefacto, inspeccionar las cinco selecciones visualmente, y después integrar en catálogo en rama aislada con QA responsive/privacidad, SIN MERGE NI PRODUCCIÓN sin aprobación. No interferir con PR #8 (texturas procedurales rechazadas).
+
+## 2026-10-11 16:40 — Vista previa navegable de catálogo real, validada (sin despliegue)
+- Como continuación del lote 10/10 verificado, se generó en Actions una **copia aislada del catálogo real**, sin modificar los ficheros fuente del sitio web en la rama: `review-package/site/mobiliario.html`. La generación está en `scripts/build-litos-10-site-preview.py`, que replica la web existente y activa **solo en esa copia** las diez rutas PNG en `approvedVariants`, adaptando su extensión y dimensiones sin alterar píxeles.
+- Se añadió QA de estática y privacidad (`scripts/check-litos-10-site-preview.py`) y pruebas de navegador Chromium (`scripts/visual-qa-10-site-preview.py`) a 390, 820 y 1440 px, seleccionando las cinco piedras en consola y banco; imagen real 1122×1402, sin filtro CSS, 21 fichas, 15 conceptos pendientes, sin formularios ni errores JS. **ÉXITO:** https://github.com/litosartesania/litos_web/actions/runs/38147856989.
+- La auditoría general de cinco páginas, privacidad y presentación existente también terminó **SUCCESS** en https://github.com/litosartesania/litos_web/actions/runs/38147860153.
+- Se adjunta ZIP `LITOS_VISTA_PREVIA_10_ORIGINALES_20261011.zip` a la conversación: extraerlo y abrir `site/mobiliario.html` para comprobar la web real o `index.html` para comparar los dos productos. El archivo descargado contiene copias exactas de los 10 PNG y no incorpora seguimiento externo.
+- PR de revisión **borrador #9**: https://github.com/litosartesania/litos_web/pull/9. No fusionar, activar en producción ni actualizar `main` hasta aprobación estética y legal. Mantener rechazo de las texturas procedurales anteriores (#8).
+- Estado: binarios seguros en GitHub rama pública, integridad verificada, **previsualización validada**, integración fuente `catalogo-precios.js` aún no activada. Antes de publicación real, activar las rutas en código fuente de rama aislada y actualizar allowlist Pages/check-site/QA; revisar impacto de carga de PNG (≈32 MB) y optimizaciones sin pérdida perceptible, con copia original intacta.
+
+
+## 2026-10-11 — Integración de diez variantes en la rama de revisión; NO en producción
+- Repositorio exclusivo litosartesania/litos_web; rama work/catalogo-consola-banco-10png-20261011. PR borrador #9: https://github.com/litosartesania/litos_web/pull/9. main no se modifica.
+- Los diez PNG originales 1122×1402 se alojan únicamente en assets/catalogo/variantes/ y figuran en docs/LOTE_10_IMAGENES_20261011.json. SHA-256, tamaño y dimensiones 10/10 confirmados previamente en https://github.com/litosartesania/litos_web/actions/runs/38147236466. No se generan, comprimen, filtran ni recolorean archivos.
+- catalogo-precios.js: mapa de 10 parejas producto-piedra (consola-esc, banco-esc × travertino, macael, verde-alpi, granito, marquina). Se preservan 21 modelos, nueve materiales, las 12 imágenes originales WebP, filtros y fórmula de precio externo; otros productos conservan sus referencias o avisos de falta de imagen.
+- scripts/build-site.sh copia literalmente los diez PNG a _site; scripts/check-site.py verifica SHA-256 de cada copia contra el manifiesto y mantiene controles de 5 vistas, privacidad y guard de producción. styles.css usa proporción 1122/1402, object-fit:contain y filter:none para impedir distorsión o falso color. Pruebas en Chromium adaptadas.
+- Vista previa completa descargable en el artefacto de la acción LITOS · Revisar 10 originales sin desplegar (archivo review-package/site/mobiliario.html). El antiguo visor HTML autónomo permanece como muestra general con WebP sin diez PNG para evitar un único HTML de más de 40 MB: no es la vista de validación de materiales.
+- Estado al preparar commit: pruebas GitHub Actions del commit de integración PENDIENTES. NO declarar integración validada hasta confirmar ejecuciones SUCCESS. No desplegar ni fusionar sin aprobación visual, técnica, jurídica/comercial y privacidad. PR #8 rechazado permanece excluido.
+- Riesgo técnico: los 10 PNG suman unos 32 MB; evaluar carga móvil. No contratar servicios de pago ni incluir datos internos.
+
+SHA-256 originales por archivo (también registrados en el manifiesto):
+
+| Producto | Piedra | SHA-256 original |
+|---|---|---|
+| consola-esc | travertino | ba0b853df05fe4a42b76b4216d19aeefd0797154af8e720327b01106c98327cf |
+| consola-esc | macael | ccb8b24242290c2cb64cedbb4bd7c25c4179172f4205ef3f45f21f6221227973 |
+| consola-esc | verde-alpi | e5815d2ae79f5a017535935fa67d64e6c9e3a21fce8637b08b43811277aff5e6 |
+| consola-esc | granito | efb24019a8151c2d5ad7085c8299797e04f3739f336f6e83da00514ac222e22c |
+| consola-esc | marquina | a4698ed0d0b24657732ae3b083cf7af2a86a5496728f0c44477c0041f6599b67 |
+| banco-esc | travertino | 463e76180ea4c00d87d62c3b78f0413f2a7d1169608f475b17c5343dd12be35f |
+| banco-esc | macael | 76fc23e41c5a13e16e5b5ad03bddd14e8955d298b7aae8d780246d4b772b3b3c |
+| banco-esc | verde-alpi | efdf2634d369ffdf37b50faf447816022b4a92d3a8496b7b43ad492e08441b41 |
+| banco-esc | granito | e6e159b5dde97962387b0d7e7ebe3bb157fdbf869f2c468916bffef055eef035 |
+| banco-esc | marquina | eeb4f4b4586d2f182293bf863d67018d4d18cf207edbd0d04e88b74ba090474a |
+
+
+## 2026-10-11 — Cierre técnico verificado: CI verde; publicación retenida
+- Commit de código fuente e integración: 20ebe328aa03fc6629334d1b8a6eac8a03a56314. Ajuste posterior de aserción de QA: 1f50a213f89fc3c94fd2b04496671d8e2c5c0720. La rama conserva todos los 10 PNG intactos, como muestran SHA Git y tamaños idénticos entre árboles previo y posterior.
+- Acciones del commit final: auditoría general de 5 vistas, JavaScript, build allowlist, privacidad, guard de publicación y Chromium responsive (390/820/1440): SUCCESS https://github.com/litosartesania/litos_web/actions/runs/38150455480 ; verificación 10 PNG SHA-256 + review copy + selección 5 piedras en banco y consola en tres tamaños: SUCCESS https://github.com/litosartesania/litos_web/actions/runs/38150452502 .
+- Previsualización completa navegable: descargar artefacto litos-10-originales-vista-previa de la segunda acción y abrir site/mobiliario.html (incluye también index.html y otras vistas). La vista previa no está desplegada en ninguna URL pública; los archivos originales sí están en la rama pública de GitHub.
+- PR borrador #9: https://github.com/litosartesania/litos_web/pull/9 . No fusionado, no se modifica main, no se ejecuta deploy Pages. Única aprobación pendiente: inspección estética humana y autorización explícita antes de cualquier publicación, además de la revisión legal/privacidad asociada al uso comercial futuro.
+- Riesgo de rendimiento: paquete con diez PNG adicionales (~32 MB). Mantener originales sin comprimir durante la revisión. Si se exige optimización de red futura, plantear una entrega derivada separada conservando los originales y solo con autorización.
+
+
+## 2026-10-11 — Autorización expresa de publicación (fase de liberación)
+- El propietario revisó las capturas y la vista previa del selector y escribió «Tiene buena pinta, publícalo». Autoriza exclusivamente publicar este catálogo conceptual de consola y banco con los 10 PNG originales. Mantener la condición informativa: sin aceptar encargos, sin alterar cálculos, ni exponer información personal, familiar o comercial interna.
+- Último test de revisión sobre rama autorizada: GitHub Actions 38152576101 (10 originales + navegación responsive 390/820/1440 + syntax-check del comprobador de Pages) y 38152578674 (auditoría general, cinco páginas, privacidad y guard de publicación): ambos SUCCESS. No se modificó ninguno de los PNG ni se incluyó PR #8.
+- Reparado scripts/check-live-deployment.py para exigir textos/rutas versionadas vigentes y validar en la URL pública los 10 originales por tamaño y SHA-256. La publicación no se considera realizada hasta fusionar PR #9, completar Pages y comprobar en GitHub el despliegue, su URL y los hashes HTTP.
+- Los originales siguen siendo imágenes conceptuales; no se consideran fabricación ni oferta. Riesgo aceptado para esta publicación: ~32 MB en 10 archivos PNG (carga inicial de las variantes seleccionadas, no necesariamente todos los archivos); revisar rendimiento en conexiones móviles posteriormente sin sustituir originales sin autorización.

@@ -383,7 +383,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .concept-availability span{color:rgba(240,233,226,.78);font-size:.79rem}
 .material-preview .material-placeholder{min-height:12rem}
 .material-preview .material-variant-figure{margin:0;overflow:hidden}
-.material-variant-figure img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.material-variant-figure img{width:100%;height:auto;aspect-ratio:1122/1402;object-fit:contain;filter:none;display:block}
 .material-variant-figure figcaption{font-size:.72rem;color:var(--limestone-light);padding:.5rem}
 .concept-reference{margin:0 .65rem .65rem;border:1px solid var(--line-dark);color:var(--limestone-light)}
 .concept-reference summary{cursor:pointer;padding:.75rem .9rem;font-size:.77rem;line-height:1.55}

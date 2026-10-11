@@ -1,0 +1,17 @@
+name: LITOS · Verificar 10 imágenes de consola y banco
+on:
+  push:
+    branches: [work/catalogo-consola-banco-10png-20261011]
+    paths:
+      - 'assets/catalogo/variantes/*.png'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hash-check:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar SHA-256, tamaños, formato y dimensiones de los 10 PNG
+        run: python3 scripts/verify-litos-10-png.py
