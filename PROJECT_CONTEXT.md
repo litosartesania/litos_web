@@ -247,3 +247,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Rama exclusiva `work/catalogo-consola-banco-18png-20261011` creada desde `main` 49d11abab406d19d802ce43ed512682efbddc9d3. No modificar `main`, Pages ni otros procesos/repo. PR borrador, no publicar sin nueva autorización.
 - Pendiente transferencia de los ocho binarios: herramienta GitHub actual no importa adjuntos del sandbox. Workflow seguro `materialize-litos-8-zip.yml` admite subir **solo el ZIP original** al directorio `transfer/` de ESTA rama; script verifica hashes, formato, ruta, dimensiones y tamaño antes de materializar los 8 PNG, elimina ZIP y empuja al branch, nunca `main`.
 - Código configura 18 combinaciones (10 existentes intactas + 8 pendientes), 9 materiales por dos piezas, controles de integridad y de build responsive. Si faltan binarios, verificaciones FALLAN intencionadamente; no interpretar como éxito. 21 productos restantes y fórmulas de precios preservados. 0 € adicionales; privacidad sin alteraciones.
+
+
+## 2026-10-11 — Tabla canónica de progreso del catálogo
+- Matriz completa de los 21 productos × 9 materiales en `docs/PROGRESO_CATALOGO.md`. Criterio del propietario: `HECHO` significa exclusivamente imagen específica publicada y funcionando en la web pública, no aprobada en revisión.
+- Al cierre de esta revisión: 10/189 publicados y verificados en Pages; 8/189 imágenes del segundo lote aprobadas visualmente en la conversación, verificadas 18/18 en rama aislada PR #10 y pendientes de publicar; 171/189 combinaciones sin variante específica preparada.
+- La aprobación visual del usuario («ok, esta bien; actualiza la tabla de progreso») no incluye una instrucción expresa para fusionar o desplegar. Se conserva PR #10 en borrador, `main` y Pages con 10 variantes.
+- Actualizar la matriz a 18/189 solamente después de publicación autorizada y prueba HTTP/SHA-256 del nuevo despliegue. Controles, privacidad y 0 € de coste adicional permanecen obligatorios.
