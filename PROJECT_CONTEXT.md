@@ -268,3 +268,12 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Desde 1100px: menú lateral pegajoso con desplazamiento interno y fichas de imagen (sin recorte) junto al texto; entre 791 y 1099px controles arriba y fichas con imagen/texto lado a lado; en móvil controles y fichas apilados. Página de catálogo única.
 - Prueba específica `scripts/qa-catalog-sidebar.py` en 390,820,1100,1440,1600 px, diseño, filtro, 2 PNG naturales, sin filtros y sin desbordamiento. Workflow de revisión genera capturas de pantalla y previsualización offline, no Pages.
 - **NO PUBLICAR** sin auditoría integral y revisión visual. La tabla de progreso conserva 18/189.
+
+
+## 2026-10-11 — Catálogo con selector lateral compacto PUBLICADO Y VERIFICADO
+- Cambio solicitado: menú de material/familias más compacto a la izquierda de imágenes completas en escritorio; tarjetas con fotografía sin recortar y detalle junto a ella; tablet y móvil apilados sin desbordamiento.
+- PR #12 fusionado, commit `2881c5e2c80b206d06f78409b67ae3e900f32ec6`. Se revisaron capturas reales de 1440/390 y cinco anchos 390,820,1100,1440,1600 en workflow `38160566652` (SUCCESS); auditoría general `38160614811` (SUCCESS).
+- El primer workflow de Pages `38160808024` **falló solo en el verificador HTTP posterior** por usar el antiguo token de CSS `18png`; el despliegue de Pages y pruebas responsive previas fueron SUCCESS. No fue un fallo de imágenes o diseño.
+- Corregido verificador en PR #13, commit `094ef23654b9f1c2abd66ef50db26b33b8a40f21`; comprobación final de Pages `38161319526` **SUCCESS**, incluidos HTML/CSS del nuevo diseño, funcionalidad responsive, privacidad y HTTP 200 + SHA-256 de 18/18 PNG.
+- URL pública: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo . El catálogo continúa en 18/189 combinaciones publicadas, sin cambiar fotografías, precios ni demás repositorios. Solo hosting gratuito y página informativa sin encargos.
+- Este registro prevalece sobre los estados históricos de «no publicar» relativos a la rama de diseño ya integrada; PR #8 procedurales rechazado permanece sin fusionar.

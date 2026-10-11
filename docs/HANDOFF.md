@@ -236,3 +236,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Desde 1100px: menú lateral pegajoso con desplazamiento interno y fichas de imagen (sin recorte) junto al texto; entre 791 y 1099px controles arriba y fichas con imagen/texto lado a lado; en móvil controles y fichas apilados. Página de catálogo única.
 - Prueba específica `scripts/qa-catalog-sidebar.py` en 390,820,1100,1440,1600 px, diseño, filtro, 2 PNG naturales, sin filtros y sin desbordamiento. Workflow de revisión genera capturas de pantalla y previsualización offline, no Pages.
 - **NO PUBLICAR** sin auditoría integral y revisión visual. La tabla de progreso conserva 18/189.
+
+
+## 2026-10-11 — Menú lateral de piedra: ya publicado
+- PR #12 (rama `work/catalogo-sidebar-imagen-20261011`) fusionado: layout compacto con sidebar a la izquierda en pantallas >=1100px, imágenes originales completas sin recorte, detalle al lado; móvil/tablet apilados. CSS/HTML + breve ayuda; precios y 18 PNG intactos.
+- Pruebas: 38160566652 y auditoría 38160614811, ambas SUCCESS. Capturas automáticas de 390,820,1100,1440,1600 px en Actions.
+- El workflow inicial de Pages 38160808024 desplegó el sitio, pero falló por comprobador HTTP con token CSS obsoleto. Corregido en PR #13 y commit `094ef23654b9f1c2abd66ef50db26b33b8a40f21`; workflow final `38161319526` **SUCCESS**, verificación de diseño HTML/CSS y 18 PNG HTTP+SHA-256.
+- Web pública activa: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo . Se mantienen 18/189 imágenes específicas completas (dos productos × nueve materiales), 171 pendientes. Cero coste adicional, privacidad estricta, sin formularios/encargos.
