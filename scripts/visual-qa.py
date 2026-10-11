@@ -67,7 +67,7 @@ with sync_playwright() as app:
      assert page.locator('#catalog-count').inner_text().endswith('Granito gris')
      assert page.locator('.material-preview .material-placeholder').count()==15
      assert page.locator('.material-preview img').count()==10
-     assert page.locator('.material-preview .piece-photos').count()==6
+     assert page.locator('.material-preview .piece-photos').count()==4
      assert page.locator('.concept-availability').count()==4
      assert page.locator('.concept-reference').count()==0
      assert 'Referencias visuales originales' in page.locator('.material-preview').first.inner_text()
