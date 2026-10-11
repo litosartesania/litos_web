@@ -5,7 +5,7 @@
   "expected_count": 8,
   "image_count": 8,
   "original_bytes_preserved": true,
-  "state": "PENDIENTE_TRANSFERENCIA_A_RAMA_DE_REVISION; NO PUBLICADO",
+  "state": "VERIFICADO_EN_RAMA_DE_REVISION; NO_PUBLICADO",
   "items": [
     {
       "product_id": "consola-esc",
@@ -87,5 +87,6 @@
       "size_bytes": 3100391,
       "sha256": "49355d73f119aef3448f1ec19b0daf98e35a0d7173fb0bb44dc69150639ffbec"
     }
-  ]
+  ],
+  "review": "https://github.com/litosartesania/litos_web/actions/runs/38156971000"
 }
