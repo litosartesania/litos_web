@@ -13,7 +13,7 @@ const picker=root.querySelector('#material-picker');
 const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
 const materialHelp=root.querySelector('.material-heading > p');
-if(materialHelp){materialHelp.textContent='Explora las piezas originales y selecciona una piedra para actualizar los valores orientativos. Las fotos son referencias conceptuales: no muestran necesariamente la piedra elegida. Consola escultórica y banco escultórico disponen de imágenes conceptuales específicas para nueve piedras verificadas; las otras combinaciones mantienen referencias o avisos de imagen pendiente.';}
+if(materialHelp){materialHelp.textContent='Consola y banco muestran una imagen propia para cada piedra. Las demás fotos no muestran necesariamente la piedra elegida; los precios siguen siendo orientativos.';}
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 // Only files that passed source-image and material-specific visual QA belong here.

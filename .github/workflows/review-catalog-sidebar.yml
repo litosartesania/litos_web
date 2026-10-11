@@ -1,0 +1,33 @@
+name: LITOS · Vista previa de menú compacto y fotografía completa
+on:
+  push:
+    branches: [work/catalogo-sidebar-imagen-20261011]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and validate privacy safety gate without deploying
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+          node --check catalogo-precios.js
+      - name: Set up responsive browser
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Check selector/photography for 390, 820, 1100, 1440, 1600px
+        run: python3 scripts/qa-catalog-sidebar.py
+      - name: Save design screenshots and navigable offline copy
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-catalogo-sidebar-vista-previa
+          path: |
+            review-layout/
+            _site/
+          if-no-files-found: error
+          retention-days: 7
