@@ -70,7 +70,7 @@ with sync_playwright() as app:
      assert page.locator('.material-preview .piece-photos').count()==3
      assert page.locator('.concept-availability').count()==3
      assert page.locator('.concept-reference').count()==0
-     assert 'Referencias visuales originales' in page.locator('.material-preview').first.inner_text()
+     assert page.locator('.concept-availability').count()==3 and all('Referencias visuales originales' in t for t in page.locator('.concept-availability').all_inner_texts())
      assert 'no representan necesariamente la piedra' in page.locator('.material-heading > p').inner_text() or 'no muestran necesariamente la piedra' in page.locator('.material-heading > p').inner_text()
      original_images=page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')
      assert all(src.startswith('assets/catalogo/') or src.startswith('data:image/webp;') for src in original_images)
