@@ -14,3 +14,8 @@ for asset in consola-esc__travertino.png consola-esc__macael.png consola-esc__ve
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
 printf 'Site package: '; du -sh "$site"
+
+# Copy only the eight additional owner-supplied PNGs, preserving bytes.
+for asset in consola-esc__caliza.png consola-esc__carrara.png consola-esc__cuarcita.png consola-esc__calacatta.png banco-esc__caliza.png banco-esc__carrara.png banco-esc__cuarcita.png banco-esc__calacatta.png; do
+ cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
+done
