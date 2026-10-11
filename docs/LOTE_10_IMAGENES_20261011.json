@@ -4,7 +4,7 @@
   "branch": "work/catalogo-consola-banco-10png-20261011",
   "batch_id": "consola-banco-20261011-1036",
   "source": "Diez PNG originales adjuntos en conversación, 11 octubre 2026",
-  "status": "manifest-published-binary-transfer-pending",
+  "status": "verified-in-github-review-branch-no-production-deployment",
   "count_expected": 10,
   "items": [
     {
@@ -137,5 +137,8 @@
       "sha256": "eeb4f4b4586d2f182293bf863d67018d4d18cf207edbd0d04e88b74ba090474a",
       "status": "imagen conceptual - no obra física verificada"
     }
-  ]
+  ],
+  "verified_commit": "50d31be7042c4e545f16cf16ddea2ef4f5d97f78",
+  "review_page": "review/lote10-consola-banco.html",
+  "publication_approval": "pending"
 }
