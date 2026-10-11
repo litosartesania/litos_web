@@ -19,13 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify 18 original PNG hashes, dimensions and file sizes
-        run: python3 scripts/verify-litos-18-png.py
-      - name: Validate code syntax, JS and release verifier
+      - name: Validate independent source syntax before binary transfer
         run: |
-          python3 -m py_compile scripts/check-live-deployment.py scripts/check-site.py scripts/build-litos-18-site-preview.py scripts/check-litos-18-site-preview.py
+          python3 -m py_compile scripts/check-live-deployment.py scripts/check-site.py scripts/build-litos-18-site-preview.py scripts/check-litos-18-site-preview.py scripts/verify-litos-18-png.py scripts/materialize-litos-8-zip.py scripts/visual-qa-18-site-preview.py
           node --check script.js
           node --check catalogo-precios.js
+      - name: Verify 18 original PNG hashes, dimensions and file sizes
+        run: python3 scripts/verify-litos-18-png.py
       - name: Build privacy-safe offline Pages replica
         run: |
           sh scripts/build-site.sh
