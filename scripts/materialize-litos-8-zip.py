@@ -9,7 +9,9 @@ root=Path(__file__).resolve().parents[1]
 target_manifest=root/'docs/LOTE_8_IMAGENES_20261011.json'
 manifest=json.loads(target_manifest.read_text(encoding='utf-8'))
 assert len(manifest['items'])==manifest['expected_count']==8
-zip_path=root/'transfer/LITOS_LOTE_8_VARIANTES_20261011.zip'
+matches=sorted((root/'transfer').glob('LITOS_LOTE_8_VARIANTES_20261011*.zip'))
+assert len(matches)==1, 'Expected exactly one owner ZIP in transfer/'
+zip_path=matches[0]
 assert zip_path.is_file() and zip_path.stat().st_size<26000000,"Missing or unexpectedly large owner ZIP"
 prefix="assets/catalogo/variantes/"
 expected={i['path']:i for i in manifest['items']}
