@@ -221,3 +221,11 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Rama exclusiva `work/catalogo-consola-banco-18png-20261011` creada desde `main` 49d11abab406d19d802ce43ed512682efbddc9d3. No modificar `main`, Pages ni otros procesos/repo. PR borrador, no publicar sin nueva autorización.
 - Pendiente transferencia de los ocho binarios: herramienta GitHub actual no importa adjuntos del sandbox. Workflow seguro `materialize-litos-8-zip.yml` admite subir **solo el ZIP original** al directorio `transfer/` de ESTA rama; script verifica hashes, formato, ruta, dimensiones y tamaño antes de materializar los 8 PNG, elimina ZIP y empuja al branch, nunca `main`.
 - Código configura 18 combinaciones (10 existentes intactas + 8 pendientes), 9 materiales por dos piezas, controles de integridad y de build responsive. Si faltan binarios, verificaciones FALLAN intencionadamente; no interpretar como éxito. 21 productos restantes y fórmulas de precios preservados. 0 € adicionales; privacidad sin alteraciones.
+
+
+## 2026-10-11 — Publicación verificada del catálogo 18/18 originales
+- Usuario autorizó publicar el segundo lote de 8 imágenes. PR #10 fusionado, `main` commit `638144cd6c0f59daf4340170e8072af68593359f`.
+- Pages SUCCESS y verificación HTTP/SHA-256 18/18: https://github.com/litosartesania/litos_web/actions/runs/38159245695
+- Consola escultórica y banco escultórico terminados en las nueve piedras; progreso total publicado **18/189 (9,5 %)**. Los otros 19 modelos no tienen imágenes específicas verificadas. Restan 171 combinaciones.
+- Referencia vigente: `docs/PROGRESO_CATALOGO.md` y `docs/PUBLICACION_18PNG_20261011.md`. Las notas previas de transferencia/revisión se conservan como historial, pero su estado de “no publicado” ya quedó superado.
+- Mantener cuenta y repositorio `litosartesania/litos_web`, privacidad, cero gasto adicional, integridad de PNG y web exclusivamente informativa, sin encargos.
