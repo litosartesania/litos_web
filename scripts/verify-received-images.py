@@ -23,7 +23,7 @@ for row in EXPECTED:
     sha=hashlib.sha256(raw).hexdigest()
     if sha!=row['sha256']:
         errors.append('SHA-256 DIFFERENT: '+rel)
-    if len(raw)<24 or raw[:8]!=b'\\x89PNG\\r\\n\\x1a\\n' or raw[12:16]!=b'IHDR':
+    if len(raw)<24 or raw[:8]!=bytes.fromhex('89504e470d0a1a0a') or raw[12:16]!=b'IHDR':
         errors.append('NOT PNG: '+rel); continue
     width,height=struct.unpack('>II',raw[16:24])
     if (width,height)!=(row['width'],row['height']):
