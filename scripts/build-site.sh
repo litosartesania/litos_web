@@ -18,4 +18,9 @@ for asset in consola-esc__caliza.png consola-esc__carrara.png consola-esc__cuarc
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
 
-printf 'Site package with all 18 verified PNGs: '; du -sh "$site"
+# Copy nine concept-2 oval dining table variants with exact original byte content.
+for asset in mesa-comedor-oval__travertino.png mesa-comedor-oval__caliza.png mesa-comedor-oval__macael.png mesa-comedor-oval__carrara.png mesa-comedor-oval__marquina.png mesa-comedor-oval__granito.png mesa-comedor-oval__cuarcita.png mesa-comedor-oval__calacatta.png mesa-comedor-oval__verde-alpi.png; do
+ cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
+done
+
+printf 'Site package with all 27 verified PNGs: '; du -sh "$site"
