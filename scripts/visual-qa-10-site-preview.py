@@ -6,6 +6,8 @@ from playwright.sync_api import sync_playwright
 root=Path(__file__).resolve().parents[1]
 pageurl=(root/'review-package/site/mobiliario.html').resolve().as_uri()
 names=['travertino','macael','verde-alpi','granito','marquina']
+screenshots=root/'review-package/screenshots'
+screenshots.mkdir(parents=True,exist_ok=True)
 with sync_playwright() as pw:
     browser=pw.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
     for width,height in [(390,844),(820,1180),(1440,900)]:
@@ -26,6 +28,9 @@ with sync_playwright() as pw:
                 im.evaluate('(el)=>el.decode()')
                 assert im.evaluate('(el)=>el.naturalWidth===1122 && el.naturalHeight===1402'),(pid,name)
                 assert im.evaluate('(el)=>getComputedStyle(el).filter')=='none',(pid,name)
+                if width==1440:
+                    card=page.locator(f'[data-product="{pid}"]')
+                    card.screenshot(path=str(screenshots/f'{pid}__{name}__catalogo.png'),animations='disabled')
         assert page.locator('.concept-availability').count()==4
         assert page.locator('.material-placeholder').count()==15
         assert not errors,(width,errors)
