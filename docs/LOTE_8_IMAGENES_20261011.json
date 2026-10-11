@@ -1,0 +1,92 @@
+{
+  "project": "LITOS COMERCIAL",
+  "repository": "litosartesania/litos_web",
+  "batch_id": "consola-banco-20261011-lote8",
+  "expected_count": 8,
+  "image_count": 8,
+  "original_bytes_preserved": true,
+  "state": "VERIFICADO_EN_RAMA_DE_REVISION; NO_PUBLICADO",
+  "items": [
+    {
+      "product_id": "consola-esc",
+      "stone_id": "caliza",
+      "stone": "Caliza Campaspero",
+      "path": "assets/catalogo/variantes/consola-esc__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3004194,
+      "sha256": "6401c13574544d14d89633398f342a2111acdb94aa3e8d54ce8c5e7f771ce675"
+    },
+    {
+      "product_id": "consola-esc",
+      "stone_id": "carrara",
+      "stone": "Mármol Carrara",
+      "path": "assets/catalogo/variantes/consola-esc__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3004082,
+      "sha256": "0cb04356c11a5db3bd7bc30d464e9b3540a0472c6bd41a4ca5243c45bed6bce9"
+    },
+    {
+      "product_id": "consola-esc",
+      "stone_id": "cuarcita",
+      "stone": "Cuarcita común",
+      "path": "assets/catalogo/variantes/consola-esc__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3128911,
+      "sha256": "e04d3392f94f42c245d9fe4d3c29ccc1b1212c35ac02cc818c8c74681d0fbb21"
+    },
+    {
+      "product_id": "consola-esc",
+      "stone_id": "calacatta",
+      "stone": "Mármol Calacatta Gold",
+      "path": "assets/catalogo/variantes/consola-esc__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3035248,
+      "sha256": "d0f99d5dea07a9288c87ee0c37445389349732944ada699430045eea9b04323d"
+    },
+    {
+      "product_id": "banco-esc",
+      "stone_id": "caliza",
+      "stone": "Caliza Campaspero",
+      "path": "assets/catalogo/variantes/banco-esc__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3034784,
+      "sha256": "12f059325709cca940791feec3ee4d0090e7bd1605bac81e2a5be483e763dc41"
+    },
+    {
+      "product_id": "banco-esc",
+      "stone_id": "carrara",
+      "stone": "Mármol Carrara",
+      "path": "assets/catalogo/variantes/banco-esc__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3017175,
+      "sha256": "a8e60c51d84b29fd6f0285d63b4c204e06469e9ccaf6413e5f00cc6fed0fe0c6"
+    },
+    {
+      "product_id": "banco-esc",
+      "stone_id": "cuarcita",
+      "stone": "Cuarcita común",
+      "path": "assets/catalogo/variantes/banco-esc__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3104855,
+      "sha256": "d9793f26f5223ec1ab9d8f8b151d1e1341645ba4210a53c2661185ae48880191"
+    },
+    {
+      "product_id": "banco-esc",
+      "stone_id": "calacatta",
+      "stone": "Mármol Calacatta Gold",
+      "path": "assets/catalogo/variantes/banco-esc__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3100391,
+      "sha256": "49355d73f119aef3448f1ec19b0daf98e35a0d7173fb0bb44dc69150639ffbec"
+    }
+  ],
+  "review": "https://github.com/litosartesania/litos_web/actions/runs/38156971000"
+}

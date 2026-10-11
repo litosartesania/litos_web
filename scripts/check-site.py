@@ -23,20 +23,21 @@ class Inspect(HTMLParser):
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
-manifest=json.loads((root.parent/'docs/LOTE_10_IMAGENES_20261011.json').read_text(encoding='utf-8'))
-assert manifest['count_expected']==len(manifest['items'])==10
-variants={i['path'] for i in manifest['items']}
-assert len(variants)==10 and all(p.startswith('assets/catalogo/variantes/') and p.endswith('.png') for p in variants)
+manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json')]
+assert [len(m['items']) for m in manifests]==[10,8]
+items=[i for m in manifests for i in m['items']]
+variants={i['path'] for i in items}
+assert len(variants)==18 and all(p.startswith('assets/catalogo/variantes/') and p.endswith('.png') and '..' not in Path(p).parts for p in variants)
 expected.update(variants)
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
-for item in manifest['items']:
+for item in items:
  f=root/item['path']
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
 assert sum((root/p).stat().st_size for p in actual-variants)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<40000000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -65,11 +66,11 @@ for page,count in [('funerario.html',3)]:
 assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==9
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261011-10png' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261011-10png' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261011-18png' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261011-18png' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
-assert all((root/'catalogo-precios.js').read_text().count(item['path'])==1 for item in manifest['items'])
+assert all((root/'catalogo-precios.js').read_text().count(item['path'])==1 for item in items)
 assert 'img.width=1122;img.height=1402' in (root/'catalogo-precios.js').read_text()
 assert 'Elige la piedra para consultar imágenes conceptuales específicas' in htmls['mobiliario.html']
 assert '--stone-photo-filter' not in (root/'styles.css').read_text() and '--stone-preview-tint' not in (root/'styles.css').read_text()
@@ -109,4 +110,4 @@ if '--production' in sys.argv:
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: five pages, nine material options, 12 source WebP, 10 original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
+print(f'PASS: five pages, nine material options, 12 source WebP, 18 original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')

@@ -13,4 +13,9 @@ mkdir -p "$site/assets/catalogo/variantes"
 for asset in consola-esc__travertino.png consola-esc__macael.png consola-esc__verde-alpi.png consola-esc__granito.png consola-esc__marquina.png banco-esc__travertino.png banco-esc__macael.png banco-esc__verde-alpi.png banco-esc__granito.png banco-esc__marquina.png; do
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
-printf 'Site package: '; du -sh "$site"
+# Copy only the eight additional owner-supplied PNGs, preserving bytes.
+for asset in consola-esc__caliza.png consola-esc__carrara.png consola-esc__cuarcita.png consola-esc__calacatta.png banco-esc__caliza.png banco-esc__carrara.png banco-esc__cuarcita.png banco-esc__calacatta.png; do
+ cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
+done
+
+printf 'Site package with all 18 verified PNGs: '; du -sh "$site"

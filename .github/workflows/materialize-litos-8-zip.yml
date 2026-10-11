@@ -1,0 +1,33 @@
+name: LITOS · Transferir ZIP verificado de 8 PNG a rama aislada
+on:
+  push:
+    branches: [work/catalogo-consola-banco-18png-20261011]
+    paths: ['transfer/LITOS_LOTE_8_VARIANTES_20261011*.zip']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: litos-8-png-materialize
+  cancel-in-progress: false
+jobs:
+  materialize:
+    if: github.repository == 'litosartesania/litos_web' && github.ref == 'refs/heads/work/catalogo-consola-banco-18png-20261011'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Check and extract exactly 8 user-approved PNGs, byte-for-byte
+        run: python3 scripts/materialize-litos-8-zip.py
+      - name: Check 18 source originals, SHA-256 and dimensions
+        run: python3 scripts/verify-litos-18-png.py
+      - name: Commit images to this review branch only and remove transfer archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets/catalogo/variantes/
+          git rm -f -- transfer/LITOS_LOTE_8_VARIANTES_20261011*.zip
+          git rm -f -- transfer/README_LOTE_8.md
+          git diff --cached --quiet && exit 1
+          git commit -m "assets: import 8 verified original PNGs without modification"
+          git push origin HEAD:work/catalogo-consola-banco-18png-20261011

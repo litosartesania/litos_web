@@ -1,0 +1,50 @@
+name: LITOS · Revisar 18 PNG en rama, sin publicar
+on:
+  push:
+    branches:
+      - work/catalogo-consola-banco-18png-20261011
+    paths:
+      - 'assets/catalogo/variantes/*.png'
+      - 'docs/LOTE_8_IMAGENES_20261011.json'
+      - 'scripts/**'
+      - 'catalogo-precios.js'
+      - 'mobiliario.html'
+      - '.github/workflows/review-litos-18-originals.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate independent source syntax before binary transfer
+        run: |
+          python3 -m py_compile scripts/check-live-deployment.py scripts/check-site.py scripts/build-litos-18-site-preview.py scripts/check-litos-18-site-preview.py scripts/verify-litos-18-png.py scripts/materialize-litos-8-zip.py scripts/visual-qa-18-site-preview.py
+          node --check script.js
+          node --check catalogo-precios.js
+      - name: Verify 18 original PNG hashes, dimensions and file sizes
+        run: python3 scripts/verify-litos-18-png.py
+      - name: Build privacy-safe offline Pages replica
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site
+          python3 scripts/check-site.py _site --production
+      - name: Create and verify 18-PNG real-site preview, without deploying
+        run: |
+          python3 scripts/build-litos-18-site-preview.py
+          python3 scripts/check-litos-18-site-preview.py
+      - name: Prepare responsive browsers
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Check all 18 material selections at 390/820/1440 px
+        run: python3 scripts/visual-qa-18-site-preview.py
+      - name: Save downloadable offline preview (never Pages)
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-18-originales-vista-previa
+          path: review-package/
+          if-no-files-found: error
+          retention-days: 7
