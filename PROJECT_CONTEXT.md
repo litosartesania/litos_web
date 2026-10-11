@@ -254,3 +254,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Al cierre de esta revisión: 10/189 publicados y verificados en Pages; 8/189 imágenes del segundo lote aprobadas visualmente en la conversación, verificadas 18/18 en rama aislada PR #10 y pendientes de publicar; 171/189 combinaciones sin variante específica preparada.
 - La aprobación visual del usuario («ok, esta bien; actualiza la tabla de progreso») no incluye una instrucción expresa para fusionar o desplegar. Se conserva PR #10 en borrador, `main` y Pages con 10 variantes.
 - Actualizar la matriz a 18/189 solamente después de publicación autorizada y prueba HTTP/SHA-256 del nuevo despliegue. Controles, privacidad y 0 € de coste adicional permanecen obligatorios.
+
+
+## 2026-10-11 — Lote 8 original PUBLICADO, total 18/18 en Pages
+- Aprobación expresa del propietario para publicar las 8 imágenes adicionales en respuesta «Sí» a la propuesta de publicación. PR #10 fusionado a `main` mediante squash, SHA `638144cd6c0f59daf4340170e8072af68593359f`.
+- Workflow Pages `38159245695`: SUCCESS, incluye 5 páginas, controles de privacidad, QA responsive y verificación HTTP 200 + SHA-256 de los 18 originales directamente en la web pública.
+- Consola escultórica: 9/9 materiales publicados; banco escultórico: 9/9. Progreso global HECHO = 18/189 (9,5 %); faltan 171. «Hecho» equivale únicamente a una variante visible y correctamente servida en Pages.
+- Actualización de matriz de progreso `docs/PROGRESO_CATALOGO.md` y evidencia detallada `docs/PUBLICACION_18PNG_20261011.md` en PR de documentación posterior aislado. El sitio sigue siendo informativo, sin venta ni captación, coste 0 €, imágenes originales intactas.
