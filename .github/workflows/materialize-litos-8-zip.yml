@@ -2,7 +2,7 @@ name: LITOS · Transferir ZIP verificado de 8 PNG a rama aislada
 on:
   push:
     branches: [work/catalogo-consola-banco-18png-20261011]
-    paths: ['transfer/LITOS_LOTE_8_VARIANTES_20261011.zip']
+    paths: ['transfer/LITOS_LOTE_8_VARIANTES_20261011*.zip']
   workflow_dispatch:
 permissions:
   contents: write
@@ -26,7 +26,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- assets/catalogo/variantes/
-          git rm -f -- transfer/LITOS_LOTE_8_VARIANTES_20261011.zip
+          git rm -f -- transfer/LITOS_LOTE_8_VARIANTES_20261011*.zip
           git rm -f -- transfer/README_LOTE_8.md
           git diff --cached --quiet && exit 1
           git commit -m "assets: import 8 verified original PNGs without modification"
