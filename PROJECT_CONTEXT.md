@@ -277,3 +277,19 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Corregido verificador en PR #13, commit `094ef23654b9f1c2abd66ef50db26b33b8a40f21`; comprobación final de Pages `38161319526` **SUCCESS**, incluidos HTML/CSS del nuevo diseño, funcionalidad responsive, privacidad y HTTP 200 + SHA-256 de 18/18 PNG.
 - URL pública: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo . El catálogo continúa en 18/189 combinaciones publicadas, sin cambiar fotografías, precios ni demás repositorios. Solo hosting gratuito y página informativa sin encargos.
 - Este registro prevalece sobre los estados históricos de «no publicar» relativos a la rama de diseño ya integrada; PR #8 procedurales rechazado permanece sin fusionar.
+
+
+## 2026-10-12 — Mesa de comedor ovalada, Concepto 2, 9 PNG en proceso (NO PUBLICAR)
+- Se verificaron visualmente nueve variantes de una única mesa ovalada con dos pedestales cilíndricos: travertino, caliza, Blanco Macael, Carrara, Negro Marquina, granito gris, cuarcita, Calacatta Gold, Verde Alpi. Referencia original conservada `assets/catalogo/litos-mesa-comedor-02.webp`. Siete PNG aportados por el usuario + dos previamente generados en la conversación. Materiales conceptuales, no certificación geológica ni obra ejecutada.
+- Todos los PNG 1122×1402, inspeccionados y catalogados por SHA-256, rutas y bytes exactos en `docs/LOTE_9_MESA_OVAL_20261012.json`. Lote local en dos ZIPs <25MiB para subida web a GitHub (5+4 archivos), sin recodificar imágenes.
+- Rama aislada `work/catalogo-mesa-oval-9png-20261012` desde main `7d986e9b9986c85fded367ba9572c298dd9c0156`. Código de integración para `mesa-comedor-oval` preparado, con allowlist de 27 imágenes, QA de selector, release HTTP+SHA para 27. Los 18 PNG existentes, 12 WebP, 21 productos y fórmulas no se modifican.
+- **ALTO DE PUBLICACIÓN**: falta transferir BINARIOS, validar 27/27 y revisar el sitio con el propietario antes de merge/publicación. Estado oficial HECHO sigue 18/189 (9,5%); 9 nuevas en preparación. GitHub Pages seguirá en su versión verificada previa hasta permiso expreso.
+- Transferencia con dos ZIPs en `transfer/` sobre la rama aislada; un workflow verifica hashes independientes y retira los ZIPs del control de versiones tras materializarlos. No interferir con otros procesos ni usar servicios de pago.
+
+
+## 2026-10-12 — Transferencia finalizada y QA 27/27 superado (NO PUBLICADO)
+- El usuario subió correctamente los 2 ZIP al directorio `transfer/` en `work/catalogo-mesa-oval-9png-20261012`. Importación por GitHub Actions **SUCCESS** en https://github.com/litosartesania/litos_web/actions/runs/38179616443: 9/9 originales 1122×1402 comprobados mediante hashes SHA-256 y tamaños, incorporados byte a byte y ZIPs temporales eliminados de la rama. Commit de importación `4fb709de79111432b5e151e4d31c6ae8b3d90328`.
+- Validación general del catálogo offline **SUCCESS** https://github.com/litosartesania/litos_web/actions/runs/38179723349 (cinco páginas, guard de privacidad, navegadores).
+- Validación específica **SUCCESS** https://github.com/litosartesania/litos_web/actions/runs/38179720303: 27/27 PNG intactos, 9 tipos de piedra × 3 productos y 21 fichas, 390/820/1440px, vista previa descargable `litos-mesa-oval-27-originales-vista-previa`. No desplegó Pages.
+- PR #15 sigue en borrador y no fusionado. **La web pública y `main` permanecen con 18/189 combinaciones hechas.** Las 9 de la mesa están preparadas y validadas pero no se consideran hechas hasta autorización expresa, publicación Pages y verificación HTTP 200/SHA-256 de 27 originales.
+- Ningún otro repositorio afectado; 0 € de coste adicional; privacidad, carácter conceptual y archivos originales conservados.

@@ -1,0 +1,113 @@
+{
+  "project": "LITOS COMERCIAL",
+  "repository": "litosartesania/litos_web",
+  "batch_id": "mesa-comedor-oval-concepto2-20261012",
+  "status": "ORIGINALES_9_DE_9_VERIFICADOS_EN_RAMA; SIN_PUBLICAR",
+  "expected_count": 9,
+  "files": 9,
+  "original_bytes_preserved": true,
+  "reference_file": "assets/catalogo/litos-mesa-comedor-02.webp",
+  "items": [
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "travertino",
+      "stone": "Travertino beige",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__travertino.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2958827,
+      "sha256": "5972b8178dd818374f97af48f92b662f076b0818a4ae3d2724fc102b5de0bb37"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "caliza",
+      "stone": "Caliza Campaspero",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3571839,
+      "sha256": "98e871832c620f7207efac665855a6721ee32c4194c3506f503c56f8ee705091"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "macael",
+      "stone": "Mármol Blanco Macael",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__macael.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3435494,
+      "sha256": "bb7ace0c78a97775b29b096a7cfdaa954312650254fc72d01158038d5f057a4e"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "carrara",
+      "stone": "Mármol Carrara",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3597483,
+      "sha256": "320c7435fb80d81678f343633d71e1f82c30147617a5a591451f9c85012e219a"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "marquina",
+      "stone": "Mármol Negro Marquina",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__marquina.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3007414,
+      "sha256": "a6c2f5655039bba6cba4d0c2f92e60c35073b2d356a22dd3e800dd0a868f8dfa"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "granito",
+      "stone": "Granito gris",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__granito.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3708053,
+      "sha256": "f663d3c1c28e34c7051ade2f8316f3ad89057d7b701c0b62d7b7902fecd5256d"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "cuarcita",
+      "stone": "Cuarcita común",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3617002,
+      "sha256": "1a1f3232e0c0e70a9003a1c60c31fcebb63a74cdf59e630111e38a46fbc8cc91"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "calacatta",
+      "stone": "Mármol Calacatta Gold",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3559408,
+      "sha256": "f0508e17a988d55d79dda087f89050d8ad1145c518159c853b7c2d71a175896b"
+    },
+    {
+      "product_id": "mesa-comedor-oval",
+      "product": "Mesa de comedor ovalada · Concepto 2",
+      "stone_id": "verde-alpi",
+      "stone": "Mármol Verde Alpi",
+      "path": "assets/catalogo/variantes/mesa-comedor-oval__verde-alpi.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3666230,
+      "sha256": "a6be3fc7e3f01c51dae3f43b27255ab5fa4b45c2dda0ae3fed5db450327c5e8d"
+    }
+  ],
+  "integrity_workflow": "https://github.com/litosartesania/litos_web/actions/runs/38179616443",
+  "review_workflow": "https://github.com/litosartesania/litos_web/actions/runs/38179720303"
+}

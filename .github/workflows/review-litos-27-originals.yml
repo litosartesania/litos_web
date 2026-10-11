@@ -1,0 +1,43 @@
+name: LITOS · Mesa ovalada 9 piedras QA y vista previa aislada
+on:
+  push:
+    branches: [work/catalogo-mesa-oval-9png-20261012]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify syntax before binary intake
+        run: |
+          python3 -m py_compile scripts/verify-litos-27-png.py scripts/materialize-litos-mesa-oval-zip.py scripts/check-site.py scripts/check-live-deployment.py scripts/build-litos-27-site-preview.py scripts/check-litos-27-site-preview.py scripts/visual-qa-27-site-preview.py
+          node --check catalogo-precios.js
+      - name: Verify every original PNG by size, SHA256 and dimensions
+        run: python3 scripts/verify-litos-27-png.py
+      - name: Build five pages and apply privacy and release guards (offline)
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+      - name: Create navigable isolated preview and verify 27 mappings
+        run: |
+          python3 scripts/build-litos-27-site-preview.py
+          python3 scripts/check-litos-27-site-preview.py
+      - name: Set up Chromium
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Browser QA for 27 variants, nine stones, 21 products and five viewports
+        run: |
+          python3 scripts/visual-qa-27-site-preview.py
+          python3 scripts/qa-catalog-sidebar.py
+          python3 scripts/visual-qa.py
+      - name: Save offline preview artifact; never deploy Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-mesa-oval-27-originales-vista-previa
+          path: review-package/
+          retention-days: 7
+          if-no-files-found: error

@@ -1,0 +1,46 @@
+name: LITOS · Verificar y transferir mesa ovalada (9 originales PNG)
+on:
+  push:
+    branches: [work/catalogo-mesa-oval-9png-20261012]
+    paths:
+      - 'transfer/LITOS_MESA_OVAL_CONCEPTO2_PARTE_1_20261012.zip'
+      - 'transfer/LITOS_MESA_OVAL_CONCEPTO2_PARTE_2_20261012.zip'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: litos-oval-originals-20261012
+  cancel-in-progress: false
+jobs:
+  intake:
+    if: github.repository == 'litosartesania/litos_web' && github.ref == 'refs/heads/work/catalogo-mesa-oval-9png-20261012'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Wait for both owner ZIPs without modifying repo
+        id: parts
+        run: |
+          if [ -f transfer/LITOS_MESA_OVAL_CONCEPTO2_PARTE_1_20261012.zip ] && [ -f transfer/LITOS_MESA_OVAL_CONCEPTO2_PARTE_2_20261012.zip ]; then
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo 'WAIT: Both original ZIPs are required.'
+          fi
+      - name: Verify nine exact originals then materialize
+        if: steps.parts.outputs.ready == 'true'
+        run: python3 scripts/materialize-litos-mesa-oval-zip.py
+      - name: Verify all 27 original PNGs unchanged
+        if: steps.parts.outputs.ready == 'true'
+        run: python3 scripts/verify-litos-27-png.py
+      - name: Keep only nine PNGs in review branch; delete transfer ZIPs
+        if: steps.parts.outputs.ready == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets/catalogo/variantes/mesa-comedor-oval__*.png
+          git rm -f -- transfer/LITOS_MESA_OVAL_CONCEPTO2_PARTE_1_20261012.zip transfer/LITOS_MESA_OVAL_CONCEPTO2_PARTE_2_20261012.zip
+          git diff --cached --quiet && exit 1
+          git commit -m "assets: add nine original oval table PNGs with verified SHA-256"
+          git push origin HEAD:work/catalogo-mesa-oval-9png-20261012

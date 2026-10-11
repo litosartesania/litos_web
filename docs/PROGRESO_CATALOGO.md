@@ -64,3 +64,12 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 **Estado confirmado:** las ocho combinaciones antes pendientes de publicación están publicadas y verificadas tras autorización expresa del propietario. El despliegue de GitHub Pages y los HTTP 200/SHA-256 de las 18 imágenes concluyeron correctamente. El cómputo de «hecho» pasa a **18/189 (9,5 %)**. Restan 171 combinaciones por preparar.
 
 Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros repositorios, mantener intactos los PNG originales y no declarar fabricación real de las imágenes conceptuales.
+
+
+## En preparación — Mesa de comedor ovalada · Concepto 2 (12/10/2026)
+- **9 imágenes preparadas y catalogadas localmente**, todavía **0/9 públicas**. Tipos: Travertino, Caliza Campaspero, Blanco Macael, Carrara, Negro Marquina, Granito gris, Cuarcita, Calacatta Gold y Verde Alpi.
+- Referencia geométrica: `assets/catalogo/litos-mesa-comedor-02.webp` (mesa ovalada, dos pedestales cilíndricos), no reemplazada.
+- Rutas y SHA-256 del lote: `docs/LOTE_9_MESA_OVAL_20261012.json`.
+- Rama de importación: `work/catalogo-mesa-oval-9png-20261012` / PR #15 (borrador).
+- Estado de transferencia: **9/9 PNG importados byte a byte y verificados, pruebas responsive superadas en PR #15; web pública todavía sin cambios**.
+- **No cambiar las nueve casillas a ✅ hasta disponer de 27/27 originales en Pages y comprobar la navegación pública.** El contador público se mantiene en **18/189 (9,5 %)**; 171 pendientes.
