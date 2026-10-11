@@ -13,12 +13,12 @@ const picker=root.querySelector('#material-picker');
 const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
 const materialHelp=root.querySelector('.material-heading > p');
-if(materialHelp){materialHelp.textContent='Explora las piezas originales y selecciona una piedra para actualizar los valores orientativos. Las fotos son referencias conceptuales: no muestran necesariamente la piedra elegida. Una variante de material solo se mostrará como tal cuando tenga su propia imagen validada.';}
+if(materialHelp){materialHelp.textContent='Explora las piezas originales y selecciona una piedra para actualizar los valores orientativos. Las fotos son referencias conceptuales: no muestran necesariamente la piedra elegida. Consola escultórica y banco escultórico disponen de imágenes conceptuales específicas para cinco piedras verificadas; las otras combinaciones mantienen referencias o avisos de imagen pendiente.';}
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 // Only files that passed source-image and material-specific visual QA belong here.
 // The 30 manifest entries are still planned; a planned path is never a rendered asset.
-const approvedVariants=Object.freeze({});
+const approvedVariants=Object.freeze({"consola-esc__travertino":"assets/catalogo/variantes/consola-esc__travertino.png","consola-esc__macael":"assets/catalogo/variantes/consola-esc__macael.png","consola-esc__verde-alpi":"assets/catalogo/variantes/consola-esc__verde-alpi.png","consola-esc__granito":"assets/catalogo/variantes/consola-esc__granito.png","consola-esc__marquina":"assets/catalogo/variantes/consola-esc__marquina.png","banco-esc__travertino":"assets/catalogo/variantes/banco-esc__travertino.png","banco-esc__macael":"assets/catalogo/variantes/banco-esc__macael.png","banco-esc__verde-alpi":"assets/catalogo/variantes/banco-esc__verde-alpi.png","banco-esc__granito":"assets/catalogo/variantes/banco-esc__granito.png","banco-esc__marquina":"assets/catalogo/variantes/banco-esc__marquina.png"});
 const referenceImage=(p)=>{
  const slug=p[4];
  if(slug&&imageSources[slug])return imageSources[slug];
@@ -32,11 +32,11 @@ const showMaterial=(card,material)=>{
  const key=card.dataset.product+'__'+material[0];
  const file=approvedVariants[key];
  if(file){
-  if(!file.startsWith('assets/catalogo/variantes/') || !file.endsWith('.webp') || file.includes('..')) throw Error('Unapproved asset path: '+file);
+  if(!file.startsWith('assets/catalogo/variantes/') || !/\.(?:png|webp)$/.test(file) || file.includes('..')) throw Error('Unapproved asset path: '+file);
   if(host.dataset.view!==key){
    host.replaceChildren();
    const figure=document.createElement('figure');figure.className='material-variant-figure';
-   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=720;img.height=900;
+   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=1122;img.height=1402;
    img.alt='Imagen conceptual de '+card.querySelector('h3').textContent+' en '+material[1];
    const cap=document.createElement('figcaption');cap.textContent='Imagen conceptual de '+material[1]+' · No es una obra ejecutada';
    figure.append(img,cap);host.append(figure);

@@ -10,8 +10,8 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261009-3"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261009-3"' in html
+  assert 'href="styles.css?v=stone-20261011-10png"' in html
+  assert 'src="catalogo-precios.js?v=stone-20261011-10png"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -20,20 +20,20 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261009-3">','<style>'+css+'</style>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261011-10png">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261009-3"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-20261011-10png"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
- browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
+ browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
  for width,height in [(390,844),(820,1180),(1440,900)]:
   for file in ['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']:
    page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
    errors=[]
    page.on('pageerror',lambda e:errors.append(str(e)))
-   page.set_content(inline(file))
+   page.goto((site/file).resolve().as_uri(),wait_until='domcontentloaded')
    for image in page.locator('img').all():image.evaluate('(x)=>x.loading="eager"')
    page.wait_for_timeout(150)
    sizes=page.evaluate('''() => ({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,images:[...document.images].every(x=>x.complete&&x.naturalWidth>0)})''')
@@ -54,7 +54,7 @@ with sync_playwright() as app:
      assert page.locator('.catalog-price').count()==3
     else:
      assert page.locator('.piece-card').count()==21
-     assert page.locator('.piece-photos img').count()==12
+     assert page.locator('.piece-photos img').count()==8
      assert page.locator('.piece-amount').count()==21
      assert page.locator('#material-picker option').count()==9
      assert page.locator('#material-color').get_attribute('title')=='Abrir selector de piedras'
@@ -66,9 +66,9 @@ with sync_playwright() as app:
      page.locator('#material-picker').select_option('granito')
      assert page.locator('#catalog-count').inner_text().endswith('Granito gris')
      assert page.locator('.material-preview .material-placeholder').count()==15
-     assert page.locator('.material-preview img').count()==12
+     assert page.locator('.material-preview img').count()==10
      assert page.locator('.material-preview .piece-photos').count()==6
-     assert page.locator('.concept-availability').count()==6
+     assert page.locator('.concept-availability').count()==4
      assert page.locator('.concept-reference').count()==0
      assert 'Referencias visuales originales' in page.locator('.material-preview').first.inner_text()
      assert 'no representan necesariamente la piedra' in page.locator('.material-heading > p').inner_text() or 'no muestran necesariamente la piedra' in page.locator('.material-heading > p').inner_text()
@@ -84,7 +84,14 @@ with sync_playwright() as app:
      assert 'Verde Alpi' in page.locator('#catalog-count').inner_text()
      assert green_price!=granite_price,(width,green_price,granite_price)
      assert 'Verde Alpi' in page.locator('.concept-material-note').first.inner_text()
-     assert page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')==original_images
+     assert page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')!=original_images
+     for model in ('consola-esc','banco-esc'):
+      image=page.locator(f'[data-product="{model}"] .material-variant-figure img')
+      assert image.get_attribute('src')==f'assets/catalogo/variantes/{model}__verde-alpi.png'
+      image.evaluate('(el)=>{el.loading="eager"}')
+      image.evaluate('(el)=>el.decode()')
+      assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+      assert image.evaluate('(el)=>getComputedStyle(el).filter')=='none'
      assert page.locator('.material-preview .piece-photos').first.is_visible()
      assert 'colourofstone.com' in page.locator('#material-source').get_attribute('href')
      page.locator('[data-category-filter="Baño"]').click()

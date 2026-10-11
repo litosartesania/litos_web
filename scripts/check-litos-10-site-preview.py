@@ -7,9 +7,9 @@ site=root/'review-package/site'
 manifest=json.loads((root/'docs/LOTE_10_IMAGENES_20261011.json').read_text(encoding='utf-8'))
 assert (site/'mobiliario.html').is_file()
 source=(root/'catalogo-precios.js').read_text(encoding='utf-8')
-assert 'const approvedVariants=Object.freeze({});' in source, 'Tracked catalog must not be activated before approval'
+assert 'const approvedVariants=Object.freeze({});' not in source, 'Review branch must contain mapping; main stays unchanged'
 changed=(site/'catalogo-precios.js').read_text(encoding='utf-8')
-assert 'const approvedVariants=Object.freeze({});' not in changed
+assert source==changed, 'Review copy must preserve exact source JavaScript'
 assert 'png|webp' in changed and 'img.width=1122;img.height=1402' in changed
 for item in manifest['items']:
     path=item['path']
@@ -22,4 +22,4 @@ for page in ('index.html','funerario.html','mobiliario.html','aviso-legal.html',
     assert '<form' not in html.lower(),page
     assert 'fonts.googleapis.com' not in html,page
 assert 'LITOS · PREVISUALIZACIÓN DEL CATÁLOGO · SIN PUBLICAR' in (site/'mobiliario.html').read_text(encoding='utf-8')
-print('PASS: unchanged source, 10 exact images, no forms, isolated preview of 21-piece catalog.')
+print('PASS: ten source mappings on review branch, 10 original PNGs hashed, no forms, isolated preview.')

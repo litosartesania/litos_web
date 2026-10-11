@@ -2,7 +2,7 @@
 """Site separation, route integrity, build allowlist and release safety gate."""
 from html.parser import HTMLParser
 from pathlib import Path
-import re,sys
+import re,sys,json,hashlib
 from urllib.parse import unquote,urlsplit
 root=Path(sys.argv[1] if len(sys.argv)>1 else '_site').resolve()
 pages=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']
@@ -23,9 +23,20 @@ class Inspect(HTMLParser):
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
+manifest=json.loads((root.parent/'docs/LOTE_10_IMAGENES_20261011.json').read_text(encoding='utf-8'))
+assert manifest['count_expected']==len(manifest['items'])==10
+variants={i['path'] for i in manifest['items']}
+assert len(variants)==10 and all(p.startswith('assets/catalogo/variantes/') and p.endswith('.png') for p in variants)
+expected.update(variants)
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
-assert sum(x.stat().st_size for x in root.rglob('*') if x.is_file())<2500000
+for item in manifest['items']:
+ f=root/item['path']
+ data=f.read_bytes()
+ assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
+ assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
+assert sum((root/p).stat().st_size for p in actual-variants)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<40000000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -54,11 +65,13 @@ for page,count in [('funerario.html',3)]:
 assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==9
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261009-3' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261009-3' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261011-10png' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261011-10png' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
-assert 'Explora las imágenes conceptuales originales' in htmls['mobiliario.html']
+assert all((root/'catalogo-precios.js').read_text().count(item['path'])==1 for item in manifest['items'])
+assert 'img.width=1122;img.height=1402' in (root/'catalogo-precios.js').read_text()
+assert 'Elige la piedra para consultar imágenes conceptuales específicas' in htmls['mobiliario.html']
 assert '--stone-photo-filter' not in (root/'styles.css').read_text() and '--stone-preview-tint' not in (root/'styles.css').read_text()
 assert 'https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/' in (root/'catalogo-precios.js').read_text()
 assert htmls['mobiliario.html'].count('class="piece-card"')==6
@@ -96,4 +109,4 @@ if '--production' in sys.argv:
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: five pages, nine material options, 12 source images, no false stone tint, no collection; {len(actual)} allowlisted files')
+print(f'PASS: five pages, nine material options, 12 source WebP, 10 original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')

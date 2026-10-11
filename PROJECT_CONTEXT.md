@@ -200,3 +200,28 @@ Consultar `AGENTS.md` y `docs/HANDOFF.md` para reglas de trabajo más completas.
 - Se adjunta ZIP `LITOS_VISTA_PREVIA_10_ORIGINALES_20261011.zip` a la conversación: extraerlo y abrir `site/mobiliario.html` para comprobar la web real o `index.html` para comparar los dos productos. El archivo descargado contiene copias exactas de los 10 PNG y no incorpora seguimiento externo.
 - PR de revisión **borrador #9**: https://github.com/litosartesania/litos_web/pull/9. No fusionar, activar en producción ni actualizar `main` hasta aprobación estética y legal. Mantener rechazo de las texturas procedurales anteriores (#8).
 - Estado: binarios seguros en GitHub rama pública, integridad verificada, **previsualización validada**, integración fuente `catalogo-precios.js` aún no activada. Antes de publicación real, activar las rutas en código fuente de rama aislada y actualizar allowlist Pages/check-site/QA; revisar impacto de carga de PNG (≈32 MB) y optimizaciones sin pérdida perceptible, con copia original intacta.
+
+
+## 2026-10-11 — Integración de diez variantes en la rama de revisión; NO en producción
+- Repositorio exclusivo litosartesania/litos_web; rama work/catalogo-consola-banco-10png-20261011. PR borrador #9: https://github.com/litosartesania/litos_web/pull/9. main no se modifica.
+- Los diez PNG originales 1122×1402 se alojan únicamente en assets/catalogo/variantes/ y figuran en docs/LOTE_10_IMAGENES_20261011.json. SHA-256, tamaño y dimensiones 10/10 confirmados previamente en https://github.com/litosartesania/litos_web/actions/runs/38147236466. No se generan, comprimen, filtran ni recolorean archivos.
+- catalogo-precios.js: mapa de 10 parejas producto-piedra (consola-esc, banco-esc × travertino, macael, verde-alpi, granito, marquina). Se preservan 21 modelos, nueve materiales, las 12 imágenes originales WebP, filtros y fórmula de precio externo; otros productos conservan sus referencias o avisos de falta de imagen.
+- scripts/build-site.sh copia literalmente los diez PNG a _site; scripts/check-site.py verifica SHA-256 de cada copia contra el manifiesto y mantiene controles de 5 vistas, privacidad y guard de producción. styles.css usa proporción 1122/1402, object-fit:contain y filter:none para impedir distorsión o falso color. Pruebas en Chromium adaptadas.
+- Vista previa completa descargable en el artefacto de la acción LITOS · Revisar 10 originales sin desplegar (archivo review-package/site/mobiliario.html). El antiguo visor HTML autónomo permanece como muestra general con WebP sin diez PNG para evitar un único HTML de más de 40 MB: no es la vista de validación de materiales.
+- Estado al preparar commit: pruebas GitHub Actions del commit de integración PENDIENTES. NO declarar integración validada hasta confirmar ejecuciones SUCCESS. No desplegar ni fusionar sin aprobación visual, técnica, jurídica/comercial y privacidad. PR #8 rechazado permanece excluido.
+- Riesgo técnico: los 10 PNG suman unos 32 MB; evaluar carga móvil. No contratar servicios de pago ni incluir datos internos.
+
+SHA-256 originales por archivo (también registrados en el manifiesto):
+
+| Producto | Piedra | SHA-256 original |
+|---|---|---|
+| consola-esc | travertino | ba0b853df05fe4a42b76b4216d19aeefd0797154af8e720327b01106c98327cf |
+| consola-esc | macael | ccb8b24242290c2cb64cedbb4bd7c25c4179172f4205ef3f45f21f6221227973 |
+| consola-esc | verde-alpi | e5815d2ae79f5a017535935fa67d64e6c9e3a21fce8637b08b43811277aff5e6 |
+| consola-esc | granito | efb24019a8151c2d5ad7085c8299797e04f3739f336f6e83da00514ac222e22c |
+| consola-esc | marquina | a4698ed0d0b24657732ae3b083cf7af2a86a5496728f0c44477c0041f6599b67 |
+| banco-esc | travertino | 463e76180ea4c00d87d62c3b78f0413f2a7d1169608f475b17c5343dd12be35f |
+| banco-esc | macael | 76fc23e41c5a13e16e5b5ad03bddd14e8955d298b7aae8d780246d4b772b3b3c |
+| banco-esc | verde-alpi | efdf2634d369ffdf37b50faf447816022b4a92d3a8496b7b43ad492e08441b41 |
+| banco-esc | granito | e6e159b5dde97962387b0d7e7ebe3bb157fdbf869f2c468916bffef055eef035 |
+| banco-esc | marquina | eeb4f4b4586d2f182293bf863d67018d4d18cf207edbd0d04e88b74ba090474a |

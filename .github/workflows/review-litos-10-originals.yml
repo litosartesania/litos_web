@@ -13,6 +13,12 @@ on:
       - 'docs/LOTE_10_IMAGENES_20261011.json'
       - 'assets/catalogo/variantes/*.png'
       - '.github/workflows/review-litos-10-originals.yml'
+      - 'catalogo-precios.js'
+      - 'mobiliario.html'
+      - 'styles.css'
+      - 'scripts/build-site.sh'
+      - 'scripts/check-site.py'
+      - 'scripts/visual-qa.py'
   workflow_dispatch:
 permissions:
   contents: read
