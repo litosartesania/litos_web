@@ -2,7 +2,7 @@
   "project": "LITOS COMERCIAL",
   "repository": "litosartesania/litos_web",
   "batch_id": "mesa-comedor-oval-concepto2-20261012",
-  "status": "ORIGINALES_9_DE_9_VERIFICADOS_EN_RAMA; SIN_PUBLICAR",
+  "status": "PUBLICADO_Y_VERIFICADO_EN_PAGES; 9/9_NUEVAS; 27/27_TOTALES",
   "expected_count": 9,
   "files": 9,
   "original_bytes_preserved": true,
@@ -109,5 +109,8 @@
     }
   ],
   "integrity_workflow": "https://github.com/litosartesania/litos_web/actions/runs/38179616443",
-  "review_workflow": "https://github.com/litosartesania/litos_web/actions/runs/38179720303"
+  "review_workflow": "https://github.com/litosartesania/litos_web/actions/runs/38179720303",
+  "production_commit": "8e728cdfcbcfe625ed333bef9c26d04de7dbe585",
+  "production_verification_run": "https://github.com/litosartesania/litos_web/actions/runs/38180458652",
+  "public_url": "https://litosartesania.github.io/litos_web/mobiliario.html#catalogo"
 }
