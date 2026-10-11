@@ -19,6 +19,7 @@ on:
       - 'scripts/build-site.sh'
       - 'scripts/check-site.py'
       - 'scripts/visual-qa.py'
+      - 'scripts/check-live-deployment.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Syntax-check live Pages release verifier before publication
+        run: python3 -m py_compile scripts/check-live-deployment.py
       - name: Verify original PNG binary integrity
         run: python3 scripts/verify-litos-10-png.py
       - name: Assemble static offline viewer
