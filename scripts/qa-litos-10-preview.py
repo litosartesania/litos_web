@@ -22,6 +22,7 @@ with sync_playwright() as p:
                 assert img.count()==1, (width,material,product,"image missing")
                 expected=f"assets/catalogo/variantes/{product}__{material}.png"
                 assert img.get_attribute("src")==expected, (material,product,img.get_attribute("src"))
+                img.evaluate("(el) => { el.loading = 'eager'; }")
                 assert img.evaluate("async (el) => { try { await el.decode(); return el.naturalWidth === 1122 && el.naturalHeight === 1402; } catch { return false; } }"), (width,material,product,"invalid rendered PNG")
                 assert page.locator(f'[data-product="{product}"] .material-variant-figure figcaption').inner_text().find("No es una obra ejecutada")>=0
             assert page.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1"),(width,material,"horizontal overflow")
