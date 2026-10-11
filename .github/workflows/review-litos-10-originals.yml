@@ -7,6 +7,9 @@ on:
       - 'review/lote10-consola-banco.html'
       - 'scripts/build-litos-10-review.py'
       - 'scripts/check-litos-10-review.py'
+      - 'scripts/build-litos-10-site-preview.py'
+      - 'scripts/check-litos-10-site-preview.py'
+      - 'scripts/visual-qa-10-site-preview.py'
       - 'docs/LOTE_10_IMAGENES_20261011.json'
       - 'assets/catalogo/variantes/*.png'
       - '.github/workflows/review-litos-10-originals.yml'
@@ -25,6 +28,20 @@ jobs:
         run: python3 scripts/build-litos-10-review.py
       - name: Verify no third-party content or data collection
         run: python3 scripts/check-litos-10-review.py
+      - name: Build baseline website without variant activation
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site
+      - name: Build review-only copy of the actual catalog with ten images
+        run: python3 scripts/build-litos-10-site-preview.py
+      - name: Audit the review copy and preserved original PNGs
+        run: python3 scripts/check-litos-10-site-preview.py
+      - name: Prepare responsive browser checks
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Check ten stone selections on mobile, tablet and desktop
+        run: python3 scripts/visual-qa-10-site-preview.py
       - name: Save downloadable review, never deploy to Pages
         uses: actions/upload-artifact@v4
         with:
