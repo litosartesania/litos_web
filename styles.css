@@ -529,3 +529,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .catalog-mobiliario .technical-placeholder{background:rgba(240,233,226,.06);border:1px dashed rgba(240,233,226,.38);text-align:center}
 .catalog-mobiliario .technical-placeholder .material-placeholder-text{display:block;max-width:26rem;line-height:1.5}
 .product-dialog .detail-stage .technical-drawing-figure img{max-height:65dvh;object-fit:contain}
+
+/* Prevent the author-defined inline-flex source link from overriding HTML hidden. */
+.catalog-mobiliario .material-source[hidden]{display:none}
