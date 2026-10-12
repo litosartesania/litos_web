@@ -18,11 +18,12 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261012-grid5",
-        "catalogo-precios.js?v=stone-20261012-grid5",
+        "styles.css?v=stone-20261012-planos",
+        "catalogo-precios.js?v=stone-20261012-planos",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
+        'value="plano-tecnico"',
     ),
     "styles.css": (
         ".material-preview",
@@ -42,6 +43,7 @@ FILES = {
         "mesa-centro-mon__calacatta",
         "mesa-centro-red__calacatta",
         "tonalMockup:false",
+        "approvedTechnicalDrawings",
     ),
 }
 FORBIDDEN = {
