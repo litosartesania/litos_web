@@ -1,0 +1,89 @@
+{
+  "batch_id": "mesa-centro-red-20261012",
+  "product_id": "mesa-centro-red",
+  "status": "REVISADO_POR_CODEX_TRANSFERIDO_A_RAMA_AISLADA_NO_PUBLICADO",
+  "expected_count": 9,
+  "items": [
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "travertino",
+      "path": "assets/catalogo/variantes/mesa-centro-red__travertino.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2913043,
+      "sha256": "6ce61daeecbc23b55bcc1b6bc6f2932063dd9f86d0b647aad10de7a791088fbf"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "caliza",
+      "path": "assets/catalogo/variantes/mesa-centro-red__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2779646,
+      "sha256": "425568aa1b0eb9e632ce117a06d29fda00bde7d7ca76d4cf3d46282f83fee105"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "macael",
+      "path": "assets/catalogo/variantes/mesa-centro-red__macael.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2656319,
+      "sha256": "d68dc67319cdc149466c4667c401605adedefdc962d6900ef397960f626ba2a1"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "carrara",
+      "path": "assets/catalogo/variantes/mesa-centro-red__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2647570,
+      "sha256": "ed2166a3d883b1b0dfc6a45eac7e78dc885aaa0bc6ac9da9648584f01dc4012b"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "marquina",
+      "path": "assets/catalogo/variantes/mesa-centro-red__marquina.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2766445,
+      "sha256": "7bf6d022530a6dd46bdb1c807fc053c37511bcc79439bc0b66884ff0f01ab5a8"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "granito",
+      "path": "assets/catalogo/variantes/mesa-centro-red__granito.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2888408,
+      "sha256": "ddd0b8ff3757f98939a6de7a5071c4b6da958b7d42b62c0f37e3ff8224c8646b"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "cuarcita",
+      "path": "assets/catalogo/variantes/mesa-centro-red__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2832975,
+      "sha256": "7f4f757ced67ab77d71a1841ef392498688f4eb4acfb524cf81a7765676269f1"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "calacatta",
+      "path": "assets/catalogo/variantes/mesa-centro-red__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2675153,
+      "sha256": "04a5e744fdd65420d09b7e997a0658e2bda3f86d361c289ec497f8cccb745a2c"
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "stone_id": "verde-alpi",
+      "path": "assets/catalogo/variantes/mesa-centro-red__verde-alpi.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2827648,
+      "sha256": "c67e877164771d20ad0cc1750423c8ed74165d97f4974c9b312891be7658c7bb"
+    }
+  ]
+}

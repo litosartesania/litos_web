@@ -1,0 +1,89 @@
+{
+  "batch_id": "mesa-centro-mon-20261012",
+  "product_id": "mesa-centro-mon",
+  "status": "REVISADO_POR_CODEX_TRANSFERIDO_A_RAMA_AISLADA_NO_PUBLICADO",
+  "expected_count": 9,
+  "items": [
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "travertino",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__travertino.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2824668,
+      "sha256": "bac7d9186a187cb577be43065e3361e6bee2b6bcde18c501bd08dccd54dc81dd"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "caliza",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2675074,
+      "sha256": "125b7c4dcadca9d4e80854ae6ad19993884dfb653e217e9b2894feed4c96f1e6"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "macael",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__macael.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2565044,
+      "sha256": "9c792216125ebb9816e4cd1e739d58aea3c6d81efc09e970cd34af009fc4c0ea"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "carrara",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2586808,
+      "sha256": "88c8f3b04bef32caae4c71b819288828b67fa0b8d600eb9814b86a394b797069"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "marquina",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__marquina.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2684417,
+      "sha256": "da310e841597bff3999946c309231e9536308cee12e65920ccf41577b5d4c20d"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "granito",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__granito.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2877576,
+      "sha256": "7d06a398ec6fe77eab297b6b60bb13b1a0a9ed631f9a3d17b3766c6e65797954"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "cuarcita",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2748953,
+      "sha256": "e90123388d32bf71bb2a74111c996d5a0dcb4ec575cbc855dd07dff2af73af14"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "calacatta",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2580427,
+      "sha256": "0f7d96e836c40a00027ee24af2cd97679853e5d8157a2445ae14849e860bd39b"
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "stone_id": "verde-alpi",
+      "path": "assets/catalogo/variantes/mesa-centro-mon__verde-alpi.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2789198,
+      "sha256": "29c6f38412d546af073dd5b5d6e13e62fb66e93859997c77dff7d762846a05b3"
+    }
+  ]
+}
