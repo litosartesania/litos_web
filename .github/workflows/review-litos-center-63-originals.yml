@@ -7,6 +7,12 @@ on:
       - 'assets/catalogo/variantes/mesa-centro-red__*.png'
       - 'docs/LOTE_9_MESA_CENTRO_MON_20261012.json'
       - 'docs/LOTE_9_MESA_CENTRO_RED_20261012.json'
+      - 'scripts/visual-qa.py'
+      - 'scripts/visual-qa-63-site-preview.py'
+      - 'scripts/check-site.py'
+      - 'scripts/check-litos-63-site-preview.py'
+      - 'scripts/verify-litos-63-png.py'
+      - '.github/workflows/review-litos-center-63-originals.yml'
   workflow_dispatch:
 permissions:
   contents: read

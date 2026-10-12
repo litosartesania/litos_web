@@ -102,3 +102,5 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 ## En preparación — Mesas de centro monolítica y circular (12/10/2026)
 - Codex ha entregado dos lotes de nueve PNG cada uno en la carpeta `LITOS_CATALOGO` del Mac del usuario. **Pendientes de transferencia, QA 63/63 y autorización separada de publicación.**
 - Rama aislada `work/catalogo-mesas-centro-18png-20261012`. **Progreso público: 45/189 (23,8 %)** hasta verificación HTTP/SHA-256 en Pages; objetivo potencial 63/189 (33,3 %).
+
+**TRANSFERIDOS, NO PUBLICADOS:** los 18 PNG y 2 manifiestos nuevos están en la rama aislada desde `3adf001ee562bca8ba3eb47d69f7ad71634eba2f`; las pruebas específicas 63/63 pasan. La auditoría general se repite tras reparar el contador de imágenes heredado. Producción permanece en 45/189.
