@@ -1,0 +1,93 @@
+{
+  "project": "LITOS COMERCIAL",
+  "repository": "litosartesania/litos_web",
+  "batch_id": "mesa-comedor-red-20261012",
+  "product_id": "mesa-comedor-red",
+  "product_name": "Mesa de comedor redonda",
+  "description": "Concepto visual con tablero circular y pedestal cilíndrico central; no representa obra ejecutada ni muestra geológica certificada",
+  "status": "CATALOGADO_LOCALMENTE; PENDIENTE_SUBIDA_BINARIOS",
+  "expected_count": 9,
+  "items": [
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "travertino",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__travertino.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3593695,
+      "sha256": "65397559d27893e1171b55431ca9132c066555d18ff6cf1cbd1d39790d15c84e"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "caliza",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3511020,
+      "sha256": "c55a621efc5848853cd0a6be879e9f6ba59302fa66d68d208099a010336e0384"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "macael",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__macael.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3438280,
+      "sha256": "c9241a995e72aeeff69562624119c9045f511e4eebf45fdef1aa0b1a6bda7dad"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "carrara",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3433758,
+      "sha256": "70873a66f2f1e527bcd5733af435be4890cd109cb9a042bfb2b27adf0a4a0647"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "marquina",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__marquina.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3528578,
+      "sha256": "cf46a099a54f636b1f9cc60b5ba2d1e02f9d5f7bddbb2d678cb683c9dcf70420"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "granito",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__granito.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3689112,
+      "sha256": "238f54a9c2378ed0388f0774d8a22f05bdb9c3cd97bd2338c994f8bccc812a6c"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "cuarcita",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3501311,
+      "sha256": "6fed9f47747cebe2d8d55f0f6657161ebc57519cb5e4b6d8bcbacd33be1a0d2d"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "calacatta",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3444477,
+      "sha256": "2b7b45bcc406fba86549958b98c1b6f2ed809629294b92fa500473c51aa78fe3"
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "stone_id": "verde-alpi",
+      "path": "assets/catalogo/variantes/mesa-comedor-red__verde-alpi.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 3647885,
+      "sha256": "a40d6e5974a2c0233388d9c874f78d9698a0520d2e366ef96df681302093bc88"
+    }
+  ]
+}
