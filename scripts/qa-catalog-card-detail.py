@@ -65,7 +65,7 @@ with sync_playwright() as pw:
             page.screenshot(path=str(out/f'producto-mon-detalle-{width}.png'),animations='disabled')
         page.keyboard.press('Escape')
         assert not dialog.is_visible(),(width,'ESC did not close dialog')
-        assert trigger.is_focused(),(width,'focus did not return to opener')
+        page.wait_for_function('() => document.activeElement === document.querySelector(\'[data-product="mesa-centro-mon"] .product-open\')',timeout=4000)
 
         # Unillustrated products must never pretend to have a stone-specific rendering.
         page.locator('[data-product="mesa-aux-bal"] .product-open').click()
