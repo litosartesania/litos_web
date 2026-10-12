@@ -13,35 +13,50 @@ El significado de «hecho» se determina exclusivamente por lo **visible y opera
 | — Aún sin imagen específica aprobada | **126** | **66,7 %** |
 | **Total planificado** | **189** | **100 %** |
 
+## Nueva capa de documentación técnica · alzado, planta y perfil
+
+| Componente | Publicado y verificado | Pendiente | Total |
+| --- | ---: | ---: | ---: |
+| Variantes visuales por piedra | **63** | **126** | **189** |
+| Bocetos técnicos por producto | **0** | **21** | **21** |
+| **Piezas de contenido del catálogo** | **63** | **147** | **210** |
+
+- Cada producto tendrá **una lámina técnica** con tres proyecciones ortogonales coherentes: **alzado, planta y perfil**, y **cotas en centímetros**.
+- Esta vista es **independiente de los nueve materiales**. No es un décimo acabado ni altera el modelo de precios, el recuento de 189 variantes o el funcionamiento de los siete filtros.
+- Identificador propuesto: `assets/catalogo/planos/<product_id>.png` en proporción horizontal 4:3, según catálogo `catalogo-precios.js`. Solo se incorpora al mapa `approvedTechnicalDrawings` tras revisión gráfica, comprobación de integridad y autorización.
+- Si no existe plano validado, el selector puede mostrar **«Plano técnico pendiente»**. No se inventarán medidas reales ni se presentarán anteproyectos como planos ejecutivos.
+- Los valores acotados que proponga Codex son **dimensiones conceptuales orientativas**, pendientes de revisión del taller; deben ser geométricamente coherentes entre las tres vistas. Una foto o render no permite recuperar cotas reales de fabricación.
+- **Estado de esta funcionalidad:** selección y documentación preparadas solo en una rama en revisión, NO publicadas todavía. El conteo de 0/21 refiere a láminas efectivamente publicadas en GitHub Pages.
+
 Los 21 productos aparecen como **conceptos** en el catálogo web; eso no significa que las 189 variantes tengan una imagen fiel a la piedra elegida. Tampoco hay servicios de encargos ni venta.
 
 ## Matriz producto × material
 
 ✅ **Hecho:** imagen específica publicada y verificada en GitHub Pages.  ◷ **Validado:** disponible solo en una rama de revisión, aún no publicada.  — **Pendiente:** sin imagen específica preparada.
 
-| Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi |
-| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa auxiliar pedestal | Mesas | — | — | — | — | — | — | — | — | — |
-| Mesa auxiliar con baldas | Mesas | — | — | — | — | — | — | — | — | — |
-| Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Consola recta | Consolas | — | — | — | — | — | — | — | — | — |
-| Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Banco lineal | Bancos | — | — | — | — | — | — | — | — | — |
-| Lavabo pedestal | Baño | — | — | — | — | — | — | — | — | — |
-| Lavabo de sobreponer | Baño | — | — | — | — | — | — | — | — | — |
-| Encimera de baño | Baño | — | — | — | — | — | — | — | — | — |
-| Encimera de cocina | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Balda / repisa de piedra | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Panel de revestimiento (m²) | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Bandeja de piedra | Objetos | — | — | — | — | — | — | — | — | — |
-| Peana escultórica | Objetos | — | — | — | — | — | — | — | — | — |
-| Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — |
-| Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — |
+| Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi | Plano técnico |
+| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Mesa auxiliar pedestal | Mesas | — | — | — | — | — | — | — | — | — | — |
+| Mesa auxiliar con baldas | Mesas | — | — | — | — | — | — | — | — | — | — |
+| Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Consola recta | Consolas | — | — | — | — | — | — | — | — | — | — |
+| Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Banco lineal | Bancos | — | — | — | — | — | — | — | — | — | — |
+| Lavabo pedestal | Baño | — | — | — | — | — | — | — | — | — | — |
+| Lavabo de sobreponer | Baño | — | — | — | — | — | — | — | — | — | — |
+| Encimera de baño | Baño | — | — | — | — | — | — | — | — | — | — |
+| Encimera de cocina | Arquitectura | — | — | — | — | — | — | — | — | — | — |
+| Balda / repisa de piedra | Arquitectura | — | — | — | — | — | — | — | — | — | — |
+| Panel de revestimiento (m²) | Arquitectura | — | — | — | — | — | — | — | — | — | — |
+| Bandeja de piedra | Objetos | — | — | — | — | — | — | — | — | — | — |
+| Peana escultórica | Objetos | — | — | — | — | — | — | — | — | — | — |
+| Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — | — |
+| Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — | — |
 
 ## Siete productos con la colección visual completa publicada
 
