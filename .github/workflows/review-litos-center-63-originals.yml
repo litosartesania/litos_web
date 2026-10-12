@@ -1,0 +1,46 @@
+name: LITOS · Dos mesas de centro · QA 63 PNG (solo rama)
+on:
+  push:
+    branches: [work/catalogo-mesas-centro-18png-20261012]
+    paths:
+      - 'assets/catalogo/variantes/mesa-centro-mon__*.png'
+      - 'assets/catalogo/variantes/mesa-centro-red__*.png'
+      - 'docs/LOTE_9_MESA_CENTRO_MON_20261012.json'
+      - 'docs/LOTE_9_MESA_CENTRO_RED_20261012.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify 63 byte-identical original PNGs and syntax
+        run: |
+          python3 scripts/verify-litos-63-png.py
+          python3 -m py_compile scripts/check-site.py scripts/check-live-deployment.py scripts/verify-litos-63-png.py scripts/build-litos-63-site-preview.py scripts/check-litos-63-site-preview.py scripts/visual-qa-63-site-preview.py
+          node --check catalogo-precios.js
+      - name: Build and check five public-safe pages, without deploying
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+      - name: Build navigable isolated review, never deploy to Pages
+        run: |
+          python3 scripts/build-litos-63-site-preview.py
+          python3 scripts/check-litos-63-site-preview.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Test 21 products and 63 variants at phone tablet desktop
+        run: |
+          python3 scripts/visual-qa-63-site-preview.py
+          python3 scripts/visual-qa.py
+          python3 scripts/qa-catalog-sidebar.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: litos-dos-mesas-centro-63-originales-vista-previa
+          path: review-package/
+          retention-days: 7
+          if-no-files-found: error
