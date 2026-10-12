@@ -75,3 +75,9 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - PNG 1122×1402 y SHA-256 conservados en `docs/LOTE_9_MESA_OVAL_20261012.json`.
 - PR #15 autorizado y fusionado al commit `8e728cdfcbcfe625ed333bef9c26d04de7dbe585`. GitHub Pages y comprobación real de 27 originales: https://github.com/litosartesania/litos_web/actions/runs/38180458652 (**SUCCESS**).
 - Progreso público: **27/189 hechas (14,3 %)**; **162 pendientes (85,7 %)**. Catálogo conceptual sin aceptar encargos.
+
+
+## En preparación — Mesa de comedor redonda (12/10/2026)
+- Nueve PNG originales 1122×1402 catalogados y verificados localmente en el Mac. Pendiente de transferencia Git a `work/catalogo-mesa-redonda-9png-20261012`.
+- Manifiesto de bytes, tamaños y hashes: `docs/LOTE_9_MESA_REDONDA_20261012.json`.
+- **No están publicados**. El progreso público HECHO sigue **27/189 (14,3 %)**. Solo tras autorización ya dada, revisión de 36/36, merge seguro y verificación HTTP/SHA-256 en Pages se podrá elevar a **36/189 (19,0 %)**.
