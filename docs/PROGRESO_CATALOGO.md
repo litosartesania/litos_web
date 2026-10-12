@@ -2,15 +2,15 @@
 
 **Estado contrastado el 12/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`.
 
-El significado de «hecho» se determina exclusivamente por lo **visible y operativo en la web pública**, no por tener una imagen generada o probada en una rama de GitHub. La autorización de publicación y la verificación HTTP y SHA-256 de GitHub Pages para las 36 variantes han concluido correctamente. Mesa ovalada, mesa redonda, consola escultórica y banco escultórico están publicadas y operativas.
+El significado de «hecho» se determina exclusivamente por lo **visible y operativo en la web pública**, no por tener una imagen generada o probada en una rama de GitHub. La autorización de publicación y la verificación HTTP y SHA-256 de GitHub Pages para las 45 variantes han concluido correctamente. Mesa ovalada, mesa redonda, mesa rectangular, consola escultórica y banco escultórico están publicadas y operativas.
 
 ## Progreso resumido
 
 | Categoría | Combinaciones | Porcentaje del total |
 | --- | ---: | ---: |
-| ✅ Publicadas y verificadas en la web pública | **36** | **19,0 %** |
+| ✅ Publicadas y verificadas en la web pública | **45** | **23,8 %** |
 | ◷ Imágenes aprobadas pero aún sin publicar | **0** | **0 %** |
-| — Aún sin imagen específica aprobada | **153** | **81,0 %** |
+| — Aún sin imagen específica aprobada | **144** | **76,2 %** |
 | **Total planificado** | **189** | **100 %** |
 
 Los 21 productos aparecen como **conceptos** en el catálogo web; eso no significa que las 189 variantes tengan una imagen fiel a la piedra elegida. Tampoco hay servicios de encargos ni venta.
@@ -23,7 +23,7 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor rectangular | Mesas | — | — | — | — | — | — | — | — | — |
+| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Mesa de centro monolítica | Mesas | — | — | — | — | — | — | — | — | — |
 | Mesa de centro circular | Mesas | — | — | — | — | — | — | — | — | — |
 | Mesa auxiliar pedestal | Mesas | — | — | — | — | — | — | — | — | — |
@@ -43,13 +43,14 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 | Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — |
 | Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — |
 
-## Cuatro productos con la colección visual completa publicada
+## Cinco productos con la colección visual completa publicada
 
 - **Mesa de comedor ovalada (Concepto 2):** **9/9** combinaciones específicas de piedra publicadas y verificadas.
 - **Mesa de comedor redonda:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
+- **Mesa de comedor rectangular:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
 - **Consola escultórica:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
 - **Banco escultórico:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- Los otros 17 modelos no disponen aún de una variante específica de material verificada y aprobada. Los WebP genéricos se mantienen como referencias, **no equivalen a una casilla hecha**.
+- Los otros 16 modelos no disponen aún de una variante específica de material verificada y aprobada. Los WebP genéricos se mantienen como referencias, **no equivalen a una casilla hecha**.
 
 ## Evidencias y actualización segura
 
@@ -64,6 +65,8 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 - **Mesa redonda: QA aislada 36/36:** https://github.com/litosartesania/litos_web/actions/runs/38241754408 (**SUCCESS**).
 - **Mesa redonda: PR #17 fusionado:** https://github.com/litosartesania/litos_web/pull/17, commit `d417f9311d95d888146958b915193f8d511ccf61`.
 - **Mesa redonda: despliegue público y verificación HTTP/SHA-256 de 36/36:** https://github.com/litosartesania/litos_web/actions/runs/38242073251 (**SUCCESS**).
+- **Mesa rectangular: QA de rama 45/45:** https://github.com/litosartesania/litos_web/actions/runs/38256820251 (**SUCCESS**); PR de publicación #19: https://github.com/litosartesania/litos_web/pull/19, fusionado en `d58b1e3b24dd2125da9d9b8237ed6347623db87f`.
+- **Mesa rectangular: despliegue y verificación HTTP/SHA-256 reales de 45/45 originales:** https://github.com/litosartesania/litos_web/actions/runs/38258374234 (**SUCCESS**).
 - PR #15 fusionado: https://github.com/litosartesania/litos_web/pull/15, commit `8e728cdfcbcfe625ed333bef9c26d04de7dbe585`.
 - Relación de ficheros y SHA-256: `docs/LOTE_10_IMAGENES_20261011.json`, `docs/LOTE_8_IMAGENES_20261011.json`, `docs/LOTE_9_MESA_OVAL_20261012.json` y `docs/LOTE_9_MESA_REDONDA_20261012.json`.
 - Relevo técnico: `docs/REVISION_18PNG_20261011.md`.
@@ -88,7 +91,9 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - Representación conceptual, no prueba de pieza ejecutada; sin formulario ni ventas ni tarifas acreditadas.
 
 
-## En preparación — Mesa de comedor rectangular (12/10/2026)
-- **Nueve imágenes aprobadas localmente**, 1122×1402, preparadas en `~/Documents/LITOS_TRANSFER/mesa-comedor-rect`. Rama aislada de integración `work/catalogo-mesa-rectangular-9png-20261012`.
-- **9/9 PNG originales y manifiesto transferidos y verificados** en la rama aislada, commit `3d73c71d2447dab2ba89b1e2f2742ad0ea344992`. SHA-256 de todas las 45 imágenes y pruebas de navegador en 390/820/1440 px: [GitHub Actions SUCCESS](https://github.com/litosartesania/litos_web/actions/runs/38256820251). Vista previa sin desplegar `litos-mesa-rectangular-45-originales-vista-previa` (artefacto 11750667728).
-- **PENDIENTE exclusivamente la autorización separada de publicación y la comprobación HTTP/SHA-256 en producción posterior.** Progreso público sigue **36/189 (19,0 %)**; el lote añade nueve combinaciones listas para revisión, NO publicadas.
+## Publicado — Mesa de comedor rectangular (12/10/2026)
+- Nueve imágenes aprobadas 1122×1402 en nueve materiales: Travertino, Caliza Campaspero, Blanco Macael, Carrara, Negro Marquina, Granito gris, Cuarcita, Calacatta Gold y Verde Alpi. Fuente íntegra SHA-256: `docs/LOTE_9_MESA_RECTANGULAR_20261012.json`.
+- Importación segura de nueve PNG sin alterar los 36 anteriores (commit `3d73c71d2447dab2ba89b1e2f2742ad0ea344992`). QA aislada, incluyendo Playwright 390/820/1440: [GitHub Actions SUCCESS](https://github.com/litosartesania/litos_web/actions/runs/38256820251).
+- Usuario autorizó publicar tras revisión visual de la vista previa. PR #19 https://github.com/litosartesania/litos_web/pull/19 fusionado en `d58b1e3b24dd2125da9d9b8237ed6347623db87f`. GitHub Pages verificó HTTP 200, tamaño y SHA-256 de **45/45 imágenes** y versión HTML/CSS/JS: https://github.com/litosartesania/litos_web/actions/runs/38258374234 (**SUCCESS**).
+- **HECHO público = 45/189 (23,8 %)**, pendientes 144 (76,2 %). Cinco productos completos; otras 16 referencias siguen siendo conceptos sin imagen específica. Sitio: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo.
+- Las imágenes son conceptos visuales, no piezas realmente fabricadas. Sin atribuir precio contractual, sin formularios, sin servicios adicionales de pago.
