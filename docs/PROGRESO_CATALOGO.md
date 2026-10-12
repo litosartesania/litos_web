@@ -97,3 +97,10 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - Usuario autorizó publicar tras revisión visual de la vista previa. PR #19 https://github.com/litosartesania/litos_web/pull/19 fusionado en `d58b1e3b24dd2125da9d9b8237ed6347623db87f`. GitHub Pages verificó HTTP 200, tamaño y SHA-256 de **45/45 imágenes** y versión HTML/CSS/JS: https://github.com/litosartesania/litos_web/actions/runs/38258374234 (**SUCCESS**).
 - **HECHO público = 45/189 (23,8 %)**, pendientes 144 (76,2 %). Cinco productos completos; otras 16 referencias siguen siendo conceptos sin imagen específica. Sitio: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo.
 - Las imágenes son conceptos visuales, no piezas realmente fabricadas. Sin atribuir precio contractual, sin formularios, sin servicios adicionales de pago.
+
+
+## En preparación — Mesas de centro monolítica y circular (12/10/2026)
+- Codex ha entregado dos lotes de nueve PNG cada uno en la carpeta `LITOS_CATALOGO` del Mac del usuario. **Pendientes de transferencia, QA 63/63 y autorización separada de publicación.**
+- Rama aislada `work/catalogo-mesas-centro-18png-20261012`. **Progreso público: 45/189 (23,8 %)** hasta verificación HTTP/SHA-256 en Pages; objetivo potencial 63/189 (33,3 %).
+
+**TRANSFERIDOS, NO PUBLICADOS:** los 18 PNG y 2 manifiestos nuevos están en la rama aislada desde `3adf001ee562bca8ba3eb47d69f7ad71634eba2f`; las pruebas específicas 63/63 pasan. La auditoría general se repite tras reparar el contador de imágenes heredado. Producción permanece en 45/189.

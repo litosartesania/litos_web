@@ -33,4 +33,8 @@ for asset in mesa-comedor-rect__travertino.png mesa-comedor-rect__caliza.png mes
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
 
-printf 'Site package with all 45 verified PNGs: '; du -sh "$site"
+# 18 new coffee table images, copied verbatim from the verified originals.
+for asset in mesa-centro-mon__travertino.png mesa-centro-mon__caliza.png mesa-centro-mon__macael.png mesa-centro-mon__carrara.png mesa-centro-mon__marquina.png mesa-centro-mon__granito.png mesa-centro-mon__cuarcita.png mesa-centro-mon__calacatta.png mesa-centro-mon__verde-alpi.png mesa-centro-red__travertino.png mesa-centro-red__caliza.png mesa-centro-red__macael.png mesa-centro-red__carrara.png mesa-centro-red__marquina.png mesa-centro-red__granito.png mesa-centro-red__cuarcita.png mesa-centro-red__calacatta.png mesa-centro-red__verde-alpi.png; do
+ cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
+done
+printf 'Site package with all 63 verified PNGs: '; du -sh "$site"
