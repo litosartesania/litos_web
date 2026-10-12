@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the deployed LITOS catalog and all 36 original PNGs from the public Pages URL."""
+"""Verify the deployed LITOS catalog and all 45 original PNGs from the public Pages URL."""
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from pathlib import Path
@@ -12,14 +12,14 @@ import time
 BASE = "https://litosartesania.github.io/litos_web/"
 RELEASE = os.getenv("GITHUB_SHA", "manual-check")
 ROOT = Path(__file__).resolve().parents[1]
-MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/LOTE_10_IMAGENES_20261011.json", "docs/LOTE_8_IMAGENES_20261011.json", "docs/LOTE_9_MESA_OVAL_20261012.json", "docs/LOTE_9_MESA_REDONDA_20261012.json")]
-assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9]
+MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/LOTE_10_IMAGENES_20261011.json", "docs/LOTE_8_IMAGENES_20261011.json", "docs/LOTE_9_MESA_OVAL_20261012.json", "docs/LOTE_9_MESA_REDONDA_20261012.json", "docs/LOTE_9_MESA_RECTANGULAR_20261012.json")]
+assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261012-redonda9",
-        "catalogo-precios.js?v=stone-20261012-redonda9",
+        "styles.css?v=stone-20261012-rect9",
+        "catalogo-precios.js?v=stone-20261012-rect9",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -38,6 +38,7 @@ FILES = {
         "banco-esc__marquina",
         "mesa-comedor-oval__calacatta",
         "mesa-comedor-red__calacatta",
+        "mesa-comedor-rect__calacatta",
         "tonalMockup:false",
     ),
 }
@@ -90,7 +91,7 @@ def check(attempt):
 for attempt in range(1, 25):
     try:
         check(attempt)
-        print("PASS: live Pages HTML/CSS/JS and all 36 unmodified PNG originals.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS and all 45 unmodified PNG originals.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

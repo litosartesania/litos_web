@@ -28,4 +28,9 @@ for asset in mesa-comedor-red__travertino.png mesa-comedor-red__caliza.png mesa-
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
 
-printf 'Site package with all 36 verified PNGs: '; du -sh "$site"
+# Add nine approved rectangular dining table PNG originals unchanged.
+for asset in mesa-comedor-rect__travertino.png mesa-comedor-rect__caliza.png mesa-comedor-rect__macael.png mesa-comedor-rect__carrara.png mesa-comedor-rect__marquina.png mesa-comedor-rect__granito.png mesa-comedor-rect__cuarcita.png mesa-comedor-rect__calacatta.png mesa-comedor-rect__verde-alpi.png; do
+ cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
+done
+
+printf 'Site package with all 45 verified PNGs: '; du -sh "$site"

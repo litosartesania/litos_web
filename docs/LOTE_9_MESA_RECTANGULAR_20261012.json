@@ -1,0 +1,89 @@
+{
+  "batch_id": "mesa-comedor-rect-20261012",
+  "product_id": "mesa-comedor-rect",
+  "status": "CATALOGADO_LOCALMENTE_PENDIENTE_REVISION",
+  "expected_count": 9,
+  "items": [
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "travertino",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__travertino.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2625309,
+      "sha256": "db8d468c5bb6b129b07351f375acebd4823a589b0044feb56f0395f748018a75"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "macael",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__macael.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2587905,
+      "sha256": "977625401f57934414ef36d2c8543c50377c32e0b826aa0a6f570de79f8da06d"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "marquina",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__marquina.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2659410,
+      "sha256": "1ae47ee1ef9932c2cef3961d67193033f5d1e28e384d991ac1c91135fea4acef"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "caliza",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__caliza.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2608106,
+      "sha256": "690b5535b882829de79cd5ce4a4e561266300b59f3999b807be5b88c7248c0d5"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "verde-alpi",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__verde-alpi.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2668167,
+      "sha256": "5c253a948343fc179385179632dd3545ac4add0dc2c3a2689ea5fc544300860c"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "carrara",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__carrara.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2556897,
+      "sha256": "b92e232399210ff4bd0079878e4c0c4498ff18076bb7d7ccf3c06fd828090e26"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "calacatta",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__calacatta.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2578897,
+      "sha256": "e24a8eb1cd0453eaa0e2479b8212cea45603a98171871f130e9472ecf1e5f474"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "granito",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__granito.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2741127,
+      "sha256": "aa7a014c5f1c0b758ff483d239d2ef0d060188638fb6d62a99b014df0f284e63"
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "stone_id": "cuarcita",
+      "path": "assets/catalogo/variantes/mesa-comedor-rect__cuarcita.png",
+      "width": 1122,
+      "height": 1402,
+      "size_bytes": 2610815,
+      "sha256": "1fc0acf279617b35beef25c9ea9bf12af5a8f2073d2e2eaedb9da7149ae15479"
+    }
+  ]
+}
