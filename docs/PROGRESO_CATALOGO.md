@@ -13,35 +13,45 @@ El significado de «hecho» se determina exclusivamente por lo **visible y opera
 | — Aún sin imagen específica aprobada | **126** | **66,7 %** |
 | **Total planificado** | **189** | **100 %** |
 
+## Progreso de bocetos técnicos · capa separada
+
+| Entregable | Publicado | Pendiente | Total |
+| --- | ---: | ---: | ---: |
+| Variantes visuales por piedra | **63** | **126** | **189** |
+| Bocetos con alzado, planta y perfil | **9** | **12** | **21** |
+| **Total de imágenes de catálogo** | **72 (34,3 %)** | **138** | **210** |
+
+Existen **21 bocetos originales generados**, pero solo nueve están revisados con hipótesis y publicados. Los otros doce se mantienen en estado `PENDIENTE_REVISION` por falta de referencia conceptual aprobada; no están extraviados. ZIP fuente verificado: `LITOS_PLANOS_21_COMPLETO_20261012.zip`, SHA-256 `54964936b58263d289ef16caa41daea1a5560dc2e682e5d59b962124a50a2b41`. Las cotas son hipótesis orientativas, nunca medidas de fabricación.
+
 Los 21 productos aparecen como **conceptos** en el catálogo web; eso no significa que las 189 variantes tengan una imagen fiel a la piedra elegida. Tampoco hay servicios de encargos ni venta.
 
 ## Matriz producto × material
 
 ✅ **Hecho:** imagen específica publicada y verificada en GitHub Pages.  ◷ **Validado:** disponible solo en una rama de revisión, aún no publicada.  — **Pendiente:** sin imagen específica preparada.
 
-| Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi |
-| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa auxiliar pedestal | Mesas | — | — | — | — | — | — | — | — | — |
-| Mesa auxiliar con baldas | Mesas | — | — | — | — | — | — | — | — | — |
-| Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Consola recta | Consolas | — | — | — | — | — | — | — | — | — |
-| Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Banco lineal | Bancos | — | — | — | — | — | — | — | — | — |
-| Lavabo pedestal | Baño | — | — | — | — | — | — | — | — | — |
-| Lavabo de sobreponer | Baño | — | — | — | — | — | — | — | — | — |
-| Encimera de baño | Baño | — | — | — | — | — | — | — | — | — |
-| Encimera de cocina | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Balda / repisa de piedra | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Panel de revestimiento (m²) | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Bandeja de piedra | Objetos | — | — | — | — | — | — | — | — | — |
-| Peana escultórica | Objetos | — | — | — | — | — | — | — | — | — |
-| Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — |
-| Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — |
+| Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi | Plano técnico |
+| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Mesa auxiliar pedestal | Mesas | — | — | — | — | — | — | — | — | — | ✅ |
+| Mesa auxiliar con baldas | Mesas | — | — | — | — | — | — | — | — | — | — |
+| Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Consola recta | Consolas | — | — | — | — | — | — | — | — | — | — |
+| Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Banco lineal | Bancos | — | — | — | — | — | — | — | — | — | — |
+| Lavabo pedestal | Baño | — | — | — | — | — | — | — | — | — | ✅ |
+| Lavabo de sobreponer | Baño | — | — | — | — | — | — | — | — | — | — |
+| Encimera de baño | Baño | — | — | — | — | — | — | — | — | — | — |
+| Encimera de cocina | Arquitectura | — | — | — | — | — | — | — | — | — | — |
+| Balda / repisa de piedra | Arquitectura | — | — | — | — | — | — | — | — | — | — |
+| Panel de revestimiento (m²) | Arquitectura | — | — | — | — | — | — | — | — | — | — |
+| Bandeja de piedra | Objetos | — | — | — | — | — | — | — | — | — | — |
+| Peana escultórica | Objetos | — | — | — | — | — | — | — | — | — | — |
+| Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — | — |
+| Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — | — |
 
 ## Siete productos con la colección visual completa publicada
 
@@ -140,3 +150,11 @@ Las láminas son vistas independientes de las nueve piedras. No alteran el cómp
 | Macetero mineral | Pendiente de concepto visual aprobado | — |
 
 Cotas orientativas · concepto no fabricado · no apto para fabricación. Manifiesto: `docs/PLANOS_TECNICOS_20261012.json`.
+
+## 2026-10-12 — Nueve planos PUBLICADOS Y VERIFICADOS (sustituye estado «en curso»)
+
+- PR [#29](https://github.com/litosartesania/litos_web/pull/29) fusionado en `main` (`c7c2c5014258491a498460f89a5a024186e5949e`), workflow [38305351566](https://github.com/litosartesania/litos_web/actions/runs/38305351566) **SUCCESS**, con verificación pública HTTP/longitud/SHA-256 de nueve planos y 63 PNG de piedra.
+- Publicados: `mesa-comedor-oval`, `mesa-comedor-red`, `mesa-comedor-rect`, `mesa-centro-mon`, `mesa-centro-red`, `consola-esc`, `banco-esc`, `mesa-aux-ped`, `lavabo-ped`. Coinciden también con los originales recuperados del ZIP por hash Git y SHA-256.
+- El desplegable dispone de la opción «Plano técnico», sincronizada con la ficha, y señaliza de forma explícita las doce referencias sin plano validado. No modifica el cálculo de la última piedra seleccionada ni crea un décimo material.
+- Los doce restantes **NO están aprobados**: `mesa-aux-bal`, `consola-rect`, `banco-rect`, `lavabo-sobre`, `encimera-bano`, `encimera-cocina`, `balda`, `panel`, `bandeja`, `peana`, `cuenco`, `macetero`. No publicarlos ni cargarlos al repositorio público antes de revisar sus referencias conceptuales y geometría.
+- Se mantienen **63/189** variantes de piedra, **9/21** planos y **72/210** entregables totales publicados; todos conceptuales, dimensiones orientativas, sin fabricación acreditada ni aceptación de encargos.
