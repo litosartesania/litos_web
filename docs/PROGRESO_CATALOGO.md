@@ -109,3 +109,34 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - CI de revisión [63/63 SUCCESS](https://github.com/litosartesania/litos_web/actions/runs/38273631176), incluido Playwright móvil/tableta/escritorio. Con autorización específica del usuario se fusionó [PR #21](https://github.com/litosartesania/litos_web/pull/21) mediante squash `3e909b5b9734a89431d113dcb586b4869ce71931`.
 - **GitHub Pages SUCCESS** https://github.com/litosartesania/litos_web/actions/runs/38274897683: validación de HTML/CSS/JS y de las **63/63 imágenes reales en producción** con HTTP 200, tamaño y SHA-256; 45 PNG anteriores preservados.
 - **HECHO público = 63/189 (33,3 %)**, **PENDIENTES = 126/189 (66,7 %)**. Siete productos completos, catorce pendientes. Los renders son conceptos y no acreditan piezas fabricadas ni precios comerciales propios. Cero servicios de pago o formularios.
+
+
+
+## Planos técnicos — importación revisada, publicación en curso (12/10/2026)
+Las láminas son vistas independientes de las nueve piedras. No alteran el cómputo 63/189 de renders publicados. Generados 21 bocetos: nueve revisados con hipótesis y doce pendientes de concepto visual propio. Solo se importan los nueve revisados; publicación expresamente autorizada, condicionada a QA y verificación HTTP/SHA-256 de Pages.
+
+| Producto | Plano técnico | Cotas (ancho × fondo × alto, cm) |
+| --- | --- | --- |
+| Mesa de comedor ovalada | Revisado e importado; publicación en curso | 220 × 105 × 75 |
+| Mesa de comedor redonda | Revisado e importado; publicación en curso | 140 × 140 × 75 |
+| Mesa de comedor rectangular | Revisado e importado; publicación en curso | 220 × 100 × 75 |
+| Mesa de centro monolítica | Revisado e importado; publicación en curso | 130 × 75 × 36 |
+| Mesa de centro circular | Revisado e importado; publicación en curso | 100 × 100 × 34 |
+| Mesa auxiliar pedestal | Revisado e importado; publicación en curso | 45 × 45 × 52 |
+| Mesa auxiliar con baldas | Pendiente de concepto visual aprobado | — |
+| Consola escultórica | Revisado e importado; publicación en curso | 160 × 40 × 82 |
+| Consola recta | Pendiente de concepto visual aprobado | — |
+| Banco escultórico | Revisado e importado; publicación en curso | 180 × 42 × 45 |
+| Banco lineal | Pendiente de concepto visual aprobado | — |
+| Lavabo pedestal | Revisado e importado; publicación en curso | 46 × 46 × 88 |
+| Lavabo de sobreponer | Pendiente de concepto visual aprobado | — |
+| Encimera de baño | Pendiente de concepto visual aprobado | — |
+| Encimera de cocina | Pendiente de concepto visual aprobado | — |
+| Balda / repisa de piedra | Pendiente de concepto visual aprobado | — |
+| Panel de revestimiento (m²) | Pendiente de concepto visual aprobado | — |
+| Bandeja de piedra | Pendiente de concepto visual aprobado | — |
+| Peana escultórica | Pendiente de concepto visual aprobado | — |
+| Cuenco decorativo | Pendiente de concepto visual aprobado | — |
+| Macetero mineral | Pendiente de concepto visual aprobado | — |
+
+Cotas orientativas · concepto no fabricado · no apto para fabricación. Manifiesto: `docs/PLANOS_TECNICOS_20261012.json`.

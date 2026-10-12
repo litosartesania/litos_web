@@ -18,7 +18,8 @@ with sync_playwright() as pw:
         cards=page.locator('.piece-card:visible')
         assert cards.count()==21,(width,cards.count())
         assert page.locator('.category-filter-bar button').count()==7
-        assert page.locator('#material-picker option').count()==9
+        assert page.locator('#material-picker option').count()==10
+        assert page.locator('#detail-material-picker option').count()==10
         assert page.locator('.product-open').count()==21
         assert page.locator('form').count()==0
         boxes=[cards.nth(i).bounding_box() for i in range(6)]
@@ -64,6 +65,26 @@ with sync_playwright() as pw:
         img.evaluate('(im)=>im.decode()')
         assert page.locator('#detail-price').inner_text()!=prev_price
         assert page.locator('#detail-source').get_attribute('rel')=='noopener noreferrer'
+        # A drawing is one per product. Both selectors synchronize; no false dimensions.
+        last_price=page.locator('#detail-price').inner_text()
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        assert page.locator('#material-picker').input_value()=='plano-tecnico'
+        drawing=page.locator('.detail-stage .technical-drawing-figure img')
+        assert drawing.count()==1
+        assert drawing.get_attribute('src')=='assets/catalogo/planos/mesa-centro-mon.png'
+        drawing.evaluate('(im)=>{im.loading="eager"}')
+        drawing.evaluate('(im)=>im.decode()')
+        assert drawing.evaluate('(im)=>im.naturalWidth===1600&&im.naturalHeight===1200')
+        assert drawing.evaluate('(im)=>getComputedStyle(im).objectFit')=='contain'
+        assert page.locator('.piece-grid .technical-drawing-figure img').count()==9
+        assert page.locator('.piece-grid .technical-placeholder').count()==12
+        assert page.locator('#detail-price').inner_text()==last_price
+        assert 'Negro Marquina' in page.locator('#detail-stone').inner_text()
+        if width in (390,1440):page.screenshot(path=str(out/f'plano-mon-detalle-{width}.png'),animations='disabled')
+        page.locator('#detail-material-picker').select_option('marquina')
+        assert page.locator('#material-picker').input_value()=='marquina'
+        assert img.get_attribute('src')=='assets/catalogo/variantes/mesa-centro-mon__marquina.png'
+        assert page.locator('.detail-stage .technical-placeholder').count()==0
         if width in (390,1440):
             page.screenshot(path=str(out/f'producto-mon-detalle-{width}.png'),animations='disabled')
         page.keyboard.press('Escape')
@@ -91,3 +112,4 @@ with sync_playwright() as pw:
         print('PASS',width,'gallery columns, left filters, 21 cards, synced modal, ESC, image fallback, filters')
         page.close()
     browser.close()
+

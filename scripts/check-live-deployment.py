@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261012-grid5",
-        "catalogo-precios.js?v=stone-20261012-grid5",
+        "styles.css?v=stone-20261012-planos",
+        "catalogo-precios.js?v=stone-20261012-planos",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -90,13 +90,23 @@ def check(attempt):
         if hashlib.sha256(data).hexdigest() != item["sha256"]:
             raise AssertionError(f"{rel}: SHA-256 differs from original")
 
+PLANS = json.loads((ROOT/'docs/PLANOS_TECNICOS_20261012.json').read_text())['products']
+assert len(PLANS)==9
+
 for attempt in range(1, 25):
     try:
         check(attempt)
-        print("PASS: live Pages HTML/CSS/JS and all 63 unmodified PNG originals.", flush=True)
+        script=read_live('catalogo-precios.js',attempt).decode('utf-8')
+        for p in PLANS:
+            assert script.count(p['path'])==1, 'missing approved drawing map'
+            data=read_live(p['path'],attempt)
+            assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
+
+        print("PASS: live Pages HTML/CSS/JS and all 63 unmodified PNG originals and 9 reviewed technical drawings.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)
         if attempt < 24:
             time.sleep(10)
 raise SystemExit("FAIL: public GitHub Pages did not pass release verification.")
+

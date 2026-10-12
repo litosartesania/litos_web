@@ -1,0 +1,599 @@
+{
+  "schema_version": 1,
+  "collection": "LITOS COMERCIAL",
+  "created_date": "2026-10-12",
+  "units": "cm",
+  "drawing_size_px": [
+    1600,
+    1200
+  ],
+  "notice": "DIMENSIONES ORIENTATIVAS · CONCEPTO NO FABRICADO · NO APTO PARA FABRICACIÓN",
+  "scale_notice": "Sin escala garantizada",
+  "scope": "Entrega de archivos. Sin importación, publicación ni cambios a GitHub.",
+  "source_repository": "litosartesania/litos_web",
+  "reference_artifact": {
+    "workflow_run_id": 38273631176,
+    "artifact_id": 11757104690,
+    "sha256": "132445feea009fbfee4b0dad772332fd118ab79425cc6ecf989517a470c0fea6"
+  },
+  "brief_ref": "work/catalogo-vista-planos-tecnicos-20261012",
+  "integration_rule": "Integrar solo REVISADO_CON_HIPOTESIS después de la revisión del propietario. Nunca integrar PENDIENTE_REVISION.",
+  "count": 9,
+  "reviewed_with_assumptions": 9,
+  "pending_visual_reference": 0,
+  "products": [
+    {
+      "product_id": "mesa-comedor-oval",
+      "name": "Mesa de comedor ovalada",
+      "dimensions_cm": {
+        "ancho": 220,
+        "fondo": 105,
+        "alto": 75
+      },
+      "kind": "table",
+      "reference_assets": [
+        "assets/catalogo/variantes/mesa-comedor-oval__travertino.png",
+        "assets/catalogo/litos-mesa-comedor-02.webp"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Se conserva Concepto 2: sobre ovalado y dos pedestales cilíndricos iguales.",
+        "Óvalo idealizado como elipse; canto 5 cm, pedestales Ø48 cm a ±55 cm del centro."
+      ],
+      "top": "ellipse",
+      "t": 5,
+      "feet": [
+        [
+          -55,
+          0,
+          48,
+          48
+        ],
+        [
+          55,
+          0,
+          48,
+          48
+        ]
+      ],
+      "foot": "cylinder",
+      "path": "assets/catalogo/planos/mesa-comedor-oval.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 187888,
+      "sha256": "bbf7bcf7c5f03482ef76963c5970145ee20105064c8e892b2cb7774fd953f6e9",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/mesa-comedor-oval__travertino.png",
+          "sha256": "5972b8178dd818374f97af48f92b662f076b0818a4ae3d2724fc102b5de0bb37",
+          "git_blob_sha": "2a8ee0cab22342a8c9d8fe674a77c3a9dfff4065"
+        },
+        {
+          "path": "assets/catalogo/litos-mesa-comedor-02.webp",
+          "sha256": "18c20709dad0270a9bc2ae9e68838ce1d7dfedc5040a27a6efbf5174df3c496d",
+          "git_blob_sha": "b43b22aa932cff24d1e35c2e89bf8a9ceb4ea763"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 220.0,
+          "vertical_cm": 105.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 220.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 105.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 1
+    },
+    {
+      "product_id": "mesa-comedor-red",
+      "name": "Mesa de comedor redonda",
+      "dimensions_cm": {
+        "ancho": 140,
+        "fondo": 140,
+        "alto": 75
+      },
+      "kind": "table",
+      "reference_assets": [
+        "assets/catalogo/variantes/mesa-comedor-red__travertino.png"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Sobre circular Ø140 cm, canto 5 cm y pedestal central Ø58 cm propuestos."
+      ],
+      "top": "ellipse",
+      "t": 5,
+      "feet": [
+        [
+          0,
+          0,
+          58,
+          58
+        ]
+      ],
+      "foot": "cylinder",
+      "path": "assets/catalogo/planos/mesa-comedor-red.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 174310,
+      "sha256": "36a5000566481276edf2c640fd6f40c972a21fd0a4f4205c2d36b1440334dbf4",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/mesa-comedor-red__travertino.png",
+          "sha256": "65397559d27893e1171b55431ca9132c066555d18ff6cf1cbd1d39790d15c84e",
+          "git_blob_sha": "20c4440ff1e5e96c51b526e5d0bbf9adcd8e60a2"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 140.0,
+          "vertical_cm": 140.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 140.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 140.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 1
+    },
+    {
+      "product_id": "mesa-comedor-rect",
+      "name": "Mesa de comedor rectangular",
+      "dimensions_cm": {
+        "ancho": 220,
+        "fondo": 100,
+        "alto": 75
+      },
+      "kind": "table",
+      "reference_assets": [
+        "assets/catalogo/variantes/mesa-comedor-rect__travertino.png"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Sobre rectangular con esquinas redondeadas; dos cilindros de igual diámetro.",
+        "Radio de esquina 6 cm, canto 6 cm y soportes Ø42 cm a ±55 cm propuestos."
+      ],
+      "top": "roundrect",
+      "r": 6,
+      "t": 6,
+      "feet": [
+        [
+          -55,
+          0,
+          42,
+          42
+        ],
+        [
+          55,
+          0,
+          42,
+          42
+        ]
+      ],
+      "foot": "cylinder",
+      "path": "assets/catalogo/planos/mesa-comedor-rect.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 166471,
+      "sha256": "4e8381af94b654da651eea1df4e267d070c46503dbbb30d385442dcba3c39cf5",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/mesa-comedor-rect__travertino.png",
+          "sha256": "db8d468c5bb6b129b07351f375acebd4823a589b0044feb56f0395f748018a75",
+          "git_blob_sha": "08f4a652bc382561ff34134416687e290fef1a80"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 220.0,
+          "vertical_cm": 100.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 220.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 100.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 1
+    },
+    {
+      "product_id": "mesa-centro-mon",
+      "name": "Mesa de centro monolítica",
+      "dimensions_cm": {
+        "ancho": 130,
+        "fondo": 75,
+        "alto": 36
+      },
+      "kind": "table",
+      "reference_assets": [
+        "assets/catalogo/variantes/mesa-centro-mon__travertino.png"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Se conserva tablero rectangular grueso sobre dos bloques prismáticos.",
+        "Canto 10 cm; bloques 22×52 cm centrados en fondo, a ±38 cm en ancho."
+      ],
+      "top": "rect",
+      "t": 10,
+      "feet": [
+        [
+          -38,
+          0,
+          22,
+          52
+        ],
+        [
+          38,
+          0,
+          22,
+          52
+        ]
+      ],
+      "foot": "box",
+      "path": "assets/catalogo/planos/mesa-centro-mon.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 163413,
+      "sha256": "4b6f05462e494bbd6507a2ca3becfca462d048749e5f4a20ffb48bd403343546",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/mesa-centro-mon__travertino.png",
+          "sha256": "bac7d9186a187cb577be43065e3361e6bee2b6bcde18c501bd08dccd54dc81dd",
+          "git_blob_sha": "8b1a2c1178ab4c5c4d12068cd467913257059156"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 130.0,
+          "vertical_cm": 75.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 130.0,
+          "vertical_cm": 36.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 75.0,
+          "vertical_cm": 36.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 1
+    },
+    {
+      "product_id": "mesa-centro-red",
+      "name": "Mesa de centro circular",
+      "dimensions_cm": {
+        "ancho": 100,
+        "fondo": 100,
+        "alto": 34
+      },
+      "kind": "table",
+      "reference_assets": [
+        "assets/catalogo/variantes/mesa-centro-red__travertino.png"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Sobre circular Ø100 cm, canto 9 cm y pedestal cilíndrico Ø50 cm propuestos."
+      ],
+      "top": "ellipse",
+      "t": 9,
+      "feet": [
+        [
+          0,
+          0,
+          50,
+          50
+        ]
+      ],
+      "foot": "cylinder",
+      "path": "assets/catalogo/planos/mesa-centro-red.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 174307,
+      "sha256": "a27fe30eb912e53de62b396875e1b8fbbf98d7c53cca288214d7a084c8559a3f",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/mesa-centro-red__travertino.png",
+          "sha256": "6ce61daeecbc23b55bcc1b6bc6f2932063dd9f86d0b647aad10de7a791088fbf",
+          "git_blob_sha": "f37aae3eea145d91c5110a6d28f4d077c3eba61a"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 100.0,
+          "vertical_cm": 100.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 100.0,
+          "vertical_cm": 34.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 100.0,
+          "vertical_cm": 34.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 2
+    },
+    {
+      "product_id": "consola-esc",
+      "name": "Consola escultórica",
+      "dimensions_cm": {
+        "ancho": 160,
+        "fondo": 40,
+        "alto": 82
+      },
+      "kind": "portal",
+      "reference_assets": [
+        "assets/catalogo/variantes/consola-esc__travertino.png"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Se conservan dos apoyos laterales con transición curva hacia el sobre.",
+        "Sobre 6 cm; apoyos de 18 cm de ancho, transición interior R12 cm y fondo constante 40 cm propuestos.",
+        "Cara posterior y continuidad en fondo no visibles: se supone extrusión simétrica."
+      ],
+      "t": 6,
+      "leg": 18,
+      "inset": 17,
+      "fillet": 12,
+      "organic": false,
+      "path": "assets/catalogo/planos/consola-esc.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 160174,
+      "sha256": "c62d55fb17f106ea9e2a23e09ba641206eb77cc4689b458a33374d45dc37eaf7",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/consola-esc__travertino.png",
+          "sha256": "ba0b853df05fe4a42b76b4216d19aeefd0797154af8e720327b01106c98327cf",
+          "git_blob_sha": "629d2f621db840ac2f5376b6af2221539f35316c"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 160.0,
+          "vertical_cm": 40.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 160.0,
+          "vertical_cm": 82.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 40.0,
+          "vertical_cm": 82.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 2
+    },
+    {
+      "product_id": "banco-esc",
+      "name": "Banco escultórico",
+      "dimensions_cm": {
+        "ancho": 180,
+        "fondo": 42,
+        "alto": 45
+      },
+      "kind": "portal",
+      "reference_assets": [
+        "assets/catalogo/variantes/banco-esc__travertino.png"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Se conserva el banco de contorno orgánico, extremos redondos y dos apoyos integrados.",
+        "Planta idealizada como cápsula; apoyos de extremo Ø42 cm, asiento 8 cm y enlace interior R10 cm propuestos.",
+        "Redondeos y continuidad posterior idealizados; no se deduce un método de fabricación."
+      ],
+      "t": 8,
+      "leg": 42,
+      "inset": 0,
+      "fillet": 10,
+      "organic": true,
+      "path": "assets/catalogo/planos/banco-esc.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 169388,
+      "sha256": "4d7454af8c70d191b3863a2c96a912dbf497f4fcd14d92cff198dafd177be151",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/variantes/banco-esc__travertino.png",
+          "sha256": "463e76180ea4c00d87d62c3b78f0413f2a7d1169608f475b17c5343dd12be35f",
+          "git_blob_sha": "e78e72ec72e857ebb67dc5ae63b7658b8c01b74d"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 180.0,
+          "vertical_cm": 42.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 180.0,
+          "vertical_cm": 45.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 42.0,
+          "vertical_cm": 45.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 2
+    },
+    {
+      "product_id": "mesa-aux-ped",
+      "name": "Mesa auxiliar pedestal",
+      "dimensions_cm": {
+        "ancho": 45,
+        "fondo": 45,
+        "alto": 52
+      },
+      "kind": "turned",
+      "reference_assets": [
+        "assets/catalogo/litos-mesa-auxiliar-01.webp"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Se selecciona exclusivamente la referencia 01; la 02 tiene una silueta distinta.",
+        "Sobre circular y pie torneado de cuello estrecho y cuerpo convexo; simetría de revolución supuesta.",
+        "Canto 4 cm, base Ø20 cm y cuello Ø10 cm propuestos."
+      ],
+      "t": 4,
+      "path": "assets/catalogo/planos/mesa-aux-ped.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 175618,
+      "sha256": "1097d54fc8d111c815789909fd9a6d80f65529dc5b1a1a4052fb4805d391f449",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/litos-mesa-auxiliar-01.webp",
+          "sha256": "dfc01e162761b7a21e8f92fe3435e1afe0d93b4bc6f0917b555d587203612d95",
+          "git_blob_sha": "865d5aa256b3c2192c66ae78a170810afa8a5b92"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 45.0,
+          "vertical_cm": 45.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 45.0,
+          "vertical_cm": 52.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 45.0,
+          "vertical_cm": 52.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 3
+    },
+    {
+      "product_id": "lavabo-ped",
+      "name": "Lavabo pedestal",
+      "dimensions_cm": {
+        "ancho": 46,
+        "fondo": 46,
+        "alto": 88
+      },
+      "kind": "basin_ped",
+      "reference_assets": [
+        "assets/catalogo/litos-lavabo-01.webp"
+      ],
+      "assumptions": [
+        "Todas las dimensiones son propuestas de diseño, no mediciones del render.",
+        "Geometría nominal idealizada: las formas no visibles se registran como hipótesis.",
+        "No se especifican resistencia, tolerancias, uniones, anclajes ni instalaciones.",
+        "Taza cilíndrica abierta sobre pie cilíndrico central, conforme a referencia 01.",
+        "Taza de 18 cm de alto y pie Ø28 cm; borde interior Ø40 cm es una hipótesis solo de contorno.",
+        "No se dibuja vaciado interno ni desagüe: no están especificados."
+      ],
+      "bowl": 18,
+      "ped": 28,
+      "inner": 40,
+      "path": "assets/catalogo/planos/lavabo-ped.png",
+      "width": 1600,
+      "height": 1200,
+      "size_bytes": 171443,
+      "sha256": "6feb5a71912e87f3e362a3281be31c4525223471b6ad525c77e2a2da7758aad9",
+      "reference_integrity": [
+        {
+          "path": "assets/catalogo/litos-lavabo-01.webp",
+          "sha256": "503892a1d0405967b63f07094c22bbbbfbeb4f0f80ac97982f1c6a795e41bf58",
+          "git_blob_sha": "629cccb76aaf7a2d201b768ec31a0931f6125226"
+        }
+      ],
+      "review_status": "REVISADO_CON_HIPOTESIS",
+      "eligible_for_integration": true,
+      "review_notes": "Coherencia de proyecciones verificada; medidas y geometría oculta siguen siendo hipótesis.",
+      "projection_checks": {
+        "plan": {
+          "horizontal_cm": 46.0,
+          "vertical_cm": 46.0,
+          "matches_dimensions": true
+        },
+        "front": {
+          "horizontal_cm": 46.0,
+          "vertical_cm": 88.0,
+          "matches_dimensions": true
+        },
+        "side": {
+          "horizontal_cm": 46.0,
+          "vertical_cm": 88.0,
+          "matches_dimensions": true
+        }
+      },
+      "batch": 3
+    }
+  ]
+}
