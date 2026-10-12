@@ -99,12 +99,14 @@ with sync_playwright() as app:
      last_price=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
      page.locator('#material-picker').select_option('plano-tecnico')
      assert page.locator('.technical-placeholder').count()==21
+     assert page.locator('#material-source').is_hidden()
      assert page.locator('.technical-placeholder').first.inner_text().startswith('Plano técnico pendiente')
      assert page.locator('#catalog-count').inner_text().endswith('(0/21 disponibles)')
      assert page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()==last_price
      assert page.locator('img[src*="catalogo/planos/"]').count()==0
      page.locator('#material-picker').select_option('verde-alpi')
      assert page.locator('.technical-placeholder').count()==0
+     assert page.locator('#material-source').is_visible()
      page.locator('[data-category-filter="Baño"]').click()
      assert page.locator('.piece-card:visible').count()==3
      page.locator('[data-category-filter="Todos"]').click()
