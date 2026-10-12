@@ -1,0 +1,44 @@
+name: LITOS · Mesa redonda 9 piedras · QA de 36 PNG sin publicar
+on:
+  push:
+    branches: [work/catalogo-mesa-redonda-9png-20261012]
+    paths:
+      - 'assets/catalogo/variantes/mesa-comedor-red__*.png'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check all 36 unmodified original PNGs and syntax
+        run: |
+          python3 scripts/verify-litos-36-png.py
+          python3 -m py_compile scripts/check-site.py scripts/check-live-deployment.py scripts/verify-litos-36-png.py scripts/build-litos-36-site-preview.py scripts/check-litos-36-site-preview.py scripts/visual-qa-36-site-preview.py
+          node --check catalogo-precios.js
+      - name: Build five pages with strict privacy and deployment safety gate
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+      - name: Build real offline preview without deploying Pages
+        run: |
+          python3 scripts/build-litos-36-site-preview.py
+          python3 scripts/check-litos-36-site-preview.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Verify 21 products x nine stones on desktop tablet and phone
+        run: |
+          python3 scripts/visual-qa-36-site-preview.py
+          python3 scripts/visual-qa.py
+          python3 scripts/qa-catalog-sidebar.py
+      - name: Save offline preview for owner review
+        uses: actions/upload-artifact@v4
+        with:
+          name: litos-mesa-redonda-36-originales-vista-previa
+          path: review-package/
+          retention-days: 7
+          if-no-files-found: error
