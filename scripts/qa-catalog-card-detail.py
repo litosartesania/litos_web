@@ -71,7 +71,7 @@ with sync_playwright() as pw:
         assert page.locator('#material-picker').input_value()=='plano-tecnico'
         assert page.locator('.detail-stage .technical-placeholder').count()==1
         assert 'Medidas en cm pendientes de validación' in page.locator('.detail-stage .technical-placeholder').inner_text()
-        assert page.locator('[data-product="mesa-centro-mon"] .technical-placeholder').count()==1
+        assert page.locator('.piece-grid [data-product="mesa-centro-mon"] .technical-placeholder').count()==1
         assert page.locator('#detail-price').inner_text()==last_price
         assert 'Negro Marquina' in page.locator('#detail-stone').inner_text()
         assert page.locator('img[src*="catalogo/planos/"]').count()==0
