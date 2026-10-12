@@ -23,11 +23,11 @@ class Inspect(HTMLParser):
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
-manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json','docs/LOTE_9_MESA_OVAL_20261012.json')]
-assert [len(m['items']) for m in manifests]==[10,8,9]
+manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json','docs/LOTE_9_MESA_OVAL_20261012.json','docs/LOTE_9_MESA_REDONDA_20261012.json')]
+assert [len(m['items']) for m in manifests]==[10,8,9,9]
 items=[i for m in manifests for i in m['items']]
 variants={i['path'] for i in items}
-assert len(variants)==27 and all(p.startswith('assets/catalogo/variantes/') and p.endswith('.png') and '..' not in Path(p).parts for p in variants)
+assert len(variants)==36 and all(p.startswith('assets/catalogo/variantes/') and p.endswith('.png') and '..' not in Path(p).parts for p in variants)
 expected.update(variants)
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
@@ -67,8 +67,8 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261012-mesaoval9' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261012-mesaoval9' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261012-redonda9' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261012-redonda9' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==1 for item in items)
@@ -111,4 +111,4 @@ if '--production' in sys.argv:
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: five pages, nine material options, 12 source WebP, 27 original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
+print(f'PASS: five pages, nine material options, 12 source WebP, 36 original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
