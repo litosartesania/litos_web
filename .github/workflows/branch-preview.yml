@@ -28,6 +28,8 @@ jobs:
         run: |
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site
+      - name: Audit all catalog manifests, registered variants and original PNG SHA-256
+        run: python3 scripts/audit-catalog-inventory.py --min-png 63
       - name: Validate publication safety gate without deploying
         run: python3 scripts/check-site.py _site --production
       - name: Set up Chromium for responsive visual QA
