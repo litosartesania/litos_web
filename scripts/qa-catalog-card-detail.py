@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assert editorial three-column catalog and keyboard-accessible product modal, offline."""
+"""Assert editorial five-column catalog and keyboard-accessible product modal, offline."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
@@ -10,7 +10,7 @@ out.mkdir(parents=True,exist_ok=True)
 
 with sync_playwright() as pw:
     browser=pw.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
-    for width,height in [(390,844),(820,1180),(1100,900),(1440,900),(1600,900)]:
+    for width,height in [(390,844),(820,1180),(1100,900),(1200,900),(1440,900),(1600,900),(1920,1000)]:
         page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
         errors=[]
         page.on('pageerror',lambda e:errors.append(str(e)))
@@ -21,16 +21,19 @@ with sync_playwright() as pw:
         assert page.locator('#material-picker option').count()==9
         assert page.locator('.product-open').count()==21
         assert page.locator('form').count()==0
-        boxes=[cards.nth(i).bounding_box() for i in range(4)]
+        boxes=[cards.nth(i).bounding_box() for i in range(6)]
         assert all(box and box['width']>165 for box in boxes),(width,boxes)
         close=lambda a,b: abs(a-b)<4
         if width>=1200:
-            assert close(boxes[0]['y'],boxes[1]['y']) and close(boxes[1]['y'],boxes[2]['y']),(width,'not three across',boxes)
-            assert boxes[3]['y']>boxes[0]['y']+200,(width,'fourth must be on second row')
+            assert all(close(boxes[0]['y'],boxes[i]['y']) for i in range(1,5)),(width,'not five across',boxes)
+            assert boxes[5]['y']>boxes[0]['y']+150,(width,'sixth must start second row',boxes)
+        elif width>=1100:
+            assert all(close(boxes[0]['y'],boxes[i]['y']) for i in range(1,3)),(width,'not three across',boxes)
+            assert boxes[3]['y']>boxes[0]['y']+150,(width,'fourth must start second row',boxes)
         elif width>=700:
             assert close(boxes[0]['y'],boxes[1]['y']) and boxes[2]['y']>boxes[0]['y']+150,(width,'not two across',boxes)
         else:
-            assert boxes[1]['y']>boxes[0]['y']+150,(width,'not single-column on mobile')
+            assert boxes[1]['y']>boxes[0]['y']+150,(width,'not single-column on mobile',boxes)
         sidebar=page.locator('.material-planner').bounding_box()
         if width>=1100:
             assert sidebar['x']+sidebar['width']+8<boxes[0]['x'],(width,'sidebar not at left',sidebar,boxes[0])
