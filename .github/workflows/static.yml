@@ -43,7 +43,10 @@ jobs:
           python3 -m pip install playwright
           python3 -m playwright install --with-deps chromium
       - name: Validate the rendered website before deployment
-        run: python3 scripts/visual-qa.py
+        run: |
+          python3 scripts/visual-qa.py
+          python3 scripts/qa-catalog-card-detail.py
+          python3 scripts/qa-catalog-sidebar.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -54,3 +57,4 @@ jobs:
         uses: actions/deploy-pages@v5
       - name: Verify actual public HTML CSS and JS after Pages deployment
         run: python3 scripts/check-live-deployment.py
+

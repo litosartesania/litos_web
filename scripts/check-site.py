@@ -29,6 +29,17 @@ items=[i for m in manifests for i in m['items']]
 variants={i['path'] for i in items}
 assert len(variants)==63 and all(p.startswith('assets/catalogo/variantes/') and p.endswith('.png') and '..' not in Path(p).parts for p in variants)
 expected.update(variants)
+plans=json.loads((root.parent/'docs/PLANOS_TECNICOS_20261012.json').read_text())['products']
+assert len(plans)==9 and len({p['product_id'] for p in plans})==9
+assert all(p['review_status']=='REVISADO_CON_HIPOTESIS' and p['width']==1600 and p['height']==1200 and p['path']=='assets/catalogo/planos/'+p['product_id']+'.png' for p in plans)
+plan_paths={p['path'] for p in plans}
+expected.update(plan_paths)
+for p in plans:
+ data=(root/p['path']).read_bytes()
+ assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
+ assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], ('technical drawing integrity',p['path'])
+ assert (root/'catalogo-precios.js').read_text().count(p['path'])==1
+
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
 for item in items:
@@ -36,8 +47,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -63,12 +74,12 @@ for page,count in [('funerario.html',3)]:
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert not p.forms and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
-assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==9
+assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261012-grid5' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261012-grid5' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261012-planos' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261012-planos' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==1 for item in items)
@@ -112,3 +123,4 @@ if '--production' in sys.argv:
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
 print(f'PASS: five pages, nine material options, 12 source WebP, 63 original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
+

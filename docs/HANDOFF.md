@@ -349,3 +349,12 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Despliegue público: https://github.com/litosartesania/litos_web/actions/runs/38283202187 (**SUCCESS**); HTML, CSS, JS y **63/63 originales PNG** confirmados por HTTP/SHA-256 en GitHub Pages. Versión cache `stone-20261012-grid5`. URL https://litosartesania.github.io/litos_web/mobiliario.html#catalogo.
 - Progreso de producción **sin cambios: 63/189 (33,3 %), siete de 21 productos completos, 126 variantes pendientes**. Ningún original PNG modificado, precios y referencias intactos; sitio informativo sin solicitudes de presupuesto ni formularios. Solo repositorio `litosartesania/litos_web`; sin costes adicionales ni cambios a otros proyectos ni PR experimental #8.
 - **Relevo**: tratar este registro como estado vigente, no la entrada anterior donde cinco columnas constaban como propuesta. Para siguientes cambios, trabajar con una rama nueva desde el main más reciente, pasar QA, publicar solo con autorización, y actualizar el handoff tras verificación real.
+
+
+
+## 2026-10-12 — Nueve planos técnicos importados; publicación autorizada en curso
+- El propietario ordena «subelo a la web» tras recibir el ZIP con 21 láminas: se incorporan exclusivamente las nueve REVISADO_CON_HIPOTESIS; doce PENDIENTE_REVISION quedan fuera del repositorio y del mapa del selector.
+- Rama nueva `work/publicar-planos-9-20261012` desde main `1668c09092db119ff7d28a08c6cec06a3ca230d4`; no se toca la rama ajena preparada ni PR #8. Nueve PNG 1600×1200 exactos; SHA-256/dimensiones/hipótesis en `docs/PLANOS_TECNICOS_20261012.json`.
+- Décima opción de visualización «Plano técnico · alzado, planta y perfil» en selector lateral y ficha. Nueve piedras reales, 21 productos, 63 renders originales y precios intactos. Los doce modelos sin plano revisado muestran pendiente, sin solicitar un archivo ausente. Los planos conservan dimensiones orientativas, concepto no fabricado y no apto para fabricación; enlace a lámina a tamaño completo.
+- Build/check-site producción y sintaxis JS locales PASS; QA Chromium en GitHub obligatoria antes de fusionar. Workflow dedicado de revisión y despliegue Pages incorporan revisión del diálogo/precios/vistas. Verificador público exige HTTP/SHA-256 de 63 renders + 9 planos después de desplegar.
+- La autorización del usuario cubre publicar las nueve láminas revisadas si QA pasa; no pedir otra autorización. No declarar producción hasta Pages SUCCESS y comprobación HTTP real. Coste adicional cero, sin cambios a otros proyectos ni información privada.

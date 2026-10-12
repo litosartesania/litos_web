@@ -38,3 +38,10 @@ for asset in mesa-centro-mon__travertino.png mesa-centro-mon__caliza.png mesa-ce
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
 printf 'Site package with all 63 verified PNGs: '; du -sh "$site"
+
+
+# Nine reviewed conceptual drawings, copied verbatim.
+mkdir -p "$site/assets/catalogo/planos"
+for asset in mesa-comedor-oval.png mesa-comedor-red.png mesa-comedor-rect.png mesa-centro-mon.png mesa-centro-red.png consola-esc.png banco-esc.png mesa-aux-ped.png lavabo-ped.png; do
+ cp "assets/catalogo/planos/$asset" "$site/assets/catalogo/planos/$asset"
+done

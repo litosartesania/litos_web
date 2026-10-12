@@ -1,0 +1,35 @@
+name: LITOS · Revisar nueve planos técnicos
+on:
+  push:
+    branches: ['work/publicar-planos-9-*']
+  pull_request:
+    branches: [main]
+    paths: ['assets/catalogo/planos/**', 'docs/PLANOS_TECNICOS_20261012.json', 'catalogo-precios.js', '.github/workflows/review-planos-9.yml']
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify build, 63 originals and nine drawing hashes
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+          node --check script.js
+          node --check catalogo-precios.js
+      - name: Install Chromium
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Verify rendered pages, drawings, prices and both selectors
+        run: |
+          python3 scripts/visual-qa.py
+          python3 scripts/qa-catalog-card-detail.py
+          python3 scripts/qa-catalog-sidebar.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: litos-planos-9-revision-visual
+          path: review-layout/screenshots/
+          if-no-files-found: error
+          retention-days: 7
