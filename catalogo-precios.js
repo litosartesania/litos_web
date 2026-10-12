@@ -61,7 +61,26 @@ const showMaterial=(card,material)=>{
 };
 grid.innerHTML=products.map((p,i)=>'<article class="piece-card product-model" data-product="'+safe(p[0])+'" data-category="'+safe(p[2])+'" data-base="'+p[3]+'">'+
 '<div class="material-preview" aria-label="Imagen del modelo y disponibilidad del material"></div>'+
-'<div class="piece-details"><p class="piece-index">'+String(i+1).padStart(2,'0')+' / '+safe(p[2].toUpperCase())+' · '+(p[7]?'COMPARABLE':'EXTRAPOLACIÓN')+'</p><h3>'+safe(p[1])+'</h3><p>'+safe(p[6])+'.</p><div class="piece-benchmark"><span>Estimación en <span class="card-material">travertino</span></span><strong class="piece-amount">'+formatter.format(p[3])+'</strong></div><p class="piece-comparison">Referencia externa: <a href="'+links[p[5]]+'" target="_blank" rel="noopener noreferrer">consultar fuente ↗</a>. '+(p[7]?'Precio orientado por artículo o familia comparable.':'Extrapolación de categoría, sin comparable idéntico.')+' No es tarifa de LITOS.</p></div></article>').join('');
+'<div class="piece-details"><p class="piece-index">'+String(i+1).padStart(2,'0')+' / '+safe(p[2].toUpperCase())+' · '+(p[7]?'COMPARABLE':'EXTRAPOLACIÓN')+'</p><h3>'+safe(p[1])+'</h3><p>'+safe(p[6])+'.</p><div class="piece-benchmark"><span>Estimación en <span class="card-material">travertino</span></span><strong class="piece-amount">'+formatter.format(p[3])+'</strong></div><p class="piece-comparison">Referencia externa: <a href="'+links[p[5]]+'" target="_blank" rel="noopener noreferrer">consultar fuente ↗</a>. '+(p[7]?'Precio orientado por artículo o familia comparable.':'Extrapolación de categoría, sin comparable idéntico.')+' No es tarifa de LITOS.</p></div><button type="button" class="product-open" aria-haspopup="dialog" aria-label="Ver ficha completa: '+safe(p[1])+'">Ver ficha completa <span aria-hidden="true">↗</span></button></article>').join('');
+// Details are shown on demand; source PNGs and existing 21 model records remain unchanged.
+const dialog=document.createElement('dialog');
+dialog.className='product-dialog';
+dialog.id='product-dialog';
+dialog.setAttribute('aria-labelledby','detail-product-title');
+dialog.innerHTML='<div class="detail-panel">'+
+ '<div class="detail-topline"><span>LITOS / Colección conceptual · Ficha del producto</span><button type="button" class="detail-close" aria-label="Cerrar ficha del producto">Cerrar <span aria-hidden="true">×</span></button></div>'+
+ '<div class="detail-material-row"><label for="detail-material-picker">Piedra de esta pieza</label><select id="detail-material-picker" autocomplete="off">'+materials.map(m=>'<option value="'+safe(m[0])+'">'+safe(m[1])+'</option>').join('')+'</select><span class="detail-material-help">El acabado se sincroniza con el catálogo.</span></div>'+
+ '<div class="detail-layout">'+
+ '<div class="detail-stage"><h3 class="detail-image-alt-title"></h3><div class="material-preview" aria-label="Vista completa de la pieza y del material"></div></div>'+
+ '<div class="detail-copy"><p class="piece-index" id="detail-index"></p><h2 id="detail-product-title"></h2><p id="detail-summary"></p>'+
+ '<div class="detail-benchmark"><span>Referencia estimada · <span id="detail-stone"></span></span><strong id="detail-price"></strong></div>'+
+ '<p id="detail-comparable"></p><a id="detail-source" target="_blank" rel="noopener noreferrer">Consultar referencia de mercado ↗</a>'+
+ '<p class="detail-disclaimer">Visualización conceptual, no obra ejecutada. Las cifras son comparables de terceros o extrapolaciones; no son tarifas de LITOS ni una oferta comercial.</p>'+
+ '</div></div></div>';
+root.append(dialog);
+const detailPicker=dialog.querySelector('#detail-material-picker');
+const detailStage=dialog.querySelector('.detail-stage');
+let detailOpener=null;
 const swatch=root.querySelector('#material-color');
 swatch?.addEventListener('click',()=>{
  try{if(typeof picker.showPicker==='function')picker.showPicker();
@@ -87,7 +106,45 @@ function render(){
   showMaterial(card,m);
  }
  root.querySelector('#catalog-count').textContent=count+' propuestas en '+m[1];
+ if(dialog.open){
+  detailPicker.value=m[0];
+  showMaterial(detailStage,m);
+  const selected=grid.querySelector('[data-product="'+detailStage.dataset.product+'"]');
+  if(selected)dialog.querySelector('#detail-price').textContent=selected.querySelector('.piece-amount').textContent;
+  dialog.querySelector('#detail-stone').textContent=m[1];
+ }
 }
+function openDetail(card){
+ const p=products.find(item=>item[0]===card.dataset.product);
+ if(!p)return;
+ detailOpener=card.querySelector('.product-open');
+ detailStage.dataset.product=p[0];
+ detailStage.querySelector('.material-preview').removeAttribute('data-view');
+ detailStage.querySelector('.detail-image-alt-title').textContent=p[1];
+ dialog.querySelector('#detail-index').textContent=p[2]+' · '+(p[7]?'Referencia comparable':'Estimación extrapolada');
+ dialog.querySelector('#detail-product-title').textContent=p[1];
+ dialog.querySelector('#detail-summary').textContent=p[6]+'.';
+ dialog.querySelector('#detail-comparable').textContent=p[7]?'Estimación basada en artículo o familia comparable; precio real no confirmado.':'Extrapolación sin un comparable idéntico; viabilidad y precio real sin confirmar.';
+ dialog.querySelector('#detail-source').href=links[p[5]];
+ detailPicker.value=picker.value;
+ if(!dialog.open)dialog.showModal();
+ render();
+ dialog.querySelector('.detail-close').focus();
+}
+grid.addEventListener('click',event=>{
+ const card=event.target.closest('.product-model');
+ if(card&&!event.target.closest('a'))openDetail(card);
+});
+dialog.querySelector('.detail-close').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+dialog.addEventListener('close',()=>{
+ detailStage.dataset.product='';
+ if(detailOpener&&detailOpener.isConnected)detailOpener.focus({preventScroll:true});
+});
+detailPicker.addEventListener('change',()=>{
+ picker.value=detailPicker.value;
+ render();
+});
 picker.addEventListener('change',render);
 filters.forEach(btn=>btn.addEventListener('click',()=>{category=btn.dataset.categoryFilter;filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));render()}));
 render();
