@@ -19,6 +19,10 @@ const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAl
 // Only files that passed source-image and material-specific visual QA belong here.
 // Only manifest-verified image paths are approved; never substitute a procedural tint.
 const approvedVariants=Object.freeze({"consola-esc__travertino":"assets/catalogo/variantes/consola-esc__travertino.png","consola-esc__macael":"assets/catalogo/variantes/consola-esc__macael.png","consola-esc__verde-alpi":"assets/catalogo/variantes/consola-esc__verde-alpi.png","consola-esc__granito":"assets/catalogo/variantes/consola-esc__granito.png","consola-esc__marquina":"assets/catalogo/variantes/consola-esc__marquina.png","banco-esc__travertino":"assets/catalogo/variantes/banco-esc__travertino.png","banco-esc__macael":"assets/catalogo/variantes/banco-esc__macael.png","banco-esc__verde-alpi":"assets/catalogo/variantes/banco-esc__verde-alpi.png","banco-esc__granito":"assets/catalogo/variantes/banco-esc__granito.png","banco-esc__marquina":"assets/catalogo/variantes/banco-esc__marquina.png","consola-esc__caliza":"assets/catalogo/variantes/consola-esc__caliza.png","consola-esc__carrara":"assets/catalogo/variantes/consola-esc__carrara.png","consola-esc__cuarcita":"assets/catalogo/variantes/consola-esc__cuarcita.png","consola-esc__calacatta":"assets/catalogo/variantes/consola-esc__calacatta.png","banco-esc__caliza":"assets/catalogo/variantes/banco-esc__caliza.png","banco-esc__carrara":"assets/catalogo/variantes/banco-esc__carrara.png","banco-esc__cuarcita":"assets/catalogo/variantes/banco-esc__cuarcita.png","banco-esc__calacatta":"assets/catalogo/variantes/banco-esc__calacatta.png","mesa-comedor-oval__travertino":"assets/catalogo/variantes/mesa-comedor-oval__travertino.png","mesa-comedor-oval__caliza":"assets/catalogo/variantes/mesa-comedor-oval__caliza.png","mesa-comedor-oval__macael":"assets/catalogo/variantes/mesa-comedor-oval__macael.png","mesa-comedor-oval__carrara":"assets/catalogo/variantes/mesa-comedor-oval__carrara.png","mesa-comedor-oval__marquina":"assets/catalogo/variantes/mesa-comedor-oval__marquina.png","mesa-comedor-oval__granito":"assets/catalogo/variantes/mesa-comedor-oval__granito.png","mesa-comedor-oval__cuarcita":"assets/catalogo/variantes/mesa-comedor-oval__cuarcita.png","mesa-comedor-oval__calacatta":"assets/catalogo/variantes/mesa-comedor-oval__calacatta.png","mesa-comedor-oval__verde-alpi":"assets/catalogo/variantes/mesa-comedor-oval__verde-alpi.png","mesa-comedor-red__travertino":"assets/catalogo/variantes/mesa-comedor-red__travertino.png","mesa-comedor-red__caliza":"assets/catalogo/variantes/mesa-comedor-red__caliza.png","mesa-comedor-red__macael":"assets/catalogo/variantes/mesa-comedor-red__macael.png","mesa-comedor-red__carrara":"assets/catalogo/variantes/mesa-comedor-red__carrara.png","mesa-comedor-red__marquina":"assets/catalogo/variantes/mesa-comedor-red__marquina.png","mesa-comedor-red__granito":"assets/catalogo/variantes/mesa-comedor-red__granito.png","mesa-comedor-red__cuarcita":"assets/catalogo/variantes/mesa-comedor-red__cuarcita.png","mesa-comedor-red__calacatta":"assets/catalogo/variantes/mesa-comedor-red__calacatta.png","mesa-comedor-red__verde-alpi":"assets/catalogo/variantes/mesa-comedor-red__verde-alpi.png","mesa-comedor-rect__travertino":"assets/catalogo/variantes/mesa-comedor-rect__travertino.png","mesa-comedor-rect__caliza":"assets/catalogo/variantes/mesa-comedor-rect__caliza.png","mesa-comedor-rect__macael":"assets/catalogo/variantes/mesa-comedor-rect__macael.png","mesa-comedor-rect__carrara":"assets/catalogo/variantes/mesa-comedor-rect__carrara.png","mesa-comedor-rect__marquina":"assets/catalogo/variantes/mesa-comedor-rect__marquina.png","mesa-comedor-rect__granito":"assets/catalogo/variantes/mesa-comedor-rect__granito.png","mesa-comedor-rect__cuarcita":"assets/catalogo/variantes/mesa-comedor-rect__cuarcita.png","mesa-comedor-rect__calacatta":"assets/catalogo/variantes/mesa-comedor-rect__calacatta.png","mesa-comedor-rect__verde-alpi":"assets/catalogo/variantes/mesa-comedor-rect__verde-alpi.png","mesa-centro-mon__travertino":"assets/catalogo/variantes/mesa-centro-mon__travertino.png","mesa-centro-mon__caliza":"assets/catalogo/variantes/mesa-centro-mon__caliza.png","mesa-centro-mon__macael":"assets/catalogo/variantes/mesa-centro-mon__macael.png","mesa-centro-mon__carrara":"assets/catalogo/variantes/mesa-centro-mon__carrara.png","mesa-centro-mon__marquina":"assets/catalogo/variantes/mesa-centro-mon__marquina.png","mesa-centro-mon__granito":"assets/catalogo/variantes/mesa-centro-mon__granito.png","mesa-centro-mon__cuarcita":"assets/catalogo/variantes/mesa-centro-mon__cuarcita.png","mesa-centro-mon__calacatta":"assets/catalogo/variantes/mesa-centro-mon__calacatta.png","mesa-centro-mon__verde-alpi":"assets/catalogo/variantes/mesa-centro-mon__verde-alpi.png","mesa-centro-red__travertino":"assets/catalogo/variantes/mesa-centro-red__travertino.png","mesa-centro-red__caliza":"assets/catalogo/variantes/mesa-centro-red__caliza.png","mesa-centro-red__macael":"assets/catalogo/variantes/mesa-centro-red__macael.png","mesa-centro-red__carrara":"assets/catalogo/variantes/mesa-centro-red__carrara.png","mesa-centro-red__marquina":"assets/catalogo/variantes/mesa-centro-red__marquina.png","mesa-centro-red__granito":"assets/catalogo/variantes/mesa-centro-red__granito.png","mesa-centro-red__cuarcita":"assets/catalogo/variantes/mesa-centro-red__cuarcita.png","mesa-centro-red__calacatta":"assets/catalogo/variantes/mesa-centro-red__calacatta.png","mesa-centro-red__verde-alpi":"assets/catalogo/variantes/mesa-centro-red__verde-alpi.png"});
+// Published technical drawings are registered only after checking dimensions and approval.
+ // A missing drawing is deliberately not fetched or replaced with invented measurements.
+const approvedTechnicalDrawings=Object.freeze({});
+const TECHNICAL_VIEW='plano-tecnico';
 const referenceImage=(p)=>{
  const slug=p[4];
  if(slug&&imageSources[slug])return imageSources[slug];
@@ -27,6 +31,30 @@ const referenceImage=(p)=>{
 };
 // Keep original concepts visible without asserting that their stone is the selected one.
 const referenceByProduct=Object.fromEntries(products.map(p=>[p[0],referenceImage(p)]));
+const showTechnical=(card)=>{
+ const host=card.querySelector('.material-preview');
+ const id=card.dataset.product;
+ const file=approvedTechnicalDrawings[id];
+ const key='technical__'+id;
+ if(file){
+  if(file!=='assets/catalogo/planos/'+id+'.png')throw Error('Unapproved technical drawing path: '+file);
+  if(host.dataset.view!==key){
+   host.replaceChildren();
+   const figure=document.createElement('figure');figure.className='technical-drawing-figure';
+   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';
+   img.width=1600;img.height=1200;
+   img.alt='Boceto técnico conceptual de '+card.querySelector('h3').textContent+': alzado, planta y perfil, con cotas en cm';
+   const cap=document.createElement('figcaption');cap.textContent='Alzado · Planta · Perfil · Cotas orientativas en cm · No es plano de fabricación';
+   figure.append(img,cap);host.append(figure);
+   host.dataset.view=key;
+  }
+  return;
+ }
+ if(host.dataset.view!==key){
+  host.innerHTML='<div class="material-placeholder technical-placeholder" role="status"><div class="material-placeholder-symbol" aria-hidden="true"></div><strong>Plano técnico pendiente</strong><span class="material-placeholder-text">Alzado · Planta · Perfil · Medidas en cm pendientes de validación. Sin plano de fabricación.</span></div>';
+  host.dataset.view=key;
+ }
+};
 const showMaterial=(card,material)=>{
  const host=card.querySelector('.material-preview');
  const key=card.dataset.product+'__'+material[0];
@@ -69,7 +97,7 @@ dialog.id='product-dialog';
 dialog.setAttribute('aria-labelledby','detail-product-title');
 dialog.innerHTML='<div class="detail-panel">'+
  '<div class="detail-topline"><span>LITOS / Colección conceptual · Ficha del producto</span><button type="button" class="detail-close" aria-label="Cerrar ficha del producto">Cerrar <span aria-hidden="true">×</span></button></div>'+
- '<div class="detail-material-row"><label for="detail-material-picker">Piedra de esta pieza</label><select id="detail-material-picker" autocomplete="off">'+materials.map(m=>'<option value="'+safe(m[0])+'">'+safe(m[1])+'</option>').join('')+'</select><span class="detail-material-help">El acabado se sincroniza con el catálogo.</span></div>'+
+ '<div class="detail-material-row"><label for="detail-material-picker">Piedra o plano técnico</label><select id="detail-material-picker" autocomplete="off">'+materials.map(m=>'<option value="'+safe(m[0])+'">'+safe(m[1])+'</option>').join('')+'<option value="plano-tecnico">Plano técnico · alzado, planta y perfil</option></select><span class="detail-material-help">Vista sincronizada con el catálogo. El precio conserva la última piedra elegida.</span></div>'+
  '<div class="detail-layout">'+
  '<div class="detail-stage"><h3 class="detail-image-alt-title"></h3><div class="material-preview" aria-label="Vista completa de la pieza y del material"></div></div>'+
  '<div class="detail-copy"><p class="piece-index" id="detail-index"></p><h2 id="detail-product-title"></h2><p id="detail-summary"></p>'+
@@ -88,14 +116,20 @@ swatch?.addEventListener('click',()=>{
  catch{picker.focus();picker.click()}
 });
 let category='Todos';
+let lastStone=materials[0];
 function render(){
- const m=materials.find(x=>x[0]===picker.value)||materials[0];
- root.querySelector('#material-cost').textContent='Índice de piedra: '+m[2]+' €/m²';
- root.querySelector('#material-name').textContent=m[1];
+ const technical=picker.value===TECHNICAL_VIEW;
+ const selected=materials.find(x=>x[0]===picker.value);
+ if(selected)lastStone=selected;
+ const m=lastStone;
+ root.querySelector('#material-cost').textContent=technical?'Alzado · planta · perfil · cotas en cm':'Índice de piedra: '+m[2]+' €/m²';
+ root.querySelector('#material-name').textContent=technical?'Plano técnico · vista conceptual':m[1];
  const a=root.querySelector('#material-source');a.href=m[4];a.title='Consultar precio índice de '+m[1];
+ a.hidden=technical;
  root.querySelector('#material-color').style.backgroundColor=m[3];
  root.dataset.selectedStone=m[0];
- swatch?.setAttribute('aria-label','Elegir otra piedra. Actual: '+m[1]);
+ root.dataset.selectedView=technical?TECHNICAL_VIEW:'material';
+ swatch?.setAttribute('aria-label',technical?'Seleccionar una piedra. Vista técnica activa':'Elegir otra piedra. Actual: '+m[1]);
  let count=0;
  for(const card of grid.querySelectorAll('.product-model')){
   card.hidden=category!=='Todos'&&card.dataset.category!==category;
@@ -103,14 +137,16 @@ function render(){
   const base=Number(card.dataset.base),raw=base*(.7+.3*m[2]/70);
   card.querySelector('.piece-amount').textContent=formatter.format(Math.round(raw/10)*10);
   card.querySelector('.card-material').textContent=m[1];
-  showMaterial(card,m);
+  if(technical)showTechnical(card);else showMaterial(card,m);
  }
- root.querySelector('#catalog-count').textContent=count+' propuestas en '+m[1];
+ root.querySelector('#catalog-count').textContent=technical?
+  count+' propuestas · vista de planos técnicos ('+Object.keys(approvedTechnicalDrawings).length+'/'+products.length+' disponibles)':
+  count+' propuestas en '+m[1];
  if(dialog.open){
-  detailPicker.value=m[0];
-  showMaterial(detailStage,m);
-  const selected=grid.querySelector('[data-product="'+detailStage.dataset.product+'"]');
-  if(selected)dialog.querySelector('#detail-price').textContent=selected.querySelector('.piece-amount').textContent;
+  detailPicker.value=picker.value;
+  if(technical)showTechnical(detailStage);else showMaterial(detailStage,m);
+  const current=grid.querySelector('[data-product="'+detailStage.dataset.product+'"]');
+  if(current)dialog.querySelector('#detail-price').textContent=current.querySelector('.piece-amount').textContent;
   dialog.querySelector('#detail-stone').textContent=m[1];
  }
 }
@@ -148,5 +184,5 @@ detailPicker.addEventListener('change',()=>{
 picker.addEventListener('change',render);
 filters.forEach(btn=>btn.addEventListener('click',()=>{category=btn.dataset.categoryFilter;filters.forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));render()}));
 render();
-window.LITOS_CATALOG_INFO=Object.freeze({materials:materials.length,products:products.length,modelSensitivity:0.3,tonalMockup:false,approvedVariantImages:Object.keys(approvedVariants).length});
+window.LITOS_CATALOG_INFO=Object.freeze({materials:materials.length,products:products.length,modelSensitivity:0.3,tonalMockup:false,approvedVariantImages:Object.keys(approvedVariants).length,technicalDrawings:Object.keys(approvedTechnicalDrawings).length,technicalView:TECHNICAL_VIEW});
 })();
