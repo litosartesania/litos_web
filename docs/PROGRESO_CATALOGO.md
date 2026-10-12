@@ -2,15 +2,15 @@
 
 **Estado contrastado el 12/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`.
 
-El significado de «hecho» se determina exclusivamente por lo **visible y operativo en la web pública**, no por tener una imagen generada o probada en una rama de GitHub. La autorización de publicación y las pruebas de GitHub Pages del segundo lote han sido verificadas. Las 27 variantes de mesa ovalada, consola escultórica y banco escultórico están publicadas y operativas.
+El significado de «hecho» se determina exclusivamente por lo **visible y operativo en la web pública**, no por tener una imagen generada o probada en una rama de GitHub. La autorización de publicación y la verificación HTTP y SHA-256 de GitHub Pages para las 36 variantes han concluido correctamente. Mesa ovalada, mesa redonda, consola escultórica y banco escultórico están publicadas y operativas.
 
 ## Progreso resumido
 
 | Categoría | Combinaciones | Porcentaje del total |
 | --- | ---: | ---: |
-| ✅ Publicadas y verificadas en la web pública | **27** | **14,3 %** |
+| ✅ Publicadas y verificadas en la web pública | **36** | **19,0 %** |
 | ◷ Imágenes aprobadas pero aún sin publicar | **0** | **0 %** |
-| — Aún sin imagen específica aprobada | **162** | **85,7 %** |
+| — Aún sin imagen específica aprobada | **153** | **81,0 %** |
 | **Total planificado** | **189** | **100 %** |
 
 Los 21 productos aparecen como **conceptos** en el catálogo web; eso no significa que las 189 variantes tengan una imagen fiel a la piedra elegida. Tampoco hay servicios de encargos ni venta.
@@ -22,7 +22,7 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 | Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi |
 | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor redonda | Mesas | — | — | — | — | — | — | — | — | — |
+| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Mesa de comedor rectangular | Mesas | — | — | — | — | — | — | — | — | — |
 | Mesa de centro monolítica | Mesas | — | — | — | — | — | — | — | — | — |
 | Mesa de centro circular | Mesas | — | — | — | — | — | — | — | — | — |
@@ -43,12 +43,13 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 | Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — |
 | Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — |
 
-## Tres productos con la colección visual completa publicada
+## Cuatro productos con la colección visual completa publicada
 
 - **Mesa de comedor ovalada (Concepto 2):** **9/9** combinaciones específicas de piedra publicadas y verificadas.
+- **Mesa de comedor redonda:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
 - **Consola escultórica:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
 - **Banco escultórico:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- Los otros 18 modelos no disponen aún de una variante específica de material verificada y aprobada. Los WebP genéricos se mantienen como referencias, **no equivalen a una casilla hecha**.
+- Los otros 17 modelos no disponen aún de una variante específica de material verificada y aprobada. Los WebP genéricos se mantienen como referencias, **no equivalen a una casilla hecha**.
 
 ## Evidencias y actualización segura
 
@@ -60,8 +61,11 @@ Los 21 productos aparecen como **conceptos** en el catálogo web; eso no signifi
 - Verificación de 18 originales, selector 2×9 y vista previa responsive: https://github.com/litosartesania/litos_web/actions/runs/38156971000
 - **Publicación de producción y verificación real por HTTP + SHA-256 18/18:** https://github.com/litosartesania/litos_web/actions/runs/38159245695 (**SUCCESS**).
 - **Publicación de mesa ovalada y verificación HTTP + SHA-256 de 27/27:** https://github.com/litosartesania/litos_web/actions/runs/38180458652 (**SUCCESS**).
+- **Mesa redonda: QA aislada 36/36:** https://github.com/litosartesania/litos_web/actions/runs/38241754408 (**SUCCESS**).
+- **Mesa redonda: PR #17 fusionado:** https://github.com/litosartesania/litos_web/pull/17, commit `d417f9311d95d888146958b915193f8d511ccf61`.
+- **Mesa redonda: despliegue público y verificación HTTP/SHA-256 de 36/36:** https://github.com/litosartesania/litos_web/actions/runs/38242073251 (**SUCCESS**).
 - PR #15 fusionado: https://github.com/litosartesania/litos_web/pull/15, commit `8e728cdfcbcfe625ed333bef9c26d04de7dbe585`.
-- Relación de ficheros y SHA-256: `docs/LOTE_10_IMAGENES_20261011.json`, `docs/LOTE_8_IMAGENES_20261011.json` y `docs/LOTE_9_MESA_OVAL_20261012.json`.
+- Relación de ficheros y SHA-256: `docs/LOTE_10_IMAGENES_20261011.json`, `docs/LOTE_8_IMAGENES_20261011.json`, `docs/LOTE_9_MESA_OVAL_20261012.json` y `docs/LOTE_9_MESA_REDONDA_20261012.json`.
 - Relevo técnico: `docs/REVISION_18PNG_20261011.md`.
 
 **Estado confirmado (12/10/2026):** las nueve combinaciones de mesa ovalada y las 18 anteriores están publicadas y verificadas tras autorización expresa del propietario. GitHub Pages validó los HTTP 200/SHA-256 de los 27 originales. El cómputo HECHO pasa a **27/189 (14,3 %)**; restan **162** combinaciones.
@@ -77,7 +81,8 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - Progreso público: **27/189 hechas (14,3 %)**; **162 pendientes (85,7 %)**. Catálogo conceptual sin aceptar encargos.
 
 
-## En preparación — Mesa de comedor redonda (12/10/2026)
-- Nueve PNG originales 1122×1402 catalogados y verificados localmente en el Mac. Pendiente de transferencia Git a `work/catalogo-mesa-redonda-9png-20261012`.
-- Manifiesto de bytes, tamaños y hashes: `docs/LOTE_9_MESA_REDONDA_20261012.json`.
-- **No están publicados**. El progreso público HECHO sigue **27/189 (14,3 %)**. Solo tras autorización ya dada, revisión de 36/36, merge seguro y verificación HTTP/SHA-256 en Pages se podrá elevar a **36/189 (19,0 %)**.
+## Publicado — Mesa de comedor redonda (12/10/2026)
+- Nueve PNG originales 1122×1402 transferidos y verificados. Hashes en `docs/LOTE_9_MESA_REDONDA_20261012.json`, sin alterar ningún fichero anterior.
+- Tras QA aislada (36/36), PR #17 autorizado y fusionado al commit `d417f9311d95d888146958b915193f8d511ccf61`. GitHub Pages verificó desde producción los 36 PNG (HTTP 200, tamaño y SHA-256): https://github.com/litosartesania/litos_web/actions/runs/38242073251 (**SUCCESS**).
+- **HECHO = 36/189 (19,0 %); PENDIENTES = 153/189 (81,0 %)**. Nueve piedras: Travertino, Caliza, Macael, Carrara, Marquina, Granito, Cuarcita, Calacatta y Verde Alpi.
+- Representación conceptual, no prueba de pieza ejecutada; sin formulario ni ventas ni tarifas acreditadas.
