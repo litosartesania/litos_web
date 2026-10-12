@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261012-grid3",
-        "catalogo-precios.js?v=stone-20261012-grid3",
+        "styles.css?v=stone-20261012-grid5",
+        "catalogo-precios.js?v=stone-20261012-grid5",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',

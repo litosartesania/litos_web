@@ -445,25 +445,25 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 
-/* LITOS gallery review 2026-10-12: wider 3-column catalogue + full accessible product detail.
+/* LITOS gallery review 2026-10-12: full-width 5-column catalogue + full accessible product detail.
    Preserves the original material sidebar, source images, dimensions and filters. */
 .catalog-mobiliario.catalog-section{padding-right:clamp(14px,1.6vw,30px);padding-left:clamp(14px,1.6vw,30px)}
-.catalog-mobiliario .catalog-heading{max-width:1840px}
-.catalog-mobiliario .catalog-workspace{max-width:1840px}
-.catalog-mobiliario .catalog-workspace>.piece-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.65rem,1.15vw,1.2rem);align-items:stretch}
+.catalog-mobiliario .catalog-heading{max-width:2200px}
+.catalog-mobiliario .catalog-workspace{max-width:2200px}
+.catalog-mobiliario .catalog-workspace>.piece-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.42rem,.7vw,.9rem);align-items:stretch}
 .catalog-mobiliario .catalog-workspace .piece-card{display:flex;flex-direction:column;min-width:0;position:relative;cursor:pointer;transition:border-color .18s ease,background .18s ease}
 .catalog-mobiliario .catalog-workspace .piece-card:hover,.catalog-mobiliario .catalog-workspace .piece-card:focus-within{border-color:rgba(240,233,226,.72);background:#26221e}
 .catalog-mobiliario .catalog-workspace .piece-card .material-preview{min-width:0;padding:.45rem}
 .catalog-mobiliario .catalog-workspace .piece-card .material-variant-figure img{max-height:none;height:auto;aspect-ratio:1122/1402;object-fit:contain;filter:none}
 .catalog-mobiliario .catalog-workspace .piece-card .material-variant-figure figcaption{font-size:.65rem;padding:.45rem .2rem;color:rgba(240,233,226,.75)}
 .catalog-mobiliario .catalog-workspace .piece-card .material-placeholder{min-height:clamp(190px,20vw,340px);padding:1.2rem}
-.catalog-mobiliario .catalog-workspace .piece-card .piece-details{flex:1;min-width:0;padding:clamp(.75rem,1.35vw,1.15rem)}
-.catalog-mobiliario .catalog-workspace .piece-details h3{font-size:clamp(1.24rem,1.6vw,1.82rem);line-height:1.14;margin:.5rem 0 .6rem}
+.catalog-mobiliario .catalog-workspace .piece-card .piece-details{flex:1;min-width:0;padding:clamp(.55rem,.8vw,.9rem)}
+.catalog-mobiliario .catalog-workspace .piece-details h3{font-size:clamp(1.12rem,1.24vw,1.6rem);line-height:1.15;margin:.5rem 0 .6rem;overflow-wrap:break-word}
 .catalog-mobiliario .catalog-workspace .piece-details>p:not(.piece-index):not(.piece-comparison){display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.78rem;line-height:1.45}
 .catalog-mobiliario .catalog-workspace .piece-card .piece-comparison{display:none}
-.catalog-mobiliario .catalog-workspace .piece-card .piece-benchmark{margin:.75rem 0 .15rem;padding:.6rem 0 0;align-items:center;gap:.5rem}
+.catalog-mobiliario .catalog-workspace .piece-card .piece-benchmark{margin:.6rem 0 .15rem;padding:.5rem 0 0;align-items:baseline;gap:.25rem;flex-direction:column}
 .catalog-mobiliario .catalog-workspace .piece-card .piece-benchmark span{font-size:.67rem}
-.catalog-mobiliario .catalog-workspace .piece-card .piece-amount{font-size:clamp(1.22rem,1.8vw,1.8rem)}
+.catalog-mobiliario .catalog-workspace .piece-card .piece-amount{font-size:clamp(1.25rem,1.45vw,1.85rem)}
 .catalog-mobiliario .catalog-workspace .piece-card .piece-index{font-size:.6rem!important}
 .catalog-mobiliario .catalog-workspace .piece-card .concept-images .piece-figure img{object-fit:contain;filter:none}
 .catalog-mobiliario .catalog-workspace .piece-card .concept-availability{font-size:.72rem;padding:.7rem}
@@ -471,11 +471,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .catalog-mobiliario .catalog-workspace .product-open:hover,.catalog-mobiliario .catalog-workspace .product-open:focus-visible{background:rgba(240,233,226,.12)}
 .catalog-mobiliario .catalog-workspace .product-open span{font-size:1rem}
 @media(min-width:1100px){
- .catalog-mobiliario .catalog-workspace{grid-template-columns:clamp(215px,16vw,248px) minmax(0,1fr);gap:clamp(12px,1.2vw,22px)}
+ .catalog-mobiliario .catalog-workspace{grid-template-columns:clamp(205px,15vw,235px) minmax(0,1fr);gap:clamp(12px,1.2vw,22px)}
  .catalog-mobiliario .catalog-workspace>.material-planner{padding:.85rem .95rem}
  .catalog-mobiliario .catalog-workspace .material-heading h3{font-size:clamp(1.4rem,1.8vw,1.85rem)}
 }
-@media(min-width:700px) and (max-width:1199px){
+@media(min-width:1100px) and (max-width:1199px){
+ .catalog-mobiliario .catalog-workspace>.piece-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(min-width:700px) and (max-width:1099px){
  .catalog-mobiliario .catalog-workspace>.piece-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:699px){
