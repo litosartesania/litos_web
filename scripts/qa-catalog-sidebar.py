@@ -34,7 +34,7 @@ with sync_playwright() as pw:
   assert boxes['scroll']<=boxes['client']+1,(w,boxes)
   if w>=1100:assert boxes['right']+8<boxes['left'],(w,'menu must be left of image',boxes)
   else:assert boxes['bottom']<=boxes['top']+1,(w,'menu should be above image',boxes)
-  assert boxes['width']>210 and boxes['height']>240,(w,boxes)
+  assert boxes['width']>155 and boxes['height']>190,(w,boxes)  # Five-column cards preserve portrait artwork
   page.evaluate("""() => {const el=document.querySelector('.catalog-workspace');window.scrollTo(0,el.getBoundingClientRect().top+scrollY-16)}""")
   page.wait_for_timeout(200)
   page.screenshot(path=str(out/f'consola-calacatta-{w}.png'),animations='disabled')
