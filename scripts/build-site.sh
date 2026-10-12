@@ -23,4 +23,9 @@ for asset in mesa-comedor-oval__travertino.png mesa-comedor-oval__caliza.png mes
  cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
 done
 
-printf 'Site package with all 27 verified PNGs: '; du -sh "$site"
+# Nine verified originals of the round dining table, copied without altering bytes.
+for asset in mesa-comedor-red__travertino.png mesa-comedor-red__caliza.png mesa-comedor-red__macael.png mesa-comedor-red__carrara.png mesa-comedor-red__marquina.png mesa-comedor-red__granito.png mesa-comedor-red__cuarcita.png mesa-comedor-red__calacatta.png mesa-comedor-red__verde-alpi.png; do
+ cp "assets/catalogo/variantes/$asset" "$site/assets/catalogo/variantes/$asset"
+done
+
+printf 'Site package with all 36 verified PNGs: '; du -sh "$site"
