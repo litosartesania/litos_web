@@ -1,0 +1,44 @@
+name: LITOS · Mesa rectangular 9 piedras · QA 45 PNG aislada
+on:
+  push:
+    branches: [work/catalogo-mesa-rectangular-9png-20261012]
+    paths:
+      - 'assets/catalogo/variantes/mesa-comedor-rect__*.png'
+      - 'docs/LOTE_9_MESA_RECTANGULAR_20261012.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.repository == 'litosartesania/litos_web'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check 45 original PNGs and syntax
+        run: |
+          python3 scripts/verify-litos-45-png.py
+          python3 -m py_compile scripts/check-site.py scripts/check-live-deployment.py scripts/verify-litos-45-png.py scripts/build-litos-45-site-preview.py scripts/check-litos-45-site-preview.py scripts/visual-qa-45-site-preview.py
+          node --check catalogo-precios.js
+      - name: Build pages; enforce privacy and publication safety checks
+        run: |
+          sh scripts/build-site.sh
+          python3 scripts/check-site.py _site --production
+      - name: Create navigable offline preview without Pages deployment
+        run: |
+          python3 scripts/build-litos-45-site-preview.py
+          python3 scripts/check-litos-45-site-preview.py
+      - name: Install Chromium
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Test 21 models and 45 images at phone tablet desktop
+        run: |
+          python3 scripts/visual-qa-45-site-preview.py
+          python3 scripts/visual-qa.py
+          python3 scripts/qa-catalog-sidebar.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: litos-mesa-rectangular-45-originales-vista-previa
+          path: review-package/
+          retention-days: 7
+          if-no-files-found: error

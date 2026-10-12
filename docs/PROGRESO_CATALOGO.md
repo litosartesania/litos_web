@@ -86,3 +86,8 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 - Tras QA aislada (36/36), PR #17 autorizado y fusionado al commit `d417f9311d95d888146958b915193f8d511ccf61`. GitHub Pages verificó desde producción los 36 PNG (HTTP 200, tamaño y SHA-256): https://github.com/litosartesania/litos_web/actions/runs/38242073251 (**SUCCESS**).
 - **HECHO = 36/189 (19,0 %); PENDIENTES = 153/189 (81,0 %)**. Nueve piedras: Travertino, Caliza, Macael, Carrara, Marquina, Granito, Cuarcita, Calacatta y Verde Alpi.
 - Representación conceptual, no prueba de pieza ejecutada; sin formulario ni ventas ni tarifas acreditadas.
+
+
+## En preparación — Mesa de comedor rectangular (12/10/2026)
+- **Nueve imágenes aprobadas localmente**, 1122×1402, preparadas en `~/Documents/LITOS_TRANSFER/mesa-comedor-rect`. Rama aislada de integración `work/catalogo-mesa-rectangular-9png-20261012`.
+- Pendiente transferir nueve PNG y `docs/LOTE_9_MESA_RECTANGULAR_20261012.json`, superar QA 45/45 y obtener autorización de publicación. **Progreso público sigue 36/189 (19,0 %)**. No contar las nueve como hechas hasta publicación y comprobación HTTP/SHA-256.
