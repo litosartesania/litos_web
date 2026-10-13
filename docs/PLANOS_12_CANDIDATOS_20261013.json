@@ -1,0 +1,298 @@
+{
+  "project": "LITOS COMERCIAL",
+  "date": "2026-10-13",
+  "status": "PROPUESTAS PARA REVISION; NO PUBLICADAS",
+  "source": "Se contrastaron doce bocetos recuperados de LITOS_REVISION_12_PLANOS_PENDIENTES_20261012.zip con los doce PNG originales de travertino vigentes.",
+  "total": 12,
+  "notice": "Láminas artísticas indicativas. No sustituyen planos constructivos firmados por técnico competente, ni determinan medidas reales, mecanizados, anclajes, tolerancias o seguridad.",
+  "products": [
+    {
+      "product_id": "mesa-aux-bal",
+      "name": "Mesa auxiliar con baldas",
+      "category": "Mesas",
+      "dims_cm": {
+        "ancho": 45,
+        "fondo": 40,
+        "alto": 55
+      },
+      "kind": "shelf_table",
+      "reference_file_name": "02_mesa_auxiliar_cubica_travertino.png",
+      "reference_sha256": "1e767fbc859dc1b3c3a2d9f8d8c4439efe896bfbc068c03f0b742e0984630266",
+      "png": "mesa-aux-bal.png",
+      "png_sha256": "73213339ba2be7c766945768eaa96c7410abfbee891cf5b901e0397bd7e6a7dd",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "mesa-aux-bal.svg",
+      "svg_sha256": "1d93a49cfa8ce4a517dd1042df8931986ace0d7c35f691cfcf43cb2db706e372",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Dos costados portantes y dos baldas interiores. El frente queda abierto.",
+      "assumptions": "Espesores orientativos de las paredes y baldas: 5–6 cm."
+    },
+    {
+      "product_id": "consola-rect",
+      "name": "Consola recta",
+      "category": "Consolas",
+      "dims_cm": {
+        "ancho": 140,
+        "fondo": 35,
+        "alto": 80
+      },
+      "kind": "console",
+      "reference_file_name": "01_consola_recta_travertino_v2.png",
+      "reference_sha256": "f8962c9f9b40f9ef5bd7f6d1e0fa37c08a665605ddbc006c8232a99a2676314a",
+      "png": "consola-rect.png",
+      "png_sha256": "b307d704ac9f8de76fbe8e0560d1ab0851d4082993fac8d8bfd8b9ee0abd1bba",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "consola-rect.svg",
+      "svg_sha256": "c0114ffe7f62461539944388056abf8026220ee4aecfd528f5be6ee5343c8891",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Dos apoyos prismáticos rectos y macizos próximos a los extremos.",
+      "assumptions": "Sobre de 6 cm y apoyos de 12 cm, como propuesta conceptual."
+    },
+    {
+      "product_id": "banco-rect",
+      "name": "Banco lineal",
+      "category": "Bancos",
+      "dims_cm": {
+        "ancho": 160,
+        "fondo": 40,
+        "alto": 45
+      },
+      "kind": "bench",
+      "reference_file_name": "02_banco_recto_travertino_v2.png",
+      "reference_sha256": "7c965601071329a6f56acfd1525d33d61167615adccca10b16e770bfda5a356e",
+      "png": "banco-rect.png",
+      "png_sha256": "2b0a70a30d4630de64e31c9f2c89eedebdd58c78b201711437bf1ccbee4e0896",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "banco-rect.svg",
+      "svg_sha256": "930d24183c8648ce24d6be71d5e264282fc33e8ee62b3d70f7745ed175f7eafd",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Sobre rectangular grueso sobre dos grandes bloques laterales.",
+      "assumptions": "Canto de 8 cm, bloques de 25 × 35 cm como hipótesis."
+    },
+    {
+      "product_id": "lavabo-sobre",
+      "name": "Lavabo de sobreponer",
+      "category": "Baño",
+      "dims_cm": {
+        "ancho": 40,
+        "fondo": 40,
+        "alto": 15
+      },
+      "kind": "basin",
+      "reference_file_name": "11_lavabo_sobre_encimera_travertino.png",
+      "reference_sha256": "2ae249b7e3bb2c0092ff58f78e52adaf291cecb26f34f0f50bb866ce6f0e71fb",
+      "png": "lavabo-sobre.png",
+      "png_sha256": "61c6edc3e0efc69da24eed0a956920de02dbdb13eb0741a0b478b8fbfb739f9b",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "lavabo-sobre.svg",
+      "svg_sha256": "d7106b7c20ef669afba170995d675b7f8475e1e89f7d1c605d5eae094ae78601",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Cuenco circular con paredes curvas: no es un prisma rectangular.",
+      "assumptions": "Hueco Ø34 cm y altura 15 cm orientativos; no se define desagüe."
+    },
+    {
+      "product_id": "encimera-bano",
+      "name": "Encimera de baño suspendida",
+      "category": "Baño",
+      "dims_cm": {
+        "ancho": 120,
+        "fondo": 55,
+        "alto": 14
+      },
+      "kind": "bathcounter",
+      "reference_file_name": "03_encimera_bano_suspendida_travertino.png",
+      "reference_sha256": "8b4c029ad9c1d805fe281886f3c5efd8a3243360c0638ecc94d0b7a8fd13bff1",
+      "png": "encimera-bano.png",
+      "png_sha256": "6c8741c2a15950b87171873ae4fadb8b75d5e77f575dd7470734ac8d3f826549",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "encimera-bano.svg",
+      "svg_sha256": "2020dd50a1a8ff5b5d796c635ae29e8585a6c3ef8c14a0af0adb42c02ab146f5",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Lavabo rectangular integrado, frontal alto y montaje suspendido.",
+      "assumptions": "Altura 14 cm = envolvente visible, NO espesor macizo acreditado."
+    },
+    {
+      "product_id": "encimera-cocina",
+      "name": "Encimera de cocina",
+      "category": "Arquitectura",
+      "dims_cm": {
+        "ancho": 240,
+        "fondo": 65,
+        "alto": 4
+      },
+      "kind": "kitchencounter",
+      "reference_file_name": "04_encimera_cocina_travertino.png",
+      "reference_sha256": "2d9cc93defdb06cbe1dd696b262f326a771c344bc8d461a415b4fce1ff59c8b7",
+      "png": "encimera-cocina.png",
+      "png_sha256": "a9786daf4430cb7dab94041c8d5cbfcb2f66138cc5c179a1bea89c38d1523f12",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "encimera-cocina.svg",
+      "svg_sha256": "f32bea532c1af2ed8a4c66b29fa8bb745a4e3288c73ed84af778d18cb5844073",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Encimera con abertura de fregadero. Los armarios NO forman parte de la pieza.",
+      "assumptions": "Espesor 4 cm y hueco 55 × 36 cm propuestos; instalaciones sin definir."
+    },
+    {
+      "product_id": "balda",
+      "name": "Balda / repisa de piedra",
+      "category": "Arquitectura",
+      "dims_cm": {
+        "ancho": 90,
+        "fondo": 25,
+        "alto": 8
+      },
+      "kind": "shelf",
+      "reference_file_name": "19_estante_flotante_travertino.png",
+      "reference_sha256": "d1c4e5ab45dc893cb7cbd228edbc37ff9f0a5d5f61ddffe083c6ba69205d768b",
+      "png": "balda.png",
+      "png_sha256": "ee41ef321a8359142525527fe79dd27d3811c6df47d6d0f115d948d0fae381a4",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "balda.svg",
+      "svg_sha256": "4905460b2f085bec00130113daff40ab91a481b07c3b065ecd53b9f6cffe818a",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Volumen prismático flotante con canto frontal visible de espesor apreciable.",
+      "assumptions": "Espesor aparente 8 cm propuesto; anclajes ocultos sin definir."
+    },
+    {
+      "product_id": "panel",
+      "name": "Panel de revestimiento (m²)",
+      "category": "Arquitectura",
+      "dims_cm": {
+        "ancho": 100,
+        "fondo": 2,
+        "alto": 100
+      },
+      "kind": "panel",
+      "reference_file_name": "05_panel_revestimiento_travertino_v2.png",
+      "reference_sha256": "30ac80316ca7d561792a8d871a3842cb0249e095084713cac7889e71902b9b09",
+      "png": "panel.png",
+      "png_sha256": "6be59227f404389815aa4c227dbfa69b95a8e0d844647794bb378906a782ba0f",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "panel.svg",
+      "svg_sha256": "27dd728fb6cb7785afeb23eb314721ecd69449a9176ccb9f1e4c8826eb40f17b",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Módulo de 1 m² de REVESTIMIENTO. No representa un muro estructural.",
+      "assumptions": "Espesor 2 cm conceptual. Juntas de montaje solo ilustrativas."
+    },
+    {
+      "product_id": "bandeja",
+      "name": "Bandeja de piedra",
+      "category": "Objetos",
+      "dims_cm": {
+        "ancho": 35,
+        "fondo": 22,
+        "alto": 3
+      },
+      "kind": "tray",
+      "reference_file_name": "13_bandeja_travertino.png",
+      "reference_sha256": "965fbf556fff010a61476a600abf0e88aec519978f7a4af37396396af3945efe",
+      "png": "bandeja.png",
+      "png_sha256": "997e9d34068df509194000df031b6559a9efba7bf84a05b1e2a96edb34122c3a",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "bandeja.svg",
+      "svg_sha256": "7e2a19fdbee05d0394c93228ee1a63bb3097341c0e76efd2044c10dff82e2b14",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Bandeja rectangular de esquinas redondeadas y superficie rebajada.",
+      "assumptions": "Rebaje interior orientativo de 1 cm, borde perimetral de 2 cm."
+    },
+    {
+      "product_id": "peana",
+      "name": "Peana escultórica",
+      "category": "Objetos",
+      "dims_cm": {
+        "ancho": 32,
+        "fondo": 32,
+        "alto": 80
+      },
+      "kind": "plinth",
+      "reference_file_name": "06_peana_prismatica_travertino.png",
+      "reference_sha256": "331f4e61d7ad1b51ea2647a6239c254eac927f06affda1f86dcdf030e32fd90b",
+      "png": "peana.png",
+      "png_sha256": "7565653ee81ed8574065575d4e70f7a6f68aeaebaed77dea44c7a1220be088ce",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "peana.svg",
+      "svg_sha256": "5a498416a57b17f02ab48192c16910094790d09b08eb23bd41b0d598275acd89",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Prisma de base cuadrada y ligera conicidad, NO pedestal cilíndrico.",
+      "assumptions": "32 × 32 cm en la base y 27 × 27 cm en coronación propuestos."
+    },
+    {
+      "product_id": "cuenco",
+      "name": "Cuenco decorativo",
+      "category": "Objetos",
+      "dims_cm": {
+        "ancho": 26,
+        "fondo": 26,
+        "alto": 10
+      },
+      "kind": "bowl",
+      "reference_file_name": "15_cuenco_travertino.png",
+      "reference_sha256": "cf85fa455d150e78b82b5420fd520bf2e4d4704bde17bb8305f2bb4cc91198ef",
+      "png": "cuenco.png",
+      "png_sha256": "d0c9926b735263e3ae9341dfcd3c3c72b0031276665c3fecdb5d5c8071264724",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "cuenco.svg",
+      "svg_sha256": "c179bd3f1cf1d9d281d15e6c510db196fdab6eb604f378213950ab85e1018def",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Pared curva continua tipo cuenco y pequeño fondo plano.",
+      "assumptions": "Boca Ø26 cm e interior Ø22 cm orientativos."
+    },
+    {
+      "product_id": "macetero",
+      "name": "Macetero mineral",
+      "category": "Objetos",
+      "dims_cm": {
+        "ancho": 55,
+        "fondo": 55,
+        "alto": 78
+      },
+      "kind": "planter",
+      "reference_file_name": "07_macetero_mineral_travertino.png",
+      "reference_sha256": "68eefd55ad25fac2ce147de033d5d3512fb22430f20810251d84280b8b812859",
+      "png": "macetero.png",
+      "png_sha256": "9f8996dd8c008b0243566b1dd4d118ac794a8cd974ceaa46c69daf58e7b76cda",
+      "png_dimensions": [
+        1600,
+        1200
+      ],
+      "svg": "macetero.svg",
+      "svg_sha256": "23a55ef6eda5c9b7f93dec84ddf2c3952eb9f818a92685db313299e2fe3c8c32",
+      "review_status": "BORRADOR_PENDIENTE_VALIDACION_VISUAL",
+      "geometry": "Copa abierta sobre pedestal troncocónico central, no un único tronco de cono.",
+      "assumptions": "Boca Ø55 cm, alto 78 cm y base Ø31 cm propuestos; el olivo es atrezzo."
+    }
+  ]
+}

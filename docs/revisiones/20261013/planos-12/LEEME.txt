@@ -1,0 +1,8 @@
+LITOS COMERCIAL — 12 PLANOS REVISADOS PARA COMPROBACIÓN DEL CLIENTE
+
+Se ha aprovechado el trabajo del lote de 12 láminas anterior. Se han corregido los errores de morfología visibles tras contrastar la imagen de travertino de cada producto:
+- soportes de balda/mesa y consola/banco; cuenco con sección curvada; encimeras con lavabos visibles; peana cuadrangular; macetero con copa y pedestal.
+
+Incluye PNG 1600 × 1200 + SVG vectorial para corrección + SHA256.
+SIN PUBLICACIÓN NI APROBACIÓN. Medidas propuestas en cm, no mediciones de modelos ejecutados; no apto para fabricación.
+No modificar PNG publicados previos. Una vez validadas estas 12 láminas se podrán integrar en rama aislada GitHub.
