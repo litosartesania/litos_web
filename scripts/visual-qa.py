@@ -35,7 +35,7 @@ with sync_playwright() as app:
    page.on('pageerror',lambda e:errors.append(str(e)))
    page.goto((site/file).resolve().as_uri(),wait_until='domcontentloaded')
    for image in page.locator('img').all():image.evaluate('(x)=>x.loading="eager"')
-   page.wait_for_timeout(150)
+   page.wait_for_function("() => [...document.images].every(im => im.complete && im.naturalWidth > 0)", timeout=15000)
    sizes=page.evaluate('''() => ({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,images:[...document.images].every(x=>x.complete&&x.naturalWidth>0)})''')
    assert sizes['scroll']<=sizes['width']+1 and sizes['images'],(file,width,sizes)
    assert not errors,(file,width,errors)
@@ -113,7 +113,7 @@ with sync_playwright() as app:
      for image in page.locator('.technical-drawing-figure img').all():
       image.evaluate('(el)=>{el.loading="eager"}')
       image.evaluate('(el)=>el.decode()')
-      assert image.evaluate('(el)=>el.naturalWidth===(el.src.includes('/revisiones/20261013/')?1448:1600)&&el.naturalHeight===(el.src.includes('/revisiones/20261013/')?1086:1200)')
+      assert image.evaluate("(el)=>el.naturalWidth===(el.src.includes('/revisiones/20261013/')?1448:1600)&&el.naturalHeight===(el.src.includes('/revisiones/20261013/')?1086:1200)")
      assert page.locator('#material-source').is_hidden()
      assert page.locator('.technical-placeholder').first.inner_text().startswith('Plano técnico pendiente')
      assert page.locator('#catalog-count').inner_text().endswith('(9/21 disponibles)')
