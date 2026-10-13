@@ -62,3 +62,9 @@ mkdir -p "$site/assets/catalogo/revisiones/20261013/travertino-seleccion"
 for model in mesa-aux-ped mesa-aux-bal lavabo-ped lavabo-sobre bandeja cuenco balda; do
  cp "assets/catalogo/revisiones/20261013/travertino-seleccion/${model}__travertino.png" "$site/assets/catalogo/revisiones/20261013/travertino-seleccion/${model}__travertino.png"
 done
+
+# Seven additional concept renders, copied unchanged and only when explicitly selected.
+mkdir -p "$site/assets/catalogo/revisiones/20261013/travertino-extra-seleccion"
+for model in consola-rect banco-rect encimera-bano encimera-cocina panel peana macetero; do
+ cp "assets/catalogo/revisiones/20261013/travertino-extra-seleccion/${model}__travertino.png" "$site/assets/catalogo/revisiones/20261013/travertino-extra-seleccion/${model}__travertino.png"
+done
