@@ -34,11 +34,28 @@ assert len(plans)==9 and len({p['product_id'] for p in plans})==9
 assert all(p['review_status']=='REVISADO_CON_HIPOTESIS' and p['width']==1600 and p['height']==1200 and p['path']=='assets/catalogo/planos/'+p['product_id']+'.png' for p in plans)
 plan_paths={p['path'] for p in plans}
 expected.update(plan_paths)
+# User-approved revised originals: nine console materials and two drawings. Old files stay.
+corrections=json.loads((root.parent/'docs/IMPORTACION_CONSOLA_ESC_20261013.json').read_text(encoding='utf-8'))['images']
+assert len(corrections)==11 and len({x['path'] for x in corrections})==11
+stone_ids={'travertino','caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'}
+assert {x['stone_id'] for x in corrections if x['kind']=='material_variant'}==stone_ids
+assert {x['product_id'] for x in corrections if x['kind']=='technical_drawing'}=={'consola-esc','mesa-comedor-oval'}
+for i in corrections:
+ rel=i['path']
+ assert rel.startswith('assets/catalogo/revisiones/20261013/') and '..' not in Path(rel).parts and rel.endswith('.png')
+ assert rel==('assets/catalogo/revisiones/20261013/variantes/consola-esc__'+i['stone_id']+'.png' if i['kind']=='material_variant' else 'assets/catalogo/revisiones/20261013/planos/'+i['product_id']+'.png')
+ blob=(root/rel).read_bytes()
+ assert len(blob)==i['size_bytes'] and hashlib.sha256(blob).hexdigest()==i['sha256'],('corrected image SHA-256',rel)
+ assert blob[:8]==b'\\x89PNG\\r\\n\\x1a\\n'
+ assert (int.from_bytes(blob[16:20],'big'),int.from_bytes(blob[20:24],'big'))==(i['width'],i['height'])
+ assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(rel)==1,('corrected image not selected',rel)
+review_paths={x['path'] for x in corrections}
+expected.update(review_paths)
 for p in plans:
  data=(root/p['path']).read_bytes()
  assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
  assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], ('technical drawing integrity',p['path'])
- assert (root/'catalogo-precios.js').read_text().count(p['path'])==1
+ assert (root/'catalogo-precios.js').read_text().count(p['path'])==(0 if p['product_id'] in ('consola-esc','mesa-comedor-oval') else 1)
 
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
@@ -47,8 +64,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -78,11 +95,11 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261012-planos' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261012-planos' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261013-correcciones' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261013-correcciones' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
-assert all((root/'catalogo-precios.js').read_text().count(item['path'])==1 for item in items)
+assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)
 assert 'img.width=1122;img.height=1402' in (root/'catalogo-precios.js').read_text()
 assert 'Elige la piedra para consultar imágenes conceptuales específicas' in htmls['mobiliario.html']
 assert '--stone-photo-filter' not in (root/'styles.css').read_text() and '--stone-preview-tint' not in (root/'styles.css').read_text()
