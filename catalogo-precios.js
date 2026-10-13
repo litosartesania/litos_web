@@ -62,7 +62,7 @@ const showMaterial=(card,material)=>{
  const key=card.dataset.product+'__'+material[0];
  const file=approvedVariants[key];
  if(file){
-  if(!/^assets\/catalogo\/(?:variantes|revisiones\/20261013\/(?:variantes|travertino-seleccion))\/[a-z0-9-]+__[a-z0-9-]+\.png$/.test(file)) throw Error('Unapproved asset path: '+file);
+  if(!/^assets\/catalogo\/(?:variantes|revisiones\/20261013\/(?:variantes|travertino-seleccion|travertino-extra-seleccion))\/[a-z0-9-]+__[a-z0-9-]+\.png$/.test(file)) throw Error('Unapproved asset path: '+file);
   if(host.dataset.view!==key){
    host.replaceChildren();
    const figure=document.createElement('figure');figure.className='material-variant-figure';
