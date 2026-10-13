@@ -437,3 +437,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - La matriz canónica `docs/PROGRESO_CATALOGO.md` pasa a **21/21 planos publicados** (100 %), cero pendientes. Travertinos 21/21, imágenes de piedra 77/189, 112 pendientes (14 productos × 8 piedras). 7 productos tienen nueve piedras propias.
 - Los planos son arte conceptual de alzado/planta/perfil con cotas **orientativas en cm, no aptas para fabricación**. Los SVG editables originales permanecen en rama aislada y están fuera de Pages; preservar sus hashes y los PNG publicados.
 - Próxima fase: las ocho piedras restantes de los catorce productos incompletos, manteniendo geometría y documentación estrictamente fieles. No modificar otros repositorios, datos privados ni PR experimental #8.
+
+## 2026-10-13 — Mesa auxiliar pedestal: 9/9 PUBLICADAS Y VERIFICADAS
+- El usuario cargó ocho fotografías originales en `work/mesa-aux-ped-8-variantes-20261013` y autorizó su publicación; PR [#39](https://github.com/litosartesania/litos_web/pull/39) fusionada mediante squash `1c86ff56f755b50ef8338d6110628fb3841e5f77`.
+- GitHub Pages: [#38468958479](https://github.com/litosartesania/litos_web/actions/runs/38468958479) — **SUCCESS**, HTTP 200, SHA-256 de los ocho PNG (1122×1402) y protección de los originales, 21 planos y 77 imágenes previas.
+- La primera imagen fue correctamente **Caliza Campaspero**, no Travertino. Los ocho materiales incorporados: caliza, macael, carrara, marquina, granito, cuarcita, calacatta y verde-alpi. El travertino publicado anteriormente sigue intacto.
+- **Estado canónico: 85/189 imágenes de piedra (45,0 %) y 104 pendientes; 8/21 productos completos con 9 piedras; 21/21 planos publicados**. Los restantes 13 productos conservan un único travertino hasta generar otras ocho variantes por producto.
+- Todas las imágenes son conceptuales, no piezas ejecutadas. Los planos contienen cotas hipotéticas y no son aptos para fabricar. Precios orientativos, sin encargos ni formularios. Se mantiene el coste gratuito, privacidad y la exclusividad de `litosartesania/litos_web`.
