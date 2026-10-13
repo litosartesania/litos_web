@@ -420,3 +420,8 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Las imágenes son *representaciones conceptuales*, nunca fotografías de trabajos ejecutados; los precios siguen siendo meramente orientativos y el sitio no acepta encargos. El panel es una representación visual conceptual: el dibujo técnico futuro deberá definir si se trata de un revestimiento de pared y no sugerir un elemento estructural.
 - **Próximo hito aprobado por el usuario**: completar/revisar los 12 planos restantes hasta 21/21 (alzado/planta/perfil y cotas *orientativas*) ANTES de emprender los ocho materiales faltantes, producto por producto. No considerar planos ilustrativos como documentación apta para fabricación.
 - Esta anotación documental es posterior a la publicación de las imágenes y sustituye las notas previas «en revisión»; no añade ni modifica recursos visuales ni precios.
+
+## 13/10/2026 — Tabla operativa de progreso actualizada
+- `docs/PROGRESO_CATALOGO.md` contiene ahora la matriz de **21 productos × 9 piedras**, con casillas calculadas a partir de `approvedVariants` y columna independiente de planos desde `approvedTechnicalDrawings`.
+- La matriz publicada muestra **77/189 imágenes**, **21/21 travertinos** y **9/21 planos**; las **112 variantes y 12 planos restantes** se mantienen pendientes. Base de evidencia: despliegue Pages [#38438636709](https://github.com/litosartesania/litos_web/actions/runs/38438636709) SUCCESS.
+- Este cambio es solo de documentación: ni catálogo HTML/JS, ni assets, ni precios, ni producción comercial se alteran; PR experimental #8 intacto.

@@ -1,60 +1,61 @@
 # LITOS COMERCIAL — Tabla de progreso del catálogo
 
-**Estado contrastado el 12/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`.
+**Estado vigente verificado el 13/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`. Último despliegue Pages: [#38438636709](https://github.com/litosartesania/litos_web/actions/runs/38438636709) — **SUCCESS**; entrega de las imágenes: [#38437710472](https://github.com/litosartesania/litos_web/actions/runs/38437710472) — **SUCCESS**.
 
-El significado de «hecho» se determina exclusivamente por lo **visible y operativo en la web pública**, no por tener una imagen generada o probada en una rama de GitHub. La autorización de publicación y la verificación HTTP y SHA-256 de GitHub Pages para las 63 variantes han concluido correctamente. Las mesas de comedor ovalada, redonda y rectangular; las mesas de centro monolítica y circular; la consola escultórica y el banco escultórico están publicados y operativos.
+**Criterio «HECHO»:** imagen o lámina correcta, seleccionable, visible en producción y validada por HTTP/SHA-256. Los demás estados históricos que aparecen al final de este documento son cronología y **no modifican este cuadro vigente**.
 
-## Progreso resumido
+## Progreso resumido — estado de producción vigente
 
-| Categoría | Combinaciones | Porcentaje del total |
-| --- | ---: | ---: |
-| ✅ Publicadas y verificadas en la web pública | **63** | **33,3 %** |
-| ◷ Imágenes aprobadas pero aún sin publicar | **0** | **0 %** |
-| — Aún sin imagen específica aprobada | **126** | **66,7 %** |
-| **Total planificado** | **189** | **100 %** |
+| Indicador | Publicados y verificados | Pendientes | Avance |
+| --- | ---: | ---: | ---: |
+| **Imágenes específicas producto × piedra** | **77/189** | **112** | **40,7 %** |
+| **Travertino beige (imagen maestra)** | **21/21** | **0** | **100 %** |
+| **Planos técnicos ilustrativos** | **9/21** | **12** | **42,9 %** |
+| **Productos con las 9 piedras publicadas** | **7/21** | **14** | **33,3 %** |
 
-Los 21 productos aparecen como **conceptos** en el catálogo web; eso no significa que las 189 variantes tengan una imagen fiel a la piedra elegida. Tampoco hay servicios de encargos ni venta.
+El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios son orientativos. Ninguna casilla se da por terminada por existir un archivo en una rama; requiere visualización pública y verificación de GitHub Pages. Las 112 imágenes aún pendientes corresponden a **14 productos × 8 piedras distintas del travertino**. No hay imágenes publicables en espera de autorización.
 
-## Matriz producto × material
+## Matriz producto × material + planos
 
-✅ **Hecho:** imagen específica publicada y verificada en GitHub Pages.  ◷ **Validado:** disponible solo en una rama de revisión, aún no publicada.  — **Pendiente:** sin imagen específica preparada.
+✅ = imagen individual **visible y verificada en producción**; — = pendiente. **Plano** es independiente de las nueve imágenes de piedra; **Imágenes** cuenta solo las variantes piedra × producto.
 
-| Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi |
-| --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Mesa auxiliar pedestal | Mesas | — | — | — | — | — | — | — | — | — |
-| Mesa auxiliar con baldas | Mesas | — | — | — | — | — | — | — | — | — |
-| Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Consola recta | Consolas | — | — | — | — | — | — | — | — | — |
-| Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Banco lineal | Bancos | — | — | — | — | — | — | — | — | — |
-| Lavabo pedestal | Baño | — | — | — | — | — | — | — | — | — |
-| Lavabo de sobreponer | Baño | — | — | — | — | — | — | — | — | — |
-| Encimera de baño | Baño | — | — | — | — | — | — | — | — | — |
-| Encimera de cocina | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Balda / repisa de piedra | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Panel de revestimiento (m²) | Arquitectura | — | — | — | — | — | — | — | — | — |
-| Bandeja de piedra | Objetos | — | — | — | — | — | — | — | — | — |
-| Peana escultórica | Objetos | — | — | — | — | — | — | — | — | — |
-| Cuenco decorativo | Objetos | — | — | — | — | — | — | — | — | — |
-| Macetero mineral | Objetos | — | — | — | — | — | — | — | — | — |
+| Producto | Familia | Travertino | Caliza | Blanco Macael | Carrara | Negro Marquina | Granito gris | Cuarcita | Calacatta G. | Verde Alpi | Imágenes | Plano |
+| --- | --- |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  |  :---:  | :---: | :---: |
+| Mesa de comedor ovalada | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Mesa de comedor redonda | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Mesa de comedor rectangular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Mesa auxiliar pedestal | Mesas | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Mesa auxiliar con baldas | Mesas | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Consola recta | Consolas | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
+| Banco lineal | Bancos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Lavabo pedestal | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Lavabo de sobreponer | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Encimera de baño | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Encimera de cocina | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Balda / repisa de piedra | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Panel de revestimiento (m²) | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Bandeja de piedra | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Peana escultórica | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Cuenco decorativo | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Macetero mineral | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
 
-## Siete productos con la colección visual completa publicada
+## Estado de los productos por material
 
-- **Mesa de comedor ovalada (Concepto 2):** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- **Mesa de comedor redonda:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- **Mesa de comedor rectangular:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- **Mesa de centro monolítica:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- **Mesa de centro circular:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- **Consola escultórica:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- **Banco escultórico:** **9/9** combinaciones específicas de piedra publicadas y verificadas.
-- Los otros 14 modelos no disponen aún de una variante específica de material verificada y aprobada. Los WebP genéricos se mantienen como referencias, **no equivalen a una casilla hecha**.
+- **Siete productos completos (9/9)**: Mesa de comedor ovalada; Mesa de comedor redonda; Mesa de comedor rectangular; Mesa de centro monolítica; Mesa de centro circular; Consola escultórica; Banco escultórico.
+- **Otros 14 productos (1/9)**: imagen individual de **Travertino beige** publicada; faltan sus otras ocho piedras. Ninguno dispone todavía de 9/9.
+- **Planos**: nueve publicados y doce pendientes de validación geométrica y cotas orientativas; son una **vista independiente**, no una décima piedra.
+- En las fichas, cualquier piedra sin imagen propia debe conservar un aviso, sin presentar como tal una fotografía de otro material.
 
 ## Evidencias y actualización segura
+
+- **Último despliegue público: [#38438636709](https://github.com/litosartesania/litos_web/actions/runs/38438636709) — SUCCESS**. Validación de HTML/CSS/JS, 77 variantes publicadas (63 históricas + 14 travertinos), 9 planos y PNG SHA-256 íntegros.
+- **PR de segunda tanda [#34](https://github.com/litosartesania/litos_web/pull/34)** — fusionada; PR documental [#35](https://github.com/litosartesania/litos_web/pull/35) — fusionada.
+- La evidencia anterior se conserva a continuación como registro cronológico; las cifras de 27/36/45/63 de hitos pasados no deben tratarse como estado actual.
+
 
 - Web pública: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo
 - Rama de revisión: `work/catalogo-consola-banco-18png-20261011`.
@@ -112,34 +113,35 @@ Normas: 0 € de coste adicional, máxima privacidad, no interferir en otros rep
 
 
 
-## Planos técnicos — importación revisada, publicación en curso (12/10/2026)
-Las láminas son vistas independientes de las nueve piedras. No alteran el cómputo 63/189 de renders publicados. Generados 21 bocetos: nueve revisados con hipótesis y doce pendientes de concepto visual propio. Solo se importan los nueve revisados; publicación expresamente autorizada, condicionada a QA y verificación HTTP/SHA-256 de Pages.
+## Planos técnicos — estado público verificado el 13/10/2026
 
-| Producto | Plano técnico | Cotas (ancho × fondo × alto, cm) |
+La vista «Plano técnico» se muestra en el selector, separada de las nueve piedras. Cada lámina debe incluir alzado, planta y perfil con dimensiones orientativas en cm; **no está a escala garantizada ni es apta para fabricación**. Los nueve planos listados como publicados pasaron la auditoría de producción. Los doce restantes **no** deben figurar como completos por existir bocetos sin validar.
+
+| Producto | Estado del plano | Cotas propuestas (ancho × fondo × alto, cm) |
 | --- | --- | --- |
-| Mesa de comedor ovalada | Revisado e importado; publicación en curso | 220 × 105 × 75 |
-| Mesa de comedor redonda | Revisado e importado; publicación en curso | 140 × 140 × 75 |
-| Mesa de comedor rectangular | Revisado e importado; publicación en curso | 220 × 100 × 75 |
-| Mesa de centro monolítica | Revisado e importado; publicación en curso | 130 × 75 × 36 |
-| Mesa de centro circular | Revisado e importado; publicación en curso | 100 × 100 × 34 |
-| Mesa auxiliar pedestal | Revisado e importado; publicación en curso | 45 × 45 × 52 |
-| Mesa auxiliar con baldas | Pendiente de concepto visual aprobado | — |
-| Consola escultórica | Revisado e importado; publicación en curso | 160 × 40 × 82 |
-| Consola recta | Pendiente de concepto visual aprobado | — |
-| Banco escultórico | Revisado e importado; publicación en curso | 180 × 42 × 45 |
-| Banco lineal | Pendiente de concepto visual aprobado | — |
-| Lavabo pedestal | Revisado e importado; publicación en curso | 46 × 46 × 88 |
-| Lavabo de sobreponer | Pendiente de concepto visual aprobado | — |
-| Encimera de baño | Pendiente de concepto visual aprobado | — |
-| Encimera de cocina | Pendiente de concepto visual aprobado | — |
-| Balda / repisa de piedra | Pendiente de concepto visual aprobado | — |
-| Panel de revestimiento (m²) | Pendiente de concepto visual aprobado | — |
-| Bandeja de piedra | Pendiente de concepto visual aprobado | — |
-| Peana escultórica | Pendiente de concepto visual aprobado | — |
-| Cuenco decorativo | Pendiente de concepto visual aprobado | — |
-| Macetero mineral | Pendiente de concepto visual aprobado | — |
+| Mesa de comedor ovalada | ✅ Publicado y verificado | 220 × 105 × 75 |
+| Mesa de comedor redonda | ✅ Publicado y verificado | 140 × 140 × 75 |
+| Mesa de comedor rectangular | ✅ Publicado y verificado | 220 × 100 × 75 |
+| Mesa de centro monolítica | ✅ Publicado y verificado | 130 × 75 × 36 |
+| Mesa de centro circular | ✅ Publicado y verificado | 100 × 100 × 34 |
+| Mesa auxiliar pedestal | ✅ Publicado y verificado | 45 × 45 × 52 |
+| Mesa auxiliar con baldas | — Pendiente de revisión de geometría y cotas | — |
+| Consola escultórica | ✅ Publicado y verificado | 160 × 40 × 82 |
+| Consola recta | — Pendiente de revisión de geometría y cotas | — |
+| Banco escultórico | ✅ Publicado y verificado | 180 × 42 × 45 |
+| Banco lineal | — Pendiente de revisión de geometría y cotas | — |
+| Lavabo pedestal | ✅ Publicado y verificado | 46 × 46 × 88 |
+| Lavabo de sobreponer | — Pendiente de revisión de geometría y cotas | — |
+| Encimera de baño | — Pendiente de revisión de geometría y cotas | — |
+| Encimera de cocina | — Pendiente de revisión de geometría y cotas | — |
+| Balda / repisa de piedra | — Pendiente de revisión de geometría y cotas | — |
+| Panel de revestimiento (m²) | — Pendiente de revisión de geometría y cotas | — |
+| Bandeja de piedra | — Pendiente de revisión de geometría y cotas | — |
+| Peana escultórica | — Pendiente de revisión de geometría y cotas | — |
+| Cuenco decorativo | — Pendiente de revisión de geometría y cotas | — |
+| Macetero mineral | — Pendiente de revisión de geometría y cotas | — |
 
-Cotas orientativas · concepto no fabricado · no apto para fabricación. Manifiesto: `docs/PLANOS_TECNICOS_20261012.json`.
+**Resumen planos:** 9/21 publicados y verificados; **12 pendientes**. Manifiesto inicial: `docs/PLANOS_TECNICOS_20261012.json`; las correcciones publicadas de consola escultórica y mesa ovalada prevalecen sobre sus versiones iniciales.
 
 ## 2026-10-13 — Corrección geométrica de consola escultórica y plano oval (RAMA AISLADA, NO PUBLICADA)
 - Rama de trabajo: `work/consola-9-materiales-2-planos-20261013` desde `main` `c7c2c5014258491a498460f89a5a024186e5949e`. Subida autorizada por el usuario mediante su script de transferencia, commit `53c9a55`. **Sin publicación ni fusión autorizada todavía.**
