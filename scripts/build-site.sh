@@ -75,3 +75,9 @@ mkdir -p "$site/assets/catalogo/revisiones/20261013/planos-12-seleccion"
 for model in mesa-aux-bal consola-rect banco-rect lavabo-sobre encimera-bano encimera-cocina balda panel bandeja peana cuenco macetero; do
  cp "assets/catalogo/revisiones/20261013/planos-12-seleccion/${model}.png" "$site/assets/catalogo/revisiones/20261013/planos-12-seleccion/${model}.png"
 done
+
+# Eight approved Mesa auxiliar pedestal materials; only selected original PNGs.
+mkdir -p "$site/assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion"
+for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
+ cp "assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__${stone}.png" "$site/assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__${stone}.png"
+done

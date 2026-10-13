@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261013-planos21",
-        "catalogo-precios.js?v=stone-20261013-planos21",
+        "styles.css?v=stone-20261013-mesaauxped9",
+        "catalogo-precios.js?v=stone-20261013-mesaauxped9",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -106,6 +106,12 @@ def check(attempt):
         assert script.count(p)==1,('new plan mapping',p)
         b=read_live(p,attempt)
         assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],('new plan SHA-256',p)
+    for x in MESA_AUX_PHOTOS:
+        rel=x['path']
+        assert rel=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__'+x['stone_id']+'.png'
+        assert script.count(rel)==1,('mesa auxiliar original missing',rel)
+        data=read_live(rel,attempt)
+        assert len(data)==x['size_bytes'] and hashlib.sha256(data).hexdigest()==x['sha256'],('mesa auxiliar original SHA256',rel)
     for item in ITEMS:
         rel = item["path"]
         if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
@@ -127,6 +133,9 @@ assert len(PLANS)==9
 NEW_PLANS=json.loads((ROOT/'docs/PLANOS_12_SELECCION_20261013.json').read_text(encoding='utf-8'))['images']
 assert len(NEW_PLANS)==12 and len({i['product_id'] for i in NEW_PLANS})==12
 
+MESA_AUX_PHOTOS=json.loads((ROOT/'docs/MESA_AUX_PED_8_VARIANTES_20261013.json').read_text(encoding='utf-8'))['images']
+assert len(MESA_AUX_PHOTOS)==8 and len({x['stone_id'] for x in MESA_AUX_PHOTOS})==8
+
 for attempt in range(1, 25):
     try:
         check(attempt)
@@ -136,7 +145,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

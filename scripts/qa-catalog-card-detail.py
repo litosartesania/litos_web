@@ -120,6 +120,22 @@ with sync_playwright() as pw:
         assert page.locator('.detail-stage .material-placeholder').count()==1
         page.locator('.detail-close').click()
 
+        # Mesa auxiliar pedestal: all new stone materials are displayed and synced.
+        page.locator('[data-product="mesa-aux-ped"] .product-open').click()
+        assert dialog.is_visible()
+        assert page.locator('#detail-product-title').inner_text()=='Mesa auxiliar pedestal'
+        for stone in ('caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
+            page.locator('#detail-material-picker').select_option(stone)
+            assert page.locator('#material-picker').input_value()==stone
+            im=page.locator('.detail-stage .material-variant-figure img')
+            assert im.count()==1 and im.get_attribute('src')=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__'+stone+'.png'
+            im.evaluate('(e)=>e.decode()')
+            assert im.evaluate('(e)=>e.naturalWidth===1122&&e.naturalHeight===1402')
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        assert page.locator('.detail-stage .technical-drawing-figure img').get_attribute('src')=='assets/catalogo/planos/mesa-aux-ped.png'
+        page.locator('.detail-close').click()
+        assert not dialog.is_visible()
+
         # Corrected console imagery is available in modal and synchronized with main selector.
         page.locator('[data-product="consola-esc"] .product-open').click()
         assert dialog.is_visible()

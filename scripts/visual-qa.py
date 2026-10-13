@@ -10,8 +10,8 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261013-planos21"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261013-planos21"' in html
+  assert 'href="styles.css?v=stone-20261013-mesaauxped9"' in html
+  assert 'src="catalogo-precios.js?v=stone-20261013-mesaauxped9"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -20,11 +20,11 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-planos21">','<style>'+css+'</style>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-mesaauxped9">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-planos21"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-mesaauxped9"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
@@ -66,12 +66,13 @@ with sync_playwright() as app:
      assert 'Calacatta' in page.locator('#catalog-count').inner_text()
      page.locator('#material-picker').select_option('granito')
      assert page.locator('#catalog-count').inner_text().endswith('Granito gris')
-     assert page.locator('.material-preview .material-placeholder').count()==12
-     assert page.locator('.material-preview img').count()==11
-     assert page.locator('.material-preview .piece-photos').count()==2
-     assert page.locator('.concept-availability').count()==2
+     assert page.locator('.material-preview .material-placeholder').count()==12,(width,'granito placeholders',page.locator('.material-preview .material-placeholder').count())
+     assert page.locator('[data-product="mesa-aux-ped"] .material-variant-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__granito.png'
+     assert page.locator('.piece-grid .material-variant-figure img').count()==8,(width,'specific granite product pictures',page.locator('.piece-grid .material-variant-figure img').count())
+     assert page.locator('.material-preview .piece-photos').count()==1
+     assert page.locator('.concept-availability').count()==1
      assert page.locator('.concept-reference').count()==0
-     assert page.locator('.concept-availability').count()==2 and all('Referencias visuales originales' in t for t in page.locator('.concept-availability').all_inner_texts())
+     assert page.locator('.concept-availability').count()==1 and all('Referencias visuales originales' in t for t in page.locator('.concept-availability').all_inner_texts())
      assert 'no representan necesariamente la piedra' in page.locator('.material-heading > p').inner_text() or 'no muestran necesariamente la piedra' in page.locator('.material-heading > p').inner_text()
      original_images=page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')
      assert all(src.startswith('assets/catalogo/') or src.startswith('data:image/webp;') for src in original_images)
@@ -93,6 +94,17 @@ with sync_playwright() as app:
       image.evaluate('(el)=>el.decode()')
       assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
       assert image.evaluate('(el)=>getComputedStyle(el).filter')=='none'
+
+     # Product 06 now has its nine distinct stone renderings, independently of drawings.
+     for stone in ('caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
+      page.locator('#material-picker').select_option(stone)
+      new=page.locator('[data-product="mesa-aux-ped"] .material-variant-figure img')
+      assert new.count()==1
+      assert new.get_attribute('src')=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__'+stone+'.png'
+      new.evaluate('(im)=>{im.loading="eager"}')
+      new.evaluate('(im)=>im.decode()')
+      assert new.evaluate('(im)=>im.naturalWidth===1122&&im.naturalHeight===1402')
+      assert new.evaluate('(im)=>getComputedStyle(im).filter')=='none'
      # New candidate previews: nine original material views remain untouched, seven added for travertine.
      page.locator('#material-picker').select_option('travertino')
      for model in ('mesa-aux-ped','mesa-aux-bal','lavabo-ped','lavabo-sobre','bandeja','cuenco','balda'):
