@@ -66,7 +66,7 @@ with sync_playwright() as app:
      assert 'Calacatta' in page.locator('#catalog-count').inner_text()
      page.locator('#material-picker').select_option('granito')
      assert page.locator('#catalog-count').inner_text().endswith('Granito gris')
-     assert page.locator('.material-preview .material-placeholder').count()==11
+     assert page.locator('.material-preview .material-placeholder').count()==11,(width,'granito placeholders',page.locator('.material-preview .material-placeholder').count(),'new view',page.locator('[data-product="mesa-aux-ped"] .material-preview').inner_html()[:500],'all',page.locator('.material-preview').evaluate_all('(els)=>els.filter(x=>x.querySelector(".material-placeholder")).map(x=>x.closest("[data-product]")?.dataset.product)'))
      assert page.locator('.material-preview img').count()==12
      assert page.locator('.material-preview .piece-photos').count()==2
      assert page.locator('.concept-availability').count()==2
