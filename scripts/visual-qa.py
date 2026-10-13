@@ -68,7 +68,7 @@ with sync_playwright() as app:
      assert page.locator('#catalog-count').inner_text().endswith('Granito gris')
      assert page.locator('.material-preview .material-placeholder').count()==12,(width,'granito placeholders',page.locator('.material-preview .material-placeholder').count())
      assert page.locator('[data-product="mesa-aux-ped"] .material-variant-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__granito.png'
-     assert page.locator('.material-preview img').count()==12
+     assert page.locator('.piece-grid .material-variant-figure img').count()==8,(width,'specific granite product pictures',page.locator('.piece-grid .material-variant-figure img').count())
      assert page.locator('.material-preview .piece-photos').count()==2
      assert page.locator('.concept-availability').count()==2
      assert page.locator('.concept-reference').count()==0
