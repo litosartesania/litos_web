@@ -19,7 +19,7 @@ with sync_playwright() as pw:
   for product in ('consola-esc','banco-esc'):
    img=page.locator(f'[data-product="{product}"] .material-variant-figure img')
    assert img.count()==1
-   assert img.get_attribute('src')==f'assets/catalogo/variantes/{product}__calacatta.png'
+   assert img.get_attribute('src')==(f'assets/catalogo/revisiones/20261013/variantes/consola-esc__calacatta.png' if product=='consola-esc' else f'assets/catalogo/variantes/{product}__calacatta.png')
    img.evaluate('(el)=>{el.loading="eager"}')
    img.evaluate('(el)=>el.decode()')
    assert img.evaluate('(el)=>el.naturalWidth==1122 and el.naturalHeight==1402'.replace('and','&&'))
