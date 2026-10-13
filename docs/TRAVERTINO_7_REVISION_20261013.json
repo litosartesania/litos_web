@@ -1,0 +1,103 @@
+{
+  "scope": "LITOS COMERCIAL: 7 nuevas vistas de travertino",
+  "branch": "work/travertino-7-integracion-20261013",
+  "base_sha": "1443f41f2ecc7510d1b629ab4aa4af012cdf8c40",
+  "publicado": false,
+  "preserves_originals": true,
+  "images": [
+    {
+      "product_id": "mesa-aux-ped",
+      "stone_id": "travertino",
+      "source_name": "01_mesa_auxiliar_escultorica_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-ped__travertino.png",
+      "sha256": "fbb6b02fa713d557275ea38a751a162b38f98b4e00409521cec5c4200f3664a8",
+      "size_bytes": 3172546,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    },
+    {
+      "product_id": "mesa-aux-bal",
+      "stone_id": "travertino",
+      "source_name": "02_mesa_auxiliar_cubica_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-bal__travertino.png",
+      "sha256": "1e767fbc859dc1b3c3a2d9f8d8c4439efe896bfbc068c03f0b742e0984630266",
+      "size_bytes": 3283905,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    },
+    {
+      "product_id": "lavabo-ped",
+      "stone_id": "travertino",
+      "source_name": "09_lavabo_pedestal_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/lavabo-ped__travertino.png",
+      "sha256": "14f3053139907453e0538f88939498c009a800ef0833d7f1b0b3232e2f177a18",
+      "size_bytes": 3409871,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    },
+    {
+      "product_id": "lavabo-sobre",
+      "stone_id": "travertino",
+      "source_name": "11_lavabo_sobre_encimera_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/lavabo-sobre__travertino.png",
+      "sha256": "2ae249b7e3bb2c0092ff58f78e52adaf291cecb26f34f0f50bb866ce6f0e71fb",
+      "size_bytes": 3355400,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "travertino",
+      "source_name": "13_bandeja_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/bandeja__travertino.png",
+      "sha256": "965fbf556fff010a61476a600abf0e88aec519978f7a4af37396396af3945efe",
+      "size_bytes": 3173655,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    },
+    {
+      "product_id": "cuenco",
+      "stone_id": "travertino",
+      "source_name": "15_cuenco_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/cuenco__travertino.png",
+      "sha256": "cf85fa455d150e78b82b5420fd520bf2e4d4704bde17bb8305f2bb4cc91198ef",
+      "size_bytes": 3137002,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    },
+    {
+      "product_id": "balda",
+      "stone_id": "travertino",
+      "source_name": "19_estante_flotante_travertino.png",
+      "source_branch": "work/travertino-20-candidatas-20261013",
+      "path": "assets/catalogo/revisiones/20261013/travertino-seleccion/balda__travertino.png",
+      "sha256": "d1c4e5ab45dc893cb7cbd228edbc37ff9f0a5d5f61ddffe083c6ba69205d768b",
+      "size_bytes": 3189935,
+      "width": 1122,
+      "height": 1402,
+      "review_status": "SELECCION_VISUAL_PROVISIONAL"
+    }
+  ],
+  "pending": [
+    "banco-rect",
+    "consola-rect",
+    "encimera-bano",
+    "encimera-cocina",
+    "panel",
+    "peana",
+    "macetero"
+  ],
+  "note": "Candidatas duplicadas y productos ya completos excluidos. Son imágenes conceptuales, no piezas fabricadas; 7 seleccionadas para QA y eventual aprobación de publicación."
+}
