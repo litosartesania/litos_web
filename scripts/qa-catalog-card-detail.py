@@ -107,6 +107,19 @@ with sync_playwright() as pw:
         page.locator('.detail-close').click()
         assert not dialog.is_visible()
 
+        # Newly illustrated product in the detail modal and honest fallback for Marquina.
+        page.locator('[data-product="macetero"] .product-open').click()
+        assert dialog.is_visible()
+        page.locator('#detail-material-picker').select_option('travertino')
+        image=page.locator('.detail-stage .material-variant-figure img')
+        assert image.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/macetero__travertino.png'
+        image.evaluate('(el)=>{el.loading="eager"}')
+        image.evaluate('(el)=>el.decode()')
+        assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+        page.locator('#detail-material-picker').select_option('marquina')
+        assert page.locator('.detail-stage .material-placeholder').count()==1
+        page.locator('.detail-close').click()
+
         # Corrected console imagery is available in modal and synchronized with main selector.
         page.locator('[data-product="consola-esc"] .product-open').click()
         assert dialog.is_visible()

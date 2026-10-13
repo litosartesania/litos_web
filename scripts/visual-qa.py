@@ -10,8 +10,8 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261013-travertino7"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261013-travertino7"' in html
+  assert 'href="styles.css?v=stone-20261013-travertino21"' in html
+  assert 'src="catalogo-precios.js?v=stone-20261013-travertino21"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -20,11 +20,11 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-travertino7">','<style>'+css+'</style>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-travertino21">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-travertino7"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-travertino21"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
@@ -102,8 +102,15 @@ with sync_playwright() as app:
       image.evaluate('(el)=>{el.loading="eager"}')
       image.evaluate('(el)=>el.decode()')
       assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
-     assert page.locator('.material-variant-figure img').count()==14
-     assert page.locator('.material-placeholder').count()==7
+     for model in ('consola-rect','banco-rect','encimera-bano','encimera-cocina','panel','peana','macetero'):
+      image=page.locator(f'[data-product="{model}"] .material-variant-figure img')
+      assert image.count()==1
+      assert image.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/'+model+'__travertino.png'
+      image.evaluate('(el)=>{el.loading="eager"}')
+      image.evaluate('(el)=>el.decode()')
+      assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+     assert page.locator('.material-variant-figure img').count()==21
+     assert page.locator('.material-placeholder').count()==0
      # Nine new renderings must match the catalog material and never reuse outdated console art.
      for stone in ('travertino','caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
       page.locator('#material-picker').select_option(stone)
