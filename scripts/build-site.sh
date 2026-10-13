@@ -68,3 +68,10 @@ mkdir -p "$site/assets/catalogo/revisiones/20261013/travertino-extra-seleccion"
 for model in consola-rect banco-rect encimera-bano encimera-cocina panel peana macetero; do
  cp "assets/catalogo/revisiones/20261013/travertino-extra-seleccion/${model}__travertino.png" "$site/assets/catalogo/revisiones/20261013/travertino-extra-seleccion/${model}__travertino.png"
 done
+
+# Do not stage all review candidates or SVGs in public Pages. Only 12 SHA-verified
+# conceptual orthographic PNGs are included in the published asset allowlist.
+mkdir -p "$site/assets/catalogo/revisiones/20261013/planos-12-seleccion"
+for model in mesa-aux-bal consola-rect banco-rect lavabo-sobre encimera-bano encimera-cocina balda panel bandeja peana cuenco macetero; do
+ cp "assets/catalogo/revisiones/20261013/planos-12-seleccion/${model}.png" "$site/assets/catalogo/revisiones/20261013/planos-12-seleccion/${model}.png"
+done

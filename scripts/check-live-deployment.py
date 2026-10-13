@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261013-travertino21",
-        "catalogo-precios.js?v=stone-20261013-travertino21",
+        "styles.css?v=stone-20261013-planos21",
+        "catalogo-precios.js?v=stone-20261013-planos21",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -100,6 +100,12 @@ def check(attempt):
         assert script.count(p)==1,('extra travertine mapping',p)
         b=read_live(p,attempt)
         assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],('extra travertine SHA-256',p)
+    for i in NEW_PLANS:
+        p=i['path']
+        assert p=='assets/catalogo/revisiones/20261013/planos-12-seleccion/'+i['product_id']+'.png'
+        assert script.count(p)==1,('new plan mapping',p)
+        b=read_live(p,attempt)
+        assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],('new plan SHA-256',p)
     for item in ITEMS:
         rel = item["path"]
         if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
@@ -118,6 +124,8 @@ assert len(EXTRA_TRAVERTINE)==7 and len({x['product_id'] for x in EXTRA_TRAVERTI
 assert len(REVISIONS)==11
 PLANS = json.loads((ROOT/'docs/PLANOS_TECNICOS_20261012.json').read_text())['products']
 assert len(PLANS)==9
+NEW_PLANS=json.loads((ROOT/'docs/PLANOS_12_SELECCION_20261013.json').read_text(encoding='utf-8'))['images']
+assert len(NEW_PLANS)==12 and len({i['product_id'] for i in NEW_PLANS})==12
 
 for attempt in range(1, 25):
     try:
@@ -128,7 +136,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 11 corrected assets and 14 additional travertine originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

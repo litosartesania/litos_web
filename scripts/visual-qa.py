@@ -10,8 +10,8 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261013-travertino21"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261013-travertino21"' in html
+  assert 'href="styles.css?v=stone-20261013-planos21"' in html
+  assert 'src="catalogo-precios.js?v=stone-20261013-planos21"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -20,11 +20,11 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-travertino21">','<style>'+css+'</style>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-planos21">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-travertino21"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-planos21"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
@@ -126,17 +126,17 @@ with sync_playwright() as app:
      # Technical view is a tenth presentation option, NOT a tenth stone.
      last_price=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
      page.locator('#material-picker').select_option('plano-tecnico')
-     assert page.locator('.technical-placeholder').count()==12
-     assert page.locator('.technical-drawing-figure img').count()==9
+     assert page.locator('.technical-placeholder').count()==0
+     assert page.locator('.technical-drawing-figure img').count()==21
      for image in page.locator('.technical-drawing-figure img').all():
       image.evaluate('(el)=>{el.loading="eager"}')
       image.evaluate('(el)=>el.decode()')
-      assert image.evaluate("(el)=>el.naturalWidth===(el.src.includes('/revisiones/20261013/')?1448:1600)&&el.naturalHeight===(el.src.includes('/revisiones/20261013/')?1086:1200)")
+      assert image.evaluate("(el)=>el.naturalWidth===(el.src.includes('/revisiones/20261013/planos/')?1448:1600)&&el.naturalHeight===(el.src.includes('/revisiones/20261013/planos/')?1086:1200)")
      assert page.locator('#material-source').is_hidden()
-     assert page.locator('.technical-placeholder').first.inner_text().startswith('Plano técnico pendiente')
-     assert page.locator('#catalog-count').inner_text().endswith('(9/21 disponibles)')
+     assert all(page.locator(f'[data-product="{id}"] .technical-drawing-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/planos-12-seleccion/'+id+'.png' for id in ('mesa-aux-bal','consola-rect','banco-rect','lavabo-sobre','encimera-bano','encimera-cocina','balda','panel','bandeja','peana','cuenco','macetero'))
+     assert page.locator('#catalog-count').inner_text().endswith('(21/21 disponibles)')
      assert page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()==last_price
-     assert page.locator('.technical-drawing-figure img').count()==9
+     assert page.locator('.technical-drawing-figure img').count()==21
      for corrected in ('mesa-comedor-oval','consola-esc'):
       revised=page.locator('.piece-grid [data-product="'+corrected+'"] .technical-drawing-figure img')
       assert revised.get_attribute('src')=='assets/catalogo/revisiones/20261013/planos/'+corrected+'.png'

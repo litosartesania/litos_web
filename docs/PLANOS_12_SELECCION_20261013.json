@@ -1,0 +1,240 @@
+{
+  "collection": "LITOS COMERCIAL",
+  "date": "2026-10-13",
+  "source_branch": "work/planos-12-archivos-20261013",
+  "review_branch": "work/planos-12-integracion-20261013",
+  "source_manifest": "docs/PLANOS_12_CANDIDATOS_20261013.json",
+  "publication": "NOT_PUBLISHED",
+  "notice": "Láminas conceptuales. Dimensiones orientativas, sin escala ni validez para fabricación. Requiere validación visual y autorización del propietario.",
+  "count": 12,
+  "images": [
+    {
+      "product_id": "mesa-aux-bal",
+      "name": "Mesa auxiliar con baldas",
+      "kind": "shelf_table",
+      "geometry": "Dos costados portantes y dos baldas interiores. El frente queda abierto.",
+      "dims_cm": {
+        "ancho": 45,
+        "fondo": 40,
+        "alto": 55
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/mesa-aux-bal.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/mesa-aux-bal.png",
+      "git_blob_sha": "d3fc45274ab193c45fb07c2e0237b7013fc80562",
+      "sha256": "73213339ba2be7c766945768eaa96c7410abfbee891cf5b901e0397bd7e6a7dd",
+      "size_bytes": 82906,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "consola-rect",
+      "name": "Consola recta",
+      "kind": "console",
+      "geometry": "Dos apoyos prismáticos rectos y macizos próximos a los extremos.",
+      "dims_cm": {
+        "ancho": 140,
+        "fondo": 35,
+        "alto": 80
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/consola-rect.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/consola-rect.png",
+      "git_blob_sha": "f0587ffb0ef97a2f74e0ada93f41faedd34b8292",
+      "sha256": "b307d704ac9f8de76fbe8e0560d1ab0851d4082993fac8d8bfd8b9ee0abd1bba",
+      "size_bytes": 83568,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "banco-rect",
+      "name": "Banco lineal",
+      "kind": "bench",
+      "geometry": "Sobre rectangular grueso sobre dos grandes bloques laterales.",
+      "dims_cm": {
+        "ancho": 160,
+        "fondo": 40,
+        "alto": 45
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/banco-rect.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/banco-rect.png",
+      "git_blob_sha": "e11860677e0e24d4ced11b549f71a1d750f86817",
+      "sha256": "2b0a70a30d4630de64e31c9f2c89eedebdd58c78b201711437bf1ccbee4e0896",
+      "size_bytes": 83179,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "lavabo-sobre",
+      "name": "Lavabo de sobreponer",
+      "kind": "basin",
+      "geometry": "Cuenco circular con paredes curvas: no es un prisma rectangular.",
+      "dims_cm": {
+        "ancho": 40,
+        "fondo": 40,
+        "alto": 15
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/lavabo-sobre.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/lavabo-sobre.png",
+      "git_blob_sha": "1e185689e267ae9f2fed4dd0134d4b5c54548022",
+      "sha256": "61c6edc3e0efc69da24eed0a956920de02dbdb13eb0741a0b478b8fbfb739f9b",
+      "size_bytes": 113070,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "encimera-bano",
+      "name": "Encimera de baño suspendida",
+      "kind": "bathcounter",
+      "geometry": "Lavabo rectangular integrado, frontal alto y montaje suspendido.",
+      "dims_cm": {
+        "ancho": 120,
+        "fondo": 55,
+        "alto": 14
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/encimera-bano.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/encimera-bano.png",
+      "git_blob_sha": "4ee6231124d38ac725cd5674219c5d05de47e770",
+      "sha256": "6c8741c2a15950b87171873ae4fadb8b75d5e77f575dd7470734ac8d3f826549",
+      "size_bytes": 86732,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "encimera-cocina",
+      "name": "Encimera de cocina",
+      "kind": "kitchencounter",
+      "geometry": "Encimera con abertura de fregadero. Los armarios NO forman parte de la pieza.",
+      "dims_cm": {
+        "ancho": 240,
+        "fondo": 65,
+        "alto": 4
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/encimera-cocina.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/encimera-cocina.png",
+      "git_blob_sha": "9914f1786688c033edd62ad3c9b8e6a34d067433",
+      "sha256": "a9786daf4430cb7dab94041c8d5cbfcb2f66138cc5c179a1bea89c38d1523f12",
+      "size_bytes": 82156,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "balda",
+      "name": "Balda / repisa de piedra",
+      "kind": "shelf",
+      "geometry": "Volumen prismático flotante con canto frontal visible de espesor apreciable.",
+      "dims_cm": {
+        "ancho": 90,
+        "fondo": 25,
+        "alto": 8
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/balda.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/balda.png",
+      "git_blob_sha": "8aa131048c2924cc2119193eca25e05a9328767a",
+      "sha256": "ee41ef321a8359142525527fe79dd27d3811c6df47d6d0f115d948d0fae381a4",
+      "size_bytes": 79931,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "panel",
+      "name": "Panel de revestimiento (m²)",
+      "kind": "panel",
+      "geometry": "Módulo de 1 m² de REVESTIMIENTO. No representa un muro estructural.",
+      "dims_cm": {
+        "ancho": 100,
+        "fondo": 2,
+        "alto": 100
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/panel.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/panel.png",
+      "git_blob_sha": "e0bd688491a4bd9c4ce26ec39cb9d0a578b5b846",
+      "sha256": "6be59227f404389815aa4c227dbfa69b95a8e0d844647794bb378906a782ba0f",
+      "size_bytes": 77650,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "bandeja",
+      "name": "Bandeja de piedra",
+      "kind": "tray",
+      "geometry": "Bandeja rectangular de esquinas redondeadas y superficie rebajada.",
+      "dims_cm": {
+        "ancho": 35,
+        "fondo": 22,
+        "alto": 3
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/bandeja.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/bandeja.png",
+      "git_blob_sha": "16acc9be6dd524170ebc332eb7da5ca3a072371d",
+      "sha256": "997e9d34068df509194000df031b6559a9efba7bf84a05b1e2a96edb34122c3a",
+      "size_bytes": 84148,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "peana",
+      "name": "Peana escultórica",
+      "kind": "plinth",
+      "geometry": "Prisma de base cuadrada y ligera conicidad, NO pedestal cilíndrico.",
+      "dims_cm": {
+        "ancho": 32,
+        "fondo": 32,
+        "alto": 80
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/peana.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/peana.png",
+      "git_blob_sha": "dedfbed6b5812ddfb8937175547f5d4e3c504154",
+      "sha256": "7565653ee81ed8574065575d4e70f7a6f68aeaebaed77dea44c7a1220be088ce",
+      "size_bytes": 84275,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "cuenco",
+      "name": "Cuenco decorativo",
+      "kind": "bowl",
+      "geometry": "Pared curva continua tipo cuenco y pequeño fondo plano.",
+      "dims_cm": {
+        "ancho": 26,
+        "fondo": 26,
+        "alto": 10
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/cuenco.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/cuenco.png",
+      "git_blob_sha": "2363ec93c04962fb5342d2d8d8485c0fe477bfc2",
+      "sha256": "d0c9926b735263e3ae9341dfcd3c3c72b0031276665c3fecdb5d5c8071264724",
+      "size_bytes": 110427,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    },
+    {
+      "product_id": "macetero",
+      "name": "Macetero mineral",
+      "kind": "planter",
+      "geometry": "Copa abierta sobre pedestal troncocónico central, no un único tronco de cono.",
+      "dims_cm": {
+        "ancho": 55,
+        "fondo": 55,
+        "alto": 78
+      },
+      "path": "assets/catalogo/revisiones/20261013/planos-12-seleccion/macetero.png",
+      "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/macetero.png",
+      "git_blob_sha": "e7ca167ebb77d11e51a35bdf8b318c5f14b10385",
+      "sha256": "9f8996dd8c008b0243566b1dd4d118ac794a8cd974ceaa46c69daf58e7b76cda",
+      "size_bytes": 102048,
+      "width": 1600,
+      "height": 1200,
+      "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
+    }
+  ]
+}
