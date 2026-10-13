@@ -110,6 +110,31 @@ drawing_map=json.loads(mapped.group(1))
 assert len(drawing_map)==21 and set(drawing_map)==({p['product_id'] for p in plans}|missing_ids)
 assert all(drawing_map[i['product_id']]==i['path'] for i in selected_drawings)
 expected.update(new_drawings)
+# All 8 original owner-provided stone views of Mesa auxiliar pedestal: exact bytes and selection.
+mesa_aux_manifest=json.loads((root.parent/'docs/MESA_AUX_PED_8_VARIANTES_20261013.json').read_text(encoding='utf-8'))
+mesa_aux_photos=mesa_aux_manifest['images']
+stone_set={'caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'}
+assert len(mesa_aux_photos)==8 and {x['stone_id'] for x in mesa_aux_photos}==stone_set
+assert all(x['product_id']=='mesa-aux-ped' for x in mesa_aux_photos)
+mesa_aux_paths=set()
+for x in mesa_aux_photos:
+ rel=x['path']
+ assert rel=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__'+x['stone_id']+'.png'
+ assert x['source_path']=='assets/catalogo/revisiones/20261013/mesa-aux-ped-candidatas-8/mesa-aux-ped__'+x['stone_id']+'.png'
+ assert len(x['sha256'])==64 and len(x['git_blob_sha'])==40 and rel not in mesa_aux_paths
+ b=(root/rel).read_bytes()
+ assert len(b)==x['size_bytes'] and hashlib.sha256(b).hexdigest()==x['sha256'],('mesa auxiliar SHA-256',rel)
+ assert b[:8]==b'\x89PNG\r\n\x1a\n'
+ assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(x['width'],x['height'])==(1122,1402)
+ assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(rel)==1,('mesa auxiliar selection',rel)
+ mesa_aux_paths.add(rel)
+js=(root/'catalogo-precios.js').read_text(encoding='utf-8')
+all_variants=re.search(r'const approvedVariants=Object\.freeze\((\{[^\n]*\})\);',js)
+assert all_variants
+chosen=json.loads(all_variants.group(1))
+assert len(chosen)==85 and chosen['mesa-aux-ped__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-ped__travertino.png'
+assert all(chosen['mesa-aux-ped__'+x['stone_id']]==x['path'] for x in mesa_aux_photos)
+expected.update(mesa_aux_paths)
 for p in plans:
  data=(root/p['path']).read_bytes()
  assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
@@ -123,8 +148,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -154,8 +179,8 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261013-planos21' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261013-planos21' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261013-mesaauxped9' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261013-mesaauxped9' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)
