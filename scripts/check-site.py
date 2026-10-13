@@ -73,6 +73,9 @@ extra_selection=json.loads((root.parent/'docs/TRAVERTINO_7_EXTRAS_INTEGRACION_20
 extra_ids={'consola-rect','banco-rect','encimera-bano','encimera-cocina','panel','peana','macetero'}
 assert len(extra_selection)==7 and {i['product_id'] for i in extra_selection}==extra_ids
 extra_paths=set()
+for entry in extra_selection:
+ png=(root/entry['path']).read_bytes()
+ print('EXTRA_PNG_DIMENSIONS',entry['product_id'],int.from_bytes(png[16:20],'big'),int.from_bytes(png[20:24],'big'),flush=True)
 for i in extra_selection:
  p=i['path']
  assert i['stone_id']=='travertino' and i['review_status']=='SELECCION_VISUAL_PROVISIONAL'
