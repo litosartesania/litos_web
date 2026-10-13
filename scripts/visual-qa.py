@@ -10,8 +10,8 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261012-planos"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261012-planos"' in html
+  assert 'href="styles.css?v=stone-20261013-correcciones"' in html
+  assert 'src="catalogo-precios.js?v=stone-20261013-correcciones"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -20,11 +20,11 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261012-planos">','<style>'+css+'</style>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261013-correcciones">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261012-planos"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-20261013-correcciones"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
@@ -35,7 +35,7 @@ with sync_playwright() as app:
    page.on('pageerror',lambda e:errors.append(str(e)))
    page.goto((site/file).resolve().as_uri(),wait_until='domcontentloaded')
    for image in page.locator('img').all():image.evaluate('(x)=>x.loading="eager"')
-   page.wait_for_timeout(150)
+   page.wait_for_function("() => [...document.images].every(im => im.complete && im.naturalWidth > 0)", timeout=15000)
    sizes=page.evaluate('''() => ({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,images:[...document.images].every(x=>x.complete&&x.naturalWidth>0)})''')
    assert sizes['scroll']<=sizes['width']+1 and sizes['images'],(file,width,sizes)
    assert not errors,(file,width,errors)
@@ -88,11 +88,21 @@ with sync_playwright() as app:
      assert page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')!=original_images
      for model in ('consola-esc','banco-esc','mesa-comedor-oval','mesa-comedor-red','mesa-comedor-rect','mesa-centro-mon','mesa-centro-red'):
       image=page.locator(f'[data-product="{model}"] .material-variant-figure img')
-      assert image.get_attribute('src')==f'assets/catalogo/variantes/{model}__verde-alpi.png'
+      assert image.get_attribute('src')==(f'assets/catalogo/revisiones/20261013/variantes/consola-esc__verde-alpi.png' if model=='consola-esc' else f'assets/catalogo/variantes/{model}__verde-alpi.png')
       image.evaluate('(el)=>{el.loading="eager"}')
       image.evaluate('(el)=>el.decode()')
       assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
       assert image.evaluate('(el)=>getComputedStyle(el).filter')=='none'
+     # Nine new renderings must match the catalog material and never reuse outdated console art.
+     for stone in ('travertino','caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
+      page.locator('#material-picker').select_option(stone)
+      console=page.locator('.piece-grid [data-product="consola-esc"] .material-variant-figure img')
+      assert console.count()==1
+      assert console.get_attribute('src')=='assets/catalogo/revisiones/20261013/variantes/consola-esc__'+stone+'.png'
+      console.evaluate('(e)=>{e.loading="eager"}')
+      console.evaluate('(e)=>e.decode()')
+      assert console.evaluate('(e)=>e.naturalWidth===1122&&e.naturalHeight===1402')
+     page.locator('#material-picker').select_option('verde-alpi')
      assert page.locator('.material-preview .piece-photos').first.is_visible()
      assert 'colourofstone.com' in page.locator('#material-source').get_attribute('href')
      # Technical view is a tenth presentation option, NOT a tenth stone.
@@ -103,12 +113,16 @@ with sync_playwright() as app:
      for image in page.locator('.technical-drawing-figure img').all():
       image.evaluate('(el)=>{el.loading="eager"}')
       image.evaluate('(el)=>el.decode()')
-      assert image.evaluate('(el)=>el.naturalWidth===1600&&el.naturalHeight===1200')
+      assert image.evaluate("(el)=>el.naturalWidth===(el.src.includes('/revisiones/20261013/')?1448:1600)&&el.naturalHeight===(el.src.includes('/revisiones/20261013/')?1086:1200)")
      assert page.locator('#material-source').is_hidden()
      assert page.locator('.technical-placeholder').first.inner_text().startswith('Plano técnico pendiente')
      assert page.locator('#catalog-count').inner_text().endswith('(9/21 disponibles)')
      assert page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()==last_price
-     assert page.locator('img[src*="catalogo/planos/"]').count()==9
+     assert page.locator('.technical-drawing-figure img').count()==9
+     for corrected in ('mesa-comedor-oval','consola-esc'):
+      revised=page.locator('.piece-grid [data-product="'+corrected+'"] .technical-drawing-figure img')
+      assert revised.get_attribute('src')=='assets/catalogo/revisiones/20261013/planos/'+corrected+'.png'
+      revised.evaluate('(e)=>e.decode()')
      page.locator('#material-picker').select_option('verde-alpi')
      assert page.locator('.technical-placeholder').count()==0
      assert page.locator('#material-source').is_visible()
