@@ -384,3 +384,11 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Estado actual publicado permanece **63/189 renders (7/21 travertinos) y 9/21 planos**, hasta demostrar despliegue público SUCCESS. Si el PR de siete travertinos se autoriza, fusiona y supera auditoría HTTP/SHA-256: **70/189 renders, 14/21 travertinos, 9/21 planos**; faltarán siete bases de travertino.
 - QA: manifiesto SHA-256, estricto allowlist de 7, selección sincronizada en catálogo/ficha, responsive, no alteración de las 63 originales ni 11 correcciones previas, nueve planos, precios o estado "no aceptamos encargos". La versión pública solo se modifica con autorización explícita de publicación tras auditoría.
 
+
+## 2026-10-13 — Segunda tanda de siete travertinos (integración en revisión)
+- Origen: siete imágenes entregadas por el usuario, verificadas con SHA-256 y subidas a `work/travertino-7-extras-20261013`, commit `886c3af`.
+- Rama aislada `work/travertino-21-integracion-20261013`; reutilización de los siete blobs Git sin alterar un byte, con alias canónicos y manifiesto `docs/TRAVERTINO_7_EXTRAS_INTEGRACION_20261013.json`.
+- Productos: `consola-rect`, `banco-rect`, `encimera-bano`, `encimera-cocina`, `panel`, `peana`, `macetero`. Únicamente material travertino. Los ocho materiales restantes no obtienen una imagen fabricada ni simulada.
+- Se incorpora a la allowlist de Pages exclusivamente este lote seleccionado, nunca la carpeta completa de candidatos. SHA-256, dimensiones, correspondencia, modal, selector y QA de navegador automatizados. Conservados 63 PNG históricos, once correcciones, siete travertinos anteriores y nueve planos.
+- Advertencia editorial: las escenas de cocina y baño incluyen elementos de ambientación; el olivo es atrezzo. Verificar si el render del panel se interpreta como revestimiento y no como tabique autoportante antes de publicar.
+- Estado mientras la PR está en revisión: no publicado. Tras autorización explícita, despliegue SUCCESS y verificación pública: 77/189 imágenes, 21/21 travertinos, nueve/21 planos. No se modifica ningún precio, dato privado, servicio o repositorio ajeno.
