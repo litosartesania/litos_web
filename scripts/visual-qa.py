@@ -108,7 +108,7 @@ with sync_playwright() as app:
       assert image.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/'+model+'__travertino.png'
       image.evaluate('(el)=>{el.loading="eager"}')
       image.evaluate('(el)=>el.decode()')
-      assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+      assert image.evaluate('(el)=>el.naturalWidth===1086&&el.naturalHeight===1448')
      assert page.locator('.material-variant-figure img').count()==21
      assert page.locator('.material-placeholder').count()==0
      # Nine new renderings must match the catalog material and never reuse outdated console art.

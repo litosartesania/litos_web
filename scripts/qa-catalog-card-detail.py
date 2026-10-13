@@ -115,7 +115,7 @@ with sync_playwright() as pw:
         assert image.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/macetero__travertino.png'
         image.evaluate('(el)=>{el.loading="eager"}')
         image.evaluate('(el)=>el.decode()')
-        assert image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+        assert image.evaluate('(el)=>el.naturalWidth===1086&&el.naturalHeight===1448')
         page.locator('#detail-material-picker').select_option('marquina')
         assert page.locator('.detail-stage .material-placeholder').count()==1
         page.locator('.detail-close').click()

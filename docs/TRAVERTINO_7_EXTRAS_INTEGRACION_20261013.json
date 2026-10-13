@@ -14,8 +14,8 @@
       "git_blob_sha": "ee82c91b45ea65c4a678df09daec8112a864fecb",
       "sha256": "f8962c9f9b40f9ef5bd7f6d1e0fa37c08a665605ddbc006c8232a99a2676314a",
       "size_bytes": 2667336,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "Alternativa visual, no sustituir hasta validación de geometría"
     },
@@ -29,8 +29,8 @@
       "git_blob_sha": "d7c2412b33703caa05d2604376100651f56d5cb9",
       "sha256": "7c965601071329a6f56acfd1525d33d61167615adccca10b16e770bfda5a356e",
       "size_bytes": 2456919,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "Alternativa visual, contrastar apoyos con plano"
     },
@@ -44,8 +44,8 @@
       "git_blob_sha": "704d3d7e0718b6c79d715f4b0f833fe7d16f450c",
       "sha256": "8b4c029ad9c1d805fe281886f3c5efd8a3243360c0638ecc94d0b7a8fd13bff1",
       "size_bytes": 2493033,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "Vista conceptual de encimera suspendida con lavabo integrado"
     },
@@ -59,8 +59,8 @@
       "git_blob_sha": "f8fe8566d89605ab1c70764dc2374bb01abf36e4",
       "sha256": "2d9cc93defdb06cbe1dd696b262f326a771c344bc8d461a415b4fce1ff59c8b7",
       "size_bytes": 2626188,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "Vista de cocina con mobiliario de madera; no atribuir muebles al producto piedra"
     },
@@ -74,8 +74,8 @@
       "git_blob_sha": "c6755da1e87255d4c86a0c8414abbc59dfad624a",
       "sha256": "30ac80316ca7d561792a8d871a3842cb0249e095084713cac7889e71902b9b09",
       "size_bytes": 2766559,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "Propuesta de panel vertical, interpretar como revestimiento"
     },
@@ -89,8 +89,8 @@
       "git_blob_sha": "7d7e0f261dd1a8dde302582d4838ee53919da25e",
       "sha256": "331f4e61d7ad1b51ea2647a6239c254eac927f06affda1f86dcdf030e32fd90b",
       "size_bytes": 2467119,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "Nueva geometría prismática por validar"
     },
@@ -104,8 +104,8 @@
       "git_blob_sha": "8ebf3037c607a8fbc136ef6c32a8486648dd817d",
       "sha256": "68eefd55ad25fac2ce147de033d5d3512fb22430f20810251d84280b8b812859",
       "size_bytes": 2681364,
-      "width": 1122,
-      "height": 1402,
+      "width": 1086,
+      "height": 1448,
       "review_status": "SELECCION_VISUAL_PROVISIONAL",
       "visual_note": "El olivo es atrezzo; el producto es el macetero"
     }

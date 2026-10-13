@@ -66,7 +66,7 @@ const showMaterial=(card,material)=>{
   if(host.dataset.view!==key){
    host.replaceChildren();
    const figure=document.createElement('figure');figure.className='material-variant-figure';
-   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=1122;img.height=1402;
+   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=1122;img.height=1402;if(file.includes('/travertino-extra-seleccion/')){img.width=1086;img.height=1448;}
    img.alt='Imagen conceptual de '+card.querySelector('h3').textContent+' en '+material[1];
    const cap=document.createElement('figcaption');cap.textContent='Imagen conceptual de '+material[1]+' · No es una obra ejecutada';
    figure.append(img,cap);host.append(figure);

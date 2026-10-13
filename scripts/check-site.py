@@ -73,9 +73,6 @@ extra_selection=json.loads((root.parent/'docs/TRAVERTINO_7_EXTRAS_INTEGRACION_20
 extra_ids={'consola-rect','banco-rect','encimera-bano','encimera-cocina','panel','peana','macetero'}
 assert len(extra_selection)==7 and {i['product_id'] for i in extra_selection}==extra_ids
 extra_paths=set()
-for entry in extra_selection:
- png=(root/entry['path']).read_bytes()
- print('EXTRA_PNG_DIMENSIONS',entry['product_id'],int.from_bytes(png[16:20],'big'),int.from_bytes(png[20:24],'big'),flush=True)
 for i in extra_selection:
  p=i['path']
  assert i['stone_id']=='travertino' and i['review_status']=='SELECCION_VISUAL_PROVISIONAL'
@@ -84,7 +81,7 @@ for i in extra_selection:
  b=(root/p).read_bytes()
  assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'], ('extra SHA256',p)
  assert b[:8]==b'\x89PNG\r\n\x1a\n'
- assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(i['width'],i['height'])==(1122,1402)
+ assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(i['width'],i['height'])==(1086,1448)
  assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(p)==1
  extra_paths.add(p)
 expected.update(extra_paths)
