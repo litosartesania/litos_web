@@ -97,6 +97,13 @@ with sync_playwright() as pw:
         assert page.locator('#detail-product-title').inner_text()=='Mesa auxiliar con baldas'
         assert page.locator('.detail-stage .material-placeholder').count()==1
         assert 'sin imagen propia' in page.locator('.detail-stage .material-placeholder').inner_text()
+        page.locator('#detail-material-picker').select_option('travertino')
+        assert page.locator('#material-picker').input_value()=='travertino'
+        new_image=page.locator('.detail-stage .material-variant-figure img')
+        assert new_image.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-bal__travertino.png'
+        new_image.evaluate('(el)=>el.decode()')
+        assert new_image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+        page.locator('#detail-material-picker').select_option('marquina')
         page.locator('.detail-close').click()
         assert not dialog.is_visible()
 

@@ -55,3 +55,10 @@ done
 for model in consola-esc mesa-comedor-oval; do
  cp "assets/catalogo/revisiones/20261013/planos/$model.png" "$site/assets/catalogo/revisiones/20261013/planos/$model.png"
 done
+
+# Seven selected original travertine PNGs, strictly allowlisted by reviewed slug.
+# Unselected candidates remain ONLY in isolated candidate branch; not published.
+mkdir -p "$site/assets/catalogo/revisiones/20261013/travertino-seleccion"
+for model in mesa-aux-ped mesa-aux-bal lavabo-ped lavabo-sobre bandeja cuenco balda; do
+ cp "assets/catalogo/revisiones/20261013/travertino-seleccion/${model}__travertino.png" "$site/assets/catalogo/revisiones/20261013/travertino-seleccion/${model}__travertino.png"
+done
