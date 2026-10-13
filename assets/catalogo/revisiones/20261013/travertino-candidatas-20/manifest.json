@@ -1,0 +1,231 @@
+{
+  "repo": "litosartesania/litos_web",
+  "branch": "work/travertino-20-candidatas-20261013",
+  "published": false,
+  "scope": "candidatas; no cambiar catálogo ni publicar",
+  "missing_slugs": [
+    "macetero"
+  ],
+  "images": [
+    {
+      "index": 1,
+      "filename": "01_mesa_auxiliar_escultorica_travertino.png",
+      "product_slug_provisional": "mesa-aux-ped",
+      "review_status": "candidata_base",
+      "review_note": "Propuesta geométrica de pedestal con estrechamiento; contrastar plano.",
+      "size_bytes": 3172546,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "fbb6b02fa713d557275ea38a751a162b38f98b4e00409521cec5c4200f3664a8"
+    },
+    {
+      "index": 2,
+      "filename": "02_mesa_auxiliar_cubica_travertino.png",
+      "product_slug_provisional": "mesa-aux-bal",
+      "review_status": "candidata_base",
+      "review_note": "Módulo abierto con balda interior; comprobar número de niveles y dimensiones.",
+      "size_bytes": 3283905,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "1e767fbc859dc1b3c3a2d9f8d8c4439efe896bfbc068c03f0b742e0984630266"
+    },
+    {
+      "index": 3,
+      "filename": "03_mesa_ovalada_travertino.png",
+      "product_slug_provisional": "mesa-comedor-oval",
+      "review_status": "producto_ya_completo",
+      "review_note": "La mesa ovalada ya tiene nueve imágenes publicadas: no sustituir.",
+      "size_bytes": 3476129,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "2e90c5aa9bb98ae4b178bf2b9d5cedd25e1389e1f176bdcb4a51b79224871584"
+    },
+    {
+      "index": 4,
+      "filename": "04_consola_recta_travertino_a.png",
+      "product_slug_provisional": "consola-rect",
+      "review_status": "candidata_base",
+      "review_note": "Opción A para consola recta, geometría por validar.",
+      "size_bytes": 3350294,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "669f81f443d01b5ff4e37eeabe85596ba488c9d0a5945051ade0326becc0a965"
+    },
+    {
+      "index": 5,
+      "filename": "05_mesa_pedestal_travertino.png",
+      "product_slug_provisional": "mesa-aux-ped",
+      "review_status": "alternativa",
+      "review_note": "Segunda propuesta de mesa auxiliar pedestal, no publicar junto con #01.",
+      "size_bytes": 3360441,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "7af2710f4dd6e209c7f297df4fd1f47e5e6c97ad80b896990d5ba95442b87fac"
+    },
+    {
+      "index": 6,
+      "filename": "06_mesa_rectangular_travertino.png",
+      "product_slug_provisional": "mesa-comedor-rect",
+      "review_status": "producto_ya_completo",
+      "review_note": "Mesa rectangular ya tiene nueve imágenes publicadas: no sustituir.",
+      "size_bytes": 3373703,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "50063693c2efcf1e0063b75f6b64ad945d66481215b081cecf0eeb73e7653153"
+    },
+    {
+      "index": 7,
+      "filename": "07_banco_travertino.png",
+      "product_slug_provisional": "banco-rect",
+      "review_status": "candidata_base",
+      "review_note": "Banco lineal con dos patas: comprobar correspondencia con alzado.",
+      "size_bytes": 3141776,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "eeacada4ad60960d358719487080c4cbf37f6be77145a019ca6f55082d6b3bf7"
+    },
+    {
+      "index": 8,
+      "filename": "08_mesa_de_centro_travertino.png",
+      "product_slug_provisional": "mesa-centro-mon",
+      "review_status": "producto_ya_completo",
+      "review_note": "Mesa de centro monolítica publicada: no sustituir.",
+      "size_bytes": 3181275,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "16f21d5b51c929ea5fdbcb24ff2350913dafcacd756216f2a8653ba5201ff3af"
+    },
+    {
+      "index": 9,
+      "filename": "09_lavabo_pedestal_travertino.png",
+      "product_slug_provisional": "lavabo-ped",
+      "review_status": "candidata_base",
+      "review_note": "Lavabo pedestal: perfil del cuenco por comparar con plano.",
+      "size_bytes": 3409871,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "14f3053139907453e0538f88939498c009a800ef0833d7f1b0b3232e2f177a18"
+    },
+    {
+      "index": 10,
+      "filename": "10_consola_recta_travertino_b.png",
+      "product_slug_provisional": "consola-rect",
+      "review_status": "alternativa",
+      "review_note": "Opción B de consola recta: no activar junto con #04.",
+      "size_bytes": 3399915,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "17d5482f854b0ccffe8b1d5de21709d8e699992c70c722d62bd52392bbcb8975"
+    },
+    {
+      "index": 11,
+      "filename": "11_lavabo_sobre_encimera_travertino.png",
+      "product_slug_provisional": "lavabo-sobre",
+      "review_status": "candidata_base",
+      "review_note": "Lavabo de sobreponer sobre una encimera de ambientación.",
+      "size_bytes": 3355400,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "2ae249b7e3bb2c0092ff58f78e52adaf291cecb26f34f0f50bb866ce6f0e71fb"
+    },
+    {
+      "index": 12,
+      "filename": "12_consola_recta_travertino_c.png",
+      "product_slug_provisional": "consola-rect",
+      "review_status": "alternativa",
+      "review_note": "Opción C de consola recta: no activar junto con #04.",
+      "size_bytes": 3435515,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "7d3dc12ef6d0498771ac36234fd4a65e788cbe59e9d13333e69ca7784bc2a313"
+    },
+    {
+      "index": 13,
+      "filename": "13_bandeja_travertino.png",
+      "product_slug_provisional": "bandeja",
+      "review_status": "candidata_base",
+      "review_note": "Bandeja rectangular.",
+      "size_bytes": 3173655,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "965fbf556fff010a61476a600abf0e88aec519978f7a4af37396396af3945efe"
+    },
+    {
+      "index": 14,
+      "filename": "14_pedestal_travertino.png",
+      "product_slug_provisional": "peana",
+      "review_status": "revisar_geometria",
+      "review_note": "Se interpreta como peana pero tiene tapa sobredimensionada; validar con plano cilíndrico.",
+      "size_bytes": 3338674,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "0d1d6d204c493f3fd1db1290772f8dba7a2da6d9eddcbcf0f9895d28caca0a06"
+    },
+    {
+      "index": 15,
+      "filename": "15_cuenco_travertino.png",
+      "product_slug_provisional": "cuenco",
+      "review_status": "candidata_base",
+      "review_note": "Cuenco decorativo.",
+      "size_bytes": 3137002,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "cf85fa455d150e78b82b5420fd520bf2e4d4704bde17bb8305f2bb4cc91198ef"
+    },
+    {
+      "index": 16,
+      "filename": "16_mueble_lavabo_travertino.png",
+      "product_slug_provisional": "encimera-bano",
+      "review_status": "revisar_concepto",
+      "review_note": "Imagen presenta mueble completo con lavabo; catálogo describe encimera plana con hueco.",
+      "size_bytes": 3525541,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "d0df03bd61b6e9376bccfe89a1ee220199900dc02170a5b1571f7bfeb5289edf"
+    },
+    {
+      "index": 17,
+      "filename": "17_mesa_redonda_travertino.png",
+      "product_slug_provisional": "mesa-centro-red",
+      "review_status": "producto_ya_completo",
+      "review_note": "Mesa de centro circular publicada: no sustituir.",
+      "size_bytes": 3360054,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "a878bb017ab4caa35b7bdd94190b2e9ba989e3b1e3cf832d7a0d5f92c81ce3d7"
+    },
+    {
+      "index": 18,
+      "filename": "18_isla_cocina_travertino.png",
+      "product_slug_provisional": "encimera-cocina",
+      "review_status": "revisar_concepto",
+      "review_note": "La imagen muestra isla entera con fregadero; concepto vendido es encimera, no módulo completo.",
+      "size_bytes": 3249929,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "00c7567ac061408b23d8d97bb3d25407ad31e2a65a75f775f9deb51063e64f26"
+    },
+    {
+      "index": 19,
+      "filename": "19_estante_flotante_travertino.png",
+      "product_slug_provisional": "balda",
+      "review_status": "candidata_base",
+      "review_note": "Balda flotante en travertino.",
+      "size_bytes": 3189935,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "d1c4e5ab45dc893cb7cbd228edbc37ff9f0a5d5f61ddffe083c6ba69205d768b"
+    },
+    {
+      "index": 20,
+      "filename": "20_panel_travertino.png",
+      "product_slug_provisional": "panel",
+      "review_status": "revisar_concepto",
+      "review_note": "Representa panel exento; producto de catálogo es revestimiento por m² instalado.",
+      "size_bytes": 3621877,
+      "width": 1122,
+      "height": 1402,
+      "sha256": "186207eaacb01fb0eb9cc801807146a54abd4219651c2c03215cf308c9c680b1"
+    }
+  ]
+}
