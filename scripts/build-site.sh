@@ -60,5 +60,5 @@ done
 # Unselected candidates remain ONLY in isolated candidate branch; not published.
 mkdir -p "$site/assets/catalogo/revisiones/20261013/travertino-seleccion"
 for model in mesa-aux-ped mesa-aux-bal lavabo-ped lavabo-sobre bandeja cuenco balda; do
- cp "assets/catalogo/revisiones/20261013/travertino-seleccion/$model__travertino.png" "$site/assets/catalogo/revisiones/20261013/travertino-seleccion/$model__travertino.png"
+ cp "assets/catalogo/revisiones/20261013/travertino-seleccion/${model}__travertino.png" "$site/assets/catalogo/revisiones/20261013/travertino-seleccion/${model}__travertino.png"
 done
