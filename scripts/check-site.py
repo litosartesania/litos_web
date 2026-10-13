@@ -68,6 +68,23 @@ for item in selection:
  assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(path)==1
  selection_paths.add(path)
 expected.update(selection_paths)
+# Second selected travertine batch: seven unique slugs, original hashes mandatory.
+extra_selection=json.loads((root.parent/'docs/TRAVERTINO_7_EXTRAS_INTEGRACION_20261013.json').read_text(encoding='utf-8'))['images']
+extra_ids={'consola-rect','banco-rect','encimera-bano','encimera-cocina','panel','peana','macetero'}
+assert len(extra_selection)==7 and {i['product_id'] for i in extra_selection}==extra_ids
+extra_paths=set()
+for i in extra_selection:
+ p=i['path']
+ assert i['stone_id']=='travertino' and i['review_status']=='SELECCION_VISUAL_PROVISIONAL'
+ assert p=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/'+i['product_id']+'__travertino.png'
+ assert p not in extra_paths and '..' not in Path(p).parts
+ b=(root/p).read_bytes()
+ assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'], ('extra SHA256',p)
+ assert b[:8]==b'\x89PNG\r\n\x1a\n'
+ assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(i['width'],i['height'])==(1086,1448)
+ assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(p)==1
+ extra_paths.add(p)
+expected.update(extra_paths)
 for p in plans:
  data=(root/p['path']).read_bytes()
  assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
@@ -81,8 +98,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -112,8 +129,8 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261013-travertino7' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261013-travertino7' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261013-travertino21' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261013-travertino21' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)
@@ -156,5 +173,5 @@ if '--production' in sys.argv:
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
-print(f'PASS: five pages, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 7 new travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
+print(f'PASS: five pages, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 14 selected travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
 

@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261013-travertino7",
-        "catalogo-precios.js?v=stone-20261013-travertino7",
+        "styles.css?v=stone-20261013-travertino21",
+        "catalogo-precios.js?v=stone-20261013-travertino21",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -94,6 +94,12 @@ def check(attempt):
         assert script.count(path)==1,('new travertine missing in mapping',path)
         blob=read_live(path,attempt)
         assert len(blob)==item['size_bytes'] and hashlib.sha256(blob).hexdigest()==item['sha256'],('new travertine SHA-256',path)
+    for i in EXTRA_TRAVERTINE:
+        p=i['path']
+        assert p=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/'+i['product_id']+'__travertino.png'
+        assert script.count(p)==1,('extra travertine mapping',p)
+        b=read_live(p,attempt)
+        assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],('extra travertine SHA-256',p)
     for item in ITEMS:
         rel = item["path"]
         if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
@@ -107,6 +113,8 @@ def check(attempt):
 REVISIONS = json.loads((ROOT/'docs/IMPORTACION_CONSOLA_ESC_20261013.json').read_text())['images']
 TRAVERTINE = json.loads((ROOT/'docs/TRAVERTINO_7_REVISION_20261013.json').read_text())['images']
 assert len(TRAVERTINE)==7 and len({x['product_id'] for x in TRAVERTINE})==7
+EXTRA_TRAVERTINE=json.loads((ROOT/'docs/TRAVERTINO_7_EXTRAS_INTEGRACION_20261013.json').read_text())['images']
+assert len(EXTRA_TRAVERTINE)==7 and len({x['product_id'] for x in EXTRA_TRAVERTINE})==7
 assert len(REVISIONS)==11
 PLANS = json.loads((ROOT/'docs/PLANOS_TECNICOS_20261012.json').read_text())['products']
 assert len(PLANS)==9
@@ -120,7 +128,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 11 corrected assets and 7 additional travertine originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 11 corrected assets and 14 additional travertine originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)
