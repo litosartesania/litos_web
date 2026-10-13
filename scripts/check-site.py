@@ -85,6 +85,31 @@ for i in extra_selection:
  assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(p)==1
  extra_paths.add(p)
 expected.update(extra_paths)
+# Twelve owner-supplied reviewed-for-preview ortho plates: SHA, allowlist, projection size.
+selected_drawings=json.loads((root.parent/'docs/PLANOS_12_SELECCION_20261013.json').read_text(encoding='utf-8'))['images']
+missing_ids={'mesa-aux-bal','consola-rect','banco-rect','lavabo-sobre','encimera-bano','encimera-cocina','balda','panel','bandeja','peana','cuenco','macetero'}
+assert len(selected_drawings)==12 and {i['product_id'] for i in selected_drawings}==missing_ids
+assert not ({i['product_id'] for i in plans}&missing_ids)
+new_drawings=set()
+for i in selected_drawings:
+ p=i['path']
+ assert i['review_status']=='PROPUESTA_PARA_REVISION_NO_PUBLICADA'
+ assert p=='assets/catalogo/revisiones/20261013/planos-12-seleccion/'+i['product_id']+'.png'
+ assert i['source_path']=='assets/catalogo/revisiones/20261013/planos-12-candidatos/'+i['product_id']+'.png'
+ assert p not in new_drawings and '..' not in Path(p).parts
+ b=(root/p).read_bytes()
+ assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],('new drawing SHA-256',p)
+ assert b[:8]==b'\x89PNG\r\n\x1a\n'
+ assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(i['width'],i['height'])==(1600,1200)
+ assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(p)==1,('new drawing mapping',p)
+ new_drawings.add(p)
+js=(root/'catalogo-precios.js').read_text(encoding='utf-8')
+mapped=re.search(r'const approvedTechnicalDrawings=Object\.freeze\((\{[^\n]*\})\);',js)
+assert mapped
+drawing_map=json.loads(mapped.group(1))
+assert len(drawing_map)==21 and set(drawing_map)==({p['product_id'] for p in plans}|missing_ids)
+assert all(drawing_map[i['product_id']]==i['path'] for i in selected_drawings)
+expected.update(new_drawings)
 for p in plans:
  data=(root/p['path']).read_bytes()
  assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
@@ -98,8 +123,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -129,8 +154,8 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261013-travertino21' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261013-travertino21' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261013-planos21' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261013-planos21' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)

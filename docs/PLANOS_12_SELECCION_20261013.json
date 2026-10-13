@@ -22,7 +22,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/mesa-aux-bal.png",
       "git_blob_sha": "d3fc45274ab193c45fb07c2e0237b7013fc80562",
       "sha256": "73213339ba2be7c766945768eaa96c7410abfbee891cf5b901e0397bd7e6a7dd",
-      "size_bytes": null,
+      "size_bytes": 82906,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -41,7 +41,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/consola-rect.png",
       "git_blob_sha": "f0587ffb0ef97a2f74e0ada93f41faedd34b8292",
       "sha256": "b307d704ac9f8de76fbe8e0560d1ab0851d4082993fac8d8bfd8b9ee0abd1bba",
-      "size_bytes": null,
+      "size_bytes": 83568,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -60,7 +60,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/banco-rect.png",
       "git_blob_sha": "e11860677e0e24d4ced11b549f71a1d750f86817",
       "sha256": "2b0a70a30d4630de64e31c9f2c89eedebdd58c78b201711437bf1ccbee4e0896",
-      "size_bytes": null,
+      "size_bytes": 83179,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -79,7 +79,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/lavabo-sobre.png",
       "git_blob_sha": "1e185689e267ae9f2fed4dd0134d4b5c54548022",
       "sha256": "61c6edc3e0efc69da24eed0a956920de02dbdb13eb0741a0b478b8fbfb739f9b",
-      "size_bytes": null,
+      "size_bytes": 113070,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -98,7 +98,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/encimera-bano.png",
       "git_blob_sha": "4ee6231124d38ac725cd5674219c5d05de47e770",
       "sha256": "6c8741c2a15950b87171873ae4fadb8b75d5e77f575dd7470734ac8d3f826549",
-      "size_bytes": null,
+      "size_bytes": 86732,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -117,7 +117,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/encimera-cocina.png",
       "git_blob_sha": "9914f1786688c033edd62ad3c9b8e6a34d067433",
       "sha256": "a9786daf4430cb7dab94041c8d5cbfcb2f66138cc5c179a1bea89c38d1523f12",
-      "size_bytes": null,
+      "size_bytes": 82156,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -136,7 +136,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/balda.png",
       "git_blob_sha": "8aa131048c2924cc2119193eca25e05a9328767a",
       "sha256": "ee41ef321a8359142525527fe79dd27d3811c6df47d6d0f115d948d0fae381a4",
-      "size_bytes": null,
+      "size_bytes": 79931,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -155,7 +155,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/panel.png",
       "git_blob_sha": "e0bd688491a4bd9c4ce26ec39cb9d0a578b5b846",
       "sha256": "6be59227f404389815aa4c227dbfa69b95a8e0d844647794bb378906a782ba0f",
-      "size_bytes": null,
+      "size_bytes": 77650,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -174,7 +174,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/bandeja.png",
       "git_blob_sha": "16acc9be6dd524170ebc332eb7da5ca3a072371d",
       "sha256": "997e9d34068df509194000df031b6559a9efba7bf84a05b1e2a96edb34122c3a",
-      "size_bytes": null,
+      "size_bytes": 84148,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -193,7 +193,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/peana.png",
       "git_blob_sha": "dedfbed6b5812ddfb8937175547f5d4e3c504154",
       "sha256": "7565653ee81ed8574065575d4e70f7a6f68aeaebaed77dea44c7a1220be088ce",
-      "size_bytes": null,
+      "size_bytes": 84275,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -212,7 +212,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/cuenco.png",
       "git_blob_sha": "2363ec93c04962fb5342d2d8d8485c0fe477bfc2",
       "sha256": "d0c9926b735263e3ae9341dfcd3c3c72b0031276665c3fecdb5d5c8071264724",
-      "size_bytes": null,
+      "size_bytes": 110427,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"
@@ -231,7 +231,7 @@
       "source_path": "assets/catalogo/revisiones/20261013/planos-12-candidatos/macetero.png",
       "git_blob_sha": "e7ca167ebb77d11e51a35bdf8b318c5f14b10385",
       "sha256": "9f8996dd8c008b0243566b1dd4d118ac794a8cd974ceaa46c69daf58e7b76cda",
-      "size_bytes": null,
+      "size_bytes": 102048,
       "width": 1600,
       "height": 1200,
       "review_status": "PROPUESTA_PARA_REVISION_NO_PUBLICADA"

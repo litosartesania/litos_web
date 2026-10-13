@@ -425,3 +425,8 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - `docs/PROGRESO_CATALOGO.md` contiene ahora la matriz de **21 productos × 9 piedras**, con casillas calculadas a partir de `approvedVariants` y columna independiente de planos desde `approvedTechnicalDrawings`.
 - La matriz publicada muestra **77/189 imágenes**, **21/21 travertinos** y **9/21 planos**; las **112 variantes y 12 planos restantes** se mantienen pendientes. Base de evidencia: despliegue Pages [#38438636709](https://github.com/litosartesania/litos_web/actions/runs/38438636709) SUCCESS.
 - Este cambio es solo de documentación: ni catálogo HTML/JS, ni assets, ni precios, ni producción comercial se alteran; PR experimental #8 intacto.
+
+## 13/10/2026 — Los 12 planos pendientes integrados en rama SOLO DE REVISIÓN
+- Recibidos y comprobados 12 PNG originales (1600×1200) + 12 SVG editables en `work/planos-12-archivos-20261013`. Reutilizados como blobs Git idénticos en `work/planos-12-integracion-20261013`, identificados en `docs/PLANOS_12_SELECCION_20261013.json`. Los SVG siguen en rama de archivos y están excluidos de Pages.
+- El selector «Plano técnico» reconoce las 21 fichas SOLO en la rama de revisión. La publicación, los nueve planos anteriores, los precios y los nueve materiales se mantienen intactos. Se añadieron verificaciones de dimensiones, SHA-256, allowlist, modal y navegadores; la auditoría pública solo se ejecutará tras publicación autorizada.
+- Cotas hipotéticas, bocetos conceptuales y **NO aptos para fabricación**. Ningún plano adicional aprobado todavía. Estado público vigente: 77/189 imágenes de piedra, 21/21 travertinos y **9/21 planos**; la aprobación visual y autorización expresa siguen pendientes.

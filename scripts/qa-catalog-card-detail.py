@@ -76,8 +76,8 @@ with sync_playwright() as pw:
         drawing.evaluate('(im)=>im.decode()')
         assert drawing.evaluate('(im)=>im.naturalWidth===1600&&im.naturalHeight===1200')
         assert drawing.evaluate('(im)=>getComputedStyle(im).objectFit')=='contain'
-        assert page.locator('.piece-grid .technical-drawing-figure img').count()==9
-        assert page.locator('.piece-grid .technical-placeholder').count()==12
+        assert page.locator('.piece-grid .technical-drawing-figure img').count()==21
+        assert page.locator('.piece-grid .technical-placeholder').count()==0
         assert page.locator('#detail-price').inner_text()==last_price
         assert 'Negro Marquina' in page.locator('#detail-stone').inner_text()
         if width in (390,1440):page.screenshot(path=str(out/f'plano-mon-detalle-{width}.png'),animations='disabled')
@@ -140,6 +140,17 @@ with sync_playwright() as pw:
         revised_plan.evaluate('(e)=>e.decode()')
         assert revised_plan.evaluate('(e)=>e.naturalWidth===1448&&e.naturalHeight===1086')
         assert page.locator('#detail-price').inner_text()==before_technical
+        page.locator('.detail-close').click()
+        assert not dialog.is_visible()
+        # Additional new drawing: planter in synchronized product detail.
+        page.locator('[data-product="macetero"] .product-open').click()
+        assert dialog.is_visible()
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        sheet=page.locator('.detail-stage .technical-drawing-figure img')
+        assert sheet.count()==1 and sheet.get_attribute('src')=='assets/catalogo/revisiones/20261013/planos-12-seleccion/macetero.png'
+        sheet.evaluate('(im)=>{im.loading="eager"}')
+        sheet.evaluate('(im)=>im.decode()')
+        assert sheet.evaluate('(im)=>im.naturalWidth===1600&&im.naturalHeight===1200')
         page.locator('.detail-close').click()
         assert not dialog.is_visible()
         page.locator('[data-category-filter="Baño"]').click()
