@@ -45,3 +45,13 @@ mkdir -p "$site/assets/catalogo/planos"
 for asset in mesa-comedor-oval.png mesa-comedor-red.png mesa-comedor-rect.png mesa-centro-mon.png mesa-centro-red.png consola-esc.png banco-esc.png mesa-aux-ped.png lavabo-ped.png; do
  cp "assets/catalogo/planos/$asset" "$site/assets/catalogo/planos/$asset"
 done
+
+# Explicitly allowlist only the eleven corrected originals reviewed 2026-10-13.
+# The prior 63 variants and 9 technical sheets remain unchanged and still ship.
+mkdir -p "$site/assets/catalogo/revisiones/20261013/variantes" "$site/assets/catalogo/revisiones/20261013/planos"
+for material in travertino caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
+ cp "assets/catalogo/revisiones/20261013/variantes/consola-esc__$material.png" "$site/assets/catalogo/revisiones/20261013/variantes/consola-esc__$material.png"
+done
+for model in consola-esc mesa-comedor-oval; do
+ cp "assets/catalogo/revisiones/20261013/planos/$model.png" "$site/assets/catalogo/revisiones/20261013/planos/$model.png"
+done
