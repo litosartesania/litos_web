@@ -46,7 +46,7 @@ for i in corrections:
  assert rel==('assets/catalogo/revisiones/20261013/variantes/consola-esc__'+i['stone_id']+'.png' if i['kind']=='material_variant' else 'assets/catalogo/revisiones/20261013/planos/'+i['product_id']+'.png')
  blob=(root/rel).read_bytes()
  assert len(blob)==i['size_bytes'] and hashlib.sha256(blob).hexdigest()==i['sha256'],('corrected image SHA-256',rel)
- assert blob[:8]==b'\\x89PNG\\r\\n\\x1a\\n'
+ assert blob[:8]==b'\x89PNG\r\n\x1a\n'
  assert (int.from_bytes(blob[16:20],'big'),int.from_bytes(blob[20:24],'big'))==(i['width'],i['height'])
  assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(rel)==1,('corrected image not selected',rel)
 review_paths={x['path'] for x in corrections}
