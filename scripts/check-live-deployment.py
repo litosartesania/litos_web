@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261013-correcciones",
-        "catalogo-precios.js?v=stone-20261013-correcciones",
+        "styles.css?v=stone-20261013-travertino7",
+        "catalogo-precios.js?v=stone-20261013-travertino7",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -88,6 +88,12 @@ def check(attempt):
         assert script.count(rel)==1,("revised image not referenced",rel)
         blob=read_live(rel, attempt)
         assert len(blob)==item["size_bytes"] and hashlib.sha256(blob).hexdigest()==item["sha256"],("revised image hash mismatch",rel)
+    for item in TRAVERTINE:
+        path=item["path"]
+        assert path=='assets/catalogo/revisiones/20261013/travertino-seleccion/'+item['product_id']+'__travertino.png'
+        assert script.count(path)==1,('new travertine missing in mapping',path)
+        blob=read_live(path,attempt)
+        assert len(blob)==item['size_bytes'] and hashlib.sha256(blob).hexdigest()==item['sha256'],('new travertine SHA-256',path)
     for item in ITEMS:
         rel = item["path"]
         if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
@@ -99,6 +105,8 @@ def check(attempt):
             raise AssertionError(f"{rel}: SHA-256 differs from original")
 
 REVISIONS = json.loads((ROOT/'docs/IMPORTACION_CONSOLA_ESC_20261013.json').read_text())['images']
+TRAVERTINE = json.loads((ROOT/'docs/TRAVERTINO_7_REVISION_20261013.json').read_text())['images']
+assert len(TRAVERTINE)==7 and len({x['product_id'] for x in TRAVERTINE})==7
 assert len(REVISIONS)==11
 PLANS = json.loads((ROOT/'docs/PLANOS_TECNICOS_20261012.json').read_text())['products']
 assert len(PLANS)==9
@@ -112,7 +120,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings and 11 corrected assets, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 11 corrected assets and 7 additional travertine originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)
