@@ -100,6 +100,28 @@ with sync_playwright() as pw:
         page.locator('.detail-close').click()
         assert not dialog.is_visible()
 
+        # Corrected console imagery is available in modal and synchronized with main selector.
+        page.locator('[data-product="consola-esc"] .product-open').click()
+        assert dialog.is_visible()
+        assert page.locator('#detail-product-title').inner_text()=='Consola escultórica'
+        page.locator('#detail-material-picker').select_option('caliza')
+        assert page.locator('#material-picker').input_value()=='caliza'
+        revised_console=page.locator('.detail-stage .material-variant-figure img')
+        assert revised_console.get_attribute('src')=='assets/catalogo/revisiones/20261013/variantes/consola-esc__caliza.png'
+        revised_console.evaluate('(e)=>{e.loading="eager"}')
+        revised_console.evaluate('(e)=>e.decode()')
+        assert revised_console.evaluate('(e)=>e.naturalWidth===1122&&e.naturalHeight===1402')
+        before_technical=page.locator('#detail-price').inner_text()
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        assert page.locator('#material-picker').input_value()=='plano-tecnico'
+        revised_plan=page.locator('.detail-stage .technical-drawing-figure img')
+        assert revised_plan.get_attribute('src')=='assets/catalogo/revisiones/20261013/planos/consola-esc.png'
+        revised_plan.evaluate('(e)=>{e.loading="eager"}')
+        revised_plan.evaluate('(e)=>e.decode()')
+        assert revised_plan.evaluate('(e)=>e.naturalWidth===1448&&e.naturalHeight===1086')
+        assert page.locator('#detail-price').inner_text()==before_technical
+        page.locator('.detail-close').click()
+        assert not dialog.is_visible()
         page.locator('[data-category-filter="Baño"]').click()
         assert page.locator('.piece-card:visible').count()==3,(width,'family filter not retained')
         page.locator('[data-category-filter="Todos"]').click()
