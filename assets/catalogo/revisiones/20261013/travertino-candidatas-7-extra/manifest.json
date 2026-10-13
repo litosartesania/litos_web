@@ -1,0 +1,94 @@
+{
+  "proyecto": "LITOS COMERCIAL",
+  "repository": "litosartesania/litos_web",
+  "source": "imagenes suministradas por el usuario en esta conversación",
+  "fecha": "2026-10-13",
+  "objetivo": "Almacenamiento de siete candidatas adicionales. No activa imágenes en la web ni modifica precios.",
+  "published": false,
+  "images": [
+    {
+      "numero": 1,
+      "original": "entrada_mediterránea_con_consola_de_travertino.png",
+      "archivo": "01_consola_recta_travertino_v2.png",
+      "producto": "Consola recta",
+      "slug": "consola-rect",
+      "material": "Travertino beige",
+      "sha256": "f8962c9f9b40f9ef5bd7f6d1e0fa37c08a665605ddbc006c8232a99a2676314a",
+      "bytes": 2667336,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "Alternativa visual, no sustituir hasta validación de geometría"
+    },
+    {
+      "numero": 2,
+      "original": "banco_minimalista_de_travertino_mediterráneo.png",
+      "archivo": "02_banco_recto_travertino_v2.png",
+      "producto": "Banco lineal",
+      "slug": "banco-rect",
+      "material": "Travertino beige",
+      "sha256": "7c965601071329a6f56acfd1525d33d61167615adccca10b16e770bfda5a356e",
+      "bytes": 2456919,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "Alternativa visual, contrastar apoyos con plano"
+    },
+    {
+      "numero": 3,
+      "original": "baño_mediterráneo_de_travertino_y_luz_dorada.png",
+      "archivo": "03_encimera_bano_suspendida_travertino.png",
+      "producto": "Encimera de baño",
+      "slug": "encimera-bano",
+      "material": "Travertino beige",
+      "sha256": "8b4c029ad9c1d805fe281886f3c5efd8a3243360c0638ecc94d0b7a8fd13bff1",
+      "bytes": 2493033,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "Vista conceptual de encimera suspendida con lavabo integrado"
+    },
+    {
+      "numero": 4,
+      "original": "cocina_mediterránea_bañada_por_el_sol.png",
+      "archivo": "04_encimera_cocina_travertino.png",
+      "producto": "Encimera de cocina",
+      "slug": "encimera-cocina",
+      "material": "Travertino beige",
+      "sha256": "2d9cc93defdb06cbe1dd696b262f326a771c344bc8d461a415b4fce1ff59c8b7",
+      "bytes": 2626188,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "Vista de cocina con mobiliario de madera; no atribuir muebles al producto piedra"
+    },
+    {
+      "numero": 5,
+      "original": "panel_de_travertino_en_villa_mediterránea.png",
+      "archivo": "05_panel_revestimiento_travertino_v2.png",
+      "producto": "Panel de revestimiento (m2)",
+      "slug": "panel",
+      "material": "Travertino beige",
+      "sha256": "30ac80316ca7d561792a8d871a3842cb0249e095084713cac7889e71902b9b09",
+      "bytes": 2766559,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "Propuesta de panel vertical, interpretar como revestimiento"
+    },
+    {
+      "numero": 6,
+      "original": "pedestal_de_travertino_bajo_luz_mediterránea.png",
+      "archivo": "06_peana_prismatica_travertino.png",
+      "producto": "Peana escultórica",
+      "slug": "peana",
+      "material": "Travertino beige",
+      "sha256": "331f4e61d7ad1b51ea2647a6239c254eac927f06affda1f86dcdf030e32fd90b",
+      "bytes": 2467119,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "Nueva geometría prismática por validar"
+    },
+    {
+      "numero": 7,
+      "original": "macetero_de_travertino_con_olivo_mediterráneo.png",
+      "archivo": "07_macetero_mineral_travertino.png",
+      "producto": "Macetero mineral",
+      "slug": "macetero",
+      "material": "Travertino beige",
+      "sha256": "68eefd55ad25fac2ce147de033d5d3512fb22430f20810251d84280b8b812859",
+      "bytes": 2681364,
+      "estado": "CANDIDATA_EN_REVISION_NO_PUBLICADA",
+      "nota": "El olivo es atrezzo; el producto es el macetero"
+    }
+  ]
+}
