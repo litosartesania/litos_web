@@ -1,6 +1,6 @@
 # LITOS COMERCIAL — Tabla de progreso del catálogo
 
-**Estado vigente verificado el 13/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`. Último despliegue Pages: [#38438636709](https://github.com/litosartesania/litos_web/actions/runs/38438636709) — **SUCCESS**; entrega de las imágenes: [#38437710472](https://github.com/litosartesania/litos_web/actions/runs/38437710472) — **SUCCESS**.
+**Estado vigente verificado el 13/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`. Último despliegue Pages: [#38448981789](https://github.com/litosartesania/litos_web/actions/runs/38448981789) — **SUCCESS**; entrega de las imágenes: [#38437710472](https://github.com/litosartesania/litos_web/actions/runs/38437710472) — **SUCCESS**.
 
 **Criterio «HECHO»:** imagen o lámina correcta, seleccionable, visible en producción y validada por HTTP/SHA-256. Los demás estados históricos que aparecen al final de este documento son cronología y **no modifican este cuadro vigente**.
 
@@ -10,7 +10,7 @@
 | --- | ---: | ---: | ---: |
 | **Imágenes específicas producto × piedra** | **77/189** | **112** | **40,7 %** |
 | **Travertino beige (imagen maestra)** | **21/21** | **0** | **100 %** |
-| **Planos técnicos ilustrativos** | **9/21** | **12** | **42,9 %** |
+| **Planos técnicos ilustrativos** | **21/21** | **0** | **100 %** |
 | **Productos con las 9 piedras publicadas** | **7/21** | **14** | **33,3 %** |
 
 El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios son orientativos. Ninguna casilla se da por terminada por existir un archivo en una rama; requiere visualización pública y verificación de GitHub Pages. Las 112 imágenes aún pendientes corresponden a **14 productos × 8 piedras distintas del travertino**. No hay imágenes publicables en espera de autorización.
@@ -27,34 +27,34 @@ El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios so
 | Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Mesa auxiliar pedestal | Mesas | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
-| Mesa auxiliar con baldas | Mesas | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Mesa auxiliar con baldas | Mesas | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
 | Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
-| Consola recta | Consolas | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Consola recta | Consolas | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
 | Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
-| Banco lineal | Bancos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Banco lineal | Bancos | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
 | Lavabo pedestal | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
-| Lavabo de sobreponer | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Encimera de baño | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Encimera de cocina | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Balda / repisa de piedra | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Panel de revestimiento (m²) | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Bandeja de piedra | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Peana escultórica | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Cuenco decorativo | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
-| Macetero mineral | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | — |
+| Lavabo de sobreponer | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Encimera de baño | Baño | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Encimera de cocina | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Balda / repisa de piedra | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Panel de revestimiento (m²) | Arquitectura | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Bandeja de piedra | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Peana escultórica | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Cuenco decorativo | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Macetero mineral | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
 
 ## Estado de los productos por material
 
 - **Siete productos completos (9/9)**: Mesa de comedor ovalada; Mesa de comedor redonda; Mesa de comedor rectangular; Mesa de centro monolítica; Mesa de centro circular; Consola escultórica; Banco escultórico.
 - **Otros 14 productos (1/9)**: imagen individual de **Travertino beige** publicada; faltan sus otras ocho piedras. Ninguno dispone todavía de 9/9.
-- **Planos**: nueve publicados y doce pendientes de validación geométrica y cotas orientativas; son una **vista independiente**, no una décima piedra.
+- **Planos**: **21/21 publicados y verificados**; las doce láminas nuevas son ilustraciones conceptuales con cotas orientativas, no documentación técnica apta para fabricar. La vista es independiente de las nueve piedras.
 - En las fichas, cualquier piedra sin imagen propia debe conservar un aviso, sin presentar como tal una fotografía de otro material.
 
 ## Evidencias y actualización segura
 
-- **Último despliegue público: [#38438636709](https://github.com/litosartesania/litos_web/actions/runs/38438636709) — SUCCESS**. Validación de HTML/CSS/JS, 77 variantes publicadas (63 históricas + 14 travertinos), 9 planos y PNG SHA-256 íntegros.
-- **PR de segunda tanda [#34](https://github.com/litosartesania/litos_web/pull/34)** — fusionada; PR documental [#35](https://github.com/litosartesania/litos_web/pull/35) — fusionada.
-- La evidencia anterior se conserva a continuación como registro cronológico; las cifras de 27/36/45/63 de hitos pasados no deben tratarse como estado actual.
+- **Último despliegue público: [#38448981789](https://github.com/litosartesania/litos_web/actions/runs/38448981789) — SUCCESS**. Verificación HTTP 200 y SHA-256 de 77 imágenes de piedras, 21 planos (9 anteriores + 12 nuevos), once correcciones, y controles de HTML/CSS/JS, privacidad y navegación responsive.
+- **PR de planos [#37](https://github.com/litosartesania/litos_web/pull/37)** — fusionada tras aprobación expresa del propietario, commit `3b699e643b745597d549d8d06c4912ae8d0bfd84`. PR de travertinos [#34](https://github.com/litosartesania/litos_web/pull/34) y PR documentales [#35](https://github.com/litosartesania/litos_web/pull/35) y [#36](https://github.com/litosartesania/litos_web/pull/36) — fusionadas.
+- La evidencia anterior se conserva a continuación como registro cronológico; las cifras de 27/36/45/63/9 planos de hitos pasados no deben tratarse como estado actual. El estado vigente está exclusivamente en la cabecera y matriz de este documento.
 
 
 - Web pública: https://litosartesania.github.io/litos_web/mobiliario.html#catalogo
@@ -184,3 +184,10 @@ La vista «Plano técnico» se muestra en el selector, separada de las nueve pie
 - Recibidos y comprobados 12 PNG originales (1600×1200) + 12 SVG editables en `work/planos-12-archivos-20261013`. Reutilizados como blobs Git idénticos en `work/planos-12-integracion-20261013`, identificados en `docs/PLANOS_12_SELECCION_20261013.json`. Los SVG siguen en rama de archivos y están excluidos de Pages.
 - El selector «Plano técnico» reconoce las 21 fichas SOLO en la rama de revisión. La publicación, los nueve planos anteriores, los precios y los nueve materiales se mantienen intactos. Se añadieron verificaciones de dimensiones, SHA-256, allowlist, modal y navegadores; la auditoría pública solo se ejecutará tras publicación autorizada.
 - Cotas hipotéticas, bocetos conceptuales y **NO aptos para fabricación**. Ningún plano adicional aprobado todavía. Estado público vigente: 77/189 imágenes de piedra, 21/21 travertinos y **9/21 planos**; la aprobación visual y autorización expresa siguen pendientes.
+
+## 2026-10-13 — PUBLICACIÓN DE LOS 21 PLANOS TÉCNICOS CONFIRMADA
+- Aprobación del propietario: «PROCEDE» tras revisar las 12 nuevas propuestas. PR [#37](https://github.com/litosartesania/litos_web/pull/37) fusionada mediante squash `3b699e643b745597d549d8d06c4912ae8d0bfd84`.
+- GitHub Pages: despliegue [#38448981789](https://github.com/litosartesania/litos_web/actions/runs/38448981789) en **SUCCESS**. Verificados HTTP y SHA-256 exactos de los doce planos nuevos, nueve anteriores, 77 imágenes de piedra y correcciones previas.
+- **Estado canónico publicado: 21/21 planos (100 %); 77/189 imágenes de piedra (40,7 %); 21/21 travertinos (100 %).** Faltan **112** imágenes: ocho materiales para catorce productos. Ningún plano pendiente.
+- Las láminas solo representan alzado, planta y perfil ilustrativos, con medidas hipotéticas en cm; **NO sirven para fabricar**. Los 12 SVG originales siguen en la rama de archivos; GitHub Pages solo aloja los PNG seleccionados con su integridad validada. La rama de archivos conserva un manifiesto histórico con estado previo de revisión, anterior a esta autorización.
+- Siguiente objetivo: producir las 112 variantes de piedra pendientes una a una, contrastando siempre el mismo modelo y sus proporciones; evitar publicar renders de geometría incompatible o materiales simulados sin verificación.
