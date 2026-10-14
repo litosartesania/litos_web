@@ -1,6 +1,6 @@
 # LITOS COMERCIAL — Tabla de progreso del catálogo
 
-**Estado vigente verificado el 13/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`. Último despliegue Pages: [#38468958479](https://github.com/litosartesania/litos_web/actions/runs/38468958479) — **SUCCESS**; entrega de las imágenes: [#38437710472](https://github.com/litosartesania/litos_web/actions/runs/38437710472) — **SUCCESS**.
+**Estado vigente verificado el 14/10/2026.** Repositorio exclusivo: `litosartesania/litos_web`. Último despliegue Pages: [#38595707375](https://github.com/litosartesania/litos_web/actions/runs/38595707375) — **SUCCESS**; entrega de las imágenes: [#38437710472](https://github.com/litosartesania/litos_web/actions/runs/38437710472) — **SUCCESS**.
 
 **Criterio «HECHO»:** imagen o lámina correcta, seleccionable, visible en producción y validada por HTTP/SHA-256. Los demás estados históricos que aparecen al final de este documento son cronología y **no modifican este cuadro vigente**.
 
@@ -8,12 +8,12 @@
 
 | Indicador | Publicados y verificados | Pendientes | Avance |
 | --- | ---: | ---: | ---: |
-| **Imágenes específicas producto × piedra** | **85/189** | **104** | **45,0 %** |
+| **Imágenes específicas producto × piedra** | **93/189** | **96** | **49,2 %** |
 | **Travertino beige (imagen maestra)** | **21/21** | **0** | **100 %** |
 | **Planos técnicos ilustrativos** | **21/21** | **0** | **100 %** |
-| **Productos con las 9 piedras publicadas** | **8/21** | **13** | **38,1 %** |
+| **Productos con las 9 piedras publicadas** | **9/21** | **12** | **42,9 %** |
 
-El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios son orientativos. Ninguna casilla se da por terminada por existir un archivo en una rama; requiere visualización pública y verificación de GitHub Pages. Las **104** imágenes aún pendientes corresponden a **13 productos × 8 piedras distintas del travertino**. Las ocho nuevas fotografías de la Mesa auxiliar pedestal están publicadas y verificadas.
+El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios son orientativos. Ninguna casilla se da por terminada por existir un archivo en una rama; requiere visualización pública y verificación de GitHub Pages. Las **96** imágenes pendientes corresponden a **12 productos × 8 piedras distintas del travertino**. Las ocho nuevas fotografías de la Mesa auxiliar con baldas están publicadas y verificadas, igual que las de la Mesa auxiliar pedestal.
 
 ## Matriz producto × material + planos
 
@@ -27,7 +27,7 @@ El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios so
 | Mesa de centro monolítica | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Mesa de centro circular | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Mesa auxiliar pedestal | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
-| Mesa auxiliar con baldas | Mesas | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Mesa auxiliar con baldas | Mesas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Consola escultórica | Consolas | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Consola recta | Consolas | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
 | Banco escultórico | Bancos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
@@ -45,14 +45,14 @@ El catálogo incluye 21 **conceptos**; no son piezas fabricadas y los precios so
 
 ## Estado de los productos por material
 
-- **Ocho productos completos (9/9)**: Mesa de comedor ovalada; Mesa de comedor redonda; Mesa de comedor rectangular; Mesa de centro monolítica; Mesa de centro circular; **Mesa auxiliar pedestal**; Consola escultórica; Banco escultórico.
-- **Otros 13 productos (1/9)**: imagen individual de **Travertino beige** publicada; faltan sus otras ocho piedras. Ninguno dispone todavía de 9/9.
+- **Nueve productos completos (9/9)**: Mesa de comedor ovalada; Mesa de comedor redonda; Mesa de comedor rectangular; Mesa de centro monolítica; Mesa de centro circular; **Mesa auxiliar pedestal**; **Mesa auxiliar con baldas**; Consola escultórica; Banco escultórico.
+- **Otros 12 productos (1/9)**: imagen individual de **Travertino beige** publicada; faltan sus otras ocho piedras. Ninguno dispone todavía de 9/9.
 - **Planos**: **21/21 publicados y verificados**; las doce láminas nuevas son ilustraciones conceptuales con cotas orientativas, no documentación técnica apta para fabricar. La vista es independiente de las nueve piedras.
 - En las fichas, cualquier piedra sin imagen propia debe conservar un aviso, sin presentar como tal una fotografía de otro material.
 
 ## Evidencias y actualización segura
 
-- **Último despliegue público: [#38468958479](https://github.com/litosartesania/litos_web/actions/runs/38468958479) — SUCCESS**. Verificación HTTP 200 y SHA-256 de 85 imágenes de piedras, incluidos ocho nuevos originales de la Mesa auxiliar pedestal, 21 planos (9 anteriores + 12 nuevos) y controles de HTML/CSS/JS, privacidad y navegación responsive.
+- **Último despliegue público: [#38595707375](https://github.com/litosartesania/litos_web/actions/runs/38595707375) — SUCCESS**. Verificación HTTP 200 y SHA-256 de 93 imágenes de piedra, incluidas ocho nuevas originales de la Mesa auxiliar con baldas, 21 planos (9 anteriores + 12 nuevos), HTML/CSS/JS, privacidad y navegación responsive.
 - **PR de planos [#37](https://github.com/litosartesania/litos_web/pull/37)** — fusionada tras aprobación expresa del propietario, commit `3b699e643b745597d549d8d06c4912ae8d0bfd84`. PR de travertinos [#34](https://github.com/litosartesania/litos_web/pull/34) y PR documentales [#35](https://github.com/litosartesania/litos_web/pull/35) y [#36](https://github.com/litosartesania/litos_web/pull/36) — fusionadas.
 - La evidencia anterior se conserva a continuación como registro cronológico; las cifras de 27/36/45/63/9 planos de hitos pasados no deben tratarse como estado actual. El estado vigente está exclusivamente en la cabecera y matriz de este documento.
 
@@ -198,3 +198,10 @@ La vista «Plano técnico» se muestra en el selector, separada de las nueve pie
 - La primera imagen fue correctamente **Caliza Campaspero**, no Travertino. Los ocho materiales incorporados: caliza, macael, carrara, marquina, granito, cuarcita, calacatta y verde-alpi. El travertino publicado anteriormente sigue intacto.
 - **Estado canónico: 85/189 imágenes de piedra (45,0 %) y 104 pendientes; 8/21 productos completos con 9 piedras; 21/21 planos publicados**. Los restantes 13 productos conservan un único travertino hasta generar otras ocho variantes por producto.
 - Todas las imágenes son conceptuales, no piezas ejecutadas. Los planos contienen cotas hipotéticas y no son aptos para fabricar. Precios orientativos, sin encargos ni formularios. Se mantiene el coste gratuito, privacidad y la exclusividad de `litosartesania/litos_web`.
+
+## 2026-10-14 — Mesa auxiliar con baldas: 9/9 PUBLICADAS Y VERIFICADAS
+- Ocho originales recibidos del usuario en `work/mesa-aux-baldas-8-variantes-20261014` con SHA-256 íntegros, posteriormente seleccionados como blobs Git idénticos. Se fusionó [PR #41](https://github.com/litosartesania/litos_web/pull/41), commit `be7c513c4348a1edb7580941d519f3e2dc2f6486`.
+- GitHub Pages [#38595707375](https://github.com/litosartesania/litos_web/actions/runs/38595707375): **SUCCESS**. Verificación pública HTTP 200, bytes y SHA-256 de los ocho PNG originales (1122×1402), sin alterar los otros 85 materiales ni los 21 planos.
+- Piedra de la mesa con baldas: travertino existente + ocho nuevas (Caliza Campaspero, Blanco Macael, Carrara, Negro Marquina, Granito gris, Cuarcita, Calacatta Gold y Verde Alpi). Todas son renders conceptuales, no piezas reales fabricadas; los planos no sirven para fabricación.
+- **Estado canónico: 93/189 imágenes publicadas (49,2 %) y 96 pendientes; 9/21 productos completos; travertinos 21/21; planos 21/21**. Pendientes: ocho materiales para doce productos.
+- Coste cero, privacidad preservada y trabajo exclusivamente en `litosartesania/litos_web`. No se alteraron otros repositorios ni procesos.

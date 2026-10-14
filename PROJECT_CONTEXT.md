@@ -444,3 +444,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - La primera imagen fue correctamente **Caliza Campaspero**, no Travertino. Los ocho materiales incorporados: caliza, macael, carrara, marquina, granito, cuarcita, calacatta y verde-alpi. El travertino publicado anteriormente sigue intacto.
 - **Estado canónico: 85/189 imágenes de piedra (45,0 %) y 104 pendientes; 8/21 productos completos con 9 piedras; 21/21 planos publicados**. Los restantes 13 productos conservan un único travertino hasta generar otras ocho variantes por producto.
 - Todas las imágenes son conceptuales, no piezas ejecutadas. Los planos contienen cotas hipotéticas y no son aptos para fabricar. Precios orientativos, sin encargos ni formularios. Se mantiene el coste gratuito, privacidad y la exclusividad de `litosartesania/litos_web`.
+
+## 2026-10-14 — Mesa auxiliar con baldas: 9/9 PUBLICADAS Y VERIFICADAS
+- Ocho originales recibidos del usuario en `work/mesa-aux-baldas-8-variantes-20261014` con SHA-256 íntegros, posteriormente seleccionados como blobs Git idénticos. Se fusionó [PR #41](https://github.com/litosartesania/litos_web/pull/41), commit `be7c513c4348a1edb7580941d519f3e2dc2f6486`.
+- GitHub Pages [#38595707375](https://github.com/litosartesania/litos_web/actions/runs/38595707375): **SUCCESS**. Verificación pública HTTP 200, bytes y SHA-256 de los ocho PNG originales (1122×1402), sin alterar los otros 85 materiales ni los 21 planos.
+- Piedra de la mesa con baldas: travertino existente + ocho nuevas (Caliza Campaspero, Blanco Macael, Carrara, Negro Marquina, Granito gris, Cuarcita, Calacatta Gold y Verde Alpi). Todas son renders conceptuales, no piezas reales fabricadas; los planos no sirven para fabricación.
+- **Estado canónico: 93/189 imágenes publicadas (49,2 %) y 96 pendientes; 9/21 productos completos; travertinos 21/21; planos 21/21**. Pendientes: ocho materiales para doce productos.
+- Coste cero, privacidad preservada y trabajo exclusivamente en `litosartesania/litos_web`. No se alteraron otros repositorios ni procesos.
