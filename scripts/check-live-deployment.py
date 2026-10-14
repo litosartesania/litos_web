@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261013-mesaauxped9",
-        "catalogo-precios.js?v=stone-20261013-mesaauxped9",
+        "styles.css?v=stone-20261014-mesaauxbal9",
+        "catalogo-precios.js?v=stone-20261014-mesaauxbal9",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -112,6 +112,12 @@ def check(attempt):
         assert script.count(rel)==1,('mesa auxiliar original missing',rel)
         data=read_live(rel,attempt)
         assert len(data)==x['size_bytes'] and hashlib.sha256(data).hexdigest()==x['sha256'],('mesa auxiliar original SHA256',rel)
+    for x in MESA_BAL_PHOTOS:
+        rel=x['path']
+        assert rel=='assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion/mesa-aux-bal__'+x['stone_id']+'.png'
+        assert script.count(rel)==1,('Mesa auxiliar baldas mapping',rel)
+        data=read_live(rel,attempt)
+        assert len(data)==x['size_bytes'] and hashlib.sha256(data).hexdigest()==x['sha256'],('Mesa auxiliar baldas SHA-256',rel)
     for item in ITEMS:
         rel = item["path"]
         if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
@@ -135,6 +141,9 @@ assert len(NEW_PLANS)==12 and len({i['product_id'] for i in NEW_PLANS})==12
 
 MESA_AUX_PHOTOS=json.loads((ROOT/'docs/MESA_AUX_PED_8_VARIANTES_20261013.json').read_text(encoding='utf-8'))['images']
 assert len(MESA_AUX_PHOTOS)==8 and len({x['stone_id'] for x in MESA_AUX_PHOTOS})==8
+
+MESA_BAL_PHOTOS=json.loads((ROOT/'docs/MESA_AUX_BAL_8_VARIANTES_20261014.json').read_text(encoding='utf-8'))['images']
+assert len(MESA_BAL_PHOTOS)==8 and {x['stone_id'] for x in MESA_BAL_PHOTOS}=={'caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'}
 
 for attempt in range(1, 25):
     try:

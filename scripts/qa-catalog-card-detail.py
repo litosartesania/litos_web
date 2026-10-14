@@ -91,18 +91,26 @@ with sync_playwright() as pw:
         assert not dialog.is_visible(),(width,'ESC did not close dialog')
         page.wait_for_function('() => document.activeElement === document.querySelector(\'[data-product="mesa-centro-mon"] .product-open\')',timeout=4000)
 
-        # Unillustrated products must never pretend to have a stone-specific rendering.
+        # Mesa auxiliar con baldas: all nine materials, enlarged modal and synchronized selector.
         page.locator('[data-product="mesa-aux-bal"] .product-open').click()
         assert dialog.is_visible()
         assert page.locator('#detail-product-title').inner_text()=='Mesa auxiliar con baldas'
-        assert page.locator('.detail-stage .material-placeholder').count()==1
-        assert 'sin imagen propia' in page.locator('.detail-stage .material-placeholder').inner_text()
+        assert page.locator('#detail-material-picker').input_value()=='marquina'
+        for stone in ('caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
+            page.locator('#detail-material-picker').select_option(stone)
+            assert page.locator('#material-picker').input_value()==stone
+            image=page.locator('.detail-stage .material-variant-figure img')
+            assert image.count()==1
+            assert image.get_attribute('src')=='assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion/mesa-aux-bal__'+stone+'.png'
+            image.evaluate('(e)=>e.decode()')
+            assert image.evaluate('(e)=>e.naturalWidth===1122&&e.naturalHeight===1402')
         page.locator('#detail-material-picker').select_option('travertino')
         assert page.locator('#material-picker').input_value()=='travertino'
-        new_image=page.locator('.detail-stage .material-variant-figure img')
-        assert new_image.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-bal__travertino.png'
-        new_image.evaluate('(el)=>el.decode()')
-        assert new_image.evaluate('(el)=>el.naturalWidth===1122&&el.naturalHeight===1402')
+        natural=page.locator('.detail-stage .material-variant-figure img')
+        assert natural.get_attribute('src')=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-bal__travertino.png'
+        natural.evaluate('(e)=>e.decode()')
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        assert page.locator('.detail-stage .technical-drawing-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/planos-12-seleccion/mesa-aux-bal.png'
         page.locator('#detail-material-picker').select_option('marquina')
         page.locator('.detail-close').click()
         assert not dialog.is_visible()
