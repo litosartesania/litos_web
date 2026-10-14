@@ -5,7 +5,7 @@
   "integration_branch": "work/mesa-aux-bal-8-integracion-20261014",
   "source_manifest": "assets/catalogo/revisiones/20261014/mesa-aux-baldas-candidatas-8/manifest.json",
   "date": "2026-10-14",
-  "publication_status": "PENDIENTE_VERIFICACION_PUBLICA",
+  "publication_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES",
   "note": "Los ocho PNG son los originales de la rama de carga, reutilizados por Git blob sin recomprimir. El travertino permanece inalterado. Planos orientativos.",
   "images": [
     {
@@ -19,7 +19,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "78b589cb6130a0b291349766ae82ffa6ca618f43",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -32,7 +32,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "78f051b798d806e191405f3c964e6d83ca3f1945",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -45,7 +45,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "2a3192364b9d6533a95ecfc5e693c26dc52ed194",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -58,7 +58,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "7843fdf318c7a20600e7b08aa25b8dedc9c482c9",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -71,7 +71,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "5233d36febf47ae24b8f87114c2a48c2610c75e2",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -84,7 +84,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "482c27cb9158d548a255a812b91f34b2cfcb87d1",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -97,7 +97,7 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "662bbb00d1c7473ca86676b53a431cc241a57282",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     },
     {
       "product_id": "mesa-aux-bal",
@@ -110,7 +110,9 @@
       "width": 1122,
       "height": 1402,
       "git_blob_sha": "7bb42e5e3d8fd4b978f3d175402c00a2829bf767",
-      "review_status": "SELECCIONADO_POR_USUARIO_PENDIENTE_VERIFICACION_PUBLICA"
+      "review_status": "PUBLICADO_VERIFICADO_GITHUB_PAGES"
     }
-  ]
+  ],
+  "deploy_run": 38595707375,
+  "merge_commit": "be7c513c4348a1edb7580941d519f3e2dc2f6486"
 }
