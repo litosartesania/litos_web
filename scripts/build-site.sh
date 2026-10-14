@@ -81,3 +81,10 @@ mkdir -p "$site/assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion"
 for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
  cp "assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__${stone}.png" "$site/assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__${stone}.png"
 done
+
+# Eight reviewed specific stone images for Mesa auxiliar con baldas.
+# Only exact original PNGs (no candidate files or extra contact sheets).
+mkdir -p "$site/assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion"
+for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
+ cp "assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion/mesa-aux-bal__${stone}.png" "$site/assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion/mesa-aux-bal__${stone}.png"
+done
