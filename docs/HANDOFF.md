@@ -432,3 +432,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Piedra de la mesa con baldas: travertino existente + ocho nuevas (Caliza Campaspero, Blanco Macael, Carrara, Negro Marquina, Granito gris, Cuarcita, Calacatta Gold y Verde Alpi). Todas son renders conceptuales, no piezas reales fabricadas; los planos no sirven para fabricación.
 - **Estado canónico: 93/189 imágenes publicadas (49,2 %) y 96 pendientes; 9/21 productos completos; travertinos 21/21; planos 21/21**. Pendientes: ocho materiales para doce productos.
 - Coste cero, privacidad preservada y trabajo exclusivamente en `litosartesania/litos_web`. No se alteraron otros repositorios ni procesos.
+
+## 2026-10-14 — Incidencia operativa de GitHub Pages tras cierre documental
+- **Contenido de producción ya comprobado:** la ejecución [#38595707375](https://github.com/litosartesania/litos_web/actions/runs/38595707375) desplegó el catálogo de 93/189 variantes y verificó por HTTP 200 y SHA-256 las ocho fotografías de `mesa-aux-bal`, junto a las 85 anteriores y los 21 planos.
+- La [PR #42](https://github.com/litosartesania/litos_web/pull/42), solo documental, se fusionó en `main` tras auditoría `SUCCESS` y actualizó la matriz canónica a 93/189, 9/21 productos completos y 96 pendientes.
+- El despliegue de Pages [#38596417260](https://github.com/litosartesania/litos_web/actions/runs/38596417260), provocado por el cambio documental, falló en el servicio de publicación (primer intento: `updating_pages` y timeout; reejecución del mismo run: `Multiple artifacts named github-pages`). **No es un fallo de las imágenes ni de la construcción.** No reejecutar ese mismo run porque conserva artefactos duplicados.
+- Solución aplicada: nueva rama aislada y PR de documentación mínima para desencadenar **una ejecución nueva** de Pages con un artefacto único. No tocar PNG, precios, selector, datos privados ni otros repositorios.
+- Mantener los modelos como conceptos, no fabricados; dibujos técnicos solo ilustrativos y no aptos para fabricación. Se mantienen las restricciones de coste cero, privacidad y publicación controlada.
