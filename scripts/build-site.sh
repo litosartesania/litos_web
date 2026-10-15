@@ -97,3 +97,9 @@ for product in balda banco-rect consola-rect cuenco encimera-bano encimera-cocin
   cp "assets/catalogo/revisiones/20261015/lote-80-originales/$asset" "$site/assets/catalogo/revisiones/20261015/lote-80-originales/$asset"
  done
 done
+
+# Eight reviewed Bandeja originals, copied without transcoding, never include new travertine candidate.
+mkdir -p "$site/assets/catalogo/revisiones/20261015/bandeja-8-candidatas"
+for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
+ cp "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__${stone}.png" "$site/assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__${stone}.png"
+done

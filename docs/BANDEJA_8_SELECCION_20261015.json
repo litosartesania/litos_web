@@ -1,0 +1,91 @@
+{
+  "product_id": "bandeja",
+  "date": "2026-10-15",
+  "source_branch": "work/bandeja-8-originales-20261015",
+  "source_commit": "856173cd3fa876859769517d723acc097d176a3a",
+  "source_manifest": "docs/BANDEJA_9_CANDIDATAS_ORIGEN_20261015.json",
+  "sha256_manifest": "docs/BANDEJA_8_CANDIDATAS_SHA256_20261015.txt",
+  "note": "Original PNG bytes unchanged; travertine master remains in published 20261013 directory. Conceptual images, not manufactured products.",
+  "images": [
+    {
+      "product_id": "bandeja",
+      "stone_id": "caliza",
+      "filename": "bandeja__caliza.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__caliza.png",
+      "size_bytes": 3187565,
+      "sha256": "6a163a1ff13611ab0506474df7c4aef1fbef9aa93abd433b01fd70dbfe95be78",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "macael",
+      "filename": "bandeja__macael.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__macael.png",
+      "size_bytes": 3032122,
+      "sha256": "b34f85b6f22079bd70fb8fa09dd34fc98579241847df6d9916057f81db6c3446",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "carrara",
+      "filename": "bandeja__carrara.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__carrara.png",
+      "size_bytes": 3012460,
+      "sha256": "87aed75f601ed116e369effbd87bc795f8fdcd5ace4a5800592a17de5b2a6531",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "marquina",
+      "filename": "bandeja__marquina.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__marquina.png",
+      "size_bytes": 3187694,
+      "sha256": "5260966c16988b13840fb4fcce68bcaf844f5e4986e3b5c042b95d9a06fb3d7a",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "granito",
+      "filename": "bandeja__granito.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__granito.png",
+      "size_bytes": 3289576,
+      "sha256": "63cbc07b66bf89e4b6206851eae6012cdc72419e380fb96e67b086889dbe4af7",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "cuarcita",
+      "filename": "bandeja__cuarcita.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__cuarcita.png",
+      "size_bytes": 3258375,
+      "sha256": "c543b0deb6538b9544677e78266e6b230f5791aed3fa9d066c485a4b8f3251cc",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "calacatta",
+      "filename": "bandeja__calacatta.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__calacatta.png",
+      "size_bytes": 3022204,
+      "sha256": "f53f428fe67a8a022961fc7909b76ce0a1cc64d43c2a4bd16c103ff6297bd932",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "product_id": "bandeja",
+      "stone_id": "verde-alpi",
+      "filename": "bandeja__verde-alpi.png",
+      "path": "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__verde-alpi.png",
+      "size_bytes": 3329450,
+      "sha256": "7a1a3908f67829655f6e2e6ba043c06d1d6bfc8334c08ff0012933d81d4d25b1",
+      "width": 1122,
+      "height": 1402
+    }
+  ]
+}
