@@ -1,0 +1,64 @@
+{
+  "producto": "Bandeja de piedra",
+  "identificador": "bandeja",
+  "fecha_paquete": "2026-10-15",
+  "descripcion": "Nueve imágenes catalogadas para la bandeja de piedra: travertino beige y ocho variantes adicionales, todas con la misma escena y geometría.",
+  "destino_sugerido_repo": "assets/catalogo/revisiones/20261015/bandeja-9-candidatas/",
+  "rama_sugerida": "work/bandeja-9-variantes-20261015",
+  "archivos": [
+    {
+      "archivo": "imagenes/bandeja__travertino.png",
+      "material": "Travertino beige",
+      "sha256": "3c57eeb0fb0aab9fdb7dc1f9fdccb35b3ac5e47e458f0d283aa3903e0c47f899",
+      "size_bytes": 3232833
+    },
+    {
+      "archivo": "imagenes/bandeja__caliza-campaspero.png",
+      "material": "Caliza Campaspero",
+      "sha256": "6a163a1ff13611ab0506474df7c4aef1fbef9aa93abd433b01fd70dbfe95be78",
+      "size_bytes": 3187565
+    },
+    {
+      "archivo": "imagenes/bandeja__blanco-macael.png",
+      "material": "Blanco Macael",
+      "sha256": "b34f85b6f22079bd70fb8fa09dd34fc98579241847df6d9916057f81db6c3446",
+      "size_bytes": 3032122
+    },
+    {
+      "archivo": "imagenes/bandeja__carrara.png",
+      "material": "Carrara",
+      "sha256": "87aed75f601ed116e369effbd87bc795f8fdcd5ace4a5800592a17de5b2a6531",
+      "size_bytes": 3012460
+    },
+    {
+      "archivo": "imagenes/bandeja__negro-marquina.png",
+      "material": "Negro Marquina",
+      "sha256": "5260966c16988b13840fb4fcce68bcaf844f5e4986e3b5c042b95d9a06fb3d7a",
+      "size_bytes": 3187694
+    },
+    {
+      "archivo": "imagenes/bandeja__granito-gris.png",
+      "material": "Granito gris",
+      "sha256": "63cbc07b66bf89e4b6206851eae6012cdc72419e380fb96e67b086889dbe4af7",
+      "size_bytes": 3289576
+    },
+    {
+      "archivo": "imagenes/bandeja__cuarcita.png",
+      "material": "Cuarcita",
+      "sha256": "c543b0deb6538b9544677e78266e6b230f5791aed3fa9d066c485a4b8f3251cc",
+      "size_bytes": 3258375
+    },
+    {
+      "archivo": "imagenes/bandeja__calacatta-gold.png",
+      "material": "Calacatta Gold",
+      "sha256": "f53f428fe67a8a022961fc7909b76ce0a1cc64d43c2a4bd16c103ff6297bd932",
+      "size_bytes": 3022204
+    },
+    {
+      "archivo": "imagenes/bandeja__verde-alpi.png",
+      "material": "Verde Alpi",
+      "sha256": "7a1a3908f67829655f6e2e6ba043c06d1d6bfc8334c08ff0012933d81d4d25b1",
+      "size_bytes": 3329450
+    }
+  ]
+}
