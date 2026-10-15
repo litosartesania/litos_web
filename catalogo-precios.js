@@ -62,11 +62,11 @@ const showMaterial=(card,material)=>{
  const key=card.dataset.product+'__'+material[0];
  const file=approvedVariants[key];
  if(file){
-  if(!/^assets\/catalogo\/(?:variantes|revisiones\/(?:20261013\/(?:variantes|travertino-seleccion|travertino-extra-seleccion|mesa-aux-ped-8-seleccion)|20261014\/mesa-aux-bal-8-seleccion))\/[a-z0-9-]+__[a-z0-9-]+\.png$/.test(file)) throw Error('Unapproved asset path: '+file);
+  if(!/^assets\/catalogo\/(?:variantes|revisiones\/(?:20261013\/(?:variantes|travertino-seleccion|travertino-extra-seleccion|mesa-aux-ped-8-seleccion)|20261014\/mesa-aux-bal-8-seleccion|20261015\/lote-80-originales))\/[a-z0-9-]+__[a-z0-9-]+\.png$/.test(file)) throw Error('Unapproved asset path: '+file);
   if(host.dataset.view!==key){
    host.replaceChildren();
    const figure=document.createElement('figure');figure.className='material-variant-figure';
-   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=1122;img.height=1402;if(file.includes('/travertino-extra-seleccion/')){img.width=1086;img.height=1448;}
+   const img=document.createElement('img');img.src=file;img.loading='lazy';img.decoding='async';img.width=1122;img.height=1402;if(file.includes('/travertino-extra-seleccion/')||(file.includes('/20261015/lote-80-originales/')&&['consola-rect','banco-rect','encimera-bano','encimera-cocina','panel','peana'].includes(card.dataset.product))){img.width=1086;img.height=1448;}
    img.alt='Imagen conceptual de '+card.querySelector('h3').textContent+' en '+material[1];
    const cap=document.createElement('figcaption');cap.textContent='Imagen conceptual de '+material[1]+' · No es una obra ejecutada';
    figure.append(img,cap);host.append(figure);
