@@ -103,3 +103,9 @@ mkdir -p "$site/assets/catalogo/revisiones/20261015/bandeja-8-candidatas"
 for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
  cp "assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__${stone}.png" "$site/assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__${stone}.png"
 done
+
+# Reviewed Macetero mineral originals: eight materials, no travertine replacements.
+mkdir -p "$site/assets/catalogo/revisiones/20261015/macetero-8-candidatas"
+for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
+ cp "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__${stone}.png" "$site/assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__${stone}.png"
+done

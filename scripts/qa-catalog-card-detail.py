@@ -141,7 +141,7 @@ with sync_playwright() as pw:
         assert page.locator('.detail-stage .technical-drawing-figure img').count()==1
         page.locator('.detail-close').click()
 
-        # Newly illustrated product in the detail modal and honest fallback for Marquina.
+        # Macetero mineral: selected travertine and eight original stone-specific images.
         page.locator('[data-product="macetero"] .product-open').click()
         assert dialog.is_visible()
         page.locator('#detail-material-picker').select_option('travertino')
@@ -150,8 +150,16 @@ with sync_playwright() as pw:
         image.evaluate('(el)=>{el.loading="eager"}')
         image.evaluate('(el)=>el.decode()')
         assert image.evaluate('(el)=>el.naturalWidth===1086&&el.naturalHeight===1448')
-        page.locator('#detail-material-picker').select_option('marquina')
-        assert page.locator('.detail-stage .material-placeholder').count()==1
+        for stone in ('caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
+            page.locator('#detail-material-picker').select_option(stone)
+            assert page.locator('#material-picker').input_value()==stone
+            image=page.locator('.detail-stage .material-variant-figure img')
+            assert image.count()==1 and image.get_attribute('src')=='assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__'+stone+'.png'
+            assert image.get_attribute('width')=='1024' and image.get_attribute('height')=='1536'
+            image.evaluate('(el)=>el.decode()')
+            assert image.evaluate('(el)=>el.naturalWidth===1024&&el.naturalHeight===1536')
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        assert page.locator('.detail-stage .technical-drawing-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/planos-12-seleccion/macetero.png'
         page.locator('.detail-close').click()
 
         # Mesa auxiliar pedestal: all new stone materials are displayed and synced.
