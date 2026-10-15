@@ -1,0 +1,101 @@
+{
+  "product_id": "macetero",
+  "product_name": "Macetero mineral",
+  "date": "2026-10-15",
+  "source_branch": "work/macetero-8-originales-20261015",
+  "source_commit": "3c611eff4155b6e0a10137b8cbb24376326c12cd",
+  "source_manifest": "docs/MANIFIESTO_MACETERO_8_20261015.json",
+  "source_sha256_file": "docs/MACETERO_8_SHA256_20261015.txt",
+  "master_path": "assets/catalogo/revisiones/20261013/travertino-extra-seleccion/macetero__travertino.png",
+  "usage": "conceptual image - not an executed order",
+  "images": [
+    {
+      "product_id": "macetero",
+      "stone_id": "caliza",
+      "material": "Caliza Campaspero",
+      "filename": "macetero__caliza.png",
+      "sha256": "3c24a3ce62f856f03fd6dc16090ef352018acef4dd389ee2a1ff15b7df115fb5",
+      "size_bytes": 3473004,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__caliza.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "macael",
+      "material": "Blanco Macael",
+      "filename": "macetero__macael.png",
+      "sha256": "6d5caa14ff74daedd746d06a261b810ac53040c0576ed3fd693cddad9530044a",
+      "size_bytes": 3363226,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__macael.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "carrara",
+      "material": "Carrara",
+      "filename": "macetero__carrara.png",
+      "sha256": "ea80028e80e2ca55c7ab5214ca0e27bd65871232fa3906f1ae31b9c56dd7aab7",
+      "size_bytes": 3421878,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__carrara.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "marquina",
+      "material": "Negro Marquina",
+      "filename": "macetero__marquina.png",
+      "sha256": "1cb427efe4f437c3e8b4035ec0100f337db3fb9392f32eeb6313eb48e43bdcd7",
+      "size_bytes": 3510867,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__marquina.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "granito",
+      "material": "Granito gris",
+      "filename": "macetero__granito.png",
+      "sha256": "1399de8dd990c207a9521aea24271df2405fab5242ffd465b58896d3a7a932f8",
+      "size_bytes": 3613278,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__granito.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "cuarcita",
+      "material": "Cuarcita",
+      "filename": "macetero__cuarcita.png",
+      "sha256": "3482ca2b66206d238c005df83d570dc142dc8874055960c9e4064a2d592a4cce",
+      "size_bytes": 3540826,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__cuarcita.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "calacatta",
+      "material": "Calacatta Gold",
+      "filename": "macetero__calacatta.png",
+      "sha256": "e72265d0a3d43d4c0c97d99aaf5bc86eb9852572316225b6b0dc55faef0ba4a7",
+      "size_bytes": 3419720,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__calacatta.png"
+    },
+    {
+      "product_id": "macetero",
+      "stone_id": "verde-alpi",
+      "material": "Verde Alpi",
+      "filename": "macetero__verde-alpi.png",
+      "sha256": "43938bfff773d5ea7ddfdcc74e84a6ebc3de8113df4c14b3782f0aca183a43df",
+      "size_bytes": 3592446,
+      "width": 1024,
+      "height": 1536,
+      "path": "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__verde-alpi.png"
+    }
+  ]
+}

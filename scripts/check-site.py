@@ -134,7 +134,7 @@ js=(root/'catalogo-precios.js').read_text(encoding='utf-8')
 all_variants=re.search(r'const approvedVariants=Object\.freeze\((\{[^\n]*\})\);',js)
 assert all_variants
 chosen=json.loads(all_variants.group(1))
-assert len(chosen)==181 and chosen['mesa-aux-ped__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-ped__travertino.png'
+assert len(chosen)==189 and chosen['mesa-aux-ped__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-ped__travertino.png'
 assert all(chosen['mesa-aux-ped__'+x['stone_id']]==x['path'] for x in mesa_aux_photos)
 expected.update(mesa_aux_paths)
 # Mesa auxiliar con baldas: eight newly selected original PNGs, with strict SHA-256 and allowlist.
@@ -155,7 +155,7 @@ for x in mesa_bal_photos:
  assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(p)==1,('Mesa con baldas mapping',p)
  mesa_bal_paths.add(p)
 selected_map=json.loads(re.search(r'const approvedVariants=Object\.freeze\((\{[^\n]*\})\);',(root/'catalogo-precios.js').read_text()).group(1))
-assert len(selected_map)==181
+assert len(selected_map)==189
 assert selected_map['mesa-aux-bal__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-bal__travertino.png'
 assert all(selected_map['mesa-aux-bal__'+i['stone_id']]==i['path'] for i in mesa_bal_photos)
 assert all(selected_map['mesa-aux-ped__'+i['stone_id']]==i['path'] for i in mesa_aux_photos)
@@ -196,6 +196,28 @@ for i in bandeja_images:
  bandeja_paths.add(rel)
 assert selected_map['bandeja__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/bandeja__travertino.png'
 expected.update(bandeja_paths)
+# Macetero mineral: eight exact original PNGs selected; manifest and hashes are binding.
+macetero=json.loads((root.parent/'docs/MACETERO_8_SELECCION_20261015.json').read_text(encoding='utf-8'))
+macetero_images=macetero['images']
+source_macetero=json.loads((root.parent/'docs/MANIFIESTO_MACETERO_8_20261015.json').read_text(encoding='utf-8'))
+macetero_checksum=(root.parent/'docs/MACETERO_8_SHA256_20261015.txt').read_text(encoding='utf-8').splitlines()
+assert macetero['product_id']=='macetero' and len(macetero_images)==len(source_macetero['archivos'])==len(macetero_checksum)==8
+assert {i['stone_id'] for i in macetero_images}==stone_set and len({i['filename'] for i in macetero_images})==8
+assert macetero['master_path']==selected_map['macetero__travertino']=='assets/catalogo/revisiones/20261013/travertino-extra-seleccion/macetero__travertino.png'
+macetero_paths=set()
+for i in macetero_images:
+ rel='assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__'+i['stone_id']+'.png'
+ assert i['product_id']=='macetero' and i['path']==rel and i['filename']=='macetero__'+i['stone_id']+'.png'
+ assert rel not in macetero_paths and i['width']==1024 and i['height']==1536
+ assert i['sha256']+'  imagenes/'+i['filename'] in macetero_checksum,('Macetero checksum file',rel)
+ assert any(z['filename']==i['filename'] and z['sha256']==i['sha256'] and z['size_bytes']==i['size_bytes'] for z in source_macetero['archivos'])
+ b=(root/rel).read_bytes()
+ assert b[:8]==bytes((137,80,78,71,13,10,26,10))
+ assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(1024,1536),('Macetero native dimensions',rel)
+ assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],('Macetero SHA-256',rel)
+ assert selected_map['macetero__'+i['stone_id']]==rel and js.count(rel)==1,('Macetero selector',rel)
+ macetero_paths.add(rel)
+expected.update(macetero_paths)
 for p in plans:
  data=(root/p['path']).read_bytes()
  assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
@@ -209,8 +231,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -240,7 +262,7 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261015-macetero8' in htmls['mobiliario.html']
 assert 'catalogo-precios.js?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()

@@ -18,7 +18,7 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261015-bandeja8",
+        "styles.css?v=stone-20261015-macetero8",
         "catalogo-precios.js?v=stone-20261015-bandeja8",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
@@ -41,6 +41,7 @@ FILES = {
         "mesa-comedor-rect__calacatta",
         "mesa-centro-mon__calacatta",
         "mesa-centro-red__calacatta",
+        "macetero__verde-alpi",
         "tonalMockup:false",
     ),
 }
@@ -118,6 +119,14 @@ def check(attempt):
         assert script.count(rel)==1,('Mesa auxiliar baldas mapping',rel)
         data=read_live(rel,attempt)
         assert len(data)==x['size_bytes'] and hashlib.sha256(data).hexdigest()==x['sha256'],('Mesa auxiliar baldas SHA-256',rel)
+    for item in MACETERO8:
+        rel=item['path']
+        assert rel=='assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__'+item['stone_id']+'.png'
+        assert script.count(rel)==1,('Macetero mapping missing',rel)
+        b=read_live(rel,attempt)
+        assert b[:8]==bytes((137,80,78,71,13,10,26,10))
+        assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(1024,1536)
+        assert len(b)==item['size_bytes'] and hashlib.sha256(b).hexdigest()==item['sha256'],('Macetero public SHA-256',rel)
     for item in BANDEJA8:
         rel=item['path']
         assert script.count(rel)==1,('Bandeja selection missing',rel)
@@ -161,6 +170,9 @@ assert len(NEW80)==80 and len({(i['product_id'],i['stone_id']) for i in NEW80})=
 BANDEJA8=json.loads((ROOT/'docs/BANDEJA_8_SELECCION_20261015.json').read_text(encoding='utf-8'))['images']
 assert len(BANDEJA8)==8 and {i['stone_id'] for i in BANDEJA8}=={'caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'}
 
+MACETERO8=json.loads((ROOT/'docs/MACETERO_8_SELECCION_20261015.json').read_text(encoding='utf-8'))['images']
+assert len(MACETERO8)==8 and {i['stone_id'] for i in MACETERO8}=={'caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'}
+
 for attempt in range(1, 25):
     try:
         check(attempt)
@@ -170,7 +182,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 8 Macetero PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)
