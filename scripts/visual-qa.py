@@ -69,10 +69,10 @@ with sync_playwright() as app:
      assert page.locator('.material-preview .material-placeholder').count()==2,(width,'granito placeholders',page.locator('.material-preview .material-placeholder').count())
      assert page.locator('[data-product="mesa-aux-ped"] .material-variant-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/mesa-aux-ped-8-seleccion/mesa-aux-ped__granito.png'
      assert page.locator('.piece-grid .material-variant-figure img').count()==19,(width,'specific granite product pictures',page.locator('.piece-grid .material-variant-figure img').count())
-     assert page.locator('.material-preview .piece-photos').count()==1
-     assert page.locator('.concept-availability').count()==1
+     assert page.locator('.material-preview .piece-photos').count()==0
+     assert page.locator('.concept-availability').count()==0
      assert page.locator('.concept-reference').count()==0
-     assert page.locator('.concept-availability').count()==1 and all('Referencias visuales originales' in t for t in page.locator('.concept-availability').all_inner_texts())
+     assert page.locator('.material-placeholder').count()==2 and all('pendiente' in t.lower() for t in page.locator('.material-placeholder').all_inner_texts())
      assert 'no representan necesariamente la piedra' in page.locator('.material-heading > p').inner_text() or 'no muestran necesariamente la piedra' in page.locator('.material-heading > p').inner_text()
      original_images=page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')
      assert all(src.startswith('assets/catalogo/') or src.startswith('data:image/webp;') for src in original_images)
@@ -85,7 +85,7 @@ with sync_playwright() as app:
      assert green_filter=='none',(width,green_filter)
      assert 'Verde Alpi' in page.locator('#catalog-count').inner_text()
      assert green_price!=granite_price,(width,green_price,granite_price)
-     assert 'Verde Alpi' in page.locator('.concept-material-note').first.inner_text()
+     assert 'Verde Alpi' in page.locator('.material-placeholder-text').first.inner_text()
      assert page.locator('.material-preview img').evaluate_all('(nodes)=>nodes.map(n=>n.getAttribute("src"))')!=original_images
      for model in ('consola-esc','banco-esc','mesa-comedor-oval','mesa-comedor-red','mesa-comedor-rect','mesa-centro-mon','mesa-centro-red'):
       image=page.locator(f'[data-product="{model}"] .material-variant-figure img')
@@ -151,7 +151,7 @@ with sync_playwright() as app:
       console.evaluate('(e)=>e.decode()')
       assert console.evaluate('(e)=>e.naturalWidth===1122&&e.naturalHeight===1402')
      page.locator('#material-picker').select_option('verde-alpi')
-     assert page.locator('.material-preview .piece-photos').first.is_visible()
+     assert page.locator('[data-product="consola-rect"] .material-variant-figure img').is_visible()
      assert 'colourofstone.com' in page.locator('#material-source').get_attribute('href')
      # Technical view is a tenth presentation option, NOT a tenth stone.
      last_price=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
