@@ -4,7 +4,9 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re,sys,json,hashlib
 from urllib.parse import unquote,urlsplit
+import ast
 root=Path(sys.argv[1] if len(sys.argv)>1 else '_site').resolve()
+ast.parse((root.parent/'scripts/check-live-deployment.py').read_text(encoding='utf-8'), filename='scripts/check-live-deployment.py')
 pages=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']
 class Inspect(HTMLParser):
  def __init__(self):

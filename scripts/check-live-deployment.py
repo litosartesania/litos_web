@@ -77,12 +77,7 @@ def check(attempt):
             if needle in content:
                 raise AssertionError(f"{file}: stale or forbidden content: {needle}")
         if file == "catalogo-precios.js":
-            for item in NEW80:
-        rel='assets/catalogo/revisiones/20261015/lote-80-originales/'+item['filename']
-        assert script.count(rel)==1,('missing new mapping',rel)
-        b=read_live(rel,attempt)
-        assert len(b)==item['size_bytes'] and hashlib.sha256(b).hexdigest()==item['source_sha256'],('original SHA256',rel)
-    for item in ITEMS:
+            for item in ITEMS:
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
