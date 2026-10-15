@@ -1,6 +1,6 @@
 # LITOS COMERCIAL — Tabla de progreso del catálogo
 
-**Estado de producción confirmado el 15/10/2026.** Repositorio exclusivo `litosartesania/litos_web`. Último despliegue validado: [GitHub Pages #38734556607](https://github.com/litosartesania/litos_web/actions/runs/38734556607) — **SUCCESS**, commit `089224eaa24773aeea2f376d218053a489334741` (ocho originales Bandeja verificados mediante HTTP 200, bytes y SHA-256).
+**Estado de producción confirmado el 15/10/2026.** Repositorio exclusivo `litosartesania/litos_web`. Último despliegue validado: [GitHub Pages #38752697679](https://github.com/litosartesania/litos_web/actions/runs/38752697679) — **SUCCESS**, commit `0938f1fb8bb229e9e2f2377d4aaffc70ea71acd2` (ocho originales Macetero mineral más el catálogo anterior, verificados mediante HTTP 200, bytes y SHA-256).
 
 **Criterio «HECHO»:** imagen o plano correcto, seleccionado y visible en Pages con HTTP 200, tamaño y SHA-256 verificados. Las casillas pendientes no se marcan como publicadas por aparecer en la Biblioteca o en una rama de GitHub. Todas las imágenes son **renders conceptuales**, no fotografías de encargos fabricados; los planos tienen cotas hipotéticas y **no sirven para fabricar**.
 
@@ -8,12 +8,12 @@
 
 | Indicador | Publicados y verificados | Pendientes | Avance |
 | --- | ---: | ---: | ---: |
-| **Imágenes específicas producto × piedra** | **181/189** | **8** | **95,8 %** |
+| **Imágenes específicas producto × piedra** | **189/189** | **0** | **100 %** |
 | **Travertino beige, imagen maestra** | **21/21** | **0** | **100 %** |
 | **Planos técnicos ilustrativos** | **21/21** | **0** | **100 %** |
-| **Productos con las 9 piedras publicadas** | **20/21** | **1** | **95,2 %** |
+| **Productos con las 9 piedras publicadas** | **21/21** | **0** | **100 %** |
 
-Se han publicado **80 PNG originales** de diez productos y **ocho PNG originales de Bandeja de piedra**, añadidos a los **93** anteriores, sin alterar ninguno. **Bandeja de piedra tiene ya sus 9/9 materiales publicados y verificados.** Solo sigue incompleto **Macetero mineral** (travertino 1/9; ocho piedras pendientes). Ningún placeholder se presenta como imagen de material específico.
+Catálogo de piedra **completo y verificado: 189 imágenes = 93 anteriores + 80 originales de diez productos + 8 originales de Bandeja + 8 originales de Macetero mineral**. Se preservan sus bytes, sin alterar las imágenes maestras de travertino. **21/21 productos tienen nueve piedras y vista técnica propia (21/21 láminas conceptuales).** No hay variantes de piedra pendientes ni placeholders presentados como imágenes auténticas.
 
 ## Matriz producto × piedra + plano
 
@@ -41,16 +41,18 @@ Se han publicado **80 PNG originales** de diez productos y **ocho PNG originales
 | Bandeja de piedra | Objetos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Peana escultórica | Objetos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 | Cuenco decorativo | Objetos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
-| Macetero mineral | Objetos | ✅ | — | — | — | — | — | — | — | — | **1/9** | ✅ |
+| Macetero mineral | Objetos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | **9/9** | ✅ |
 
-## Productos completos y trabajos pendientes
+## Productos completos y cierre del catálogo
 
-- **20 productos completos (9/9):** Mesa de comedor ovalada; Mesa de comedor redonda; Mesa de comedor rectangular; Mesa de centro monolítica; Mesa de centro circular; Mesa auxiliar pedestal; Mesa auxiliar con baldas; Consola escultórica; **Consola recta**; Banco escultórico; **Banco lineal**; **Lavabo pedestal**; **Lavabo de sobreponer**; **Encimera de baño**; **Encimera de cocina**; **Balda / repisa de piedra**; **Panel de revestimiento**; **Bandeja de piedra**; **Peana escultórica**; **Cuenco decorativo**.
-- **Macetero mineral (1/9):** travertino publicado y ocho piedras pendientes. Bandeja de piedra ya tiene sus nueve variantes verificadas. Los ocho originales de Macetero continúan pendientes de subir y validar, sin regenerar ni confundir con otro producto.
+- **21 productos completos (9/9):** Mesa de comedor ovalada; Mesa de comedor redonda; Mesa de comedor rectangular; Mesa de centro monolítica; Mesa de centro circular; Mesa auxiliar pedestal; Mesa auxiliar con baldas; Consola escultórica; **Consola recta**; Banco escultórico; **Banco lineal**; **Lavabo pedestal**; **Lavabo de sobreponer**; **Encimera de baño**; **Encimera de cocina**; **Balda / repisa de piedra**; **Panel de revestimiento**; **Bandeja de piedra**; **Peana escultórica**; **Cuenco decorativo**; **Macetero mineral**.
+- **Macetero mineral (9/9):** travertino publicado previamente más ocho PNG nuevos, originales e íntegros (SHA-256 verificados). Geometría conceptual copa superior y pedestal cilíndrico con olivo; no confundir con Peana escultórica. **No quedan imágenes de piedra pendientes**.
 - **21/21 planos publicados:** son láminas ilustrativas con alzado, planta, perfil y cotas orientativas; no son documentos de fabricación.
 - El selector mantiene nueve piedras y una vista técnica. La web no acepta encargos ni presenta estos conceptos como trabajos realizados.
 
 ## Evidencias de publicación y trazabilidad
+
+- **Macetero mineral — cierre definitivo del catálogo 189/189:** rama fuente `work/macetero-8-originales-20261015`, commit `3c611eff4155b6e0a10137b8cbb24376326c12cd`. Manifiestos `docs/MANIFIESTO_MACETERO_8_20261015.json` y `docs/MACETERO_8_SELECCION_20261015.json`; ocho SHA-256 y ocho blobs originales verificados. Integración [PR #49](https://github.com/litosartesania/litos_web/pull/49), squash `0938f1fb8bb229e9e2f2377d4aaffc70ea71acd2`; QA [#38752102260](https://github.com/litosartesania/litos_web/actions/runs/38752102260) y [#38752102352](https://github.com/litosartesania/litos_web/actions/runs/38752102352), ambas **SUCCESS**. Publicación [GitHub Pages #38752697679](https://github.com/litosartesania/litos_web/actions/runs/38752697679) **SUCCESS**, con HTTP 200, bytes y SHA-256 de las ocho nuevas imágenes y del conjunto anterior. No hubo cambios en originales, precios, servicios, repositorios ajenos o PR #8.
 
 - **Bandeja de piedra — publicación completa 9/9:** rama de originales `work/bandeja-8-originales-20261015`, commit `856173cd3fa876859769517d723acc097d176a3a`; integración [PR #47](https://github.com/litosartesania/litos_web/pull/47), fusionada `089224eaa24773aeea2f376d218053a489334741`. Auditorías de rama [#38734035724](https://github.com/litosartesania/litos_web/actions/runs/38734035724) y [#38734035770](https://github.com/litosartesania/litos_web/actions/runs/38734035770), ambas **SUCCESS**. Publicación [Pages #38734556607](https://github.com/litosartesania/litos_web/actions/runs/38734556607) **SUCCESS**, con ocho HTTP 200 y 8/8 hashes SHA-256 correctos. Manifiesto `docs/BANDEJA_8_SELECCION_20261015.json`; travertino original previo intacto, 21 planos conservados, sin cambiar precios, sin costes y PR experimental #8 intacta.
 
