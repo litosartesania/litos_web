@@ -132,7 +132,7 @@ js=(root/'catalogo-precios.js').read_text(encoding='utf-8')
 all_variants=re.search(r'const approvedVariants=Object\.freeze\((\{[^\n]*\})\);',js)
 assert all_variants
 chosen=json.loads(all_variants.group(1))
-assert len(chosen)==93 and chosen['mesa-aux-ped__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-ped__travertino.png'
+assert len(chosen)==173 and chosen['mesa-aux-ped__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-ped__travertino.png'
 assert all(chosen['mesa-aux-ped__'+x['stone_id']]==x['path'] for x in mesa_aux_photos)
 expected.update(mesa_aux_paths)
 # Mesa auxiliar con baldas: eight newly selected original PNGs, with strict SHA-256 and allowlist.
@@ -153,11 +153,29 @@ for x in mesa_bal_photos:
  assert (root/'catalogo-precios.js').read_text(encoding='utf-8').count(p)==1,('Mesa con baldas mapping',p)
  mesa_bal_paths.add(p)
 selected_map=json.loads(re.search(r'const approvedVariants=Object\.freeze\((\{[^\n]*\})\);',(root/'catalogo-precios.js').read_text()).group(1))
-assert len(selected_map)==93
+assert len(selected_map)==173
 assert selected_map['mesa-aux-bal__travertino']=='assets/catalogo/revisiones/20261013/travertino-seleccion/mesa-aux-bal__travertino.png'
 assert all(selected_map['mesa-aux-bal__'+i['stone_id']]==i['path'] for i in mesa_bal_photos)
 assert all(selected_map['mesa-aux-ped__'+i['stone_id']]==i['path'] for i in mesa_aux_photos)
 expected.update(mesa_bal_paths)
+# Audit new 80 source PNGs: no generated replacement, no duplicate, no other public assets.
+new80=json.loads((root.parent/'docs/LOTE_80_ORIGINALES_20261015.json').read_text(encoding='utf-8'))['images']
+new80_products={'balda','banco-rect','consola-rect','cuenco','encimera-bano','encimera-cocina','lavabo-ped','lavabo-sobre','panel','peana'}
+assert len(new80)==80 and {i['product_id'] for i in new80}==new80_products
+new80_pairs={(i['product_id'],i['stone_id']) for i in new80}
+assert len(new80_pairs)==80 and all({stone for product,stone in new80_pairs if product==p}==stone_set for p in new80_products)
+new80_paths=set()
+for i in new80:
+ assert i['filename']==i['product_id']+'__'+i['stone_id']+'.png'
+ rel='assets/catalogo/revisiones/20261015/lote-80-originales/'+i['filename']
+ assert rel not in new80_paths and '..' not in Path(rel).parts
+ b=(root/rel).read_bytes()
+ assert b[:8]==bytes((137,80,78,71,13,10,26,10))
+ assert len(b)==i['size_bytes'] and hashlib.sha256(b).hexdigest()==i['source_sha256'],('original SHA256',rel)
+ assert (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==(i['width'],i['height'])
+ assert selected_map[i['product_id']+'__'+i['stone_id']]==rel and js.count(rel)==1,('unique map',rel)
+ new80_paths.add(rel)
+expected.update(new80_paths)
 for p in plans:
  data=(root/p['path']).read_bytes()
  assert data[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(data[16:20],'big')==1600 and int.from_bytes(data[20:24],'big')==1200
@@ -171,8 +189,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+2500000, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():
@@ -202,8 +220,8 @@ assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in 
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261014-mesaauxbal9' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261014-mesaauxbal9' in htmls['mobiliario.html']
+assert 'styles.css?v=stone-20261015-lote80' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-20261015-lote80' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)
