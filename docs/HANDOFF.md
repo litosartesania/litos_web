@@ -439,3 +439,17 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - El despliegue de Pages [#38596417260](https://github.com/litosartesania/litos_web/actions/runs/38596417260), provocado por el cambio documental, falló en el servicio de publicación (primer intento: `updating_pages` y timeout; reejecución del mismo run: `Multiple artifacts named github-pages`). **No es un fallo de las imágenes ni de la construcción.** No reejecutar ese mismo run porque conserva artefactos duplicados.
 - Solución aplicada: nueva rama aislada y PR de documentación mínima para desencadenar **una ejecución nueva** de Pages con un artefacto único. No tocar PNG, precios, selector, datos privados ni otros repositorios.
 - Mantener los modelos como conceptos, no fabricados; dibujos técnicos solo ilustrativos y no aptos para fabricación. Se mantienen las restricciones de coste cero, privacidad y publicación controlada.
+
+
+## 2026-10-15 — Preparación de 80 PNG recuperados, SIN PUBLICAR
+- El propietario solicita publicar las variantes pendientes de LITOS. Se localizaron diez ZIP auténticos en Biblioteca de ChatGPT para: `consola-rect`, `banco-rect`, `lavabo-ped`, `lavabo-sobre`, `encimera-bano`, `encimera-cocina`, `balda`, `panel`, `peana` y `cuenco`.
+- Auditoría local: **80 PNG exactos**, **10 × 8**, sin pares duplicados, con formato PNG, dimensiones, bytes y SHA-256 coincidentes con los manifiestos originales. Inspección visual por producto/material iniciada; los archivos siguen siendo representaciones conceptuales.
+- Las otras **16 imágenes de `bandeja` y `macetero`** son visibles en Biblioteca pero no tienen acceso autorizado a sus bytes originales en esta sesión; **no recrearlas ni sustituirlas**. No presentar 189/189 completadas hasta descarga, publicación y validación real.
+- Preparada rama exclusiva de carga `work/lote-80-originales-20261015` desde main `5c8073873793834f80d5ed0bc2941eff4497c9ce`. La interfaz del conector GitHub no admite subir directamente ZIP/PNG desde Biblioteca; está preparado un archivo ZIP con los 80 originales, hashes y script de carga segura desde Mac sin modificar main.
+- **Estado público sin cambios: 93/189 variantes, 21/21 planos.** Solo después de subir, validar los SHA originales, integrar, revisar la PR y desplegar con Pages SUCCESS se actualizará la matriz canónica. PR experimental #8 intacta. No tocar otros repositorios.
+
+## 2026-10-15 — Integración del lote de 80 PNG en rama para QA; NO publicado aún
+- Rama de trabajo `work/catalogo-80-integracion-20261015` sobre la subida `work/lote-80-originales-20261015`, commit `8da3b4b` (80 PNG originales y `docs/LOTE_80_ORIGINALES_20261015.json`). No se altera la codificación de ningún PNG. Cada imagen queda vinculada a producto y piedra exactos.
+- Se incorporan los 80 a `catalogo-precios.js`, a la allowlist de `scripts/build-site.sh` y a las auditorías estática, responsive, modal y SHA-256 pública. El travertino existente y los 21 planos se mantienen.
+- **Mientras no haya despliegue verificado el estado de producción sigue 93/189, nueve productos completos y 21 planos.** Después de superar CI, fusión autorizada y verificación de Pages, el objetivo será 173/189, 19/21 productos completos, 16 pendientes (bandeja/macetero).
+- Trabajo exclusivo en `litosartesania/litos_web`, sin tocar la PR experimental #8, precios, repositorios ajenos ni datos privados. Producto exclusivamente conceptual y cotas no aptas para fabricación.

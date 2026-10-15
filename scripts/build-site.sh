@@ -88,3 +88,12 @@ mkdir -p "$site/assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion"
 for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
  cp "assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion/mesa-aux-bal__${stone}.png" "$site/assets/catalogo/revisiones/20261014/mesa-aux-bal-8-seleccion/mesa-aux-bal__${stone}.png"
 done
+
+# Explicit allowlist: 80 verified LITOS originals (10 products x eight stones).
+mkdir -p "$site/assets/catalogo/revisiones/20261015/lote-80-originales"
+for product in balda banco-rect consola-rect cuenco encimera-bano encimera-cocina lavabo-ped lavabo-sobre panel peana; do
+ for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
+  asset="${product}__${stone}.png"
+  cp "assets/catalogo/revisiones/20261015/lote-80-originales/$asset" "$site/assets/catalogo/revisiones/20261015/lote-80-originales/$asset"
+ done
+done

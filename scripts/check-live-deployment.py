@@ -18,8 +18,8 @@ ITEMS = [i for m in MANIFESTS for i in m["items"]]
 FILES = {
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261014-mesaauxbal9",
-        "catalogo-precios.js?v=stone-20261014-mesaauxbal9",
+        "styles.css?v=stone-20261015-lote80",
+        "catalogo-precios.js?v=stone-20261015-lote80",
         "Por ahora no aceptamos encargos.",
         "Imágenes conceptuales, no portfolio ejecutado",
         'class="catalog-workspace"',
@@ -77,7 +77,12 @@ def check(attempt):
             if needle in content:
                 raise AssertionError(f"{file}: stale or forbidden content: {needle}")
         if file == "catalogo-precios.js":
-            for item in ITEMS:
+            for item in NEW80:
+        rel='assets/catalogo/revisiones/20261015/lote-80-originales/'+item['filename']
+        assert script.count(rel)==1,('missing new mapping',rel)
+        b=read_live(rel,attempt)
+        assert len(b)==item['size_bytes'] and hashlib.sha256(b).hexdigest()==item['source_sha256'],('original SHA256',rel)
+    for item in ITEMS:
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
@@ -118,6 +123,11 @@ def check(attempt):
         assert script.count(rel)==1,('Mesa auxiliar baldas mapping',rel)
         data=read_live(rel,attempt)
         assert len(data)==x['size_bytes'] and hashlib.sha256(data).hexdigest()==x['sha256'],('Mesa auxiliar baldas SHA-256',rel)
+    for item in NEW80:
+        rel='assets/catalogo/revisiones/20261015/lote-80-originales/'+item['filename']
+        assert script.count(rel)==1,('missing new mapping',rel)
+        b=read_live(rel,attempt)
+        assert len(b)==item['size_bytes'] and hashlib.sha256(b).hexdigest()==item['source_sha256'],('original SHA256',rel)
     for item in ITEMS:
         rel = item["path"]
         if not rel.startswith("assets/catalogo/variantes/") or ".." in Path(rel).parts:
@@ -145,6 +155,9 @@ assert len(MESA_AUX_PHOTOS)==8 and len({x['stone_id'] for x in MESA_AUX_PHOTOS})
 MESA_BAL_PHOTOS=json.loads((ROOT/'docs/MESA_AUX_BAL_8_VARIANTES_20261014.json').read_text(encoding='utf-8'))['images']
 assert len(MESA_BAL_PHOTOS)==8 and {x['stone_id'] for x in MESA_BAL_PHOTOS}=={'caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'}
 
+NEW80=json.loads((ROOT/'docs/LOTE_80_ORIGINALES_20261015.json').read_text(encoding='utf-8'))['images']
+assert len(NEW80)==80 and len({(i['product_id'],i['stone_id']) for i in NEW80})==80
+
 for attempt in range(1, 25):
     try:
         check(attempt)
@@ -154,7 +167,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 80 new original PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

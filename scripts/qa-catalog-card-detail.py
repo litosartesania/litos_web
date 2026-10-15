@@ -115,6 +115,17 @@ with sync_playwright() as pw:
         page.locator('.detail-close').click()
         assert not dialog.is_visible()
 
+        # New batch: Consola recta mapped directly in the modal.
+        page.locator('[data-product="consola-rect"] .product-open').click()
+        assert dialog.is_visible()
+        page.locator('#detail-material-picker').select_option('marquina')
+        assert page.locator('#material-picker').input_value()=='marquina'
+        rect=page.locator('.detail-stage .material-variant-figure img')
+        assert rect.get_attribute('src')=='assets/catalogo/revisiones/20261015/lote-80-originales/consola-rect__marquina.png'
+        rect.evaluate('(e)=>e.decode()')
+        assert rect.evaluate('(e)=>e.naturalWidth===1086&&e.naturalHeight===1448')
+        page.locator('.detail-close').click()
+
         # Newly illustrated product in the detail modal and honest fallback for Marquina.
         page.locator('[data-product="macetero"] .product-open').click()
         assert dialog.is_visible()
