@@ -126,6 +126,21 @@ with sync_playwright() as pw:
         assert rect.evaluate('(e)=>e.naturalWidth===1086&&e.naturalHeight===1448')
         page.locator('.detail-close').click()
 
+        # Bandeja: material-specific image in responsive modal and synchronized material selector.
+        page.locator('[data-product="bandeja"] .product-open').click()
+        assert dialog.is_visible()
+        for stone in ('caliza','macael','carrara','marquina','granito','cuarcita','calacatta','verde-alpi'):
+            page.locator('#detail-material-picker').select_option(stone)
+            assert page.locator('#material-picker').input_value()==stone
+            im=page.locator('.detail-stage .material-variant-figure img')
+            assert im.count()==1 and im.get_attribute('src')=='assets/catalogo/revisiones/20261015/bandeja-8-candidatas/bandeja__'+stone+'.png'
+            im.evaluate('(e)=>e.decode()')
+            dims=(1086,1448) if stone=='granito' else (1122,1402)
+            assert im.evaluate('(e)=>[e.naturalWidth,e.naturalHeight]')==list(dims)
+        page.locator('#detail-material-picker').select_option('plano-tecnico')
+        assert page.locator('.detail-stage .technical-drawing-figure img').count()==1
+        page.locator('.detail-close').click()
+
         # Newly illustrated product in the detail modal and honest fallback for Marquina.
         page.locator('[data-product="macetero"] .product-open').click()
         assert dialog.is_visible()
