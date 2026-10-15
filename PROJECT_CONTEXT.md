@@ -451,3 +451,11 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Piedra de la mesa con baldas: travertino existente + ocho nuevas (Caliza Campaspero, Blanco Macael, Carrara, Negro Marquina, Granito gris, Cuarcita, Calacatta Gold y Verde Alpi). Todas son renders conceptuales, no piezas reales fabricadas; los planos no sirven para fabricación.
 - **Estado canónico: 93/189 imágenes publicadas (49,2 %) y 96 pendientes; 9/21 productos completos; travertinos 21/21; planos 21/21**. Pendientes: ocho materiales para doce productos.
 - Coste cero, privacidad preservada y trabajo exclusivamente en `litosartesania/litos_web`. No se alteraron otros repositorios ni procesos.
+
+
+## 2026-10-15 — Preparación de 80 PNG recuperados, SIN PUBLICAR
+- El propietario solicita publicar las variantes pendientes de LITOS. Se localizaron diez ZIP auténticos en Biblioteca de ChatGPT para: `consola-rect`, `banco-rect`, `lavabo-ped`, `lavabo-sobre`, `encimera-bano`, `encimera-cocina`, `balda`, `panel`, `peana` y `cuenco`.
+- Auditoría local: **80 PNG exactos**, **10 × 8**, sin pares duplicados, con formato PNG, dimensiones, bytes y SHA-256 coincidentes con los manifiestos originales. Inspección visual por producto/material iniciada; los archivos siguen siendo representaciones conceptuales.
+- Las otras **16 imágenes de `bandeja` y `macetero`** son visibles en Biblioteca pero no tienen acceso autorizado a sus bytes originales en esta sesión; **no recrearlas ni sustituirlas**. No presentar 189/189 completadas hasta descarga, publicación y validación real.
+- Preparada rama exclusiva de carga `work/lote-80-originales-20261015` desde main `5c8073873793834f80d5ed0bc2941eff4497c9ce`. La interfaz del conector GitHub no admite subir directamente ZIP/PNG desde Biblioteca; está preparado un archivo ZIP con los 80 originales, hashes y script de carga segura desde Mac sin modificar main.
+- **Estado público sin cambios: 93/189 variantes, 21/21 planos.** Solo después de subir, validar los SHA originales, integrar, revisar la PR y desplegar con Pages SUCCESS se actualizará la matriz canónica. PR experimental #8 intacta. No tocar otros repositorios.
