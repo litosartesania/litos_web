@@ -305,6 +305,9 @@ if '--production' in sys.argv:
  assert 'no acepta encargos' in htmls['aviso-legal.html'].lower(), 'release blocked: commercial scope not declared'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
- assert 'Imágenes conceptuales, no portfolio ejecutado' in htmls['mobiliario.html']
+ assert 'Colección conceptual · 21 productos · 9 piedras · 21 planos' in htmls['mobiliario.html']
+ assert 'Explora 21 conceptos en una galería' not in htmls['mobiliario.html']
+ assert 'Imagen conceptual · Línea en estudio' not in htmls['mobiliario.html']
+ assert 'Imágenes conceptuales, no portfolio ejecutado' not in htmls['mobiliario.html']
 print(f'PASS: five pages, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 14 selected travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
 
