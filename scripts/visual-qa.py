@@ -52,6 +52,23 @@ with sync_playwright() as app:
     if file=='funerario.html':
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
+     assert page.locator('#memorial-workbench').count()==1
+     assert page.locator('#memorial-model option').count()==4
+     assert page.locator('#memorial-type option').count()==6
+     page.locator('#memorial-model').select_option('doble')
+     page.locator('#memorial-stone').select_option('macael')
+     page.locator('#memorial-type').select_option('inglesa')
+     page.locator('#memorial-finish').select_option('relieve')
+     page.locator('#memorial-ornament').select_option('cruz')
+     page.locator('#memorial-text').fill('EN RECUERDO')
+     assert page.locator('#memorial-slab').get_attribute('data-model')=='doble'
+     assert page.locator('#memorial-slab').get_attribute('data-stone')=='macael'
+     assert page.locator('#memorial-slab').get_attribute('data-type')=='inglesa'
+     assert 'EN RECUERDO' in page.locator('#memorial-rendered').inner_text()
+     assert page.locator('#memorial-decoration').inner_text()=='✝'
+     page.locator('#memorial-text').fill('<img src=x onerror=alert(1)>')
+     assert page.locator('#memorial-rendered img').count()==0
+     assert page.locator('form').count()==0
     else:
      assert page.locator('.piece-card').count()==21
      assert page.locator('.piece-photos img').count()==0
