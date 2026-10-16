@@ -23,7 +23,7 @@ class Inspect(HTMLParser):
   if tag=='form':self.forms.append(a)
   if tag=='article' and 'catalog-card' in a.get('class','').split():self.cards+=1
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
-expected=set(pages+['styles.css','script.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
+expected=set(pages+['styles.css','script.js','funerario-personalizador.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
 manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json','docs/LOTE_9_MESA_OVAL_20261012.json','docs/LOTE_9_MESA_REDONDA_20261012.json','docs/LOTE_9_MESA_RECTANGULAR_20261012.json','docs/LOTE_9_MESA_CENTRO_MON_20261012.json','docs/LOTE_9_MESA_CENTRO_RED_20261012.json')]
 assert [len(m['items']) for m in manifests]==[10,8,9,9,9,9,9]
@@ -258,6 +258,11 @@ for page,count in [('funerario.html',3)]:
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert not p.forms and 'id="precios"' in htmls[page]
  assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
+assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
+assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
+assert 'no son estándares' in htmls['funerario.html']
+assert 'funerario-personalizador.js' in htmls['funerario.html']
+assert not any(token in (root/'funerario-personalizador.js').read_text(encoding='utf8') for token in ('fetch(', 'localStorage', 'sessionStorage', 'XMLHttpRequest', 'sendBeacon', 'innerHTML', 'document.cookie'))
 assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']

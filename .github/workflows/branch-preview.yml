@@ -22,6 +22,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check script.js
+          node --check funerario-personalizador.js
           node --check tools/build-preview.mjs
           node --check tools/build-standalone.mjs
       - name: Build and audit Codex public-site allowlist
@@ -46,6 +47,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: litos-offline-preview
-          path: preview/
+          path: preview/LITOS_PREVISUALIZACION_AUTONOMA.html
           if-no-files-found: error
           retention-days: 7
