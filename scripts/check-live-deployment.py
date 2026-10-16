@@ -21,7 +21,7 @@ FILES = {
         "styles.css?v=stone-20261015-macetero8",
         "catalogo-precios.js?v=stone-20261015-bandeja8",
         "Por ahora no aceptamos encargos.",
-        "Imágenes conceptuales, no portfolio ejecutado",
+        "Colección conceptual · 21 productos · 9 piedras · 21 planos",
         'class="catalog-workspace"',
     ),
     "styles.css": (
@@ -46,7 +46,7 @@ FILES = {
     ),
 }
 FORBIDDEN = {
-    "mobiliario.html": ("simulación digital de tonalidad", "<form"),
+    "mobiliario.html": ("simulación digital de tonalidad", "<form", "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
                    ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
     "catalogo-precios.js": ("--stone-photo-filter", "const visual=",
