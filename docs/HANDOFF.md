@@ -501,4 +501,12 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 ## 2026-10-16 — Revisión visual privada aplicada al boceto funerario, sin imágenes importadas
 - La inspección selectiva de referencias reales internas ha documentado cinco estilos generales (nicho con fijaciones, doble con pilastras y cornisa, columbario pulido, portada con campos simbólicos y panteón de placas horizontales). Nombres y fotografías personales se han excluido.
 - Código propuesto exclusivamente en rama PR #54: nuevo modelo CSS de cornisa, pilastras, medallón esquemático, repisa, fijaciones, símbolo y particiones. Sin SVG externos, fotos originales, datos del taller, fuentes de terceros ni modificaciones a Mobiliario.
-- Índice privado de pedido/fotos permanece en Sheets interno, no enlazar ni copiar a repo. Mantener PR #54 como borrador hasta evaluación visual. 
+- Índice privado de pedido/fotos permanece en Sheets interno, no enlazar ni copiar a repo. Mantener PR #54 como borrador hasta evaluación visual.
+
+## 2026-10-16 — Estudio visual contrastado, continuación sin publicación
+- Se inspeccionó en un entorno privado una muestra inicial de fotografías de obra, detalles de piedra, croquis y fichas. Las fichas/documentos se **excluyen** de cualquier galería de producto; no son fotografías de la pieza.
+- Se observaron en fotografía un conjunto vertical clásico de piedra clara con pilastras acanaladas, medallón y repisa; una portada de arcos gemelos; placas horizontales con moldura y herrajes; una placa oscura pulida con cruz lateral. Son patrones estéticos, nunca originales reutilizables.
+- La clasificación y corrección de hipervínculos se realizó **solo en el índice privado existente**, no en GitHub. No se añadió ningún enlace autenticado al repositorio. Fuentes originales intactas.
+- El documento público `docs/FUNERARIO_ESTUDIO_VISUAL_20261016.md` preserva únicamente los rasgos anónimos y la diferencia entre evidencia visual y estimación.
+- Se creó una previsualización **local y autónoma** con cinco recreaciones nuevas, sin fotografías reales ni nombres/datos particulares; QA local a 390, 820 y 1440 px: sin desbordamiento, navegación funcional, imágenes embebidas y cero solicitudes de red. **No es material fotorrealista final**, no está en GitHub ni se despliega mediante Pages.
+- Mantener PR #54 en borrador. Pendiente: galería privada con miniaturas auténticamente accesibles solo con autenticación; más revisión visual; renders fotorrealistas y validación; controles de privacidad; requisitos legales preexistentes. No fusionar #51, no tocar #8 y no activar producción.
