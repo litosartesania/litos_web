@@ -497,3 +497,8 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Revisión **solo lectura** de catálogo operativo y albaranes del maestro privado. Se extrajeron categorías generales, nombres de piedras y ejemplos técnicos; no se exportaron datos de clientes ni imágenes privadas. Resumen sin datos personales en `docs/FUNERARIO_REFERENCIAS_GENERICAS.md`.
 - Maqueta con nicho simple/doble, columbario, portada, losa de panteón, 7 piedras, 6 estilos tipográficos aproximados, ornamentos y texto genérico local. Las medidas históricas no se declaran tamaños comerciales o de fabricación.
 - GitHub Actions debe validar Web, móvil, seguridad y vista previa antes de revisión humana. **No fusionar ni publicar** el configurador sin aprobación visual. La web pública de Mobiliario y PR #8 quedan intactas.
+
+## 2026-10-16 — Revisión visual privada aplicada al boceto funerario, sin imágenes importadas
+- La inspección selectiva de referencias reales internas ha documentado cinco estilos generales (nicho con fijaciones, doble con pilastras y cornisa, columbario pulido, portada con campos simbólicos y panteón de placas horizontales). Nombres y fotografías personales se han excluido.
+- Código propuesto exclusivamente en rama PR #54: nuevo modelo CSS de cornisa, pilastras, medallón esquemático, repisa, fijaciones, símbolo y particiones. Sin SVG externos, fotos originales, datos del taller, fuentes de terceros ni modificaciones a Mobiliario.
+- Índice privado de pedido/fotos permanece en Sheets interno, no enlazar ni copiar a repo. Mantener PR #54 como borrador hasta evaluación visual. 

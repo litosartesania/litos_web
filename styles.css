@@ -583,3 +583,42 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-slab[data-stone="absoluto"]{--material:#141414;--grain:linear-gradient(125deg,rgba(255,255,255,.05),transparent 55%)}
 .memorial-slab[data-stone="italia"]{--material:#f2efeb;--color:#585047;--grain:repeating-linear-gradient(150deg,transparent 0 53px,rgba(115,115,116,.13) 54px,transparent 60px)}
 .memorial-slab[data-stone="champagne"]{--material:#d7cfc2;--color:#3e352b;--grain:radial-gradient(circle at 15% 30%,rgba(35,32,29,.18) 1px,transparent 2px);background-size:17px 18px}
+
+
+/* Arquitectura funeraria genérica. Dibujo CSS nuevo: ninguna imagen, inscripción o fichero de pedido. */
+.memorial-slab{isolation:isolate;overflow:visible;box-shadow:inset 0 0 0 2px rgba(255,255,255,.22), inset 0 0 0 13px rgba(0,0,0,.025),14px 14px 0 rgba(0,0,0,.3),24px 29px 42px rgba(0,0,0,.25);border:5px solid rgba(20,20,20,.21);background-blend-mode:normal}
+.memorial-slab::before{content:"";position:absolute;inset:5% 5%;pointer-events:none;border:1px solid currentColor;opacity:.22}
+.memorial-slab::after{content:"";position:absolute;inset:9% 9%;pointer-events:none;border:1px solid currentColor;opacity:.12}
+.memorial-cornice,.memorial-pilaster,.memorial-medallion,.memorial-shelf,.memorial-fixings{display:none;pointer-events:none}
+.memorial-slab .memorial-rendered{position:relative;z-index:2;line-height:1.48;max-height:75%;overflow:hidden;letter-spacing:.025em;text-wrap:balance}
+.memorial-slab .memorial-decoration{position:relative;z-index:2;font-family:Georgia,serif;font-size:clamp(2rem,4vw,3rem);line-height:1.1;color:inherit;text-shadow:0 1px 1px rgba(0,0,0,.2)}
+/* Nicho recto: placa contenida con cuatro fijaciones y marco rebajado. */
+.memorial-slab[data-model="nicho"]{padding:2.8rem 2.3rem}
+.memorial-slab[data-model="nicho"] .memorial-fixings,.memorial-slab[data-model="panteon"] .memorial-fixings{display:block;position:absolute;inset:8%;z-index:1;background:radial-gradient(circle at 0% 0%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px),radial-gradient(circle at 100% 0%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px),radial-gradient(circle at 0% 100%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px),radial-gradient(circle at 100% 100%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px)}
+/* Conjunto doble: cornisa, pilastras estriadas, medallón superior y repisa inferior. */
+.memorial-slab[data-model="doble"]{min-height:345px;aspect-ratio:1.28/1;padding:6.1rem 3.2rem 2.5rem;justify-content:flex-start;gap:.5rem}
+.memorial-slab[data-model="doble"] .memorial-cornice{display:block;position:absolute;left:-4%;right:-4%;top:-3%;height:25px;z-index:3;border-top:6px solid rgba(255,255,255,.47);border-bottom:7px groove rgba(90,82,75,.65);background:var(--material);box-shadow:0 6px 8px rgba(0,0,0,.23)}
+.memorial-slab[data-model="doble"] .memorial-pilaster{display:block;position:absolute;top:17px;bottom:18px;width:24px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.2) 0 2px,rgba(255,255,255,.35) 3px 6px,rgba(0,0,0,.07) 8px 10px);border-left:4px ridge rgba(255,255,255,.4);border-right:3px ridge rgba(0,0,0,.22);z-index:2}
+.memorial-slab[data-model="doble"] .memorial-pilaster-left{left:7px}
+.memorial-slab[data-model="doble"] .memorial-pilaster-right{right:7px}
+.memorial-slab[data-model="doble"] .memorial-medallion{display:grid;place-items:center;position:absolute;top:34px;left:50%;transform:translateX(-50%);width:72px;height:52px;border:3px ridge currentColor;border-radius:50%;opacity:.38;font:2rem Georgia,serif}
+.memorial-slab[data-model="doble"] .memorial-shelf{display:block;position:absolute;left:-4%;right:-4%;bottom:-16px;height:15px;background:var(--material);border-top:5px solid rgba(255,255,255,.35);box-shadow:0 8px 8px rgba(0,0,0,.24);z-index:2}
+.memorial-slab[data-model="doble"] .memorial-rendered{font-size:clamp(.75rem,1.3vw,1.05rem);max-height:65%}
+/* Columbario: acabado oscuro/pulido, símbolo vertical separado del campo tipográfico. */
+.memorial-slab[data-model="columbario"]{padding:1.6rem;gap:.45rem;box-shadow:inset 0 0 0 2px rgba(255,255,255,.34),inset 6px 5px 27px rgba(255,255,255,.07),15px 17px 0 rgba(0,0,0,.27),25px 30px 40px rgba(0,0,0,.22)}
+.memorial-slab[data-model="columbario"] .memorial-decoration:not(:empty){position:absolute;left:7%;top:24%;width:26%;font-size:clamp(3rem,6vw,4.5rem);color:var(--color);text-shadow:-1px -1px rgba(0,0,0,.3);border:0}
+.memorial-slab[data-model="columbario"] .memorial-decoration:not(:empty)+.memorial-rendered{margin-left:30%;width:70%;font-size:clamp(.69rem,1.3vw,.95rem)}
+.memorial-slab[data-model="columbario"]::before{inset:4%;border-color:rgba(255,255,255,.34);opacity:.5}
+.memorial-slab[data-model="columbario"]::after{display:none}
+/* Portada: dos campos de arcada rebajada para símbolo e inscripción. */
+.memorial-slab[data-model="portada"]{min-height:360px;aspect-ratio:1.13/1;width:min(100%,380px);padding:2rem;display:grid;grid-template-columns:42% 58%;gap:0;border:12px ridge rgba(189,178,166,.5)}
+.memorial-slab[data-model="portada"]::before{inset:6%;border:5px ridge rgba(255,255,255,.4);opacity:.9}
+.memorial-slab[data-model="portada"]::after{inset:14% 12%;border:2px solid currentColor;border-radius:42% 42% 0 0/18% 18% 0 0;opacity:.2}
+.memorial-slab[data-model="portada"] .memorial-decoration{grid-column:1;font-size:clamp(2.8rem,6vw,4.3rem);align-self:center;text-align:center}
+.memorial-slab[data-model="portada"] .memorial-rendered{grid-column:2;font-size:clamp(.7rem,1.25vw,.92rem);align-self:center;padding:0 1rem .4rem 0}
+.memorial-slab[data-model="portada"] .memorial-cornice{display:block;position:absolute;inset:-16px -5% auto;height:18px;background:var(--material);border:4px ridge rgba(255,255,255,.35);z-index:3}
+/* Panteón: placa horizontal fijada, cenefa fina y líneas de inscripción centradas. */
+.memorial-slab[data-model="panteon"]{padding:2.1rem 3rem;min-height:225px;width:min(100%,430px);aspect-ratio:1.7/1}
+.memorial-slab[data-model="panteon"]::before{inset:8%;border:3px double currentColor;opacity:.35}
+.memorial-slab[data-model="panteon"] .memorial-rendered{font-size:clamp(.8rem,1.5vw,1.09rem)}
+@media(max-width:480px){.memorial-slab[data-model="portada"]{min-height:280px;width:min(100%,320px);padding:1rem}.memorial-slab[data-model="doble"]{min-height:320px;padding:6rem 2.4rem 2rem}.memorial-slab[data-model="panteon"]{width:100%;padding:2rem}.memorial-slab[data-model="doble"] .memorial-pilaster{width:16px}}
