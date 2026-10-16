@@ -52,6 +52,24 @@ with sync_playwright() as app:
     if file=='funerario.html':
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
+     assert page.locator('#memorial-workbench').count()==1
+     assert page.locator('#memorial-model option').count()==5
+     assert page.locator('#memorial-stone option').count()==7
+     assert page.locator('#memorial-type option').count()==6
+     page.locator('#memorial-model').select_option('columbario')
+     page.locator('#memorial-stone').select_option('macael')
+     page.locator('#memorial-type').select_option('inglesa')
+     page.locator('#memorial-finish').select_option('relieve')
+     page.locator('#memorial-ornament').select_option('cruz')
+     page.locator('#memorial-text').fill('SIEMPRE EN NUESTRA MEMORIA')
+     assert page.locator('#memorial-slab').get_attribute('data-model')=='columbario'
+     assert page.locator('#memorial-slab').get_attribute('data-stone')=='macael'
+     assert page.locator('#memorial-slab').get_attribute('data-type')=='inglesa'
+     assert 'SIEMPRE EN NUESTRA MEMORIA' in page.locator('#memorial-rendered').inner_text()
+     assert page.locator('#memorial-decoration').inner_text()=='✝'
+     page.locator('#memorial-text').fill('<img src=x onerror=alert(1)>')
+     assert page.locator('#memorial-rendered img').count()==0
+     assert page.locator('form').count()==0
     else:
      assert page.locator('.piece-card').count()==21
      assert page.locator('.piece-photos img').count()==0
