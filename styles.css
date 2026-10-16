@@ -533,3 +533,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 /* Prevent the author-defined inline-flex source link from overriding HTML hidden. */
 .catalog-mobiliario .material-source[hidden]{display:none}
 
+
+/* Encabezado compacto una vez retirada la introduccion redundante. */
+.catalog-mobiliario .catalog-heading{display:block;max-width:1360px}
