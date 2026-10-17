@@ -526,3 +526,12 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Se corrigió el desbordamiento horizontal de 4 px de `preview/LITOS_CONFIGURADOR_FUNERARIO.html` a 390 px. El QA ahora comprueba la anchura de esta vista autónoma en móvil.
 - Validación local: build allowlist 298 archivos, `check-site.py`, `check-funerario.py`, sintaxis JS, 720 composiciones y exportación PNG en Chromium a 390/768/1440 px, vista autónoma sin red y detector Impeccable sin hallazgos. La captura final de 390 px mide 390 px de contenido, sin desbordamiento.
 - Mantener PR #55 en revisión. No fusionar ni publicar hasta revisión visual de materiales, geometrías y tipografías por el propietario; Safari/iPhone/iPad físicos siguen sin verificar.
+
+## 2026-10-17 — Autorización para finalizar el configurador y controles de publicación
+- Tras recibir la vista previa y la PR #55, el propietario escribió «Tienes permiso para todo». Se interpreta en este encargo como autorización para completar, fusionar y publicar el configurador funerario, manteniendo la separación de `litosartesania/litos_web` y la naturaleza informativa del sitio.
+- Se versionó `styles.css` en `funerario.html` para que el navegador reciba el CSS del configurador tras el despliegue. El workflow de Pages ahora exige sintaxis, hashes y escenarios de composición antes de publicar.
+- El verificador de Pages comprueba el HTML funerario, los cuatro módulos de ejecución y los 46 recursos del manifiesto mediante HTTP, tamaño y SHA-256. La misma verificación pasó contra una copia local servida por HTTP; no constituye por sí sola prueba del despliegue público.
+- QA local: construcción y guard de producción, 720 composiciones en Chromium, cinco páginas a 390/820/1440 px, regresiones de galería y sidebar, vista autónoma sin red, y prueba básica de WebKit a 390 px con cambio de piedra, sin error JS ni desbordamiento.
+- Se oscureció el valor de posición de los controles: contraste calculado 5,51:1 sobre el fondo del panel.
+- Sigue siendo una simulación visual. Las 14 texturas no son muestras certificadas, Blanco Italia carece de variedad exacta confirmada, las fuentes son aproximaciones y las geometrías no son planos de fabricación. El sitio lo declara y no acepta encargos. No se han probado dispositivos físicos.
+- Estado de esta anotación: cambios de publicación preparados en PR #55; verificar CI de la cabeza final y Pages público antes de declarar la función publicada.

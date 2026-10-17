@@ -9,13 +9,24 @@ import os
 import sys
 import time
 
-BASE = "https://litosartesania.github.io/litos_web/"
+BASE = os.getenv("LITOS_BASE_URL", "https://litosartesania.github.io/litos_web/").rstrip("/") + "/"
 RELEASE = os.getenv("GITHUB_SHA", "manual-check")
 ROOT = Path(__file__).resolve().parents[1]
 MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/LOTE_10_IMAGENES_20261011.json", "docs/LOTE_8_IMAGENES_20261011.json", "docs/LOTE_9_MESA_OVAL_20261012.json", "docs/LOTE_9_MESA_REDONDA_20261012.json", "docs/LOTE_9_MESA_RECTANGULAR_20261012.json", "docs/LOTE_9_MESA_CENTRO_MON_20261012.json", "docs/LOTE_9_MESA_CENTRO_RED_20261012.json")]
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
+MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
+assert len(MEMORIAL["files"]) == 46
 FILES = {
+    "funerario.html": (
+        'id="memorial-workbench"',
+        'styles.css?v=funerario-capas-20261017',
+        'src="funerario-recursos.js"',
+        'src="funerario-compositor.js"',
+        'src="funerario-exportar.js"',
+        'src="funerario-personalizador.js"',
+        "Recreación digital orientativa",
+    ),
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
         "styles.css?v=stone-20261015-macetero8",
@@ -25,6 +36,7 @@ FILES = {
         'class="catalog-workspace"',
     ),
     "styles.css": (
+        ".memorial-studio",
         ".material-preview",
         ".concept-availability",
         "object-fit:contain",
@@ -82,6 +94,15 @@ def check(attempt):
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
+    for name in ("funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
+        expected = (ROOT / name).read_bytes()
+        actual = read_live(name, attempt)
+        assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
+    for item in MEMORIAL["files"]:
+        path = item["path"]
+        assert path.startswith("assets/funerario/") and ".." not in Path(path).parts, ("unexpected memorial path", path)
+        actual = read_live(path, attempt)
+        assert len(actual) == item["bytes"] and hashlib.sha256(actual).hexdigest() == item["sha256"], ("memorial asset mismatch", path)
     script = read_live("catalogo-precios.js", attempt).decode("utf-8")
     for item in REVISIONS:
         rel=item["path"]
@@ -182,7 +203,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 8 Macetero PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, memorial configurator and 46 memorial assets, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 8 Macetero PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

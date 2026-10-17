@@ -582,7 +582,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-placement label{display:block;font-size:.72rem;line-height:1.4}
 .memorial-panel input[type=range]{display:block;width:100%;min-height:44px;margin:0;accent-color:#776045;cursor:pointer}
 .memorial-panel input[type=range]:disabled{opacity:.4;cursor:default}
-.memorial-panel output{float:right;color:#827059;font-weight:400}
+.memorial-panel output{float:right;color:#6f5940;font-weight:400}
 .memorial-text-field{margin:.4rem 0}
 .memorial-field-top{display:flex;justify-content:space-between;align-items:center;gap:.4rem}
 .memorial-field-top>label:first-child{font-size:.8rem;font-weight:600}
