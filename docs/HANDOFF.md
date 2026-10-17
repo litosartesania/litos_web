@@ -519,3 +519,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - Detalle técnico, fuentes públicas, licencias, archivos, pruebas y límites: `docs/FUNERARIO_CONFIGURADOR_CAPAS.md`; hashes: `docs/FUNERARIO_ASSETS_MANIFEST.json`.
 - Pendiente validar fidelidad mineral, escala de grano y pulido; Blanco Italia es una interpretación provisional sin variedad identificada. Las fuentes no equivalen a matrices históricas; los modelos no definen medidas de fabricación. Falta QA en Safari/dispositivos físicos.
 - Mantener revisión en borrador. **No fusionar ni publicar sin aprobación del usuario**. Mobiliario, imágenes previas, precios y otros repositorios conservados.
+
+## 2026-10-17 — Continuación del configurador funerario por capas
+- Se retomó la rama de revisión `work/funerario-capas-20261017` en una rama local aislada desde el mismo commit, sin alterar `main` ni la web pública. La PR de revisión es #55.
+- Auditoría actual: 7 piedras con 2 recreaciones cada una, 19 ornamentos SVG, 5 modelos, 4 composiciones, 6 tipografías locales y exportación PNG. Las texturas son conceptos visuales pendientes de contraste con muestras LITOS; no se declaran fotografías certificadas ni planos de fabricación.
+- Se corrigió el desbordamiento horizontal de 4 px de `preview/LITOS_CONFIGURADOR_FUNERARIO.html` a 390 px. El QA ahora comprueba la anchura de esta vista autónoma en móvil.
+- Validación local: build allowlist 298 archivos, `check-site.py`, `check-funerario.py`, sintaxis JS, 720 composiciones y exportación PNG en Chromium a 390/768/1440 px, vista autónoma sin red y detector Impeccable sin hallazgos. La captura final de 390 px mide 390 px de contenido, sin desbordamiento.
+- Mantener PR #55 en revisión. No fusionar ni publicar hasta revisión visual de materiales, geometrías y tipografías por el propietario; Safari/iPhone/iPad físicos siguen sin verificar.

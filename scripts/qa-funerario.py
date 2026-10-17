@@ -28,10 +28,11 @@ with sync_playwright() as p:
         results.append({'viewport':width,**result,'external_requests':len(external),'javascript_errors':len(errors),'png_download':'OK'})
         context.close()
     # Self-contained file must work without assets, HTTP, cookies or storage.
-    page=browser.new_page()
+    page=browser.new_page(viewport={'width':390,'height':844})
     network=[];page.on('request',lambda r:network.append(r.url) if not r.url.startswith(('data:','blob:','file:')) else None)
     page.goto((root/'preview/LITOS_CONFIGURADOR_FUNERARIO.html').as_uri())
     page.wait_for_selector('#memorial-workbench[data-ready="true"]')
     assert not network and page.locator('#memorial-stone option').count()==7
+    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), 'standalone preview overflows on mobile'
     browser.close()
 print(json.dumps({'status':'PASS','checks':results,'standalone':'PASS'},ensure_ascii=False,indent=2))
