@@ -30,7 +30,7 @@ Los 14 WebP son **recreaciones generadas originales, no fotografías de muestras
 
 ## Tipografías y licencias
 
-La documentación anónima existente recoge Aldine, Remus, Inglesa, Cataneo, Redonda y Gótica, pero **no aporta fuentes digitales originales o muestras suficientes para demostrar equivalencia**. No se ha consultado ni modificado otro repositorio, ni se han importado matrices privadas.
+La documentación anónima existente recoge Aldine, Remus, Inglesa, Cataneo, Redonda y Gótica, pero **no aporta fuentes digitales originales o muestras suficientes para demostrar equivalencia**. No se han consultado repositorios internos ni otros proyectos personales, ni se han importado matrices privadas; las fuentes libres proceden del repositorio público oficial de Google Fonts.
 
 | Referencia histórica | Fuente digital real | Etiqueta del selector |
 | --- | --- | --- |

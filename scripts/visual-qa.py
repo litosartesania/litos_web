@@ -68,7 +68,7 @@ with sync_playwright() as app:
      page.wait_for_function("()=>document.querySelector('#memorial-slab')?.dataset.type==='inglesa'")
      assert page.locator('#memorial-slab').get_attribute('data-model')=='columbario'
      assert page.locator('#memorial-slab').get_attribute('data-stone')=='macael'
-     assert 'SIEMPRE EN NUESTRA MEMORIA' in page.locator('#memorial-rendered').text_content()
+     page.wait_for_function("""()=>document.querySelector('[data-field="name"]')?.textContent.replace(/\s/g,'')==='SIEMPREENNUESTRAMEMORIA'""")
      assert page.locator('[data-ornament="simbolos:olivo"]').count()==1
      page.locator('#memorial-text').fill('<img src=x onerror=alert(1)>')
      assert page.locator('#memorial-rendered img').count()==0
