@@ -537,88 +537,81 @@ button, a { -webkit-tap-highlight-color: transparent; }
 /* Encabezado compacto una vez retirada la introduccion redundante. */
 .catalog-mobiliario .catalog-heading{display:block;max-width:1360px}
 
-/* Taller de inscripciones: previsualizacion conceptual local, no documento de fabricacion. */
-.memorial-studio{max-width:1360px;margin:0 auto clamp(3rem,5vw,5rem);padding:clamp(1.25rem,3vw,2.5rem);background:#e8e0d6;border:1px solid rgba(20,18,16,.12)}
-.memorial-studio-heading{max-width:46rem;margin:0 0 2rem}
-.memorial-studio-heading h3{margin:0 0 .7rem;font:400 clamp(2rem,4vw,3.5rem)/1.05 var(--serif);letter-spacing:-.035em}
-.memorial-studio-heading p:last-child{margin:0;color:#55483d}
-.memorial-workbench{display:grid;grid-template-columns:minmax(16rem,.82fr) minmax(0,1.18fr);gap:clamp(1.4rem,3vw,3.3rem)}
-.memorial-controls{display:flex;flex-direction:column;gap:.45rem}
-.memorial-controls label{margin-top:.6rem;font-size:.84rem;font-weight:650}
-.memorial-controls select,.memorial-controls textarea{width:100%;min-width:0;padding:.8rem;background:#fffaf5;border:1px solid #b4a89c;border-radius:0;color:#241f19;font:400 1rem/1.45 var(--sans)}
-.memorial-controls textarea{resize:vertical;min-height:6.8rem}
-.memorial-controls select:focus-visible,.memorial-controls textarea:focus-visible{outline:3px solid #9e7d58;outline-offset:2px}
-.memorial-character-count{align-self:flex-end;font-size:.75rem;color:#695d50}
-#memorial-local,.memorial-caption-detail{color:#6d6257;font-size:.82rem;line-height:1.55}
-#memorial-local{margin:1rem 0 0}
-.memorial-display{min-width:0}
-.memorial-stage{min-height:420px;display:grid;place-items:center;padding:2rem 1.1rem 3rem;background:radial-gradient(ellipse at 50% 10%,#d5c5b2,#756b61 100%);position:relative;overflow:hidden}
-.memorial-stage::after{content:"";position:absolute;inset:auto 0 0;height:13%;background:linear-gradient(#918579,#594e44);pointer-events:none}
-.memorial-slab{--material:#191a1a;--color:#e9d9b8;--grain:repeating-linear-gradient(135deg,transparent 0 35px,rgba(245,245,245,.065) 37px,transparent 42px);z-index:1;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.6rem;min-height:335px;width:min(100%,290px);padding:2rem 1.3rem;aspect-ratio:.85/1;color:var(--color);background:var(--grain),var(--material);border:4px solid rgba(0,0,0,.18);box-shadow:13px 14px 0 rgba(0,0,0,.35),24px 25px 35px rgba(0,0,0,.19);text-align:center}
-.memorial-slab[data-model="doble"]{width:min(100%,400px);min-height:260px;aspect-ratio:1.35/1}
-.memorial-slab[data-model="arco"]{border-radius:45% 45% 2px 2px/22% 22% 2px 2px;padding-top:3rem}
-.memorial-slab[data-model="placa"]{width:min(100%,375px);min-height:200px;aspect-ratio:1.6/1}
-.memorial-slab[data-stone="tezal"]{--material:#242426;--grain:repeating-linear-gradient(50deg,transparent 0 22px,rgba(255,255,255,.04) 24px,transparent 29px)}
-.memorial-slab[data-stone="macael"]{--material:#eeeae2;--color:#655749;--grain:repeating-linear-gradient(120deg,transparent 0 42px,rgba(60,60,65,.13) 44px,transparent 50px)}
-.memorial-slab[data-stone="quintana"]{--material:#95948f;--color:#22201d;--grain:radial-gradient(circle at 10% 30%,rgba(10,10,10,.2) 1px,transparent 2px),radial-gradient(circle at 60% 75%,rgba(255,255,255,.4) 1px,transparent 2px);background-size:17px 15px}
-.memorial-rendered{display:block;max-width:100%;white-space:pre-line;overflow-wrap:anywhere;font:400 clamp(.8rem,1.6vw,1.1rem)/1.6 Georgia,serif;letter-spacing:.05em;text-shadow:0 1px 1px rgba(0,0,0,.25)}
-.memorial-slab[data-type="aldine"] .memorial-rendered{font-family:Georgia,serif;text-transform:uppercase;letter-spacing:.08em}
-.memorial-slab[data-type="remus"] .memorial-rendered{font-family:Palatino,Georgia,serif;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.memorial-slab[data-type="inglesa"] .memorial-rendered{font-family:"Brush Script MT","Apple Chancery",cursive;font-style:italic;font-size:clamp(1rem,2vw,1.5rem);letter-spacing:0}
-.memorial-slab[data-type="cataneo"] .memorial-rendered{font-family:"Times New Roman",Georgia,serif;font-weight:700;font-style:italic}
-.memorial-slab[data-type="redonda"] .memorial-rendered{font-family:Arial,Helvetica,sans-serif;letter-spacing:.02em}
-.memorial-slab[data-type="gotica"] .memorial-rendered{font-family:Baskerville,Georgia,serif;font-weight:900;font-variant:small-caps;letter-spacing:.025em}
-.memorial-slab[data-finish="relieve"] .memorial-rendered{text-shadow:1px 1px 0 rgba(255,255,255,.48),-1px -1px 0 rgba(0,0,0,.48),2px 3px 3px rgba(0,0,0,.25)}
-.memorial-decoration{font-size:2rem;line-height:1.2;min-height:2.2rem}
-.memorial-decoration:empty{display:none}
-.memorial-caption{margin:.75rem 0 0;font-size:.9rem}
-.memorial-caption-detail{margin:.4rem 0 0}
-@media(max-width:800px){.memorial-workbench{grid-template-columns:1fr}.memorial-stage{min-height:360px}}
-@media(max-width:440px){.memorial-studio{padding:1.1rem}.memorial-stage{padding:1rem .5rem 2.5rem;min-height:300px}.memorial-slab{width:250px;min-height:270px}.memorial-slab[data-model="doble"]{min-height:220px}}
-
-/* Modelos técnicos del histórico, ilustrativos y sujetos a medición de obra. */
-.memorial-slab[data-model="columbario"]{width:min(100%,235px);min-height:245px;aspect-ratio:1/1}
-.memorial-slab[data-model="portada"]{width:min(100%,335px);min-height:360px;border-width:11px}
-.memorial-slab[data-model="panteon"]{width:min(100%,420px);min-height:215px;aspect-ratio:1.7/1}
-.memorial-slab[data-stone="absoluto"]{--material:#141414;--grain:linear-gradient(125deg,rgba(255,255,255,.05),transparent 55%)}
-.memorial-slab[data-stone="italia"]{--material:#f2efeb;--color:#585047;--grain:repeating-linear-gradient(150deg,transparent 0 53px,rgba(115,115,116,.13) 54px,transparent 60px)}
-.memorial-slab[data-stone="champagne"]{--material:#d7cfc2;--color:#3e352b;--grain:radial-gradient(circle at 15% 30%,rgba(35,32,29,.18) 1px,transparent 2px);background-size:17px 18px}
-
-
-/* Arquitectura funeraria genérica. Dibujo CSS nuevo: ninguna imagen, inscripción o fichero de pedido. */
-.memorial-slab{isolation:isolate;overflow:visible;box-shadow:inset 0 0 0 2px rgba(255,255,255,.22), inset 0 0 0 13px rgba(0,0,0,.025),14px 14px 0 rgba(0,0,0,.3),24px 29px 42px rgba(0,0,0,.25);border:5px solid rgba(20,20,20,.21);background-blend-mode:normal}
-.memorial-slab::before{content:"";position:absolute;inset:5% 5%;pointer-events:none;border:1px solid currentColor;opacity:.22}
-.memorial-slab::after{content:"";position:absolute;inset:9% 9%;pointer-events:none;border:1px solid currentColor;opacity:.12}
-.memorial-cornice,.memorial-pilaster,.memorial-medallion,.memorial-shelf,.memorial-fixings{display:none;pointer-events:none}
-.memorial-slab .memorial-rendered{position:relative;z-index:2;line-height:1.48;max-height:75%;overflow:hidden;letter-spacing:.025em;text-wrap:balance}
-.memorial-slab .memorial-decoration{position:relative;z-index:2;font-family:Georgia,serif;font-size:clamp(2rem,4vw,3rem);line-height:1.1;color:inherit;text-shadow:0 1px 1px rgba(0,0,0,.2)}
-/* Nicho recto: placa contenida con cuatro fijaciones y marco rebajado. */
-.memorial-slab[data-model="nicho"]{padding:2.8rem 2.3rem}
-.memorial-slab[data-model="nicho"] .memorial-fixings,.memorial-slab[data-model="panteon"] .memorial-fixings{display:block;position:absolute;inset:8%;z-index:1;background:radial-gradient(circle at 0% 0%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px),radial-gradient(circle at 100% 0%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px),radial-gradient(circle at 0% 100%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px),radial-gradient(circle at 100% 100%,#c3beb0 0 5px,#3c3c39 6px,transparent 8px)}
-/* Conjunto doble: cornisa, pilastras estriadas, medallón superior y repisa inferior. */
-.memorial-slab[data-model="doble"]{min-height:345px;aspect-ratio:1.28/1;padding:6.1rem 3.2rem 2.5rem;justify-content:flex-start;gap:.5rem}
-.memorial-slab[data-model="doble"] .memorial-cornice{display:block;position:absolute;left:-4%;right:-4%;top:-3%;height:25px;z-index:3;border-top:6px solid rgba(255,255,255,.47);border-bottom:7px groove rgba(90,82,75,.65);background:var(--material);box-shadow:0 6px 8px rgba(0,0,0,.23)}
-.memorial-slab[data-model="doble"] .memorial-pilaster{display:block;position:absolute;top:17px;bottom:18px;width:24px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.2) 0 2px,rgba(255,255,255,.35) 3px 6px,rgba(0,0,0,.07) 8px 10px);border-left:4px ridge rgba(255,255,255,.4);border-right:3px ridge rgba(0,0,0,.22);z-index:2}
-.memorial-slab[data-model="doble"] .memorial-pilaster-left{left:7px}
-.memorial-slab[data-model="doble"] .memorial-pilaster-right{right:7px}
-.memorial-slab[data-model="doble"] .memorial-medallion{display:grid;place-items:center;position:absolute;top:34px;left:50%;transform:translateX(-50%);width:72px;height:52px;border:3px ridge currentColor;border-radius:50%;opacity:.38;font:2rem Georgia,serif}
-.memorial-slab[data-model="doble"] .memorial-shelf{display:block;position:absolute;left:-4%;right:-4%;bottom:-16px;height:15px;background:var(--material);border-top:5px solid rgba(255,255,255,.35);box-shadow:0 8px 8px rgba(0,0,0,.24);z-index:2}
-.memorial-slab[data-model="doble"] .memorial-rendered{font-size:clamp(.75rem,1.3vw,1.05rem);max-height:65%}
-/* Columbario: acabado oscuro/pulido, símbolo vertical separado del campo tipográfico. */
-.memorial-slab[data-model="columbario"]{padding:1.6rem;gap:.45rem;box-shadow:inset 0 0 0 2px rgba(255,255,255,.34),inset 6px 5px 27px rgba(255,255,255,.07),15px 17px 0 rgba(0,0,0,.27),25px 30px 40px rgba(0,0,0,.22)}
-.memorial-slab[data-model="columbario"] .memorial-decoration:not(:empty){position:absolute;left:7%;top:24%;width:26%;font-size:clamp(3rem,6vw,4.5rem);color:var(--color);text-shadow:-1px -1px rgba(0,0,0,.3);border:0}
-.memorial-slab[data-model="columbario"] .memorial-decoration:not(:empty)+.memorial-rendered{margin-left:30%;width:70%;font-size:clamp(.69rem,1.3vw,.95rem)}
-.memorial-slab[data-model="columbario"]::before{inset:4%;border-color:rgba(255,255,255,.34);opacity:.5}
-.memorial-slab[data-model="columbario"]::after{display:none}
-/* Portada: dos campos de arcada rebajada para símbolo e inscripción. */
-.memorial-slab[data-model="portada"]{min-height:360px;aspect-ratio:1.13/1;width:min(100%,380px);padding:2rem;display:grid;grid-template-columns:42% 58%;gap:0;border:12px ridge rgba(189,178,166,.5)}
-.memorial-slab[data-model="portada"]::before{inset:6%;border:5px ridge rgba(255,255,255,.4);opacity:.9}
-.memorial-slab[data-model="portada"]::after{inset:14% 12%;border:2px solid currentColor;border-radius:42% 42% 0 0/18% 18% 0 0;opacity:.2}
-.memorial-slab[data-model="portada"] .memorial-decoration{grid-column:1;font-size:clamp(2.8rem,6vw,4.3rem);align-self:center;text-align:center}
-.memorial-slab[data-model="portada"] .memorial-rendered{grid-column:2;font-size:clamp(.7rem,1.25vw,.92rem);align-self:center;padding:0 1rem .4rem 0}
-.memorial-slab[data-model="portada"] .memorial-cornice{display:block;position:absolute;inset:-16px -5% auto;height:18px;background:var(--material);border:4px ridge rgba(255,255,255,.35);z-index:3}
-/* Panteón: placa horizontal fijada, cenefa fina y líneas de inscripción centradas. */
-.memorial-slab[data-model="panteon"]{padding:2.1rem 3rem;min-height:225px;width:min(100%,430px);aspect-ratio:1.7/1}
-.memorial-slab[data-model="panteon"]::before{inset:8%;border:3px double currentColor;opacity:.35}
-.memorial-slab[data-model="panteon"] .memorial-rendered{font-size:clamp(.8rem,1.5vw,1.09rem)}
-@media(max-width:480px){.memorial-slab[data-model="portada"]{min-height:280px;width:min(100%,320px);padding:1rem}.memorial-slab[data-model="doble"]{min-height:320px;padding:6rem 2.4rem 2rem}.memorial-slab[data-model="panteon"]{width:100%;padding:2rem}.memorial-slab[data-model="doble"] .memorial-pilaster{width:16px}}
+/* Memorial studio: original SVG layers, no effects applied to the other catalogs. */
+.memorial-studio{max-width:1360px;margin:0 auto 5rem;background:#eeeae2;color:#27241e;border-top:1px solid #c4baaa;padding:clamp(1rem,3vw,2.5rem)}
+.memorial-studio-heading{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 3rem;padding:1rem 0 2.2rem;align-items:end}
+.memorial-studio-heading .catalog-eyebrow{grid-column:1/-1;margin:0 0 .7rem;font-size:.7rem;letter-spacing:.16em}
+.memorial-studio-heading h3{margin:0;font:400 clamp(2.6rem,5.2vw,5rem)/.99 var(--serif);letter-spacing:-.04em}
+.memorial-studio-heading h3 em{font-weight:400;color:#856b4e}
+.memorial-studio-heading>p:last-child{margin:0 0 .25rem;font-size:1rem;line-height:1.65;max-width:25rem;color:#645b50}
+.memorial-workbench{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:clamp(1.2rem,3vw,2.8rem);align-items:start}
+.memorial-display{position:sticky;top:95px;min-width:0}
+.memorial-stage{display:grid;place-items:center;width:100%;min-height:250px;background:#ddd5c9;border:1px solid #d1c7b8;aspect-ratio:1;overflow:hidden}
+.memorial-stage>svg{display:block;width:100%;height:100%;max-height:75vh}
+.memorial-stage>p{padding:2rem;text-align:center}
+.memorial-caption{font-size:.83rem;line-height:1.5;font-weight:600;margin:.9rem 0 .4rem}
+.memorial-material-note{font-size:.75rem;line-height:1.55;color:#706457;margin:0 0 1rem}
+.memorial-actions{display:flex;gap:.65rem;flex-wrap:wrap}
+.memorial-actions button{min-height:48px;padding:.75rem 1.1rem;font:500 .85rem var(--sans);border:1px solid #76654f;cursor:pointer;background:transparent;color:#3b3227}
+.memorial-actions button:first-child{flex:1;background:#292720;color:#f6efe4;border-color:#292720}
+.memorial-actions button:first-child span{margin-left:1.2rem}
+.memorial-actions button:disabled{opacity:.55;cursor:wait}
+.memorial-status{min-height:2.8em;margin:.7rem 0 0;font-size:.72rem;line-height:1.45;color:#6a5d4c}
+.memorial-controls{min-width:0}
+.memorial-controls details{border-top:1px solid #bfb4a4}
+.memorial-controls details:last-child{border-bottom:1px solid #bfb4a4}
+.memorial-controls summary{min-height:68px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.8rem;font:500 1rem var(--sans);position:relative;padding-right:1.5rem}
+.memorial-controls summary::-webkit-details-marker{display:none}
+.memorial-controls summary span{font-size:.66rem;color:#85745e;letter-spacing:.06em}
+.memorial-controls summary::after{content:'+';position:absolute;right:.25rem;color:#826d51;font-size:1.3rem;font-weight:300}
+.memorial-controls details[open]>summary::after{content:'−'}
+.memorial-panel{display:flex;flex-direction:column;gap:.5rem;padding:0 0 1.4rem}
+.memorial-panel>label:not(.memorial-check){margin-top:.55rem;font-size:.78rem;font-weight:600;line-height:1.5}
+.memorial-panel select,.memorial-panel textarea{width:100%;min-width:0;min-height:46px;padding:.7rem .75rem;color:#2f2b24;background:#f9f6f0;border:1px solid #b9ae9e;border-radius:0;font:400 1rem/1.45 var(--sans)}
+.memorial-panel textarea{resize:vertical}
+.memorial-swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin:.55rem 0 .1rem}
+.memorial-swatch{padding:3px;background:transparent;border:1px solid transparent;cursor:pointer;min-width:0;color:#4d463b;text-align:left}
+.memorial-swatch[aria-pressed=true]{border-color:#68533b;background:#e0d6c6}
+.memorial-swatch img{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;margin-bottom:.35rem}
+.memorial-swatch span{display:block;min-height:2.8em;font:500 .62rem/1.25 var(--sans);padding:.1rem}
+.memorial-check{display:flex;align-items:center;gap:.55rem;min-height:44px;font-size:.8rem;cursor:pointer}
+.memorial-check input{width:18px;height:18px;margin:0;accent-color:#6d563b;flex-shrink:0}
+.memorial-note,#memorial-local{font-size:.75rem;line-height:1.55;color:#716454;margin:.4rem 0}
+.memorial-placement{border:1px solid #cfc4b3;margin:.65rem 0 .1rem;padding:.6rem .8rem;min-width:0}
+.memorial-placement legend{padding:0 .25rem;font-size:.72rem;color:#78664f}
+.memorial-placement label{display:block;font-size:.72rem;line-height:1.4}
+.memorial-panel input[type=range]{display:block;width:100%;min-height:44px;margin:0;accent-color:#776045;cursor:pointer}
+.memorial-panel input[type=range]:disabled{opacity:.4;cursor:default}
+.memorial-panel output{float:right;color:#827059;font-weight:400}
+.memorial-text-field{margin:.4rem 0}
+.memorial-field-top{display:flex;justify-content:space-between;align-items:center;gap:.4rem}
+.memorial-field-top>label:first-child{font-size:.8rem;font-weight:600}
+.memorial-field-top .memorial-check{font-size:.7rem}
+.memorial-caption-detail{max-width:72rem;font-size:.74rem;line-height:1.6;color:#776a59;border-top:1px solid #d2c8b9;padding-top:1rem;margin:1.5rem 0 0}
+.memorial-studio :is(button,summary,select,textarea,input):focus-visible{outline:3px solid #8b6b3f;outline-offset:3px}
+@media(max-width:900px){
+ .memorial-studio-heading{grid-template-columns:1fr;gap:.8rem;padding-bottom:1.4rem}
+ .memorial-studio-heading>p:last-child{max-width:36rem}
+ .memorial-workbench{grid-template-columns:1fr;gap:1.2rem}
+ .memorial-display{top:70px;z-index:3;background:#eeeae2;box-shadow:0 8px 10px -10px #544b3c;padding-bottom:.45rem}
+ .memorial-stage{aspect-ratio:auto;height:min(43vh,440px);min-height:220px}
+ .memorial-stage>svg{height:100%;width:auto;max-width:100%}
+ .memorial-caption{font-size:.7rem;margin:.45rem 0 .2rem}
+ .memorial-material-note{font-size:.64rem;line-height:1.35;margin:0 0 .5rem}
+ .memorial-actions button{min-height:44px;padding:.55rem .7rem;font-size:.74rem}
+ .memorial-status{font-size:.65rem;margin:.4rem 0 0;min-height:1.5em}
+ .memorial-swatches{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .memorial-swatch span{font-size:.72rem}
+ .memorial-controls summary{min-height:60px}
+ .memorial-studio{scroll-margin-top:80px}
+}
+@media(max-width:440px){
+ .memorial-studio{padding:.8rem;margin-left:-.25rem;margin-right:-.25rem}
+ .memorial-studio-heading h3{font-size:2.6rem}
+ .memorial-studio-heading>p:last-child{font-size:.88rem}
+ .memorial-stage{height:32vh;min-height:210px}
+ .memorial-display{top:64px}
+ .memorial-swatches{gap:.3rem}
+ .memorial-swatch span{font-size:.65rem}
+}
+@media(prefers-reduced-motion:reduce){.memorial-studio *{scroll-behavior:auto}}

@@ -23,12 +23,15 @@ jobs:
         run: |
           node --check script.js
           node --check funerario-personalizador.js
+          node --check funerario-compositor.js
+          node --check funerario-exportar.js
           node --check tools/build-preview.mjs
           node --check tools/build-standalone.mjs
       - name: Build and audit Codex public-site allowlist
         run: |
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site
+          python3 scripts/check-funerario.py
       - name: Validate publication safety gate without deploying
         run: python3 scripts/check-site.py _site --production
       - name: Set up Chromium for responsive visual QA
@@ -41,12 +44,17 @@ jobs:
         run: |
           node tools/build-preview.mjs
           node tools/build-standalone.mjs
+          node tools/build-funerario-preview.mjs
       - name: Validate self-contained review HTML and disabled contact forms
         run: python3 scripts/check-preview.py preview
+      - name: Verify memorial layers, long text, fonts, privacy and PNG downloads
+        run: python3 scripts/qa-funerario.py
       - name: Upload local review package (not a Pages deployment)
         uses: actions/upload-artifact@v4
         with:
           name: litos-offline-preview
-          path: preview/LITOS_PREVISUALIZACION_AUTONOMA.html
+          path: |
+            preview/LITOS_PREVISUALIZACION_AUTONOMA.html
+            preview/LITOS_CONFIGURADOR_FUNERARIO.html
           if-no-files-found: error
           retention-days: 7

@@ -224,6 +224,15 @@ for p in plans:
  assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], ('technical drawing integrity',p['path'])
  assert (root/'catalogo-precios.js').read_text().count(p['path'])==(0 if p['product_id'] in ('consola-esc','mesa-comedor-oval') else 1)
 
+memorial_manifest=json.loads((root.parent/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
+memorial_paths={i['path'] for i in memorial_manifest['files']}|{'funerario-recursos.js','funerario-compositor.js','funerario-exportar.js'}
+assert len(memorial_manifest['files'])==46
+for i in memorial_manifest['files']:
+ b=(root/i['path']).read_bytes()
+ assert len(b)==i['bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],i['path']
+memorial_bytes=sum((root/p).stat().st_size for p in memorial_paths)
+assert memorial_bytes<3500000,'memorial resource budget exceeded'
+expected.update(memorial_paths)
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
 for item in items:
@@ -231,8 +240,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000, 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 parsers={}
 for page,html in htmls.items():

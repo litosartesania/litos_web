@@ -517,3 +517,12 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 - El documento público `docs/FUNERARIO_ESTUDIO_VISUAL_20261016.md` preserva únicamente los rasgos anónimos y la diferencia entre evidencia visual y estimación.
 - Se creó una previsualización **local y autónoma** con cinco recreaciones nuevas, sin fotografías reales ni nombres/datos particulares; QA local a 390, 820 y 1440 px: sin desbordamiento, navegación funcional, imágenes embebidas y cero solicitudes de red. **No es material fotorrealista final**, no está en GitHub ni se despliega mediante Pages.
 - Mantener PR #54 en borrador. Pendiente: galería privada con miniaturas auténticamente accesibles solo con autenticación; más revisión visual; renders fotorrealistas y validación; controles de privacidad; requisitos legales preexistentes. No fusionar #51, no tocar #8 y no activar producción.
+
+## 2026-10-17 — Configurador funerario por capas, revisión aislada
+- Rama `work/funerario-capas-20261017`, basada en PR #54 (`b6f33a23`), sin fusión ni despliegue. Reutiliza la página y sustituye el núcleo conceptual CSS por composición SVG.
+- Siete materiales con 14 recreaciones originales orientativas; 19 ornamentos SVG; seis fuentes OFL identificadas como aproximaciones; cinco geometrías propias; cuatro layouts; cinco campos editables; PNG 2000 × 2000 íntegramente local.
+- Texto y selecciones solo en memoria: sin envíos, almacenamiento, analítica ni datos en URL. No se importan originales particulares ni datos internos.
+- Build/allowlist/hashes y sintaxis: PASS. Chromium: 720 composiciones a 390/768/1440, texto largo dentro de zonas, ornamentos independientes, teclado/táctil y descarga PASS. Regresión de cinco páginas × tres anchuras sin imágenes rotas, desbordamientos, errores JS o solicitudes HTTP externas. Vista autónoma sin red.
+- Detalle técnico, fuentes públicas, licencias, archivos, pruebas y límites: `docs/FUNERARIO_CONFIGURADOR_CAPAS.md`; hashes: `docs/FUNERARIO_ASSETS_MANIFEST.json`.
+- Pendiente validar fidelidad mineral, escala de grano y pulido; Blanco Italia es una interpretación provisional sin variedad identificada. Las fuentes no equivalen a matrices históricas; los modelos no definen medidas de fabricación. Falta QA en Safari/dispositivos físicos.
+- Mantener revisión en borrador. **No fusionar ni publicar sin aprobación del usuario**. Mobiliario, imágenes previas, precios y otros repositorios conservados.

@@ -109,3 +109,6 @@ mkdir -p "$site/assets/catalogo/revisiones/20261015/macetero-8-candidatas"
 for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alpi; do
  cp "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__${stone}.png" "$site/assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__${stone}.png"
 done
+
+# Generic memorial layers: explicit, hash-verified public allowlist.
+python3 scripts/stage-funerario.py "$site"
