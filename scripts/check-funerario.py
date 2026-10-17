@@ -21,6 +21,7 @@ for item in catalog['ornaments']:
     assert pack['resources'][item['path']]==path.read_text()
 for font in catalog['fonts']:
     assert 'SIL OPEN FONT LICENSE Version 1.1' in (root/font['license']).read_text()
+    assert ' '.join((root/font['license']).read_text().split()) in ' '.join(bundle.split()), 'standalone font license missing'
 for path in ['funerario-personalizador.js','funerario-compositor.js','funerario-exportar.js']:
     js=(root/path).read_text()
     for token in ['fetch(', 'XMLHttpRequest','sendBeacon','localStorage','sessionStorage','document.cookie','console.log','innerHTML','URLSearchParams','location.href=']:

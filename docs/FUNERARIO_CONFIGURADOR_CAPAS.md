@@ -41,7 +41,7 @@ La documentación anónima existente recoge Aldine, Remus, Inglesa, Cataneo, Red
 | Redonda | Noto Sans | Sans redonda · aproximación visual |
 | Gótica | UnifrakturMaguntia | Fractura · aproximación |
 
-Las seis fuentes se distribuyen con SIL Open Font License 1.1. Se conservan los seis archivos `*-OFL.txt`, con sus titulares y condiciones, junto a los WOFF2. Origen: [repositorio oficial Google Fonts](https://github.com/google/fonts/tree/main/ofl), directorios identificados en `catalogo.json`. Se usa el subconjunto latino, con acentos y ñ; otros alfabetos pueden recurrir a sustituciones del navegador. No hay Google Fonts ni CDN en ejecución: los bytes están embebidos en el paquete local.
+Las seis fuentes se distribuyen con SIL Open Font License 1.1. Se conservan los seis archivos `*-OFL.txt`, con sus titulares y condiciones, junto a los WOFF2; los seis textos de licencia también acompañan las fuentes embebidas en la vista autónoma. Origen: [repositorio oficial Google Fonts](https://github.com/google/fonts/tree/main/ofl), directorios identificados en `catalogo.json`. Se usa el subconjunto latino, con acentos y ñ; otros alfabetos pueden recurrir a sustituciones del navegador. No hay Google Fonts ni CDN en ejecución: los bytes están embebidos en el paquete local.
 
 ## Archivos y reproducción
 
