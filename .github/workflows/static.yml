@@ -37,7 +37,11 @@ jobs:
         run: |
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site --production
+          python3 scripts/check-funerario.py
           node --check script.js
+          node --check funerario-compositor.js
+          node --check funerario-exportar.js
+          node --check funerario-personalizador.js
       - name: Install browser for mobile, tablet and desktop validation
         run: |
           python3 -m pip install playwright
@@ -47,6 +51,8 @@ jobs:
           python3 scripts/visual-qa.py
           python3 scripts/qa-catalog-card-detail.py
           python3 scripts/qa-catalog-sidebar.py
+          node tools/build-funerario-preview.mjs
+          python3 scripts/qa-funerario.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

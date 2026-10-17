@@ -536,3 +536,82 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 /* Encabezado compacto una vez retirada la introduccion redundante. */
 .catalog-mobiliario .catalog-heading{display:block;max-width:1360px}
+
+/* Memorial studio: original SVG layers, no effects applied to the other catalogs. */
+.memorial-studio{max-width:1360px;margin:0 auto 5rem;background:#eeeae2;color:#27241e;border-top:1px solid #c4baaa;padding:clamp(1rem,3vw,2.5rem)}
+.memorial-studio-heading{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 3rem;padding:1rem 0 2.2rem;align-items:end}
+.memorial-studio-heading .catalog-eyebrow{grid-column:1/-1;margin:0 0 .7rem;font-size:.7rem;letter-spacing:.16em}
+.memorial-studio-heading h3{margin:0;font:400 clamp(2.6rem,5.2vw,5rem)/.99 var(--serif);letter-spacing:-.04em}
+.memorial-studio-heading h3 em{font-weight:400;color:#856b4e}
+.memorial-studio-heading>p:last-child{margin:0 0 .25rem;font-size:1rem;line-height:1.65;max-width:25rem;color:#645b50}
+.memorial-workbench{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:clamp(1.2rem,3vw,2.8rem);align-items:start}
+.memorial-display{position:sticky;top:95px;min-width:0}
+.memorial-stage{display:grid;place-items:center;width:100%;min-height:250px;background:#ddd5c9;border:1px solid #d1c7b8;aspect-ratio:1;overflow:hidden}
+.memorial-stage>svg{display:block;width:100%;height:100%;max-height:75vh}
+.memorial-stage>p{padding:2rem;text-align:center}
+.memorial-caption{font-size:.83rem;line-height:1.5;font-weight:600;margin:.9rem 0 .4rem}
+.memorial-material-note{font-size:.75rem;line-height:1.55;color:#706457;margin:0 0 1rem}
+.memorial-actions{display:flex;gap:.65rem;flex-wrap:wrap}
+.memorial-actions button{min-height:48px;padding:.75rem 1.1rem;font:500 .85rem var(--sans);border:1px solid #76654f;cursor:pointer;background:transparent;color:#3b3227}
+.memorial-actions button:first-child{flex:1;background:#292720;color:#f6efe4;border-color:#292720}
+.memorial-actions button:first-child span{margin-left:1.2rem}
+.memorial-actions button:disabled{opacity:.55;cursor:wait}
+.memorial-status{min-height:2.8em;margin:.7rem 0 0;font-size:.72rem;line-height:1.45;color:#6a5d4c}
+.memorial-controls{min-width:0}
+.memorial-controls details{border-top:1px solid #bfb4a4}
+.memorial-controls details:last-child{border-bottom:1px solid #bfb4a4}
+.memorial-controls summary{min-height:68px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.8rem;font:500 1rem var(--sans);position:relative;padding-right:1.5rem}
+.memorial-controls summary::-webkit-details-marker{display:none}
+.memorial-controls summary span{font-size:.66rem;color:#85745e;letter-spacing:.06em}
+.memorial-controls summary::after{content:'+';position:absolute;right:.25rem;color:#826d51;font-size:1.3rem;font-weight:300}
+.memorial-controls details[open]>summary::after{content:'−'}
+.memorial-panel{display:flex;flex-direction:column;gap:.5rem;padding:0 0 1.4rem}
+.memorial-panel>label:not(.memorial-check){margin-top:.55rem;font-size:.78rem;font-weight:600;line-height:1.5}
+.memorial-panel select,.memorial-panel textarea{width:100%;min-width:0;min-height:46px;padding:.7rem .75rem;color:#2f2b24;background:#f9f6f0;border:1px solid #b9ae9e;border-radius:0;font:400 1rem/1.45 var(--sans)}
+.memorial-panel textarea{resize:vertical}
+.memorial-swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin:.55rem 0 .1rem}
+.memorial-swatch{padding:3px;background:transparent;border:1px solid transparent;cursor:pointer;min-width:0;color:#4d463b;text-align:left}
+.memorial-swatch[aria-pressed=true]{border-color:#68533b;background:#e0d6c6}
+.memorial-swatch img{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;margin-bottom:.35rem}
+.memorial-swatch span{display:block;min-height:2.8em;font:500 .62rem/1.25 var(--sans);padding:.1rem}
+.memorial-check{display:flex;align-items:center;gap:.55rem;min-height:44px;font-size:.8rem;cursor:pointer}
+.memorial-check input{width:18px;height:18px;margin:0;accent-color:#6d563b;flex-shrink:0}
+.memorial-note,#memorial-local{font-size:.75rem;line-height:1.55;color:#716454;margin:.4rem 0}
+.memorial-placement{border:1px solid #cfc4b3;margin:.65rem 0 .1rem;padding:.6rem .8rem;min-width:0}
+.memorial-placement legend{padding:0 .25rem;font-size:.72rem;color:#78664f}
+.memorial-placement label{display:block;font-size:.72rem;line-height:1.4}
+.memorial-panel input[type=range]{display:block;width:100%;min-height:44px;margin:0;accent-color:#776045;cursor:pointer}
+.memorial-panel input[type=range]:disabled{opacity:.4;cursor:default}
+.memorial-panel output{float:right;color:#6f5940;font-weight:400}
+.memorial-text-field{margin:.4rem 0}
+.memorial-field-top{display:flex;justify-content:space-between;align-items:center;gap:.4rem}
+.memorial-field-top>label:first-child{font-size:.8rem;font-weight:600}
+.memorial-field-top .memorial-check{font-size:.7rem}
+.memorial-caption-detail{max-width:72rem;font-size:.74rem;line-height:1.6;color:#776a59;border-top:1px solid #d2c8b9;padding-top:1rem;margin:1.5rem 0 0}
+.memorial-studio :is(button,summary,select,textarea,input):focus-visible{outline:3px solid #8b6b3f;outline-offset:3px}
+@media(max-width:900px){
+ .memorial-studio-heading{grid-template-columns:1fr;gap:.8rem;padding-bottom:1.4rem}
+ .memorial-studio-heading>p:last-child{max-width:36rem}
+ .memorial-workbench{grid-template-columns:1fr;gap:1.2rem}
+ .memorial-display{top:70px;z-index:3;background:#eeeae2;box-shadow:0 8px 10px -10px #544b3c;padding-bottom:.45rem}
+ .memorial-stage{aspect-ratio:auto;height:min(43vh,440px);min-height:220px}
+ .memorial-stage>svg{height:100%;width:auto;max-width:100%}
+ .memorial-caption{font-size:.7rem;margin:.45rem 0 .2rem}
+ .memorial-material-note{font-size:.64rem;line-height:1.35;margin:0 0 .5rem}
+ .memorial-actions button{min-height:44px;padding:.55rem .7rem;font-size:.74rem}
+ .memorial-status{font-size:.65rem;margin:.4rem 0 0;min-height:1.5em}
+ .memorial-swatches{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .memorial-swatch span{font-size:.72rem}
+ .memorial-controls summary{min-height:60px}
+ .memorial-studio{scroll-margin-top:80px}
+}
+@media(max-width:440px){
+ .memorial-studio{padding:.8rem;margin-left:-.25rem;margin-right:-.25rem}
+ .memorial-studio-heading h3{font-size:2.6rem}
+ .memorial-studio-heading>p:last-child{font-size:.88rem}
+ .memorial-stage{height:32vh;min-height:210px}
+ .memorial-display{top:64px}
+ .memorial-swatches{gap:.3rem}
+ .memorial-swatch span{font-size:.65rem}
+}
+@media(prefers-reduced-motion:reduce){.memorial-studio *{scroll-behavior:auto}}

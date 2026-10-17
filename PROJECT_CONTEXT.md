@@ -503,3 +503,26 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 ## 16/10/2026 — Corrección de verificador público tras PR #52
 - La limpieza de textos de Mobiliario se fusionó con [PR #52](https://github.com/litosartesania/litos_web/pull/52), commit `6473780ce9cb445fa1d275fccc9cd36c31d22f8d`. La primera ejecución Pages #38875986966 desplegó HTML actualizado y devolvió HTTP 200, pero el control final falló por una regla obsoleta de `scripts/check-live-deployment.py` que seguía **exigiendo el comentario que el usuario ordenó quitar**. No fue un error de imágenes ni de CSS.
 - Rama `work/arreglar-verificador-comentarios-20261016`: sustituye la regla esperada por la cabecera vigente «21 productos · 9 piedras · 21 planos» y añade tres comprobaciones negativas para impedir que reaparezcan los comentarios retirados. No modifica HTML, PNG, precios, páginas funerarias ni PR #8 / #51. Revalidar PR y despliegue público; no declarar SUCCESS mientras la ejecución final no termine satisfactoriamente.
+
+## 2026-10-16 — Arte funerario genérico: desarrollo aislado basado en categorías y geometría real
+- Rama `work/funerario-catalogo-generico-tecnico-20261016` desde el último `main`; reemplaza el borrador PR #51, incompatible tras PR #52/#53, que permanece sin fusionar.
+- Revisión **solo lectura** de catálogo operativo y albaranes del maestro privado. Se extrajeron categorías generales, nombres de piedras y ejemplos técnicos; no se exportaron datos de clientes ni imágenes privadas. Resumen sin datos personales en `docs/FUNERARIO_REFERENCIAS_GENERICAS.md`.
+- Maqueta con nicho simple/doble, columbario, portada, losa de panteón, 7 piedras, 6 estilos tipográficos aproximados, ornamentos y texto genérico local. Las medidas históricas no se declaran tamaños comerciales o de fabricación.
+- GitHub Actions debe validar Web, móvil, seguridad y vista previa antes de revisión humana. **No fusionar ni publicar** el configurador sin aprobación visual. La web pública de Mobiliario y PR #8 quedan intactas.
+
+## 2026-10-16 — Estudio visual contrastado, continuación sin publicación
+- Se inspeccionó en un entorno privado una muestra inicial de fotografías de obra, detalles de piedra, croquis y fichas. Las fichas/documentos se **excluyen** de cualquier galería de producto; no son fotografías de la pieza.
+- Se observaron en fotografía un conjunto vertical clásico de piedra clara con pilastras acanaladas, medallón y repisa; una portada de arcos gemelos; placas horizontales con moldura y herrajes; una placa oscura pulida con cruz lateral. Son patrones estéticos, nunca originales reutilizables.
+- La clasificación y corrección de hipervínculos se realizó **solo en el índice privado existente**, no en GitHub. No se añadió ningún enlace autenticado al repositorio. Fuentes originales intactas.
+- El documento público `docs/FUNERARIO_ESTUDIO_VISUAL_20261016.md` preserva únicamente los rasgos anónimos y la diferencia entre evidencia visual y estimación.
+- Se creó una previsualización **local y autónoma** con cinco recreaciones nuevas, sin fotografías reales ni nombres/datos particulares; QA local a 390, 820 y 1440 px: sin desbordamiento, navegación funcional, imágenes embebidas y cero solicitudes de red. **No es material fotorrealista final**, no está en GitHub ni se despliega mediante Pages.
+- Mantener PR #54 en borrador. Pendiente: galería privada con miniaturas auténticamente accesibles solo con autenticación; más revisión visual; renders fotorrealistas y validación; controles de privacidad; requisitos legales preexistentes. No fusionar #51, no tocar #8 y no activar producción.
+
+## 2026-10-17 — Configurador funerario por capas, revisión aislada
+- Rama `work/funerario-capas-20261017`, basada en PR #54 (`b6f33a23`), sin fusión ni despliegue. Reutiliza la página y sustituye el núcleo conceptual CSS por composición SVG.
+- Siete materiales con 14 recreaciones originales orientativas; 19 ornamentos SVG; seis fuentes OFL identificadas como aproximaciones; cinco geometrías propias; cuatro layouts; cinco campos editables; PNG 2000 × 2000 íntegramente local.
+- Texto y selecciones solo en memoria: sin envíos, almacenamiento, analítica ni datos en URL. No se importan originales particulares ni datos internos.
+- Build/allowlist/hashes y sintaxis: PASS. Chromium: 720 composiciones a 390/768/1440, texto largo dentro de zonas, ornamentos independientes, teclado/táctil y descarga PASS. Regresión de cinco páginas × tres anchuras sin imágenes rotas, desbordamientos, errores JS o solicitudes HTTP externas. Vista autónoma sin red.
+- Detalle técnico, fuentes públicas, licencias, archivos, pruebas y límites: `docs/FUNERARIO_CONFIGURADOR_CAPAS.md`; hashes: `docs/FUNERARIO_ASSETS_MANIFEST.json`.
+- Pendiente validar fidelidad mineral, escala de grano y pulido; Blanco Italia es una interpretación provisional sin variedad identificada. Las fuentes no equivalen a matrices históricas; los modelos no definen medidas de fabricación. Falta QA en Safari/dispositivos físicos.
+- Mantener revisión en borrador. **No fusionar ni publicar sin aprobación del usuario**. Mobiliario, imágenes previas, precios y otros repositorios conservados.

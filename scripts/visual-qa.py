@@ -11,7 +11,7 @@ def inline(page):
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
   assert 'href="styles.css?v=stone-20261015-macetero8"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261015-macetero8"' in html
+  assert 'src="catalogo-precios.js?v=stone-20261015-bandeja8"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -24,7 +24,7 @@ def inline(page):
  html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261015-macetero8"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-20261015-bandeja8"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
@@ -52,6 +52,27 @@ with sync_playwright() as app:
     if file=='funerario.html':
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
+     assert page.locator('#memorial-workbench').count()==1
+     assert page.locator('#memorial-model option').count()==5
+     assert page.locator('#memorial-stone option').count()==7
+     assert page.locator('#memorial-type option').count()==6
+     page.wait_for_selector('#memorial-workbench[data-ready="true"]')
+     page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+     page.locator('#memorial-model').select_option('columbario')
+     page.locator('#memorial-stone').select_option('macael')
+     page.locator('#memorial-type').select_option('inglesa')
+     page.locator('#memorial-finish').select_option('relieve')
+     page.locator('#memorial-ornament').select_option('olivo')
+     page.locator('details').nth(3).evaluate('(e)=>e.open=true')
+     page.locator('#memorial-text').fill('SIEMPRE EN NUESTRA MEMORIA')
+     page.wait_for_function("()=>document.querySelector('#memorial-slab')?.dataset.type==='inglesa'")
+     assert page.locator('#memorial-slab').get_attribute('data-model')=='columbario'
+     assert page.locator('#memorial-slab').get_attribute('data-stone')=='macael'
+     page.wait_for_function("""()=>document.querySelector('[data-field="name"]')?.textContent.replace(/\s/g,'')==='SIEMPREENNUESTRAMEMORIA'""")
+     assert page.locator('[data-ornament="simbolos:olivo"]').count()==1
+     page.locator('#memorial-text').fill('<img src=x onerror=alert(1)>')
+     assert page.locator('#memorial-rendered img').count()==0
+     assert page.locator('form').count()==0
     else:
      assert page.locator('.piece-card').count()==21
      assert page.locator('.piece-photos img').count()==0

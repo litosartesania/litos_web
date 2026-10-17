@@ -1,0 +1,596 @@
+{
+  "version": 1,
+  "materials": [
+    {
+      "id": "sudafrica",
+      "name": "Negro Sudáfrica",
+      "family": "Granito comercial",
+      "dark": true,
+      "description": "Grano gris fino sobre fondo oscuro.",
+      "source": "https://grupimar.es/granitos/negro-sudafrica-impala/",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/sudafrica-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/sudafrica-2.webp"
+        }
+      ]
+    },
+    {
+      "id": "absoluto",
+      "name": "Negro Absoluto",
+      "family": "Granito comercial",
+      "dark": true,
+      "description": "Negro uniforme de grano muy fino.",
+      "source": "https://www.cupastone.es/productos/negro-absoluto/",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/absoluto-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/absoluto-2.webp"
+        }
+      ]
+    },
+    {
+      "id": "tezal",
+      "name": "Negro Tezal",
+      "family": "Granito",
+      "dark": true,
+      "description": "Grises y negros de grano medio.",
+      "source": "https://grupimar.es/granitos/granito-negro-tezal/",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/tezal-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/tezal-2.webp"
+        }
+      ]
+    },
+    {
+      "id": "macael",
+      "name": "Blanco Macael",
+      "family": "Mármol",
+      "dark": false,
+      "description": "Fondo blanco cristalino con vetas grises suaves.",
+      "source": "https://www.marmolesmacael.com/catalogo",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/macael-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/macael-2.webp"
+        }
+      ]
+    },
+    {
+      "id": "italia",
+      "name": "Blanco Italia",
+      "family": "Mármol · denominación por confirmar",
+      "dark": false,
+      "description": "Interpretación blanca veteada; variedad exacta pendiente.",
+      "source": "https://grupocarmenamarmoles.com/catalogo/marmol-blanco-italia/",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/italia-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/italia-2.webp"
+        }
+      ]
+    },
+    {
+      "id": "champagne",
+      "name": "Blanco Champagne",
+      "family": "Granito",
+      "dark": false,
+      "description": "Grano medio negro y gris sobre blanco.",
+      "source": "https://arteaco.es/home/materiales/granito/gblanco/blancochampagne/",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/champagne-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/champagne-2.webp"
+        }
+      ]
+    },
+    {
+      "id": "quintana",
+      "name": "Gris Quintana",
+      "family": "Granito",
+      "dark": false,
+      "description": "Gris compacto de grano fino a medio.",
+      "source": "https://canterasagustintena.com/gris-quintana/",
+      "status": "Recreación orientativa · pendiente de muestra LITOS",
+      "variants": [
+        {
+          "id": "1",
+          "name": "Recreación A",
+          "path": "assets/funerario/materiales/quintana-1.webp"
+        },
+        {
+          "id": "2",
+          "name": "Recreación B",
+          "path": "assets/funerario/materiales/quintana-2.webp"
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "nicho",
+      "name": "Lápida de nicho recta",
+      "face": [
+        0.11,
+        0.19,
+        0.78,
+        0.643298969072165
+      ],
+      "architecture": "recta",
+      "note": "Proporción conceptual 97:80; sin medida de fabricación."
+    },
+    {
+      "id": "doble",
+      "name": "Lápida doble",
+      "face": [
+        0.14,
+        0.19,
+        0.72,
+        0.6
+      ],
+      "architecture": "pilastras",
+      "note": "Conjunto conceptual con cornisa, pilastras y repisa."
+    },
+    {
+      "id": "columbario",
+      "name": "Lápida de columbario",
+      "face": [
+        0.23,
+        0.21,
+        0.54,
+        0.54
+      ],
+      "architecture": "cuadrada",
+      "note": "Geometría cuadrada propia; dimensiones por comprobar."
+    },
+    {
+      "id": "portada",
+      "name": "Lápida con portada",
+      "face": [
+        0.2,
+        0.16,
+        0.6,
+        0.66
+      ],
+      "architecture": "arco",
+      "note": "Portada con arco rebajado; secciones por comprobar."
+    },
+    {
+      "id": "panteon",
+      "name": "Losa para panteón",
+      "face": [
+        0.12,
+        0.29,
+        0.76,
+        0.43
+      ],
+      "architecture": "losa",
+      "note": "Losa horizontal conceptual; sin especificación constructiva."
+    }
+  ],
+  "layouts": [
+    {
+      "id": "centrado",
+      "name": "Centrado clásico",
+      "text": [
+        0.2,
+        0.31,
+        0.6,
+        0.4
+      ],
+      "symbol": [
+        0.4,
+        0.08,
+        0.2,
+        0.19
+      ],
+      "flower": [
+        0.41,
+        0.82,
+        0.18,
+        0.1
+      ],
+      "separator": [
+        0.25,
+        0.76,
+        0.5,
+        0.03
+      ]
+    },
+    {
+      "id": "lateral",
+      "name": "Cruz a la izquierda",
+      "text": [
+        0.4,
+        0.2,
+        0.45,
+        0.55
+      ],
+      "symbol": [
+        0.12,
+        0.23,
+        0.19,
+        0.43
+      ],
+      "flower": [
+        0.15,
+        0.73,
+        0.16,
+        0.13
+      ],
+      "separator": [
+        0.43,
+        0.78,
+        0.39,
+        0.03
+      ]
+    },
+    {
+      "id": "superior",
+      "name": "Ornamento superior",
+      "text": [
+        0.19,
+        0.36,
+        0.62,
+        0.44
+      ],
+      "symbol": [
+        0.44,
+        0.09,
+        0.12,
+        0.12
+      ],
+      "flower": [
+        0.34,
+        0.22,
+        0.32,
+        0.11
+      ],
+      "separator": [
+        0.28,
+        0.81,
+        0.44,
+        0.03
+      ]
+    },
+    {
+      "id": "separadores",
+      "name": "Texto con separadores",
+      "text": [
+        0.19,
+        0.34,
+        0.62,
+        0.4
+      ],
+      "symbol": [
+        0.43,
+        0.08,
+        0.14,
+        0.14
+      ],
+      "flower": [
+        0.43,
+        0.84,
+        0.14,
+        0.09
+      ],
+      "separator": [
+        0.24,
+        0.26,
+        0.52,
+        0.04
+      ],
+      "secondSeparator": [
+        0.24,
+        0.78,
+        0.52,
+        0.04
+      ]
+    }
+  ],
+  "fonts": [
+    {
+      "id": "aldine",
+      "name": "EB Garamond",
+      "label": "Serif clásica · aprox. a Aldine",
+      "family": "Litos-aldine",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/ebgaramond.woff2",
+      "license": "assets/funerario/fuentes/ebgaramond-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/ebgaramond"
+    },
+    {
+      "id": "remus",
+      "name": "Cinzel",
+      "label": "Capital romana · aprox. a Remus",
+      "family": "Litos-remus",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/cinzel.woff2",
+      "license": "assets/funerario/fuentes/cinzel-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/cinzel"
+    },
+    {
+      "id": "inglesa",
+      "name": "Great Vibes",
+      "label": "Caligráfica · aprox. a Inglesa",
+      "family": "Litos-inglesa",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/greatvibes.woff2",
+      "license": "assets/funerario/fuentes/greatvibes-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/greatvibes"
+    },
+    {
+      "id": "cataneo",
+      "name": "Libre Baskerville",
+      "label": "Itálica · aprox. a Cataneo",
+      "family": "Litos-cataneo",
+      "style": "italic",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/librebaskerville.woff2",
+      "license": "assets/funerario/fuentes/librebaskerville-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/librebaskerville"
+    },
+    {
+      "id": "redonda",
+      "name": "Noto Sans",
+      "label": "Sans redonda · aprox. visual",
+      "family": "Litos-redonda",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/notosans.woff2",
+      "license": "assets/funerario/fuentes/notosans-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosans"
+    },
+    {
+      "id": "gotica",
+      "name": "UnifrakturMaguntia",
+      "label": "Fractura · aprox. a Gótica",
+      "family": "Litos-gotica",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/unifrakturmaguntia.woff2",
+      "license": "assets/funerario/fuentes/unifrakturmaguntia-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/unifrakturmaguntia"
+    }
+  ],
+  "finishes": [
+    {
+      "id": "auto",
+      "name": "Adaptado a la piedra"
+    },
+    {
+      "id": "oscuro",
+      "name": "Inciso oscuro"
+    },
+    {
+      "id": "claro",
+      "name": "Inciso claro"
+    },
+    {
+      "id": "blanco",
+      "name": "Letra blanca"
+    },
+    {
+      "id": "plata",
+      "name": "Gris / plateado"
+    },
+    {
+      "id": "oro",
+      "name": "Dorado"
+    },
+    {
+      "id": "relieve",
+      "name": "Relieve suave"
+    }
+  ],
+  "fields": [
+    {
+      "id": "header",
+      "label": "Encabezado",
+      "max": 60,
+      "default": "EN RECUERDO",
+      "size": 21,
+      "weight": 1
+    },
+    {
+      "id": "name",
+      "label": "Nombre o denominación",
+      "max": 100,
+      "default": "UN SER QUERIDO",
+      "size": 39,
+      "weight": 1.8
+    },
+    {
+      "id": "dates",
+      "label": "Fechas opcionales",
+      "max": 60,
+      "default": "",
+      "size": 22,
+      "weight": 1
+    },
+    {
+      "id": "epitaph",
+      "label": "Epitafio",
+      "max": 240,
+      "default": "SIEMPRE EN NUESTRA MEMORIA",
+      "size": 25,
+      "weight": 2
+    },
+    {
+      "id": "extra",
+      "label": "Texto adicional",
+      "max": 160,
+      "default": "",
+      "size": 20,
+      "weight": 1.5
+    }
+  ],
+  "ornaments": [
+    {
+      "id": "simple",
+      "category": "cruces",
+      "name": "Cruz simple",
+      "path": "assets/funerario/ornamentos/cruces/simple.svg"
+    },
+    {
+      "id": "clasica",
+      "category": "cruces",
+      "name": "Cruz clásica",
+      "path": "assets/funerario/ornamentos/cruces/clasica.svg"
+    },
+    {
+      "id": "latina",
+      "category": "cruces",
+      "name": "Cruz latina fina",
+      "path": "assets/funerario/ornamentos/cruces/latina.svg"
+    },
+    {
+      "id": "biselada",
+      "category": "cruces",
+      "name": "Cruz biselada",
+      "path": "assets/funerario/ornamentos/cruces/biselada.svg"
+    },
+    {
+      "id": "pedestal",
+      "category": "cruces",
+      "name": "Cruz con pedestal",
+      "path": "assets/funerario/ornamentos/cruces/pedestal.svg"
+    },
+    {
+      "id": "linea",
+      "category": "separadores",
+      "name": "Línea sencilla",
+      "path": "assets/funerario/ornamentos/separadores/linea.svg"
+    },
+    {
+      "id": "doble",
+      "category": "separadores",
+      "name": "Doble línea",
+      "path": "assets/funerario/ornamentos/separadores/doble.svg"
+    },
+    {
+      "id": "ornamental",
+      "category": "separadores",
+      "name": "Separador ornamental",
+      "path": "assets/funerario/ornamentos/separadores/ornamental.svg"
+    },
+    {
+      "id": "extremos",
+      "category": "separadores",
+      "name": "Extremos decorados",
+      "path": "assets/funerario/ornamentos/separadores/extremos.svg"
+    },
+    {
+      "id": "fino",
+      "category": "marcos",
+      "name": "Marco fino",
+      "path": "assets/funerario/ornamentos/marcos/fino.svg"
+    },
+    {
+      "id": "clasico",
+      "category": "marcos",
+      "name": "Marco clásico",
+      "path": "assets/funerario/ornamentos/marcos/clasico.svg"
+    },
+    {
+      "id": "bisel",
+      "category": "marcos",
+      "name": "Marco biselado",
+      "path": "assets/funerario/ornamentos/marcos/bisel.svg"
+    },
+    {
+      "id": "esquinas",
+      "category": "marcos",
+      "name": "Esquinas ornamentales",
+      "path": "assets/funerario/ornamentos/marcos/esquinas.svg"
+    },
+    {
+      "id": "rosa",
+      "category": "flores",
+      "name": "Rosa",
+      "path": "assets/funerario/ornamentos/flores/rosa.svg"
+    },
+    {
+      "id": "ramo",
+      "category": "flores",
+      "name": "Ramo de flores",
+      "path": "assets/funerario/ornamentos/flores/ramo.svg"
+    },
+    {
+      "id": "hojas",
+      "category": "flores",
+      "name": "Hojas",
+      "path": "assets/funerario/ornamentos/flores/hojas.svg"
+    },
+    {
+      "id": "paloma",
+      "category": "simbolos",
+      "name": "Paloma",
+      "path": "assets/funerario/ornamentos/simbolos/paloma.svg"
+    },
+    {
+      "id": "olivo",
+      "category": "simbolos",
+      "name": "Rama de olivo",
+      "path": "assets/funerario/ornamentos/simbolos/olivo.svg"
+    },
+    {
+      "id": "luz",
+      "category": "simbolos",
+      "name": "Luz simbólica",
+      "path": "assets/funerario/ornamentos/simbolos/luz.svg"
+    }
+  ]
+}
