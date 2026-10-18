@@ -84,5 +84,31 @@ with sync_playwright() as p:
         assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
         assert not review_errors and not review_network,(review_errors,review_network)
         context.close()
+    # A sandbox-only transparent PNG may be tested in the independent local image reviewer.
+    # Generated RGBA image contains no photograph, inscription, or personal data.
+    import struct,zlib
+    def chunk(kind,payload):
+        return struct.pack('>I',len(payload))+kind+payload+struct.pack('>I',zlib.crc32(kind+payload)&0xffffffff)
+    size=64
+    rgba=b''.join(b'\\x00'+b''.join(bytes([90+col,90+row,90,(row+col)%128+127]) for col in range(size)) for row in range(size))
+    fixture=b'\\x89PNG\\r\\n\\x1a\\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',size,size,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(rgba))+chunk(b'IEND',b'')
+    pictorial_context=browser.new_context(viewport={'width':390,'height':844},accept_downloads=True)
+    pictorial=pictorial_context.new_page()
+    errors=[];network=[]
+    pictorial.on('pageerror',lambda error:errors.append(str(error)))
+    pictorial.on('request',lambda req:network.append(req.url) if req.url.startswith(('https://','http://')) else None)
+    pictorial.goto((root/'preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html').as_uri())
+    pictorial.wait_for_selector('#memorial-workbench[data-ready="true"]')
+    pictorial.locator('#litos-local-upload').set_input_files({'name':'generic-relief.png','mimeType':'image/png','buffer':fixture})
+    pictorial.wait_for_function('()=>document.getElementById("memorial-devotional").value==="arte_local_temporal"')
+    pictorial.wait_for_selector('[data-slot="devotional"] image')
+    assert pictorial.locator('#memorial-download').is_enabled()
+    assert pictorial.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    with pictorial.expect_download() as download_info:
+        pictorial.locator('#memorial-download').click()
+    png=Path(download_info.value.path()).read_bytes()
+    assert png[:8]==b'\\x89PNG\\r\\n\\x1a\\n' and int.from_bytes(png[16:20],'big')==2000
+    assert not errors and not network,(errors,network)
+    pictorial_context.close()
     browser.close()
 print(json.dumps({'status':'PASS','checks':results,'standalone':'PASS'},ensure_ascii=False,indent=2))
