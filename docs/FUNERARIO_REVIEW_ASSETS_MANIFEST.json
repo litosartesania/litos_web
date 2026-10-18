@@ -1,46 +1,5 @@
 {
   "version": 1,
-  "policy": "Review only: these original generic pictorial files are excluded from the public resource bundle and Pages allowlist.",
-  "files": [
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/cristo-corona.webp",
-      "bytes": 166366,
-      "sha256": "13c2da0ee1829aff2b83c544887e9d8211a54aacced5b00dfb180cf2f30dcd84"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/cristo-crucificado.webp",
-      "bytes": 53822,
-      "sha256": "c61f4b78aee69ce19a95a25194599dab31d4378ddf83d704fe02d0fc676241ce"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/virgen-nino.webp",
-      "bytes": 116276,
-      "sha256": "443d42e47ca5261440d27d99594f37518d1934f9636b53729faabb42f8391831"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/san-jose-nino.webp",
-      "bytes": 102618,
-      "sha256": "a9eaa3198e8d6dd8cc683edfe228e3cc08cd85bfb032b3442d539cd3045fdad4"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/angel.webp",
-      "bytes": 107214,
-      "sha256": "32cfc510fd6e30bdab68452cccb39262cd822eac2107ec1a62ad9381e37cee37"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/paloma-olivo.webp",
-      "bytes": 120838,
-      "sha256": "fb49e57ff4c39a438b2d3d0ac28f844629a4fb9f926932761c2dd691d30ea560"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/medallon-mariano.webp",
-      "bytes": 139706,
-      "sha256": "952c2699dc68542c5c19793cb9cf942e95410ce14a5eae4712788916a0bba76f"
-    },
-    {
-      "path": "assets/funerario/ornamentos/religiosas/relieves/medallon-cristo.webp",
-      "bytes": 130424,
-      "sha256": "3e43d4b9926209e6f03a57316b67c2aa33a1365206ae4ffc74ca60629edbf6c0"
-    }
-  ]
+  "policy": "Any figure still awaiting public selection belongs here; approved visual prototypes are listed in the public manifest as separate on-demand files.",
+  "files": []
 }

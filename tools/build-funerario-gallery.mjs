@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 const catalog=JSON.parse(fs.readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
 const rejected=new Set(['madre','corona','ala','orantes','palomamedallon']);
-const review=catalog.ornaments.filter(o=>o.validation&&o.rights&&o.publicSelectable!==false&&!rejected.has(o.id));
+const review=catalog.ornaments.filter(o=>o.path.endsWith('.svg')&&o.validation&&o.rights&&o.publicSelectable!==false&&!rejected.has(o.id));
 const approvedPrototypeIds=new Set(['santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz']);
 const proposed=review.filter(o=>approvedPrototypeIds.has(o.id)&&o.category==='cruces'&&o.publicSelectable===true);
 if(review.length!==15||proposed.length!==6)throw Error('Unexpected review gallery coverage');

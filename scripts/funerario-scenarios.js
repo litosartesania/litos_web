@@ -3,7 +3,16 @@ async () => {
   const assert=(ok,message)=>{if(!ok)throw Error(message);};
   const {catalog}=window.LitosMemorialData;
   const raf=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-  const select=async(id,value)=>{const el=document.getElementById('memorial-'+id);el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));await raf();};
+  const select=async(id,value)=>{
+    const el=document.getElementById('memorial-'+id);el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));await raf();
+    const figure=id==='devotional'&&catalog.ornaments.find(x=>x.id===value&&x.format==='image/webp');
+    if(figure){
+      const deadline=Date.now()+10000;
+      while(!window.LitosMemorialData.resources[figure.path]&&Date.now()<deadline)await new Promise(resolve=>setTimeout(resolve,30));
+      assert(window.LitosMemorialData.resources[figure.path],'selected figure loaded: '+value);
+      await raf();
+    }
+  };
   const field=document.getElementById('memorial-text');
   const inscription='TEXTO FICTICIO DE PRUEBA';
   field.value=inscription;field.dispatchEvent(new Event('input',{bubbles:true}));await raf();
@@ -22,10 +31,13 @@ async () => {
     await select(target,'ninguno');
     assert(!document.querySelector(`[data-ornament="${item.category}:${item.id}"]`),'ornament removable: '+item.id);
   }
-  assert(!document.querySelector('#memorial-gallery-category option[value="religiosas"]'),'rejected religious group hidden');
-  assert(document.querySelectorAll('#memorial-devotional option').length===1,'rejected religious choices removed');
-  assert(document.getElementById('memorial-devotional').disabled,'devotional selector suspended');
+  assert(document.querySelector('#memorial-gallery-category option[value="religiosas"]'),'figurative group available');
+  assert(document.querySelectorAll('#memorial-devotional option').length===9,'eight approved visual prototypes');
+  assert(!document.getElementById('memorial-devotional').disabled,'devotional selector available');
   assert(!document.querySelector('[data-slot="devotional"]'),'devotional scene empty');
+  document.getElementById('memorial-gallery-category').value='religiosas';
+  document.getElementById('memorial-gallery-category').dispatchEvent(new Event('change'));
+  assert(document.querySelectorAll('#memorial-gallery .memorial-motif img').length===8,'eight figurative thumbnails');
   document.getElementById('memorial-gallery-category').value='flores';
   document.getElementById('memorial-gallery-category').dispatchEvent(new Event('change'));
   const galleryChoice=document.querySelector('#memorial-gallery [data-item-id="rosaabierta"]');

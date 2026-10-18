@@ -59,10 +59,18 @@ with sync_playwright() as p:
         assert download.suggested_filename=='LITOS-simulacion-orientativa.png' and download.failure() is None
         base_png=Path(download.path()).read_bytes()
         assert base_png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(base_png[16:20],'big')==2000
-        # Rejected religious drawings remain internal prototypes, not public choices.
-        assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==0
-        assert page.locator('#memorial-devotional option').count()==1
-        assert page.locator('#memorial-devotional').is_disabled()
+        # Eight owner-approved visual prototypes are selectable; old rejected drawings remain hidden.
+        assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
+        assert page.locator('#memorial-devotional option').count()==9
+        assert not page.locator('#memorial-devotional').is_disabled()
+        page.locator('#memorial-gallery-category').select_option('religiosas')
+        assert page.locator('#memorial-gallery .memorial-motif img').count()==8
+        assert page.locator('.memorial-motif[data-item-id="madre"]').count()==0
+        page.locator('.memorial-motif[data-item-id="cristo-corona"]').click()
+        page.wait_for_selector('[data-slot="devotional"] image')
+        assert page.locator('[data-slot="devotional"] image').get_attribute('href').startswith('data:image/webp;base64,')
+        assert page.locator('#memorial-download').is_enabled()
+        page.locator('#memorial-reset').click()
         page.locator('#memorial-gallery-category').select_option('cruces')
         for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
             assert page.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
@@ -100,8 +108,8 @@ with sync_playwright() as p:
         review.goto((root/'preview/LITOS_REVISION_CRUCES_6.html').as_uri())
         review.wait_for_selector('#memorial-workbench[data-ready="true"]')
         assert review.locator('#review-only-notice').count()==1
-        assert review.locator('#memorial-gallery-category option[value="religiosas"]').count()==0
-        assert review.locator('#memorial-devotional').is_disabled()
+        assert review.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
+        assert review.locator('#memorial-devotional option').count()==9
         review.locator('#memorial-gallery-category').select_option('cruces')
         for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
             assert review.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1

@@ -58,6 +58,29 @@
   }
   const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',ornamentFinish:'auto',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
+  const pictorialLoads=new Map(),pictorialErrors=new Map();
+  function loadPictorial(item){
+    if(item?.format!=='image/webp'||resources[item.path]||pictorialLoads.has(item.path))return;
+    pictorialErrors.delete(item.path);
+    const image=new Image();
+    const promise=new Promise((resolve,reject)=>{
+      image.onload=()=>{
+        try{
+          const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
+          canvas.getContext('2d').drawImage(image,0,0);
+          resources[item.path]=canvas.toDataURL('image/webp',.97);
+          resolve();
+        }catch(error){reject(error);}
+      };
+      image.onerror=()=>reject(new Error('No se pudo cargar la figura.'));
+      image.src=item.path;
+    });
+    pictorialLoads.set(item.path,promise);
+    promise.catch(error=>pictorialErrors.set(item.path,error)).finally(()=>{
+      pictorialLoads.delete(item.path);
+      if(state.devotional===item.id)requestRender();
+    });
+  }
   const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame','ornament-finish':'ornamentFinish',align:'align'};
   const swatches=[];
   for(const material of catalog.materials){
@@ -79,6 +102,8 @@
     if((slot==='devotional'||slot==='secondary')&&id!=='ninguno'&&!catalog.layouts.find(x=>x.id===state.layout)?.[slot]){
       state.layout='devocionlateral';$('layout').value=state.layout;
     }
+    const item=publicOrnaments.find(candidate=>candidate.id===id);
+    loadPictorial(item);
     renderGallery();requestRender();
   }
   function renderGallery(force=false){
@@ -100,7 +125,7 @@
       button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name);
       const image=document.createElement('span');image.className='memorial-motif-image';
       if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
-      else{const art=document.createElement('img');const source=resources[item.path];art.src=source.startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source);art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
+      else{const art=document.createElement('img');const source=resources[item.path];art.src=item.thumbnailPath?(resources[item.thumbnailPath]||item.thumbnailPath):((source||'').startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source));art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
       const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
       button.append(image,label);
       if(item.commercialReady===false){
@@ -130,6 +155,15 @@
   $('gallery-category').addEventListener('change',()=>renderGallery(true));
   function render(){
     if(!ready)return;
+    const figure=publicOrnaments.find(item=>item.id===state.devotional&&item.format==='image/webp');
+    if(figure&&!resources[figure.path]){
+      scene=null;$('download').disabled=true;
+      root.setAttribute('aria-busy','true');
+      const message=pictorialErrors.has(figure.path)?'No se pudo cargar la figura. Elige otra o inténtalo de nuevo.':'Cargando la figura seleccionada…';
+      const placeholder=document.createElement('p');placeholder.textContent=message;$('canvas').replaceChildren(placeholder);
+      status(message);
+      return;
+    }
     try{
       scene=window.LitosMemorialComposer.compose(state);
       scene.svg.id='memorial-slab';$('canvas').replaceChildren(scene.svg);

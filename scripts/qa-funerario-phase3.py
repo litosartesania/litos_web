@@ -1,4 +1,4 @@
-"""Browser acceptance for the isolated, unpublished figurative-relief reviewer."""
+"""Browser acceptance for the self-contained figurative-relief reviewer."""
 from pathlib import Path
 import base64,json
 from playwright.sync_api import sync_playwright
@@ -24,6 +24,7 @@ with sync_playwright() as p:
   assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
   page.locator('#memorial-gallery-category').select_option('religiosas')
   assert page.locator('#memorial-gallery .memorial-motif img').count()==8
+  assert page.locator('#memorial-gallery img').evaluate_all('(els)=>els.every(e=>e.src.startsWith("data:image/webp;base64,"))')
   page.locator('#memorial-gallery img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
   page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery img")].every(x=>x.complete&&x.naturalWidth>0)')
   count=page.evaluate("""({ids,stones,layouts})=>{
