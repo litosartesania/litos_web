@@ -234,28 +234,28 @@
     },
     {
       "path": "assets/funerario/ornamentos/religiosas/ala.svg",
-      "bytes": 305,
-      "sha256": "821c1f0eac145d1ff08022cfc7b715381380530f85896462c87b8c4549888b71"
+      "bytes": 897,
+      "sha256": "4a1f78717ad6f0e9f80ccb2f0340c3746486d2317f1567aac2e1be25dde80180"
     },
     {
       "path": "assets/funerario/ornamentos/religiosas/corona.svg",
-      "bytes": 443,
-      "sha256": "e63e2a34930364212be2566e5647b0d1e3886c303f486e9187784fa907c3fdc4"
+      "bytes": 1047,
+      "sha256": "f6bb18430f756bf1c0e779bfded120d691ddc4b26b55eade9599dea7e0acb858"
     },
     {
       "path": "assets/funerario/ornamentos/religiosas/madre.svg",
-      "bytes": 476,
-      "sha256": "d513207ea691da13896b1d9042ba671cfa6725c256142104772e44d927b562b8"
+      "bytes": 1549,
+      "sha256": "71d7b1268d97ecedaa68555f9141d3a492732263eb44c6ddd50288326cda8b7e"
     },
     {
       "path": "assets/funerario/ornamentos/religiosas/orantes.svg",
-      "bytes": 372,
-      "sha256": "37e98652b08eaee3a1de01a84c00fbcfc10598259eb1febde97954c4effed1a1"
+      "bytes": 997,
+      "sha256": "831eb8111df7a7f419b774650a09dd9c1faaf23e484961083697f980e5eb7a6a"
     },
     {
       "path": "assets/funerario/ornamentos/religiosas/palomamedallon.svg",
-      "bytes": 399,
-      "sha256": "b0cec7896c621573f9decbf2d6fbd5fe84cf2fb60c0f27e5a57806a8b73d7e40"
+      "bytes": 1092,
+      "sha256": "26311bffed54f85025a839f683c2cae7d52a4315a06a1272d917b051659e4fc6"
     },
     {
       "path": "assets/funerario/ornamentos/separadores/doble.svg",

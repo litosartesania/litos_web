@@ -538,3 +538,10 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 # 2026-10-18 — Fase 2 del configurador funerario
 
 Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La auditoría de 202 imágenes/62 carpetas, sus límites y las categorías agregadas están en [FUNERARIO_AUDITORIA_FOTOGRAFICA_FASE2.md](FUNERARIO_AUDITORIA_FOTOGRAFICA_FASE2.md). Evidencia y trazabilidad privada: biblioteca de investigación en Drive del taller; nunca incorporar originales, enlaces internos, pedidos o epígrafes a GitHub. El catálogo incorpora 14 SVG genéricos originales y dos disposiciones nuevas. Generación: `define-funerario-catalog.mjs` → `extend-funerario-phase2.mjs` → builders de UI/recursos/preview/galería. Los nuevos vectores siguen `commercialReady: false`. La PR será de borrador y no autoriza despliegue. Pendientes: lectura de otras fuentes históricas, cotejo de fichas y medidas, muestras de piedra, revisión técnica/comercial y Safari físico.
+
+
+## 2026-10-18 — Configurador funerario: nuevo diseño ancho y grabados devocionales revisados (rama aislada)
+- Tras la publicación autorizada de PR #56 en `fbbe7dca181515b755aed63fc9408278af10cb18`, el propietario solicita piedra más grande, selectores por encima y mejora sustancial de las imágenes de grabado.
+- Rama exclusiva `work/funerario-legibilidad-galeria-20261018`: nueva barra principal superior, galería horizontal con miniaturas, escena ampliada, ajustes avanzados debajo; cinco SVG religiosos redibujados genéricamente; hashes y bundle actualizados.
+- Los 14 nuevos ornamentos de la fase 2 siguen `commercialReady: false`; no se utilizaron fotografías privadas, datos personales ni otros repositorios. Los 14 WebP originales permanecen intactos. El configurador bloquea descargar texto truncado o composiciones con capas ocultas.
+- Estado: pendiente de comprobar CI y validar visualmente mediante PR de borrador. No publicar ni fusionar esta nueva rama sin aprobación.

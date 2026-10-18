@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Manos orantes</title><path d="M45 88Q29 76 31 60L34 38Q35 31 40 32L44 60L46 15Q47 7 51 8Q55 9 54 17L56 60L62 30Q65 25 69 28Q72 31 69 38L65 66Q64 79 55 88M45 88H55M39 39L43 73M62 38L58 73M32 89H68"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+<title>Manos en oración, grabado con dedos y puños detallados</title>
+<path d="M42 84Q31 77 27 68Q22 54 28 40L40 18Q43 13 46 17Q48 19 46 25L41 39L48 16Q51 11 54 15Q56 18 54 24L49 44L54 27Q57 23 61 26Q63 29 61 34L56 55Q64 48 68 47Q73 47 72 52L67 64Q65 75 58 83Z" fill="currentColor" fill-opacity=".09" stroke-width="1.65"/>
+<path d="M57 84Q69 76 73 66Q79 53 72 39L61 20Q58 15 55 19Q53 22 56 28L62 43M52 18Q50 11 47 16" stroke-width=".9"/>
+<path d="M47 24L41 46M52 26L47 50M58 35L54 58M34 35Q33 49 36 62M67 35Q69 50 65 64M33 66Q37 74 45 78M67 67Q63 76 55 79" stroke-width=".7"/>
+<path d="M41 83L39 94H62L58 83M37 93H65M43 86H57" stroke-width="1.4"/>
+<path d="M42 57Q47 62 53 60M43 64Q49 69 56 66M42 70Q50 74 58 70" stroke-width=".6"/>
+<path d="M29 44L33 38M26 55L31 50M72 44L68 38M75 55L70 51M44 33L42 39" stroke-width=".5"/>
+</svg>

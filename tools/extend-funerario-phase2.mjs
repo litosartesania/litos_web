@@ -1,5 +1,5 @@
 // Generic, original vectors informed by aggregate visual categories, never copied from a private photograph.
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 const root='assets/funerario';
 const path=`${root}/configuracion/catalogo.json`;
 const catalog=JSON.parse(readFileSync(path,'utf8'));
@@ -29,7 +29,8 @@ for(const [category,id,name,description,body] of entries){
  const asset=`${root}/ornamentos/${category}/${id}.svg`;
  mkdirSync(`${root}/ornamentos/${category}`,{recursive:true});
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>${name}</title>${body}</svg>\n`;
- writeFileSync(asset,svg);
+ // Keep subsequent manually refined master vectors; this script only supplies missing base candidates.
+ if(!existsSync(asset))writeFileSync(asset,svg);
  const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false};
  const previous=catalog.ornaments.findIndex(x=>x.id===id&&x.category===category);
  if(previous<0)catalog.ornaments.push(metadata);else catalog.ornaments[previous]=metadata;

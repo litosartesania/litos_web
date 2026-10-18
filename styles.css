@@ -625,3 +625,96 @@ button, a { -webkit-tap-highlight-color: transparent; }
  .memorial-swatch span{font-size:.65rem}
 }
 @media(prefers-reduced-motion:reduce){.memorial-studio *{scroll-behavior:auto}}
+
+/* Funerario · revisión de composición: controles arriba, piedra protagonista. */
+.catalog-funerary .memorial-studio{max-width:1680px}
+.memorial-toolbar{
+ display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem 1.1rem;
+ padding:1.2rem 1.3rem 1rem;margin-bottom:1.5rem;background:#e4dccf;border:1px solid #c7bba9
+}
+.memorial-quick-field{min-width:0;display:flex;flex-direction:column;gap:.35rem}
+.memorial-quick-field label,.memorial-toolbar .memorial-library>label{
+ display:block;font:600 .75rem/1.4 var(--sans);color:#433b31
+}
+.memorial-quick-field select,.memorial-toolbar .memorial-library select{
+ width:100%;min-height:48px;padding:.65rem .7rem;color:#2f2b24;
+ background:#fffaf3;border:1px solid #aaa08f;font:400 .89rem/1.4 var(--sans)
+}
+.memorial-toolbar .memorial-library{
+ grid-column:1/-1;min-width:0;margin:.2rem 0 0;padding:1rem 0 .3rem;
+ border-bottom:0
+}
+.memorial-toolbar .memorial-library>label{margin-bottom:.45rem}
+.memorial-toolbar .memorial-library>select{max-width:380px}
+.memorial-toolbar .memorial-gallery{
+ display:flex;gap:.75rem;overflow-x:auto;overflow-y:hidden;max-height:none;
+ padding:.5rem .1rem 1rem;scrollbar-color:#8e7b63 #e4dccf;scroll-snap-type:x proximity
+}
+.memorial-toolbar .memorial-motif{
+ flex:0 0 132px;min-height:166px;max-width:132px;
+ border-radius:3px;padding:.7rem .55rem;scroll-snap-align:start;
+ background:#f8f5ee;font-size:.73rem
+}
+.memorial-toolbar .memorial-motif[aria-pressed=true]{
+ padding:calc(.7rem - 1px) calc(.55rem - 1px);
+ box-shadow:0 0 0 2px #735836
+}
+.memorial-toolbar .memorial-motif-image,.memorial-toolbar .memorial-motif-image img{width:94px;height:94px}
+.memorial-motif-pending{display:block;line-height:1.2;color:#7b6144;font-size:.6rem}
+.memorial-workbench{
+ display:flex;flex-direction:column;gap:1.6rem;width:100%;align-items:stretch
+}
+.memorial-display{
+ position:relative;top:auto;width:100%;min-width:0;
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,.26fr);
+ align-items:start;column-gap:1.25rem
+}
+.memorial-stage{
+ grid-row:1/6;grid-column:1;width:100%;aspect-ratio:1.14;
+ max-height:none;min-height:560px;margin:0;
+ background:#d5cec3
+}
+.memorial-stage>svg{width:100%;height:100%;max-width:100%;max-height:none;object-fit:contain}
+.memorial-caption,.memorial-material-note,.memorial-actions,.memorial-status{grid-column:2;margin-top:0}
+.memorial-caption{font-size:1rem;margin-bottom:.65rem}
+.memorial-material-note{font-size:.78rem}
+.memorial-actions{display:flex;flex-direction:column;gap:.6rem}
+.memorial-actions button{width:100%}
+.memorial-status{font-size:.78rem;min-height:3em}
+.memorial-controls{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;
+ align-items:start;min-width:0
+}
+.memorial-controls details{
+ padding:0 1rem;min-width:0;border:1px solid #c6bbaa;
+ background:#e8e2d7
+}
+.memorial-controls details:last-child{border-bottom:1px solid #c6bbaa}
+.memorial-panel{padding-bottom:1.3rem}
+.memorial-studio :is(.memorial-toolbar select,.memorial-toolbar button):focus-visible{
+ outline:3px solid #8b6b3f;outline-offset:2px
+}
+@media(max-width:1050px){
+ .memorial-toolbar{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .memorial-display{display:block}
+ .memorial-stage{max-width:100%;aspect-ratio:1.22;min-height:0}
+ .memorial-caption{margin-top:.9rem}
+ .memorial-actions{flex-direction:row}
+ .memorial-controls{gap:.9rem}
+}
+@media(max-width:700px){
+ .memorial-toolbar{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;padding:.8rem;margin-bottom:.75rem}
+ .memorial-toolbar .memorial-library{padding:.7rem 0 .2rem}
+ .memorial-toolbar .memorial-motif{flex-basis:118px;min-height:149px;max-width:118px}
+ .memorial-toolbar .memorial-motif-image,.memorial-toolbar .memorial-motif-image img{width:84px;height:84px}
+ .memorial-display{position:relative;top:auto;padding:0;background:none;box-shadow:none}
+ .memorial-stage{width:100%;height:auto;aspect-ratio:1;min-height:0;max-height:none}
+ .memorial-stage>svg{height:100%;width:100%;max-height:none}
+ .memorial-controls{grid-template-columns:1fr}
+ .memorial-actions button{font-size:.78rem}
+ .memorial-studio{padding:1rem;margin-left:0;margin-right:0}
+}
+@media(max-width:380px){
+ .memorial-toolbar{grid-template-columns:1fr 1fr}
+ .memorial-quick-field select{font-size:.82rem}
+}
