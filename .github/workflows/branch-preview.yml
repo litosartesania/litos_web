@@ -60,5 +60,6 @@ jobs:
             preview/LITOS_PREVISUALIZACION_AUTONOMA.html
             preview/LITOS_CONFIGURADOR_FUNERARIO.html
             preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html
+            preview/LITOS_REVISION_CRUCES_6.html
           if-no-files-found: error
           retention-days: 7
