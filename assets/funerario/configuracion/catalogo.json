@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "materials": [
     {
       "id": "sudafrica",
@@ -1019,6 +1019,131 @@
         "medallonsuperior"
       ],
       "validation": "Pendiente de revision",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "doblefilete",
+      "category": "cruces",
+      "name": "Cruz de doble filete",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/doblefilete.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Pendiente de revisión técnica y comercial",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "moldurada",
+      "category": "cruces",
+      "name": "Cruz tallada",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/moldurada.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Pendiente de revisión técnica y comercial",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "metalica",
+      "category": "cruces",
+      "name": "Cruz de aplique",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/metalica.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Pendiente de revisión técnica y comercial",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "florenzada",
+      "category": "cruces",
+      "name": "Cruz ornamental",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/florenzada.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Pendiente de revisión técnica y comercial",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "medalloncruz",
+      "category": "cruces",
+      "name": "Cruz con medallón",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/medalloncruz.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Pendiente de revisión técnica y comercial",
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": false
