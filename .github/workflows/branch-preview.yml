@@ -61,6 +61,9 @@ jobs:
             preview/LITOS_CONFIGURADOR_FUNERARIO.html
             preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html
             preview/LITOS_REVISION_CRUCES_6.html
+            preview/LITOS_PANEL_IZQUIERDO_390.png
+            preview/LITOS_PANEL_IZQUIERDO_768.png
+            preview/LITOS_PANEL_IZQUIERDO_1440.png
             preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html
           if-no-files-found: error
           retention-days: 7
