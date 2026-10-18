@@ -4,6 +4,18 @@
   const root=document.getElementById('memorial-workbench');if(!root)return;
   const $=id=>document.getElementById('memorial-'+id);
   const {catalog,resources}=window.LitosMemorialData;
+  // Move the same interactive controls into the wide toolbar above the larger stone.
+  const toolbar=$('toolbar');
+  if(toolbar){
+    for(const id of ['stone','variant','model','layout','type']){
+      const input=$(id),label=document.querySelector('label[for="memorial-'+id+'"]');
+      if(!input||!label)continue;
+      const field=document.createElement('div');field.className='memorial-quick-field';
+      field.append(label,input);toolbar.append(field);
+    }
+    const library=root.querySelector('.memorial-library');
+    if(library)toolbar.append(library);
+  }
   const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',ornamentFinish:'auto',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
   const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame','ornament-finish':'ornamentFinish',align:'align'};
@@ -46,7 +58,13 @@
       if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
       else{const art=document.createElement('img');art.src='data:image/svg+xml,'+encodeURIComponent(resources[item.path]);art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
       const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
-      button.append(image,label);button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
+      button.append(image,label);
+      if(item.commercialReady===false){
+        const note=document.createElement('small');note.className='memorial-motif-pending';
+        note.textContent='Prototipo sin validar';button.append(note);
+        button.title=item.validation;
+      }
+      button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
     }
     $('gallery').replaceChildren(fragment);$('gallery').dataset.group=group;
   }
@@ -68,13 +86,24 @@
       }
       if(!exporting)status(scene.warnings.length?scene.warnings.join(' '):scene.adjusted?'Composición actualizada. Tamaño ajustado para mantener el texto dentro de su zona.':'Composición actualizada. Lista para descargar.');
       renderGallery();
-      root.setAttribute('aria-busy','false');root.dataset.ready='true';$('download').disabled=exporting;
+      root.setAttribute('aria-busy','false');root.dataset.ready='true';$('download').disabled=exporting||scene.truncated||scene.unrendered;
     }catch(error){root.setAttribute('aria-busy','false');status('No se pudo actualizar la vista previa. '+error.message);$('download').disabled=true;}
   }
   function requestRender(){cancelAnimationFrame(frame);frame=requestAnimationFrame(render);}
   for(const [id,key] of Object.entries(selections))$(id).addEventListener('change',()=>{
     if(key==='devotional'||key==='secondary')selectMotif(key,$(id).value);
-    else{state[key]=$(id).value;requestRender();}
+    else{
+      const next=$(id).value;
+      if(key==='layout'){
+        const layout=catalog.layouts.find(x=>x.id===next);
+        if((state.devotional!=='ninguno'&&!layout?.devotional)||(state.secondary!=='ninguno'&&!layout?.secondary)){
+          $(id).value=state.layout;
+          status('Esta composición no dispone de zona para los motivos seleccionados. Retíralos o utiliza una de las dos composiciones devocionales.');
+          return;
+        }
+      }
+      state[key]=next;requestRender();
+    }
   });
   for(const id of ['fixings','guides'])$(id).addEventListener('change',()=>{state[id]=$(id).checked;requestRender();});
   for(const [id,key] of [['size','textSize'],['leading','leading']])$(id).addEventListener('input',()=>{state[key]=Number($(id).value);requestRender();});
@@ -95,10 +124,14 @@
   $('download').addEventListener('click',async()=>{
     if(!ready||exporting)return;
     cancelAnimationFrame(frame);render();
+    if(!scene||scene.truncated||scene.unrendered){
+      status('Corrige el texto abreviado o selecciona una composición que incluya todas las capas antes de descargar.');
+      return;
+    }
     exporting=true;$('download').disabled=true;status('Preparando la descarga en tu navegador…');
     try{await window.LitosMemorialExport.download(scene);status('Imagen preparada. La descarga incluye tu inscripción y el aviso de simulación.');}
     catch(error){status(error.message+' La composición sigue disponible.');}
-    finally{exporting=false;$('download').disabled=false;}
+    finally{exporting=false;$('download').disabled=scene.truncated||scene.unrendered;}
   });
   sync();renderGallery();
   window.LitosMemorialComposer.loadFonts().then(()=>{ready=true;render();}).catch(error=>{root.setAttribute('aria-busy','false');status(error.message);});
