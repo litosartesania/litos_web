@@ -550,3 +550,6 @@ La PR #60 incorpora soporte PNG/WebP en el compositor de motivos y una vista HTM
 
 ## 2026-10-18 — Diseño de configurador con barra lateral izquierda
 La PR #60 de `litosartesania/litos_web` incorpora distribución de una sola vista: todos los selectores, biblioteca visual y texto editable agrupados en barra desplazable a la izquierda con resumen vivo de 11 opciones; escena de lápida completa y exportación a la derecha. En móvil, piedra primero y opciones después. Pruebas de geometría responsive, selección, privacidad y PNG añadidas a CI y capturas 390/768/1440. Sin fusión ni publicación. Se mantienen ocultos los cinco motivos religiosos rechazados y las seis nuevas cruces genéricas, pendientes de validación comercial.
+
+## 2026-10-18 — Autorización para publicar prototipos de seis cruces (PR #60)
+El usuario aprueba su exhibición en `litos_web` como simulación orientativa, con `publicSelectable:true`, sin elevar `commercialReady:false`. Permanecen ocultas cinco imágenes religiosas rechazadas. La PR contiene además configuración de vista única con opciones laterales y lápida grande, más revisores autónomos de recurso local que no deben publicarse en Pages. Control obligatorio: GitHub Actions, allowlist, QA responsive, PNG, cero datos privados y comprobación postdespliegue.
