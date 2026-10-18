@@ -535,3 +535,9 @@ En `work/funerario-fase2-20261018`, desde el `main` posterior a PR #55, se audit
 - Publicación de PR #56 ya comprobada, commit `fbbe7dca181515b755aed63fc9408278af10cb18`. Feedback: escena de piedra debe ocupar más ancho y controles encima; motivos actuales no tienen calidad suficiente.
 - Nueva rama `work/funerario-legibilidad-galeria-20261018`: gran vista de piedra, barra superior de selects + carrusel de ornamentos, detalle de ajustes inferior, cinco figuras devocionales SVG de nueva creación más detalladas. Refuerzo de exportación: no permitir descargas si el texto se trunca o si hay capas sin zona en la composición.
 - Mantener `commercialReady: false` en los 14 motivos nuevos; son simulaciones sin validación de fabricación. Sin imágenes particulares ni datos internos. CI y aprobación visual pendientes; main no modificado.
+
+
+## 2026-10-18 — Control de calidad visual de funerario: cinco dibujos rechazados
+- La vista panorámica y cache fix de PR #57/#58 están publicados. El propietario rechaza los cinco motivos religiosos esquemáticos actuales.
+- Rama exclusiva `work/funerario-retirar-devocionales-no-validados-20261018`: desactivar su selección pública con `publicSelectable:false` sin alterar `commercialReady:false`; catálogo 33 ornamentos, 14 pendientes comerciales y cinco suspendidos artísticamente. Cruces, flores, marcos, separadores, seis layouts y todas las piedras continúan operativos; el editor/PNG permanece local.
+- Verificar CI, revisión visual, privacidad y despliegue; no publicar originales del taller ni exponer datos privados. Reemplazo religioso pictórico pendiente de validación, no confundirse con los SVG presentes.
