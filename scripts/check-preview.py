@@ -49,4 +49,11 @@ gallery=root/'LITOS_BIBLIOTECA_FUNERARIA_FASE2.html'
 assert gallery.is_file(), 'phase 2 gallery missing'
 gp=Inspector();gp.feed(gallery.read_text(encoding='utf-8'))
 assert gp.images==20 and not gp.external and not gp.forms, 'gallery must contain 20 embedded generic review vectors'
+review=root/'LITOS_REVISION_CRUCES_6.html'
+assert review.is_file(), 'interactive six-cross preview missing'
+rp=Inspector();rp.feed(review.read_text(encoding='utf-8'))
+assert rp.styles>=1 and rp.scripts>=5 and not rp.external and not rp.forms
+assert 'id="review-only-notice"' in review.read_text(encoding='utf-8')
+assert 'noindex,nofollow' in review.read_text(encoding='utf-8')
+
 print('PASS: portable five-view preview is self-contained, images embedded and commercial forms absent')
