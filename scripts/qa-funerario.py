@@ -73,7 +73,7 @@ with sync_playwright() as p:
             tile=review.locator('.memorial-motif[data-item-id="'+candidate+'"]')
             assert tile.count()==1
             tile.click()
-            review.wait_for_function('(id)=>document.querySelector("#memorial-symbol").value===id',candidate)
+            review.wait_for_function('(id)=>document.querySelector("#memorial-symbol").value===id',arg=candidate)
             assert review.locator('#memorial-download').is_enabled(),candidate
         assert review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
         with review.expect_download() as download_info:
@@ -81,7 +81,7 @@ with sync_playwright() as p:
         downloaded=download_info.value
         assert downloaded.failure() is None
         png=Path(downloaded.path()).read_bytes()
-        assert png[:8]==b'\\x89PNG\\r\\n\\x1a\\n' and int.from_bytes(png[16:20],'big')==2000
+        assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
         assert not review_errors and not review_network,(review_errors,review_network)
         context.close()
     browser.close()
