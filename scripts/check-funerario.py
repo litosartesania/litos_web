@@ -24,6 +24,7 @@ for item in catalog['ornaments']:
         assert item['commercialReady'] is False and item['rights'].startswith('Vector original genérico')
         assert item['digitalSize']==[100,100] and item['compatibleLayouts']
 assert sum('commercialReady' in item for item in catalog['ornaments'])==14
+assert all(o.get('publicSelectable') is not False for o in catalog['ornaments'] if o['category']!='religiosas')
 # Rejected visuals remain available for review but are not public choices.
 rejected={'madre','corona','ala','orantes','palomamedallon'}
 assert {o['id'] for o in catalog['ornaments'] if o.get('publicSelectable') is False}==rejected
