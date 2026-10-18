@@ -20,11 +20,11 @@ assert len(MEMORIAL["files"]) == 60
 FILES = {
     "funerario.html": (
         'id="memorial-workbench"',
-        'styles.css?v=funerario-fase2-20261018',
-        'src="funerario-recursos.js"',
-        'src="funerario-compositor.js"',
-        'src="funerario-exportar.js"',
-        'src="funerario-personalizador.js"',
+        'styles.css?v=funerario-panorama-20261018',
+        'src="funerario-recursos.js?v=funerario-panorama-20261018"',
+        'src="funerario-compositor.js?v=funerario-panorama-20261018"',
+        'src="funerario-exportar.js?v=funerario-panorama-20261018"',
+        'src="funerario-personalizador.js?v=funerario-panorama-20261018"',
         "Recreación digital orientativa",
     ),
     "mobiliario.html": (
