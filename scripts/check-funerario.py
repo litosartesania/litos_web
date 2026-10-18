@@ -24,6 +24,13 @@ for item in catalog['ornaments']:
         assert item['commercialReady'] is False and item['rights'].startswith('Vector original genérico')
         assert item['digitalSize']==[100,100] and item['compatibleLayouts']
 assert sum('commercialReady' in item for item in catalog['ornaments'])==14
+# Rejected visuals remain available for review but are not public choices.
+rejected={'madre','corona','ala','orantes','palomamedallon'}
+assert {o['id'] for o in catalog['ornaments'] if o.get('publicSelectable') is False}==rejected
+assert all(o.get('commercialReady') is False for o in catalog['ornaments'] if o['id'] in rejected)
+assert 'Imágenes religiosas</option>' not in (root/'funerario.html').read_text(encoding='utf8')
+assert not any(('value="'+id+'"') in (root/'funerario.html').read_text(encoding='utf8') for id in rejected)
+
 for font in catalog['fonts']:
     assert 'SIL OPEN FONT LICENSE Version 1.1' in (root/font['license']).read_text()
     assert ' '.join((root/font['license']).read_text().split()) in ' '.join(bundle.split()), 'standalone font license missing'
