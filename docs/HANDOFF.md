@@ -588,3 +588,8 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El primer despliegue Pages #39159169780 falló **antes de publicar**: `scripts/qa-funerario.py` esperaba la galería offline `preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html`, pero el flujo `static.yml` solo ejecutaba `tools/build-funerario-preview.mjs`.
 - Rama `fix/funerario-galeria-ci-pages-20261018`: añadir `node tools/build-funerario-gallery.mjs` a la validación de navegador **antes** de `qa-funerario.py`. Se generan recursos de revisión únicamente en `preview/`, no en `_site`, por lo que no se publican imágenes ni documentos privados.
 - Fusión y publicación de la corrección sujetas a CI en verde y verificación HTTP/hash de GitHub Pages. Mantener seis cruces visibles como prototipo (`commercialReady:false`), cinco motivos figurativos rechazados ocultos.
+
+## 18/10/2026 — Ajuste del verificador postdespliegue a 66 recursos
+- PR #61 corrigió el flujo Pages para generar la galería offline antes de su QA, compilación y Playwright superados, desplegó el sitio, pero la verificación final del run #39159881252 falló inmediatamente al comprobar `len(MEMORIAL['files']) == 60`, constante histórica anterior a las seis cruces de PR #60.
+- Rama `fix/funerario-verificador-66-recursos-20261018`: cambia esa única expectativa a 66 y actualiza el mensaje de éxito; mantiene todas las verificaciones HTTP, tamaño y SHA-256. No toca ningún recurso ni catálogo, no revela fotografías privadas ni afecta otros repositorios.
+- Publicar la corrección solo con CI verde y verificar la URL Pages tras finalizar todo el job.
