@@ -4,7 +4,8 @@ const c=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','
 const options=list=>list.map(x=>`<option value="${x.id}">${x.label||x.name}</option>`).join('');
 const select=(id,label,list)=>`<label for="memorial-${id}">${label}</label><select id="memorial-${id}">${options(list)}</select>`;
 const none={id:'ninguno',name:'Ninguno'};
-const ornaments=category=>[none,...c.ornaments.filter(x=>category.includes(x.category))];
+const publicOrnaments=c.ornaments.filter(x=>x.publicSelectable!==false);
+const ornaments=category=>[none,...publicOrnaments.filter(x=>category.includes(x.category))];
 const placement=(prefix,label)=>`<fieldset class="memorial-placement"><legend>${label} · dentro de su zona</legend><label for="memorial-${prefix}-scale">Escala <output id="${prefix}-scale-value">85 %</output></label><input id="memorial-${prefix}-scale" type="range" min="35" max="100" value="85"><label for="memorial-${prefix}-x">Posición horizontal</label><input id="memorial-${prefix}-x" type="range" min="0" max="100" value="50"><label for="memorial-${prefix}-y">Posición vertical</label><input id="memorial-${prefix}-y" type="range" min="0" max="100" value="50"></fieldset>`;
 const fields=c.fields.map(f=>`<div class="memorial-text-field"><div class="memorial-field-top"><label for="${f.id==='name'?'memorial-text':'memorial-field-'+f.id}">${f.label}</label><label class="memorial-check"><input id="memorial-show-${f.id}" type="checkbox" checked> Mostrar</label></div><textarea id="${f.id==='name'?'memorial-text':'memorial-field-'+f.id}" data-text-field="${f.id}" rows="${f.id==='epitaph'?3:2}" maxlength="${f.max}" spellcheck="false" aria-describedby="memorial-local">${f.default}</textarea></div>`).join('');
 const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="memorial-title">
@@ -22,14 +23,14 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
    </div></details>
    <details><summary><span>02</span> Composición y símbolos</summary><div class="memorial-panel">
     ${select('layout','Composición',c.layouts)}
-    <div class="memorial-library"><label for="memorial-gallery-category">Biblioteca visual de motivos</label><select id="memorial-gallery-category"><option value="cruces">Cruces</option><option value="religiosas">Imágenes religiosas</option><option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas inspiradas en categorías observadas, pendientes de revisión visual. Las fotografías reales permanecen privadas.</p></div>
-    ${select('symbol','Cruz',[{id:'ninguno',name:'Sin cruz'},...c.ornaments.filter(x=>x.category==='cruces')])}
+    <div class="memorial-library"><label for="memorial-gallery-category">Biblioteca visual de motivos</label><select id="memorial-gallery-category"><option value="cruces">Cruces</option>${publicOrnaments.some(x=>x.category==="religiosas")?'<option value="religiosas">Imágenes religiosas</option>':""}<option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas inspiradas en categorías observadas, pendientes de revisión visual. Las fotografías reales permanecen privadas.</p></div>
+    ${select('symbol','Cruz',[{id:'ninguno',name:'Sin cruz'},...publicOrnaments.filter(x=>x.category==='cruces')])}
     ${placement('symbol','Cruz')}
-    ${select('devotional','Imagen religiosa',[{id:'ninguno',name:'Sin imagen religiosa'},...c.ornaments.filter(x=>x.category==='religiosas')])}
+    ${select('devotional','Imagen religiosa',[{id:'ninguno',name:'Sin imagen religiosa'},...publicOrnaments.filter(x=>x.category==='religiosas')])}
     ${placement('devotional','Imagen religiosa')}
     ${select('ornament','Ornamento floral o simbólico',ornaments(['flores','simbolos']))}
     ${placement('ornament','Ornamento')}
-    ${select('secondary','Motivo adicional',[{id:'ninguno',name:'Sin motivo adicional'},...c.ornaments.filter(x=>x.category==='flores'||x.category==='simbolos')])}
+    ${select('secondary','Motivo adicional',[{id:'ninguno',name:'Sin motivo adicional'},...publicOrnaments.filter(x=>x.category==='flores'||x.category==='simbolos')])}
     ${placement('secondary','Motivo adicional')}
     ${select('ornament-finish','Acabado del ornamento',c.finishes)}
     ${select('separator','Separador',ornaments(['separadores']))}
