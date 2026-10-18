@@ -52,6 +52,6 @@ for(const [category,id,name,description,body] of entries){
   catalog.ornaments[previous]={...metadata,...(original.publicSelectable===false?{publicSelectable:false,visualReview:original.visualReview}: {})};
 }
 }
-catalog.version=2;
+catalog.version=3;
 writeFileSync(path,JSON.stringify(catalog,null,2)+'\n');
 console.log(`Extended memorial catalog to ${catalog.ornaments.length} original vectors and ${catalog.layouts.length} compositions.`);
