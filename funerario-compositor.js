@@ -143,7 +143,7 @@
     const active=catalog.fields.filter(f=>state.fields[f.id].visible&&state.fields[f.id].text.trim());
     const total=active.reduce((sum,f)=>sum+f.weight,0),gap=active.length>1?Math.min(9,textBox.h*.025):0;
     const usable=textBox.h-gap*Math.max(0,active.length-1);
-    let y=textBox.y,adjusted=false;
+    let y=textBox.y,adjusted=false,truncated=false;
     const runs=[];
     for(const field of active){
       const box={x:textBox.x,y,w:textBox.w,h:usable*field.weight/total};
@@ -165,7 +165,7 @@
             let tail=lines[capacity-1];measure.font=fontCss(font,size);
             while(tail&&measure.measureText(tail+'…').width>box.w*.86)tail=tail.slice(0,-1);
             lines[capacity-1]=tail.trimEnd()+'…';
-            warnings.push('El campo «'+field.label+'» es demasiado largo: la vista previa muestra solo el comienzo.');
+            truncated=true;warnings.push('El campo «'+field.label+'» es demasiado largo: la vista previa muestra solo el comienzo. Reduce el texto para habilitar la descarga.');
           }
           adjusted=true;break;
         }
@@ -194,7 +194,7 @@
     }
     add(svg,'text',{x:500,y:916,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':13,'letter-spacing':2,fill:'#5e594f'},'LITOS · SIMULACIÓN ORIENTATIVA');
     add(svg,'text',{x:500,y:942,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':12,fill:'#716c63'},'Textura recreada · No es un plano de fabricación');
-    return {svg,runs,boxes,finish,material,model,layout,font,adjusted,warnings};
+    return {svg,runs,boxes,finish,material,model,layout,font,adjusted,warnings,truncated,unrendered: Boolean((state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)||(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox))};
   }
   async function loadFonts(){
     const outcomes=await Promise.allSettled(catalog.fonts.map(async f=>{
