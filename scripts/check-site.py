@@ -226,7 +226,7 @@ for p in plans:
 
 memorial_manifest=json.loads((root.parent/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 memorial_paths={i['path'] for i in memorial_manifest['files']}|{'funerario-recursos.js','funerario-compositor.js','funerario-exportar.js'}
-assert len(memorial_manifest['files'])==60
+assert len(memorial_manifest['files'])==66
 for i in memorial_manifest['files']:
  b=(root/i['path']).read_bytes()
  assert len(b)==i['bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],i['path']

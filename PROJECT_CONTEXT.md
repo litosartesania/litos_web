@@ -541,3 +541,15 @@ En `work/funerario-fase2-20261018`, desde el `main` posterior a PR #55, se audit
 - La vista panorámica y cache fix de PR #57/#58 están publicados. El propietario rechaza los cinco motivos religiosos esquemáticos actuales.
 - Rama exclusiva `work/funerario-retirar-devocionales-no-validados-20261018`: desactivar su selección pública con `publicSelectable:false` sin alterar `commercialReady:false`; catálogo 33 ornamentos, 14 pendientes comerciales y cinco suspendidos artísticamente. Cruces, flores, marcos, separadores, seis layouts y todas las piedras continúan operativos; el editor/PNG permanece local.
 - Verificar CI, revisión visual, privacidad y despliegue; no publicar originales del taller ni exponer datos privados. Reemplazo religioso pictórico pendiente de validación, no confundirse con los SVG presentes.
+
+## 2026-10-18 — Seis cruces candidatas, rama aislada
+Se añadieron seis SVG originales para revisar familias de grabado, talla, cruz ornamental y aplique. El catálogo pasa a 39 ornamentos; once no seleccionables, incluyendo los cinco motivos religiosos rechazados. Son propuestas sin validación comercial. La tabla de 33 motivos reales y las fotos siguen fuera del repositorio, únicamente en Drive privado. Revisar PR y CI antes de publicar.
+
+## 18-10-2026 · Ensayos raster locales
+La PR #60 incorpora soporte PNG/WebP en el compositor de motivos y una vista HTML de revision local con selector de archivo. Los recursos se usan solo en memoria del navegador; se comprueba su exportacion en PNG. Los cinco dibujos religiosos rechazados y seis cruces candidatas permanecen ocultos en la web publica. La PR sigue en borrador y no se publica sin validacion visual.
+
+## 2026-10-18 — Diseño de configurador con barra lateral izquierda
+La PR #60 de `litosartesania/litos_web` incorpora distribución de una sola vista: todos los selectores, biblioteca visual y texto editable agrupados en barra desplazable a la izquierda con resumen vivo de 11 opciones; escena de lápida completa y exportación a la derecha. En móvil, piedra primero y opciones después. Pruebas de geometría responsive, selección, privacidad y PNG añadidas a CI y capturas 390/768/1440. Sin fusión ni publicación. Se mantienen ocultos los cinco motivos religiosos rechazados y las seis nuevas cruces genéricas, pendientes de validación comercial.
+
+## 2026-10-18 — Autorización para publicar prototipos de seis cruces (PR #60)
+El usuario aprueba su exhibición en `litos_web` como simulación orientativa, con `publicSelectable:true`, sin elevar `commercialReady:false`. Permanecen ocultas cinco imágenes religiosas rechazadas. La PR contiene además configuración de vista única con opciones laterales y lápida grande, más revisores autónomos de recurso local que no deben publicarse en Pages. Control obligatorio: GitHub Actions, allowlist, QA responsive, PNG, cero datos privados y comprobación postdespliegue.

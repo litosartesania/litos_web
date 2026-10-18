@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "materials": [
     {
       "id": "sudafrica",
@@ -997,6 +997,162 @@
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
       "commercialReady": false
+    },
+    {
+      "id": "santiago",
+      "category": "cruces",
+      "name": "Cruz de Santiago estilizada",
+      "description": "Propuesta geometrica de cruz ornamental",
+      "path": "assets/funerario/ornamentos/cruces/santiago.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+    },
+    {
+      "id": "doblefilete",
+      "category": "cruces",
+      "name": "Cruz de doble filete",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/doblefilete.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+    },
+    {
+      "id": "moldurada",
+      "category": "cruces",
+      "name": "Cruz tallada",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/moldurada.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+    },
+    {
+      "id": "metalica",
+      "category": "cruces",
+      "name": "Cruz de aplique",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/metalica.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+    },
+    {
+      "id": "florenzada",
+      "category": "cruces",
+      "name": "Cruz ornamental",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/florenzada.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+    },
+    {
+      "id": "medalloncruz",
+      "category": "cruces",
+      "name": "Cruz con medallón",
+      "description": "Diseño original, inspirado en tipologías generales, sin calco de encargos",
+      "path": "assets/funerario/ornamentos/cruces/medalloncruz.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     }
   ]
 }

@@ -22,6 +22,18 @@ const entries=[
 ];
 // Public access to these experimental pictograms is suspended until visual approval.
 const visualRejects=new Set(['madre','corona','ala','orantes','palomamedallon']);
+// Six unpublished original candidate vectors based only on anonymous observed technique families.
+// Their reviewed SVG masters already exist in the repository; regeneration may not invent fallbacks.
+const candidateCrosses=[
+ ['santiago','Cruz de Santiago estilizada'],
+ ['doblefilete','Cruz de doble filete'],
+ ['moldurada','Cruz tallada'],
+ ['metalica','Cruz de aplique'],
+ ['florenzada','Cruz ornamental'],
+ ['medalloncruz','Cruz con medallón']
+];
+const candidateIds=new Set(candidateCrosses.map(x=>x[0]));
+for(const [id,name] of candidateCrosses)entries.push(['cruces',id,name,'Diseño original genérico; pendiente de revisión técnica y comercial','']);
 const newLayouts=[
  {id:'devocionlateral',name:'Imagen a la izquierda',text:[.43,.20,.43,.58],symbol:[.10,.08,.16,.16],devotional:[.12,.28,.25,.36],flower:[.13,.76,.15,.12],secondary:[.65,.82,.15,.10],separator:[.45,.79,.38,.025]},
  {id:'medallonsuperior',name:'Medallón superior',text:[.20,.47,.60,.36],symbol:[.14,.08,.14,.15],devotional:[.36,.08,.28,.30],flower:[.75,.08,.12,.15],secondary:[.41,.86,.18,.08],separator:[.25,.42,.50,.025]},
@@ -32,14 +44,14 @@ for(const [category,id,name,description,body] of entries){
  mkdirSync(`${root}/ornamentos/${category}`,{recursive:true});
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>${name}</title>${body}</svg>\n`;
  // Keep subsequent manually refined master vectors; this script only supplies missing base candidates.
- if(!existsSync(asset))writeFileSync(asset,svg);
- const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false,...(visualRejects.has(id)?{publicSelectable:false,visualReview:'oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión'}:{})};
+ if(!existsSync(asset)){if(candidateIds.has(id))throw new Error('Falta SVG original de revisión: '+id);writeFileSync(asset,svg);}
+ const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false,...(visualRejects.has(id)?{publicSelectable:false,visualReview:'oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión'}:candidateIds.has(id)?{publicSelectable:true,visualReview:'Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación sin validar.',validation:'Prototipo visual autorizado para exhibición; pendiente de validar técnica, medidas y fabricación en el taller.'}:{})};
  const previous=catalog.ornaments.findIndex(x=>x.id===id&&x.category===category);
  if(previous<0)catalog.ornaments.push(metadata);else{
   const original=catalog.ornaments[previous];
-  catalog.ornaments[previous]={...metadata,...(original.publicSelectable===false?{publicSelectable:false,visualReview:original.visualReview}: {})};
+  catalog.ornaments[previous]={...metadata,...(original.publicSelectable===false&&visualRejects.has(id)?{publicSelectable:false,visualReview:original.visualReview}: {})};
 }
 }
-catalog.version=2;
+catalog.version=3;
 writeFileSync(path,JSON.stringify(catalog,null,2)+'\n');
 console.log(`Extended memorial catalog to ${catalog.ornaments.length} original vectors and ${catalog.layouts.length} compositions.`);

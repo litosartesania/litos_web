@@ -111,4 +111,5 @@ for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alp
 done
 
 # Generic memorial layers: explicit, hash-verified public allowlist.
+node tools/build-funerario-resources.mjs
 python3 scripts/stage-funerario.py "$site"

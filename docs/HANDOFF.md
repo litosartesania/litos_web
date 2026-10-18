@@ -551,3 +551,34 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El propietario califica los cinco SVG religiosos de la PR #57 como inaceptables. Se deshabilitan del selector público `madre`, `corona`, `ala`, `orantes`, `palomamedallon`, sin borrarlos ni incorporar fotografías privadas. Se mantiene `commercialReady:false` para los 14 recursos experimentales.
 - Rama aislada: `work/funerario-retirar-devocionales-no-validados-20261018`. Catálogo identifica `publicSelectable:false` y `visualReview`, compositor/controles no permiten escoger los cinco, y el test del navegador verifica ausencia de categorías/selecciones rechazadas y descarga de combinación neutra. Bundled catalog y SHA-256 sincronizados. Scripts JS versionados para evitar caché anterior.
 - Los candidatos artísticos pictóricos de alta resolución no se incluyen en esta entrega y requieren aprobación visual. No tocar otros repositorios; desplegar solo tras CI en verde.
+
+## 2026-10-18 — Cruces originales por familias observadas (solo rama de revisión)
+- Tras revisar el inventario privado de 33 vistas y 30 trabajos se preparan seis SVG originales de cruces, sin copiar fotografías ni reutilizar datos particulares.
+- Rama `work/funerario-cruces-tipologias-reales-20261018`: 39 ornamentos, 20 sin validar comercialmente, 11 ocultos (cinco devocionales retirados y seis cruces candidatas). Las seis nuevas opciones no están disponibles en la web pública.
+- `scripts/build-site.sh` regenera el paquete y hashes antes de construir Pages; revisión de 66 entradas del manifiesto en CI. Permanecen sin modificar las piedras, inscripciones, Mobiliario y demás proyectos.
+- **Pendiente:** CI, revisión visual de las propuestas, contraste de técnicas con el taller y autorización antes de cualquier fusión o publicación.
+
+## 2026-10-18 — PR #60: revisor offline interactivo de cruces
+- Se incorporó `preview/LITOS_REVISION_CRUCES_6.html` como artefacto de GitHub Actions (no GitHub Pages). Habilita seis cruces candidatas solo en memoria de la copia autónoma; la web publicada, el catálogo y el HTML de vista previa normal mantienen `publicSelectable:false`.
+- La galería de 20 recursos en revisión enlaza al revisor offline; funciona con materiales, tipografías, composiciones y descarga PNG íntegramente local.
+- Chromium 390/1440 px comprueba seis selecciones, ausencia de solicitudes externas, ausencia de errores JS y PNG 2000 px. CI verde en ejecución #39142906218 anterior al enlace corregido; comprobar la última ejecución de PR #60.
+- Pendientes: aprobación visual y técnica, verificación de derechos y contraste con fabricación. No fusionar ni publicar la PR sin aprobación expresa. Nunca trasladar fotografías privadas a GitHub.
+
+## 2026-10-18 — Ensayo de motivos figurativos raster en PR #60
+- El compositor soporta capas PNG/WebP. El empaquetador contempla image/png.
+- `preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html` permite cargar una imagen desde el equipo y probarla sin guardarla ni enviarla. Es una prueba offline, no una funcion de produccion.
+- CI verifica una imagen sintetica RGBA y la descarga PNG de 2000 px, junto a los controles de privacidad y las opciones ocultas.
+- Los cinco prototipos pictoricos nuevos quedan para comparacion y validacion artistica. No se han incorporado fotografias internas ni se ha fusionado la PR #60.
+
+## 2026-10-18 — Fase 2 · interfaz de una sola vista, controles laterales (PR #60, borrador)
+- Feedback del propietario: mantener TODAS las selecciones desplegables a la izquierda, con la lápida completa a la derecha, sin navegar entre vista y formularios.
+- `funerario-personalizador.js`: crea `.memorial-options` (barra lateral semántica), reubica en ella la barra de piedra/modelo/layout/fuente, la galería de motivos y los cuatro grupos de opciones ya existentes sin duplicar controles. Añade resumen sincronizado `.memorial-selection-overview` con 11 selecciones actuales.
+- `styles.css`: grid panorámico 34% opciones / resto vista completa a partir de 821px; desplazamiento interior del lateral y piedra sticky sin recortes, SVG contenido; por debajo de 821px vista completa antes de opciones para uso táctil. Resumen seleccionado sticky en escritorio con etiquetas sin truncar.
+- `scripts/qa-funerario.py`: valida DOM/posición, sincronización del resumen de piedra, no desbordamiento, descargas PNG y salvaguarda de seis candidatas ocultas; genera capturas 390/768/1440 en el artefacto de revisión. El flujo isolated preview adjunta dichas capturas.
+- Cambios exclusivos de PR #60; no se ha publicado nada nuevo en main; confirmar CI actual de la rama antes de cerrar. Los seis motivos cruz y cinco religiosos rechazados permanecen `publicSelectable:false` y sin aprobación comercial. Sin originales privados ni IDs de trabajo.
+
+## 18/10/2026 — Aprobación explícita de PR #60 para publicación de prototipos
+- El propietario autorizó integrar las seis cruces genéricas y el nuevo configurador de vista única en la web, manteniendo su estado `commercialReady:false`; la autorización es visual/de exhibición, **no** de fabricación ni de copia de diseños originales.
+- Habilitar exclusivamente las seis cruces nuevas como `publicSelectable:true`; los cinco motivos religiosos rechazados permanecen ocultos. Regenerador, HTML, galería y tests deben preservar esos estados después de cada build.
+- Versionar CSS/JS y verificar Pages, combinaciones por capas, exportación PNG y privacidad; sin imágenes del taller, pedidos, datos personales, otros repositorios ni servicios de pago.
+- Tras fusionar, anotar commit de Pages y ejecución CI pública verificada. La calidad artística de imágenes figurativas y validación industrial continúan pendientes.
