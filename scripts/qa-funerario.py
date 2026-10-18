@@ -15,9 +15,41 @@ with sync_playwright() as p:
         page.on('request',lambda r:external.append(r.url) if r.url.startswith(('http://','https://')) else None)
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
         page.wait_for_selector('#memorial-workbench[data-ready="true"]')
+        # One-screen layout: on desktop all options are in the LEFT rail and the entire
+        # stone stays on the RIGHT; narrow screens show the full stone above the options.
+        positions=page.evaluate("""() => {
+          const root=document.getElementById('memorial-workbench');
+          const rail=root.querySelector('.memorial-options');
+          const slab=root.querySelector('.memorial-display');
+          const stone=document.getElementById('memorial-canvas');
+          const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
+          return {parent:rail?.parentElement===root,
+            toolbar:rail?.contains(document.getElementById('memorial-toolbar')),
+            controls:rail?.contains(root.querySelector('.memorial-controls')),
+            selects:rail?.querySelectorAll('.memorial-quick-field select').length,
+            overview:rail?.querySelectorAll('.memorial-selection-item').length,
+            rail:rect(rail),slab:rect(slab),stone:rect(stone),
+            svg:rect(stone.querySelector('svg')),
+            overflow:document.documentElement.scrollWidth>innerWidth+1};
+        }""")
+        assert positions['parent'] and positions['toolbar'] and positions['controls']
+        assert positions['selects']==5 and positions['overview']>=10,positions
+        assert not positions['overflow'],positions
+        assert positions['svg']['width']>0 and positions['svg']['height']>0,positions
+        if width>=900:
+            assert positions['rail']['right']<=positions['slab']['x']+2,positions
+            assert positions['stone']['right']<=width+1,positions
+            assert positions['rail']['height']<=height,positions
+        else:
+            assert positions['slab']['y']<positions['rail']['y'],positions
+        page.locator('#memorial-stone').select_option('macael')
+        page.wait_for_function("()=>document.querySelector('.memorial-selection-overview')?.textContent.includes('Blanco Macael')")
+        page.locator('#memorial-stone').select_option('sudafrica')
+        page.wait_for_function("()=>document.querySelector('.memorial-selection-overview')?.textContent.includes('Negro Sudáfrica')")
         page.locator('img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
         page.wait_for_function('()=>[...document.images].every(e=>e.complete&&e.naturalWidth>0)')
         page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+        page.locator('#personalizar').screenshot(path=str(root/'preview'/f'LITOS_PANEL_IZQUIERDO_{width}.png'),animations='disabled')
         result=page.evaluate(scenarios)
         page.locator('#memorial-stone').focus();page.keyboard.press('ArrowDown');page.keyboard.press('Enter')
         assert page.locator('#memorial-stone').evaluate('(el)=>el===document.activeElement')
