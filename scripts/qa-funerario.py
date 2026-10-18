@@ -90,8 +90,8 @@ with sync_playwright() as p:
     def chunk(kind,payload):
         return struct.pack('>I',len(payload))+kind+payload+struct.pack('>I',zlib.crc32(kind+payload)&0xffffffff)
     size=64
-    rgba=b''.join(b'\\x00'+b''.join(bytes([90+col,90+row,90,(row+col)%128+127]) for col in range(size)) for row in range(size))
-    fixture=b'\\x89PNG\\r\\n\\x1a\\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',size,size,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(rgba))+chunk(b'IEND',b'')
+    rgba=b''.join(b'\x00'+b''.join(bytes([90+col,90+row,90,(row+col)%128+127]) for col in range(size)) for row in range(size))
+    fixture=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',size,size,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(rgba))+chunk(b'IEND',b'')
     pictorial_context=browser.new_context(viewport={'width':390,'height':844},accept_downloads=True)
     pictorial=pictorial_context.new_page()
     errors=[];network=[]
@@ -107,7 +107,7 @@ with sync_playwright() as p:
     with pictorial.expect_download() as download_info:
         pictorial.locator('#memorial-download').click()
     png=Path(download_info.value.path()).read_bytes()
-    assert png[:8]==b'\\x89PNG\\r\\n\\x1a\\n' and int.from_bytes(png[16:20],'big')==2000
+    assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
     assert not errors and not network,(errors,network)
     pictorial_context.close()
     browser.close()
