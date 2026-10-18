@@ -56,4 +56,10 @@ assert rp.styles>=1 and rp.scripts>=5 and not rp.external and not rp.forms
 assert 'id="review-only-notice"' in review.read_text(encoding='utf-8')
 assert 'noindex,nofollow' in review.read_text(encoding='utf-8')
 
+local=root/'LITOS_REVISION_FIGURATIVOS_LOCALES.html'
+assert local.is_file(), 'offline PNG/WebP tester missing'
+lp=Inspector();lp.feed(local.read_text(encoding='utf-8'))
+assert lp.styles>=1 and lp.scripts>=5 and not lp.external and not lp.forms
+assert 'id=\\"litos-local-upload\\"' in local.read_text(encoding='utf-8') or 'id="litos-local-upload"' in local.read_text(encoding='utf-8')
+assert 'noindex,nofollow' in local.read_text(encoding='utf-8')
 print('PASS: portable five-view preview is self-contained, images embedded and commercial forms absent')
