@@ -23,7 +23,7 @@ async () => {
     assert(!document.querySelector(`[data-ornament="${item.category}:${item.id}"]`),'ornament removable: '+item.id);
   }
   assert(!document.querySelector('#memorial-gallery-category option[value="religiosas"]'),'rejected religious group hidden');
-  assert(document.querySelector('#memorial-devotional option').length===1,'rejected religious choices removed');
+  assert(document.querySelectorAll('#memorial-devotional option').length===1,'rejected religious choices removed');
   assert(document.getElementById('memorial-devotional').disabled,'devotional selector suspended');
   assert(!document.querySelector('[data-slot="devotional"]'),'devotional scene empty');
   document.getElementById('memorial-gallery-category').value='flores';
