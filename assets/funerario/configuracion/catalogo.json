@@ -1018,10 +1018,11 @@
         "devocionlateral",
         "medallonsuperior"
       ],
-      "validation": "Pendiente de revision",
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
       "rights": "Vector original genérico",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     },
     {
       "id": "doblefilete",
@@ -1043,10 +1044,11 @@
         "devocionlateral",
         "medallonsuperior"
       ],
-      "validation": "Pendiente de revisión técnica y comercial",
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
       "rights": "Vector original genérico",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     },
     {
       "id": "moldurada",
@@ -1068,10 +1070,11 @@
         "devocionlateral",
         "medallonsuperior"
       ],
-      "validation": "Pendiente de revisión técnica y comercial",
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
       "rights": "Vector original genérico",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     },
     {
       "id": "metalica",
@@ -1093,10 +1096,11 @@
         "devocionlateral",
         "medallonsuperior"
       ],
-      "validation": "Pendiente de revisión técnica y comercial",
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
       "rights": "Vector original genérico",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     },
     {
       "id": "florenzada",
@@ -1118,10 +1122,11 @@
         "devocionlateral",
         "medallonsuperior"
       ],
-      "validation": "Pendiente de revisión técnica y comercial",
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
       "rights": "Vector original genérico",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     },
     {
       "id": "medalloncruz",
@@ -1143,10 +1148,11 @@
         "devocionlateral",
         "medallonsuperior"
       ],
-      "validation": "Pendiente de revisión técnica y comercial",
+      "validation": "Prototipo visual autorizado para su exhibición; pendiente de validar técnica, medidas y fabricación en el taller.",
       "rights": "Vector original genérico",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
     }
   ]
 }
