@@ -43,7 +43,7 @@
   function ornament(group,id,category,box,placement,color,slot){
     if(id==='ninguno'||!box)return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category===category);
-    if(!entry)return;
+    if(!entry||entry.publicSelectable===false)return;
     const source=new DOMParser().parseFromString(resources[entry.path],'image/svg+xml').documentElement;
     const factor=clamp(placement.scale,35,100)/100;
     const side=Math.min(box.w,box.h)*factor;

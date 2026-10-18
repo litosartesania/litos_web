@@ -4,6 +4,8 @@
   const root=document.getElementById('memorial-workbench');if(!root)return;
   const $=id=>document.getElementById('memorial-'+id);
   const {catalog,resources}=window.LitosMemorialData;
+  const isPublic=item=>item.publicSelectable!==false;
+  const publicOrnaments=catalog.ornaments.filter(isPublic);
   // Move the same interactive controls into the wide toolbar above the larger stone.
   const toolbar=$('toolbar');
   if(toolbar){
@@ -31,6 +33,10 @@
   const galleryGroups={cruces:['cruces'],religiosas:['religiosas'],flores:['flores','simbolos'],secondary:['flores','simbolos'],marcos:['marcos'],separadores:['separadores']};
   const gallerySlot={cruces:'symbol',religiosas:'devotional',flores:'ornament',secondary:'secondary',marcos:'frame',separadores:'separator'};
   function selectMotif(slot,id){
+    if(id!=='ninguno'&&!publicOrnaments.some(item=>item.id===id)){
+      status('Ese motivo sigue en revisión artística y no está disponible en el catálogo público.');
+      return;
+    }
     state[slot]=id;$(slot).value=id;
     if((slot==='devotional'||slot==='secondary')&&id!=='ninguno'&&!catalog.layouts.find(x=>x.id===state.layout)?.[slot]){
       state.layout='devocionlateral';$('layout').value=state.layout;
@@ -47,7 +53,7 @@
       }
       return;
     }
-    const items=catalog.ornaments.filter(item=>galleryGroups[group].includes(item.category));
+    const items=publicOrnaments.filter(item=>galleryGroups[group].includes(item.category));
     const fragment=document.createDocumentFragment();
     const choices=[{id:'ninguno',name:'Sin elemento',category:''},...items];
     for(const item of choices){
@@ -67,6 +73,21 @@
       button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
     }
     $('gallery').replaceChildren(fragment);$('gallery').dataset.group=group;
+  }
+  const religiousReady=publicOrnaments.some(item=>item.category==='religiosas');
+  if(!religiousReady){
+    const religiousOption=$('gallery-category').querySelector('option[value="religiosas"]');
+    if(religiousOption)religiousOption.remove();
+    $('devotional').replaceChildren(new Option('Imágenes en revisión','ninguno'));
+    $('devotional').disabled=true;
+    const label=document.querySelector('label[for="memorial-devotional"]');
+    if(label)label.textContent='Imágenes religiosas · en preparación';
+    const note=document.createElement('p');
+    note.className='memorial-note';
+    note.textContent='Estamos renovando los grabados religiosos; no están disponibles en esta versión orientativa.';
+    $('devotional').after(note);
+    const placement=$('devotional-scale').closest('fieldset');
+    if(placement)placement.hidden=true;
   }
   $('gallery-category').addEventListener('change',()=>renderGallery(true));
   function render(){

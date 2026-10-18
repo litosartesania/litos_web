@@ -27,12 +27,16 @@ with sync_playwright() as p:
         assert download.suggested_filename=='LITOS-simulacion-orientativa.png' and download.failure() is None
         base_png=Path(download.path()).read_bytes()
         assert base_png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(base_png[16:20],'big')==2000
+        # Rejected religious drawings remain internal prototypes, not public choices.
+        assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==0
+        assert page.locator('#memorial-devotional option').count()==1
+        assert page.locator('#memorial-devotional').is_disabled()
+        assert page.locator('[data-slot="devotional"]').count()==0
         page.locator('#memorial-layout').select_option('devocionlateral')
-        page.locator('#memorial-devotional').select_option('madre')
         page.locator('#memorial-secondary').select_option('rosaabierta')
-        page.wait_for_selector('[data-slot="devotional"]')
         page.wait_for_selector('[data-slot="secondary"]')
-        assert page.locator('[data-slot="devotional"]').count()>=1 and page.locator('[data-slot="secondary"]').count()>=1
+        assert page.locator('[data-slot="secondary"]').count()==1
+        assert page.locator('[data-slot="devotional"]').count()==0
         with page.expect_download() as pending:page.locator('#memorial-download').click()
         layered_png=Path(pending.value.path()).read_bytes()
         assert layered_png[:8]==b'\x89PNG\r\n\x1a\n' and hashlib.sha256(layered_png).digest()!=hashlib.sha256(base_png).digest()

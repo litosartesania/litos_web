@@ -762,7 +762,9 @@
       ],
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
-      "commercialReady": false
+      "commercialReady": false,
+      "publicSelectable": false,
+      "visualReview": "oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión"
     },
     {
       "id": "corona",
@@ -782,7 +784,9 @@
       ],
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
-      "commercialReady": false
+      "commercialReady": false,
+      "publicSelectable": false,
+      "visualReview": "oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión"
     },
     {
       "id": "ala",
@@ -802,7 +806,9 @@
       ],
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
-      "commercialReady": false
+      "commercialReady": false,
+      "publicSelectable": false,
+      "visualReview": "oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión"
     },
     {
       "id": "orantes",
@@ -822,7 +828,9 @@
       ],
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
-      "commercialReady": false
+      "commercialReady": false,
+      "publicSelectable": false,
+      "visualReview": "oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión"
     },
     {
       "id": "palomamedallon",
@@ -842,7 +850,9 @@
       ],
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
-      "commercialReady": false
+      "commercialReady": false,
+      "publicSelectable": false,
+      "visualReview": "oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión"
     },
     {
       "id": "rosaabierta",

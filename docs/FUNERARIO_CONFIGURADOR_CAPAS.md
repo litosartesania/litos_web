@@ -1,5 +1,17 @@
 # Configurador funerario por capas · revisión 17/10/2026
 
+## 2026-10-18 · Retirada de cinco motivos devocionales de calidad insuficiente
+
+Tras revisión visual del propietario, los cinco dibujos religiosos incorporados en fase 2 no son aceptables como ejemplos de grabado funerario. Se **retiran del selector público**, sin borrar los recursos originales del repositorio ni atribuir aprobación artística a los dibujos revisados de PR #57.
+
+- IDs suspendidos: `madre`, `corona`, `ala`, `orantes`, `palomamedallon`. Registro `publicSelectable: false` y `commercialReady: false`, con motivo explícito `visualReview`. Los **14** motivos de la fase 2 conservan `commercialReady: false`.
+- La categoría «Imágenes religiosas» deja de aparecer en la galería y las cinco entradas se excluyen del selector. El control avanzado se muestra inhabilitado e informa de que la nueva colección está en preparación. No se altera el selector de cruces, florales, marcos y separadores, ni las composiciones técnicas guardadas.
+- El compositor también rechaza un recurso suspendido aunque se manipule el estado del navegador. El motor de texto, materiales y exportación PNG sigue operativo con motivos visibles permitidos.
+- Se actualizan catálogo, bundle autónomo, SHA-256 del manifiesto, generador UI, tests Chromium y verificador de despliegue; los scripts reciben nueva versión de caché.
+- **No se han sustituido estos dibujos por fotografía real alguna**. Los cinco candidatos pictóricos de alta resolución creados previamente siguen en revisión por separado y no se han publicado en esta fase. Los SVG suspendidos continúan siendo recursos genéricos públicos por razones de compatibilidad histórica; ocultar un elemento del selector no lo convierte en privado.
+- Próximo trabajo: probar nuevos recursos rasterizados genéricos, con transparencia verificada, acabados gris/negro/blanco y escala comercial orientativa; comprobar detalle en miniatura, placa y PNG. No copiar fotografías originales de clientes.
+
+
 ## Revisión posterior a PR #56 · selector ancho e ilustraciones (rama aislada)
 
 La PR #56 está fusionada y publicada como prototipo orientativo; la nueva rama `work/funerario-legibilidad-galeria-20261018` **no está fusionada ni publicada**. A partir de las observaciones visuales del propietario se reorganiza la interfaz: la selección de piedra, variante, modelo, composición y fuente, más una galería horizontal con miniaturas y aviso de validación, se sitúa sobre una vista de piedra a mayor ancho. Los detalles quedan por debajo en un panel de dos columnas en escritorio y una en móvil. No se duplican controles ni IDs; se trasladan los DOM existentes al iniciar.
