@@ -557,3 +557,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Rama `work/funerario-cruces-tipologias-reales-20261018`: 39 ornamentos, 20 sin validar comercialmente, 11 ocultos (cinco devocionales retirados y seis cruces candidatas). Las seis nuevas opciones no están disponibles en la web pública.
 - `scripts/build-site.sh` regenera el paquete y hashes antes de construir Pages; revisión de 66 entradas del manifiesto en CI. Permanecen sin modificar las piedras, inscripciones, Mobiliario y demás proyectos.
 - **Pendiente:** CI, revisión visual de las propuestas, contraste de técnicas con el taller y autorización antes de cualquier fusión o publicación.
+
+## 2026-10-18 — PR #60: revisor offline interactivo de cruces
+- Se incorporó `preview/LITOS_REVISION_CRUCES_6.html` como artefacto de GitHub Actions (no GitHub Pages). Habilita seis cruces candidatas solo en memoria de la copia autónoma; la web publicada, el catálogo y el HTML de vista previa normal mantienen `publicSelectable:false`.
+- La galería de 20 recursos en revisión enlaza al revisor offline; funciona con materiales, tipografías, composiciones y descarga PNG íntegramente local.
+- Chromium 390/1440 px comprueba seis selecciones, ausencia de solicitudes externas, ausencia de errores JS y PNG 2000 px. CI verde en ejecución #39142906218 anterior al enlace corregido; comprobar la última ejecución de PR #60.
+- Pendientes: aprobación visual y técnica, verificación de derechos y contraste con fabricación. No fusionar ni publicar la PR sin aprobación expresa. Nunca trasladar fotografías privadas a GitHub.
