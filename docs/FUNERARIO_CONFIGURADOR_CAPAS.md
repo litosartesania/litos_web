@@ -1,5 +1,14 @@
 # Configurador funerario por capas · revisión 17/10/2026
 
+## Revisión posterior a PR #56 · selector ancho e ilustraciones (rama aislada)
+
+La PR #56 está fusionada y publicada como prototipo orientativo; la nueva rama `work/funerario-legibilidad-galeria-20261018` **no está fusionada ni publicada**. A partir de las observaciones visuales del propietario se reorganiza la interfaz: la selección de piedra, variante, modelo, composición y fuente, más una galería horizontal con miniaturas y aviso de validación, se sitúa sobre una vista de piedra a mayor ancho. Los detalles quedan por debajo en un panel de dos columnas en escritorio y una en móvil. No se duplican controles ni IDs; se trasladan los DOM existentes al iniciar.
+
+Las cinco ilustraciones religiosas de la fase 2 se redibujaron como vectores propios con jerarquía de líneas y detalles más propios de incisión. Se conservaron los mismos IDs, rutas, SVG transparentes y metadatos `commercialReady: false`. No son grabados de fabricación ni fotos originales y requieren validación artística del taller; los otros nueve recursos nuevos tampoco están aprobados comercialmente. Se actualizó el manifiesto SHA-256 y el paquete autónomo de recursos, y el generador deja de sobrescribir los SVG ya refinados.
+
+Protección añadida: cuando un texto se trunca o un layout no admite una capa seleccionada, el compositor indica esa situación y la descarga PNG queda deshabilitada; cambiar de layout no puede ocultar silenciosamente la imagen religiosa. Las selecciones y textos siguen siendo solo locales, sin envío externo. Pendiente de QA en CI, revisión visual en dispositivos reales y contraste del aspecto de los grabados con pruebas físicas.
+
+
 ## Continuación fase 2 · 18/10/2026
 
 Esta sección actualiza el inventario y las pruebas de la revisión anterior; las cifras históricas más abajo describen el estado de la fase 1. Rama `work/funerario-fase2-20261018` basada en `main` tras la fusión de PR #55. Preparada para PR de revisión; **sin permiso para fusionar o desplegar esta fase**.
