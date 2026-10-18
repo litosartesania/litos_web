@@ -53,7 +53,11 @@ jobs:
           python3 scripts/qa-catalog-sidebar.py
           node tools/build-funerario-preview.mjs
           node tools/build-funerario-gallery.mjs
+          node tools/build-funerario-phase3-gallery.mjs
+          node tools/build-funerario-phase3-comparison.mjs
           python3 scripts/qa-funerario.py
+          python3 scripts/qa-funerario-phase3.py
+          python3 scripts/qa-funerario-public-loading.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

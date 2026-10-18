@@ -141,8 +141,8 @@ Se conservan los binarios y precios anteriores del catálogo y no se alteran pro
 
 El prototipo satisface la composición interactiva por capas sin regeneración de imágenes en cada cambio. No satisface todavía una certificación fotográfica o de fabricación.
 
-## Fase 3 · extensión en revisión, 18/10/2026
+## Fase 3 · extensión figurativa aprobada para simulación, 18/10/2026
 
-El motor acepta ocho WebP con transparencia como capas figurativas, con tamaño y relación de aspecto reales. Se simulan luz de contacto y mezcla distinta en piedra oscura, clara y de grano visible; la fuente permanece separada del acabado. Tres layouts añaden figura lateral grande, crucifijo lateral vertical y figura/medallón superior. Todos estos elementos nuevos tienen `publicSelectable:false` y se activan **solo en el HTML de revisión autónomo**. El paquete Pages mantiene la selección previa, incluidas las seis cruces autorizadas como prototipos, y excluye los ocho bytes figurativos.
+El motor acepta ocho WebP con transparencia como capas figurativas, con tamaño y relación de aspecto reales. Se simulan luz de contacto y mezcla distinta en piedra oscura, clara y de grano visible; la fuente permanece separada del acabado. Tres layouts añaden figura lateral grande, crucifijo lateral vertical y figura/medallón superior. El propietario aprobó estos once elementos para simulación pública: `publicSelectable:true`, `commercialReady:false`. Pages incluye las ocho imágenes completas y ocho miniaturas verificadas; el navegador carga la imagen completa al elegir el motivo, mientras el editor y la exportación PNG permanecen locales.
 
-La cobertura visual, la tabla de candidatos, las capturas y las pruebas de exportación están en `FUNERARIO_FASE3_VALIDACION.md`; los hashes de las imágenes aisladas están en `FUNERARIO_REVIEW_ASSETS_MANIFEST.json`. Ninguna imagen nueva es un trabajo del taller ni una propuesta de fabricación aprobada.
+La cobertura visual, la tabla de candidatos, las capturas y las pruebas de exportación están en `FUNERARIO_FASE3_VALIDACION.md`; los hashes de las imágenes públicas están en `FUNERARIO_ASSETS_MANIFEST.json`. Ninguna imagen nueva es un trabajo del taller ni una propuesta de fabricación aprobada.

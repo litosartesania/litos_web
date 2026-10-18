@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "origin": "Original generated textures and original generic vectors; OFL fonts.",
+  "origin": "Original generated textures, generic vectors and pictorial prototypes; OFL fonts.",
   "files": [
     {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 43477,
-      "sha256": "3753ba5fc6ed2e86853f04bfa3cfe990b13965a2f990ab582ed9ece580f6933b"
+      "bytes": 44957,
+      "sha256": "c6b0ed6febd63a263e9b8f82d8db085d559b98382a14b9844d60a47766487058"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",
@@ -286,6 +286,86 @@
       "path": "assets/funerario/ornamentos/religiosas/palomamedallon.svg",
       "bytes": 1092,
       "sha256": "26311bffed54f85025a839f683c2cae7d52a4315a06a1272d917b051659e4fc6"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/angel.webp",
+      "bytes": 107214,
+      "sha256": "32cfc510fd6e30bdab68452cccb39262cd822eac2107ec1a62ad9381e37cee37"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/cristo-corona.webp",
+      "bytes": 166366,
+      "sha256": "13c2da0ee1829aff2b83c544887e9d8211a54aacced5b00dfb180cf2f30dcd84"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/cristo-crucificado.webp",
+      "bytes": 53822,
+      "sha256": "c61f4b78aee69ce19a95a25194599dab31d4378ddf83d704fe02d0fc676241ce"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/medallon-cristo.webp",
+      "bytes": 130424,
+      "sha256": "3e43d4b9926209e6f03a57316b67c2aa33a1365206ae4ffc74ca60629edbf6c0"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/medallon-mariano.webp",
+      "bytes": 139706,
+      "sha256": "952c2699dc68542c5c19793cb9cf942e95410ce14a5eae4712788916a0bba76f"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/angel.webp",
+      "bytes": 11092,
+      "sha256": "1f1bdc4704f82739dd943a89512a7869e5634f6ca06f8e039fbf08931e8fe847"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/cristo-corona.webp",
+      "bytes": 14008,
+      "sha256": "a8432ba357f160a58085fdf1223cdd107fad9467a24277e96f4e8357f965f414"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/cristo-crucificado.webp",
+      "bytes": 6078,
+      "sha256": "b9dc3c7a148f763a20bf8f6a3df2c64425e0ca9e7af3564ac1d2ed9d5f5b4b2e"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/medallon-cristo.webp",
+      "bytes": 11392,
+      "sha256": "0b445e00d9c45b93207d8b9eea0266317fab11b641eaf8a829a754ff162aa312"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/medallon-mariano.webp",
+      "bytes": 11638,
+      "sha256": "75b133f777d69984f8c6dee8779809fca8ee38c77aab0df39454ac3e510c480d"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/paloma-olivo.webp",
+      "bytes": 11996,
+      "sha256": "bfb8d2eee8762e7e946bfdba9970987472db9955419c920f83d909779c597a93"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/san-jose-nino.webp",
+      "bytes": 10786,
+      "sha256": "9544cbc8f14d630936d44a4d0c815220f1d6df0c57030506e94b2efe7d728b78"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/virgen-nino.webp",
+      "bytes": 12376,
+      "sha256": "e284872e83be03998872b3fadd902765c24126bb3dae757d214a829a03ec703a"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/paloma-olivo.webp",
+      "bytes": 120838,
+      "sha256": "fb49e57ff4c39a438b2d3d0ac28f844629a4fb9f926932761c2dd691d30ea560"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/san-jose-nino.webp",
+      "bytes": 102618,
+      "sha256": "a9eaa3198e8d6dd8cc683edfe228e3cc08cd85bfb032b3442d539cd3045fdad4"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/relieves/virgen-nino.webp",
+      "bytes": 116276,
+      "sha256": "443d42e47ca5261440d27d99594f37518d1934f9636b53729faabb42f8391831"
     },
     {
       "path": "assets/funerario/ornamentos/separadores/doble.svg",

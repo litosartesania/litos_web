@@ -449,8 +449,8 @@
         0.4,
         0.025
       ],
-      "publicSelectable": false,
-      "visualReview": "Composición experimental; pendiente de revisión del taller."
+      "publicSelectable": true,
+      "visualReview": "Aprobada por el propietario para simulación pública; pendiente de validación técnica."
     },
     {
       "id": "crucifijolateral",
@@ -491,8 +491,8 @@
         0.39,
         0.025
       ],
-      "publicSelectable": false,
-      "visualReview": "Composición experimental; pendiente de revisión del taller."
+      "publicSelectable": true,
+      "visualReview": "Aprobada por el propietario para simulación pública; pendiente de validación técnica."
     },
     {
       "id": "relievesuperior",
@@ -533,8 +533,8 @@
         0.5,
         0.025
       ],
-      "publicSelectable": false,
-      "visualReview": "Composición experimental; pendiente de revisión del taller."
+      "publicSelectable": true,
+      "visualReview": "Aprobada por el propietario para simulación pública; pendiente de validación técnica."
     }
   ],
   "fonts": [
@@ -1306,12 +1306,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/cristo-corona.webp"
     },
     {
       "id": "cristo-crucificado",
@@ -1333,12 +1334,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/cristo-crucificado.webp"
     },
     {
       "id": "virgen-nino",
@@ -1360,12 +1362,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/virgen-nino.webp"
     },
     {
       "id": "san-jose-nino",
@@ -1387,12 +1390,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/san-jose-nino.webp"
     },
     {
       "id": "angel",
@@ -1414,12 +1418,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/angel.webp"
     },
     {
       "id": "paloma-olivo",
@@ -1441,12 +1446,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/paloma-olivo.webp"
     },
     {
       "id": "medallon-mariano",
@@ -1468,12 +1474,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/medallon-mariano.webp"
     },
     {
       "id": "medallon-cristo",
@@ -1495,12 +1502,13 @@
         "crucifijolateral",
         "relievesuperior"
       ],
-      "validation": "Propuesta artística; no validada para fabricación",
-      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
-      "visualReview": "Pendiente de revisión artística del propietario",
+      "validation": "Prototipo visual aprobado para exhibición; no validado para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; exhibición autorizada por el propietario, uso industrial pendiente de revisión",
+      "visualReview": "Aprobada por el propietario para simulación pública el 18/10/2026",
       "technicalValidation": "Pendiente de validación del taller",
       "commercialReady": false,
-      "publicSelectable": false
+      "publicSelectable": true,
+      "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/medallon-cristo.webp"
     }
   ]
 }

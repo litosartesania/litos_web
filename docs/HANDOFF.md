@@ -600,3 +600,8 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El propietario indicó «procede» y se fusionó PR #63 en `main` (`4bb0ec8`), manteniendo ocultos los ocho figurativos y tres layouts nuevos; la autorización de integración no altera su estado comercial/técnico.
 - Rama correctiva `fix/funerario-fase3-cache-20261018`: las referencias a los cuatro módulos funerarios cambian a `?v=funerario-fase3-20261018` desde el generador de HTML y el verificador público espera ese valor. Así los navegadores solicitan los recursos de esta fase sin reutilizar los módulos cacheados de la fase de cruces.
 - Verificar el nuevo despliegue Pages y los hashes HTTP antes de declarar la fase publicada.
+
+## 18/10/2026 — Fase 3 aprobada para simulación pública
+- El propietario revisó la galería y autorizó «impleméntalo todo». Se activan ocho figuras genéricas WebP y tres composiciones en el configurador de `litosartesania/litos_web`, como prototipos orientativos (`publicSelectable:true`, `commercialReady:false`). Los cinco SVG religiosos rechazados permanecen ocultos.
+- El manifiesto público verifica 82 recursos, incluidas ocho imágenes completas y ocho miniaturas. La galería descarga miniaturas y solo carga la imagen completa elegida. La composición y el PNG se producen en el navegador; no se incorporan fotos privadas del taller ni textos de visitantes en las solicitudes.
+- Rama `work/funerario-activar-relieves-20261018`. Documentar PR, fusión, Pages y prueba funcional pública solo después de comprobar cada paso. Técnica de taller, uso comercial y muestras físicas siguen pendientes.

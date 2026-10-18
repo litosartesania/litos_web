@@ -4,10 +4,11 @@ const html=readFileSync('funerario.html','utf8');
 const section=html.match(/<section class="memorial-studio"[\s\S]*?<\/section>/)?.[0];
 if(!section)throw Error('Existing studio not found');
 const css=readFileSync('styles.css','utf8');
-const scriptFor=n=>'<script>'+readFileSync('funerario-'+n+'.js','utf8').replaceAll('</script','<\\/script')+'</script>';
+const catalog=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
+const offlineArt=Object.fromEntries(catalog.ornaments.filter(x=>x.publicSelectable!==false&&x.format==='image/webp').flatMap(x=>[x.path,x.thumbnailPath].map(path=>[path,'data:image/webp;base64,'+readFileSync(path).toString('base64')])));
+const scriptFor=n=>'<script>'+readFileSync('funerario-'+n+'.js','utf8').replaceAll('</script','<\\/script')+'</script>'+(n==='recursos'?'<script>Object.assign(window.LitosMemorialData.resources,'+JSON.stringify(offlineArt)+');</script>':'');
 const scripts=['recursos','compositor','exportar','personalizador'].map(scriptFor).join('');
-// Review ONLY: mark the six unpublished crosses selectable in the standalone copy in memory.
-// Never edit catalog.json or production selectors; all religious drawings remain rejected.
+// Cross comparison remains an offline review of prototypes already selectable publicly.
 const reviewerIds=['santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'];
 const reviewBootstrap=`<script>(()=>{'use strict';
 const candidates=new Set(${JSON.stringify(reviewerIds)});
@@ -16,8 +17,7 @@ const select=document.getElementById('memorial-symbol');
 for(const item of catalog.ornaments){
  if(!candidates.has(item.id))continue;
  if(item.category!=='cruces'||item.commercialReady!==false||item.publicSelectable!==true)throw Error('Approved prototype flag mismatch: '+item.id);
- item.publicSelectable=true;
- if(![...select.options].some(option=>option.value===item.id))select.append(new Option(item.name+' · SOLO REVISIÓN',item.id));
+ if(![...select.options].some(option=>option.value===item.id))throw Error('Cross option missing: '+item.id);
 }
 if(select.options.length<11)throw Error('Review options missing');
 })();</script>`;
@@ -42,28 +42,23 @@ if(!localReview.includes('litos-local-upload')||!localReview.includes('arte_loca
 writeFileSync('preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html',localReview);
 const reliefIds=['cristo-corona','cristo-crucificado','virgen-nino','san-jose-nino','angel','paloma-olivo','medallon-mariano','medallon-cristo'];
 const reliefLayoutIds=['relievelateral','crucifijolateral','relievesuperior'];
-const reliefCatalog=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
-const reliefResources=Object.fromEntries(reliefCatalog.ornaments.filter(x=>reliefIds.includes(x.id)).map(x=>[x.path,'data:image/webp;base64,'+readFileSync(x.path).toString('base64')]));
 const reliefBootstrap=`<script>(()=>{'use strict';
 const data=window.LitosMemorialData,ids=new Set(${JSON.stringify(reliefIds)}),layoutIds=new Set(${JSON.stringify(reliefLayoutIds)});
-Object.assign(data.resources,${JSON.stringify(reliefResources)});
 const devotional=document.getElementById('memorial-devotional'),layout=document.getElementById('memorial-layout');
-document.getElementById('memorial-gallery-category').append(new Option('Relieves figurativos · solo revisión','religiosas'));
 for(const item of data.catalog.ornaments){
  if(!ids.has(item.id))continue;
- if(item.commercialReady!==false||item.publicSelectable!==false||item.format!=='image/webp')throw Error('Candidato no aislado: '+item.id);
- item.publicSelectable=true;devotional.append(new Option(item.name+' · REVISIÓN',item.id));
+ if(item.commercialReady!==false||item.publicSelectable!==true||item.format!=='image/webp')throw Error('Prototipo figurativo no disponible: '+item.id);
+ if(![...devotional.options].some(option=>option.value===item.id)||!data.resources[item.path])throw Error('Recurso offline no disponible: '+item.id);
 }
 for(const item of data.catalog.layouts){
  if(!layoutIds.has(item.id))continue;
- if(item.publicSelectable!==false)throw Error('Composición no aislada: '+item.id);
- item.publicSelectable=true;layout.append(new Option(item.name+' · REVISIÓN',item.id));
+ if(item.publicSelectable!==true||![...layout.options].some(option=>option.value===item.id))throw Error('Composición no disponible: '+item.id);
 }
 if(devotional.options.length!==9||layout.options.length!==9)throw Error('Faltan recursos de revisión');
 })();</script>`;
 const reliefScripts=scriptFor('recursos')+reliefBootstrap+['compositor','exportar','personalizador'].map(scriptFor).join('');
 const reliefReview=out.replace('<title>LITOS · Estudio de composición</title>','<title>LITOS · Revisión de relieves fase 3</title>')
- .replace('<header class="review-head">','<p id="relief-review-only" style="text-align:center;background:#694c35;color:white;padding:12px;margin:0;font:700 13px Arial,sans-serif">ENTORNO DE REVISIÓN OFFLINE · OCHO FIGURAS Y TRES COMPOSICIONES EXPERIMENTALES · NO PUBLICAR</p><header class="review-head">')
+ .replace('<header class="review-head">','<p id="relief-review-only" style="text-align:center;background:#694c35;color:white;padding:12px;margin:0;font:700 13px Arial,sans-serif">COMPARACIÓN OFFLINE · OCHO FIGURAS Y TRES COMPOSICIONES PÚBLICAS COMO PROTOTIPOS · SIN VALIDACIÓN DE FABRICACIÓN</p><header class="review-head">')
  .replace(scripts,reliefScripts)
  .replace('</body></html>',`<script>addEventListener('load',()=>{const l=document.getElementById('memorial-layout'),d=document.getElementById('memorial-devotional');l.value='relievelateral';l.dispatchEvent(new Event('change',{bubbles:true}));d.value='cristo-corona';d.dispatchEvent(new Event('change',{bubbles:true}));});</script></body></html>`);
 if(!reliefReview.includes(reliefBootstrap)||!reliefReview.includes('relief-review-only'))throw Error('Relief review injection missing');

@@ -226,10 +226,11 @@ for p in plans:
 
 memorial_manifest=json.loads((root.parent/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 memorial_paths={i['path'] for i in memorial_manifest['files']}|{'funerario-recursos.js','funerario-compositor.js','funerario-exportar.js'}
-assert len(memorial_manifest['files'])==66
+assert len(memorial_manifest['files'])==82
 review_manifest=json.loads((root.parent/'docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json').read_text())
-assert len(review_manifest['files'])==8
-assert all(not (root/i['path']).exists() for i in review_manifest['files']), 'review-only figure leaked to Pages'
+assert len(review_manifest['files'])==0
+figure_paths={i['path'] for i in memorial_manifest['files'] if '/ornamentos/religiosas/relieves/' in i['path']}
+assert len(figure_paths)==16 and sum('/miniaturas/' in p for p in figure_paths)==8
 for i in memorial_manifest['files']:
  b=(root/i['path']).read_bytes()
  assert len(b)==i['bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],i['path']

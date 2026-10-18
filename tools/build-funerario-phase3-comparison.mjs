@@ -4,7 +4,7 @@ const c=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','
 const pairs=[['corona','cristo-corona'],['madre','virgen-nino'],['ala','angel'],['palomamedallon','paloma-olivo']];
 const byId=id=>c.ornaments.find(x=>x.id===id);
 const esc=s=>String(s).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
-const img=id=>{const item=byId(id);if(!item||item.publicSelectable!==false)throw Error('Unexpected public item '+id);let b=readFileSync(item.path);if(item.path.endsWith('.svg'))b=Buffer.from(b.toString().replaceAll('currentColor','#e5dfd2'));return `data:${item.path.endsWith('.svg')?'image/svg+xml':'image/webp'};base64,${b.toString('base64')}`};
+const img=id=>{const item=byId(id);if(!item||item.publicSelectable!==(item.path.endsWith('.svg')?false:true))throw Error('Unexpected motif status '+id);let b=readFileSync(item.path);if(item.path.endsWith('.svg'))b=Buffer.from(b.toString().replaceAll('currentColor','#e5dfd2'));return `data:${item.path.endsWith('.svg')?'image/svg+xml':'image/webp'};base64,${b.toString('base64')}`};
 const stone=c.materials.find(x=>x.id==='sudafrica').variants[0].path;
 const stoneUrl='data:image/webp;base64,'+readFileSync(stone).toString('base64');
 const rows=pairs.map(([oldId,newId])=>`<div class="row"><div class="tile"><span>ANTES · dibujo SVG rechazado</span><img src="${img(oldId)}" alt="Boceto anterior: ${esc(byId(oldId).name)}"></div><div class="tile"><span>AHORA · propuesta WebP en revisión</span><img src="${img(newId)}" alt="Propuesta nueva: ${esc(byId(newId).name)}"></div><div class="caption">${esc(byId(newId).name)}</div></div>`).join('');
