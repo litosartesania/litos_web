@@ -569,3 +569,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - `preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html` permite cargar una imagen desde el equipo y probarla sin guardarla ni enviarla. Es una prueba offline, no una funcion de produccion.
 - CI verifica una imagen sintetica RGBA y la descarga PNG de 2000 px, junto a los controles de privacidad y las opciones ocultas.
 - Los cinco prototipos pictoricos nuevos quedan para comparacion y validacion artistica. No se han incorporado fotografias internas ni se ha fusionado la PR #60.
+
+## 2026-10-18 — Fase 2 · interfaz de una sola vista, controles laterales (PR #60, borrador)
+- Feedback del propietario: mantener TODAS las selecciones desplegables a la izquierda, con la lápida completa a la derecha, sin navegar entre vista y formularios.
+- `funerario-personalizador.js`: crea `.memorial-options` (barra lateral semántica), reubica en ella la barra de piedra/modelo/layout/fuente, la galería de motivos y los cuatro grupos de opciones ya existentes sin duplicar controles. Añade resumen sincronizado `.memorial-selection-overview` con 11 selecciones actuales.
+- `styles.css`: grid panorámico 34% opciones / resto vista completa a partir de 821px; desplazamiento interior del lateral y piedra sticky sin recortes, SVG contenido; por debajo de 821px vista completa antes de opciones para uso táctil. Resumen seleccionado sticky en escritorio con etiquetas sin truncar.
+- `scripts/qa-funerario.py`: valida DOM/posición, sincronización del resumen de piedra, no desbordamiento, descargas PNG y salvaguarda de seis candidatas ocultas; genera capturas 390/768/1440 en el artefacto de revisión. El flujo isolated preview adjunta dichas capturas.
+- Cambios exclusivos de PR #60; no se ha publicado nada nuevo en main; confirmar CI actual de la rama antes de cerrar. Los seis motivos cruz y cinco religiosos rechazados permanecen `publicSelectable:false` y sin aprobación comercial. Sin originales privados ni IDs de trabajo.
