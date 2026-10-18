@@ -545,3 +545,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Rama exclusiva `work/funerario-legibilidad-galeria-20261018`: nueva barra principal superior, galería horizontal con miniaturas, escena ampliada, ajustes avanzados debajo; cinco SVG religiosos redibujados genéricamente; hashes y bundle actualizados.
 - Los 14 nuevos ornamentos de la fase 2 siguen `commercialReady: false`; no se utilizaron fotografías privadas, datos personales ni otros repositorios. Los 14 WebP originales permanecen intactos. El configurador bloquea descargar texto truncado o composiciones con capas ocultas.
 - Estado: pendiente de comprobar CI y validar visualmente mediante PR de borrador. No publicar ni fusionar esta nueva rama sin aprobación.
+
+
+## 2026-10-18 — Retirada visual inmediata de motivos devocionales rechazados (rama de trabajo)
+- El propietario califica los cinco SVG religiosos de la PR #57 como inaceptables. Se deshabilitan del selector público `madre`, `corona`, `ala`, `orantes`, `palomamedallon`, sin borrarlos ni incorporar fotografías privadas. Se mantiene `commercialReady:false` para los 14 recursos experimentales.
+- Rama aislada: `work/funerario-retirar-devocionales-no-validados-20261018`. Catálogo identifica `publicSelectable:false` y `visualReview`, compositor/controles no permiten escoger los cinco, y el test del navegador verifica ausencia de categorías/selecciones rechazadas y descarga de combinación neutra. Bundled catalog y SHA-256 sincronizados. Scripts JS versionados para evitar caché anterior.
+- Los candidatos artísticos pictóricos de alta resolución no se incluyen en esta entrega y requieren aprobación visual. No tocar otros repositorios; desplegar solo tras CI en verde.
