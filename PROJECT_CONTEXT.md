@@ -544,3 +544,6 @@ En `work/funerario-fase2-20261018`, desde el `main` posterior a PR #55, se audit
 
 ## 2026-10-18 — Seis cruces candidatas, rama aislada
 Se añadieron seis SVG originales para revisar familias de grabado, talla, cruz ornamental y aplique. El catálogo pasa a 39 ornamentos; once no seleccionables, incluyendo los cinco motivos religiosos rechazados. Son propuestas sin validación comercial. La tabla de 33 motivos reales y las fotos siguen fuera del repositorio, únicamente en Drive privado. Revisar PR y CI antes de publicar.
+
+## 18-10-2026 · Ensayos raster locales
+La PR #60 incorpora soporte PNG/WebP en el compositor de motivos y una vista HTML de revision local con selector de archivo. Los recursos se usan solo en memoria del navegador; se comprueba su exportacion en PNG. Los cinco dibujos religiosos rechazados y seis cruces candidatas permanecen ocultos en la web publica. La PR sigue en borrador y no se publica sin validacion visual.
