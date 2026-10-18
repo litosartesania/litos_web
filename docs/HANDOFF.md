@@ -551,3 +551,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El propietario califica los cinco SVG religiosos de la PR #57 como inaceptables. Se deshabilitan del selector público `madre`, `corona`, `ala`, `orantes`, `palomamedallon`, sin borrarlos ni incorporar fotografías privadas. Se mantiene `commercialReady:false` para los 14 recursos experimentales.
 - Rama aislada: `work/funerario-retirar-devocionales-no-validados-20261018`. Catálogo identifica `publicSelectable:false` y `visualReview`, compositor/controles no permiten escoger los cinco, y el test del navegador verifica ausencia de categorías/selecciones rechazadas y descarga de combinación neutra. Bundled catalog y SHA-256 sincronizados. Scripts JS versionados para evitar caché anterior.
 - Los candidatos artísticos pictóricos de alta resolución no se incluyen en esta entrega y requieren aprobación visual. No tocar otros repositorios; desplegar solo tras CI en verde.
+
+## 2026-10-18 — Cruces originales por familias observadas (solo rama de revisión)
+- Tras revisar el inventario privado de 33 vistas y 30 trabajos se preparan seis SVG originales de cruces, sin copiar fotografías ni reutilizar datos particulares.
+- Rama `work/funerario-cruces-tipologias-reales-20261018`: 39 ornamentos, 20 sin validar comercialmente, 11 ocultos (cinco devocionales retirados y seis cruces candidatas). Las seis nuevas opciones no están disponibles en la web pública.
+- `scripts/build-site.sh` regenera el paquete y hashes antes de construir Pages; revisión de 66 entradas del manifiesto en CI. Permanecen sin modificar las piedras, inscripciones, Mobiliario y demás proyectos.
+- **Pendiente:** CI, revisión visual de las propuestas, contraste de técnicas con el taller y autorización antes de cualquier fusión o publicación.
