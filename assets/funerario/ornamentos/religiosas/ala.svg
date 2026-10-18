@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Ala de ángel</title><path d="M22 83Q31 42 78 16Q65 47 38 62Q57 48 83 38Q67 68 35 75Q54 70 72 61Q58 86 22 83Z M23 83Q48 59 77 18"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+<title>Ala de ángel, grabado ornamental de plumas</title>
+<path d="M15 91Q23 64 43 39Q64 18 89 10Q85 27 76 43Q87 40 92 33Q87 50 73 59Q82 61 87 58Q76 72 58 75Q65 78 69 78Q46 93 15 91Z" fill="currentColor" fill-opacity=".10" stroke-width="1.8"/>
+<path d="M16 90Q44 57 88 11" stroke-width="1.6"/>
+<path d="M31 73Q34 45 57 28M37 72Q48 46 71 22M46 67Q59 46 80 29M54 67Q70 52 83 42M45 80Q61 73 75 60M27 84Q45 74 56 72" stroke-width=".85"/>
+<path d="M24 86Q20 74 31 65M31 88Q30 76 40 68M38 88Q38 77 48 70M47 86Q48 77 56 72M57 79Q59 71 67 67" stroke-width=".6"/>
+<path d="M45 41L47 46M51 34L54 39M59 28L62 34M66 23L70 28M73 19L77 23M79 15L83 19" stroke-width=".5"/>
+<path d="M19 92Q35 94 49 89M21 96Q34 97 43 94" stroke-width=".65"/>
+</svg>
