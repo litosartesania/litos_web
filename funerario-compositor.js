@@ -44,7 +44,10 @@
     if(id==='ninguno'||!box)return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category===category);
     if(!entry||entry.publicSelectable===false)return;
-    const source=new DOMParser().parseFromString(resources[entry.path],'image/svg+xml').documentElement;
+    const resource=resources[entry.path];
+    if(!resource)throw Error('Motivo no disponible en esta vista.');
+    const raster=entry.path.endsWith('.png')||entry.path.endsWith('.webp');
+    const source=raster?null:new DOMParser().parseFromString(resource,'image/svg+xml').documentElement;
     const factor=clamp(placement.scale,35,100)/100;
     const side=Math.min(box.w,box.h)*factor;
     const x=box.x+(box.w-side)*clamp(placement.x,0,100)/100;
@@ -52,7 +55,10 @@
     const g=add(group,'g',{'data-ornament':category+':'+id,'data-slot':slot,'data-zone':JSON.stringify(box),color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:'url(#engraved)'});
     // Only vetted repository SVG paths are imported, never user content.
     const nested=add(g,'svg',{x,y,width:side,height:side,viewBox:'0 0 100 100','aria-hidden':'true'});
-    for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
+    if(raster){
+      if(!resource.startsWith('data:image/png;base64,')&&!resource.startsWith('data:image/webp;base64,'))throw Error('Imagen PNG/WebP incorrecta.');
+      add(nested,'image',{href:resource,x:0,y:0,width:100,height:100,preserveAspectRatio:'xMidYMid meet'});
+    }else for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
     return {x,y,w:side,h:side};
   }
   function separator(group,id,box,color){
