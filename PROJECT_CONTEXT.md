@@ -529,3 +529,9 @@ SHA-256 originales por archivo (también registrados en el manifiesto):
 # 2026-10-18 — Fase 2 funeraria: investigación privada y biblioteca visual
 
 En `work/funerario-fase2-20261018`, desde el `main` posterior a PR #55, se auditaron visualmente 202 JPEG de 62 carpetas privadas (68 fotos físicas únicas tras deduplicación de esa clase). La trazabilidad individual y las hojas de contacto permanecen en Drive privado; solo se publica [el informe agregado](docs/FUNERARIO_AUDITORIA_FOTOGRAFICA_FASE2.md). Se añadieron 14 SVG genéricos originales (19 → 33 ornamentos), dos composiciones (4 → 6), selector visual por categorías y una capa devocional/complementaria. Ningún recurso nuevo se marca listo para uso comercial. La fase requiere revisión del taller y autorización expresa antes de fusionar o publicar. El configurador y la galería se entregan como HTML autónomos en los artefactos de la PR; no se modifican Mobiliario ni datos internos.
+
+
+## 2026-10-18 — Iteración visual posterior a fase 2, aislada
+- Publicación de PR #56 ya comprobada, commit `fbbe7dca181515b755aed63fc9408278af10cb18`. Feedback: escena de piedra debe ocupar más ancho y controles encima; motivos actuales no tienen calidad suficiente.
+- Nueva rama `work/funerario-legibilidad-galeria-20261018`: gran vista de piedra, barra superior de selects + carrusel de ornamentos, detalle de ajustes inferior, cinco figuras devocionales SVG de nueva creación más detalladas. Refuerzo de exportación: no permitir descargas si el texto se trunca o si hay capas sin zona en la composición.
+- Mantener `commercialReady: false` en los 14 motivos nuevos; son simulaciones sin validación de fabricación. Sin imágenes particulares ni datos internos. CI y aprobación visual pendientes; main no modificado.
