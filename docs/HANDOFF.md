@@ -582,3 +582,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Habilitar exclusivamente las seis cruces nuevas como `publicSelectable:true`; los cinco motivos religiosos rechazados permanecen ocultos. Regenerador, HTML, galería y tests deben preservar esos estados después de cada build.
 - Versionar CSS/JS y verificar Pages, combinaciones por capas, exportación PNG y privacidad; sin imágenes del taller, pedidos, datos personales, otros repositorios ni servicios de pago.
 - Tras fusionar, anotar commit de Pages y ejecución CI pública verificada. La calidad artística de imágenes figurativas y validación industrial continúan pendientes.
+
+## 18/10/2026 — Corrección CI post-fusión PR #60
+- PR #60 fusionada por autorización explícita del propietario; commit `1c5a14afea0dee4212818b7eac8484958c2388a3`.
+- El primer despliegue Pages #39159169780 falló **antes de publicar**: `scripts/qa-funerario.py` esperaba la galería offline `preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html`, pero el flujo `static.yml` solo ejecutaba `tools/build-funerario-preview.mjs`.
+- Rama `fix/funerario-galeria-ci-pages-20261018`: añadir `node tools/build-funerario-gallery.mjs` a la validación de navegador **antes** de `qa-funerario.py`. Se generan recursos de revisión únicamente en `preview/`, no en `_site`, por lo que no se publican imágenes ni documentos privados.
+- Fusión y publicación de la corrección sujetas a CI en verde y verificación HTTP/hash de GitHub Pages. Mantener seis cruces visibles como prototipo (`commercialReady:false`), cinco motivos figurativos rechazados ocultos.
