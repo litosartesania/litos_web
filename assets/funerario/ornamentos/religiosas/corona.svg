@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Corona de espinas</title><path d="M19 51Q20 22 50 19Q80 22 81 51Q80 79 50 81Q20 79 19 51Z M25 51Q28 29 50 27Q72 29 75 51Q72 71 50 73Q28 71 25 51Z M16 33L29 40M24 17L36 31M48 11L50 28M76 17L64 31M84 33L71 40M84 68L70 61M76 83L64 69M50 90L50 72M24 83L36 69M16 68L30 61"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+<title>Corona de espinas, grabado de doble trenza</title>
+<path d="M15 52C17 29 31 16 52 17C74 19 85 35 83 54C81 77 64 86 45 83C26 81 15 66 15 52Z" stroke-width="2.2"/>
+<path d="M22 51C24 34 35 24 52 25C67 26 76 39 75 55C74 69 62 77 47 75C32 73 22 64 22 51Z" stroke-width="1.45"/>
+<path d="M17 42Q41 17 71 34M18 58Q45 84 77 62M29 26Q48 15 66 23M30 73Q51 88 69 74" stroke-width=".8"/>
+<path d="M21 31L10 20L29 28L24 13L38 25L40 7L47 22L58 6L56 22L73 11L65 29L85 22L75 39L95 37L81 47L96 58L78 58L88 78L71 67L72 90L59 76L52 98L46 78L28 91L34 71L11 80L24 61L4 54L23 47L7 36L26 39" stroke-width="1.15"/>
+<path d="M29 43L42 33M53 27L64 41M74 52L64 64M42 76L34 61M24 52L35 44M46 23L53 32M71 36L66 48M65 69L52 76" stroke-width=".55"/>
+<circle cx="50" cy="50" r="2.2" fill="currentColor" stroke="none" opacity=".65"/>
+<path d="M50 34V45M50 55V67M35 50H45M55 50H65" stroke-width=".7"/>
+</svg>
