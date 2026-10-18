@@ -16,12 +16,22 @@ async () => {
     assert(svg.querySelector('image').getAttribute('href').startsWith('data:image/webp;base64,'),'embedded texture');
   }
   for(const item of catalog.ornaments){
-    const target=item.category==='cruces'?'symbol':item.category==='separadores'?'separator':item.category==='marcos'?'frame':'ornament';
+    const target=item.category==='cruces'?'symbol':item.category==='religiosas'?'devotional':item.category==='separadores'?'separator':item.category==='marcos'?'frame':'ornament';
     await select(target,item.id);
     assert(document.querySelector(`[data-ornament="${item.category}:${item.id}"]`),'ornament present: '+item.id);
     await select(target,'ninguno');
     assert(!document.querySelector(`[data-ornament="${item.category}:${item.id}"]`),'ornament removable: '+item.id);
   }
+  document.getElementById('memorial-gallery-category').value='religiosas';
+  document.getElementById('memorial-gallery-category').dispatchEvent(new Event('change'));
+  const galleryChoice=document.querySelector('#memorial-gallery [data-item-id="madre"]');
+  assert(galleryChoice&&galleryChoice.querySelector('img').src.startsWith('data:image/svg+xml,'),'visual library preview');
+  galleryChoice.click();await raf();
+  assert(document.querySelector('[data-slot="devotional"][data-ornament="religiosas:madre"]'),'gallery selects religious image');
+  assert(document.getElementById('memorial-layout').value==='devocionlateral','compatible layout selected');
+  await select('secondary','rosaabierta');
+  assert(document.querySelector('[data-slot="secondary"][data-ornament="flores:rosaabierta"]'),'second motif combines with religious image');
+  await select('secondary','ninguno');await select('devotional','ninguno');
   await select('symbol','latina');await select('ornament','rosa');
   const scale=document.getElementById('memorial-symbol-scale');scale.value='35';scale.dispatchEvent(new Event('input'));await raf();
   const sizeBefore=Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('width'));
@@ -37,7 +47,7 @@ async () => {
   assert(!document.querySelector('#memorial-rendered img'),'literal user text');
   assert(document.querySelector('[data-field="name"]').textContent.includes('<img'),'text preserved literally');
   assert(location.href===locationBefore,'inscription must not enter URL');
-  const makeState=(model,layout,type,long)=>({stone:'absoluto',variant:'2',model,layout,type,finish:'auto',symbol:'clasica',ornament:'olivo',separator:'ornamental',frame:'fino',ornamentFinish:'auto',fixings:true,guides:false,textSize:150,leading:180,align:'center',symbolPlacement:{x:50,y:50,scale:100},ornamentPlacement:{x:50,y:50,scale:100},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:long?('Texto ficticio con áéíóú ñ y signos. ').repeat(9).slice(0,f.max):f.default,visible:true}]))});
+  const makeState=(model,layout,type,long)=>({stone:'absoluto',variant:'2',model,layout,type,finish:'auto',symbol:'clasica',devotional:catalog.layouts.find(x=>x.id===layout).devotional?'madre':'ninguno',ornament:'olivo',secondary:catalog.layouts.find(x=>x.id===layout).secondary?'rosaabierta':'ninguno',separator:'ornamental',frame:'fino',ornamentFinish:'auto',fixings:true,guides:false,textSize:150,leading:180,align:'center',symbolPlacement:{x:50,y:50,scale:100},devotionalPlacement:{x:50,y:50,scale:100},ornamentPlacement:{x:50,y:50,scale:100},secondaryPlacement:{x:50,y:50,scale:100},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:long?('Texto ficticio con áéíóú ñ y signos. ').repeat(9).slice(0,f.max):f.default,visible:true}]))});
   let compositions=0;
   const host=document.createElement('div');host.style.cssText='position:fixed;left:-2000px;top:0;width:1000px;height:1000px';document.body.append(host);
   for(const model of catalog.models)for(const layout of catalog.layouts)for(const font of catalog.fonts)for(const long of [false,true]){
@@ -49,6 +59,11 @@ async () => {
     const textBoxes=scene.boxes.filter(b=>b.kind.startsWith('text:'));
     for(const decor of scene.boxes.filter(b=>!b.kind.startsWith('text:')))for(const text of textBoxes){
       assert(decor.x+decor.w<=text.x||text.x+text.w<=decor.x||decor.y+decor.h<=text.y||text.y+text.h<=decor.y,'symbol/text overlap');
+    }
+    const decorative=scene.boxes.filter(b=>!b.kind.startsWith('text:'));
+    for(let a=0;a<decorative.length;a++)for(let b=a+1;b<decorative.length;b++){
+      const one=decorative[a],two=decorative[b];
+      assert(one.x+one.w<=two.x||two.x+two.w<=one.x||one.y+one.h<=two.y||two.y+two.h<=one.y,'motif/motif overlap');
     }
     compositions++;
   }

@@ -4,9 +4,9 @@
   const root=document.getElementById('memorial-workbench');if(!root)return;
   const $=id=>document.getElementById('memorial-'+id);
   const {catalog,resources}=window.LitosMemorialData;
-  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',ornament:'olivo',separator:'linea',frame:'fino',ornamentFinish:'auto',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
+  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',ornamentFinish:'auto',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
-  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',ornament:'ornament',separator:'separator',frame:'frame','ornament-finish':'ornamentFinish',align:'align'};
+  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame','ornament-finish':'ornamentFinish',align:'align'};
   const swatches=[];
   for(const material of catalog.materials){
     const button=document.createElement('button');button.type='button';button.className='memorial-swatch';button.dataset.stone=material.id;
@@ -16,6 +16,41 @@
     button.addEventListener('click',()=>{state.stone=material.id;$('stone').value=material.id;requestRender();});
   }
   function status(message){$('status').textContent=message;}
+  const galleryGroups={cruces:['cruces'],religiosas:['religiosas'],flores:['flores','simbolos'],secondary:['flores','simbolos'],marcos:['marcos'],separadores:['separadores']};
+  const gallerySlot={cruces:'symbol',religiosas:'devotional',flores:'ornament',secondary:'secondary',marcos:'frame',separadores:'separator'};
+  function selectMotif(slot,id){
+    state[slot]=id;$(slot).value=id;
+    if((slot==='devotional'||slot==='secondary')&&id!=='ninguno'&&!catalog.layouts.find(x=>x.id===state.layout)?.[slot]){
+      state.layout='devocionlateral';$('layout').value=state.layout;
+    }
+    renderGallery();requestRender();
+  }
+  function renderGallery(force=false){
+    const group=$('gallery-category').value,slot=gallerySlot[group];
+    if(!force&&$('gallery').dataset.group===group){
+      for(const button of $('gallery').querySelectorAll('button')){
+        const selected=state[slot]===button.dataset.itemId;
+        button.setAttribute('aria-pressed',String(selected));
+        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent);
+      }
+      return;
+    }
+    const items=catalog.ornaments.filter(item=>galleryGroups[group].includes(item.category));
+    const fragment=document.createDocumentFragment();
+    const choices=[{id:'ninguno',name:'Sin elemento',category:''},...items];
+    for(const item of choices){
+      const button=document.createElement('button');button.type='button';button.className='memorial-motif';
+      button.dataset.itemId=item.id;button.dataset.slot=slot;button.setAttribute('aria-pressed',String(state[slot]===item.id));
+      button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name);
+      const image=document.createElement('span');image.className='memorial-motif-image';
+      if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
+      else{const art=document.createElement('img');art.src='data:image/svg+xml,'+encodeURIComponent(resources[item.path]);art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
+      const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
+      button.append(image,label);button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
+    }
+    $('gallery').replaceChildren(fragment);$('gallery').dataset.group=group;
+  }
+  $('gallery-category').addEventListener('change',()=>renderGallery(true));
   function render(){
     if(!ready)return;
     try{
@@ -25,22 +60,25 @@
       $('material-note').textContent=scene.material.description+' '+scene.material.status+(scene.material.id==='italia'?' · Variedad comercial exacta sin identificar.':'');
       $('model-note').textContent=scene.model.note;
       swatches.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.stone===state.stone)));
-      document.getElementById('symbol-scale-value').textContent=state.symbolPlacement.scale+' %';
-      document.getElementById('ornament-scale-value').textContent=state.ornamentPlacement.scale+' %';
+      for(const prefix of ['symbol','devotional','ornament','secondary'])document.getElementById(prefix+'-scale-value').textContent=state[prefix+'Placement'].scale+' %';
       $('size-value').textContent=state.textSize+' %';$('leading-value').textContent=state.leading+' %';
-      for(const prefix of ['symbol','ornament']){
+      for(const prefix of ['symbol','devotional','ornament','secondary']){
         const disabled=state[prefix]==='ninguno';
         for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).disabled=disabled;
       }
-      if(!exporting)status(scene.adjusted?'Composición actualizada. Tamaño ajustado para mantener el texto dentro de su zona.':'Composición actualizada. Lista para descargar.');
+      if(!exporting)status(scene.warnings.length?scene.warnings.join(' '):scene.adjusted?'Composición actualizada. Tamaño ajustado para mantener el texto dentro de su zona.':'Composición actualizada. Lista para descargar.');
+      renderGallery();
       root.setAttribute('aria-busy','false');root.dataset.ready='true';$('download').disabled=exporting;
     }catch(error){root.setAttribute('aria-busy','false');status('No se pudo actualizar la vista previa. '+error.message);$('download').disabled=true;}
   }
   function requestRender(){cancelAnimationFrame(frame);frame=requestAnimationFrame(render);}
-  for(const [id,key] of Object.entries(selections))$(id).addEventListener('change',()=>{state[key]=$(id).value;requestRender();});
+  for(const [id,key] of Object.entries(selections))$(id).addEventListener('change',()=>{
+    if(key==='devotional'||key==='secondary')selectMotif(key,$(id).value);
+    else{state[key]=$(id).value;requestRender();}
+  });
   for(const id of ['fixings','guides'])$(id).addEventListener('change',()=>{state[id]=$(id).checked;requestRender();});
   for(const [id,key] of [['size','textSize'],['leading','leading']])$(id).addEventListener('input',()=>{state[key]=Number($(id).value);requestRender();});
-  for(const prefix of ['symbol','ornament'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);requestRender();});
+  for(const prefix of ['symbol','devotional','ornament','secondary'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);requestRender();});
   for(const field of catalog.fields){
     const input=field.id==='name'?$('text'):$('field-'+field.id);
     input.addEventListener('input',()=>{state.fields[field.id].text=input.value.slice(0,field.max);requestRender();});
@@ -50,10 +88,10 @@
     for(const [id,key] of Object.entries(selections))$(id).value=state[key];
     for(const id of ['fixings','guides'])$(id).checked=state[id];
     $('size').value=state.textSize;$('leading').value=state.leading;
-    for(const prefix of ['symbol','ornament'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).value=state[prefix+'Placement'][suffix];
+    for(const prefix of ['symbol','devotional','ornament','secondary'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).value=state[prefix+'Placement'][suffix];
     for(const field of catalog.fields){(field.id==='name'?$('text'):$('field-'+field.id)).value=state.fields[field.id].text;$('show-'+field.id).checked=state.fields[field.id].visible;}
   }
-  $('reset').addEventListener('click',()=>{state=initial();sync();render();});
+  $('reset').addEventListener('click',()=>{state=initial();sync();renderGallery();render();});
   $('download').addEventListener('click',async()=>{
     if(!ready||exporting)return;
     cancelAnimationFrame(frame);render();
@@ -62,6 +100,6 @@
     catch(error){status(error.message+' La composición sigue disponible.');}
     finally{exporting=false;$('download').disabled=false;}
   });
-  sync();
+  sync();renderGallery();
   window.LitosMemorialComposer.loadFonts().then(()=>{ready=true;render();}).catch(error=>{root.setAttribute('aria-busy','false');status(error.message);});
 })();

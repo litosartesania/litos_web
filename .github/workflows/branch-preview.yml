@@ -27,6 +27,8 @@ jobs:
           node --check funerario-exportar.js
           node --check tools/build-preview.mjs
           node --check tools/build-standalone.mjs
+          node --check tools/extend-funerario-phase2.mjs
+          node --check tools/build-funerario-gallery.mjs
       - name: Build and audit Codex public-site allowlist
         run: |
           sh scripts/build-site.sh
@@ -45,6 +47,7 @@ jobs:
           node tools/build-preview.mjs
           node tools/build-standalone.mjs
           node tools/build-funerario-preview.mjs
+          node tools/build-funerario-gallery.mjs
       - name: Validate self-contained review HTML and disabled contact forms
         run: python3 scripts/check-preview.py preview
       - name: Verify memorial layers, long text, fonts, privacy and PNG downloads
@@ -56,5 +59,6 @@ jobs:
           path: |
             preview/LITOS_PREVISUALIZACION_AUTONOMA.html
             preview/LITOS_CONFIGURADOR_FUNERARIO.html
+            preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html
           if-no-files-found: error
           retention-days: 7

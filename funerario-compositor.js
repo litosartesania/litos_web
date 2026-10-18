@@ -40,8 +40,8 @@
     }
     return lines;
   }
-  function ornament(group,id,category,box,placement,color,finish){
-    if(id==='ninguno')return;
+  function ornament(group,id,category,box,placement,color,slot){
+    if(id==='ninguno'||!box)return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category===category);
     if(!entry)return;
     const source=new DOMParser().parseFromString(resources[entry.path],'image/svg+xml').documentElement;
@@ -49,7 +49,7 @@
     const side=Math.min(box.w,box.h)*factor;
     const x=box.x+(box.w-side)*clamp(placement.x,0,100)/100;
     const y=box.y+(box.h-side)*clamp(placement.y,0,100)/100;
-    const g=add(group,'g',{'data-ornament':category+':'+id,'data-zone':JSON.stringify(box),color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:'url(#engraved)'});
+    const g=add(group,'g',{'data-ornament':category+':'+id,'data-slot':slot,'data-zone':JSON.stringify(box),color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:'url(#engraved)'});
     // Only vetted repository SVG paths are imported, never user content.
     const nested=add(g,'svg',{x,y,width:side,height:side,viewBox:'0 0 100 100','aria-hidden':'true'});
     for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
@@ -113,13 +113,22 @@
     const effects=add(svg,'g',{'data-layer':'surface-effects','clip-path':'url(#slab-clip)'});
     add(effects,'rect',{x:face.x,y:face.y,width:face.w,height:face.h,fill:'url(#polish)'});
     const symbols=add(svg,'g',{'data-layer':'symbols'}),ornaments=add(svg,'g',{'data-layer':'ornaments'});
-    const boxes=[];
+    const boxes=[],warnings=[];
     const symbolBox=zone(face,layout.symbol),flowerBox=zone(face,layout.flower),textBox=zone(face,layout.text);
-    const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,finish);
+    const devotionalBox=layout.devotional?zone(face,layout.devotional):null;
+    const secondaryBox=layout.secondary?zone(face,layout.secondary):null;
+    const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol');
     if(placedSymbol)boxes.push({kind:'symbol',...placedSymbol});
+    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'devotional');
+    if(placedDevotional)boxes.push({kind:'devotional',...placedDevotional});
+    else if(state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)warnings.push('La imagen religiosa necesita una composición con zona propia.');
     const flowerEntry=catalog.ornaments.find(o=>o.id===state.ornament&&(o.category==='flores'||o.category==='simbolos'));
-    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,paint(state.ornamentFinish,material.dark).color,finish);
+    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,paint(state.ornamentFinish,material.dark).color,'ornament');
     if(placedFlower)boxes.push({kind:'ornament',...placedFlower});
+    const secondaryEntry=catalog.ornaments.find(o=>o.id===state.secondary&&(o.category==='flores'||o.category==='simbolos'));
+    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'secondary');
+    if(placedSecondary)boxes.push({kind:'secondary',...placedSecondary});
+    else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
     separator(ornaments,state.separator,zone(face,layout.separator),finish.color);
     if(layout.secondSeparator)separator(ornaments,state.separator,zone(face,layout.secondSeparator),finish.color);
     if(state.frame!=='ninguno'){
@@ -144,15 +153,33 @@
       let lines;
       const leading=clamp(state.leading,105,180)/100;
       // Ample bearing allowance protects calligraphic ascenders/descenders and overhangs.
+      const minimum=Math.max(12,field.size*.43*(face.w/780));
       for(let n=0;n<120;n++){
         lines=wrap(contents,box.w*.88,font,size);
         if(lines.length*size*leading<=box.h*.82&&lines.every(line=>{measure.font=fontCss(font,size);const m=measure.measureText(line);return Math.max(m.width,(m.actualBoundingBoxLeft||0)+(m.actualBoundingBoxRight||0))<=box.w*.90;}))break;
+        if(size*.95<minimum){
+          size=minimum;lines=wrap(contents,box.w*.88,font,size);
+          const capacity=Math.max(1,Math.floor(box.h*.82/(size*leading)));
+          if(lines.length>capacity){
+            lines=lines.slice(0,capacity);
+            let tail=lines[capacity-1];measure.font=fontCss(font,size);
+            while(tail&&measure.measureText(tail+'…').width>box.w*.86)tail=tail.slice(0,-1);
+            lines[capacity-1]=tail.trimEnd()+'…';
+            warnings.push('El campo «'+field.label+'» es demasiado largo: la vista previa muestra solo el comienzo.');
+          }
+          adjusted=true;break;
+        }
         size*=.95;adjusted=true;
       }
       const lineHeight=size*leading;
       const anchor={left:'start',center:'middle',right:'end'}[state.align]||'middle';
       const x=state.align==='left'?box.x+box.w*.06:state.align==='right'?box.x+box.w*.94:box.x+box.w/2;
-      const baseline=box.y+(box.h-lines.length*lineHeight)/2+size;
+      measure.font=fontCss(font,size);
+      const sample=measure.measureText('ÁgjpqÉÑ');
+      const ascent=Math.max(size*.7,sample.actualBoundingBoxAscent||0);
+      const descent=Math.max(size*.12,sample.actualBoundingBoxDescent||0);
+      const inkHeight=ascent+descent+Math.max(0,lines.length-1)*lineHeight;
+      const baseline=box.y+(box.h-inkHeight)/2+ascent;
       const text=add(textLayer,'text',{'data-field':field.id,'data-zone':JSON.stringify(box),'font-family':font.family,'font-style':font.style,'font-weight':400,'font-size':size,'text-anchor':anchor,'xml:space':'preserve'});
       lines.forEach((line,i)=>{
         add(text,'tspan',{x,y:baseline+i*lineHeight},line);
@@ -163,11 +190,11 @@
     }
     if(state.guides){
       const guides=add(svg,'g',{'data-layer':'guides',fill:'none',stroke:material.dark?'#d0ba86':'#6d5030','stroke-width':1.2,'stroke-dasharray':'5 5',opacity:.7});
-      for(const box of [symbolBox,flowerBox,textBox])add(guides,'rect',{x:box.x,y:box.y,width:box.w,height:box.h});
+      for(const box of [symbolBox,flowerBox,textBox,devotionalBox,secondaryBox].filter(Boolean))add(guides,'rect',{x:box.x,y:box.y,width:box.w,height:box.h});
     }
     add(svg,'text',{x:500,y:916,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':13,'letter-spacing':2,fill:'#5e594f'},'LITOS · SIMULACIÓN ORIENTATIVA');
     add(svg,'text',{x:500,y:942,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':12,fill:'#716c63'},'Textura recreada · No es un plano de fabricación');
-    return {svg,runs,boxes,finish,material,model,layout,font,adjusted};
+    return {svg,runs,boxes,finish,material,model,layout,font,adjusted,warnings};
   }
   async function loadFonts(){
     const outcomes=await Promise.allSettled(catalog.fonts.map(async f=>{

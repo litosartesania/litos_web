@@ -569,6 +569,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-panel>label:not(.memorial-check){margin-top:.55rem;font-size:.78rem;font-weight:600;line-height:1.5}
 .memorial-panel select,.memorial-panel textarea{width:100%;min-width:0;min-height:46px;padding:.7rem .75rem;color:#2f2b24;background:#f9f6f0;border:1px solid #b9ae9e;border-radius:0;font:400 1rem/1.45 var(--sans)}
 .memorial-panel textarea{resize:vertical}
+.memorial-library{margin:.75rem 0 1rem;padding:1rem 0;border-top:1px solid #c4b8a6;border-bottom:1px solid #c4b8a6}
+.memorial-library>label{display:block;margin:0 0 .55rem;font-size:.78rem;font-weight:600}
+.memorial-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:.8rem 0 .55rem;max-height:18rem;overflow-y:auto;scrollbar-color:#8e7b63 #e7ded1}
+.memorial-motif{display:flex;flex-direction:column;align-items:center;gap:.4rem;min-height:112px;padding:.45rem .35rem;background:#f7f3eb;color:#3e3428;border:1px solid #c9bba9;cursor:pointer;text-align:center;font:500 .68rem/1.3 var(--sans)}
+.memorial-motif:hover{background:#eee5d7;border-color:#80694c}
+.memorial-motif[aria-pressed=true]{background:#e7d8c3;border:2px solid #6f5940;padding:calc(.45rem - 1px) calc(.35rem - 1px)}
+.memorial-motif-image{display:grid;place-items:center;width:68px;height:68px;font:400 2rem var(--serif)}
+.memorial-motif-image img{display:block;width:68px;height:68px;object-fit:contain}
+.memorial-motif-name{display:block;max-width:100%;overflow-wrap:anywhere}
 .memorial-swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin:.55rem 0 .1rem}
 .memorial-swatch{padding:3px;background:transparent;border:1px solid transparent;cursor:pointer;min-width:0;color:#4d463b;text-align:left}
 .memorial-swatch[aria-pressed=true]{border-color:#68533b;background:#e0d6c6}
@@ -589,6 +598,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-field-top .memorial-check{font-size:.7rem}
 .memorial-caption-detail{max-width:72rem;font-size:.74rem;line-height:1.6;color:#776a59;border-top:1px solid #d2c8b9;padding-top:1rem;margin:1.5rem 0 0}
 .memorial-studio :is(button,summary,select,textarea,input):focus-visible{outline:3px solid #8b6b3f;outline-offset:3px}
+@media(max-width:380px){.memorial-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){
  .memorial-studio-heading{grid-template-columns:1fr;gap:.8rem;padding-bottom:1.4rem}
  .memorial-studio-heading>p:last-child{max-width:36rem}

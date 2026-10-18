@@ -45,4 +45,8 @@ assert '<form' not in (root/'index.html').read_text()
 for page in ('funerario.html','mobiliario.html'):
  content=(root/page).read_text()
  assert '<form' not in content and 'solicitar presupuesto' not in content.lower()
+gallery=root/'LITOS_BIBLIOTECA_FUNERARIA_FASE2.html'
+assert gallery.is_file(), 'phase 2 gallery missing'
+gp=Inspector();gp.feed(gallery.read_text(encoding='utf-8'))
+assert gp.images==14 and not gp.external and not gp.forms, 'gallery must contain only 14 embedded generic vectors'
 print('PASS: portable five-view preview is self-contained, images embedded and commercial forms absent')
