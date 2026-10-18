@@ -28,7 +28,7 @@ const materials=[
  return {id,name,label,src:'data:image/webp;base64,'+fs.readFileSync(p).toString('base64')};
 });
 const cards=candidates.map((item,i)=>`<button type="button" class="motif-card" data-id="${esc(item.id)}" aria-pressed="${i===0?'true':'false'}" aria-label="${esc(item.name)}">
- <span class="mini-slab"><img src="${item.image}" alt="" width="110" height="110" loading="lazy"></span>
+ <span class="mini-slab"><img src="${item.image}" alt="" width="110" height="110" loading="eager" decoding="async"></span>
  <span class="motif-name">${esc(item.name)}</span>
  <span class="meta">${item.publicSelectable===false?'Diseño en revisión':'Prototipo sin validar'}</span>
  </button>`).join('');
