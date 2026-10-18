@@ -48,7 +48,12 @@ for page in ('funerario.html','mobiliario.html'):
 gallery=root/'LITOS_BIBLIOTECA_FUNERARIA_FASE2.html'
 assert gallery.is_file(), 'phase 2 gallery missing'
 gp=Inspector();gp.feed(gallery.read_text(encoding='utf-8'))
-assert gp.images==20 and not gp.external and not gp.forms, 'gallery must contain 20 embedded generic review vectors'
+assert gp.images==16 and not gp.external and not gp.forms, '15 generic review vectors plus main preview, offline'
+assert gp.scripts==1 and gp.styles>=1, 'interactive embedded compare gallery'
+gallery_html=gallery.read_text(encoding='utf-8')
+assert 'id="hero-motif"' in gallery_html and 'class="stone-choices"' in gallery_html
+assert all(('data-stone="'+v+'"') in gallery_html for v in ('sudafrica','macael','quintana'))
+assert 'data:image/webp;base64,' in gallery_html and 'noindex,nofollow' in gallery_html
 review=root/'LITOS_REVISION_CRUCES_6.html'
 assert review.is_file(), 'interactive six-cross preview missing'
 rp=Inspector();rp.feed(review.read_text(encoding='utf-8'))
