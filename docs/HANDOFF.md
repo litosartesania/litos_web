@@ -595,3 +595,8 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Bloque C: tres composiciones experimentales, filtros visuales por técnica/material, galería y configurador autónomos. Ocho figuras y tres layouts son invisibles en la web pública y se excluyen del paquete Pages. Las seis cruces de PR #60 conservan permiso solo como prototipos; `moldurada` y `metalica` tienen trazados refinados.
 - Bloque D: consultar `docs/FUNERARIO_FASE3_VALIDACION.md` para matriz individual, capturas, límites y pruebas; `scripts/qa-funerario-phase3.py` cubre 216 combinaciones de figura/piedra/layout en tres anchuras y coteja la exportación PNG.
 - Próximo paso de producto: revisión artística individual, técnica y de derechos, con muestras físicas. **No fusionar ni desplegar la PR de fase 3 sin aprobación expresa.**
+
+## 18/10/2026 — Integración autorizada y corrección de caché
+- El propietario indicó «procede» y se fusionó PR #63 en `main` (`4bb0ec8`), manteniendo ocultos los ocho figurativos y tres layouts nuevos; la autorización de integración no altera su estado comercial/técnico.
+- Rama correctiva `fix/funerario-fase3-cache-20261018`: las referencias a los cuatro módulos funerarios cambian a `?v=funerario-fase3-20261018` desde el generador de HTML y el verificador público espera ese valor. Así los navegadores solicitan los recursos de esta fase sin reutilizar los módulos cacheados de la fase de cruces.
+- Verificar el nuevo despliegue Pages y los hashes HTTP antes de declarar la fase publicada.
