@@ -54,5 +54,35 @@ with sync_playwright() as p:
     page.wait_for_selector('#memorial-workbench[data-ready="true"]')
     assert not network and page.locator('#memorial-stone option').count()==7
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), 'standalone preview overflows on mobile'
+    # A separate offline review file may expose ONLY the six cross candidates.
+    # The public _site and the ordinary standalone preview above must keep them hidden.
+    for width in (390,1440):
+        context=browser.new_context(viewport={'width':width,'height':880},accept_downloads=True)
+        review=context.new_page()
+        review_errors=[];review_network=[]
+        review.on('pageerror',lambda err:review_errors.append(str(err)))
+        review.on('request',lambda req:review_network.append(req.url) if req.url.startswith(('http://','https://')) else None)
+        review.goto((root/'preview/LITOS_REVISION_CRUCES_6.html').as_uri())
+        review.wait_for_selector('#memorial-workbench[data-ready="true"]')
+        assert review.locator('#review-only-notice').count()==1
+        assert review.locator('#memorial-gallery-category option[value="religiosas"]').count()==0
+        assert review.locator('#memorial-devotional').is_disabled()
+        review.locator('#memorial-gallery-category').select_option('cruces')
+        for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
+            assert review.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
+            tile=review.locator('.memorial-motif[data-item-id="'+candidate+'"]')
+            assert tile.count()==1
+            tile.click()
+            review.wait_for_function('(id)=>document.querySelector("#memorial-symbol").value===id',candidate)
+            assert review.locator('#memorial-download').is_enabled(),candidate
+        assert review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+        with review.expect_download() as download_info:
+            review.locator('#memorial-download').click()
+        downloaded=download_info.value
+        assert downloaded.failure() is None
+        png=Path(downloaded.path()).read_bytes()
+        assert png[:8]==b'\\x89PNG\\r\\n\\x1a\\n' and int.from_bytes(png[16:20],'big')==2000
+        assert not review_errors and not review_network,(review_errors,review_network)
+        context.close()
     browser.close()
 print(json.dumps({'status':'PASS','checks':results,'standalone':'PASS'},ensure_ascii=False,indent=2))
