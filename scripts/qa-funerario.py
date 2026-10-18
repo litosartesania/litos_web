@@ -118,6 +118,11 @@ with sync_playwright() as p:
     gallery_page.on('request',lambda req:gal_network.append(req.url) if req.url.startswith(('http://','https://')) else None)
     gallery_page.goto((root/'preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html').as_uri())
     assert gallery_page.locator('.motif-card').count()==15
+    # The full-page mobile screenshot revealed lazy-loaded candidates blank below the fold.
+    # All 15 local SVG miniatures must decode even before the visitor scrolls.
+    gallery_page.wait_for_function('()=>[...document.querySelectorAll(".motif-card img")].every(im=>im.complete&&im.naturalWidth>0)')
+    assert gallery_page.locator('.motif-card img[loading="eager"]').count()==15
+
     assert gallery_page.locator('.motif-card[data-id="madre"]').count()==0
     assert gallery_page.locator('.motif-card[data-id="santiago"]').count()==1
     gallery_page.locator('.material-choice[data-stone="macael"]').click()
@@ -128,5 +133,13 @@ with sync_playwright() as p:
     assert gallery_page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     assert not gal_errors and not gal_network,(gal_errors,gal_network)
     gal_context.close()
+    mobile_gallery_context=browser.new_context(viewport={'width':390,'height':844})
+    mobile_gallery=mobile_gallery_context.new_page()
+    mobile_gallery.goto((root/'preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html').as_uri())
+    mobile_gallery.wait_for_function('()=>[...document.querySelectorAll(".motif-card img")].length===15&&[...document.querySelectorAll(".motif-card img")].every(im=>im.complete&&im.naturalWidth>0)')
+    assert mobile_gallery.locator('.motif-card img[loading="eager"]').count()==15
+    assert mobile_gallery.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    mobile_gallery_context.close()
+
     browser.close()
 print(json.dumps({'status':'PASS','checks':results,'standalone':'PASS'},ensure_ascii=False,indent=2))
