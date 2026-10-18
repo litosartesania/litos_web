@@ -110,5 +110,23 @@ with sync_playwright() as p:
     assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
     assert not errors and not network,(errors,network)
     pictorial_context.close()
+    # Stone-first conceptual gallery: verify material choices and motif selection without network.
+    gal_context=browser.new_context(viewport={'width':1440,'height':900})
+    gallery_page=gal_context.new_page()
+    gal_errors=[];gal_network=[]
+    gallery_page.on('pageerror',lambda err:gal_errors.append(str(err)))
+    gallery_page.on('request',lambda req:gal_network.append(req.url) if req.url.startswith(('http://','https://')) else None)
+    gallery_page.goto((root/'preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html').as_uri())
+    assert gallery_page.locator('.motif-card').count()==15
+    assert gallery_page.locator('.motif-card[data-id="madre"]').count()==0
+    assert gallery_page.locator('.motif-card[data-id="santiago"]').count()==1
+    gallery_page.locator('.material-choice[data-stone="macael"]').click()
+    assert gallery_page.locator('body').get_attribute('data-stone')=='macael'
+    gallery_page.locator('.motif-card[data-id="moldurada"]').click()
+    assert gallery_page.locator('#motif-select').input_value()=='moldurada'
+    assert gallery_page.locator('.motif-card[data-id="moldurada"]').get_attribute('aria-pressed')=='true'
+    assert gallery_page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    assert not gal_errors and not gal_network,(gal_errors,gal_network)
+    gal_context.close()
     browser.close()
 print(json.dumps({'status':'PASS','checks':results,'standalone':'PASS'},ensure_ascii=False,indent=2))
