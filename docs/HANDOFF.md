@@ -588,3 +588,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El primer despliegue Pages #39159169780 falló **antes de publicar**: `scripts/qa-funerario.py` esperaba la galería offline `preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html`, pero el flujo `static.yml` solo ejecutaba `tools/build-funerario-preview.mjs`.
 - Rama `fix/funerario-galeria-ci-pages-20261018`: añadir `node tools/build-funerario-gallery.mjs` a la validación de navegador **antes** de `qa-funerario.py`. Se generan recursos de revisión únicamente en `preview/`, no en `_site`, por lo que no se publican imágenes ni documentos privados.
 - Fusión y publicación de la corrección sujetas a CI en verde y verificación HTTP/hash de GitHub Pages. Mantener seis cruces visibles como prototipo (`commercialReady:false`), cinco motivos figurativos rechazados ocultos.
+
+## 18/10/2026 — Fase 3, propuesta figurativa en revisión
+- Punto de partida verificado: PR #60 fusionada; rama de fase 3 `work/funerario-fase3-figurativos-20261018` desde `main` tras la reparación de Pages. Mantener `litosartesania/litos_web` separado de repositorios personales e internos.
+- Bloque A guardado en `85333c1`: auditoría agregada de 33 recortes privados, 30 trabajos, sin fotos ni identificadores en Git. El lote B contiene ocho propuestas originales genéricas en WebP alfa y un manifiesto SHA-256 exclusivo de revisión.
+- Bloque C: tres composiciones experimentales, filtros visuales por técnica/material, galería y configurador autónomos. Ocho figuras y tres layouts son invisibles en la web pública y se excluyen del paquete Pages. Las seis cruces de PR #60 conservan permiso solo como prototipos; `moldurada` y `metalica` tienen trazados refinados.
+- Bloque D: consultar `docs/FUNERARIO_FASE3_VALIDACION.md` para matriz individual, capturas, límites y pruebas; `scripts/qa-funerario-phase3.py` cubre 216 combinaciones de figura/piedra/layout en tres anchuras y coteja la exportación PNG.
+- Próximo paso de producto: revisión artística individual, técnica y de derechos, con muestras físicas. **No fusionar ni desplegar la PR de fase 3 sin aprobación expresa.**
