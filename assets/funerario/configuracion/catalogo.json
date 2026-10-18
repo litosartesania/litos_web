@@ -997,6 +997,31 @@
       "validation": "Prototipo visual pendiente de revisión del taller",
       "rights": "Vector original genérico; no calco de obra particular",
       "commercialReady": false
+    },
+    {
+      "id": "santiago",
+      "category": "cruces",
+      "name": "Cruz de Santiago estilizada",
+      "description": "Propuesta geometrica de cruz ornamental",
+      "path": "assets/funerario/ornamentos/cruces/santiago.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "Grabado orientativo",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Pendiente de revision",
+      "rights": "Vector original genérico",
+      "commercialReady": false,
+      "publicSelectable": false
     }
   ]
 }
