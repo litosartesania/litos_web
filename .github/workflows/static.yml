@@ -52,6 +52,7 @@ jobs:
           python3 scripts/qa-catalog-card-detail.py
           python3 scripts/qa-catalog-sidebar.py
           node tools/build-funerario-preview.mjs
+          node tools/build-funerario-gallery.mjs
           python3 scripts/qa-funerario.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
