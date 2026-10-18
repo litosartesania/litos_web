@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "materials": [
     {
       "id": "sudafrica",
@@ -409,6 +409,132 @@
         0.5,
         0.025
       ]
+    },
+    {
+      "id": "relievelateral",
+      "name": "Relieve lateral grande",
+      "text": [
+        0.44,
+        0.2,
+        0.43,
+        0.56
+      ],
+      "symbol": [
+        0.12,
+        0.07,
+        0.13,
+        0.11
+      ],
+      "devotional": [
+        0.08,
+        0.21,
+        0.3,
+        0.55
+      ],
+      "flower": [
+        0.12,
+        0.79,
+        0.13,
+        0.1
+      ],
+      "secondary": [
+        0.72,
+        0.82,
+        0.13,
+        0.08
+      ],
+      "separator": [
+        0.46,
+        0.78,
+        0.4,
+        0.025
+      ],
+      "publicSelectable": false,
+      "visualReview": "Composición experimental; pendiente de revisión del taller."
+    },
+    {
+      "id": "crucifijolateral",
+      "name": "Crucifijo vertical lateral",
+      "text": [
+        0.43,
+        0.21,
+        0.43,
+        0.55
+      ],
+      "symbol": [
+        0.75,
+        0.07,
+        0.11,
+        0.11
+      ],
+      "devotional": [
+        0.09,
+        0.13,
+        0.29,
+        0.66
+      ],
+      "flower": [
+        0.13,
+        0.84,
+        0.12,
+        0.07
+      ],
+      "secondary": [
+        0.7,
+        0.84,
+        0.13,
+        0.07
+      ],
+      "separator": [
+        0.45,
+        0.79,
+        0.39,
+        0.025
+      ],
+      "publicSelectable": false,
+      "visualReview": "Composición experimental; pendiente de revisión del taller."
+    },
+    {
+      "id": "relievesuperior",
+      "name": "Relieve superior amplio",
+      "text": [
+        0.2,
+        0.49,
+        0.6,
+        0.33
+      ],
+      "symbol": [
+        0.12,
+        0.08,
+        0.12,
+        0.12
+      ],
+      "devotional": [
+        0.32,
+        0.07,
+        0.36,
+        0.37
+      ],
+      "flower": [
+        0.76,
+        0.08,
+        0.12,
+        0.12
+      ],
+      "secondary": [
+        0.42,
+        0.86,
+        0.16,
+        0.08
+      ],
+      "separator": [
+        0.25,
+        0.45,
+        0.5,
+        0.025
+      ],
+      "publicSelectable": false,
+      "visualReview": "Composición experimental; pendiente de revisión del taller."
     }
   ],
   "fonts": [
@@ -1022,7 +1148,8 @@
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": true,
-      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
+      "simulatedTechnique": "aplicación coloreada conceptual"
     },
     {
       "id": "doblefilete",
@@ -1048,7 +1175,8 @@
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": true,
-      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
+      "simulatedTechnique": "incisión de doble filete"
     },
     {
       "id": "moldurada",
@@ -1074,7 +1202,8 @@
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": true,
-      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
+      "simulatedTechnique": "talla en relieve conceptual"
     },
     {
       "id": "metalica",
@@ -1100,7 +1229,8 @@
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": true,
-      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
+      "simulatedTechnique": "aplique metálico conceptual"
     },
     {
       "id": "florenzada",
@@ -1126,7 +1256,8 @@
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": true,
-      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
+      "simulatedTechnique": "talla ornamental conceptual"
     },
     {
       "id": "medalloncruz",
@@ -1152,7 +1283,224 @@
       "rights": "Vector original genérico",
       "commercialReady": false,
       "publicSelectable": true,
-      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar."
+      "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
+      "simulatedTechnique": "incisión en medallón"
+    },
+    {
+      "id": "cristo-corona",
+      "category": "religiosas",
+      "name": "Cristo con corona de espinas",
+      "description": "Busto en bajorrelieve de piedra clara",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/cristo-corona.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        1024,
+        936
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "cristo-crucificado",
+      "category": "religiosas",
+      "name": "Cristo crucificado",
+      "description": "Figura escultórica sobre cruz sencilla",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/cristo-crucificado.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        683,
+        1024
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "virgen-nino",
+      "category": "religiosas",
+      "name": "Virgen con Niño",
+      "description": "Figura maternal de medio cuerpo con pliegues tallados",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/virgen-nino.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        683,
+        1024
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "san-jose-nino",
+      "category": "religiosas",
+      "name": "San José con Niño",
+      "description": "Figura paterna de medio cuerpo en relieve",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/san-jose-nino.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        683,
+        1024
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "angel",
+      "category": "religiosas",
+      "name": "Ángel funerario",
+      "description": "Figura de ángel con alas y ropaje esculpidos",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/angel.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        683,
+        1024
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "paloma-olivo",
+      "category": "religiosas",
+      "name": "Paloma con olivo",
+      "description": "Ave en relieve con rama de olivo",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/paloma-olivo.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        1024,
+        853
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "medallon-mariano",
+      "category": "religiosas",
+      "name": "Medallón mariano",
+      "description": "Retrato mariano genérico dentro de aro escultórico",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/medallon-mariano.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        1024,
+        960
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
+    },
+    {
+      "id": "medallon-cristo",
+      "category": "religiosas",
+      "name": "Medallón de Cristo",
+      "description": "Busto de Cristo en medallón ovalado",
+      "path": "assets/funerario/ornamentos/religiosas/relieves/medallon-cristo.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        683,
+        1024
+      ],
+      "simulatedFinish": "bajorrelieve de piedra clara; tratamiento visual orientativo",
+      "simulatedTechnique": "bajorrelieve",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "validation": "Propuesta artística; no validada para fabricación",
+      "rights": "Imagen original generada desde descripción genérica; derechos y uso comercial pendientes de revisión",
+      "visualReview": "Pendiente de revisión artística del propietario",
+      "technicalValidation": "Pendiente de validación del taller",
+      "commercialReady": false,
+      "publicSelectable": false
     }
   ]
 }

@@ -40,6 +40,7 @@
     const selected=[
       ['Piedra','stone'],['Textura','variant'],['Modelo','model'],
       ['Composición','layout'],['Tipografía','type'],['Cruz','symbol'],
+      ['Imagen','devotional'],
       ['Ornamento','ornament'],['Adicional','secondary'],['Marco','frame'],
       ['Separador','separator'],['Grabado','finish']
     ];
@@ -99,7 +100,7 @@
       button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name);
       const image=document.createElement('span');image.className='memorial-motif-image';
       if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
-      else{const art=document.createElement('img');art.src='data:image/svg+xml,'+encodeURIComponent(resources[item.path]);art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
+      else{const art=document.createElement('img');const source=resources[item.path];art.src=source.startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source);art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
       const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
       button.append(image,label);
       if(item.commercialReady===false){

@@ -40,4 +40,32 @@ const localReview=out.replace('<title>LITOS · Estudio de composición</title>',
  .replace(scripts,scriptFor('recursos')+localBootstrap+['compositor','exportar','personalizador'].map(scriptFor).join('')+localHandler);
 if(!localReview.includes('litos-local-upload')||!localReview.includes('arte_local_temporal'))throw Error('Local image review injection missing');
 writeFileSync('preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html',localReview);
+const reliefIds=['cristo-corona','cristo-crucificado','virgen-nino','san-jose-nino','angel','paloma-olivo','medallon-mariano','medallon-cristo'];
+const reliefLayoutIds=['relievelateral','crucifijolateral','relievesuperior'];
+const reliefCatalog=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
+const reliefResources=Object.fromEntries(reliefCatalog.ornaments.filter(x=>reliefIds.includes(x.id)).map(x=>[x.path,'data:image/webp;base64,'+readFileSync(x.path).toString('base64')]));
+const reliefBootstrap=`<script>(()=>{'use strict';
+const data=window.LitosMemorialData,ids=new Set(${JSON.stringify(reliefIds)}),layoutIds=new Set(${JSON.stringify(reliefLayoutIds)});
+Object.assign(data.resources,${JSON.stringify(reliefResources)});
+const devotional=document.getElementById('memorial-devotional'),layout=document.getElementById('memorial-layout');
+document.getElementById('memorial-gallery-category').append(new Option('Relieves figurativos · solo revisión','religiosas'));
+for(const item of data.catalog.ornaments){
+ if(!ids.has(item.id))continue;
+ if(item.commercialReady!==false||item.publicSelectable!==false||item.format!=='image/webp')throw Error('Candidato no aislado: '+item.id);
+ item.publicSelectable=true;devotional.append(new Option(item.name+' · REVISIÓN',item.id));
+}
+for(const item of data.catalog.layouts){
+ if(!layoutIds.has(item.id))continue;
+ if(item.publicSelectable!==false)throw Error('Composición no aislada: '+item.id);
+ item.publicSelectable=true;layout.append(new Option(item.name+' · REVISIÓN',item.id));
+}
+if(devotional.options.length!==9||layout.options.length!==9)throw Error('Faltan recursos de revisión');
+})();</script>`;
+const reliefScripts=scriptFor('recursos')+reliefBootstrap+['compositor','exportar','personalizador'].map(scriptFor).join('');
+const reliefReview=out.replace('<title>LITOS · Estudio de composición</title>','<title>LITOS · Revisión de relieves fase 3</title>')
+ .replace('<header class="review-head">','<p id="relief-review-only" style="text-align:center;background:#694c35;color:white;padding:12px;margin:0;font:700 13px Arial,sans-serif">ENTORNO DE REVISIÓN OFFLINE · OCHO FIGURAS Y TRES COMPOSICIONES EXPERIMENTALES · NO PUBLICAR</p><header class="review-head">')
+ .replace(scripts,reliefScripts)
+ .replace('</body></html>',`<script>addEventListener('load',()=>{const l=document.getElementById('memorial-layout'),d=document.getElementById('memorial-devotional');l.value='relievelateral';l.dispatchEvent(new Event('change',{bubbles:true}));d.value='cristo-corona';d.dispatchEvent(new Event('change',{bubbles:true}));});</script></body></html>`);
+if(!reliefReview.includes(reliefBootstrap)||!reliefReview.includes('relief-review-only'))throw Error('Relief review injection missing');
+writeFileSync('preview/LITOS_REVISION_RELIEVES_FASE3.html',reliefReview);
 console.log('Self-contained configurator preview built: '+out.length+' bytes.');

@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 26778,
-      "sha256": "a3a8a77082966882e2386351607292141ed3b83b4b0e088c69c01d830a4d4a82"
+      "bytes": 43477,
+      "sha256": "3753ba5fc6ed2e86853f04bfa3cfe990b13965a2f990ab582ed9ece580f6933b"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",
@@ -153,6 +153,16 @@
       "sha256": "d6701efe49981b94bce36fa46513d00103c329580f40ae119fc19692d35e9063"
     },
     {
+      "path": "assets/funerario/ornamentos/cruces/doblefilete.svg",
+      "bytes": 631,
+      "sha256": "befdc1384a5e02669ad9889768390f81638f5734a86912e5085c1538c767c8da"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/florenzada.svg",
+      "bytes": 728,
+      "sha256": "615b9680b1a4ccada334a1b011a5a4899bd1bbdfd86facf75b98b5a21a444519"
+    },
+    {
       "path": "assets/funerario/ornamentos/cruces/latina.svg",
       "bytes": 246,
       "sha256": "b5a7117da9b6e1a24f62dd767466768d4080c6cd64c9afcf0f3f0e516fc80ed0"
@@ -163,6 +173,21 @@
       "sha256": "aef40cd9b33b3372bbef2b0f54caeb2959bf629e3291110be9eb933a8f8f1c29"
     },
     {
+      "path": "assets/funerario/ornamentos/cruces/medalloncruz.svg",
+      "bytes": 426,
+      "sha256": "459acc76db8e21b3a59d8439cb15c6d4c6a49ef7907745ae5504f51ef826a2a2"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/metalica.svg",
+      "bytes": 1002,
+      "sha256": "a8b161a473998ef9dfd41c396b903b237f2b47bfd662e7e722a880a76360247f"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/moldurada.svg",
+      "bytes": 766,
+      "sha256": "51ccfde37b36917a8eecc41152d59ed28808f73ca5e0d42aecdbff7a0b100121"
+    },
+    {
       "path": "assets/funerario/ornamentos/cruces/pedestal.svg",
       "bytes": 269,
       "sha256": "e3701a0f5b4e3e66b8712b2cf8f8165bc43d03c3b7fcd00980ecdfb8b0f2388e"
@@ -171,6 +196,11 @@
       "path": "assets/funerario/ornamentos/cruces/radiante.svg",
       "bytes": 318,
       "sha256": "3609d0b66bf2d47b5fe41946f7e6a430f26c7ff91071d8be70f624b9204719f7"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/santiago.svg",
+      "bytes": 617,
+      "sha256": "51feba8b250e37058dfc72ecf0e2003691501482a2385e69d86f9ed680d0a097"
     },
     {
       "path": "assets/funerario/ornamentos/cruces/simple.svg",

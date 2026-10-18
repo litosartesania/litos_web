@@ -2,7 +2,8 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const catalog=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
-const paths=[...catalog.materials.flatMap(m=>m.variants.map(v=>v.path)),...catalog.fonts.map(f=>f.path),...catalog.ornaments.map(o=>o.path)];
+const reviewOnly=catalog.ornaments.filter(o=>o.publicSelectable===false&&o.path.endsWith('.webp'));
+const paths=[...catalog.materials.flatMap(m=>m.variants.map(v=>v.path)),...catalog.fonts.map(f=>f.path),...catalog.ornaments.filter(o=>!reviewOnly.includes(o)).map(o=>o.path)];
 const resources={};
 for(const path of paths){
  const bytes=readFileSync(path);
@@ -17,4 +18,6 @@ writeFileSync('funerario-recursos.js',output);
 const publicPaths=[...paths,...catalog.fonts.map(f=>f.license),'assets/funerario/configuracion/catalogo.json'];
 const files=publicPaths.sort().map(path=>{const b=readFileSync(path);return {path,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')};});
 writeFileSync('docs/FUNERARIO_ASSETS_MANIFEST.json',JSON.stringify({version:1,origin:'Original generated textures and original generic vectors; OFL fonts.',files},null,2)+'\n');
+const reviewFiles=reviewOnly.map(item=>{const bytes=readFileSync(item.path);return {path:item.path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};});
+writeFileSync('docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json',JSON.stringify({version:1,policy:'Review only: these original generic pictorial files are excluded from the public resource bundle and Pages allowlist.',files:reviewFiles},null,2)+'\n');
 console.log(`Bundled ${paths.length} resources, ${output.length} bytes; export works offline.`);
