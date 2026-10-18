@@ -28,7 +28,9 @@ assert all(o.get('commercialReady') is False for o in catalog['ornaments'] if o.
 # Rejected visuals remain available for review but are not public choices.
 rejected={'madre','corona','ala','orantes','palomamedallon'}
 candidates={'santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'}
-assert {o['id'] for o in catalog['ornaments'] if o.get('publicSelectable') is False}==rejected|candidates
+assert {o['id'] for o in catalog['ornaments'] if o.get('publicSelectable') is False}==rejected
+assert all(o.get('publicSelectable') is True and o.get('commercialReady') is False for o in catalog['ornaments'] if o['id'] in candidates)
+assert all(('value="'+id+'"') in (root/'funerario.html').read_text(encoding='utf8') for id in candidates)
 assert all(o.get('commercialReady') is False for o in catalog['ornaments'] if o['id'] in rejected)
 assert 'Imágenes religiosas</option>' not in (root/'funerario.html').read_text(encoding='utf8')
 assert not any(('value="'+id+'"') in (root/'funerario.html').read_text(encoding='utf8') for id in rejected)
@@ -43,4 +45,4 @@ for path in ['funerario-personalizador.js','funerario-compositor.js','funerario-
 assert 'SIMULACIÓN ORIENTATIVA' in (root/'funerario-compositor.js').read_text()
 assert 'LITOS-simulacion-orientativa.png' in (root/'funerario-exportar.js').read_text()
 assert set(pack['resources'])=={v['path'] for m in catalog['materials'] for v in m['variants']}|{f['path'] for f in catalog['fonts']}|{o['path'] for o in catalog['ornaments']}
-print('PASS: memorial catalog, 66 asset hashes, 11 unpublished candidates, OFL licenses and local-only runtime')
+print('PASS: memorial catalog, 66 asset hashes, 5 rejected religious motifs hidden; 6 crosses offered as unvalidated prototypes, OFL licenses and local-only runtime')
