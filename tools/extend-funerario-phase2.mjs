@@ -20,6 +20,8 @@ const entries=[
  ['separadores','hojas','Separador con hojas','Dos hojas pequeñas en el eje de una línea fina.',P('M3 50H36M64 50H97M36 50Q45 31 51 37Q51 47 36 50M64 50Q55 31 49 37Q49 47 64 50')],
  ['separadores','roseta','Separador con roseta','Flor geométrica central de cuatro pétalos.',P('M3 50H40M60 50H97M50 39Q43 42 50 50Q57 42 50 39M50 61Q43 58 50 50Q57 58 50 61M39 50Q42 43 50 50Q42 57 39 50M61 50Q58 43 50 50Q58 57 61 50')],
 ];
+// Public access to these experimental pictograms is suspended until visual approval.
+const visualRejects=new Set(['madre','corona','ala','orantes','palomamedallon']);
 const newLayouts=[
  {id:'devocionlateral',name:'Imagen a la izquierda',text:[.43,.20,.43,.58],symbol:[.10,.08,.16,.16],devotional:[.12,.28,.25,.36],flower:[.13,.76,.15,.12],secondary:[.65,.82,.15,.10],separator:[.45,.79,.38,.025]},
  {id:'medallonsuperior',name:'Medallón superior',text:[.20,.47,.60,.36],symbol:[.14,.08,.14,.15],devotional:[.36,.08,.28,.30],flower:[.75,.08,.12,.15],secondary:[.41,.86,.18,.08],separator:[.25,.42,.50,.025]},
@@ -31,7 +33,7 @@ for(const [category,id,name,description,body] of entries){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>${name}</title>${body}</svg>\n`;
  // Keep subsequent manually refined master vectors; this script only supplies missing base candidates.
  if(!existsSync(asset))writeFileSync(asset,svg);
- const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false};
+ const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false,...(visualRejects.has(id)?{publicSelectable:false,visualReview:'oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión'}:{})};
  const previous=catalog.ornaments.findIndex(x=>x.id===id&&x.category===category);
  if(previous<0)catalog.ornaments.push(metadata);else{
   const original=catalog.ornaments[previous];
