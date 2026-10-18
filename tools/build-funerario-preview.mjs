@@ -15,9 +15,9 @@ const catalog=window.LitosMemorialData.catalog;
 const select=document.getElementById('memorial-symbol');
 for(const item of catalog.ornaments){
  if(!candidates.has(item.id))continue;
- if(item.category!=='cruces'||item.commercialReady!==false||item.publicSelectable!==false)throw Error('Candidate flag mismatch: '+item.id);
+ if(item.category!=='cruces'||item.commercialReady!==false||item.publicSelectable!==true)throw Error('Approved prototype flag mismatch: '+item.id);
  item.publicSelectable=true;
- select.append(new Option(item.name+' · SOLO REVISIÓN',item.id));
+ if(![...select.options].some(option=>option.value===item.id))select.append(new Option(item.name+' · SOLO REVISIÓN',item.id));
 }
 if(select.options.length<11)throw Error('Review options missing');
 })();</script>`;
