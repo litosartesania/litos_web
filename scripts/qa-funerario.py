@@ -65,8 +65,12 @@ with sync_playwright() as p:
         assert page.locator('#memorial-devotional').is_disabled()
         page.locator('#memorial-gallery-category').select_option('cruces')
         for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
-            assert page.locator('#memorial-symbol option[value="'+candidate+'"]').count()==0
-            assert page.locator('.memorial-motif[data-item-id="'+candidate+'"]').count()==0
+            assert page.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
+            assert page.locator('.memorial-motif[data-item-id="'+candidate+'"]').count()==1
+        page.locator('.memorial-motif[data-item-id="moldurada"]').click()
+        page.wait_for_function('()=>document.querySelector("#memorial-symbol").value==="moldurada"')
+        assert page.locator('#memorial-download').is_enabled()
+        page.locator('#memorial-reset').click()
         assert page.locator('[data-slot="devotional"]').count()==0
         page.locator('#memorial-layout').select_option('devocionlateral')
         page.locator('#memorial-secondary').select_option('rosaabierta')
@@ -86,8 +90,7 @@ with sync_playwright() as p:
     page.wait_for_selector('#memorial-workbench[data-ready="true"]')
     assert not network and page.locator('#memorial-stone option').count()==7
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), 'standalone preview overflows on mobile'
-    # A separate offline review file may expose ONLY the six cross candidates.
-    # The public _site and the ordinary standalone preview above must keep them hidden.
+    # Offline copy also offers the public prototype crosses; rejected religious drawings stay hidden.
     for width in (390,1440):
         context=browser.new_context(viewport={'width':width,'height':880},accept_downloads=True)
         review=context.new_page()
