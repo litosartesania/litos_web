@@ -541,3 +541,6 @@ En `work/funerario-fase2-20261018`, desde el `main` posterior a PR #55, se audit
 - La vista panorámica y cache fix de PR #57/#58 están publicados. El propietario rechaza los cinco motivos religiosos esquemáticos actuales.
 - Rama exclusiva `work/funerario-retirar-devocionales-no-validados-20261018`: desactivar su selección pública con `publicSelectable:false` sin alterar `commercialReady:false`; catálogo 33 ornamentos, 14 pendientes comerciales y cinco suspendidos artísticamente. Cruces, flores, marcos, separadores, seis layouts y todas las piedras continúan operativos; el editor/PNG permanece local.
 - Verificar CI, revisión visual, privacidad y despliegue; no publicar originales del taller ni exponer datos privados. Reemplazo religioso pictórico pendiente de validación, no confundirse con los SVG presentes.
+
+## 2026-10-18 — Seis cruces candidatas, rama aislada
+Se añadieron seis SVG originales para revisar familias de grabado, talla, cruz ornamental y aplique. El catálogo pasa a 39 ornamentos; once no seleccionables, incluyendo los cinco motivos religiosos rechazados. Son propuestas sin validación comercial. La tabla de 33 motivos reales y las fotos siguen fuera del repositorio, únicamente en Drive privado. Revisar PR y CI antes de publicar.
