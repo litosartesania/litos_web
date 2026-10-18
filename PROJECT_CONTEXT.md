@@ -547,3 +547,6 @@ Se añadieron seis SVG originales para revisar familias de grabado, talla, cruz 
 
 ## 18-10-2026 · Ensayos raster locales
 La PR #60 incorpora soporte PNG/WebP en el compositor de motivos y una vista HTML de revision local con selector de archivo. Los recursos se usan solo en memoria del navegador; se comprueba su exportacion en PNG. Los cinco dibujos religiosos rechazados y seis cruces candidatas permanecen ocultos en la web publica. La PR sigue en borrador y no se publica sin validacion visual.
+
+## 2026-10-18 — Diseño de configurador con barra lateral izquierda
+La PR #60 de `litosartesania/litos_web` incorpora distribución de una sola vista: todos los selectores, biblioteca visual y texto editable agrupados en barra desplazable a la izquierda con resumen vivo de 11 opciones; escena de lápida completa y exportación a la derecha. En móvil, piedra primero y opciones después. Pruebas de geometría responsive, selección, privacidad y PNG añadidas a CI y capturas 390/768/1440. Sin fusión ni publicación. Se mantienen ocultos los cinco motivos religiosos rechazados y las seis nuevas cruces genéricas, pendientes de validación comercial.
