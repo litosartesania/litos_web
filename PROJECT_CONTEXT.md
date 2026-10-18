@@ -553,3 +553,9 @@ La PR #60 de `litosartesania/litos_web` incorpora distribución de una sola vist
 
 ## 2026-10-18 — Autorización para publicar prototipos de seis cruces (PR #60)
 El usuario aprueba su exhibición en `litos_web` como simulación orientativa, con `publicSelectable:true`, sin elevar `commercialReady:false`. Permanecen ocultas cinco imágenes religiosas rechazadas. La PR contiene además configuración de vista única con opciones laterales y lápida grande, más revisores autónomos de recurso local que no deben publicarse en Pages. Control obligatorio: GitHub Actions, allowlist, QA responsive, PNG, cero datos privados y comprobación postdespliegue.
+
+## 2026-10-18 — Fase 3, biblioteca figurativa aislada
+- PR #60 ya estaba fusionada al iniciar esta fase (`1c5a14a`); se trabajó en una rama nueva desde `main` después de la corrección del builder de Pages (`5c55b27`). Las seis cruces siguen visibles únicamente como prototipos; se retocan `moldurada` y `metalica` y se aplica representación diferenciada de incisión, talla y aplique.
+- La base privada consolidada permitió revisar 33 recortes de 30 trabajos distintos: 16 figurativos y 17 cruces/crucifijos. Las imágenes e identificadores privados no entraron en Git ni se enviaron a ImageGen. Resultado agregado: `docs/FUNERARIO_FASE3_INVESTIGACION.md`.
+- Ocho imágenes figurativas originales genéricas con transparencia y tres composiciones nuevas se integran solo en dos revisores HTML autónomos; en el catálogo permanecen `commercialReady:false` y `publicSelectable:false`. La web/Pages no recibe sus bytes ni opciones. Ver `docs/FUNERARIO_FASE3_VALIDACION.md` y el manifiesto de revisión con SHA-256.
+- La rama es para PR de borrador y revisión artística/técnica. No fusionar ni publicar esta fase sin aprobación expresa.

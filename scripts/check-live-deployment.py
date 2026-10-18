@@ -16,7 +16,7 @@ MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
-assert len(MEMORIAL["files"]) == 60
+assert len(MEMORIAL["files"]) == 66
 FILES = {
     "funerario.html": (
         'id="memorial-workbench"',
@@ -203,7 +203,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, memorial configurator and 60 memorial assets, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 8 Macetero PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
+        print("PASS: live Pages HTML/CSS/JS, memorial configurator and 66 public memorial assets, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 8 Macetero PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

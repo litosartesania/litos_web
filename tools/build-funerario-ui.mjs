@@ -22,7 +22,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
     <label class="memorial-check"><input id="memorial-fixings" type="checkbox"> Mostrar fijaciones</label>
    </div></details>
    <details><summary><span>02</span> Composición y símbolos</summary><div class="memorial-panel">
-    ${select('layout','Composición',c.layouts)}
+    ${select('layout','Composición',c.layouts.filter(x=>x.publicSelectable!==false))}
     <div class="memorial-library"><label for="memorial-gallery-category">Biblioteca visual de motivos</label><select id="memorial-gallery-category"><option value="cruces">Cruces</option>${publicOrnaments.some(x=>x.category==="religiosas")?'<option value="religiosas">Imágenes religiosas</option>':""}<option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas inspiradas en categorías observadas, pendientes de revisión visual. Las fotografías reales permanecen privadas.</p></div>
     ${select('symbol','Cruz',[{id:'ninguno',name:'Sin cruz'},...publicOrnaments.filter(x=>x.category==='cruces')])}
     ${placement('symbol','Cruz')}

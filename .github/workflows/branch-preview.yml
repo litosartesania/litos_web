@@ -28,6 +28,9 @@ jobs:
           node --check tools/build-preview.mjs
           node --check tools/build-standalone.mjs
           node --check tools/extend-funerario-phase2.mjs
+          node --check tools/extend-funerario-phase3.mjs
+          node --check tools/build-funerario-phase3-gallery.mjs
+          node --check tools/build-funerario-phase3-comparison.mjs
           node --check tools/build-funerario-gallery.mjs
       - name: Build and audit Codex public-site allowlist
         run: |
@@ -48,10 +51,14 @@ jobs:
           node tools/build-standalone.mjs
           node tools/build-funerario-preview.mjs
           node tools/build-funerario-gallery.mjs
+          node tools/build-funerario-phase3-gallery.mjs
+          node tools/build-funerario-phase3-comparison.mjs
       - name: Validate self-contained review HTML and disabled contact forms
         run: python3 scripts/check-preview.py preview
       - name: Verify memorial layers, long text, fonts, privacy and PNG downloads
         run: python3 scripts/qa-funerario.py
+      - name: Verify isolated reliefs, three stones, safe zones and exported pixels
+        run: python3 scripts/qa-funerario-phase3.py
       - name: Upload local review package (not a Pages deployment)
         uses: actions/upload-artifact@v4
         with:
@@ -65,5 +72,13 @@ jobs:
             preview/LITOS_PANEL_IZQUIERDO_768.png
             preview/LITOS_PANEL_IZQUIERDO_1440.png
             preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html
+            preview/LITOS_REVISION_RELIEVES_FASE3.html
+            preview/LITOS_GALERIA_RELIEVES_FASE3.html
+            preview/LITOS_GALERIA_RELIEVES_FASE3.png
+            preview/LITOS_COMPARACION_FIGURAS_FASE3.html
+            preview/LITOS_COMPARACION_FIGURAS_FASE3.png
+            preview/LITOS_FASE3_SUDAFRICA_RELIEVE.png
+            preview/LITOS_FASE3_ITALIA_RELIEVE.png
+            preview/LITOS_FASE3_QUINTANA_RELIEVE.png
           if-no-files-found: error
           retention-days: 7
