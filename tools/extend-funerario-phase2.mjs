@@ -45,11 +45,11 @@ for(const [category,id,name,description,body] of entries){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>${name}</title>${body}</svg>\n`;
  // Keep subsequent manually refined master vectors; this script only supplies missing base candidates.
  if(!existsSync(asset)){if(candidateIds.has(id))throw new Error('Falta SVG original de revisión: '+id);writeFileSync(asset,svg);}
- const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false,...(visualRejects.has(id)?{publicSelectable:false,visualReview:'oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión'}:candidateIds.has(id)?{publicSelectable:false,visualReview:'Candidato vectorial pendiente de validación comercial; no visible en el selector'}:{})};
+ const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false,...(visualRejects.has(id)?{publicSelectable:false,visualReview:'oculto: calidad gráfica insuficiente; sustituir por grabado pictórico original tras revisión'}:candidateIds.has(id)?{publicSelectable:true,visualReview:'Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación sin validar.',validation:'Prototipo visual autorizado para exhibición; pendiente de validar técnica, medidas y fabricación en el taller.'}:{})};
  const previous=catalog.ornaments.findIndex(x=>x.id===id&&x.category===category);
  if(previous<0)catalog.ornaments.push(metadata);else{
   const original=catalog.ornaments[previous];
-  catalog.ornaments[previous]={...metadata,...(original.publicSelectable===false?{publicSelectable:false,visualReview:original.visualReview}: {})};
+  catalog.ornaments[previous]={...metadata,...(original.publicSelectable===false&&visualRejects.has(id)?{publicSelectable:false,visualReview:original.visualReview}: {})};
 }
 }
 catalog.version=3;
