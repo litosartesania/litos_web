@@ -563,3 +563,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - La galería de 20 recursos en revisión enlaza al revisor offline; funciona con materiales, tipografías, composiciones y descarga PNG íntegramente local.
 - Chromium 390/1440 px comprueba seis selecciones, ausencia de solicitudes externas, ausencia de errores JS y PNG 2000 px. CI verde en ejecución #39142906218 anterior al enlace corregido; comprobar la última ejecución de PR #60.
 - Pendientes: aprobación visual y técnica, verificación de derechos y contraste con fabricación. No fusionar ni publicar la PR sin aprobación expresa. Nunca trasladar fotografías privadas a GitHub.
+
+## 2026-10-18 — Ensayo de motivos figurativos raster en PR #60
+- El compositor soporta capas PNG/WebP. El empaquetador contempla image/png.
+- `preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html` permite cargar una imagen desde el equipo y probarla sin guardarla ni enviarla. Es una prueba offline, no una funcion de produccion.
+- CI verifica una imagen sintetica RGBA y la descarga PNG de 2000 px, junto a los controles de privacidad y las opciones ocultas.
+- Los cinco prototipos pictoricos nuevos quedan para comparacion y validacion artistica. No se han incorporado fotografias internas ni se ha fusionado la PR #60.
