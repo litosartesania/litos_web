@@ -576,3 +576,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - `styles.css`: grid panorámico 34% opciones / resto vista completa a partir de 821px; desplazamiento interior del lateral y piedra sticky sin recortes, SVG contenido; por debajo de 821px vista completa antes de opciones para uso táctil. Resumen seleccionado sticky en escritorio con etiquetas sin truncar.
 - `scripts/qa-funerario.py`: valida DOM/posición, sincronización del resumen de piedra, no desbordamiento, descargas PNG y salvaguarda de seis candidatas ocultas; genera capturas 390/768/1440 en el artefacto de revisión. El flujo isolated preview adjunta dichas capturas.
 - Cambios exclusivos de PR #60; no se ha publicado nada nuevo en main; confirmar CI actual de la rama antes de cerrar. Los seis motivos cruz y cinco religiosos rechazados permanecen `publicSelectable:false` y sin aprobación comercial. Sin originales privados ni IDs de trabajo.
+
+## 18/10/2026 — Aprobación explícita de PR #60 para publicación de prototipos
+- El propietario autorizó integrar las seis cruces genéricas y el nuevo configurador de vista única en la web, manteniendo su estado `commercialReady:false`; la autorización es visual/de exhibición, **no** de fabricación ni de copia de diseños originales.
+- Habilitar exclusivamente las seis cruces nuevas como `publicSelectable:true`; los cinco motivos religiosos rechazados permanecen ocultos. Regenerador, HTML, galería y tests deben preservar esos estados después de cada build.
+- Versionar CSS/JS y verificar Pages, combinaciones por capas, exportación PNG y privacidad; sin imágenes del taller, pedidos, datos personales, otros repositorios ni servicios de pago.
+- Tras fusionar, anotar commit de Pages y ejecución CI pública verificada. La calidad artística de imágenes figurativas y validación industrial continúan pendientes.
