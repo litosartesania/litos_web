@@ -6,7 +6,7 @@ const paths=[...catalog.materials.flatMap(m=>m.variants.map(v=>v.path)),...catal
 const resources={};
 for(const path of paths){
  const bytes=readFileSync(path);
- const mime=path.endsWith('.webp')?'image/webp':path.endsWith('.woff2')?'font/woff2':'image/svg+xml';
+ const mime=path.endsWith('.webp')?'image/webp':path.endsWith('.png')?'image/png':path.endsWith('.woff2')?'font/woff2':'image/svg+xml';
  resources[path]=mime==='image/svg+xml'?bytes.toString('utf8'):`data:${mime};base64,${bytes.toString('base64')}`;
 }
 // Keep the six copyright notices and OFL texts with every embedded-font copy,
