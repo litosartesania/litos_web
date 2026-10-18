@@ -1,5 +1,17 @@
 # Configurador funerario por capas · revisión 17/10/2026
 
+## Continuación fase 2 · 18/10/2026
+
+Esta sección actualiza el inventario y las pruebas de la revisión anterior; las cifras históricas más abajo describen el estado de la fase 1. Rama `work/funerario-fase2-20261018` basada en `main` tras la fusión de PR #55. Preparada para PR de revisión; **sin permiso para fusionar o desplegar esta fase**.
+
+El inventario fotográfico privado y sus límites están en [la auditoría despersonalizada](FUNERARIO_AUDITORIA_FOTOGRAFICA_FASE2.md). El catálogo aumenta de **19 a 33 ornamentos** mediante 14 SVG originales y genéricos: 3 cruces, 5 figuras religiosas, 2 flores, 2 marcos y 2 separadores. Se agregan composiciones «Imagen a la izquierda» y «Medallón superior», pasando de cuatro a **seis**. Los 14 candidatos declaran `commercialReady: false`; son conceptos pendientes de revisión visual y técnica del taller.
+
+El selector visual muestra miniaturas locales, categorías, nombre y estado de selección. Permite una imagen devocional y un motivo complementario en zonas separadas además de cruz, flor, marco y separador. La escala/posición se ajusta dentro de zonas acotadas. El texto largo advierte cuando no cabe a un tamaño mínimo legible, en vez de seguir reduciéndose. Las opciones y el texto continúan solo en memoria del navegador; la exportación PNG es local.
+
+Para reconstruir **esta** fase, ejecutar `node tools/define-funerario-catalog.mjs` seguido de `node tools/extend-funerario-phase2.mjs`, y después los builders de UI, recursos, sitio, preview funeraria y `node tools/build-funerario-gallery.mjs`. La galería autónoma `preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html` y el configurador autónomo se adjuntan como artefactos de CI a la PR. El manifiesto tiene **60 archivos** (14 texturas, 33 SVG, 6 fuentes, 6 licencias y catálogo JSON); cada SVG nuevo se audita por contenido ejecutable y dependencia remota.
+
+Validación local de fase 2: build allowlist, auditoría estática y de publicación, 1080 composiciones en Chromium (360 × 390/768/1440 px), descarga PNG, privacidad/red, y 15 vistas generales en las tres anchuras: PASS. Esta prueba no equivale a validación comercial de materiales, fabricación, Safari/iPhone físico ni despliegue público. Las 14 texturas se conservaron para no degradar una aproximación no calibrada; la corrección de grabado en esta iteración se concentra en legibilidad, posición y advertencia de exceso de texto.
+
 Estado: prototipo funcional para revisión. Rama `work/funerario-capas-20261017`, basada en el commit `b6f33a23` de la PR #54. No autoriza fusión ni despliegue.
 
 ## Implementado

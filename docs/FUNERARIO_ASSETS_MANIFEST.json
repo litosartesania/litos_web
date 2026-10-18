@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 14524,
-      "sha256": "1926ea73a8b9c18447803e7af71e24970bba995bf3743f54b786a6fe2afd048a"
+      "bytes": 26008,
+      "sha256": "25be143e122468a5021f20bd86cf259a5312a77ce6fd130feb1abeaf7a2f40d5"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",
@@ -143,6 +143,11 @@
       "sha256": "e461f6a267afe4a50dac9f2fb21938ab81443924c8653c335aa6de324c193dec"
     },
     {
+      "path": "assets/funerario/ornamentos/cruces/calada.svg",
+      "bytes": 285,
+      "sha256": "fd5bd820ee9f9e77bac4a5f7724d0fffc17c0cc5e6cb76c2b0dc5f03787322ab"
+    },
+    {
       "path": "assets/funerario/ornamentos/cruces/clasica.svg",
       "bytes": 283,
       "sha256": "d6701efe49981b94bce36fa46513d00103c329580f40ae119fc19692d35e9063"
@@ -153,9 +158,19 @@
       "sha256": "b5a7117da9b6e1a24f62dd767466768d4080c6cd64c9afcf0f3f0e516fc80ed0"
     },
     {
+      "path": "assets/funerario/ornamentos/cruces/lobulada.svg",
+      "bytes": 413,
+      "sha256": "aef40cd9b33b3372bbef2b0f54caeb2959bf629e3291110be9eb933a8f8f1c29"
+    },
+    {
       "path": "assets/funerario/ornamentos/cruces/pedestal.svg",
       "bytes": 269,
       "sha256": "e3701a0f5b4e3e66b8712b2cf8f8165bc43d03c3b7fcd00980ecdfb8b0f2388e"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/radiante.svg",
+      "bytes": 318,
+      "sha256": "3609d0b66bf2d47b5fe41946f7e6a430f26c7ff91071d8be70f624b9204719f7"
     },
     {
       "path": "assets/funerario/ornamentos/cruces/simple.svg",
@@ -168,6 +183,11 @@
       "sha256": "484712106bb3bc416d69ec4b4107e611cce7d391eb0ec4bcd1ef380ad2cfad7d"
     },
     {
+      "path": "assets/funerario/ornamentos/flores/ramaflor.svg",
+      "bytes": 433,
+      "sha256": "5ac556f2cd1d3d2be337da926593ef4d86b85908bb97079a34304d094e8a444b"
+    },
+    {
       "path": "assets/funerario/ornamentos/flores/ramo.svg",
       "bytes": 408,
       "sha256": "88f850d076640d01046f2f55cf909b3b3f2ae14d05eaeb099ffc272c4bd79601"
@@ -176,6 +196,11 @@
       "path": "assets/funerario/ornamentos/flores/rosa.svg",
       "bytes": 396,
       "sha256": "d5e8e609938451df9cf754a7d0a60835fec73690261d576388622821afe4d46e"
+    },
+    {
+      "path": "assets/funerario/ornamentos/flores/rosaabierta.svg",
+      "bytes": 424,
+      "sha256": "df606df776e91c4d47fd4d84d518a515e1ad32e6f5689ad9c2fde016e275c408"
     },
     {
       "path": "assets/funerario/ornamentos/marcos/bisel.svg",
@@ -188,6 +213,11 @@
       "sha256": "6f0be393ec7a84b78f956bd8506781083661339ed5e9ee0abbdea7d0b81c50b7"
     },
     {
+      "path": "assets/funerario/ornamentos/marcos/cornisa.svg",
+      "bytes": 294,
+      "sha256": "86caa9c7ad7119e3cbe5368bf66be7b3213bdf7c687ddd728fa46d5242b5be20"
+    },
+    {
       "path": "assets/funerario/ornamentos/marcos/esquinas.svg",
       "bytes": 345,
       "sha256": "9267bab0058aedb4379a7b9a72d640b0b805e9ee1246e6368b64ca67fd468573"
@@ -196,6 +226,36 @@
       "path": "assets/funerario/ornamentos/marcos/fino.svg",
       "bytes": 261,
       "sha256": "12f8f921e2a9b511506ec6a3839d7ee46933261254f33e34ace9685d4c31bb9a"
+    },
+    {
+      "path": "assets/funerario/ornamentos/marcos/oval.svg",
+      "bytes": 364,
+      "sha256": "c3cc8f92769a112bf1d12ed4c32581286f8e221aed51e77639035199e45fd26a"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/ala.svg",
+      "bytes": 305,
+      "sha256": "821c1f0eac145d1ff08022cfc7b715381380530f85896462c87b8c4549888b71"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/corona.svg",
+      "bytes": 443,
+      "sha256": "e63e2a34930364212be2566e5647b0d1e3886c303f486e9187784fa907c3fdc4"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/madre.svg",
+      "bytes": 476,
+      "sha256": "d513207ea691da13896b1d9042ba671cfa6725c256142104772e44d927b562b8"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/orantes.svg",
+      "bytes": 372,
+      "sha256": "37e98652b08eaee3a1de01a84c00fbcfc10598259eb1febde97954c4effed1a1"
+    },
+    {
+      "path": "assets/funerario/ornamentos/religiosas/palomamedallon.svg",
+      "bytes": 399,
+      "sha256": "b0cec7896c621573f9decbf2d6fbd5fe84cf2fb60c0f27e5a57806a8b73d7e40"
     },
     {
       "path": "assets/funerario/ornamentos/separadores/doble.svg",
@@ -208,6 +268,11 @@
       "sha256": "bfd1961bb51c6707505ddfb3a85dd069836430f88fcf6f9caba12264ce473c50"
     },
     {
+      "path": "assets/funerario/ornamentos/separadores/hojas.svg",
+      "bytes": 290,
+      "sha256": "2b5ad5a1564bcee5642a774dfa58d1a5e9cc847ec098ca0cfd96078d73b6d3d8"
+    },
+    {
       "path": "assets/funerario/ornamentos/separadores/linea.svg",
       "bytes": 218,
       "sha256": "0f0416cb07d1b15206f5e4c992bc366468dad23dd623c6b31f4cf8dfc8b3f584"
@@ -216,6 +281,11 @@
       "path": "assets/funerario/ornamentos/separadores/ornamental.svg",
       "bytes": 292,
       "sha256": "625486c0e67cc90f54e7dfd0360b85515ee951364730ad98247b804dcf8199ff"
+    },
+    {
+      "path": "assets/funerario/ornamentos/separadores/roseta.svg",
+      "bytes": 351,
+      "sha256": "f3e85d0faae780d47a67342979aa7eb39d99405038386c4e1a08509948f36ac8"
     },
     {
       "path": "assets/funerario/ornamentos/simbolos/luz.svg",

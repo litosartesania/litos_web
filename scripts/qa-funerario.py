@@ -1,6 +1,7 @@
 """Mandatory memorial acceptance checks; same DOM scenarios as the local review."""
 from pathlib import Path
 import json
+import hashlib
 from playwright.sync_api import sync_playwright
 root=Path(__file__).resolve().parents[1]
 scenarios=(root/'scripts/funerario-scenarios.js').read_text()
@@ -24,8 +25,19 @@ with sync_playwright() as p:
         with page.expect_download() as pending:page.locator('#memorial-download').click()
         download=pending.value
         assert download.suggested_filename=='LITOS-simulacion-orientativa.png' and download.failure() is None
+        base_png=Path(download.path()).read_bytes()
+        assert base_png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(base_png[16:20],'big')==2000
+        page.locator('#memorial-layout').select_option('devocionlateral')
+        page.locator('#memorial-devotional').select_option('madre')
+        page.locator('#memorial-secondary').select_option('rosaabierta')
+        page.wait_for_selector('[data-slot="devotional"]')
+        page.wait_for_selector('[data-slot="secondary"]')
+        assert page.locator('[data-slot="devotional"]').count()>=1 and page.locator('[data-slot="secondary"]').count()>=1
+        with page.expect_download() as pending:page.locator('#memorial-download').click()
+        layered_png=Path(pending.value.path()).read_bytes()
+        assert layered_png[:8]==b'\x89PNG\r\n\x1a\n' and hashlib.sha256(layered_png).digest()!=hashlib.sha256(base_png).digest()
         assert not errors and not external,(errors,external)
-        results.append({'viewport':width,**result,'external_requests':len(external),'javascript_errors':len(errors),'png_download':'OK'})
+        results.append({'viewport':width,**result,'external_requests':len(external),'javascript_errors':len(errors),'png_download':'OK','layered_png':'OK'})
         context.close()
     # Self-contained file must work without assets, HTTP, cookies or storage.
     page=browser.new_page(viewport={'width':390,'height':844})

@@ -21,10 +21,15 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
    </div></details>
    <details><summary><span>02</span> Composición y símbolos</summary><div class="memorial-panel">
     ${select('layout','Composición',c.layouts)}
+    <div class="memorial-library"><label for="memorial-gallery-category">Biblioteca visual de motivos</label><select id="memorial-gallery-category"><option value="cruces">Cruces</option><option value="religiosas">Imágenes religiosas</option><option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas inspiradas en categorías observadas, pendientes de revisión visual. Las fotografías reales permanecen privadas.</p></div>
     ${select('symbol','Cruz',[{id:'ninguno',name:'Sin cruz'},...c.ornaments.filter(x=>x.category==='cruces')])}
     ${placement('symbol','Cruz')}
+    ${select('devotional','Imagen religiosa',[{id:'ninguno',name:'Sin imagen religiosa'},...c.ornaments.filter(x=>x.category==='religiosas')])}
+    ${placement('devotional','Imagen religiosa')}
     ${select('ornament','Ornamento floral o simbólico',ornaments(['flores','simbolos']))}
     ${placement('ornament','Ornamento')}
+    ${select('secondary','Motivo adicional',[{id:'ninguno',name:'Sin motivo adicional'},...c.ornaments.filter(x=>x.category==='flores'||x.category==='simbolos')])}
+    ${placement('secondary','Motivo adicional')}
     ${select('ornament-finish','Acabado del ornamento',c.finishes)}
     ${select('separator','Separador',ornaments(['separadores']))}
     ${select('frame','Marco',ornaments(['marcos']))}
@@ -40,7 +45,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
     ${select('align','Alineación',[{id:'center',name:'Centrada'},{id:'left',name:'Izquierda'},{id:'right',name:'Derecha'}])}
     <p class="memorial-note">Grabado y relieve son simulaciones visuales; la técnica disponible requiere confirmación del taller.</p>
    </div></details>
-   <details><summary><span>04</span> Inscripción editable</summary><div class="memorial-panel">${fields}<p class="memorial-note">La letra se ajusta al espacio cuando el contenido es largo.</p><p id="memorial-local">Tu texto se mantiene solo en la memoria de esta página. No se envía ni se añade a enlaces. Al cerrarla se pierde. La descarga sí incluye lo que escribas.</p></div></details>
+   <details><summary><span>04</span> Inscripción editable</summary><div class="memorial-panel">${fields}<p class="memorial-note">La letra se ajusta al espacio. Si no cabe, la vista previa lo indicará y acortará la línea visible; el texto del campo permanece intacto.</p><p id="memorial-local">Tu texto se mantiene solo en la memoria de esta página. No se envía ni se añade a enlaces. Al cerrarla se pierde. La descarga sí incluye lo que aparezca en la vista previa.</p></div></details>
   </div>
  </div>
  <p class="memorial-caption-detail">Recreación digital orientativa, no catálogo de acabados certificados ni plano de fabricación. Las proporciones no son estándares de tamaño. Cada familia tiene geometría propia; cualquier medida, espesor, anclaje o técnica requiere documentación y validación de taller.</p>

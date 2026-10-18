@@ -5,8 +5,9 @@ root=Path(__file__).resolve().parents[1]
 catalog=json.loads((root/'assets/funerario/configuracion/catalogo.json').read_text())
 manifest=json.loads((root/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 assert len(catalog['materials'])==7 and sum(len(m['variants']) for m in catalog['materials'])==14
-assert len(catalog['ornaments'])==19 and len(catalog['fonts'])==6
-assert len(catalog['layouts'])==4 and len(catalog['models'])==5
+assert len(catalog['ornaments'])==33 and len(catalog['fonts'])==6
+assert len(catalog['layouts'])==6 and len(catalog['models'])==5
+assert len(manifest['files'])==60
 face=catalog['models'][0]['face'];assert abs(face[2]/face[3]-97/80)<1e-10
 bundle=(root/'funerario-recursos.js').read_text()
 pack=json.loads(bundle.split('window.LitosMemorialData=',1)[1].rstrip().rstrip(';'))
@@ -19,6 +20,10 @@ for item in catalog['ornaments']:
     assert all(el.tag.split('}')[-1] in {'svg','title','path','rect','circle','ellipse','g','line','polyline'} for el in xml.iter())
     assert not re.search(r'\b(?:href|onload|onclick)\s*=',path.read_text(),re.I)
     assert pack['resources'][item['path']]==path.read_text()
+    if 'commercialReady' in item:
+        assert item['commercialReady'] is False and item['rights'].startswith('Vector original genérico')
+        assert item['digitalSize']==[100,100] and item['compatibleLayouts']
+assert sum('commercialReady' in item for item in catalog['ornaments'])==14
 for font in catalog['fonts']:
     assert 'SIL OPEN FONT LICENSE Version 1.1' in (root/font['license']).read_text()
     assert ' '.join((root/font['license']).read_text().split()) in ' '.join(bundle.split()), 'standalone font license missing'
@@ -29,4 +34,4 @@ for path in ['funerario-personalizador.js','funerario-compositor.js','funerario-
 assert 'SIMULACIÓN ORIENTATIVA' in (root/'funerario-compositor.js').read_text()
 assert 'LITOS-simulacion-orientativa.png' in (root/'funerario-exportar.js').read_text()
 assert set(pack['resources'])=={v['path'] for m in catalog['materials'] for v in m['variants']}|{f['path'] for f in catalog['fonts']}|{o['path'] for o in catalog['ornaments']}
-print('PASS: memorial catalog, 46 asset hashes, OFL licenses, safe vectors and ephemeral local-only runtime')
+print('PASS: memorial catalog, 60 asset hashes, OFL licenses, safe vectors and ephemeral local-only runtime')

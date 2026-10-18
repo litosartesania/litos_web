@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "materials": [
     {
       "id": "sudafrica",
@@ -329,6 +329,86 @@
         0.52,
         0.04
       ]
+    },
+    {
+      "id": "devocionlateral",
+      "name": "Imagen a la izquierda",
+      "text": [
+        0.43,
+        0.2,
+        0.43,
+        0.58
+      ],
+      "symbol": [
+        0.1,
+        0.08,
+        0.16,
+        0.16
+      ],
+      "devotional": [
+        0.12,
+        0.28,
+        0.25,
+        0.36
+      ],
+      "flower": [
+        0.13,
+        0.76,
+        0.15,
+        0.12
+      ],
+      "secondary": [
+        0.65,
+        0.82,
+        0.15,
+        0.1
+      ],
+      "separator": [
+        0.45,
+        0.79,
+        0.38,
+        0.025
+      ]
+    },
+    {
+      "id": "medallonsuperior",
+      "name": "Medallón superior",
+      "text": [
+        0.2,
+        0.47,
+        0.6,
+        0.36
+      ],
+      "symbol": [
+        0.14,
+        0.08,
+        0.14,
+        0.15
+      ],
+      "devotional": [
+        0.36,
+        0.08,
+        0.28,
+        0.3
+      ],
+      "flower": [
+        0.75,
+        0.08,
+        0.12,
+        0.15
+      ],
+      "secondary": [
+        0.41,
+        0.86,
+        0.18,
+        0.08
+      ],
+      "separator": [
+        0.25,
+        0.42,
+        0.5,
+        0.025
+      ]
     }
   ],
   "fonts": [
@@ -591,6 +671,322 @@
       "category": "simbolos",
       "name": "Luz simbólica",
       "path": "assets/funerario/ornamentos/simbolos/luz.svg"
+    },
+    {
+      "id": "calada",
+      "category": "cruces",
+      "name": "Cruz calada",
+      "description": "Doble contorno inciso; lectura clara sobre piedra pulida.",
+      "path": "assets/funerario/ornamentos/cruces/calada.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "lobulada",
+      "category": "cruces",
+      "name": "Cruz de remates curvos",
+      "description": "Brazos de extremos redondeados, recreación geométrica genérica.",
+      "path": "assets/funerario/ornamentos/cruces/lobulada.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "radiante",
+      "category": "cruces",
+      "name": "Cruz con rayos discretos",
+      "description": "Cruz lineal con rayos separados para grabado de alto contraste.",
+      "path": "assets/funerario/ornamentos/cruces/radiante.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "madre",
+      "category": "religiosas",
+      "name": "Madre y niño · silueta",
+      "description": "Interpretación mariana esquemática, sin imagen particular ni advocación concreta.",
+      "path": "assets/funerario/ornamentos/religiosas/madre.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "corona",
+      "category": "religiosas",
+      "name": "Corona de espinas",
+      "description": "Símbolo cristológico abstracto, sin reproducir un relieve figurativo.",
+      "path": "assets/funerario/ornamentos/religiosas/corona.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "ala",
+      "category": "religiosas",
+      "name": "Ala de ángel",
+      "description": "Ala de trazo inciso para un motivo devocional no figurativo.",
+      "path": "assets/funerario/ornamentos/religiosas/ala.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "orantes",
+      "category": "religiosas",
+      "name": "Manos orantes",
+      "description": "Dos manos estilizadas, interpretación original de gesto de oración.",
+      "path": "assets/funerario/ornamentos/religiosas/orantes.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "palomamedallon",
+      "category": "religiosas",
+      "name": "Paloma en medallón",
+      "description": "Ave esquemática dentro de un óvalo independiente de la inscripción.",
+      "path": "assets/funerario/ornamentos/religiosas/palomamedallon.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "rosaabierta",
+      "category": "flores",
+      "name": "Rosa lateral",
+      "description": "Rosa de tallo curvo con pétalos abiertos, distinta de la rosa frontal.",
+      "path": "assets/funerario/ornamentos/flores/rosaabierta.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "ramaflor",
+      "category": "flores",
+      "name": "Rama de flores pequeñas",
+      "description": "Floración ligera para un campo ornamental secundario.",
+      "path": "assets/funerario/ornamentos/flores/ramaflor.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "oval",
+      "category": "marcos",
+      "name": "Medallón ovalado",
+      "description": "Contorno oval para una imagen religiosa independiente.",
+      "path": "assets/funerario/ornamentos/marcos/oval.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "cornisa",
+      "category": "marcos",
+      "name": "Marco de cornisa",
+      "description": "Filetes superiores y laterales inspirados en conjuntos moldurados.",
+      "path": "assets/funerario/ornamentos/marcos/cornisa.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "hojas",
+      "category": "separadores",
+      "name": "Separador con hojas",
+      "description": "Dos hojas pequeñas en el eje de una línea fina.",
+      "path": "assets/funerario/ornamentos/separadores/hojas.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
+    },
+    {
+      "id": "roseta",
+      "category": "separadores",
+      "name": "Separador con roseta",
+      "description": "Flor geométrica central de cuatro pétalos.",
+      "path": "assets/funerario/ornamentos/separadores/roseta.svg",
+      "format": "image/svg+xml",
+      "digitalSize": [
+        100,
+        100
+      ],
+      "simulatedFinish": "incisión, relieve o contraste de color",
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior"
+      ],
+      "validation": "Prototipo visual pendiente de revisión del taller",
+      "rights": "Vector original genérico; no calco de obra particular",
+      "commercialReady": false
     }
   ]
 }
