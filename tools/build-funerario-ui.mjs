@@ -53,7 +53,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
 </section>`;
 let html=readFileSync('funerario.html','utf8');
 html=html.replace(/<section class="memorial-studio"[\s\S]*?<\/section>(?=<div class="catalog-grid">)/,ui);
-html=html.replace(/<script src="funerario-(?:recursos|compositor|exportar)\.js"><\/script>/g,'');
-html=html.replace('<script src="funerario-personalizador.js"></script>',['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js"></script>`).join(''));
+html=html.replace(/<script src="funerario-(?:recursos|compositor|exportar|personalizador)\.js(?:\?[^"]+)?"><\/script>/g,'');
+html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-panorama-20261018"></script>`).join('')+'</body>');
 writeFileSync('funerario.html',html);
 console.log('Updated existing studio; no other page replaced.');
