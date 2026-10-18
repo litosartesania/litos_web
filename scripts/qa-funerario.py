@@ -31,6 +31,10 @@ with sync_playwright() as p:
         assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==0
         assert page.locator('#memorial-devotional option').count()==1
         assert page.locator('#memorial-devotional').is_disabled()
+        page.locator('#memorial-gallery-category').select_option('cruces')
+        for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
+            assert page.locator('#memorial-symbol option[value="'+candidate+'"]').count()==0
+            assert page.locator('.memorial-motif[data-item-id="'+candidate+'"]').count()==0
         assert page.locator('[data-slot="devotional"]').count()==0
         page.locator('#memorial-layout').select_option('devocionlateral')
         page.locator('#memorial-secondary').select_option('rosaabierta')
