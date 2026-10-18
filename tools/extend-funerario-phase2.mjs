@@ -33,7 +33,10 @@ for(const [category,id,name,description,body] of entries){
  if(!existsSync(asset))writeFileSync(asset,svg);
  const metadata={id,category,name,description,path:asset,format:'image/svg+xml',digitalSize:[100,100],simulatedFinish:'incisión, relieve o contraste de color',compatibleLayouts:category==='religiosas'?newLayouts.map(x=>x.id):catalog.layouts.map(x=>x.id),validation:'Prototipo visual pendiente de revisión del taller',rights:'Vector original genérico; no calco de obra particular',commercialReady:false};
  const previous=catalog.ornaments.findIndex(x=>x.id===id&&x.category===category);
- if(previous<0)catalog.ornaments.push(metadata);else catalog.ornaments[previous]=metadata;
+ if(previous<0)catalog.ornaments.push(metadata);else{
+  const original=catalog.ornaments[previous];
+  catalog.ornaments[previous]={...metadata,...(original.publicSelectable===false?{publicSelectable:false,visualReview:original.visualReview}: {})};
+}
 }
 catalog.version=2;
 writeFileSync(path,JSON.stringify(catalog,null,2)+'\n');
