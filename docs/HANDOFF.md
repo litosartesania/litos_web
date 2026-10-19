@@ -630,3 +630,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El `#memorial-gallery-category` queda oculto en HTML y se conserva como estado interno y punto de compatibilidad para la lógica anterior, sin duplicar selección visible. Los botones de categoría sincronizan `aria-pressed` y mantienen el comportamiento de composición y el exportador. El generador de HTML y la página comercial se actualizan conjuntamente.
 - Rama `fix/funerario-selector-motivos-sin-desplegable-20261019`: cambios solo en `litosartesania/litos_web`. No se consultan fotos privadas ni se modifican materiales, textos, precios, imágenes, pedidos ni otros repositorios.
 - CI obligatorio: `sh scripts/build-site.sh`, `python3 scripts/check-site.py _site`, `node --check script.js`, comprobación visual Chromium y descarga PNG. Validar la PR antes de fusionar/publicar.
+
+## 19/10/2026 — Únicamente cinco acordeones de personalización
+- Petición del propietario: eliminar «Tu configuración» y el panel superior con controles/biblioteca repetidos; conservar solo 01 Piedra y modelo, 02 Composición y símbolos, 03 Letra y acabado, 04 Inscripción editable y 05 Plano para taller, todos inicialmente cerrados.
+- Eliminado HTML redundante y la lógica JS que extraía controles de sus paneles; sin duplicar elementos, sin modificar los IDs ni la composición, PNG/SVG, simulación privada ni assets.
+- Biblioteca visual ahora compacta dentro del acordeón 02. CSS y JS con invalidación de caché; QA adaptada para probar DOM y funcionalidad.
+- Rama aislada y revisión visual/CI obligatoria antes de fusionar y publicar. Sin materiales privados ni cambios en otros proyectos.

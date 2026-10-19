@@ -22,6 +22,8 @@ with sync_playwright() as p:
   assert page.locator('#memorial-devotional option').count()==9
   assert page.locator('#memorial-layout option').count()==9
   assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
+  page.locator('.memorial-controls > details').nth(1).locator('summary').click()
+  page.locator('.memorial-controls > details').nth(0).locator('summary').click()
   page.locator('.memorial-category-tab[data-category="religiosas"]').click()
   assert page.locator('#memorial-gallery .memorial-motif img').count()==8
   assert page.locator('#memorial-gallery img').evaluate_all('(els)=>els.every(e=>e.src.startsWith("data:image/webp;base64,"))')

@@ -24,6 +24,8 @@ try:
   assert not full_art(),full_art()
   assert page.locator('#memorial-layout option').count()==9
   assert page.locator('#memorial-devotional option').count()==9
+  page.locator('.memorial-controls > details').nth(1).locator('summary').click()
+  page.locator('.memorial-controls > details').nth(0).locator('summary').click()
   page.locator('.memorial-category-tab[data-category="religiosas"]').click()
   page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery img")].length===8&&[...document.querySelectorAll("#memorial-gallery img")].every(x=>x.complete&&x.naturalWidth>0)')
   assert not full_art(),full_art()

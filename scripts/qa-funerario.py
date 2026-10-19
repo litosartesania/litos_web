@@ -15,49 +15,39 @@ with sync_playwright() as p:
         page.on('request',lambda r:external.append(r.url) if r.url.startswith(('http://','https://')) else None)
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
         page.wait_for_selector('#memorial-workbench[data-ready="true"]')
-        # One-screen layout: on desktop all options are in the LEFT rail and the entire
-        # stone stays on the RIGHT; narrow screens show the full stone above the options.
-        positions=page.evaluate("""() => {
-          const root=document.getElementById('memorial-workbench');
-          const rail=root.querySelector('.memorial-options');
-          const slab=root.querySelector('.memorial-display');
-          const stone=document.getElementById('memorial-canvas');
-          const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
-          const y=scrollY;window.scrollTo(9999,y);const pageShift=scrollX;window.scrollTo(0,y);
-          return {parent:rail?.parentElement===root,
-            toolbar:rail?.contains(document.getElementById('memorial-toolbar')),
-            controls:rail?.contains(root.querySelector('.memorial-controls')),
-            selects:rail?.querySelectorAll('.memorial-quick-field select').length,
-            overview:rail?.querySelectorAll('.memorial-selection-item').length,
-            rail:rect(rail),slab:rect(slab),stone:rect(stone),
-            svg:rect(stone.querySelector('svg')),
-            overflow:document.documentElement.scrollWidth>innerWidth+1||pageShift>1};
+        # Left rail: five initially closed accordions; no duplicated upper controls.
+        pos=page.evaluate("""() => {
+          const r=document.querySelector('#memorial-workbench'),side=r.querySelector('.memorial-options');
+          const ct=r.querySelector('.memorial-controls'),sec=[...ct.children].filter(x=>x.tagName==='DETAILS');
+          const slab=r.querySelector('.memorial-display'),stone=document.getElementById('memorial-canvas');
+          const rect=e=>{const x=e.getBoundingClientRect();return {x:x.x,y:x.y,right:x.right,width:x.width,height:x.height}};
+          const y=scrollY;scrollTo(9999,y);const shift=scrollX;scrollTo(0,y);
+          return {side:side.parentElement===r&&side.contains(ct),n:sec.length,closed:sec.every(x=>!x.open),
+          extra:document.querySelectorAll('.memorial-toolbar,.memorial-selection-overview').length,
+          groups:['stone','variant','model','layout','type'].map(x=>sec.indexOf(document.getElementById('memorial-'+x).closest('details'))),
+          gallery:sec.indexOf(document.getElementById('memorial-gallery').closest('details')),
+          rail:rect(side),slab:rect(slab),stone:rect(stone),svg:rect(stone.querySelector('svg')),
+          overflow:document.documentElement.scrollWidth>innerWidth+1||shift>1};
         }""")
-        assert positions['parent'] and positions['toolbar'] and positions['controls']
-        assert positions['selects']==5 and positions['overview']>=10,positions
-        assert not positions['overflow'],positions
-        overview=page.locator('.memorial-selection-overview')
-        assert not overview.evaluate('(el)=>el.open')
-        assert overview.bounding_box()['height']<=58,overview.bounding_box()
-        gallery=page.locator('#memorial-gallery')
-        assert gallery.bounding_box()['height']<=125,gallery.bounding_box()
-        assert gallery.evaluate('(el)=>el.scrollWidth>el.clientWidth')
-        overview.locator('summary').click()
-        assert overview.evaluate('(el)=>el.open') and overview.locator('.memorial-selection-item').first.is_visible()
-        overview.locator('summary').click()
-        assert not overview.evaluate('(el)=>el.open')
-        assert positions['svg']['width']>0 and positions['svg']['height']>0,positions
+        assert pos['side'] and pos['n']==5 and pos['closed'] and pos['extra']==0,pos
+        assert pos['groups']==[0,0,0,1,2] and pos['gallery']==1,pos
+        assert not pos['overflow'] and pos['svg']['width']>0,pos
         if width>=900:
-            assert positions['rail']['right']<=positions['slab']['x']+2,positions
-            assert positions['stone']['right']<=width+1,positions
-            assert positions['rail']['height']<=height,positions
+            assert pos['rail']['right']<=pos['slab']['x']+2,pos
+            assert pos['stone']['right']<=width+1,pos
+            assert pos['rail']['height']<=height,pos
         else:
-            assert positions['slab']['y']<positions['rail']['y'],positions
+            assert pos['slab']['y']<pos['rail']['y'],pos
+        page.locator('.memorial-controls > details').nth(0).locator('summary').click()
+        assert page.locator('#memorial-stone').is_visible()
         page.locator('#memorial-stone').select_option('macael')
-        page.wait_for_function("()=>document.querySelector('.memorial-selection-overview')?.textContent.includes('Blanco Macael')")
-        assert 'Blanco Macael' in overview.locator('.memorial-selection-compact').inner_text()
+        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.stone==="macael"')
         page.locator('#memorial-stone').select_option('sudafrica')
-        page.wait_for_function("()=>document.querySelector('.memorial-selection-overview')?.textContent.includes('Negro Sudáfrica')")
+        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.stone==="sudafrica"')
+        page.locator('.memorial-controls > details').nth(1).locator('summary').click()
+        gallery=page.locator('#memorial-gallery')
+        assert gallery.is_visible() and gallery.bounding_box()['height']<=140,gallery.bounding_box()
+        assert gallery.evaluate('(el)=>el.scrollWidth>el.clientWidth')
         page.locator('img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
         page.wait_for_function('()=>[...document.images].every(e=>e.complete&&e.naturalWidth>0)')
         page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
@@ -131,6 +121,7 @@ with sync_playwright() as p:
         assert review.locator('#review-only-notice').count()==1
         assert review.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
         assert review.locator('#memorial-devotional option').count()==9
+        review.locator('.memorial-controls > details').nth(1).locator('summary').click()
         review.locator('.memorial-category-tab[data-category="cruces"]').click()
         for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
             assert review.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1

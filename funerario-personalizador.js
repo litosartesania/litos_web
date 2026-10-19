@@ -6,65 +6,13 @@
   const {catalog,resources}=window.LitosMemorialData;
   const isPublic=item=>item.publicSelectable!==false;
   const publicOrnaments=catalog.ornaments.filter(isPublic);
-  // Keep ALL configuration controls in one scrollable left rail, including the motif library.
-  // Do not duplicate any input IDs or state: move existing nodes so event listeners stay intact.
-  const toolbar=$('toolbar');
+  // Exactly one source of form state; inputs stay inside their five accordions.
   const controls=root.querySelector('.memorial-controls');
   const sidebar=document.createElement('aside');
   sidebar.className='memorial-options';
   sidebar.setAttribute('aria-label','Opciones de personalización de la lápida');
-  const overview=document.createElement('details');
-  overview.className='memorial-selection-overview';
-  overview.setAttribute('aria-label','Resumen de elementos seleccionados');
-  const overviewHeading=document.createElement('summary');
-  overviewHeading.className='memorial-selection-title';
-  const overviewName=document.createElement('span');
-  overviewName.textContent='Tu configuración';
-  const overviewCompact=document.createElement('span');
-  overviewCompact.className='memorial-selection-compact';
-  overviewHeading.append(overviewName,overviewCompact);
-  const overviewGrid=document.createElement('div');
-  overviewGrid.className='memorial-selection-grid';
-  overview.append(overviewHeading,overviewGrid);
   root.prepend(sidebar);
-  sidebar.append(overview);
-  if(toolbar){
-    sidebar.append(toolbar);
-    for(const id of ['stone','variant','model','layout','type']){
-      const input=$(id),label=document.querySelector('label[for="memorial-'+id+'"]');
-      if(!input||!label)continue;
-      const field=document.createElement('div');field.className='memorial-quick-field';
-      field.append(label,input);toolbar.append(field);
-    }
-    const library=root.querySelector('.memorial-library');
-    if(library)toolbar.append(library);
-  }
   if(controls)sidebar.append(controls);
-  function renderSelection(){
-    const selected=[
-      ['Piedra','stone'],['Textura','variant'],['Modelo','model'],
-      ['Composición','layout'],['Tipografía','type'],['Cruz','symbol'],
-      ['Imagen','devotional'],
-      ['Ornamento','ornament'],['Adicional','secondary'],['Marco','frame'],
-      ['Separador','separator'],['Color','finish']
-    ];
-    const items=document.createDocumentFragment();
-    for(const [label,id] of selected){
-      const select=$(id);
-      if(!select)continue;
-      const item=document.createElement('div');item.className='memorial-selection-item';
-      const key=document.createElement('span');key.className='memorial-selection-key';key.textContent=label;
-      const value=document.createElement('strong');value.className='memorial-selection-value';
-      value.textContent=select.selectedOptions?.[0]?.textContent?.trim()||'Sin seleccionar';
-      item.append(key,value);items.append(item);
-    }
-    overviewGrid.replaceChildren(items);
-    const chosen=id=>$(id).selectedOptions?.[0]?.textContent?.trim()||'';
-    const short=[chosen('stone'),chosen('layout')];
-    if($('devotional').value!=='ninguno')short.push(chosen('devotional'));
-    overviewCompact.textContent=short.join(' · ');
-    overviewCompact.title=overviewCompact.textContent;
-  }
   const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
   const pictorialLoads=new Map(),pictorialErrors=new Map();
@@ -233,7 +181,6 @@
       $('caption').textContent=scene.material.name+' · '+scene.model.name+' · '+scene.layout.name;
       $('material-note').textContent=scene.material.description+' '+scene.material.status+(scene.material.id==='italia'?' · Variedad comercial exacta sin identificar.':'');
       $('model-note').textContent=scene.model.note;
-      renderSelection();
       swatches.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.stone===state.stone)));
       for(const prefix of ['symbol','devotional','ornament','secondary'])document.getElementById(prefix+'-scale-value').textContent=state[prefix+'Placement'].scale+' %';
       $('size-value').textContent=state.textSize+' %';$('leading-value').textContent=state.leading+' %';
