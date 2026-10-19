@@ -139,8 +139,36 @@
     loadPictorial(item);
     renderGallery();requestRender();
   }
+  // The cards are the selection control. Categories only navigate between card groups;
+  // avoid a second large dropdown above the same visual options.
+  const categoryTabs=$('category-tabs');
+  function buildCategoryTabs(){
+    if(!categoryTabs)return;
+    const select=$('gallery-category'),fragment=document.createDocumentFragment();
+    const categories=new Set();
+    for(const option of select.options){
+      if(categories.has(option.value))continue;
+      categories.add(option.value);
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='memorial-category-tab';
+      button.dataset.category=option.value;
+      button.textContent=option.label;
+      button.setAttribute('aria-pressed',String(select.value===option.value));
+      button.addEventListener('click',()=>{
+        if(select.value===option.value)return;
+        select.value=option.value;
+        select.dispatchEvent(new Event('change',{bubbles:true}));
+      });
+      fragment.append(button);
+    }
+    categoryTabs.replaceChildren(fragment);
+  }
   function renderGallery(force=false){
     const group=$('gallery-category').value,slot=gallerySlot[group];
+    if(categoryTabs)for(const button of categoryTabs.querySelectorAll('button')){
+      button.setAttribute('aria-pressed',String(button.dataset.category===group));
+    }
     if(!force&&$('gallery').dataset.group===group){
       for(const button of $('gallery').querySelectorAll('button')){
         const selected=state[slot]===button.dataset.itemId;
@@ -186,6 +214,7 @@
     const placement=$('devotional-scale').closest('fieldset');
     if(placement)placement.hidden=true;
   }
+  buildCategoryTabs();
   $('gallery-category').addEventListener('change',()=>renderGallery(true));
   function render(){
     if(!ready)return;

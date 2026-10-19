@@ -23,7 +23,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
    </div></details>
    <details><summary><span>02</span> Composición y símbolos</summary><div class="memorial-panel">
     ${select('layout','Composición',c.layouts.filter(x=>x.publicSelectable!==false))}
-    <div class="memorial-library"><label for="memorial-gallery-category">Biblioteca visual de motivos</label><select id="memorial-gallery-category"><option value="cruces">Cruces</option>${publicOrnaments.some(x=>x.category==="religiosas")?'<option value="religiosas">Imágenes religiosas</option>':""}<option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas aprobadas para simulación visual. Acabados y fabricación pendientes de validación; las fotografías reales permanecen privadas.</p></div>
+    <div class="memorial-library"><p class="memorial-library-title">Biblioteca visual de motivos</p><select id="memorial-gallery-category" aria-label="Categoría de motivos" hidden><option value="cruces">Cruces</option>${publicOrnaments.some(x=>x.category==="religiosas")?'<option value="religiosas">Imágenes religiosas</option>':""}<option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-category-tabs" class="memorial-category-tabs" role="group" aria-label="Familias de motivos"></div><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas aprobadas para simulación visual. Acabados y fabricación pendientes de validación; las fotografías reales permanecen privadas.</p></div>
     ${select('symbol','Cruz',[{id:'ninguno',name:'Sin cruz'},...publicOrnaments.filter(x=>x.category==='cruces')])}
     ${placement('symbol','Cruz')}
     ${select('devotional','Imagen religiosa',[{id:'ninguno',name:'Sin imagen religiosa'},...publicOrnaments.filter(x=>x.category==='religiosas')])}
@@ -55,7 +55,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
 let html=readFileSync('funerario.html','utf8');
 html=html.replace(/<section class="memorial-studio"[\s\S]*?<\/section>(?=<div class="catalog-grid">)/,ui);
 html=html.replace(/<script src="funerario-(?:recursos|compositor|exportar|personalizador)\.js(?:\?[^"]+)?"><\/script>/g,'');
-html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=funerario-plano-20261019');
-html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-plano-20261019"></script>`).join('')+'</body>');
+html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=funerario-motivos-20261019');
+html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-motivos-20261019"></script>`).join('')+'</body>');
 writeFileSync('funerario.html',html);
 console.log('Updated existing studio; no other page replaced.');
