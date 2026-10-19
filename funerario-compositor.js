@@ -72,6 +72,35 @@
     }else for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
     return {x,y,w:width,h:height};
   }
+  // Original schematic accessories; real fixings and dimensions require workshop review.
+  function accessory(group,state,face){
+    const kind=state.accessory||'ninguno';
+    if(!['bucaro','jardinera','florero','farol'].includes(kind))return null;
+    const colors={bronce:['#b09262','#5d4428','#e5cc93'],acero:['#bec7cd','#57636d','#e9f0f2'],piedra:['#8d8c87','#50504d','#ddd9cf']};
+    const [fill,edge,light]=colors[state.accessoryFinish]||colors.bronce;
+    const w=Math.min(face.w*.155,104),h=Math.min(face.h*.18,130);
+    const x=state.accessorySide==='left'?face.x+face.w*.035:face.x+face.w-w-face.w*.035,y=face.y+face.h-h-face.h*.035;
+    const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':state.accessoryFinish||'bronce',fill,stroke:edge,'stroke-width':2});
+    const X=v=>x+v*w,Y=v=>y+v*h;
+    add(g,'ellipse',{cx:X(.5),cy:Y(.97),rx:w*.45,ry:h*.03,fill:'#26211d',stroke:'none',opacity:.2});
+    if(kind==='bucaro'){
+      add(g,'path',{d:`M${X(.22)} ${Y(.12)}H${X(.78)}L${X(.67)} ${Y(.88)}Q${X(.5)} ${Y(.99)} ${X(.33)} ${Y(.88)}Z`});
+      add(g,'ellipse',{cx:X(.5),cy:Y(.13),rx:w*.29,ry:h*.08,fill:edge,stroke:light});
+      add(g,'path',{d:`M${X(.4)} ${Y(.27)}V${Y(.75)}`,stroke:light,'stroke-width':3,fill:'none'});
+    }else if(kind==='jardinera'){
+      add(g,'path',{d:`M${X(.03)} ${Y(.32)}H${X(.97)}L${X(.85)} ${Y(.89)}H${X(.15)}Z`});
+      add(g,'rect',{x:X(.01),y:Y(.26),width:w*.98,height:h*.1,fill:light,rx:3});
+    }else if(kind==='florero'){
+      add(g,'path',{d:`M${X(.25)} ${Y(.14)}H${X(.75)}L${X(.63)} ${Y(.81)}H${X(.37)}Z`});
+      add(g,'ellipse',{cx:X(.5),cy:Y(.15),rx:w*.25,ry:h*.07,fill:edge,stroke:light});
+      add(g,'rect',{x:X(.2),y:Y(.83),width:w*.6,height:h*.1,fill:edge,rx:2});
+    }else{
+      add(g,'rect',{x:X(.23),y:Y(.37),width:w*.54,height:h*.46,fill:edge,rx:3});
+      add(g,'path',{d:`M${X(.14)} ${Y(.37)}L${X(.5)} ${Y(.1)}L${X(.86)} ${Y(.37)}Z`,fill});
+      add(g,'rect',{x:X(.32),y:Y(.43),width:w*.36,height:h*.32,fill:'#f3d698',stroke:light,rx:2});
+    }
+    return {kind:'accessory',id:kind,x,y,w,h};
+  }
   function separator(group,id,box,color){
     if(id==='ninguno')return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category==='separadores');
@@ -104,8 +133,8 @@
     add(filter,'feDropShadow',{dx:.3,dy:.65,stdDeviation:.2,'flood-color':finish.light,'flood-opacity':.45});
     const relief=add(defs,'filter',{id:'stone-relief',x:'-12%',y:'-12%',width:'124%',height:'128%','color-interpolation-filters':'sRGB'});
     add(relief,'feColorMatrix',{type:'saturate',values:0});
-    const tint=finish.color.match(/[0-9a-f]{2}/gi).map(v=>parseInt(v,16)/255);
-    add(relief,'feColorMatrix',{type:'matrix',values:`${tint[0]} 0 0 0 0 0 ${tint[1]} 0 0 0 0 0 ${tint[2]} 0 0 0 0 0 1 0`});
+    // Religious reliefs retain an off-white grayscale independent of stone and lettering.
+    add(relief,'feColorMatrix',{type:'matrix',values:'0.98 0 0 0 0 0 0.97 0 0 0 0 0 0.95 0 0 0 0 0 1 0'});
     add(relief,'feDropShadow',{dx:1.2,dy:1.7,stdDeviation:1.1,'flood-color':'#11100e','flood-opacity':.43});
     add(relief,'feDropShadow',{dx:-.6,dy:-.8,stdDeviation:.6,'flood-color':'#fffdf6','flood-opacity':.3});
     const carved=add(defs,'filter',{id:'carved-relief',x:'-18%',y:'-18%',width:'136%',height:'136%'});
@@ -149,7 +178,7 @@
     const secondaryBox=layout.secondary?zone(face,layout.secondary):null;
     const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol',face);
     if(placedSymbol)boxes.push({kind:'symbol',id:state.symbol,...placedSymbol});
-    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},finish.color,'devotional',face);
+    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},'#f0efe8','devotional',face);
     if(placedDevotional)boxes.push({kind:'devotional',id:state.devotional,...placedDevotional});
     else if(state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)warnings.push('La imagen religiosa necesita una composición con zona propia.');
     const flowerEntry=catalog.ornaments.find(o=>o.id===state.ornament&&(o.category==='flores'||o.category==='simbolos'));
@@ -159,6 +188,8 @@
     const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},finish.color,'secondary',face);
     if(placedSecondary)boxes.push({kind:'secondary',id:state.secondary,...placedSecondary});
     else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
+    const optionalAccessory=accessory(ornaments,state,face);
+    if(optionalAccessory)boxes.push(optionalAccessory);
     const firstSeparator=separator(ornaments,state.separator,zone(face,layout.separator),finish.color);
     if(firstSeparator)boxes.push({kind:'separator',id:state.separator,...firstSeparator});
     if(layout.secondSeparator){const second=separator(ornaments,state.separator,zone(face,layout.secondSeparator),finish.color);if(second)boxes.push({kind:'secondSeparator',id:state.separator,...second});}
@@ -230,6 +261,8 @@
     const texts=boxes.filter(b=>b.kind.startsWith('text:'));
     const intersects=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
     if(movable.some(a=>texts.some(b=>intersects(a,b))))warnings.push('Un motivo se superpone con la inscripción. Revisa su posición antes de usar el plano.');
+    const addedAccessory=boxes.find(b=>b.kind==='accessory');
+    if(addedAccessory&&texts.some(b=>intersects(addedAccessory,b)))warnings.push('El complemento se superpone con el texto; revisa su colocación real.');
     if(movable.some((a,i)=>movable.slice(i+1).some(b=>intersects(a,b))))warnings.push('Dos motivos se superponen. Revisa la composición.');
     return {svg,face,runs,boxes,inscription:active.map(field=>({id:field.id,label:field.label,text:state.fields[field.id].text})),finish,material,model,layout,font,adjusted,warnings,truncated,unrendered: Boolean((state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)||(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox))};
   }
