@@ -940,3 +940,33 @@ button, a { -webkit-tap-highlight-color: transparent; }
  .memorial-toolbar .memorial-motif{min-height:94px}
  .memorial-actions button{min-height:44px}
 }
+
+/* Funerario · Selector visual único: tarjetas para elegir, pestañas solo para navegar. */
+.memorial-toolbar .memorial-library>.memorial-library-title{
+  display:block;margin:0 0 .45rem;
+  color:#433b31;font:600 .78rem/1.4 var(--sans);
+}
+.memorial-toolbar .memorial-library>select[hidden]{display:none!important}
+.memorial-category-tabs{
+  display:flex;align-items:stretch;gap:.4rem;
+  overflow-x:auto;overflow-y:hidden;
+  margin:0 0 .4rem;padding:0 0 .35rem;
+  scrollbar-width:thin;
+}
+.memorial-category-tab{
+  flex:0 0 auto;min-height:38px;
+  margin:0;padding:.45rem .7rem;
+  color:#463c30;background:#f5f0e7;
+  border:1px solid #c5b7a2;border-radius:2px;
+  font:500 .73rem/1.2 var(--sans);
+  cursor:pointer;white-space:nowrap;
+}
+.memorial-category-tab[aria-pressed="true"]{
+  color:#f9f5ef;background:#3c352c;border-color:#3c352c;
+}
+.memorial-category-tab:hover{border-color:#736049}
+.memorial-category-tab:focus-visible{outline:3px solid #a47a45;outline-offset:2px}
+@media(max-width:820px){
+  .memorial-category-tabs{margin-bottom:.25rem;gap:.35rem}
+  .memorial-category-tab{min-height:42px;font-size:.75rem}
+}
