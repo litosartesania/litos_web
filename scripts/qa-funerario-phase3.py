@@ -37,6 +37,8 @@ with sync_playwright() as p:
     const scene=window.LitosMemorialComposer.compose(state);host.replaceChildren(scene.svg);
     const art=scene.svg.querySelector('[data-slot="devotional"] image');
     if(!art?.getAttribute('href')?.startsWith('data:image/webp;base64,'))throw Error('raster missing: '+id);
+    const reliefStyle=getComputedStyle(art.closest('[data-slot="devotional"]'));
+    if(reliefStyle.mixBlendMode!=='normal'||Number(reliefStyle.opacity)!==1)throw Error('translucent relief '+id);
     if(scene.warnings.length||scene.truncated||scene.unrendered)throw Error('invalid composition '+stone+'/'+id+'/'+layout+': '+scene.warnings);
     const figure=scene.boxes.find(x=>x.kind==='devotional');
     for(const box of scene.boxes.filter(x=>x.kind.startsWith('text:')))if(overlap(figure,box))throw Error('figure/text overlap '+id+'/'+layout);

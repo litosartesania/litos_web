@@ -40,7 +40,7 @@
     }
     return lines;
   }
-  function ornament(group,id,category,box,placement,color,slot,dark=false){
+  function ornament(group,id,category,box,placement,color,slot){
     if(id==='ninguno'||!box)return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category===category);
     if(!entry||entry.publicSelectable===false)return;
@@ -54,11 +54,9 @@
     const width=fullWidth*factor,height=fullHeight*factor;
     const x=box.x+(box.w-width)*clamp(placement.x,0,100)/100;
     const y=box.y+(box.h-height)*clamp(placement.y,0,100)/100;
-    const reliefBlend=dark==='grain'?'normal':dark?'screen':'multiply';
-    const reliefOpacity=dark==='grain'?'.96':dark?'.85':'.9';
     const technique=entry.simulatedTechnique||'incisión';
     const filterName=raster?'stone-relief':technique.includes('aplique metálico')?'metal-applique':technique.includes('talla')?'carved-relief':'engraved';
-    const g=add(group,'g',{'data-ornament':category+':'+id,'data-slot':slot,'data-zone':JSON.stringify(box),'data-technique':technique,color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:`url(#${filterName})`,style:raster?`mix-blend-mode:${reliefBlend};opacity:${reliefOpacity}`:''});
+    const g=add(group,'g',{'data-ornament':category+':'+id,'data-slot':slot,'data-zone':JSON.stringify(box),'data-technique':technique,color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:`url(#${filterName})`});
     // Only vetted repository SVG paths are imported, never user content.
     const artWidth=raster&&entry.digitalSize?entry.digitalSize[0]:100;
     const artHeight=raster&&entry.digitalSize?entry.digitalSize[1]:100;
@@ -141,16 +139,16 @@
     const symbolBox=zone(face,layout.symbol),flowerBox=zone(face,layout.flower),textBox=zone(face,layout.text);
     const devotionalBox=layout.devotional?zone(face,layout.devotional):null;
     const secondaryBox=layout.secondary?zone(face,layout.secondary):null;
-    const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol',material.dark);
+    const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol');
     if(placedSymbol)boxes.push({kind:'symbol',...placedSymbol});
-    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'devotional',material.id==='quintana'?'grain':material.dark);
+    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'devotional');
     if(placedDevotional)boxes.push({kind:'devotional',...placedDevotional});
     else if(state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)warnings.push('La imagen religiosa necesita una composición con zona propia.');
     const flowerEntry=catalog.ornaments.find(o=>o.id===state.ornament&&(o.category==='flores'||o.category==='simbolos'));
-    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,paint(state.ornamentFinish,material.dark).color,'ornament',material.dark);
+    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,paint(state.ornamentFinish,material.dark).color,'ornament');
     if(placedFlower)boxes.push({kind:'ornament',...placedFlower});
     const secondaryEntry=catalog.ornaments.find(o=>o.id===state.secondary&&(o.category==='flores'||o.category==='simbolos'));
-    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'secondary',material.dark);
+    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'secondary');
     if(placedSecondary)boxes.push({kind:'secondary',...placedSecondary});
     else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
     separator(ornaments,state.separator,zone(face,layout.separator),finish.color);

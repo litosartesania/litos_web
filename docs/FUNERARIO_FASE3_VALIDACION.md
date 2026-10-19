@@ -4,7 +4,7 @@
 
 La auditoría agregada está en `FUNERARIO_FASE3_INVESTIGACION.md`: 33 recortes accesibles, 16 figurativos y 17 de cruces/crucifijos, asociados a 30 trabajos según la base privada. Los originales, recortes, identificadores y correspondencias permanecen fuera de este repositorio. Se estudiaron directamente en entorno privado. Ninguno se envió al generador de imágenes. Las ocho imágenes nuevas se generaron con descripciones **genéricas de familias iconográficas**; no son calcos ni fotografías de piezas LITOS.
 
-La fuente visual es un único relieve claro por motivo con transparencia, optimizado en WebP. El compositor conserva la fuente y aplica por material una mezcla y luz de contacto simuladas. Las miniaturas usan la misma fuente a escala menor. Esto mejora rostros, manos, pliegues y volumen respecto a los cinco SVG lineales rechazados, pero el tratamiento sigue siendo pictórico y puede parecer un aplique sobre piedras de grano grueso. No acredita un grabado o relieve fabricable.
+La fuente visual es un único relieve claro por motivo, con fondo transparente, optimizado en WebP. El compositor conserva la figura opaca y aplica una sombra de contacto simulada; la textura de la piedra no atraviesa la figura. Las miniaturas usan la misma fuente a escala menor. Esto mejora rostros, manos, pliegues y volumen respecto a los cinco SVG lineales rechazados, pero el tratamiento sigue siendo pictórico y puede parecer un aplique sobre piedras de grano grueso. No acredita un grabado o relieve fabricable.
 
 ## Estado de cada candidato
 

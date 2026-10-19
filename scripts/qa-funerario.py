@@ -23,6 +23,7 @@ with sync_playwright() as p:
           const slab=root.querySelector('.memorial-display');
           const stone=document.getElementById('memorial-canvas');
           const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
+          const y=scrollY;window.scrollTo(9999,y);const pageShift=scrollX;window.scrollTo(0,y);
           return {parent:rail?.parentElement===root,
             toolbar:rail?.contains(document.getElementById('memorial-toolbar')),
             controls:rail?.contains(root.querySelector('.memorial-controls')),
@@ -30,11 +31,21 @@ with sync_playwright() as p:
             overview:rail?.querySelectorAll('.memorial-selection-item').length,
             rail:rect(rail),slab:rect(slab),stone:rect(stone),
             svg:rect(stone.querySelector('svg')),
-            overflow:document.documentElement.scrollWidth>innerWidth+1};
+            overflow:document.documentElement.scrollWidth>innerWidth+1||pageShift>1};
         }""")
         assert positions['parent'] and positions['toolbar'] and positions['controls']
         assert positions['selects']==5 and positions['overview']>=10,positions
         assert not positions['overflow'],positions
+        overview=page.locator('.memorial-selection-overview')
+        assert not overview.evaluate('(el)=>el.open')
+        assert overview.bounding_box()['height']<=58,overview.bounding_box()
+        gallery=page.locator('#memorial-gallery')
+        assert gallery.bounding_box()['height']<=125,gallery.bounding_box()
+        assert gallery.evaluate('(el)=>el.scrollWidth>el.clientWidth')
+        overview.locator('summary').click()
+        assert overview.evaluate('(el)=>el.open') and overview.locator('.memorial-selection-item').first.is_visible()
+        overview.locator('summary').click()
+        assert not overview.evaluate('(el)=>el.open')
         assert positions['svg']['width']>0 and positions['svg']['height']>0,positions
         if width>=900:
             assert positions['rail']['right']<=positions['slab']['x']+2,positions
@@ -44,6 +55,7 @@ with sync_playwright() as p:
             assert positions['slab']['y']<positions['rail']['y'],positions
         page.locator('#memorial-stone').select_option('macael')
         page.wait_for_function("()=>document.querySelector('.memorial-selection-overview')?.textContent.includes('Blanco Macael')")
+        assert 'Blanco Macael' in overview.locator('.memorial-selection-compact').inner_text()
         page.locator('#memorial-stone').select_option('sudafrica')
         page.wait_for_function("()=>document.querySelector('.memorial-selection-overview')?.textContent.includes('Negro Sudáfrica')")
         page.locator('img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')

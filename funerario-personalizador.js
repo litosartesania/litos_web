@@ -13,12 +13,16 @@
   const sidebar=document.createElement('aside');
   sidebar.className='memorial-options';
   sidebar.setAttribute('aria-label','Opciones de personalización de la lápida');
-  const overview=document.createElement('div');
+  const overview=document.createElement('details');
   overview.className='memorial-selection-overview';
   overview.setAttribute('aria-label','Resumen de elementos seleccionados');
-  const overviewHeading=document.createElement('p');
+  const overviewHeading=document.createElement('summary');
   overviewHeading.className='memorial-selection-title';
-  overviewHeading.textContent='Tu configuración';
+  const overviewName=document.createElement('span');
+  overviewName.textContent='Tu configuración';
+  const overviewCompact=document.createElement('span');
+  overviewCompact.className='memorial-selection-compact';
+  overviewHeading.append(overviewName,overviewCompact);
   const overviewGrid=document.createElement('div');
   overviewGrid.className='memorial-selection-grid';
   overview.append(overviewHeading,overviewGrid);
@@ -55,6 +59,11 @@
       item.append(key,value);items.append(item);
     }
     overviewGrid.replaceChildren(items);
+    const chosen=id=>$(id).selectedOptions?.[0]?.textContent?.trim()||'';
+    const short=[chosen('stone'),chosen('layout')];
+    if($('devotional').value!=='ninguno')short.push(chosen('devotional'));
+    overviewCompact.textContent=short.join(' · ');
+    overviewCompact.title=overviewCompact.textContent;
   }
   const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',ornamentFinish:'auto',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
@@ -111,8 +120,9 @@
     if(!force&&$('gallery').dataset.group===group){
       for(const button of $('gallery').querySelectorAll('button')){
         const selected=state[slot]===button.dataset.itemId;
+        const item=publicOrnaments.find(candidate=>candidate.id===button.dataset.itemId);
         button.setAttribute('aria-pressed',String(selected));
-        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent);
+        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent+(item?.commercialReady===false?', prototipo sin validar':''));
       }
       return;
     }
@@ -122,7 +132,7 @@
     for(const item of choices){
       const button=document.createElement('button');button.type='button';button.className='memorial-motif';
       button.dataset.itemId=item.id;button.dataset.slot=slot;button.setAttribute('aria-pressed',String(state[slot]===item.id));
-      button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name);
+      button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name+(item.commercialReady===false?', prototipo sin validar':''));
       const image=document.createElement('span');image.className='memorial-motif-image';
       if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
       else{const art=document.createElement('img');const source=resources[item.path];art.src=item.thumbnailPath?(resources[item.thumbnailPath]||item.thumbnailPath):((source||'').startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source));art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
