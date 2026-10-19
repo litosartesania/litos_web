@@ -16,7 +16,7 @@ with sync_playwright() as p:
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
         page.wait_for_selector('#memorial-workbench[data-ready="true"]')
         assert page.locator('#memorial-case-grid .memorial-case-card').count()==6
-        assert page.locator('#memorial-case-grid .memorial-case-picture svg').count()==6
+        assert page.locator('#memorial-case-grid .memorial-case-picture img').count()==6
         assert page.locator('.memorial-dimension-option').count()==3
         assert page.locator('#memorial-accessory option').count()==5
         # Left rail: five initially closed accordions; no duplicated upper controls.
