@@ -13,8 +13,56 @@
   sidebar.setAttribute('aria-label','Opciones de personalización de la lápida');
   root.prepend(sidebar);
   if(controls)sidebar.append(controls);
-  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
+  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
+
+  // Public gallery from aggregate, anonymous motifs (never images from private jobs).
+  const casePresets=[
+    {title:'Columbario con cruz',note:'Granito oscuro, símbolo lateral y letra cursiva.',stone:'sudafrica',model:'columbario',layout:'lateral',symbol:'latina',ornament:'ninguno',type:'inglesa',finish:'blanco'},
+    {title:'Conjunto clásico moldurado',note:'Pilastras, medallón devocional genérico y jardinera.',stone:'italia',model:'doble',layout:'relievelateral',symbol:'ninguno',devotional:'medallon-mariano',ornament:'ninguno',frame:'clasico',type:'remus',finish:'oscuro',accessory:'jardinera'},
+    {title:'Portada de dos campos',note:'Marco clásico, cruz tallada y florero.',stone:'sudafrica',model:'portada',layout:'lateral',symbol:'moldurada',ornament:'lirio',frame:'clasico',finish:'plata',accessory:'florero'},
+    {title:'Placa horizontal de panteón',note:'Mármol claro, fijaciones y marco sobrio.',stone:'macael',model:'panteon',layout:'separadores',symbol:'simple',ornament:'ninguno',frame:'fino',type:'marcellus',finish:'oscuro',fixings:true},
+    {title:'Nicho con relieve blanco',note:'Figura religiosa genérica en blanco, piedra oscura y búcaro.',stone:'absoluto',model:'nicho',layout:'devocionlateral',symbol:'ninguno',devotional:'cristo-corona',ornament:'rosa',finish:'oro',accessory:'bucaro'},
+    {title:'Nicho contemporáneo',note:'Granito gris, cruz geométrica y farol.',stone:'quintana',model:'nicho',layout:'superior',symbol:'calada',ornament:'espiga',type:'montserrat',finish:'plata',accessory:'farol'}
+  ];
+  const caseHost=document.getElementById('memorial-case-grid');
+  function presetState(preset){
+    const next=initial();
+    for(const [k,v] of Object.entries(preset))if(Object.prototype.hasOwnProperty.call(next,k)&&typeof next[k]!=='object')next[k]=v;
+    const copy={header:'EN RECUERDO',name:'NOMBRE APELLIDO',dates:'DD / MM / AAAA',epitaph:'SIEMPRE EN NUESTRA MEMORIA',extra:''};
+    for(const [k,v] of Object.entries(copy))if(next.fields[k])next.fields[k].text=v;
+    return next;
+  }
+  function renderCaseGallery(){
+    if(!caseHost||!ready)return;
+    const fragment=document.createDocumentFragment();
+    for(const preset of casePresets){
+      const card=document.createElement('article');card.className='memorial-case-card';
+      const image=document.createElement('div');image.className='memorial-case-picture';
+      try{
+        const candidate=presetState(preset);
+        const figure=publicOrnaments.find(x=>x.id===candidate.devotional);
+        if(figure?.format==='image/webp'&&!resources[figure.path])candidate.devotional='ninguno';
+        const scene=window.LitosMemorialComposer.compose(candidate);
+        scene.svg.setAttribute('aria-hidden','true');image.append(scene.svg);
+      }catch(e){image.textContent='Recreación orientativa';}
+      const copy=document.createElement('div');copy.className='memorial-case-copy';
+      const name=document.createElement('h5');name.textContent=preset.title;
+      const note=document.createElement('p');note.textContent=preset.note;
+      const button=document.createElement('button');button.type='button';button.textContent='Usar como base';
+      button.setAttribute('aria-label','Usar como base: '+preset.title);
+      button.addEventListener('click',()=>{
+        state=presetState(preset);sync();
+        const figure=publicOrnaments.find(x=>x.id===state.devotional);
+        if(figure)loadPictorial(figure);
+        renderGallery(true);render();
+        document.getElementById('personalizar').scrollIntoView({behavior:'smooth',block:'start'});
+        status('Recreación genérica cargada. Comprueba las opciones antes de descargar.');
+      });
+      copy.append(name,note,button);card.append(image,copy);fragment.append(card);
+    }
+    caseHost.replaceChildren(fragment);
+  }
   const pictorialLoads=new Map(),pictorialErrors=new Map();
   function loadPictorial(item){
     if(item?.format!=='image/webp'||resources[item.path]||pictorialLoads.has(item.path))return;
@@ -36,9 +84,10 @@
     promise.catch(error=>pictorialErrors.set(item.path,error)).finally(()=>{
       pictorialLoads.delete(item.path);
       if(state.devotional===item.id)requestRender();
+      renderCaseGallery();
     });
   }
-  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame',align:'align'};
+  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame',accessory:'accessory',accessorySide:'accessorySide',accessoryFinish:'accessoryFinish',align:'align'};
   const swatches=[];
   for(const material of catalog.materials){
     const button=document.createElement('button');button.type='button';button.className='memorial-swatch';button.dataset.stone=material.id;
@@ -212,7 +261,22 @@
   });
   for(const id of ['fixings','guides'])$(id).addEventListener('change',()=>{state[id]=$(id).checked;requestRender();});
   for(const [id,key] of [['size','textSize'],['leading','leading']])$(id).addEventListener('input',()=>{state[key]=Number($(id).value);requestRender();});
-  for(const id of ['width-mm','height-mm'])$(id).addEventListener('input',renderPlan);
+
+  const dimensionButtons=[...document.querySelectorAll('.memorial-dimension-option')];
+  for(const id of ['width-mm','height-mm'])$(id).addEventListener('input',()=>{
+    for(const button of dimensionButtons){
+      const selected=Number($('width-mm').value)===Number(button.dataset.width)&&Number($('height-mm').value)===Number(button.dataset.height);
+      button.setAttribute('aria-pressed',String(selected));
+    }
+    renderPlan();
+  });
+  for(const button of dimensionButtons)button.addEventListener('click',()=>{
+    $('width-mm').value=button.dataset.width;
+    $('height-mm').value=button.dataset.height;
+    $('width-mm').dispatchEvent(new Event('input',{bubbles:true}));
+    $('height-mm').dispatchEvent(new Event('input',{bubbles:true}));
+    status('Medida observada en muestra histórica. Verificar las cotas reales con el taller.');
+  });
   for(const prefix of ['symbol','devotional','ornament','secondary'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);requestRender();});
   for(const field of catalog.fields){
     const input=field.id==='name'?$('text'):$('field-'+field.id);
@@ -245,5 +309,11 @@
     finally{exporting=false;$('download').disabled=scene.truncated||scene.unrendered;}
   });
   sync();renderGallery();
-  window.LitosMemorialComposer.loadFonts().then(()=>{ready=true;render();}).catch(error=>{root.setAttribute('aria-busy','false');status(error.message);});
+  window.LitosMemorialComposer.loadFonts().then(()=>{
+    ready=true;render();renderCaseGallery();
+    for(const preset of casePresets){
+      const item=publicOrnaments.find(x=>x.id===preset.devotional);
+      if(item)loadPictorial(item);
+    }
+  }).catch(error=>{root.setAttribute('aria-busy','false');status(error.message);});
 })();
