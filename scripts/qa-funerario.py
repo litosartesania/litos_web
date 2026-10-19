@@ -80,7 +80,10 @@ with sync_playwright() as p:
         assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
         assert page.locator('#memorial-devotional option').count()==9
         assert not page.locator('#memorial-devotional').is_disabled()
-        page.locator('#memorial-gallery-category').select_option('religiosas')
+        assert page.locator('#memorial-gallery-category').is_hidden()
+        assert page.locator('#memorial-category-tabs .memorial-category-tab').count()==6
+        page.locator('.memorial-category-tab[data-category="religiosas"]').click()
+        assert page.locator('.memorial-category-tab[data-category="religiosas"]').get_attribute('aria-pressed')=='true'
         assert page.locator('#memorial-gallery .memorial-motif img').count()==8
         assert page.locator('.memorial-motif[data-item-id="madre"]').count()==0
         page.locator('.memorial-motif[data-item-id="cristo-corona"]').click()
@@ -88,7 +91,8 @@ with sync_playwright() as p:
         assert page.locator('[data-slot="devotional"] image').get_attribute('href').startswith('data:image/webp;base64,')
         assert page.locator('#memorial-download').is_enabled()
         page.locator('#memorial-reset').click()
-        page.locator('#memorial-gallery-category').select_option('cruces')
+        page.locator('.memorial-category-tab[data-category="cruces"]').click()
+        assert page.locator('.memorial-category-tab[data-category="cruces"]').get_attribute('aria-pressed')=='true'
         for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
             assert page.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
             assert page.locator('.memorial-motif[data-item-id="'+candidate+'"]').count()==1
@@ -127,7 +131,7 @@ with sync_playwright() as p:
         assert review.locator('#review-only-notice').count()==1
         assert review.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
         assert review.locator('#memorial-devotional option').count()==9
-        review.locator('#memorial-gallery-category').select_option('cruces')
+        review.locator('.memorial-category-tab[data-category="cruces"]').click()
         for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
             assert review.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
             tile=review.locator('.memorial-motif[data-item-id="'+candidate+'"]')
