@@ -1,7 +1,8 @@
 // One complete review file, usable offline. No hosting, user text or saved browser state.
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 const html=readFileSync('funerario.html','utf8');
-const section=html.match(/<section class="memorial-studio"[\s\S]*?<\/section>/)?.[0];
+// The memorial studio contains a nested inspiration section; take the whole studio.
+const section=html.match(/<section class="memorial-studio"[\s\S]*?<\/section>(?=<div class="catalog-grid">)/)?.[0];
 if(!section)throw Error('Existing studio not found');
 const css=readFileSync('styles.css','utf8');
 const catalog=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
