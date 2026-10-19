@@ -15,6 +15,10 @@ with sync_playwright() as p:
         page.on('request',lambda r:external.append(r.url) if r.url.startswith(('http://','https://')) else None)
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
         page.wait_for_selector('#memorial-workbench[data-ready="true"]')
+        assert page.locator('#memorial-case-grid .memorial-case-card').count()==6
+        assert page.locator('#memorial-case-grid .memorial-case-picture img').count()==6
+        assert page.locator('.memorial-dimension-option').count()==3
+        assert page.locator('#memorial-accessory option').count()==5
         # Left rail: five initially closed accordions; no duplicated upper controls.
         pos=page.evaluate("""() => {
           const r=document.querySelector('#memorial-workbench'),side=r.querySelector('.memorial-options');
@@ -44,13 +48,25 @@ with sync_playwright() as p:
         page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.stone==="macael"')
         page.locator('#memorial-stone').select_option('sudafrica')
         page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.stone==="sudafrica"')
+        page.locator('#memorial-case-grid button').first.click()
+        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.model==="columbario"')
+        assert page.locator('#memorial-text').input_value()=='NOMBRE APELLIDO'
+        page.locator('#memorial-reset').click()
         page.locator('.memorial-controls > details').nth(1).locator('summary').click()
+        page.locator('#memorial-accessory').select_option('bucaro')
+        page.wait_for_selector('[data-slot="accessory"][data-accessory="bucaro"]')
+        page.locator('#memorial-accessoryFinish').select_option('acero')
+        page.wait_for_function('()=>document.querySelector("[data-slot=accessory]")?.dataset.accessoryFinish==="acero"')
+        page.locator('#memorial-accessory').select_option('ninguno')
         gallery=page.locator('#memorial-gallery')
         assert gallery.is_visible() and gallery.bounding_box()['height']<=140,gallery.bounding_box()
         assert gallery.evaluate('(el)=>el.scrollWidth>el.clientWidth')
         page.locator('img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
         page.wait_for_function('()=>[...document.images].every(e=>e.complete&&e.naturalWidth>0)')
         page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+        page.locator('.memorial-dimension-option').first.click()
+        assert page.locator('#memorial-width-mm').input_value()=='970'
+        assert page.locator('#memorial-height-mm').input_value()=='800'
         page.locator('#personalizar').screenshot(path=str(root/'preview'/f'LITOS_PANEL_IZQUIERDO_{width}.png'),animations='disabled')
         result=page.evaluate(scenarios)
         with page.expect_download() as pending_plan:page.locator('#memorial-plan-download').click()
@@ -79,6 +95,11 @@ with sync_playwright() as p:
         page.locator('.memorial-motif[data-item-id="cristo-corona"]').click()
         page.wait_for_selector('[data-slot="devotional"] image')
         assert page.locator('[data-slot="devotional"] image').get_attribute('href').startswith('data:image/webp;base64,')
+        neutral=page.locator('#stone-relief feColorMatrix[type="matrix"]').get_attribute('values')
+        assert neutral.startswith('0.98 ')
+        page.locator('#memorial-finish').select_option('oro')
+        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.finish==="oro"')
+        assert page.locator('#stone-relief feColorMatrix[type="matrix"]').get_attribute('values')==neutral
         assert page.locator('#memorial-download').is_enabled()
         page.locator('#memorial-reset').click()
         page.locator('.memorial-category-tab[data-category="cruces"]').click()
