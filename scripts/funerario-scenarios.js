@@ -111,6 +111,10 @@ async () => {
   const expectedRatio=97/80,face=catalog.models.find(x=>x.id==='nicho').face;
   assert(Math.abs(face[2]/face[3]-expectedRatio)<1e-10,'97:80 reference ratio');
   assert(document.documentElement.scrollWidth<=innerWidth+1,'page overflow');
-  assert([...document.images].every(img=>img.complete&&img.naturalWidth>0),'broken image');
+  // Accordions defer offscreen thumbnails: request them before testing image integrity.
+  const allImages=[...document.images];
+  for(const img of allImages)img.loading='eager';
+  await Promise.all(allImages.map(img=>img.decode()));
+  assert(allImages.every(img=>img.complete&&img.naturalWidth>0),'broken image');
   return {compositions,materials:catalog.materials.length,variants:14,ornaments:catalog.ornaments.length,fonts:catalog.fonts.length,layouts:catalog.layouts.length,overflow:0};
 }
