@@ -592,6 +592,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-panel input[type=range]{display:block;width:100%;min-height:44px;margin:0;accent-color:#776045;cursor:pointer}
 .memorial-panel input[type=range]:disabled{opacity:.4;cursor:default}
 .memorial-panel output{float:right;color:#6f5940;font-weight:400}
+.memorial-measures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;margin:.45rem 0}
+.memorial-measures label{display:grid;gap:.35rem;font-size:.76rem;font-weight:600}
+.memorial-measures input{width:100%;min-width:0;padding:.7rem;border:1px solid #b9ae9e;background:#f9f6f0;color:#2f2b24;font:400 .9rem var(--sans)}
+.memorial-plan-preview{width:100%;min-height:76px;max-height:310px;overflow:auto;background:#fffdf9;border:1px solid #cfc4b3;padding:.3rem}
+.memorial-plan-preview p{margin:.7rem;font-size:.78rem}
+.memorial-plan-svg{display:block;width:100%;height:auto;min-height:160px}
+.memorial-plan-measures{max-height:210px;overflow:auto;border:1px solid #cfc4b3;background:#f9f6f0}
+.memorial-plan-measures:empty{display:none}
+.memorial-plan-measures ol{margin:.55rem .6rem .55rem 1.7rem;padding:0;font:400 .74rem/1.55 var(--sans)}
+.memorial-plan-measures li+li{margin-top:.28rem}
+.memorial-plan-panel>button{min-height:44px;padding:.6rem .8rem;background:#292720;color:#f6efe4;border:0;font:500 .8rem var(--sans);cursor:pointer}
+.memorial-plan-panel>button:disabled{opacity:.5;cursor:default}
 .memorial-text-field{margin:.4rem 0}
 .memorial-field-top{display:flex;justify-content:space-between;align-items:center;gap:.4rem}
 .memorial-field-top>label:first-child{font-size:.8rem;font-weight:600}

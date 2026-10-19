@@ -55,7 +55,7 @@ with sync_playwright() as app:
      assert page.locator('#memorial-workbench').count()==1
      assert page.locator('#memorial-model option').count()==5
      assert page.locator('#memorial-stone option').count()==7
-     assert page.locator('#memorial-type option').count()==6
+     assert page.locator('#memorial-type option').count()==10
      page.wait_for_selector('#memorial-workbench[data-ready="true"]')
      page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
      page.locator('#memorial-model').select_option('columbario')

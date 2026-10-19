@@ -40,7 +40,7 @@
     }
     return lines;
   }
-  function ornament(group,id,category,box,placement,color,slot){
+  function ornament(group,id,category,box,placement,color,slot,face){
     if(id==='ninguno'||!box)return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category===category);
     if(!entry||entry.publicSelectable===false)return;
@@ -48,12 +48,17 @@
     if(!resource)throw Error('Motivo no disponible en esta vista.');
     const raster=entry.path.endsWith('.png')||entry.path.endsWith('.webp');
     const source=raster?null:new DOMParser().parseFromString(resource,'image/svg+xml').documentElement;
-    const factor=clamp(placement.scale,35,100)/100;
+    const factor=clamp(placement.scale,25,250)/100;
     const aspect=raster&&entry.digitalSize?entry.digitalSize[0]/entry.digitalSize[1]:1;
     const fullWidth=Math.min(box.w,box.h*aspect),fullHeight=fullWidth/aspect;
-    const width=fullWidth*factor,height=fullHeight*factor;
-    const x=box.x+(box.w-width)*clamp(placement.x,0,100)/100;
-    const y=box.y+(box.h-height)*clamp(placement.y,0,100)/100;
+    // The layout box supplies the initial size/centre; the sliders span the entire face.
+    const fit=Math.min(factor,(face.w*.96)/fullWidth,(face.h*.96)/fullHeight);
+    const width=fullWidth*fit,height=fullHeight*fit;
+    const homeX=clamp(box.x+(box.w-width)/2,face.x,face.x+face.w-width);
+    const homeY=clamp(box.y+(box.h-height)/2,face.y,face.y+face.h-height);
+    const travel=(value,first,home,last)=>value<=50?first+(home-first)*value/50:home+(last-home)*(value-50)/50;
+    const x=travel(clamp(placement.x,0,100),face.x,homeX,face.x+face.w-width);
+    const y=travel(clamp(placement.y,0,100),face.y,homeY,face.y+face.h-height);
     const technique=entry.simulatedTechnique||'incisión';
     const filterName=raster?'stone-relief':technique.includes('aplique metálico')?'metal-applique':technique.includes('talla')?'carved-relief':'engraved';
     const g=add(group,'g',{'data-ornament':category+':'+id,'data-slot':slot,'data-zone':JSON.stringify(box),'data-technique':technique,color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:`url(#${filterName})`});
@@ -74,6 +79,7 @@
     const source=new DOMParser().parseFromString(resources[entry.path],'image/svg+xml').documentElement;
     const nested=add(group,'svg',{x:box.x,y:box.y,width:box.w,height:box.h,viewBox:'0 35 100 30',preserveAspectRatio:'none',color,fill:'none',stroke:'currentColor','stroke-width':1.2,'data-ornament':'separadores:'+id,filter:'url(#engraved)'});
     for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
+    return box;
   }
   function compose(state){
     const material=find(catalog.materials,state.stone),model=find(catalog.models,state.model),layout=find(catalog.layouts,state.layout),font=find(catalog.fonts,state.type);
@@ -98,6 +104,8 @@
     add(filter,'feDropShadow',{dx:.3,dy:.65,stdDeviation:.2,'flood-color':finish.light,'flood-opacity':.45});
     const relief=add(defs,'filter',{id:'stone-relief',x:'-12%',y:'-12%',width:'124%',height:'128%','color-interpolation-filters':'sRGB'});
     add(relief,'feColorMatrix',{type:'saturate',values:0});
+    const tint=finish.color.match(/[0-9a-f]{2}/gi).map(v=>parseInt(v,16)/255);
+    add(relief,'feColorMatrix',{type:'matrix',values:`${tint[0]} 0 0 0 0 0 ${tint[1]} 0 0 0 0 0 ${tint[2]} 0 0 0 0 0 1 0`});
     add(relief,'feDropShadow',{dx:1.2,dy:1.7,stdDeviation:1.1,'flood-color':'#11100e','flood-opacity':.43});
     add(relief,'feDropShadow',{dx:-.6,dy:-.8,stdDeviation:.6,'flood-color':'#fffdf6','flood-opacity':.3});
     const carved=add(defs,'filter',{id:'carved-relief',x:'-18%',y:'-18%',width:'136%',height:'136%'});
@@ -134,31 +142,33 @@
     }
     const effects=add(svg,'g',{'data-layer':'surface-effects','clip-path':'url(#slab-clip)'});
     add(effects,'rect',{x:face.x,y:face.y,width:face.w,height:face.h,fill:'url(#polish)'});
-    const symbols=add(svg,'g',{'data-layer':'symbols'}),ornaments=add(svg,'g',{'data-layer':'ornaments'});
+    const symbols=add(svg,'g',{'data-layer':'symbols','clip-path':'url(#slab-clip)'}),ornaments=add(svg,'g',{'data-layer':'ornaments','clip-path':'url(#slab-clip)'});
     const boxes=[],warnings=[];
     const symbolBox=zone(face,layout.symbol),flowerBox=zone(face,layout.flower),textBox=zone(face,layout.text);
     const devotionalBox=layout.devotional?zone(face,layout.devotional):null;
     const secondaryBox=layout.secondary?zone(face,layout.secondary):null;
-    const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol');
-    if(placedSymbol)boxes.push({kind:'symbol',...placedSymbol});
-    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'devotional');
-    if(placedDevotional)boxes.push({kind:'devotional',...placedDevotional});
+    const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol',face);
+    if(placedSymbol)boxes.push({kind:'symbol',id:state.symbol,...placedSymbol});
+    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},finish.color,'devotional',face);
+    if(placedDevotional)boxes.push({kind:'devotional',id:state.devotional,...placedDevotional});
     else if(state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)warnings.push('La imagen religiosa necesita una composición con zona propia.');
     const flowerEntry=catalog.ornaments.find(o=>o.id===state.ornament&&(o.category==='flores'||o.category==='simbolos'));
-    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,paint(state.ornamentFinish,material.dark).color,'ornament');
-    if(placedFlower)boxes.push({kind:'ornament',...placedFlower});
+    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,finish.color,'ornament',face);
+    if(placedFlower)boxes.push({kind:'ornament',id:state.ornament,...placedFlower});
     const secondaryEntry=catalog.ornaments.find(o=>o.id===state.secondary&&(o.category==='flores'||o.category==='simbolos'));
-    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},paint(state.ornamentFinish,material.dark).color,'secondary');
-    if(placedSecondary)boxes.push({kind:'secondary',...placedSecondary});
+    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},finish.color,'secondary',face);
+    if(placedSecondary)boxes.push({kind:'secondary',id:state.secondary,...placedSecondary});
     else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
-    separator(ornaments,state.separator,zone(face,layout.separator),finish.color);
-    if(layout.secondSeparator)separator(ornaments,state.separator,zone(face,layout.secondSeparator),finish.color);
+    const firstSeparator=separator(ornaments,state.separator,zone(face,layout.separator),finish.color);
+    if(firstSeparator)boxes.push({kind:'separator',id:state.separator,...firstSeparator});
+    if(layout.secondSeparator){const second=separator(ornaments,state.separator,zone(face,layout.secondSeparator),finish.color);if(second)boxes.push({kind:'secondSeparator',id:state.separator,...second});}
     if(state.frame!=='ninguno'){
       const entry=catalog.ornaments.find(x=>x.category==='marcos'&&x.id===state.frame);
       if(entry){
         const doc=new DOMParser().parseFromString(resources[entry.path],'image/svg+xml');
         const frame=add(ornaments,'svg',{x:face.x+face.w*.025,y:face.y+face.h*.025,width:face.w*.95,height:face.h*.95,viewBox:'0 0 100 100',preserveAspectRatio:'none',color:finish.color,fill:'none',stroke:'currentColor','data-ornament':'marcos:'+state.frame,filter:'url(#engraved)'});
         for(const child of doc.documentElement.children)if(child.localName!=='title')frame.append(document.importNode(child,true));
+        boxes.push({kind:'frame',id:state.frame,x:face.x+face.w*.025,y:face.y+face.h*.025,w:face.w*.95,h:face.h*.95});
       }
     }
     const textLayer=add(svg,'g',{'data-layer':'text',id:'memorial-rendered',fill:finish.color,filter:'url(#engraved)'});
@@ -216,7 +226,12 @@
     }
     add(svg,'text',{x:500,y:916,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':13,'letter-spacing':2,fill:'#5e594f'},'LITOS · SIMULACIÓN ORIENTATIVA');
     add(svg,'text',{x:500,y:942,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':12,fill:'#716c63'},'Textura recreada · No es un plano de fabricación');
-    return {svg,runs,boxes,finish,material,model,layout,font,adjusted,warnings,truncated,unrendered: Boolean((state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)||(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox))};
+    const movable=boxes.filter(b=>['symbol','devotional','ornament','secondary'].includes(b.kind));
+    const texts=boxes.filter(b=>b.kind.startsWith('text:'));
+    const intersects=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+    if(movable.some(a=>texts.some(b=>intersects(a,b))))warnings.push('Un motivo se superpone con la inscripción. Revisa su posición antes de usar el plano.');
+    if(movable.some((a,i)=>movable.slice(i+1).some(b=>intersects(a,b))))warnings.push('Dos motivos se superponen. Revisa la composición.');
+    return {svg,face,runs,boxes,inscription:active.map(field=>({id:field.id,label:field.label,text:state.fields[field.id].text})),finish,material,model,layout,font,adjusted,warnings,truncated,unrendered: Boolean((state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)||(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox))};
   }
   async function loadFonts(){
     const outcomes=await Promise.allSettled(catalog.fonts.map(async f=>{

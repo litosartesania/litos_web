@@ -63,6 +63,11 @@ with sync_playwright() as p:
         page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
         page.locator('#personalizar').screenshot(path=str(root/'preview'/f'LITOS_PANEL_IZQUIERDO_{width}.png'),animations='disabled')
         result=page.evaluate(scenarios)
+        with page.expect_download() as pending_plan:page.locator('#memorial-plan-download').click()
+        plan=pending_plan.value
+        assert plan.suggested_filename=='LITOS-plano-colocacion-orientativo.svg' and plan.failure() is None
+        plan_text=Path(plan.path()).read_text(encoding='utf-8')
+        assert 'width="970"' in plan_text and 'height="800"' in plan_text and 'NO USAR PARA CORTE' in plan_text
         page.locator('#memorial-stone').focus();page.keyboard.press('ArrowDown');page.keyboard.press('Enter')
         assert page.locator('#memorial-stone').evaluate('(el)=>el===document.activeElement')
         page.locator('#memorial-reset').click()

@@ -6,7 +6,7 @@ const select=(id,label,list)=>`<label for="memorial-${id}">${label}</label><sele
 const none={id:'ninguno',name:'Ninguno'};
 const publicOrnaments=c.ornaments.filter(x=>x.publicSelectable!==false);
 const ornaments=category=>[none,...publicOrnaments.filter(x=>category.includes(x.category))];
-const placement=(prefix,label)=>`<fieldset class="memorial-placement"><legend>${label} · dentro de su zona</legend><label for="memorial-${prefix}-scale">Escala <output id="${prefix}-scale-value">85 %</output></label><input id="memorial-${prefix}-scale" type="range" min="35" max="100" value="85"><label for="memorial-${prefix}-x">Posición horizontal</label><input id="memorial-${prefix}-x" type="range" min="0" max="100" value="50"><label for="memorial-${prefix}-y">Posición vertical</label><input id="memorial-${prefix}-y" type="range" min="0" max="100" value="50"></fieldset>`;
+const placement=(prefix,label)=>`<fieldset class="memorial-placement"><legend>${label} · toda la lápida</legend><label for="memorial-${prefix}-scale">Tamaño <output id="${prefix}-scale-value">85 %</output></label><input id="memorial-${prefix}-scale" type="range" min="25" max="250" value="85"><label for="memorial-${prefix}-x">Posición horizontal · borde a borde</label><input id="memorial-${prefix}-x" type="range" min="0" max="100" value="50"><label for="memorial-${prefix}-y">Posición vertical · borde a borde</label><input id="memorial-${prefix}-y" type="range" min="0" max="100" value="50"></fieldset>`;
 const fields=c.fields.map(f=>`<div class="memorial-text-field"><div class="memorial-field-top"><label for="${f.id==='name'?'memorial-text':'memorial-field-'+f.id}">${f.label}</label><label class="memorial-check"><input id="memorial-show-${f.id}" type="checkbox" checked> Mostrar</label></div><textarea id="${f.id==='name'?'memorial-text':'memorial-field-'+f.id}" data-text-field="${f.id}" rows="${f.id==='epitaph'?3:2}" maxlength="${f.max}" spellcheck="false" aria-describedby="memorial-local">${f.default}</textarea></div>`).join('');
 const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="memorial-title">
  <div class="memorial-studio-heading"><p class="catalog-eyebrow">Estudio de composición · 01 / Materia y memoria</p><h3 id="memorial-title">Un recuerdo,<br><em>tu composición.</em></h3><p>Explora piedra, símbolos e inscripciones. Cada elemento conserva su lugar mientras das forma al conjunto.</p></div>
@@ -32,22 +32,22 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
     ${placement('ornament','Ornamento')}
     ${select('secondary','Motivo adicional',[{id:'ninguno',name:'Sin motivo adicional'},...publicOrnaments.filter(x=>x.category==='flores'||x.category==='simbolos')])}
     ${placement('secondary','Motivo adicional')}
-    ${select('ornament-finish','Acabado del ornamento',c.finishes)}
     ${select('separator','Separador',ornaments(['separadores']))}
     ${select('frame','Marco',ornaments(['marcos']))}
     <label class="memorial-check"><input id="memorial-guides" type="checkbox"> Ver zonas de composición</label>
-    <p class="memorial-note">Los elementos se desplazan dentro de zonas reservadas para proteger la inscripción.</p>
+    <p class="memorial-note">Cada motivo puede llegar a los cuatro bordes. Comprueba los avisos si se superpone con la inscripción.</p>
    </div></details>
    <details><summary><span>03</span> Letra y acabado</summary><div class="memorial-panel">
     ${select('type','Tipografía · aproximación visual',c.fonts)}
     <p class="memorial-note">Fuentes libres locales. No equivalen a las matrices históricas del taller.</p>
-    ${select('finish','Acabado de la inscripción',c.finishes)}
+    ${select('finish','Color común de letras y motivos',c.finishes)}
     <label for="memorial-size">Tamaño de letra <output id="memorial-size-value">100 %</output></label><input type="range" id="memorial-size" min="70" max="150" value="100">
     <label for="memorial-leading">Interlineado <output id="memorial-leading-value">130 %</output></label><input type="range" id="memorial-leading" min="105" max="180" value="130">
     ${select('align','Alineación',[{id:'center',name:'Centrada'},{id:'left',name:'Izquierda'},{id:'right',name:'Derecha'}])}
     <p class="memorial-note">Grabado y relieve son simulaciones visuales; la técnica disponible requiere confirmación del taller.</p>
    </div></details>
    <details><summary><span>04</span> Inscripción editable</summary><div class="memorial-panel">${fields}<p class="memorial-note">La letra se ajusta al espacio. Si no cabe, la vista previa lo indicará y acortará la línea visible; el texto del campo permanece intacto.</p><p id="memorial-local">Tu texto se mantiene solo en la memoria de esta página. No se envía ni se añade a enlaces. Al cerrarla se pierde. La descarga sí incluye lo que aparezca en la vista previa.</p></div></details>
+   <details><summary><span>05</span> Plano para taller</summary><div class="memorial-panel memorial-plan-panel"><p class="memorial-note">Introduce el ancho y alto reales de la cara vista, medidos por el taller. El plano SVG indica posición y tamaño de cada elemento en milímetros y se puede abrir en CorelDRAW. Requiere cotejo de material, canto, fijación y tipografía antes de fabricar.</p><div class="memorial-measures"><label for="memorial-width-mm">Ancho real (mm)<input id="memorial-width-mm" type="number" min="50" max="3000" step="1" inputmode="numeric" placeholder="Sin medir"></label><label for="memorial-height-mm">Alto real (mm)<input id="memorial-height-mm" type="number" min="50" max="3000" step="1" inputmode="numeric" placeholder="Sin medir"></label></div><div id="memorial-plan-preview" class="memorial-plan-preview"><p>Introduce ambas medidas para ver el plano.</p></div><div id="memorial-plan-measures" class="memorial-plan-measures" aria-live="polite"></div><button id="memorial-plan-download" type="button" disabled>Descargar plano SVG para CorelDRAW</button><p class="memorial-note">Plano de colocación orientativo. No es archivo de corte ni valida medidas del cementerio.</p></div></details>
   </div>
  </div>
  <p class="memorial-caption-detail">Recreación digital orientativa, no catálogo de acabados certificados ni plano de fabricación. Las proporciones no son estándares de tamaño. Cada familia tiene geometría propia; cualquier medida, espesor, anclaje o técnica requiere documentación y validación de taller.</p>
@@ -55,6 +55,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
 let html=readFileSync('funerario.html','utf8');
 html=html.replace(/<section class="memorial-studio"[\s\S]*?<\/section>(?=<div class="catalog-grid">)/,ui);
 html=html.replace(/<script src="funerario-(?:recursos|compositor|exportar|personalizador)\.js(?:\?[^"]+)?"><\/script>/g,'');
-html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-panel-20261018"></script>`).join('')+'</body>');
+html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=funerario-plano-20261019');
+html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-plano-20261019"></script>`).join('')+'</body>');
 writeFileSync('funerario.html',html);
 console.log('Updated existing studio; no other page replaced.');

@@ -56,7 +56,19 @@ async () => {
   const xBefore=Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('x'));
   scale.value='50';scale.dispatchEvent(new Event('input'));x.value='100';x.dispatchEvent(new Event('input'));await raf();
   assert(Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('x'))>xBefore,'symbol position');
+  const ySlider=document.getElementById('memorial-symbol-y');
+  ySlider.value='0';ySlider.dispatchEvent(new Event('input'));await raf();
+  const top=Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('y'));
+  ySlider.value='100';ySlider.dispatchEvent(new Event('input'));await raf();
+  const bottom=Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('y'));
+  const currentFace=catalog.models.find(model=>model.id===document.getElementById('memorial-model').value).face;
+  const crossHeight=Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('height'));
+  assert(Math.abs(top-currentFace[1]*1000)<.01&&Math.abs(bottom+crossHeight-(currentFace[1]+currentFace[3])*1000)<.01,'cross spans face vertically');
+  scale.value='250';scale.dispatchEvent(new Event('input'));await raf();
+  assert(Number(document.querySelector('[data-ornament="cruces:latina"] svg').getAttribute('width'))>sizeBefore*2,'expanded scale');
   for(const finish of catalog.finishes){await select('finish',finish.id);assert(document.getElementById('memorial-slab').dataset.finish,'engraving finish');}
+  await select('finish','oro');
+  assert(document.querySelector('[data-slot="symbol"]').getAttribute('color')===document.querySelector('[data-layer="text"]').getAttribute('fill'),'common ornament and text color');
   for(const font of catalog.fonts){await select('type',font.id);assert(document.fonts.check(`24px "${font.family}"`),'loaded font: '+font.id);}
   field.value='<img src=x onerror=alert(1)>';field.dispatchEvent(new Event('input'));await raf();
   assert(!document.querySelector('#memorial-rendered img'),'literal user text');
@@ -72,10 +84,10 @@ async () => {
       assert(box.x>=zone.x-1&&box.y>=zone.y-1&&box.x+box.width<=zone.x+zone.w+1&&box.y+box.height<=zone.y+zone.h+1,`text overflow: ${model.id}/${layout.id}/${font.id}/${long}: ${JSON.stringify({zone,box:{x:box.x,y:box.y,w:box.width,h:box.height}})}`);
     }
     const textBoxes=scene.boxes.filter(b=>b.kind.startsWith('text:'));
-    for(const decor of scene.boxes.filter(b=>!b.kind.startsWith('text:')))for(const text of textBoxes){
+    for(const decor of scene.boxes.filter(b=>['symbol','devotional','ornament','secondary'].includes(b.kind)))for(const text of textBoxes){
       assert(decor.x+decor.w<=text.x||text.x+text.w<=decor.x||decor.y+decor.h<=text.y||text.y+text.h<=decor.y,'symbol/text overlap');
     }
-    const decorative=scene.boxes.filter(b=>!b.kind.startsWith('text:'));
+    const decorative=scene.boxes.filter(b=>['symbol','devotional','ornament','secondary'].includes(b.kind));
     for(let a=0;a<decorative.length;a++)for(let b=a+1;b<decorative.length;b++){
       const one=decorative[a],two=decorative[b];
       assert(one.x+one.w<=two.x||two.x+two.w<=one.x||one.y+one.h<=two.y||two.y+two.h<=one.y,'motif/motif overlap');
@@ -84,6 +96,11 @@ async () => {
   }
   host.remove();
   document.getElementById('memorial-reset').click();await raf();
+  document.getElementById('memorial-width-mm').value='970';document.getElementById('memorial-width-mm').dispatchEvent(new Event('input'));
+  document.getElementById('memorial-height-mm').value='800';document.getElementById('memorial-height-mm').dispatchEvent(new Event('input'));
+  const plan=window.LitosMemorialExport.makePlan(window.LitosMemorialComposer.compose(makeState('nicho','centrado','aldine',false)),970,800);
+  assert(plan.getAttribute('data-units')==='mm'&&plan.querySelector('[id="CARA_VISTA"] rect').getAttribute('width')==='970','dimensioned workshop plan');
+  assert(!document.getElementById('memorial-plan-download').disabled,'plan download enabled with real dimensions');
   const name=document.getElementById('memorial-text');
   const visible=document.getElementById('memorial-show-name');visible.checked=false;visible.dispatchEvent(new Event('change'));await raf();
   assert(!document.querySelector('[data-field="name"]'),'hide field');

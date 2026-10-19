@@ -6,9 +6,9 @@ catalog=json.loads((root/'assets/funerario/configuracion/catalogo.json').read_te
 manifest=json.loads((root/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 review_manifest=json.loads((root/'docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json').read_text())
 assert len(catalog['materials'])==7 and sum(len(m['variants']) for m in catalog['materials'])==14
-assert len(catalog['ornaments'])==47 and len(catalog['fonts'])==6
+assert len(catalog['ornaments'])==57 and len(catalog['fonts'])==10
 assert len(catalog['layouts'])==9 and len(catalog['models'])==5
-assert len(manifest['files'])==82 and len(review_manifest['files'])==0
+assert len(manifest['files'])==100 and len(review_manifest['files'])==0
 face=catalog['models'][0]['face'];assert abs(face[2]/face[3]-97/80)<1e-10
 bundle=(root/'funerario-recursos.js').read_text()
 pack=json.loads(bundle.split('window.LitosMemorialData=',1)[1].rstrip().rstrip(';'))
@@ -61,4 +61,4 @@ assert 'SIMULACIÓN ORIENTATIVA' in (root/'funerario-compositor.js').read_text()
 assert 'LITOS-simulacion-orientativa.png' in (root/'funerario-exportar.js').read_text()
 assert set(pack['resources'])=={v['path'] for m in catalog['materials'] for v in m['variants']}|{f['path'] for f in catalog['fonts']}|{o['path'] for o in catalog['ornaments'] if o['id'] not in figuratives}
 assert {x['path'] for x in manifest['files'] if '/ornamentos/religiosas/relieves/' in x['path']}=={p for o in catalog['ornaments'] if o['id'] in figuratives for p in (o['path'],o['thumbnailPath'])}
-print('PASS: 82 public assets, 8 selectable relief prototypes loaded on demand, 5 rejected drawings hidden; 6 prototype crosses, OFL licenses and local-only runtime')
+print('PASS: 100 public assets, 8 selectable relief prototypes loaded on demand, 5 rejected drawings hidden; 6 prototype crosses, 10 OFL fonts and local-only runtime')
