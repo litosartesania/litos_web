@@ -46,7 +46,7 @@
       ['Composición','layout'],['Tipografía','type'],['Cruz','symbol'],
       ['Imagen','devotional'],
       ['Ornamento','ornament'],['Adicional','secondary'],['Marco','frame'],
-      ['Separador','separator'],['Grabado','finish']
+      ['Separador','separator'],['Color','finish']
     ];
     const items=document.createDocumentFragment();
     for(const [label,id] of selected){
@@ -65,7 +65,7 @@
     overviewCompact.textContent=short.join(' · ');
     overviewCompact.title=overviewCompact.textContent;
   }
-  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',ornamentFinish:'auto',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
+  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
   const pictorialLoads=new Map(),pictorialErrors=new Map();
   function loadPictorial(item){
@@ -90,7 +90,7 @@
       if(state.devotional===item.id)requestRender();
     });
   }
-  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame','ornament-finish':'ornamentFinish',align:'align'};
+  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame',align:'align'};
   const swatches=[];
   for(const material of catalog.materials){
     const button=document.createElement('button');button.type='button';button.className='memorial-swatch';button.dataset.stone=material.id;
@@ -100,6 +100,30 @@
     button.addEventListener('click',()=>{state.stone=material.id;$('stone').value=material.id;requestRender();});
   }
   function status(message){$('status').textContent=message;}
+  function renderPlan(){
+    const host=$('plan-preview'),button=$('plan-download');
+    const width=Number($('width-mm').value),height=Number($('height-mm').value);
+    const valid=$('width-mm').value!==''&&$('height-mm').value!==''&&Number.isInteger(width)&&Number.isInteger(height)&&width>=50&&width<=3000&&height>=50&&height<=3000;
+    button.disabled=!valid||!scene||scene.truncated||scene.unrendered;
+    if(!valid){const p=document.createElement('p');p.textContent='Introduce ancho y alto reales en milímetros para ver el plano.';host.replaceChildren(p);$('plan-measures').replaceChildren();return;}
+    if(!scene)return;
+    try{
+      const plan=window.LitosMemorialExport.makePlan(scene,width,height);
+      plan.removeAttribute('width');plan.removeAttribute('height');
+      plan.classList.add('memorial-plan-svg');host.replaceChildren(plan);
+      const list=document.createElement('ol');
+      const face=scene.face,rounded=value=>Math.round(value*10)/10;
+      for(const box of scene.boxes){
+        const row=document.createElement('li');
+        const item=box.id?catalog.ornaments.find(candidate=>candidate.id===box.id):null;
+        const field=box.kind.startsWith('text:')?catalog.fields.find(candidate=>'text:'+candidate.id===box.kind):null;
+        const label=field?'Texto: '+field.label:item?.name||({frame:'Marco',separator:'Separador',secondSeparator:'Separador 2'}[box.kind]||box.kind);
+        row.textContent=`${label}: X ${rounded((box.x-face.x)/face.w*width)} · Y ${rounded((box.y-face.y)/face.h*height)} · ${rounded(box.w/face.w*width)} × ${rounded(box.h/face.h*height)} mm`;
+        list.append(row);
+      }
+      $('plan-measures').replaceChildren(list);
+    }catch(error){const p=document.createElement('p');p.textContent=error.message;host.replaceChildren(p);button.disabled=true;}
+  }
   const galleryGroups={cruces:['cruces'],religiosas:['religiosas'],flores:['flores','simbolos'],secondary:['flores','simbolos'],marcos:['marcos'],separadores:['separadores']};
   const gallerySlot={cruces:'symbol',religiosas:'devotional',flores:'ornament',secondary:'secondary',marcos:'frame',separadores:'separator'};
   function selectMotif(slot,id){
@@ -191,6 +215,7 @@
       if(!exporting)status(scene.warnings.length?scene.warnings.join(' '):scene.adjusted?'Composición actualizada. Tamaño ajustado para mantener el texto dentro de su zona.':'Composición actualizada. Lista para descargar.');
       renderGallery();
       root.setAttribute('aria-busy','false');root.dataset.ready='true';$('download').disabled=exporting||scene.truncated||scene.unrendered;
+      renderPlan();
     }catch(error){root.setAttribute('aria-busy','false');status('No se pudo actualizar la vista previa. '+error.message);$('download').disabled=true;}
   }
   function requestRender(){cancelAnimationFrame(frame);frame=requestAnimationFrame(render);}
@@ -211,6 +236,7 @@
   });
   for(const id of ['fixings','guides'])$(id).addEventListener('change',()=>{state[id]=$(id).checked;requestRender();});
   for(const [id,key] of [['size','textSize'],['leading','leading']])$(id).addEventListener('input',()=>{state[key]=Number($(id).value);requestRender();});
+  for(const id of ['width-mm','height-mm'])$(id).addEventListener('input',renderPlan);
   for(const prefix of ['symbol','devotional','ornament','secondary'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);requestRender();});
   for(const field of catalog.fields){
     const input=field.id==='name'?$('text'):$('field-'+field.id);
@@ -225,6 +251,11 @@
     for(const field of catalog.fields){(field.id==='name'?$('text'):$('field-'+field.id)).value=state.fields[field.id].text;$('show-'+field.id).checked=state.fields[field.id].visible;}
   }
   $('reset').addEventListener('click',()=>{state=initial();sync();renderGallery();render();});
+  $('plan-download').addEventListener('click',()=>{
+    if(!scene||scene.truncated||scene.unrendered)return;
+    try{window.LitosMemorialExport.downloadPlan(scene,Number($('width-mm').value),Number($('height-mm').value));status('Plano acotado descargado. Coteja las medidas y la tipografía con el taller antes de producir.');}
+    catch(error){status(error.message);}
+  });
   $('download').addEventListener('click',async()=>{
     if(!ready||exporting)return;
     cancelAnimationFrame(frame);render();

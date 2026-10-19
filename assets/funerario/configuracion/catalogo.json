@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "materials": [
     {
       "id": "sudafrica",
@@ -609,6 +609,54 @@
       "license": "assets/funerario/fuentes/unifrakturmaguntia-OFL.txt",
       "licenseName": "SIL Open Font License 1.1",
       "source": "https://github.com/google/fonts/tree/main/ofl/unifrakturmaguntia"
+    },
+    {
+      "id": "marcellus",
+      "name": "Marcellus",
+      "label": "Romana serena · aprox. visual",
+      "family": "Litos-marcellus",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/marcellus.woff2",
+      "license": "assets/funerario/fuentes/marcellus-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/marcellus"
+    },
+    {
+      "id": "lora",
+      "name": "Lora",
+      "label": "Serif contemporánea · aprox. visual",
+      "family": "Litos-lora",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/lora.woff2",
+      "license": "assets/funerario/fuentes/lora-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/lora"
+    },
+    {
+      "id": "cormorant",
+      "name": "Cormorant Garamond",
+      "label": "Serif ornamental · aprox. visual",
+      "family": "Litos-cormorant",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/cormorantgaramond.woff2",
+      "license": "assets/funerario/fuentes/cormorantgaramond-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/cormorantgaramond"
+    },
+    {
+      "id": "montserrat",
+      "name": "Montserrat",
+      "label": "Sans geométrica · aprox. visual",
+      "family": "Litos-montserrat",
+      "style": "normal",
+      "weight": 400,
+      "path": "assets/funerario/fuentes/montserrat.woff2",
+      "license": "assets/funerario/fuentes/montserrat-OFL.txt",
+      "licenseName": "SIL Open Font License 1.1",
+      "source": "https://github.com/google/fonts/tree/main/ofl/montserrat"
     }
   ],
   "finishes": [
@@ -1509,6 +1557,76 @@
       "commercialReady": false,
       "publicSelectable": true,
       "thumbnailPath": "assets/funerario/ornamentos/religiosas/relieves/miniaturas/medallon-cristo.webp"
+    },
+    {
+      "id": "lirio",
+      "name": "Lirio estilizado",
+      "category": "flores",
+      "path": "assets/funerario/ornamentos/flores/lirio.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "lavanda",
+      "name": "Rama de lavanda",
+      "category": "flores",
+      "path": "assets/funerario/ornamentos/flores/lavanda.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "espiga",
+      "name": "Espiga de trigo",
+      "category": "flores",
+      "path": "assets/funerario/ornamentos/flores/espiga.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "camelia",
+      "name": "Camelia de contorno",
+      "category": "flores",
+      "path": "assets/funerario/ornamentos/flores/camelia.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "laurel",
+      "name": "Corona de laurel",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/laurel.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "libro",
+      "name": "Libro conmemorativo",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/libro.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "ceramica",
+      "name": "Medallón cerámico",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/ceramica.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "jarron",
+      "name": "Jarrón de flores",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/jarron.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "vela",
+      "name": "Vela encendida",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/vela.svg",
+      "publicSelectable": true
+    },
+    {
+      "id": "pergamino",
+      "name": "Pergamino conmemorativo",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/pergamino.svg",
+      "publicSelectable": true
     }
   ]
 }

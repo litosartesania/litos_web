@@ -16,15 +16,15 @@ MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
-assert len(MEMORIAL["files"]) == 82
+assert len(MEMORIAL["files"]) == 100
 FILES = {
     "funerario.html": (
         'id="memorial-workbench"',
-        'styles.css?v=funerario-panel-20261018',
-        'src="funerario-recursos.js?v=funerario-panel-20261018"',
-        'src="funerario-compositor.js?v=funerario-panel-20261018"',
-        'src="funerario-exportar.js?v=funerario-panel-20261018"',
-        'src="funerario-personalizador.js?v=funerario-panel-20261018"',
+        'styles.css?v=funerario-plano-20261019',
+        'src="funerario-recursos.js?v=funerario-plano-20261019"',
+        'src="funerario-compositor.js?v=funerario-plano-20261019"',
+        'src="funerario-exportar.js?v=funerario-plano-20261019"',
+        'src="funerario-personalizador.js?v=funerario-plano-20261019"',
         "Recreación digital orientativa",
     ),
     "mobiliario.html": (
