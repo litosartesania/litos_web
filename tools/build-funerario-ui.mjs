@@ -11,11 +11,10 @@ const fields=c.fields.map(f=>`<div class="memorial-text-field"><div class="memor
 const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="memorial-title">
  <div class="memorial-studio-heading"><p class="catalog-eyebrow">Estudio de composición · 01 / Materia y memoria</p><h3 id="memorial-title">Un recuerdo,<br><em>tu composición.</em></h3><p>Explora piedra, símbolos e inscripciones. Cada elemento conserva su lugar mientras das forma al conjunto.</p></div>
  <noscript><p>Activa JavaScript para utilizar el configurador local. No se envían inscripciones.</p></noscript>
- <div class="memorial-toolbar" id="memorial-toolbar" aria-label="Selecciones principales del configurador"></div>
  <div class="memorial-workbench" id="memorial-workbench" aria-busy="true">
   <div class="memorial-display"><div class="memorial-stage" id="memorial-canvas"><p>Cargando las muestras y las tipografías…</p></div><p class="memorial-caption" id="memorial-caption">Vista previa orientativa</p><p class="memorial-material-note" id="memorial-material-note">Texturas recreadas, pendientes de validación con muestras LITOS.</p><div class="memorial-actions"><button id="memorial-download" type="button" disabled>Descargar imagen <span aria-hidden="true">↓</span></button><button id="memorial-reset" type="button">Restablecer</button></div><p id="memorial-status" class="memorial-status" role="status" aria-live="polite">Preparando la composición.</p></div>
   <div class="memorial-controls">
-   <details open><summary><span>01</span> Piedra y modelo</summary><div class="memorial-panel">
+   <details><summary><span>01</span> Piedra y modelo</summary><div class="memorial-panel">
     ${select('stone','Material',c.materials)}<div id="memorial-swatches" class="memorial-swatches" role="group" aria-label="Muestras de piedra"></div>
     ${select('variant','Variante de textura',[{id:'1',name:'Recreación A'},{id:'2',name:'Recreación B'}])}
     ${select('model','Modelo',c.models)}<p id="memorial-model-note" class="memorial-note"></p>
@@ -55,7 +54,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
 let html=readFileSync('funerario.html','utf8');
 html=html.replace(/<section class="memorial-studio"[\s\S]*?<\/section>(?=<div class="catalog-grid">)/,ui);
 html=html.replace(/<script src="funerario-(?:recursos|compositor|exportar|personalizador)\.js(?:\?[^"]+)?"><\/script>/g,'');
-html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=funerario-motivos-20261019');
-html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-motivos-20261019"></script>`).join('')+'</body>');
+html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=funerario-acordeones-20261019');
+html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-acordeones-20261019"></script>`).join('')+'</body>');
 writeFileSync('funerario.html',html);
 console.log('Updated existing studio; no other page replaced.');

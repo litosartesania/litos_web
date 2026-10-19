@@ -970,3 +970,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .memorial-category-tabs{margin-bottom:.25rem;gap:.35rem}
   .memorial-category-tab{min-height:42px;font-size:.75rem}
 }
+
+/* Biblioteca visual solo dentro de «02 Composición y símbolos». */
+.memorial-controls .memorial-library>.memorial-library-title{display:block;margin:0 0 .45rem;color:#433b31;font:600 .78rem/1.4 var(--sans)}
+.memorial-controls .memorial-library>select[hidden]{display:none!important}
+.memorial-controls .memorial-gallery{display:flex;gap:.4rem;max-height:none;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;padding:.35rem .1rem .65rem}
+.memorial-controls .memorial-motif{flex:0 0 94px;min-height:110px;max-width:94px;padding:.4rem .2rem;font-size:.64rem;line-height:1.2;scroll-snap-align:start}
+.memorial-controls .memorial-motif[aria-pressed=true]{padding:calc(.4rem - 1px) calc(.2rem - 1px)}
+.memorial-controls .memorial-motif-image,.memorial-controls .memorial-motif-image img{width:48px;height:48px;max-width:100%}
