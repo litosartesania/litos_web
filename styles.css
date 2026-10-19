@@ -751,24 +751,34 @@ button, a { -webkit-tap-highlight-color: transparent; }
  background:#e5ded3;
  border:1px solid #c7baaa;
 }
- .memorial-selection-overview{
+.memorial-selection-overview{
  position:sticky;
  top:0;
  z-index:4;
- padding:.9rem 1rem .8rem;
  background:#d9cfbf;
  border-bottom:1px solid #b5a692;
 }
 .memorial-selection-title{
- margin:0 0 .7rem;
+ display:flex;align-items:center;gap:.55rem;
+ min-height:48px;padding:.6rem .85rem;
+ cursor:pointer;list-style:none;
  font:600 .82rem/1.3 var(--sans);
  letter-spacing:.02em;
  color:#3b3026;
 }
-.memorial-selection-grid{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
- gap:.5rem 1rem;
+.memorial-selection-title::-webkit-details-marker{display:none}
+.memorial-selection-title::after{content:'+';margin-left:auto;color:#705c43;font-size:1.2rem;font-weight:400}
+.memorial-selection-overview[open] .memorial-selection-title::after{content:'−'}
+.memorial-selection-compact{
+ min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ font:400 .7rem/1.3 var(--sans);letter-spacing:0;color:#62533f
 }
+.memorial-selection-title>span:first-child{flex:none;white-space:nowrap}
+.memorial-selection-grid{
+ display:none;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:.4rem .8rem;padding:.7rem .85rem .85rem;border-top:1px solid #b5a692;
+}
+.memorial-selection-overview[open] .memorial-selection-grid{display:grid}
 .memorial-selection-item{
  display:flex;flex-direction:column;
  gap:.12rem;
@@ -787,9 +797,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-toolbar{
  display:grid;
  grid-template-columns:repeat(2,minmax(0,1fr));
- gap:.7rem .85rem;
+ gap:.55rem .75rem;
  margin:0;
- padding:1rem .95rem .4rem;
+ padding:.75rem .85rem .3rem;
  border:0;
  background:transparent;
 }
@@ -798,28 +808,33 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-quick-field select{min-height:44px;font-size:.78rem;padding:.5rem .45rem}
 .memorial-toolbar .memorial-library{
  grid-column:1/-1;
- padding:.8rem 0 .25rem;
- margin:.4rem 0 0;
+ padding:.65rem 0 .2rem;
+ margin:.25rem 0 0;
  border-top:1px solid #c3b4a0;
 }
 .memorial-toolbar .memorial-library>select{max-width:none;min-height:44px}
 .memorial-toolbar .memorial-gallery{
- display:grid;
- grid-template-columns:repeat(3,minmax(0,1fr));
- gap:.45rem;
- max-height:245px;
- overflow-x:hidden;
- overflow-y:auto;
- scroll-snap-type:none;
- padding:.5rem .15rem;
+ position:relative;display:flex;
+ gap:.4rem;
+ max-height:none;
+ overflow-x:auto;
+ overflow-y:hidden;
+ scroll-snap-type:x proximity;
+ padding:.35rem .1rem .65rem;
 }
 .memorial-toolbar .memorial-motif{
- flex:auto;
- width:100%;max-width:none;min-height:119px;
- padding:.45rem .2rem;
+ flex:0 0 88px;
+ width:88px;max-width:none;min-height:94px;
+ padding:.4rem .2rem;font-size:.64rem;line-height:1.2;
+ scroll-snap-align:start;
 }
+.memorial-toolbar .memorial-motif[aria-pressed=true]{padding:calc(.4rem - 1px) calc(.2rem - 1px)}
 .memorial-toolbar .memorial-motif-image,
-.memorial-toolbar .memorial-motif-image img{width:62px;height:62px;max-width:100%}
+.memorial-toolbar .memorial-motif-image img{width:42px;height:42px;max-width:100%}
+.memorial-toolbar .memorial-motif-pending{
+ position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+ overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0
+}
 .memorial-controls{
  display:block;
  min-width:0;
@@ -893,9 +908,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
  .memorial-workbench{display:grid;grid-template-columns:minmax(0,1fr);gap:.9rem}
  .memorial-display{position:relative;top:auto;grid-row:1;width:100%;padding:0;box-shadow:none}
  .memorial-options{grid-row:2;max-height:none;overflow:visible;scrollbar-gutter:auto}
- .memorial-selection-overview{padding:.75rem;position:relative;top:auto}
+ .memorial-selection-overview{position:relative;top:auto}
  .memorial-toolbar{grid-template-columns:repeat(2,minmax(0,1fr));padding:.8rem}
- .memorial-toolbar .memorial-gallery{grid-template-columns:repeat(3,minmax(0,1fr));max-height:240px}
+ .memorial-toolbar .memorial-gallery{max-height:none}
  .memorial-stage{
   width:100%;height:min(57dvh,550px);max-height:none;
   min-height:270px;aspect-ratio:auto
@@ -909,7 +924,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
  .memorial-studio{padding:.7rem;margin-left:0;margin-right:0}
  .memorial-stage{height:min(50dvh,400px);min-height:245px}
  .memorial-selection-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
- .memorial-toolbar .memorial-gallery{grid-template-columns:repeat(2,minmax(0,1fr));max-height:260px}
- .memorial-toolbar .memorial-motif{min-height:120px}
+ .memorial-toolbar .memorial-gallery{max-height:none}
+ .memorial-toolbar .memorial-motif{min-height:94px}
  .memorial-actions button{min-height:44px}
 }

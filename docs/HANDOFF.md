@@ -605,3 +605,8 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El propietario revisó la galería y autorizó «impleméntalo todo». Se activan ocho figuras genéricas WebP y tres composiciones en el configurador de `litosartesania/litos_web`, como prototipos orientativos (`publicSelectable:true`, `commercialReady:false`). Los cinco SVG religiosos rechazados permanecen ocultos.
 - El manifiesto público verifica 82 recursos, incluidas ocho imágenes completas y ocho miniaturas. La galería descarga miniaturas y solo carga la imagen completa elegida. La composición y el PNG se producen en el navegador; no se incorporan fotos privadas del taller ni textos de visitantes en las solicitudes.
 - Rama `work/funerario-activar-relieves-20261018`. Documentar PR, fusión, Pages y prueba funcional pública solo después de comprobar cada paso. Técnica de taller, uso comercial y muestras físicas siguen pendientes.
+
+## 19/10/2026 — Ajuste solicitado del panel y la figura
+- Capturas del propietario: el resumen fijo de doce elecciones hace el menú largo; el Medallón de Cristo se ve translúcido sobre Negro Sudáfrica. La figura WebP original es sólida: el compositor añadía `screen` y opacidad 0,85 a su grupo.
+- Rama `work/funerario-panel-relieve-20261018`: resumen desplegable con línea compacta, galería de una fila desplazable y figura opaca con sombra de contacto. Los avisos de prototipo permanecen en el texto de la biblioteca y etiquetas accesibles. No se cambian los WebP ni las fotografías privadas.
+- Verificaciones locales: 390/768/1440 px, sin desplazamiento horizontal de la página en modo táctil, 540 composiciones por tamaño, 216 combinaciones figurativas y PNG de 2000 px. Anotar PR, fusión y Pages solo tras comprobación pública.
