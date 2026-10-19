@@ -145,7 +145,10 @@
   function buildCategoryTabs(){
     if(!categoryTabs)return;
     const select=$('gallery-category'),fragment=document.createDocumentFragment();
+    const categories=new Set();
     for(const option of select.options){
+      if(categories.has(option.value))continue;
+      categories.add(option.value);
       const button=document.createElement('button');
       button.type='button';
       button.className='memorial-category-tab';
