@@ -44,7 +44,13 @@
         const figure=publicOrnaments.find(x=>x.id===candidate.devotional);
         if(figure?.format==='image/webp'&&!resources[figure.path])candidate.devotional='ninguno';
         const scene=window.LitosMemorialComposer.compose(candidate);
-        scene.svg.setAttribute('aria-hidden','true');image.append(scene.svg);
+        // Serialize examples to isolated images: never duplicate live SVG IDs or data-field
+        // nodes, which would interfere with the editable main composition.
+        const picture=document.createElement('img');
+        picture.alt='';
+        picture.loading='eager';
+        picture.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(scene.svg));
+        image.append(picture);
       }catch(e){image.textContent='Recreación orientativa';}
       const copy=document.createElement('div');copy.className='memorial-case-copy';
       const name=document.createElement('h5');name.textContent=preset.title;
