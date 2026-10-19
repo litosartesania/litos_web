@@ -42,8 +42,16 @@
       try{
         const candidate=presetState(preset);
         const figure=publicOrnaments.find(x=>x.id===candidate.devotional);
-        if(figure?.format==='image/webp'&&!resources[figure.path])candidate.devotional='ninguno';
-        const scene=window.LitosMemorialComposer.compose(candidate);
+        const missing=figure?.format==='image/webp'&&!resources[figure.path];
+        // Preview uses the pre-bundled thumbnail, never downloads a full relief.
+        if(missing){
+          const thumb=resources[figure.thumbnailPath];
+          if(thumb)resources[figure.path]=thumb;
+          else candidate.devotional='ninguno';
+        }
+        let scene;
+        try{scene=window.LitosMemorialComposer.compose(candidate);}
+        finally{if(missing)delete resources[figure.path];}
         // Serialize examples to isolated images: never duplicate live SVG IDs or data-field
         // nodes, which would interfere with the editable main composition.
         const picture=document.createElement('img');
@@ -317,9 +325,5 @@
   sync();renderGallery();
   window.LitosMemorialComposer.loadFonts().then(()=>{
     ready=true;render();renderCaseGallery();
-    for(const preset of casePresets){
-      const item=publicOrnaments.find(x=>x.id===preset.devotional);
-      if(item)loadPictorial(item);
-    }
   }).catch(error=>{root.setAttribute('aria-busy','false');status(error.message);});
 })();
