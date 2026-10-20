@@ -692,3 +692,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Seleccionar un accesorio desde su tarjeta conserva el configurador y permite editar posición/tamaño. Se resalta el producto seleccionado y se comunica el número visible por categoría.
 - Revisada la web de referencia del sector: su página pública de accesorios presenta una categoría comercial, **no un inventario con referencias y medidas contrastables**. Otras fuentes sectoriales sí listan variantes y dimensiones, pero esos datos son de terceros, no de LITOS; no se incluyen como especificaciones comerciales del taller sin su validación.
 - QA de filtros, retorno al configurador, respuesta visual y ausencia de errores. Cambios solo en la rama aislada; actualizar e invalidar caché de recursos estáticos.
+
+## 20/10/2026 — Cabecera global de LITOS en Arte Funerario
+- Tras suprimir el hero de Arte Funerario, quedó una cabecera absoluta de texto claro sobre un fondo claro, sin navegación principal evidente. Se corrige **solo** la página funeraria: cabecera de fondo oscuro, con contraste suficiente, posición `sticky` y enlaces directos «Inicio», «Arte funerario» y «Mobiliario y objetos», más acceso al catálogo.
+- Incluida navegación equivalente en el menú móvil y en `noscript`; se marca la especialidad actual mediante `aria-current="page"`. Se conservan los controladores del menú de `script.js`; no se introduce ningún proveedor, recurso remoto ni dato privado.
+- Prueba Playwright añadida: enlaces de ambas especialidades, marca actual, menú móvil y cabecera fijada al desplazar 720px en 390/820/1440px. La cabecera está acotada a `.litos-funerary-page` para no alterar las otras secciones.
+- Publicar únicamente después de comprobar la CI de la rama y, tras fusionar, verificar GitHub Pages. Los trabajos históricos privados no se incluyen en esta mejora.
