@@ -39,26 +39,27 @@ with sync_playwright() as app:
    sizes=page.evaluate('''() => ({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,images:[...document.images].every(x=>x.complete&&x.naturalWidth>0)})''')
    assert sizes['scroll']<=sizes['width']+1 and sizes['images'],(file,width,sizes)
    assert not errors,(file,width,errors)
-   if file=='funerario.html':
-    # Primary navigation must be visible, cross-link the specialities and
-    # stay attached to the viewport after the dark introductory hero is gone.
-    header=page.locator('.site-header')
-    assert header.evaluate('(e)=>getComputedStyle(e).position')=='sticky'
-    assert header.locator('a.wordmark[href="index.html"]').count()==1
-    assert page.locator('.desktop-nav a[href="funerario.html"][aria-current="page"]').count()==1
-    assert page.locator('.desktop-nav a[href="mobiliario.html"]').count()==1
-    assert page.locator('.mobile-menu a[href="mobiliario.html"]').count()==1
-    assert header.evaluate('(e)=>getComputedStyle(e).backgroundColor')!='rgba(0, 0, 0, 0)'
-    page.evaluate('window.scrollTo(0,720)')
-    page.wait_for_timeout(80)
-    assert abs(header.bounding_box()['y'])<=2,(file,width,header.bounding_box())
-    page.evaluate('window.scrollTo(0,0)')
+   # All public pages must share the SAME global LITOS header.
+   header=page.locator('header.site-header')
+   expected_links=['index.html','funerario.html','mobiliario.html','funerario.html#personalizar']
+   assert header.locator('.desktop-nav a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'desktop nav')
+   assert page.locator('.mobile-menu a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'mobile nav')
+   assert header.locator('a.wordmark[href="index.html"]').count()==1
+   selected={'index.html':'index.html','funerario.html':'funerario.html','mobiliario.html':'mobiliario.html'}.get(file)
+   marked=header.locator('.desktop-nav a[aria-current="page"]').evaluate_all('(els)=>els.map(e=>e.getAttribute("href"))')
+   assert marked==([selected] if selected else []),(file,'current page',marked)
+   assert header.evaluate('(e)=>getComputedStyle(e).position')=='sticky',(file,'sticky header')
+   assert header.evaluate('(e)=>getComputedStyle(e).backgroundColor')!='rgba(0, 0, 0, 0)'
+   page.evaluate('window.scrollTo(0,720)')
+   page.wait_for_timeout(90)
+   assert abs(header.bounding_box()['y'])<=2,(file,width,'floating header',header.bounding_box())
+   page.evaluate('window.scrollTo(0,0)')
    if width<=1080:
     page.locator('.menu-button').click()
     assert page.locator('.mobile-menu').is_visible()
-    if file=='funerario.html':
-     assert page.locator('.mobile-menu a[href="index.html"]').is_visible()
-     assert page.locator('.mobile-menu a[href="mobiliario.html"]').is_visible()
+    assert page.locator('.mobile-menu a[href="index.html"]').is_visible()
+    assert page.locator('.mobile-menu a[href="mobiliario.html"]').is_visible()
+    assert page.locator('.mobile-menu a[href="funerario.html#personalizar"]').is_visible()
     page.keyboard.press('Escape')
     assert not page.locator('.mobile-menu').is_visible()
    if file=='index.html':
