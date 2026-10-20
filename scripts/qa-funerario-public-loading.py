@@ -27,10 +27,10 @@ try:
   assert page.locator('#memorial-layout option').count()==9
   assert page.locator('#memorial-devotional option').count()==9
   page.locator('.memorial-controls > details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
-  page.locator('.memorial-category-tab[data-category="religiosas"]').click()
-  page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery img")].length===8&&[...document.querySelectorAll("#memorial-gallery img")].every(x=>x.complete&&x.naturalWidth>0)')
+  page.locator('#memorial-gallery-religiosas').scroll_into_view_if_needed()
+  page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery-religiosas img")].length===8&&[...document.querySelectorAll("#memorial-gallery-religiosas img")].every(x=>x.complete&&x.naturalWidth>0)')
   assert not full_art(),full_art()
-  page.locator('.memorial-motif[data-item-id="cristo-corona"]').click()
+  page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
   page.wait_for_selector('[data-slot="devotional"] image')
   assert len(full_art())==1 and full_art()[0].endswith('/cristo-corona.webp'),full_art()
   assert page.locator('[data-slot="devotional"] image').get_attribute('href').startswith('data:image/webp;base64,')
