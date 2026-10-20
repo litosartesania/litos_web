@@ -81,11 +81,15 @@
     const finish=item.finishes.includes(state.accessoryFinish)?state.accessoryFinish:item.finishes[0];
     const colors={bronce:['#ad8d5f','#574329','#e6cc95'],acero:['#adb8bd','#4c5b62','#e7eef0'],piedra:['#c6c2b9','#77736c','#efebe2']};
     const [fill,edge,light]=colors[finish];
-    const w=Math.min(face.w*(item.aspect>1.4?.20:.14),item.aspect>1.4?156:104);
-    const h=Math.min(face.h*.27,w/item.aspect);
-    const x=state.accessorySide==='left'?face.x-w*.58:face.x+face.w-w*.42;
-    const y=face.y+face.h-h-face.h*.018;
-    const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':finish,filter:'url(#accessory-contact)'});
+    const placement=state.accessoryPlacement||{x:state.accessorySide==='left'?0:100,y:100,scale:100};
+    const aspect=item.digitalSize?item.digitalSize[0]/item.digitalSize[1]:item.aspect;
+    const base=Math.min(face.w*(aspect>1.4?.25:.18),aspect>1.4?180:140);
+    const w=Math.min(base*clamp(placement.scale,25,250)/100,face.w*.6,face.h*.65*aspect);
+    const h=w/aspect;
+    const first=Math.max(24,face.x-w*.58),last=Math.min(976-w,face.x+face.w-w*.42);
+    const x=first+(last-first)*clamp(placement.x,0,100)/100;
+    const y=face.y+(face.h-h)*clamp(placement.y,0,100)/100;
+    const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':finish,'data-bounds':JSON.stringify({x,y,w,h}),filter:'url(#accessory-contact)'});
     add(g,'ellipse',{cx:x+w*.5,cy:y+h*.96,rx:w*.42,ry:Math.max(2,h*.035),fill:'#181714',opacity:.32});
     const render=resources[item.renderPath]||resources[item.thumbnailPath];
     if(render){add(g,'image',{href:render,x,y,width:w,height:h,preserveAspectRatio:'xMidYMid meet'});}
@@ -143,15 +147,30 @@
     const relief=add(defs,'filter',{id:'applied-relief',x:'-22%',y:'-22%',width:'144%',height:'150%','color-interpolation-filters':'sRGB'});
     add(relief,'feColorMatrix',{type:'saturate',values:0});
     // The independent white applique keeps its own material on every stone.
-    add(relief,'feColorMatrix',{type:'matrix',values:'0.46 0 0 0 0.52 0 0.45 0 0 0.51 0 0 0.44 0 0.49 0 0 0 1 0'});
+    add(relief,'feColorMatrix',{type:'matrix',values:'0.46 0 0 0 0.52 0 0.45 0 0 0.51 0 0 0.44 0 0.49 0 0 0 1 0',result:'white-figure'});
+    add(relief,'feOffset',{in:'SourceAlpha',dx:2.4,dy:3.2,result:'extruded-alpha'});
+    add(relief,'feComposite',{in:'extruded-alpha',in2:'SourceAlpha',operator:'out',result:'side-alpha'});
+    add(relief,'feFlood',{'flood-color':'#b4ac9d',result:'side-color'});
+    add(relief,'feComposite',{in:'side-color',in2:'side-alpha',operator:'in',result:'side'});
+    const volume=add(relief,'feMerge');add(volume,'feMergeNode',{in:'side'});add(volume,'feMergeNode',{in:'white-figure'});
     add(relief,'feDropShadow',{dx:4.2,dy:5.4,stdDeviation:3.2,'flood-color':'#11100e','flood-opacity':.65});
     add(relief,'feDropShadow',{dx:-.8,dy:-1.1,stdDeviation:.5,'flood-color':'#fffdf6','flood-opacity':.42});
     const carved=add(defs,'filter',{id:'carved-relief',x:'-18%',y:'-18%',width:'136%',height:'136%'});
     add(carved,'feColorMatrix',{type:'saturate',values:0});
     const stoneTone=material.dark?'0.12':'0.52',stoneSlope=material.dark?'0.30':'0.39';
-    add(carved,'feColorMatrix',{type:'matrix',values:`${stoneSlope} 0 0 0 ${stoneTone} 0 ${stoneSlope} 0 0 ${stoneTone} 0 0 ${stoneSlope} 0 ${stoneTone} 0 0 0 1 0`});
-    add(carved,'feDropShadow',{dx:1.1,dy:1.4,stdDeviation:.7,'flood-color':'#171616','flood-opacity':.62});
-    add(carved,'feDropShadow',{dx:-.7,dy:-.8,stdDeviation:.45,'flood-color':'#ffffff','flood-opacity':.52});
+    add(carved,'feColorMatrix',{type:'matrix',values:`${stoneSlope} 0 0 0 ${stoneTone} 0 ${stoneSlope} 0 0 ${stoneTone} 0 0 ${stoneSlope} 0 ${stoneTone} 0 0 0 1 0`,result:'carved-tone'});
+    add(carved,'feImage',{href:resources[variant.path],x:face.x,y:face.y,width:Math.max(face.w,face.h),height:Math.max(face.w,face.h),preserveAspectRatio:'none',result:'carved-stone'});
+    add(carved,'feComposite',{in:'carved-stone',in2:'SourceAlpha',operator:'in',result:'carved-grain'});
+    add(carved,'feComposite',{in:'carved-tone',in2:'carved-grain',operator:'arithmetic',k1:0,k2:.72,k3:.28,k4:0,result:'stone-carving'});
+    // Inset edge lighting stays inside the cut silhouette, with no floating shadow.
+    add(carved,'feGaussianBlur',{in:'SourceAlpha',stdDeviation:.65,result:'cut-alpha'});
+    for(const [name,dx,dy,color,opacity] of [['cut-shadow',1.3,1.6,'#171616',.72],['cut-light',-1,-1.2,'#fffdf6',.65]]){
+      add(carved,'feOffset',{in:'cut-alpha',dx,dy,result:name+'-offset'});
+      add(carved,'feComposite',{in:'SourceAlpha',in2:name+'-offset',operator:'out',result:name+'-rim'});
+      add(carved,'feFlood',{'flood-color':color,'flood-opacity':opacity,result:name+'-color'});
+      add(carved,'feComposite',{in:name+'-color',in2:name+'-rim',operator:'in',result:name});
+    }
+    const cut=add(carved,'feMerge');for(const name of ['stone-carving','cut-shadow','cut-light'])add(cut,'feMergeNode',{in:name});
     const mount=add(defs,'filter',{id:'metal-applique',x:'-25%',y:'-25%',width:'150%',height:'150%'});
     add(mount,'feDropShadow',{dx:2,dy:2.5,stdDeviation:1.4,'flood-color':'#0d0e0d','flood-opacity':.72});
     add(mount,'feDropShadow',{dx:-.9,dy:-1.1,stdDeviation:.5,'flood-color':'#ffffff','flood-opacity':.55});

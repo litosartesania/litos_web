@@ -542,7 +542,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-studio-heading{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 3rem;padding:1rem 0 2.2rem;align-items:end}
 .memorial-studio-heading .catalog-eyebrow{grid-column:1/-1;margin:0 0 .7rem;font-size:.7rem;letter-spacing:.16em}
 .memorial-studio-heading h3{margin:0;font:400 clamp(2.6rem,5.2vw,5rem)/.99 var(--serif);letter-spacing:-.04em}
-.memorial-studio-heading h3 em{font-weight:400;color:#856b4e}
+.memorial-studio-heading h3 em{font-weight:400;color:#705638}
 .memorial-studio-heading>p:last-child{margin:0 0 .25rem;font-size:1rem;line-height:1.65;max-width:25rem;color:#645b50}
 .memorial-workbench{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,1fr);gap:clamp(1.2rem,3vw,2.8rem);align-items:start}
 .memorial-display{position:sticky;top:95px;min-width:0}
@@ -585,7 +585,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-swatch span{display:block;min-height:2.8em;font:500 .62rem/1.25 var(--sans);padding:.1rem}
 .memorial-check{display:flex;align-items:center;gap:.55rem;min-height:44px;font-size:.8rem;cursor:pointer}
 .memorial-check input{width:18px;height:18px;margin:0;accent-color:#6d563b;flex-shrink:0}
-.memorial-note,#memorial-local{font-size:.75rem;line-height:1.55;color:#716454;margin:.4rem 0}
+.memorial-note,#memorial-local{font-size:.75rem;line-height:1.55;color:#594c3c;margin:.4rem 0}
 .memorial-placement{border:1px solid #cfc4b3;margin:.65rem 0 .1rem;padding:.6rem .8rem;min-width:0}
 .memorial-placement legend{padding:0 .25rem;font-size:.72rem;color:#78664f}
 .memorial-placement label{display:block;font-size:.72rem;line-height:1.4}
@@ -608,7 +608,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-field-top{display:flex;justify-content:space-between;align-items:center;gap:.4rem}
 .memorial-field-top>label:first-child{font-size:.8rem;font-weight:600}
 .memorial-field-top .memorial-check{font-size:.7rem}
-.memorial-caption-detail{max-width:72rem;font-size:.74rem;line-height:1.6;color:#776a59;border-top:1px solid #d2c8b9;padding-top:1rem;margin:1.5rem 0 0}
+.memorial-caption-detail{max-width:72rem;font-size:.74rem;line-height:1.6;color:#655744;border-top:1px solid #d2c8b9;padding-top:1rem;margin:1.5rem 0 0}
 .memorial-studio :is(button,summary,select,textarea,input):focus-visible{outline:3px solid #8b6b3f;outline-offset:3px}
 @media(max-width:380px){.memorial-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){
@@ -1072,3 +1072,19 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media(max-width:650px){.memorial-case-grid{display:grid;grid-template-columns:1fr;overflow:visible;padding:0}.memorial-case-card{width:100%}.memorial-case-picture{height:clamp(250px,75vw,360px)}}
 @media(max-width:480px){.memorial-paths{gap:.45rem}.memorial-path{min-height:105px;padding:.75rem}.memorial-path strong{font-size:1.11rem}.memorial-path span{font-size:.71rem}.memorial-filters{gap:.5rem}.memorial-case-detail-picture{min-height:250px}.memorial-case-detail-copy{padding:.2rem}.memorial-actions button{flex:1 1 42%!important}}
 @media(prefers-reduced-motion:reduce){.memorial-path{transition:none}}
+
+/* PR72: progressive controls, immediate model detail and mobile return to preview. */
+.memorial-filter-panel>summary{cursor:pointer;font:600 .9rem var(--sans);padding:.7rem 0;color:#463626}
+.memorial-text-action{padding:.6rem 0;background:none;border:0;color:#4a3928;text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px}
+.memorial-preview-shortcut{display:none}
+.memorial-advanced{border-top:1px solid #c3b6a2;margin:.65rem 0}
+.memorial-advanced>summary{padding:.65rem 0;cursor:pointer;font:600 .78rem/1.4 var(--sans);color:#594630}
+.memorial-next-step{width:100%;min-height:44px;margin-top:1rem;padding:.65rem;border:1px solid #80694e;background:#f6f1e8;color:#3d3021;font:600 .8rem/1.4 var(--sans);cursor:pointer}
+.memorial-case-copy .memorial-case-meta{color:#715838}
+.memorial-studio :is(button,summary):focus-visible{outline:3px solid #825c30;outline-offset:3px}
+#memorial-canvas{scroll-margin-top:85px}
+@media(max-width:820px){
+ .memorial-preview-shortcut{display:block;position:sticky;top:65px;z-index:4;width:100%;min-height:44px;padding:.65rem;background:#3c352b;border:1px solid #3c352b;color:#fff8ee;font:600 .85rem var(--sans);cursor:pointer;margin-bottom:.6rem}
+ .memorial-options{overflow:visible;max-height:none}
+ .memorial-panel{min-width:0}
+}

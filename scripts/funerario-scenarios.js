@@ -100,6 +100,7 @@ async () => {
   document.getElementById('memorial-height-mm').value='800';document.getElementById('memorial-height-mm').dispatchEvent(new Event('input'));
   const plan=window.LitosMemorialExport.makePlan(window.LitosMemorialComposer.compose(makeState('nicho','centrado','aldine',false)),970,800);
   assert(plan.getAttribute('data-units')==='mm'&&plan.querySelector('[id="CARA_VISTA"] rect').getAttribute('width')==='970','dimensioned workshop plan');
+  await raf();
   assert(!document.getElementById('memorial-plan-download').disabled,'plan download enabled with real dimensions');
   const name=document.getElementById('memorial-text');
   const visible=document.getElementById('memorial-show-name');visible.checked=false;visible.dispatchEvent(new Event('change'));await raf();

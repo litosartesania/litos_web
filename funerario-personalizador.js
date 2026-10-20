@@ -14,7 +14,7 @@
   root.prepend(sidebar);
   if(controls)sidebar.append(controls);
   const previewShortcut=document.createElement('button');previewShortcut.type='button';previewShortcut.className='memorial-preview-shortcut';previewShortcut.textContent='Ver mi lápida ↑';previewShortcut.addEventListener('click',()=>{$('canvas').scrollIntoView({block:'start'});});sidebar.prepend(previewShortcut);
-  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',devotionalTechnique:'aplique 3D',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},dimensions:null,fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
+  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',devotionalTechnique:'aplique 3D',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',accessoryPlacement:{x:100,y:100,scale:100},fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},dimensions:null,fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
 
   // Public, anonymous families. No original photograph or private order metadata is bundled.
@@ -34,12 +34,20 @@
     if(path!=='explore')$('create').querySelector('strong').textContent='Continuar mi diseño';
     root.closest('.memorial-studio').dataset.path=path;
     $('explore').setAttribute('aria-pressed',String(path==='explore'));
-    $('create').setAttribute('aria-pressed',String(path==='create'));
+    $('create').setAttribute('aria-pressed',String(path!=='explore'));
   }
   $('explore').addEventListener('click',()=>{mode('explore');document.querySelector('.memorial-inspiration').scrollIntoView({block:'start'});});
-  $('create').addEventListener('click',()=>{activePreset=null;mode('create');root.scrollIntoView({block:'start'});controls.querySelector('details')?.setAttribute('open','');});
+  $('create').addEventListener('click',()=>{mode('create');root.scrollIntoView({block:'start'});controls.querySelector('details')?.setAttribute('open','');});
   $('back-catalog').addEventListener('click',()=>{mode('explore');document.querySelector('.memorial-inspiration').scrollIntoView({block:'start'});});
   mode('explore');
+  const steps=[...controls.querySelectorAll(':scope > details')];
+  for(const [index,step] of steps.entries()){
+    const next=steps[index+1];
+    if(!next)continue;
+    const button=document.createElement('button');button.type='button';button.className='memorial-next-step';button.textContent='Siguiente: '+next.querySelector('summary').textContent.replace(/^\d+\s*/, '');
+    button.addEventListener('click',()=>{step.open=false;next.open=true;next.querySelector('summary').focus();next.scrollIntoView({block:'nearest'});});
+    step.querySelector('.memorial-panel').append(button);
+  }
   function renderPresetImage(preset){
     const image=document.createElement('img');image.alt='';image.loading='lazy';
     try{
@@ -53,8 +61,8 @@
     }catch(error){image.alt='Recreación no disponible';}
     return image;
   }
-  function showCaseDetail(preset){
-    const heading=document.createElement('h5');heading.textContent=preset.title;
+  function showCaseDetail(preset,trigger){
+    const heading=document.createElement('h5');heading.textContent=preset.title;heading.tabIndex=-1;
     const label=document.createElement('p');label.className='memorial-case-provenance';label.textContent=preset.provenance==='inspirado'?'Modelo inspirado en trabajos realizados':'Propuesta de diseño';
     const image=renderPresetImage(preset);
     const figure=document.createElement('div');figure.className='memorial-case-detail-picture';figure.append(image);
@@ -70,9 +78,9 @@
       renderAccessoryGallery();renderGallery(true);render();mode('customize');root.scrollIntoView({block:'start'});
       status('Modelo cargado. Piedra, forma, técnica y complemento ya están en la composición.');
     });
-    const close=document.createElement('button');close.type='button';close.className='memorial-case-detail-close';close.textContent='Cerrar ficha';close.addEventListener('click',()=>{caseDetail.hidden=true;});
+    const close=document.createElement('button');close.type='button';close.className='memorial-case-detail-close';close.textContent='Cerrar ficha';close.addEventListener('click',()=>{caseDetail.hidden=true;trigger?.focus({preventScroll:true});});
     const body=document.createElement('div');body.className='memorial-case-detail-copy';body.append(label,heading,note,facts,action,close);
-    caseDetail.replaceChildren(figure,body);caseDetail.hidden=false;caseDetail.scrollIntoView({block:'nearest'});
+    caseDetail.replaceChildren(figure,body);caseDetail.hidden=false;caseDetail.scrollIntoView({block:'start'});heading.focus({preventScroll:true});
   }
   function renderCaseGallery(){
     if(!caseHost||!ready)return;
@@ -81,7 +89,7 @@
     const visible=casePresets.filter(p=>Object.entries(filters).every(([key,value])=>!value||p[key]===value));
     $('filter-count').textContent=visible.length?`${visible.length} modelos disponibles en esta selección`:'No hay modelos con esta combinación. Prueba a retirar un filtro.';
     for(const preset of visible){
-      const card=document.createElement('article');card.className='memorial-case-card';
+      const card=document.createElement('article');card.className='memorial-case-card';card.dataset.preset=preset.id;
       const image=document.createElement('div');image.className='memorial-case-picture';
       image.append(renderPresetImage(preset));
       const copy=document.createElement('div');copy.className='memorial-case-copy';
@@ -89,12 +97,13 @@
       const note=document.createElement('p');note.textContent=preset.note;
       const meta=document.createElement('p');meta.className='memorial-case-meta';meta.textContent=`${preset.type} · ${preset.technique}`;
       const button=document.createElement('button');button.type='button';button.textContent='Ver modelo';button.setAttribute('aria-label','Ver modelo: '+preset.title);
-      button.addEventListener('click',()=>showCaseDetail(preset));
+      button.addEventListener('click',()=>showCaseDetail(preset,button));
       copy.append(meta,name,note,button);card.append(image,copy);fragment.append(card);
     }
     caseHost.replaceChildren(fragment);
   }
   for(const id of ['filter-type','filter-stone','filter-style','filter-technique','filter-ornament','filter-accessory'])$(id).addEventListener('change',()=>{caseDetail.hidden=true;renderCaseGallery();});
+  $('filter-reset').addEventListener('click',()=>{document.querySelectorAll('.memorial-filters select').forEach(el=>el.value='');caseDetail.hidden=true;renderCaseGallery();});
   const pictorialLoads=new Map(),pictorialErrors=new Map();
   function loadPictorial(item){
     if(item?.format!=='image/webp'||resources[item.path]||pictorialLoads.has(item.path))return;
@@ -281,15 +290,15 @@
     try{
       scene=window.LitosMemorialComposer.compose(state);
       scene.svg.id='memorial-slab';$('canvas').replaceChildren(scene.svg);
-      $('caption').textContent=scene.material.name+' · '+scene.model.name+' · '+scene.layout.name;
+      $('caption').textContent=(activePreset?'Basado en '+activePreset.title+' · ':'Diseño propio · ')+scene.material.name+' · '+scene.model.name+' · '+scene.layout.name;
       const devotional=catalog.ornaments.find(x=>x.id===state.devotional&&x.category==='religiosas');
       $('technique-note').textContent=devotional?`Imagen religiosa: ${catalog.techniques.find(x=>x.id===state.devotionalTechnique)?.name||state.devotionalTechnique} · Simulación pendiente de validación técnica`:'Motivos y letras: acabado orientativo; técnica final pendiente de confirmar.';
       $('material-note').textContent=scene.material.description+' '+scene.material.status+(scene.material.id==='italia'?' · Variedad comercial exacta sin identificar.':'');
       $('model-note').textContent=scene.model.note;
       swatches.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.stone===state.stone)));
-      for(const prefix of ['symbol','devotional','ornament','secondary'])document.getElementById(prefix+'-scale-value').textContent=state[prefix+'Placement'].scale+' %';
+      for(const prefix of ['symbol','devotional','ornament','secondary','accessory'])document.getElementById(prefix+'-scale-value').textContent=state[prefix+'Placement'].scale+' %';
       $('size-value').textContent=state.textSize+' %';$('leading-value').textContent=state.leading+' %';
-      for(const prefix of ['symbol','devotional','ornament','secondary']){
+      for(const prefix of ['symbol','devotional','ornament','secondary','accessory']){
         const disabled=state[prefix]==='ninguno';
         for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).disabled=disabled;
       }
@@ -312,7 +321,7 @@
           return;
         }
       }
-      state[key]=next;if(key==='accessory'||key==='accessoryFinish')renderAccessoryGallery();requestRender();
+      state[key]=next;if(key==='accessorySide'&&next!=='free'){state.accessoryPlacement.x=next==='left'?0:next==='center'?50:100;state.accessoryPlacement.y=100;$('accessory-x').value=state.accessoryPlacement.x;$('accessory-y').value=100;}if(key==='accessory'||key==='accessoryFinish')renderAccessoryGallery();requestRender();
     }
   });
   for(const id of ['fixings','guides'])$(id).addEventListener('change',()=>{state[id]=$(id).checked;requestRender();});
@@ -335,7 +344,7 @@
     $('height-mm').dispatchEvent(new Event('input',{bubbles:true}));
     status('Medida observada en muestra histórica. Verificar las cotas reales con el taller.');
   });
-  for(const prefix of ['symbol','devotional','ornament','secondary'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);requestRender();});
+  for(const prefix of ['symbol','devotional','ornament','secondary','accessory'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);if(prefix==='accessory'){state.accessorySide='free';$('accessorySide').value='free';}requestRender();});
   for(const field of catalog.fields){
     const input=field.id==='name'?$('text'):$('field-'+field.id);
     input.addEventListener('input',()=>{state.fields[field.id].text=input.value.slice(0,field.max);requestRender();});
@@ -346,12 +355,12 @@
     $('devotional-technique').value=state.devotionalTechnique;
     for(const id of ['fixings','guides'])$(id).checked=state[id];
     $('size').value=state.textSize;$('leading').value=state.leading;
-    for(const prefix of ['symbol','devotional','ornament','secondary'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).value=state[prefix+'Placement'][suffix];
+    for(const prefix of ['symbol','devotional','ornament','secondary','accessory'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).value=state[prefix+'Placement'][suffix];
     for(const field of catalog.fields){(field.id==='name'?$('text'):$('field-'+field.id)).value=state.fields[field.id].text;$('show-'+field.id).checked=state.fields[field.id].visible;}
     $('width-mm').value=state.dimensions?.widthMm||'';$('height-mm').value=state.dimensions?.heightMm||'';
     renderAccessoryGallery();
   }
-  $('reset').addEventListener('click',()=>{state=initial();sync();renderGallery();render();});
+  $('reset').addEventListener('click',()=>{activePreset=null;state=initial();sync();renderGallery();render();});
   $('plan-download').addEventListener('click',()=>{
     if(!scene||scene.truncated||scene.unrendered)return;
     try{window.LitosMemorialExport.downloadPlan(scene,Number($('width-mm').value),Number($('height-mm').value));status('Plano acotado descargado. Coteja las medidas y la tipografía con el taller antes de producir.');}
