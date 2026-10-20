@@ -58,7 +58,7 @@ FILES = {
     ),
 }
 FORBIDDEN = {
-    "mobiliario.html": ("simulación digital de tonalidad", "<form", "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
+    "mobiliario.html": ("simulación digital de tonalidad", "Por ahora no aceptamos encargos.", "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
                    ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
     "catalogo-precios.js": ("--stone-photo-filter", "const visual=",
