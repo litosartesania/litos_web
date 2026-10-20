@@ -59,7 +59,9 @@ assert all(o.get('publicSelectable') is True and o.get('commercialReady') is Fal
 assert all(o.get('publicSelectable') is True and o.get('commercialReady') is False for o in catalog['ornaments'] if o['id'] in candidates)
 assert all(('value="'+id+'"') in (root/'funerario.html').read_text(encoding='utf8') for id in candidates)
 assert all(o.get('commercialReady') is False for o in catalog['ornaments'] if o['id'] in rejected)
-assert 'Imágenes religiosas</option>' in (root/'funerario.html').read_text(encoding='utf8')
+assert '<h5 id="memorial-motif-heading-religiosas" class="memorial-motif-heading">Imagen religiosa</h5>' in (root/'funerario.html').read_text(encoding='utf8')
+assert 'id="memorial-gallery-religiosas"' in (root/'funerario.html').read_text(encoding='utf8')
+assert 'memorial-gallery-category' not in (root/'funerario.html').read_text(encoding='utf8')
 assert all(('value="'+id+'"') in (root/'funerario.html').read_text(encoding='utf8') for id in figuratives|{'relievelateral','crucifijolateral','relievesuperior'})
 assert not any(('value="'+id+'"') in (root/'funerario.html').read_text(encoding='utf8') for id in rejected)
 
