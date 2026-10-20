@@ -297,7 +297,7 @@ assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"'
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261015-macetero8' in htmls['mobiliario.html']
+assert 'styles.css?v=litos-contacto-20261020-v1' in htmls['mobiliario.html']
 assert 'catalogo-precios.js?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
@@ -348,7 +348,7 @@ if '--production' in sys.argv:
  # Publishing a contact channel requires a confirmed business inbox AND
  # completed controller identification / legal review. Do not ship a mock.
  recipient=re.search(r"const LITOS_CONTACT_EMAIL = '([^']*)';",js)
- assert recipient and re.fullmatch(r"[^\\s@]+@[^\\s@]+\\.[^\\s@]+",recipient.group(1)), 'release blocked: business recipient not confirmed'
+ assert recipient and re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+",recipient.group(1)), 'release blocked: business recipient not confirmed'
  assert 'deben comprobarse y completarse' not in htmls['aviso-legal.html'].lower(), 'release blocked: owner identification not validated'
  assert 'deberá indicarse la identidad' not in htmls['privacidad.html'].lower(), 'release blocked: privacy controller identification pending'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
