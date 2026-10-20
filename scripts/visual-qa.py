@@ -260,7 +260,7 @@ with sync_playwright() as app:
     destination.mkdir(exist_ok=True)
     page.locator('#contacto').screenshot(path=str(destination/('LITOS_CONTACTO_'+file.replace('.html','').upper()+'_'+str(width)+'.png')),animations='disabled')
    if file in ('index.html','funerario.html','mobiliario.html') and width in (390,1440):
-    out=root/'preview'
+    out=root/'contact-screenshots'
     out.mkdir(parents=True,exist_ok=True)
     slug={'index.html':'INDEX','funerario.html':'FUNERARIO','mobiliario.html':'MOBILIARIO'}[file]
     page.locator('#contacto').scroll_into_view_if_needed()
