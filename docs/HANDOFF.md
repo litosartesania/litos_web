@@ -672,3 +672,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El propietario solicita que el avance ya esté disponible en la web pública; se procede a publicar la PR #72 tras comprobar la cabeza y su CI.
 - Detectada una expectativa obsoleta en la comprobación de despliegue: todavía exigía la versión anterior de CSS/JS. Se obtienen ahora las cinco URL de recursos del HTML que se está publicando; además se verifica el hash exacto del HTML y del CSS, junto con los cuatro módulos y los 131 recursos funerarios.
 - La publicación solo se considerará verificada cuando termine Pages y se pruebe la URL pública en escritorio y móvil. El estado definitivo y su ejecución quedan registrados en la PR #72.
+
+## 20/10/2026 — Acceso directo al catálogo y floreros
+- El propietario pide retirar la portada conceptual y publicar cada avance validado. Se elimina el bloque «La memoria toma forma» de la página funeraria y se conserva un único encabezado principal.
+- Acceso visible «Ver floreros y complementos» desde el inicio del configurador: muestra las diez imágenes originales con elección directa y carga sobre la composición conservada. Se mantienen los ajustes de posición y tamaño.
+- Auditoría estática/privacidad y prueba de navegación a 390/1440 px: catálogo de complementos, imágenes cargadas, selección y carga del florero, sin errores ni desbordamiento. Los originales privados permanecen fuera de Git y de Pages.
+- La revisión del archivo y de la referencia externa continúa en un avance posterior; no se presenta esta mejora de acceso como investigación terminada.

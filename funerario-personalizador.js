@@ -31,14 +31,16 @@
     return next;
   }
   function mode(path){
-    if(path!=='explore')$('create').querySelector('strong').textContent='Continuar mi diseño';
+    if(path==='create'||path==='customize')$('create').querySelector('strong').textContent='Continuar mi diseño';
     root.closest('.memorial-studio').dataset.path=path;
     $('explore').setAttribute('aria-pressed',String(path==='explore'));
-    $('create').setAttribute('aria-pressed',String(path!=='explore'));
+    $('browse-accessories').setAttribute('aria-pressed',String(path==='accessories'));
+    $('create').setAttribute('aria-pressed',String(path==='create'||path==='customize'));
   }
   $('explore').addEventListener('click',()=>{mode('explore');document.querySelector('.memorial-inspiration').scrollIntoView({block:'start'});});
   $('create').addEventListener('click',()=>{mode('create');root.scrollIntoView({block:'start'});controls.querySelector('details')?.setAttribute('open','');});
   $('back-catalog').addEventListener('click',()=>{mode('explore');document.querySelector('.memorial-inspiration').scrollIntoView({block:'start'});});
+  $('browse-accessories').addEventListener('click',()=>{mode('accessories');$('accessory-shop').scrollIntoView({block:'start'});});
   mode('explore');
   const steps=[...controls.querySelectorAll(':scope > details')];
   for(const [index,step] of steps.entries()){
@@ -141,6 +143,16 @@
       fragment.append(button);
     }
     host.replaceChildren(fragment);
+    const shop=$('accessory-shop-grid');
+    if(shop&&!shop.childElementCount){
+      for(const item of catalog.accessories){
+        const button=document.createElement('button');button.type='button';button.className='memorial-shop-item';button.dataset.accessoryChoice=item.id;
+        const img=document.createElement('img');img.src=resources[item.thumbnailPath];img.alt='';img.width=160;img.height=160;img.loading='lazy';
+        const name=document.createElement('strong');name.textContent=item.name;
+        const action=document.createElement('span');action.textContent='Añadir a mi lápida';button.append(img,name,action);
+        button.addEventListener('click',()=>{state.accessory=item.id;sync();renderAccessoryGallery();requestRender();mode('customize');steps[1].open=true;root.scrollIntoView({block:'start'});status(item.name+' añadido a tu composición.');});shop.append(button);
+      }
+    }
     const selected=catalog.accessories.find(x=>x.id===state.accessory);
     if(selected?.renderPath)loadPictorial({...selected,path:selected.renderPath,format:'image/webp'});
     $('accessory-note').textContent=selected?`${selected.category} · ${selected.mount}. Medidas y disponibilidad pendientes de validación.`:'Elige un complemento para consultar sus condiciones de montaje.';

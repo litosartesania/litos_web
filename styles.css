@@ -1088,3 +1088,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
  .memorial-options{overflow:visible;max-height:none}
  .memorial-panel{min-width:0}
 }
+
+/* Direct catalogue entry and discoverable independent accessories. */
+.catalog-funerary .catalog-heading h1{margin:0;font:400 clamp(2.4rem,5vw,4rem)/1.05 var(--serif);letter-spacing:-.025em}
+.catalog-funerary{padding-top:7rem}
+.memorial-browse-accessories{display:block;margin:0 0 1.5rem;padding:.6rem 0;color:#594127;background:none;border:0;border-bottom:1px solid currentColor;font:600 1rem var(--sans);cursor:pointer;text-underline-offset:.2em}
+.memorial-browse-accessories[aria-pressed=true]{color:#2b2118}
+.memorial-accessory-shop{display:none;scroll-margin-top:7rem}
+.memorial-studio[data-path=accessories] .memorial-accessory-shop{display:block}
+.memorial-studio[data-path=accessories] :is(.memorial-workbench,.memorial-inspiration){display:none}
+.memorial-accessory-shop h4{font:400 clamp(1.8rem,3vw,2.6rem) var(--serif);margin:1rem 0}
+.memorial-accessory-shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin:1.5rem 0}
+.memorial-shop-item{display:flex;flex-direction:column;align-items:center;gap:.65rem;border:0;border-bottom:1px solid #b9a98f;padding:1rem;background:#f7f1e7;color:#34291e;font:1rem var(--sans);cursor:pointer}
+.memorial-shop-item img{width:160px;height:160px;max-width:100%;object-fit:contain}
+.memorial-shop-item span{font-size:.8rem;text-decoration:underline;text-underline-offset:.2em}
+.memorial-shop-item:hover{background:#e6d9c5}
+.memorial-shop-item:focus-visible,.memorial-browse-accessories:focus-visible{outline:3px solid #825c30;outline-offset:3px}
+@media(max-width:480px){.memorial-accessory-shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.memorial-shop-item{padding:.7rem;font-size:.85rem}.memorial-shop-item img{height:120px}.catalog-funerary{padding-top:6rem}}
