@@ -263,8 +263,7 @@ with sync_playwright() as app:
     out=root/'contact-screenshots'
     out.mkdir(parents=True,exist_ok=True)
     slug={'index.html':'INDEX','funerario.html':'FUNERARIO','mobiliario.html':'MOBILIARIO'}[file]
-    page.locator('#contacto').scroll_into_view_if_needed()
-    page.screenshot(path=str(out/f'LITOS_CONTACTO_{slug}_{width}.png'))
+    page.locator('#contacto').screenshot(path=str(out/f'LITOS_CONTACTO_{slug}_{width}.png'))
    print('PASS',file,width)
    page.close()
  browser.close()
