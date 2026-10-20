@@ -301,8 +301,12 @@ for page in pages:
 for page in ('aviso-legal.html','privacidad.html'):
  assert not parsers[page].forms,(page,'legal pages must not collect data')
 assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'],'host IP logs must be disclosed'
-assert 'mobiliario' not in htmls['funerario.html'].lower()
-assert 'funerario' not in htmls['mobiliario.html'].lower()
+# Cross-speciality links are allowed in the common LITOS navigation.
+# Only each speciality's catalogue/workspace must remain isolated.
+assert 'class="catalog-workspace"' not in htmls['funerario.html']
+assert 'id="material-picker"' not in htmls['funerario.html']
+assert 'class="memorial-studio"' not in htmls['mobiliario.html']
+assert 'id="memorial-workbench"' not in htmls['mobiliario.html']
 assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls['index.html'].lower()
 for page in ('index.html','funerario.html','mobiliario.html'):
  assert not parsers[page].forms,(page,'lead collection forbidden')
