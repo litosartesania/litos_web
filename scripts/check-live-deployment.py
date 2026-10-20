@@ -24,14 +24,19 @@ assert len(MEMORIAL_URLS) == 5
 FILES = {
     "funerario.html": (
         'id="memorial-workbench"',
+        'id="contacto"',
+        'id="contact-form"',
         *MEMORIAL_URLS,
         "Recreación digital orientativa",
     ),
+    "index.html": ('id="contacto"', 'id="contact-form"'),
+    "script.js": ("const LITOS_CONTACT_EMAIL", "data-litos-contact"),
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
         "styles.css?v=litos-contacto-20261020-v1",
         "catalogo-precios.js?v=stone-20261015-bandeja8",
-        "Por ahora no aceptamos encargos.",
+        'id="contacto"',
+        'id="contact-form"',
         "Colección conceptual · 21 productos · 9 piedras · 21 planos",
         'class="catalog-workspace"',
     ),
@@ -58,7 +63,9 @@ FILES = {
     ),
 }
 FORBIDDEN = {
-    "mobiliario.html": ("simulación digital de tonalidad", "Por ahora no aceptamos encargos.", "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
+    "mobiliario.html": ("simulación digital de tonalidad", "class=\"section-hero hero-furniture\"", "Por ahora no aceptamos encargos.", "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
+    "index.html": ('class="workshop-intro"', 'class="landing-note"'),
+    "funerario.html": ('class="page-pricing"', 'class="made-to-measure"', 'class="project-status"'),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
                    ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
     "catalogo-precios.js": ("--stone-photo-filter", "const visual=",
