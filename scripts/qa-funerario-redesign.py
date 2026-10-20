@@ -99,7 +99,7 @@ with sync_playwright() as p:
   assert page.locator('#memorial-accessory-x').input_value()=='0'
  # Same source artwork, three different depth behaviours, on three stones.
  page.locator('#memorial-reset').click()
- page.locator('#memorial-devotional').select_option('cristo-corona')
+ page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
  page.wait_for_selector('[data-slot=devotional] image')
  figures=[]
  for stone in ['absoluto','macael','quintana']:
