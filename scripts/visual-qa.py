@@ -70,7 +70,7 @@ with sync_playwright() as app:
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
      assert page.locator('#memorial-workbench').count()==1
-     assert page.locator('#memorial-model option').count()==7
+     assert page.locator('#memorial-model option').count()==10
      assert page.locator('#memorial-stone option').count()==7
      assert page.locator('#memorial-type option').count()==10
      page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
