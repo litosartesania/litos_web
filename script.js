@@ -61,11 +61,15 @@ if (hero && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
 const LITOS_CONTACT_EMAIL = '';
 for (const form of document.querySelectorAll('[data-litos-contact]')) {
   const submit = form.querySelector('button[type="submit"]');
-  if (LITOS_CONTACT_EMAIL && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(LITOS_CONTACT_EMAIL)) {
+  if (LITOS_CONTACT_EMAIL && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(LITOS_CONTACT_EMAIL)) {
     submit.disabled = false;
   }
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if (!LITOS_CONTACT_EMAIL || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(LITOS_CONTACT_EMAIL)) {
+      form.querySelector('.contact-feedback').textContent = 'El contacto por correo no está configurado.';
+      return;
+    }
     if (!form.reportValidity()) return;
     const name = form.querySelector('[name="nombre"]').value.trim();
     const email = form.querySelector('[name="correo"]').value.trim();
