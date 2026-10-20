@@ -91,12 +91,12 @@ jobs:
             preview/LITOS_PR72_768.png
             preview/LITOS_PR72_1440.png
             preview/LITOS_NICHO_CRUZ_VERTICAL.png
-            preview/LITOS_CONTACTO_INDEX_390.png
-            preview/LITOS_CONTACTO_INDEX_1440.png
-            preview/LITOS_CONTACTO_FUNERARIO_390.png
-            preview/LITOS_CONTACTO_FUNERARIO_1440.png
-            preview/LITOS_CONTACTO_MOBILIARIO_390.png
-            preview/LITOS_CONTACTO_MOBILIARIO_1440.png
+            contact-screenshots/LITOS_CONTACTO_INDEX_390.png
+            contact-screenshots/LITOS_CONTACTO_INDEX_1440.png
+            contact-screenshots/LITOS_CONTACTO_FUNERARIO_390.png
+            contact-screenshots/LITOS_CONTACTO_FUNERARIO_1440.png
+            contact-screenshots/LITOS_CONTACTO_MOBILIARIO_390.png
+            contact-screenshots/LITOS_CONTACTO_MOBILIARIO_1440.png
             preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html
             preview/LITOS_REVISION_CRUCES_6.html
             preview/LITOS_PANEL_IZQUIERDO_390.png
