@@ -22,13 +22,13 @@ with sync_playwright() as p:
   assert page.locator('#relief-review-only').count()==1
   assert page.locator('#memorial-devotional option').count()==9
   assert page.locator('#memorial-layout option').count()==9
-  assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
+  assert page.locator('#memorial-gallery-religiosas').count()==1
   page.locator('.memorial-controls > details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
-  page.locator('.memorial-category-tab[data-category="religiosas"]').click()
-  assert page.locator('#memorial-gallery .memorial-motif img').count()==8
-  assert page.locator('#memorial-gallery img').evaluate_all('(els)=>els.every(e=>e.src.startsWith("data:image/webp;base64,"))')
-  page.locator('#memorial-gallery img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
-  page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery img")].every(x=>x.complete&&x.naturalWidth>0)')
+  page.locator('#memorial-gallery-religiosas').scroll_into_view_if_needed()
+  assert page.locator('#memorial-gallery-religiosas .memorial-motif img').count()==8
+  assert page.locator('#memorial-gallery-religiosas img').evaluate_all('(els)=>els.every(e=>e.src.startsWith("data:image/webp;base64,"))')
+  page.locator('#memorial-gallery-religiosas img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
+  page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery-religiosas img")].every(x=>x.complete&&x.naturalWidth>0)')
   count=page.evaluate("""({ids,stones,layouts})=>{
    const c=window.LitosMemorialData.catalog,host=document.createElement('div');
    host.style.cssText='position:fixed;left:-2000px;top:0;width:1000px;height:1000px';document.body.append(host);
