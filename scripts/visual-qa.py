@@ -255,6 +255,10 @@ with sync_playwright() as app:
    else:
     assert page.locator('.legal-content h2').count()>3
     assert page.locator('form').count()==0
+   if file in ('index.html','funerario.html','mobiliario.html') and width in (390,1440):
+    destination=root/'preview'
+    destination.mkdir(exist_ok=True)
+    page.locator('#contacto').screenshot(path=str(destination/('LITOS_CONTACTO_'+file.replace('.html','').upper()+'_'+str(width)+'.png')),animations='disabled')
    print('PASS',file,width)
    page.close()
  browser.close()
