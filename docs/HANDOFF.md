@@ -707,3 +707,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Faltan por acreditar medidas de fabricación, tipografías exactas, profundidad real del tallado, anclajes y disponibilidad. No son planos ejecutivos.
 - La revisión total del archivo histórico privado sigue pendiente: estos tres modelos **no** equivalen a una auditoría exhaustiva de todas las fotografías.
 - Pruebas actualizadas en `check-funerario.py`, `qa-funerario.py`, `qa-funerario-redesign.py` y `visual-qa.py`; validar GitHub Actions del HEAD antes de cualquier publicación. No modificar repositorios ajenos ni copiar fuentes privadas a GitHub.
+
+## 20/10/2026 — Barra global idéntica en todas las páginas (relevo)
+- El propietario pide que la cabecera estrenada en Arte Funerario se conserve exactamente igual en todas las páginas comerciales. Se han homogeneizado **inicio, funerario, mobiliario, aviso legal y privacidad**: «LITOS», «Inicio», «Arte funerario», «Mobiliario y objetos» y «Ver modelos» (enlace a una ruta pública común) con menú móvil y alternativa `noscript`. Solo difiere `aria-current="page"`.
+- Estilo oscuro `sticky`, siempre visible al desplazarse, con idéntica altura, fondo, tipografía y foco accesible. Ajustados espacios iniciales de catálogo y textos legales tras sacar la cabecera del `position:absolute` anterior. El JS de abrir/cerrar menú es el común existente, sin nuevas dependencias.
+- Auditoría estática: `scripts/check-site.py` comprueba que las cinco cabeceras tengan el mismo HTML al omitir `aria-current`; QA Playwright comprueba links, estado activo y comportamiento fijo tras scroll en móvil, tableta y escritorio.
+- Se separa de la PR #77 del catálogo histórico para no arriesgar sus geometrías y recursos. Mantener privadas todas las fotografías de encargos; esta actualización solo cambia navegación pública, CSS y comprobaciones.
+- No publicar como éxito hasta CI del HEAD y verificación de Pages tras fusionar.
