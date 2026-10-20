@@ -264,83 +264,61 @@
     loadPictorial(item);
     renderGallery();requestRender();
   }
-  // The cards are the selection control. Categories only navigate between card groups;
-  // avoid a second large dropdown above the same visual options.
-  const categoryTabs=$('category-tabs');
-  function buildCategoryTabs(){
-    if(!categoryTabs)return;
-    const select=$('gallery-category'),fragment=document.createDocumentFragment();
-    const categories=new Set();
-    for(const option of select.options){
-      if(categories.has(option.value))continue;
-      categories.add(option.value);
-      const button=document.createElement('button');
-      button.type='button';
-      button.className='memorial-category-tab';
-      button.dataset.category=option.value;
-      button.textContent=option.label;
-      button.setAttribute('aria-pressed',String(select.value===option.value));
-      button.addEventListener('click',()=>{
-        if(select.value===option.value)return;
-        select.value=option.value;
-        select.dispatchEvent(new Event('change',{bubbles:true}));
-      });
-      fragment.append(button);
-    }
-    categoryTabs.replaceChildren(fragment);
-  }
+  // Independent image choices live inside each related setting; no second selector bar.
   function renderGallery(force=false){
-    const group=$('gallery-category').value,slot=gallerySlot[group];
-    if(categoryTabs)for(const button of categoryTabs.querySelectorAll('button')){
-      button.setAttribute('aria-pressed',String(button.dataset.category===group));
-    }
-    if(!force&&$('gallery').dataset.group===group){
-      for(const button of $('gallery').querySelectorAll('button')){
-        const selected=state[slot]===button.dataset.itemId;
-        const item=publicOrnaments.find(candidate=>candidate.id===button.dataset.itemId);
-        button.setAttribute('aria-pressed',String(selected));
-        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent+(item?.commercialReady===false?', prototipo sin validar':''));
+    for(const [group,slot] of Object.entries(gallerySlot)){
+      const host=document.getElementById('memorial-gallery-'+group);
+      if(!host)continue;
+      if(!force&&host.dataset.ready==='true'){
+        for(const button of host.querySelectorAll('button[data-item-id]')){
+          const selected=state[slot]===button.dataset.itemId;
+          const item=publicOrnaments.find(candidate=>candidate.id===button.dataset.itemId);
+          button.setAttribute('aria-pressed',String(selected));
+          button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent+(item?.commercialReady===false?', prototipo sin validar':''));
+        }
+        continue;
       }
-      return;
-    }
-    const items=publicOrnaments.filter(item=>galleryGroups[group].includes(item.category));
-    const fragment=document.createDocumentFragment();
-    const choices=[{id:'ninguno',name:'Sin elemento',category:''},...items];
-    for(const item of choices){
-      const button=document.createElement('button');button.type='button';button.className='memorial-motif';
-      button.dataset.itemId=item.id;button.dataset.slot=slot;button.setAttribute('aria-pressed',String(state[slot]===item.id));
-      button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name+(item.commercialReady===false?', prototipo sin validar':''));
-      const image=document.createElement('span');image.className='memorial-motif-image';
-      if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
-      else{const art=document.createElement('img');const source=resources[item.path];art.src=item.thumbnailPath?(resources[item.thumbnailPath]||item.thumbnailPath):((source||'').startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source));art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
-      const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
-      button.append(image,label);
-      if(item.commercialReady===false){
-        const note=document.createElement('small');note.className='memorial-motif-pending';
-        note.textContent='Prototipo sin validar';button.append(note);
-        button.title=item.validation;
+      const items=publicOrnaments.filter(item=>galleryGroups[group].includes(item.category));
+      const fragment=document.createDocumentFragment();
+      for(const item of [{id:'ninguno',name:'Sin elemento'},...items]){
+        const selected=state[slot]===item.id;
+        const button=document.createElement('button');button.type='button';button.className='memorial-motif';
+        button.dataset.itemId=item.id;button.dataset.slot=slot;button.setAttribute('aria-pressed',String(selected));
+        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+item.name+(item.commercialReady===false?', prototipo sin validar':''));
+        const image=document.createElement('span');image.className='memorial-motif-image';
+        if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
+        else{
+          const art=document.createElement('img'),source=resources[item.path];
+          art.src=item.thumbnailPath?(resources[item.thumbnailPath]||item.thumbnailPath):((source||'').startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source));
+          art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);
+        }
+        const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
+        button.append(image,label);
+        if(item.commercialReady===false){
+          const note=document.createElement('small');note.className='memorial-motif-pending';
+          note.textContent='Prototipo sin validar';button.append(note);button.title=item.validation;
+        }
+        button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
       }
-      button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
+      host.replaceChildren(fragment);host.dataset.ready='true';
     }
-    $('gallery').replaceChildren(fragment);$('gallery').dataset.group=group;
   }
   const religiousReady=publicOrnaments.some(item=>item.category==='religiosas');
   if(!religiousReady){
-    const religiousOption=$('gallery-category').querySelector('option[value="religiosas"]');
-    if(religiousOption)religiousOption.remove();
     $('devotional').replaceChildren(new Option('Imágenes en revisión','ninguno'));
     $('devotional').disabled=true;
-    const label=document.querySelector('label[for="memorial-devotional"]');
-    if(label)label.textContent='Imágenes religiosas · en preparación';
-    const note=document.createElement('p');
-    note.className='memorial-note';
-    note.textContent='Estamos renovando los grabados religiosos; no están disponibles en esta versión orientativa.';
-    $('devotional').after(note);
+    const heading=document.getElementById('memorial-motif-heading-religiosas');
+    if(heading)heading.textContent='Imágenes religiosas · en preparación';
+    const section=document.querySelector('[data-motif-section="religiosas"]');
+    if(section){
+      const note=document.createElement('p');note.className='memorial-note';
+      note.textContent='Estamos renovando los grabados religiosos; no están disponibles en esta versión orientativa.';
+      section.append(note);
+    }
     const placement=$('devotional-scale').closest('fieldset');
     if(placement)placement.hidden=true;
   }
-  buildCategoryTabs();
-  $('gallery-category').addEventListener('change',()=>renderGallery(true));
+  renderGallery(true);
   function render(){
     if(!ready)return;
     const figure=publicOrnaments.find(item=>item.id===state.devotional&&item.format==='image/webp');
