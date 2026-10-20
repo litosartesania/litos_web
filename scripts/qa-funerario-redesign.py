@@ -36,6 +36,7 @@ with sync_playwright() as p:
   page.wait_for_function('(size)=>{const e=document.querySelector("#CARA_VISTA rect");return e&&+e.getAttribute("width")===size[0]&&+e.getAttribute("height")===size[1]}',arg=[width,height])
   ratio=page.evaluate('()=>{const e=document.querySelector("#CARA_VISTA rect");return +e.getAttribute("width")/+e.getAttribute("height")}')
   assert abs(ratio-width/height)<1e-6
+ assert page.locator('.memorial-accessory-card img').evaluate_all('(imgs)=>imgs.every(i=>{const a=i.getBoundingClientRect(),b=i.closest("button").lastElementChild.getBoundingClientRect();return a.bottom<=b.top+1})'),'accessory thumbnails overlap labels'
  for item in page.evaluate('window.LitosMemorialData.catalog.accessories'):
   page.locator('#memorial-accessory').select_option(item['id'])
   page.wait_for_selector('[data-accessory="'+item['id']+'"] image')
