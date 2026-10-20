@@ -32,6 +32,19 @@ with sync_playwright() as p:
   for field in ['stone','model','layout','symbol','devotional','ornament','frame','type','finish','accessory']:
    assert page.locator('#memorial-'+field).input_value()==model['state'][field],(model['id'],field)
   assert model['title'] in page.locator('#memorial-caption').inner_text()
+  # The three source-led typologies must be visually distinct as SVG
+  # architecture, and remain editable with only invented inscription text.
+  structure={
+   'portada-arcos-dos-campos':('arcos-gemelos','path[data-architecture-component^=arch]',2),
+   'portada-pilastras-medallon':('pilastras-altas','rect',5),
+   'panteon-modular-anillas':('losa-anillas','circle[data-architecture-component=ring]',2)
+  }
+  if model['id'] in structure:
+   architecture,selector,minimum=structure[model['id']]
+   geometry=page.locator('[data-layer=geometry]')
+   assert geometry.get_attribute('data-architecture')==architecture
+   assert geometry.locator(selector).count()>=minimum,(model['id'],selector)
+   assert page.locator('#memorial-text').input_value()=='NOMBRE APELLIDO'
   if model['id']=='nicho-cruz-incisa-florero':
    # Relative geometry and fictitious lettering must travel with a selected case.
    assert page.locator('#memorial-symbol-scale').input_value()=='180'
