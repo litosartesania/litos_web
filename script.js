@@ -53,4 +53,49 @@ if (hero && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
   }, { passive: true });
 }
 
-// No commercial contact form handlers: LITOS does not accept orders or quotations.
+// Contacto sin backend: el visitante decide el envío en su aplicación
+// de correo. Ningún dato personal se envía a GitHub Pages ni a un tercero
+// desde JavaScript, y no hay almacenamiento, analítica ni seguimiento.
+// La dirección comercial debe confirmarse ANTES de publicar. No usar una
+// dirección personal/familiar ni inventar un buzón que no exista.
+const LITOS_CONTACT_EMAIL = 'litos.artesania@gmail.com';
+for (const form of document.querySelectorAll('[data-litos-contact]')) {
+  const submit = form.querySelector('button[type="submit"]');
+  if (LITOS_CONTACT_EMAIL && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(LITOS_CONTACT_EMAIL)) {
+    submit.disabled = false;
+  }
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!LITOS_CONTACT_EMAIL || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(LITOS_CONTACT_EMAIL)) {
+      form.querySelector('.contact-feedback').textContent = 'El contacto por correo no está configurado.';
+      return;
+    }
+    if (!form.reportValidity()) return;
+    const name = form.querySelector('[name="nombre"]').value.trim();
+    const email = form.querySelector('[name="correo"]').value.trim();
+    const topic = form.querySelector('[name="asunto"]').value.trim();
+    const message = form.querySelector('[name="mensaje"]').value.trim();
+    const status = form.querySelector('.contact-feedback');
+    if (!name || !email || !topic || message.length < 10 || !form.querySelector('[name="privacidad"]').checked) {
+      status.textContent = 'Completa los campos obligatorios para preparar el correo.';
+      return;
+    }
+    const subject = 'Consulta LITOS · ' + topic.replace(/[\r\n]/g, ' ');
+    const body = 'Nombre: ' + name.replace(/[\r\n]/g, ' ')
+      + '\nCorreo de respuesta: ' + email.replace(/[\r\n]/g, ' ')
+      + '\nCategoría: ' + topic + '\n\nConsulta:\n' + message;
+    const url = 'mailto:' + LITOS_CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+    if (url.length > 7500) {
+      status.textContent = 'El mensaje es demasiado extenso para abrirlo en el correo. Resúmelo un poco.';
+      return;
+    }
+    status.textContent = 'Correo preparado. Revísalo y pulsa Enviar en tu aplicación de correo; el formulario no lo envía por sí solo.';
+    try {
+      window.location.assign(url);
+    } catch (_) {
+      status.textContent = 'No se pudo abrir la aplicación de correo. Usa la dirección de contacto mostrada junto al formulario.';
+    }
+  });
+}
+
