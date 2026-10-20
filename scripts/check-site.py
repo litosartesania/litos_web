@@ -293,7 +293,9 @@ assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con porta
 assert 'no son estándares' in htmls['funerario.html']
 assert 'funerario-personalizador.js' in htmls['funerario.html']
 assert not any(token in (root/'funerario-personalizador.js').read_text(encoding='utf8') for token in ('fetch(', 'localStorage', 'sessionStorage', 'XMLHttpRequest', 'sendBeacon', 'innerHTML', 'document.cookie'))
-assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
+assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html']
+picker=re.search(r'<select id="material-picker"[^>]*>(.*?)</select>',htmls['mobiliario.html'],re.S)
+assert picker and picker.group(1).count('<option value=')==10 and picker.group(1).count('value="plano-tecnico"')==1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
