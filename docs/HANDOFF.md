@@ -738,3 +738,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Carga diferida extendida a motivos no religiosos y restauración del revisor offline tras retirar el selector global. Ningún original privado ni inscripción real añadido.
 - Punto guardado a petición del propietario para evitar pérdida de trabajo: auditoría estática e integridad pasan; pruebas de navegador y revisión de proporciones en curso. No representa finalización de la iteración.
 - Sigue bloqueada la publicación del formulario por identificación legal pendiente. Mantener PR81 en revisión; no eludir `--production`.
+
+## 20/10/2026 — Segundo avance guardado: catálogo y proporciones
+- PR81 conservada; PR79 sin integrar. Punto remoto anterior: `a50456e`. Nuevas proporciones y controles mantienen textos y posiciones al elegir modelo.
+- 15 modelos, 12 distribuciones, 13 complementos, 59 motivos y 143 archivos públicos. Cruz incisa sencilla, árbol grabado, tres floreros propios y texto dimensionado por altura de placa. Originales privados permanecen fuera del repo.
+- PASS local: build/allowlist/hashes, cinco páginas responsive, vista autónoma, PNG/SVG, 2.400 combinaciones sin desbordamientos, quince presets, trece accesorios, nueve comparaciones de técnica y recuperación ante fallo del árbol/complemento. Capturas nuevas en `preview/PR81-*.png`.
+- Investigación realizada, límites de cobertura, pendientes y evidencia: `docs/FUNERARIO_PR81_CONTINUIDAD.md`. No se afirma medición individual exhaustiva del archivo ni extracción completa del catálogo externo.
+- `--production` sigue bloqueado por verificación legal pendiente. No fusionado ni desplegado. Comprobar CI del HEAD actualizado antes de cualquier publicación.

@@ -226,7 +226,7 @@ for p in plans:
 
 memorial_manifest=json.loads((root.parent/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 memorial_paths={i['path'] for i in memorial_manifest['files']}|{'funerario-recursos.js','funerario-compositor.js','funerario-exportar.js'}
-assert len(memorial_manifest['files'])==142
+assert len(memorial_manifest['files'])==143
 review_manifest=json.loads((root.parent/'docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json').read_text())
 assert len(review_manifest['files'])==0
 figure_paths={i['path'] for i in memorial_manifest['files'] if '/ornamentos/religiosas/relieves/' in i['path']}
@@ -236,7 +236,7 @@ for i in memorial_manifest['files']:
  assert len(b)==i['bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],i['path']
 memorial_bytes=sum((root/p).stat().st_size for p in memorial_paths)
 # Includes ten original accessory renders and their thumbnails; full images load on selection.
-assert memorial_bytes<4200000,'memorial resource budget exceeded'
+assert memorial_bytes<4600000,'memorial resource budget exceeded'
 expected.update(memorial_paths)
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)

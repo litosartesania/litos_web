@@ -7,10 +7,10 @@ commercial=json.loads((root/'assets/funerario/configuracion/modelos-comerciales.
 manifest=json.loads((root/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 review_manifest=json.loads((root/'docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json').read_text())
 assert len(catalog['materials'])==7 and sum(len(m['variants']) for m in catalog['materials'])==14
-assert len(catalog['ornaments'])==58 and len(catalog['fonts'])==10
-assert len(catalog['layouts'])==9 and len(catalog['models'])==10
-assert len(commercial['models'])==13 and len(catalog['accessories'])==13
-assert len(manifest['files'])==142 and len(review_manifest['files'])==0
+assert len(catalog['ornaments'])==59 and len(catalog['fonts'])==10
+assert len(catalog['layouts'])==12 and len(catalog['models'])==10
+assert len(commercial['models'])==15 and len(catalog['accessories'])==13
+assert len(manifest['files'])==143 and len(review_manifest['files'])==0
 face=catalog['models'][0]['face'];assert 0<face[2]<=1 and 0<face[3]<=1
 bundle=(root/'funerario-recursos.js').read_text()
 pack=json.loads(bundle.split('window.LitosMemorialData=',1)[1].rstrip().rstrip(';'))
@@ -31,7 +31,7 @@ for item in catalog['ornaments']:
         assert len(data)<250_000 and item['path'] not in pack['resources']
         thumb=root/item['thumbnailPath'];mini=thumb.read_bytes()
         assert mini[:4]==b'RIFF' and mini[8:16]==b'WEBPVP8X' and mini[20]&0x10 and len(mini)<25_000
-        assert (item['thumbnailPath'] in pack['resources']) == (item['id'] in {p['state']['devotional'] for p in commercial['models']})
+        assert (item['thumbnailPath'] in pack['resources']) == (item['id'] in {p['state'].get(slot) for p in commercial['models'] for slot in ['symbol','devotional','ornament','secondary']})
     if 'commercialReady' in item:
         assert item['commercialReady'] is False and item['rights'] and item['compatibleLayouts']
         assert all(x>0 for x in item['digitalSize'])
@@ -74,6 +74,6 @@ for path in ['funerario-personalizador.js','funerario-compositor.js','funerario-
         assert token not in js,(path,token)
 assert 'SIMULACIÓN ORIENTATIVA' in (root/'funerario-compositor.js').read_text()
 assert 'LITOS-simulacion-orientativa.png' in (root/'funerario-exportar.js').read_text()
-assert set(pack['resources'])=={v['path'] for m in catalog['materials'] for v in m['variants']}|{f['path'] for f in catalog['fonts']}|{o['path'] for o in catalog['ornaments'] if o.get('format')!='image/webp'}|{p for a in catalog['accessories'] for p in (a['path'],a['thumbnailPath'])}|{o['thumbnailPath'] for o in catalog['ornaments'] if o['id'] in {p['state']['devotional'] for p in commercial['models']} and o.get('thumbnailPath')}
+assert set(pack['resources'])=={v['path'] for m in catalog['materials'] for v in m['variants']}|{f['path'] for f in catalog['fonts']}|{o['path'] for o in catalog['ornaments'] if o.get('format')!='image/webp'}|{p for a in catalog['accessories'] for p in (a['path'],a['thumbnailPath'])}|{o['thumbnailPath'] for o in catalog['ornaments'] if o['id'] in {p['state'].get(slot) for p in commercial['models'] for slot in ['symbol','devotional','ornament','secondary']} and o.get('thumbnailPath')}
 assert {x['path'] for x in manifest['files'] if '/ornamentos/religiosas/relieves/' in x['path']}=={p for o in catalog['ornaments'] if o['id'] in figuratives for p in (o['path'],o['thumbnailPath'])}
-print('PASS: 142 public assets, 13 commercial models, 13 original accessory renders, 8 selectable relief prototypes loaded on demand, 5 rejected drawings hidden and local-only runtime')
+print('PASS: 143 public assets, 15 commercial models, 13 original accessory renders, 8 selectable relief prototypes loaded on demand, 5 rejected drawings hidden and local-only runtime')

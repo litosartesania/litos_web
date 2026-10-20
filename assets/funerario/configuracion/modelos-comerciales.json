@@ -232,9 +232,9 @@
       "provenance": "inspirado",
       "state": {
         "stone": "macael",
-        "model": "nicho",
-        "layout": "lateral",
-        "symbol": "doblefilete",
+        "model": "cornisa",
+        "layout": "cruzalta",
+        "symbol": "incisaalta",
         "devotional": "ninguno",
         "ornament": "ninguno",
         "secondary": "ninguno",
@@ -242,21 +242,21 @@
         "frame": "ninguno",
         "type": "marcellus",
         "finish": "relieve",
-        "accessory": "florero",
+        "accessory": "florero-conico-acero",
         "accessorySide": "free",
         "accessoryFinish": "acero",
-        "textSize": 78,
+        "textSize": 100,
         "leading": 116,
         "align": "center",
         "symbolPlacement": {
-          "x": 16,
-          "y": 65,
-          "scale": 180
+          "x": 50,
+          "y": 50,
+          "scale": 100
         },
         "accessoryPlacement": {
-          "x": 100,
-          "y": 100,
-          "scale": 75
+          "x": 91,
+          "y": 96,
+          "scale": 46
         },
         "dimensions": {
           "widthMm": 1080,
@@ -272,6 +272,14 @@
           },
           "extra": {
             "visible": false
+          },
+          "name": {
+            "text": "NOMBRE\nAPELLIDO\nAPELLIDO",
+            "visible": true
+          },
+          "dates": {
+            "text": "DD / MM / AAAA\nDD / MM / AAAA",
+            "visible": true
           }
         }
       }
@@ -424,6 +432,146 @@
           "extra": {
             "visible": false
           }
+        }
+      }
+    },
+    {
+      "id": "nicho-cruz-derecha",
+      "title": "Cruz a la derecha y escritura serena",
+      "type": "nicho",
+      "stoneFamily": "clara",
+      "style": "sobrio",
+      "technique": "grabado",
+      "ornamentation": "cruz",
+      "accessoryCategory": "florero",
+      "note": "Composición genérica con letras proporcionadas a la placa y complemento de material propio. Escala orientativa; no reproduce un encargo particular.",
+      "provenance": "inspirado",
+      "state": {
+        "stone": "macael",
+        "model": "nicho",
+        "layout": "cruzderecha",
+        "symbol": "incisaalta",
+        "devotional": "ninguno",
+        "ornament": "ninguno",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "marcellus",
+        "finish": "relieve",
+        "accessory": "florero-cilindrico-blanco",
+        "accessorySide": "free",
+        "accessoryFinish": "piedra",
+        "textSize": 100,
+        "leading": 116,
+        "align": "center",
+        "symbolPlacement": {
+          "x": 50,
+          "y": 50,
+          "scale": 100
+        },
+        "accessoryPlacement": {
+          "x": 10,
+          "y": 98,
+          "scale": 44
+        },
+        "dimensions": {
+          "widthMm": 1080,
+          "heightMm": 720
+        },
+        "fields": {
+          "header": {
+            "visible": false
+          },
+          "epitaph": {
+            "text": "D. E. P.",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          },
+          "name": {
+            "text": "NOMBRE\nAPELLIDO",
+            "visible": true
+          },
+          "dates": {
+            "text": "DD / MM / AAAA\nDD / MM / AAAA",
+            "visible": true
+          }
+        },
+        "ornamentPlacement": {
+          "x": 50,
+          "y": 50,
+          "scale": 100
+        }
+      }
+    },
+    {
+      "id": "nicho-arbol-grabado",
+      "title": "Olivo grabado sobre granito",
+      "type": "nicho",
+      "stoneFamily": "oscura",
+      "style": "sobrio",
+      "technique": "grabado",
+      "ornamentation": "árbol",
+      "accessoryCategory": "florero",
+      "note": "Composición genérica con letras proporcionadas a la placa y complemento de material propio. Escala orientativa; no reproduce un encargo particular.",
+      "provenance": "inspirado",
+      "state": {
+        "stone": "absoluto",
+        "model": "nicho",
+        "layout": "arbolateral",
+        "symbol": "ninguno",
+        "devotional": "ninguno",
+        "ornament": "arbol-memoria",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "marcellus",
+        "finish": "claro",
+        "accessory": "jarron-granito",
+        "accessorySide": "free",
+        "accessoryFinish": "piedra",
+        "textSize": 100,
+        "leading": 116,
+        "align": "center",
+        "symbolPlacement": {
+          "x": 50,
+          "y": 50,
+          "scale": 100
+        },
+        "accessoryPlacement": {
+          "x": 88,
+          "y": 98,
+          "scale": 44
+        },
+        "dimensions": {
+          "widthMm": 1080,
+          "heightMm": 720
+        },
+        "fields": {
+          "header": {
+            "visible": false
+          },
+          "epitaph": {
+            "text": "D. E. P.",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          },
+          "name": {
+            "text": "NOMBRE\nAPELLIDO",
+            "visible": true
+          },
+          "dates": {
+            "text": "DD / MM / AAAA\nDD / MM / AAAA",
+            "visible": true
+          }
+        },
+        "ornamentPlacement": {
+          "x": 50,
+          "y": 50,
+          "scale": 100
         }
       }
     }

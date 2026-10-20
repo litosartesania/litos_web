@@ -16,7 +16,7 @@
   function zone(face,z){return {x:face.x+z[0]*face.w,y:face.y+z[1]*face.h,w:z[2]*face.w,h:z[3]*face.h};}
   function paint(finish,dark){
     if(finish==='auto')finish=dark?'claro':'oscuro';
-    const map={oscuro:{color:'#302e2b',shadow:'#fff8e8',light:'#161514'},claro:{color:'#dcd7ca',shadow:'#121212',light:'#f5f0e4'},blanco:{color:'#f2efdf',shadow:'#101010',light:'#fff8e8'},plata:{color:dark?'#c2c8c9':'#4d5559',shadow:dark?'#101214':'#e8eef1',light:'#e7edef'},oro:{color:dark?'#c5a56b':'#81622e',shadow:dark?'#17110b':'#fff1d8',light:'#e1c894'},relieve:{color:dark?'#a5a39c':'#68645c',shadow:'#171614',light:'#f7f4e9'}};
+    const map={oscuro:{color:'#302e2b',shadow:'#fff8e8',light:'#161514'},claro:{color:'#dcd7ca',shadow:'#121212',light:'#f5f0e4'},blanco:{color:'#f2efdf',shadow:'#101010',light:'#fff8e8'},plata:{color:dark?'#c2c8c9':'#4d5559',shadow:dark?'#101214':'#e8eef1',light:'#e7edef'},oro:{color:dark?'#c5a56b':'#81622e',shadow:dark?'#17110b':'#fff1d8',light:'#e1c894'},relieve:{color:dark?'#a5a39c':'#a6a195',shadow:'#171614',light:'#f7f4e9'}};
     return {...map[finish],id:finish};
   }
   function fontCss(font,size){return `${font.style} 400 ${size}px "${font.family}",serif`;}
@@ -282,14 +282,15 @@
     let y=textBox.y,adjusted=false,truncated=false;
     const runs=[];
     for(const field of active){
-      const box={x:textBox.x,y,w:textBox.w,h:usable*field.weight/total};
+      const box=layout.fieldZones?.[field.id]?zone(face,layout.fieldZones[field.id]):{x:textBox.x,y,w:textBox.w,h:usable*field.weight/total};
       const contents=state.fields[field.id].text;
       const factor=font.id==='inglesa'?1.16:1;
-      let size=field.size*state.textSize/100*factor*(face.w/780);
+      const designSize=layout.fontHeight?.[field.id]?layout.fontHeight[field.id]*face.h:field.size*(face.w/780);
+      let size=designSize*state.textSize/100*factor;
       let lines;
       const leading=clamp(state.leading,105,180)/100;
       // Ample bearing allowance protects calligraphic ascenders/descenders and overhangs.
-      const minimum=Math.max(12,field.size*.43*(face.w/780));
+      const minimum=Math.max(8,designSize*.43);
       for(let n=0;n<120;n++){
         lines=wrap(contents,box.w*.88,font,size);
         if(lines.length*size*leading<=box.h*.82&&lines.every(line=>{measure.font=fontCss(font,size);const m=measure.measureText(line);return Math.max(m.width,(m.actualBoundingBoxLeft||0)+(m.actualBoundingBoxRight||0))<=box.w*.90;}))break;
@@ -316,7 +317,7 @@
       const descent=Math.max(size*.12,sample.actualBoundingBoxDescent||0);
       const inkHeight=ascent+descent+Math.max(0,lines.length-1)*lineHeight;
       const baseline=box.y+(box.h-inkHeight)/2+ascent;
-      const text=add(textLayer,'text',{'data-field':field.id,'data-zone':JSON.stringify(box),'font-family':font.family,'font-style':font.style,'font-weight':400,'font-size':size,'text-anchor':anchor,'xml:space':'preserve'});
+      const text=add(textLayer,'text',{'data-field':field.id,'data-zone':JSON.stringify(box),'font-family':font.family,'font-style':font.style,'font-weight':400,'font-size':size,'data-height-ratio':size/face.h,'text-anchor':anchor,'xml:space':'preserve'});
       lines.forEach((line,i)=>{
         add(text,'tspan',{x,y:baseline+i*lineHeight},line);
         runs.push({text:line,x,y:baseline+i*lineHeight,size,font:fontCss(font,size),align:state.align,color:finish.color});

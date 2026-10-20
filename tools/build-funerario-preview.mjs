@@ -56,7 +56,7 @@ for(const item of data.catalog.layouts){
  if(!layoutIds.has(item.id))continue;
  if(item.publicSelectable!==true||![...layout.options].some(option=>option.value===item.id))throw Error('Composición no disponible: '+item.id);
 }
-if(devotional.options.length!==9||layout.options.length!==9)throw Error('Faltan recursos de revisión');
+if(devotional.options.length!==9||layout.options.length!==12)throw Error('Faltan recursos de revisión');
 })();</script>`;
 const reliefScripts=scriptFor('recursos')+reliefBootstrap+['compositor','exportar','personalizador'].map(scriptFor).join('');
 const reliefReview=out.replace('<title>LITOS · Estudio de composición</title>','<title>LITOS · Revisión de relieves fase 3</title>')

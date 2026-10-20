@@ -80,11 +80,15 @@
     const image=document.createElement('img');image.alt='';image.loading='lazy';
     try{
       const candidate=presetState(preset);
-      const figure=publicOrnaments.find(x=>x.id===candidate.devotional);
-      const missing=figure?.format==='image/webp'&&!resources[figure.path];
-      if(missing){const thumb=resources[figure.thumbnailPath];if(thumb)resources[figure.path]=thumb;else candidate.devotional='ninguno';}
+      const borrowed=[];
+      for(const slot of ['symbol','devotional','ornament','secondary']){
+        const figure=publicOrnaments.find(x=>x.id===candidate[slot]);
+        if(figure?.format!=='image/webp'||resources[figure.path])continue;
+        const thumb=resources[figure.thumbnailPath];
+        if(thumb){resources[figure.path]=thumb;borrowed.push(figure.path);}else candidate[slot]='ninguno';
+      }
       let picture;
-      try{picture=window.LitosMemorialComposer.compose(candidate);}finally{if(missing)delete resources[figure.path];}
+      try{picture=window.LitosMemorialComposer.compose(candidate);}finally{for(const path of borrowed)delete resources[path];}
       image.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(picture.svg));
     }catch(error){image.alt='Recreación no disponible';}
     return image;

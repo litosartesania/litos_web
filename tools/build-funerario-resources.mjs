@@ -8,7 +8,7 @@ const raster=catalog.ornaments.filter(o=>o.format==='image/webp');
 const reviewOnly=raster.filter(o=>o.publicSelectable===false);
 // Pictorial sources stay as separate static files, loaded only when selected.
 // Their small thumbnails are fetched by the visual gallery as it scrolls.
-const cardFigures=new Set(commercialModels.models.map(p=>p.state.devotional));
+const cardFigures=new Set(commercialModels.models.flatMap(p=>['symbol','devotional','ornament','secondary'].map(slot=>p.state[slot])));
 const cardThumbnails=raster.filter(o=>cardFigures.has(o.id)).map(o=>o.thumbnailPath);
 const paths=[...cardThumbnails,...catalog.materials.flatMap(m=>m.variants.map(v=>v.path)),...catalog.fonts.map(f=>f.path),...catalog.ornaments.filter(o=>o.format!=='image/webp').map(o=>o.path),...catalog.accessories.flatMap(a=>[a.path,a.thumbnailPath])];
 const resources={};

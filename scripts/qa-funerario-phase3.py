@@ -21,7 +21,7 @@ with sync_playwright() as p:
   page.locator('#memorial-create').click()
   assert page.locator('#relief-review-only').count()==1
   assert page.locator('#memorial-devotional option').count()==9
-  assert page.locator('#memorial-layout option').count()==9
+  assert page.locator('#memorial-layout option').count()==12
   assert page.locator('#memorial-gallery-religiosas').count()==1
   page.locator('.memorial-controls > details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
   page.locator('#memorial-gallery-religiosas').scroll_into_view_if_needed()

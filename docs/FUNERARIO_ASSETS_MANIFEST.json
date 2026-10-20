@@ -199,13 +199,13 @@
     },
     {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 63287,
-      "sha256": "43bb6e060e6cc6f59c9c602232e9927d1f026bea491956d63889b3e0625bc9bb"
+      "bytes": 66753,
+      "sha256": "415fe7dd34af4eee7aba6339e99d0924f00ad926b07ad6e101156079470048b6"
     },
     {
       "path": "assets/funerario/configuracion/modelos-comerciales.json",
-      "bytes": 12410,
-      "sha256": "88ab19d8dfec9c554e81d106c92a44cd658428cdb1fc32b5e021680e22445ff5"
+      "bytes": 16430,
+      "sha256": "44d118951e64a1f0590d8cdc1c24ca80aeceed0e07c39a8fc7e1a4bc16286b08"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",
@@ -401,6 +401,11 @@
       "path": "assets/funerario/ornamentos/cruces/florenzada.svg",
       "bytes": 728,
       "sha256": "615b9680b1a4ccada334a1b011a5a4899bd1bbdfd86facf75b98b5a21a444519"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/incisaalta.svg",
+      "bytes": 229,
+      "sha256": "3c7a01dbaa11180b4e5e04be5156923ebd72e949dd0af7e74fb276995d5f1a52"
     },
     {
       "path": "assets/funerario/ornamentos/cruces/latina.svg",

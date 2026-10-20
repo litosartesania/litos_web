@@ -595,6 +595,207 @@
       ],
       "publicSelectable": true,
       "visualReview": "Aprobada por el propietario para simulación pública; pendiente de validación técnica."
+    },
+    {
+      "id": "cruzalta",
+      "name": "Cruz alta y texto contenido",
+      "text": [
+        0.42,
+        0.15,
+        0.49,
+        0.62
+      ],
+      "symbol": [
+        0.08,
+        0.1,
+        0.24,
+        0.63
+      ],
+      "flower": [
+        0.08,
+        0.8,
+        0.16,
+        0.1
+      ],
+      "separator": [
+        0.43,
+        0.78,
+        0.39,
+        0.03
+      ],
+      "fontHeight": {
+        "header": 0.027,
+        "name": 0.055,
+        "dates": 0.039,
+        "epitaph": 0.04,
+        "extra": 0.025
+      },
+      "fieldZones": {
+        "header": [
+          0.43,
+          0.08,
+          0.48,
+          0.06
+        ],
+        "name": [
+          0.42,
+          0.18,
+          0.49,
+          0.28
+        ],
+        "dates": [
+          0.42,
+          0.47,
+          0.49,
+          0.15
+        ],
+        "epitaph": [
+          0.42,
+          0.65,
+          0.49,
+          0.14
+        ],
+        "extra": [
+          0.42,
+          0.81,
+          0.49,
+          0.06
+        ]
+      }
+    },
+    {
+      "id": "cruzderecha",
+      "name": "Cruz alta a la derecha",
+      "text": [
+        0.08,
+        0.15,
+        0.52,
+        0.62
+      ],
+      "symbol": [
+        0.72,
+        0.1,
+        0.22,
+        0.64
+      ],
+      "flower": [
+        0.77,
+        0.81,
+        0.12,
+        0.1
+      ],
+      "separator": [
+        0.43,
+        0.78,
+        0.39,
+        0.03
+      ],
+      "fontHeight": {
+        "header": 0.027,
+        "name": 0.055,
+        "dates": 0.039,
+        "epitaph": 0.04,
+        "extra": 0.025
+      },
+      "fieldZones": {
+        "header": [
+          0.08,
+          0.08,
+          0.52,
+          0.06
+        ],
+        "name": [
+          0.08,
+          0.18,
+          0.52,
+          0.28
+        ],
+        "dates": [
+          0.08,
+          0.47,
+          0.52,
+          0.15
+        ],
+        "epitaph": [
+          0.08,
+          0.65,
+          0.52,
+          0.14
+        ],
+        "extra": [
+          0.08,
+          0.81,
+          0.52,
+          0.06
+        ]
+      }
+    },
+    {
+      "id": "arbolateral",
+      "name": "Árbol y texto lateral",
+      "text": [
+        0.42,
+        0.15,
+        0.49,
+        0.62
+      ],
+      "symbol": [
+        0.08,
+        0.04,
+        0.08,
+        0.08
+      ],
+      "flower": [
+        0.06,
+        0.16,
+        0.34,
+        0.57
+      ],
+      "separator": [
+        0.43,
+        0.78,
+        0.39,
+        0.03
+      ],
+      "fontHeight": {
+        "header": 0.027,
+        "name": 0.055,
+        "dates": 0.039,
+        "epitaph": 0.04,
+        "extra": 0.025
+      },
+      "fieldZones": {
+        "header": [
+          0.43,
+          0.08,
+          0.48,
+          0.06
+        ],
+        "name": [
+          0.42,
+          0.18,
+          0.49,
+          0.28
+        ],
+        "dates": [
+          0.42,
+          0.47,
+          0.49,
+          0.15
+        ],
+        "epitaph": [
+          0.42,
+          0.65,
+          0.49,
+          0.14
+        ],
+        "extra": [
+          0.42,
+          0.81,
+          0.49,
+          0.06
+        ]
+      }
     }
   ],
   "fonts": [
@@ -1719,6 +1920,16 @@
       "validation": "Grabado figurativo conceptual; detalle mínimo y técnica pendientes de prueba en piedra.",
       "visualReview": "Propuesta original para revisión en configurador.",
       "technicalValidation": "Pendiente de taller."
+    },
+    {
+      "id": "incisaalta",
+      "name": "Cruz incisa alta",
+      "category": "cruces",
+      "path": "assets/funerario/ornamentos/cruces/incisaalta.svg",
+      "displayAspect": 0.38,
+      "displayShape": "vertical",
+      "simulatedTechnique": "grabado",
+      "publicSelectable": true
     }
   ],
   "accessories": [
