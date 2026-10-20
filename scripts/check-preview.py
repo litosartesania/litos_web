@@ -32,8 +32,8 @@ p=Inspector();p.feed(html)
 assert p.views==['inicio','funerario','mobiliario','aviso-legal','privacidad'],p.views
 assert p.images>=5 and p.styles>=1 and p.scripts>=1
 assert not p.external,p.external
-assert not p.forms, 'preview must not contain forms'
-assert 'type="submit"' not in html and 'id="contact-form"' not in html
+assert len(p.forms)==3 and all('data-litos-contact' in f and not f.get('action') for f in p.forms), 'only three local contact forms allowed'
+assert html.count('type="submit" disabled')==3 and html.count('id="contact-form"')==3
 assert p.routes=={'index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html'},p.routes
 assert 'name="robots" content="noindex,nofollow"' in html
 # The catalog's inline JavaScript contains literal image-path templates, not loaded resources.
@@ -41,10 +41,10 @@ assert 'name="robots" content="noindex,nofollow"' in html
 assert 'window.LITOS_CATALOG_INFO' in html, 'interactive catalog code must be embedded'
 for page in ('index.html','funerario.html','mobiliario.html'):
  assert (root/page).is_file(),page
-assert '<form' not in (root/'index.html').read_text()
+assert (root/'index.html').read_text().count('data-litos-contact')==1
 for page in ('funerario.html','mobiliario.html'):
  content=(root/page).read_text()
- assert '<form' not in content and 'solicitar presupuesto' not in content.lower()
+ assert content.count('data-litos-contact')==1 and 'type="submit" disabled' in content
 gallery=root/'LITOS_BIBLIOTECA_FUNERARIA_FASE2.html'
 assert gallery.is_file(), 'phase 2 gallery missing'
 gp=Inspector();gp.feed(gallery.read_text(encoding='utf-8'))
@@ -67,4 +67,4 @@ lp=Inspector();lp.feed(local.read_text(encoding='utf-8'))
 assert lp.styles>=1 and lp.scripts>=5 and not lp.external and not lp.forms
 assert 'id=\\"litos-local-upload\\"' in local.read_text(encoding='utf-8') or 'id="litos-local-upload"' in local.read_text(encoding='utf-8')
 assert 'noindex,nofollow' in local.read_text(encoding='utf-8')
-print('PASS: portable five-view preview is self-contained, images embedded and commercial forms absent')
+print('PASS: portable five-view preview is self-contained, images embedded and commercial forms disabled and no network action')
