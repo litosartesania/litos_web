@@ -53,7 +53,7 @@ with sync_playwright() as p:
  page.locator('#memorial-filter-stone').select_option('oscura')
  assert page.locator('.memorial-case-card').count()==0
  page.locator('#memorial-filter-reset').click()
- assert page.locator('.memorial-case-card').count()==10
+ assert page.locator('.memorial-case-card').count()==13
  page.locator('#memorial-create').click()
  page.locator('#memorial-reset').click()
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
