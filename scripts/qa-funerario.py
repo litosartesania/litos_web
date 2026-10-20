@@ -52,7 +52,7 @@ with sync_playwright() as p:
         plan_text=Path(plan.path()).read_text(encoding='utf8')
         assert 'width="900"' in plan_text and 'height="700"' in plan_text and 'NO USAR PARA CORTE' in plan_text
         page.locator('#memorial-layout').select_option('devocionlateral')
-        page.locator('#memorial-devotional').select_option('cristo-corona')
+        page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
         page.wait_for_selector('[data-slot="devotional"] image')
         for technique,filter_id in (('grabado','pictorial-engraved'),('bajorrelieve','carved-relief'),('aplique 3D','applied-relief')):
             page.locator('#memorial-devotional-technique').select_option(technique)
