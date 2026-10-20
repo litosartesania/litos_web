@@ -49,7 +49,10 @@
     const raster=entry.path.endsWith('.png')||entry.path.endsWith('.webp');
     const source=raster?null:new DOMParser().parseFromString(resource,'image/svg+xml').documentElement;
     const factor=clamp(placement.scale,25,250)/100;
-    const aspect=raster&&entry.digitalSize?entry.digitalSize[0]/entry.digitalSize[1]:1;
+    // Certain engraved crosses are deliberately tall: a square placement
+    // container compresses them compared with actual workshop compositions.
+    const aspect=raster&&entry.digitalSize?entry.digitalSize[0]/entry.digitalSize[1]:
+      Number.isFinite(entry.displayAspect)&&entry.displayAspect>0?entry.displayAspect:1;
     const fullWidth=Math.min(box.w,box.h*aspect),fullHeight=fullWidth/aspect;
     // The layout box supplies the initial size/centre; the sliders span the entire face.
     const fit=Math.min(factor,(face.w*.96)/fullWidth,(face.h*.96)/fullHeight);
@@ -66,7 +69,10 @@
     // Only vetted repository SVG paths are imported, never user content.
     const artWidth=raster&&entry.digitalSize?entry.digitalSize[0]:100;
     const artHeight=raster&&entry.digitalSize?entry.digitalSize[1]:100;
-    const nested=add(g,'svg',{x,y,width,height,viewBox:`0 0 ${artWidth} ${artHeight}`,'aria-hidden':'true'});
+    const nested=add(g,'svg',{x,y,width,height,viewBox:`0 0 ${artWidth} ${artHeight}`,
+      // Anisotropic scaling is intentional only for vetted elongated silhouettes.
+      preserveAspectRatio:!raster&&entry.displayShape==='vertical'?'none':'xMidYMid meet',
+      'aria-hidden':'true'});
     if(raster){
       if(!resource.startsWith('data:image/png;base64,')&&!resource.startsWith('data:image/webp;base64,'))throw Error('Imagen PNG/WebP incorrecta.');
       add(nested,'image',{href:resource,x:0,y:0,width:artWidth,height:artHeight,preserveAspectRatio:'xMidYMid meet'});
