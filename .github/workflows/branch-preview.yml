@@ -27,6 +27,7 @@ jobs:
           node --check funerario-exportar.js
           node --check tools/build-preview.mjs
           node --check tools/build-standalone.mjs
+          node --check tools/build-funerario-ui.mjs
           node --check tools/extend-funerario-phase2.mjs
           node --check tools/extend-funerario-phase3.mjs
           node --check tools/build-funerario-phase3-gallery.mjs
@@ -38,7 +39,16 @@ jobs:
           python3 scripts/check-site.py _site
           python3 scripts/check-funerario.py
       - name: Validate publication safety gate without deploying
-        run: python3 scripts/check-site.py _site --production
+        run: |
+          if python3 scripts/check-site.py _site --production > /tmp/litos-release-gate.log 2>&1; then
+            echo "::error::Missing legal verification incorrectly passed production gate"
+            exit 1
+          fi
+          if ! grep -q 'release blocked: legal identity and responsible party have not been verified' /tmp/litos-release-gate.log; then
+            cat /tmp/litos-release-gate.log
+            exit 1
+          fi
+          echo "Preview only; production blocked pending responsible-party verification"
       - name: Set up Chromium for responsive visual QA
         run: |
           python3 -m pip install playwright
@@ -70,6 +80,12 @@ jobs:
           path: |
             preview/LITOS_PREVISUALIZACION_AUTONOMA.html
             preview/LITOS_CONFIGURADOR_FUNERARIO.html
+            contact-screenshots/CONTACTO_index_390.png
+            contact-screenshots/CONTACTO_index_1440.png
+            contact-screenshots/CONTACTO_funerario_390.png
+            contact-screenshots/CONTACTO_funerario_1440.png
+            contact-screenshots/CONTACTO_mobiliario_390.png
+            contact-screenshots/CONTACTO_mobiliario_1440.png
             preview/LITOS_TECNICAS_PR72.html
             preview/LITOS_PR72_320.png
             preview/LITOS_PR72_390.png
