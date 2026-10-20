@@ -233,6 +233,42 @@
       ],
       "architecture": "repisa",
       "note": "Repisa ilustrativa; anclajes, canto y medidas por validar."
+    },
+    {
+      "id": "portada-arcos-gemelos",
+      "name": "Placa de portada con arcos gemelos",
+      "face": [
+        0.13,
+        0.19,
+        0.74,
+        0.66
+      ],
+      "architecture": "arcos-gemelos",
+      "note": "Dos arcos incisos separados, composiciones en columnas y vaso de apoyo opcional. Geometría conceptual; secciones y medidas por confirmar."
+    },
+    {
+      "id": "pilastras-altas",
+      "name": "Portada alta con pilastras molduradas",
+      "face": [
+        0.25,
+        0.105,
+        0.5,
+        0.78
+      ],
+      "architecture": "pilastras-altas",
+      "note": "Pilastras estriadas, cornisa, medallón tallado y jardinera de apoyo en formato vertical. Cotas y espesor por validar."
+    },
+    {
+      "id": "placa-anillas",
+      "name": "Placa modular de panteón con anillas",
+      "face": [
+        0.13,
+        0.29,
+        0.74,
+        0.43
+      ],
+      "architecture": "losa-anillas",
+      "note": "Unidad horizontal con borde fresado, sujeciones discretas y anillas superiores. Herrajes y cargas pendientes de validación."
     }
   ],
   "layouts": [
