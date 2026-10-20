@@ -666,3 +666,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Validación local de esta continuidad: build y allowlist, integridad de 131 recursos, sintaxis JS, vista autónoma y cinco páginas responsive: PASS. Prueba nueva: 9 presets, 10 complementos, 1.260 composiciones y anchos 320/390/768/1440, sin errores. Fase 3: 72 composiciones y 18 cruces en cada ancho 390/768/1440; comparación de píxeles PNG inferior a 1 nivel RGB medio en la región de figura. WebKit 390: preset, complemento, tallado, PNG/SVG, sin errores ni desbordamiento. Carga diferida y recuperación ante fallo del complemento: PASS.
 - Revisión de privacidad del diff: sin rutas/fuentes privadas añadidas; todos los recursos originales del catálogo permanecen sin cambios. La CI del nuevo commit debe verificarse en la PR; no equivale a aceptación comercial ni a una publicación.
 - Revisión visual posterior: corregido el tamaño intrínseco de miniaturas verticales que invadía el rótulo del complemento. Añadida comprobación geométrica de separación imagen/rótulo.
+
+
+## 20/10/2026 — Publicación solicitada de PR #72
+- El propietario solicita que el avance ya esté disponible en la web pública; se procede a publicar la PR #72 tras comprobar la cabeza y su CI.
+- Detectada una expectativa obsoleta en la comprobación de despliegue: todavía exigía la versión anterior de CSS/JS. Se obtienen ahora las cinco URL de recursos del HTML que se está publicando; además se verifica el hash exacto del HTML y del CSS, junto con los cuatro módulos y los 131 recursos funerarios.
+- La publicación solo se considerará verificada cuando termine Pages y se pruebe la URL pública en escritorio y móvil. El estado definitivo y su ejecución quedan registrados en la PR #72.
