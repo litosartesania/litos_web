@@ -1098,6 +1098,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .memorial-studio[data-path=accessories] .memorial-accessory-shop{display:block}
 .memorial-studio[data-path=accessories] :is(.memorial-workbench,.memorial-inspiration){display:none}
 .memorial-accessory-shop h4{font:400 clamp(1.8rem,3vw,2.6rem) var(--serif);margin:1rem 0}
+.memorial-shop-filters{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.25rem 0 .4rem}
+.memorial-shop-filters button{min-height:2.65rem;border:1px solid #b9a98f;background:transparent;color:#34291e;padding:.45rem .85rem;font:500 .88rem var(--sans);cursor:pointer}
+.memorial-shop-filters button[aria-pressed=true]{color:#f5efe6;background:#372f25;border-color:#372f25}
+.memorial-shop-filters button:focus-visible{outline:3px solid #825c30;outline-offset:2px}
+.memorial-shop-count{font-size:.85rem;color:#675a4b;margin:.5rem 0 0}
+.memorial-shop-item[hidden]{display:none!important}
+.memorial-shop-item[aria-pressed=true]{outline:2px solid #765738;outline-offset:1px}
 .memorial-accessory-shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin:1.5rem 0}
 .memorial-shop-item{display:flex;flex-direction:column;align-items:center;gap:.65rem;border:0;border-bottom:1px solid #b9a98f;padding:1rem;background:#f7f1e7;color:#34291e;font:1rem var(--sans);cursor:pointer}
 .memorial-shop-item img{width:160px;height:160px;max-width:100%;object-fit:contain}

@@ -686,3 +686,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Una silueta larga no debe renderizarse siempre dentro de un contenedor cuadrado. El perfil `doblefilete` incorpora un aspecto vertical validado en metadatos y se representa sin el anterior encajado cuadrado.
 - Pruebas de regresión: conteo de 10 modelos y comprobación del ejemplo con controles restaurados, cruz vertical, florero y captura de la escena. Ejecutar CI del HEAD de la PR; no certificar producción antes de su resultado.
 - Toda ficha privada y los originales permanecen privados. Los modelos son **recreaciones**, no fotografías ni expedientes públicos de encargos particulares.
+
+## 20/10/2026 — Galería de complementos con familias comerciales
+- La galería independiente de floreros ahora permite filtrar entre todos, floreros, búcaros y jarrones, jardineras, faroles y luz, y repisas/soportes. Los filtros se generan únicamente desde los diez artículos genéricos originales ya existentes; no se añaden fotos ni diseños ajenos.
+- Seleccionar un accesorio desde su tarjeta conserva el configurador y permite editar posición/tamaño. Se resalta el producto seleccionado y se comunica el número visible por categoría.
+- Revisada la web de referencia del sector: su página pública de accesorios presenta una categoría comercial, **no un inventario con referencias y medidas contrastables**. Otras fuentes sectoriales sí listan variantes y dimensiones, pero esos datos son de terceros, no de LITOS; no se incluyen como especificaciones comerciales del taller sin su validación.
+- QA de filtros, retorno al configurador, respuesta visual y ausencia de errores. Cambios solo en la rama aislada; actualizar e invalidar caché de recursos estáticos.

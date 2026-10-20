@@ -157,6 +157,21 @@
     });
   }
   const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame',accessory:'accessory',accessorySide:'accessorySide',accessoryFinish:'accessoryFinish',align:'align'};
+  let activeAccessoryFilter='todos';
+  function applyAccessoryFilter(){
+    const shop=$('accessory-shop-grid');if(!shop)return;
+    let visible=0;
+    for(const button of shop.querySelectorAll('[data-accessory-choice]')){
+      const matches=activeAccessoryFilter==='todos'||button.dataset.category===activeAccessoryFilter;
+      button.hidden=!matches;if(matches)visible++;
+      button.setAttribute('aria-pressed',String(state.accessory===button.dataset.accessoryChoice));
+    }
+    for(const button of document.querySelectorAll('[data-accessory-category-filter]')){
+      button.setAttribute('aria-pressed',String(button.dataset.accessoryCategoryFilter===activeAccessoryFilter));
+    }
+    const counter=$('accessory-shop-count');
+    if(counter)counter.textContent=visible===1?'1 complemento en esta categoría':visible+' complementos en esta categoría';
+  }
   function renderAccessoryGallery(){
     const host=$('accessory-gallery');if(!host)return;
     const fragment=document.createDocumentFragment();
@@ -171,14 +186,28 @@
     host.replaceChildren(fragment);
     const shop=$('accessory-shop-grid');
     if(shop&&!shop.childElementCount){
+      const filterBar=document.createElement('div');filterBar.className='memorial-shop-filters';
+      filterBar.setAttribute('role','group');filterBar.setAttribute('aria-label','Categoría de complementos');
+      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes']];
+      for(const [key,name] of groups){
+        if(key!=='todos'&&!catalog.accessories.some(item=>item.category===key))continue;
+        const filter=document.createElement('button');filter.type='button';
+        filter.dataset.accessoryCategoryFilter=key;filter.textContent=name;
+        filter.addEventListener('click',()=>{activeAccessoryFilter=key;applyAccessoryFilter();});
+        filterBar.append(filter);
+      }
+      const counter=document.createElement('p');counter.id='memorial-accessory-shop-count';
+      counter.className='memorial-shop-count';counter.setAttribute('aria-live','polite');
+      shop.before(filterBar,counter);
       for(const item of catalog.accessories){
-        const button=document.createElement('button');button.type='button';button.className='memorial-shop-item';button.dataset.accessoryChoice=item.id;
+        const button=document.createElement('button');button.type='button';button.className='memorial-shop-item';button.dataset.accessoryChoice=item.id;button.dataset.category=item.category;
         const img=document.createElement('img');img.src=resources[item.thumbnailPath];img.alt='';img.width=160;img.height=160;img.loading='lazy';
         const name=document.createElement('strong');name.textContent=item.name;
         const action=document.createElement('span');action.textContent='Añadir a mi lápida';button.append(img,name,action);
         button.addEventListener('click',()=>{state.accessory=item.id;sync();renderAccessoryGallery();requestRender();mode('customize');steps[1].open=true;root.scrollIntoView({block:'start'});status(item.name+' añadido a tu composición.');});shop.append(button);
       }
     }
+    applyAccessoryFilter();
     const selected=catalog.accessories.find(x=>x.id===state.accessory);
     if(selected?.renderPath)loadPictorial({...selected,path:selected.renderPath,format:'image/webp'});
     $('accessory-note').textContent=selected?`${selected.category} · ${selected.mount}. Medidas y disponibilidad pendientes de validación.`:'Elige un complemento para consultar sus condiciones de montaje.';
