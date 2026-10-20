@@ -24,10 +24,36 @@
   let activePreset=null;
   function presetState(preset){
     const next=initial();
-    for(const [k,v] of Object.entries(preset.state))if(Object.prototype.hasOwnProperty.call(next,k)&&typeof next[k]!=='object')next[k]=v;
+    for(const [k,v] of Object.entries(preset.state)){
+      if(Object.prototype.hasOwnProperty.call(next,k)&&typeof next[k]!=='object')next[k]=v;
+    }
+    // Restore each model's deliberate visual proportions, not merely its material
+    // and ornament IDs. Only allow numeric placement controls from our public JSON.
+    for(const id of ['symbol','devotional','ornament','secondary','accessory']){
+      const key=id+'Placement',placement=preset.state[key];
+      if(!placement||typeof placement!=='object'||Array.isArray(placement))continue;
+      for(const part of ['x','y','scale']){
+        const value=placement[part],min=part==='scale'?25:0,max=part==='scale'?250:100;
+        if(Number.isFinite(value))next[key][part]=Math.max(min,Math.min(max,value));
+      }
+    }
+    const dimensions=preset.state.dimensions;
+    if(dimensions&&Number.isInteger(dimensions.widthMm)&&Number.isInteger(dimensions.heightMm)&&
+       dimensions.widthMm>=50&&dimensions.widthMm<=3000&&dimensions.heightMm>=50&&dimensions.heightMm<=3000){
+      next.dimensions={widthMm:dimensions.widthMm,heightMm:dimensions.heightMm};
+    }
     next.devotionalTechnique=preset.technique==='aplique 3D'?'aplique 3D':preset.technique==='bajorrelieve'?'bajorrelieve':'grabado';
     const copy={header:'EN RECUERDO',name:'NOMBRE APELLIDO',dates:'DD / MM / AAAA',epitaph:'SIEMPRE EN NUESTRA MEMORIA',extra:''};
     for(const [k,v] of Object.entries(copy))if(next.fields[k])next.fields[k].text=v;
+    // Only fictional, explicitly public strings can be used in model templates.
+    for(const [id,override] of Object.entries(preset.state.fields||{})){
+      if(!next.fields[id]||!override||typeof override!=='object')continue;
+      if(typeof override.visible==='boolean')next.fields[id].visible=override.visible;
+      if(typeof override.text==='string'){
+        const specification=catalog.fields.find(f=>f.id===id);
+        next.fields[id].text=override.text.slice(0,specification.max);
+      }
+    }
     return next;
   }
   function mode(path){
