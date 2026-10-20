@@ -65,7 +65,9 @@ with sync_playwright() as app:
    if file=='index.html':
     assert page.locator('a.path[href="funerario.html"]').count()==1
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
-    assert page.locator('form').count()==0
+    assert page.locator('form#contact-form').count()==1
+    assert page.locator('.workshop-intro').count()==0
+    assert page.locator('.landing-note').count()==0
    elif file in ('funerario.html','mobiliario.html'):
     if file=='funerario.html':
      assert page.locator('.catalog-card').count()==3
@@ -91,7 +93,7 @@ with sync_playwright() as app:
      assert page.locator('[data-ornament="simbolos:olivo"]').count()==1
      page.locator('#memorial-text').fill('<img src=x onerror=alert(1)>')
      assert page.locator('#memorial-rendered img').count()==0
-     assert page.locator('form').count()==0
+     assert page.locator('form#contact-form').count()==1
     else:
      assert page.locator('.piece-card').count()==21
      assert page.locator('.piece-photos img').count()==0
@@ -238,9 +240,18 @@ with sync_playwright() as app:
      assert page.locator('.piece-card:visible').count()==3
      page.locator('[data-category-filter="Todos"]').click()
      assert page.locator('.piece-card:visible').count()==21
-    assert page.locator('form').count()==0
-    assert page.locator('.project-status').count()==1
-    assert page.get_by_text('Por ahora no aceptamos encargos.').count()==1
+    assert page.locator('form#contact-form').count()==1
+    form=page.locator('#contact-form')
+    assert form.locator('[name="nombre"]').is_visible()
+    assert form.locator('[name="correo"]').is_visible()
+    assert form.locator('[name="mensaje"]').is_visible()
+    assert form.locator('[name="privacidad"]').count()==1
+    # No unverified inbox may become publicly actionable.
+    assert form.locator('button[type="submit"]').is_disabled()
+    if file=='mobiliario.html':assert page.locator('.hero-furniture').count()==0
+    assert page.locator('.project-status').count()==0
+    assert page.locator('.made-to-measure').count()==0
+    assert page.locator('.page-pricing').count()==0
    else:
     assert page.locator('.legal-content h2').count()>3
     assert page.locator('form').count()==0
