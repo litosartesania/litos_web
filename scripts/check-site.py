@@ -281,23 +281,27 @@ for page,html in htmls.items():
     target=Inspect();target.feed(htmls.get(name,(root/name).read_text()))
     assert unquote(u.fragment) in target.ids
   elif u.fragment:assert unquote(u.fragment) in p.ids,(page,uri)
- assert not p.forms,(page,'informational-only website must not include forms')
-assert not parsers['index.html'].forms and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
+ assert len(p.forms)==(1 if page in ('index.html','funerario.html','mobiliario.html') else 0),(page,'unexpected form count')
+assert len(parsers['index.html'].forms)==1 and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
 for page,count in [('funerario.html',3)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
- assert not p.forms and 'id="precios"' not in htmls[page]
- assert 'id="contacto"' not in htmls[page]
+ assert len(p.forms)==1 and 'id="precios"' not in htmls[page]
+ assert 'id="contacto"' in htmls[page]
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
 assert 'funerario-personalizador.js' in htmls['funerario.html']
+assert all('id="memorial-gallery-'+group+'"' in htmls['funerario.html'] for group in ('cruces','religiosas','flores','secondary','marcos','separadores')), 'motif galleries missing'
+assert 'id="memorial-gallery-category"' not in htmls['funerario.html'], 'obsolete duplicate tab/gallery remains'
 assert not any(token in (root/'funerario-personalizador.js').read_text(encoding='utf8') for token in ('fetch(', 'localStorage', 'sessionStorage', 'XMLHttpRequest', 'sendBeacon', 'innerHTML', 'document.cookie'))
-assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
+assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html']
+picker=re.search(r'<select id="material-picker"[^>]*>(.*?)</select>',htmls['mobiliario.html'],re.S)
+assert picker and picker.group(1).count('<option value=')==10 and picker.group(1).count('value="plano-tecnico"')==1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261015-macetero8' in htmls['mobiliario.html']
+assert 'styles.css?v=litos-motivos-contacto-20261020' in htmls['mobiliario.html']
 assert 'catalogo-precios.js?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
@@ -325,12 +329,15 @@ assert 'class="memorial-studio"' not in htmls['mobiliario.html']
 assert 'id="memorial-workbench"' not in htmls['mobiliario.html']
 assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls['index.html'].lower()
 for page in ('index.html','funerario.html','mobiliario.html'):
- assert not parsers[page].forms,(page,'lead collection forbidden')
- assert 'href="#contacto"' not in htmls[page],(page,'lead link forbidden')
- assert 'id="contact-form"' not in htmls[page],(page,'form ID forbidden')
+ assert len(parsers[page].forms)==1,(page,'one contact form expected')
+ form=parsers[page].forms[0]
+ assert form.get('id')=='contact-form' and 'data-litos-contact' in form,(page,'local mail form expected')
+ assert not form.get('action') and not form.get('method'),(page,'network submit forbidden')
+ assert 'type="submit" disabled' in htmls[page],(page,'fail closed without JavaScript')
+ assert 'id="contact-privacy"' in htmls[page],(page,'consent missing')
  assert 'solicitar presupuesto' not in htmls[page].lower(),(page,'outdated CTA')
  assert 'class="project-status"' not in htmls[page] and 'class="made-to-measure"' not in htmls[page],(page,'obsolete blocks')
-assert 'No integra formularios de envío' in htmls['privacidad.html']
+assert 'Incluye un formulario que únicamente prepara un borrador' in htmls['privacidad.html']
 assert 'no procesa pagos' in htmls['aviso-legal.html']
 css=(root/'styles.css').read_text();js=(root/'script.js').read_text()
 assert 'formResponse' not in js and 'fetch(' not in (root/'catalogo-precios.js').read_text() and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
@@ -339,8 +346,7 @@ for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
 if '--production' in sys.argv:
  assert not any('[[PENDIENTE_' in html for html in htmls.values()), 'release blocked: missing verified legal identity/address/tax ID'
  assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
- assert all('mailto:' not in htmls[p] for p in pages), 'release blocked: mail contact or lead collection present'
- assert all(not parsers[p].forms for p in pages), 'release blocked: form present'
+ assert 'data-litos-legal-identity-verified="true"' in htmls['aviso-legal.html'], 'release blocked: legal identity and responsible party have not been verified'
  assert 'no procesa pagos' in htmls['aviso-legal.html'], 'release blocked: legal payment scope missing'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
