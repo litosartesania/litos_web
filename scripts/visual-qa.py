@@ -10,7 +10,7 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261015-macetero8"' in html
+  assert 'href="styles.css?v=litos-contacto-20261020-v1"' in html
   assert 'src="catalogo-precios.js?v=stone-20261015-bandeja8"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
@@ -20,8 +20,8 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261015-macetero8">','<style>'+css+'</style>')
- html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=litos-contacto-20261020-v1">','<style>'+css+'</style>')
+ html=html.replace('<script src="script.js?v=litos-contacto-20261020-v1"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
   html=html.replace('<script src="catalogo-precios.js?v=stone-20261015-bandeja8"></script>','<script>'+catalog+'</script>')
