@@ -54,10 +54,11 @@ with sync_playwright() as p:
         page.locator('#memorial-layout').select_option('devocionlateral')
         page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
         page.wait_for_selector('[data-slot="devotional"] image')
+        print('TECH INITIAL',width,page.evaluate("""()=>({layout:document.querySelector('#memorial-slab')?.dataset.layout,devotional:document.querySelector('#memorial-devotional')?.value,tech:document.querySelector('#memorial-devotional-technique')?.value,slots:[...document.querySelectorAll('#memorial-slab [data-slot]')].map(x=>x.dataset.slot),status:document.querySelector('#memorial-status')?.textContent})"""),flush=True)
         for technique,filter_id in (('grabado','pictorial-engraved'),('bajorrelieve','carved-relief'),('aplique 3D','applied-relief')):
             page.locator('#memorial-devotional-technique').select_option(technique)
             page.wait_for_timeout(250)
-            print('TECHNIQUE QA',width,technique,page.evaluate("""()=>({selected:document.querySelector('#memorial-devotional')?.value,control:document.querySelector('#memorial-devotional-technique')?.value,actual:document.querySelector('[data-slot=devotional]')?.dataset.technique,busy:document.querySelector('#memorial-workbench')?.getAttribute('aria-busy'),status:document.querySelector('#memorial-status')?.textContent,model:document.querySelector('#memorial-slab')?.dataset.layout})"""),flush=True)
+            print('TECHNIQUE QA',width,technique,page.evaluate("""()=>({selected:document.querySelector('#memorial-devotional')?.value,control:document.querySelector('#memorial-devotional-technique')?.value,actual:document.querySelector('[data-slot=devotional]')?.dataset.technique,busy:document.querySelector('#memorial-workbench')?.getAttribute('aria-busy'),status:document.querySelector('#memorial-status')?.textContent,slots:[...document.querySelectorAll('#memorial-slab [data-slot]')].map(x=>[x.dataset.slot,x.dataset.technique]),model:document.querySelector('#memorial-slab')?.dataset.layout})"""),flush=True)
             page.wait_for_function('(name)=>document.querySelector("[data-slot=devotional]")?.dataset.technique===name',arg=technique,timeout=5500)
             assert page.locator('[data-slot="devotional"]').get_attribute('filter')==f'url(#{filter_id})'
         white=page.locator('#applied-relief feColorMatrix[type="matrix"]').get_attribute('values')
