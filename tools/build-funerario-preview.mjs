@@ -7,6 +7,7 @@ if(!section)throw Error('Existing studio not found');
 const css=readFileSync('styles.css','utf8');
 const catalog=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
 const offlineArt=Object.fromEntries(catalog.ornaments.filter(x=>x.publicSelectable!==false&&x.format==='image/webp').flatMap(x=>[x.path,x.thumbnailPath].map(path=>[path,'data:image/webp;base64,'+readFileSync(path).toString('base64')])));
+for(const item of catalog.accessories)offlineArt[item.renderPath]='data:image/webp;base64,'+readFileSync(item.renderPath).toString('base64');
 const scriptFor=n=>'<script>'+readFileSync('funerario-'+n+'.js','utf8').replaceAll('</script','<\\/script')+'</script>'+(n==='recursos'?'<script>Object.assign(window.LitosMemorialData.resources,'+JSON.stringify(offlineArt)+');</script>':'');
 const scripts=['recursos','compositor','exportar','personalizador'].map(scriptFor).join('');
 // Cross comparison remains an offline review of prototypes already selectable publicly.

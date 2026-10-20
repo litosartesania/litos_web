@@ -43,8 +43,11 @@
   function makePlan(scene,width,height){
     if(!Number.isInteger(width)||!Number.isInteger(height)||width<50||height<50||width>3000||height>3000)throw Error('Introduce ancho y alto reales entre 50 y 3000 mm.');
     if(scene.truncated||scene.unrendered)throw Error('Corrige los elementos incompletos antes de generar el plano.');
-    const f=scene.face, ox=58,oy=57, rows=scene.boxes.length+scene.inscription.length;
-    const pageWidth=Math.max(width+110,480),pageHeight=height+142+rows*8;
+    const f=scene.face, rows=scene.boxes.length+scene.inscription.length;
+    const minX=Math.min(0,...scene.boxes.map(b=>(b.x-f.x)/f.w*width));
+    const maxX=Math.max(width,...scene.boxes.map(b=>(b.x+b.w-f.x)/f.w*width));
+    const ox=58-minX,oy=57;
+    const pageWidth=Math.max(maxX-minX+110,480),pageHeight=height+142+rows*8;
     const svg=add(document.createDocumentFragment(),'svg',{xmlns:SVG,width:pageWidth+'mm',height:pageHeight+'mm',viewBox:`0 0 ${pageWidth} ${pageHeight}`,'data-units':'mm',role:'img'});
     add(svg,'title',{},'LITOS · Plano de colocación orientativo');
     add(svg,'desc',{},'Todas las cotas están en milímetros y dependen de las medidas de cara vista introducidas. Revisar en taller; no es plantilla de corte.');
@@ -60,12 +63,12 @@
     add(svg,'text',{x:ox-15,y:oy+height/2,transform:`rotate(-90 ${ox-15} ${oy+height/2})`,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':5,fill:'#453d36'},height+' mm');
     const position=box=>({x:(box.x-f.x)/f.w*width,y:(box.y-f.y)/f.h*height,w:box.w/f.w*width,h:box.h/f.h*height});
     const fmt=value=>Number(value.toFixed(1));
-    const names={symbol:'Cruz',devotional:'Imagen',ornament:'Motivo',secondary:'Adicional',separator:'Separador',secondSeparator:'Separador 2',frame:'Marco'};
+    const names={symbol:'Cruz',devotional:'Imagen',ornament:'Motivo',secondary:'Adicional',separator:'Separador',secondSeparator:'Separador 2',frame:'Marco',accessory:'Complemento'};
     const catalog=window.LitosMemorialData.catalog;
     const labels=[];
     scene.boxes.forEach((box,index)=>{
       const p=position(box),kind=box.kind;
-      const item=box.id?catalog.ornaments.find(entry=>entry.id===box.id):null;
+      const item=box.id?(kind==='accessory'?catalog.accessories:catalog.ornaments).find(entry=>entry.id===box.id):null;
       const inscription=kind.startsWith('text:')?scene.inscription.find(field=>'text:'+field.id===kind):null;
       const label=inscription?'Texto · '+inscription.label:(names[kind]||kind)+(item?' · '+item.name:'');
       const color=kind.startsWith('text:')?'#536784':kind==='frame'?'#8a7561':'#986749';

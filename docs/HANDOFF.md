@@ -644,3 +644,31 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Se añaden representaciones vectoriales completamente nuevas e ilustrativas de búcaro, jardinera, florero mural y farol, elegibles con acabado y posición separados; nada se importa ni copia de catálogos ajenos. No implican disponibilidad, anclajes ni medidas de fabricación.
 - El relieve religioso raster tiene filtro independiente gris/blanco, sin multiplicación por el color de texto y ornamentos; se mantienen sombras neutras. El arte de figuras procede de la biblioteca genérica previamente incorporada a LITOS comercial, no de fotos con datos de clientes.
 - Código solo en rama aislada; no publicar hasta CI, privacidad y aceptación visual. No se consultan ni modifican otros repositorios.
+
+
+## 20/10/2026 — Relevo de Codex y PR #72 (solo revisión)
+- El usuario recuperó desde el espacio de trabajo local de Codex la rama \`work/funerario-redesign-historico-20261019\` a partir de \`554917242d51f0dc42ce9e00c7891678bf605d6f\`. Se validaron 53/53 SHA-256 de los archivos transferidos y se guardaron en GitHub mediante el commit \`9d6b0715caff7b8f65ba750bdd3298f9fff31e32\`, rama \`work/funerario-redesign-recuperado-20261020\`, PR #72 **borrador**. La rama procede del trabajo local inacabado por límite de uso; no equivaler a una publicación terminada.
+- El rescate contiene nueve configuraciones públicas genéricas, diez familias visuales de complementos, diez SVG originales, diez renders WebP y diez miniaturas WebP. Las imágenes no representan productos físicamente aprobados y no se deben tratar como fotografías de trabajos ejecutados.
+- La interfaz separa «Explorar modelos» y «Crear desde cero», con filtrado, ficha comercial y carga de preset editable. Conserva cinco paneles de configuración, acabados y técnicas diferenciadas, composición en el navegador y descarga orientativa PNG/SVG.
+- La revisión local de la recuperación verificó sintaxis y render en 390, 768 y 1440 px, composición de complementos seleccionados y exportación. La CI \`LITOS isolated preview audit\` debe seguir verificándose en el HEAD **actual** de PR #72; no dar por aprobada la PR a partir de ejecuciones de commits anteriores.
+- Privacidad: revisión de imágenes de complementos sin datos identificativos visibles y contraste local de cuatro coincidencias de rutas/correo con HEAD anterior (ninguna nueva). Esto no sustituye la auditoría de privacidad previa a producción. **Nunca subir originales de pedidos, trazabilidad privada ni datos de clientes a GitHub.**
+- La muestra histórica es incompleta: **no hay fundamento para afirmar que existan tres medidas predominantes**. Las cotas actuales son opciones ilustrativas sujetas a validación del taller; ningún plano es apto para corte.
+- Pendiente: CI actual, revisión visual del propietario, comprobación de derechos de imágenes, validación técnica/comercial de complementos, geometría y anclajes, y mejora progresiva de fidelidad frente a tipologías legítimamente observadas. La fuente \`litos_web\` y su rama son públicas incluso sin fusionar.
+- **No hacer merge ni desplegar \`main\` sin aprobación expresa.** Único repositorio autorizado para escritura: \`litosartesania/litos_web\`.
+
+
+## 20/10/2026 — Continuación de PR #72 desde el rescate
+- Base comprobada: `2169c6260be854658ac6253f07e386903bf3d808`, CI #39428069603 correcta. Trabajo en checkout independiente, preservando el recuperado. Sin regeneración de las diez imágenes ni acceso a otros repositorios.
+- Ficha de modelo accesible, limpieza de filtros, cinco pasos progresivos y retorno a la vista previa en móvil. Se conserva el modelo de origen y el trabajo al volver al catálogo.
+- Complementos con escala y posición libres, proporción propia y caja compartida con el plano; tallado con iluminación interior y aplique con canto/sombra independientes.
+- Detalles, evidencia y límites: `docs/FUNERARIO_PR72_CONTINUACION.md`. La nueva prueba completa se añade a CI y genera comparación autónoma de técnicas y capturas 320/390/768/1440.
+- Las cotas históricas frecuentes, la fidelidad individual de todos los trabajos, los anclajes y la fabricación permanecen sin certificar. PR de revisión: no fusionar/publicar sin aprobación expresa.
+- Validación local de esta continuidad: build y allowlist, integridad de 131 recursos, sintaxis JS, vista autónoma y cinco páginas responsive: PASS. Prueba nueva: 9 presets, 10 complementos, 1.260 composiciones y anchos 320/390/768/1440, sin errores. Fase 3: 72 composiciones y 18 cruces en cada ancho 390/768/1440; comparación de píxeles PNG inferior a 1 nivel RGB medio en la región de figura. WebKit 390: preset, complemento, tallado, PNG/SVG, sin errores ni desbordamiento. Carga diferida y recuperación ante fallo del complemento: PASS.
+- Revisión de privacidad del diff: sin rutas/fuentes privadas añadidas; todos los recursos originales del catálogo permanecen sin cambios. La CI del nuevo commit debe verificarse en la PR; no equivale a aceptación comercial ni a una publicación.
+- Revisión visual posterior: corregido el tamaño intrínseco de miniaturas verticales que invadía el rótulo del complemento. Añadida comprobación geométrica de separación imagen/rótulo.
+
+
+## 20/10/2026 — Publicación solicitada de PR #72
+- El propietario solicita que el avance ya esté disponible en la web pública; se procede a publicar la PR #72 tras comprobar la cabeza y su CI.
+- Detectada una expectativa obsoleta en la comprobación de despliegue: todavía exigía la versión anterior de CSS/JS. Se obtienen ahora las cinco URL de recursos del HTML que se está publicando; además se verifica el hash exacto del HTML y del CSS, junto con los cuatro módulos y los 131 recursos funerarios.
+- La publicación solo se considerará verificada cuando termine Pages y se pruebe la URL pública en escritorio y móvil. El estado definitivo y su ejecución quedan registrados en la PR #72.

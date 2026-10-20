@@ -11,7 +11,7 @@ const catalog={version:1,materials:[
  ['quintana','Gris Quintana','Granito',false,'Gris compacto de grano fino a medio.','https://canterasagustintena.com/gris-quintana/']
 ].map(([id,name,family,dark,description,source])=>({id,name,family,dark,description,source,status:'Recreación orientativa · pendiente de muestra LITOS',variants:[1,2].map(n=>({id:String(n),name:'Recreación '+(n===1?'A':'B'),path:`${root}/materiales/${id}-${n}.webp`}))})),
 models:[
- {id:'nicho',name:'Lápida de nicho recta',face:[.11,.19,.78,.78/1.2125],architecture:'recta',note:'Proporción conceptual 97:80; sin medida de fabricación.'},
+ {id:'nicho',name:'Lápida de nicho recta',face:[.11,.19,.78,.65],architecture:'recta',note:'Proporción ilustrativa; introduce las medidas verificadas de la pieza.'},
  {id:'doble',name:'Lápida doble',face:[.14,.19,.72,.60],architecture:'pilastras',note:'Conjunto conceptual con cornisa, pilastras y repisa.'},
  {id:'columbario',name:'Lápida de columbario',face:[.23,.21,.54,.54],architecture:'cuadrada',note:'Geometría cuadrada propia; dimensiones por comprobar.'},
  {id:'portada',name:'Lápida con portada',face:[.20,.16,.60,.66],architecture:'arco',note:'Portada con arco rebajado; secciones por comprobar.'},

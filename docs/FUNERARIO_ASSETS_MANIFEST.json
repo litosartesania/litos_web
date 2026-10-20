@@ -3,9 +3,164 @@
   "origin": "Original generated textures, generic vectors and pictorial prototypes; OFL fonts.",
   "files": [
     {
+      "path": "assets/funerario/accesorios/bucaro.svg",
+      "bytes": 485,
+      "sha256": "8bfb194cf12595a59868dcc537edd78a2b266d4e77fb80038264deea6dd40f8b"
+    },
+    {
+      "path": "assets/funerario/accesorios/farol.svg",
+      "bytes": 613,
+      "sha256": "16f82a37c5677fb26f3dcc3e53a57753705b82ee7c40b9abc8cd3addb973faa6"
+    },
+    {
+      "path": "assets/funerario/accesorios/florero-gota.svg",
+      "bytes": 463,
+      "sha256": "473d17f61d43c050ddb0bfad1cd2a3828c45636743d9ff5a1a8d6c1957083146"
+    },
+    {
+      "path": "assets/funerario/accesorios/florero.svg",
+      "bytes": 522,
+      "sha256": "f6be144e32c6af4dba0847f5750a8a6d337b22f79b2afe8979116f890f5482da"
+    },
+    {
+      "path": "assets/funerario/accesorios/jardinera-copa.svg",
+      "bytes": 528,
+      "sha256": "f5af61c36ecfe6fe3491e41e9385f88588eb6838c45d295e30af5cc0626a73c0"
+    },
+    {
+      "path": "assets/funerario/accesorios/jardinera.svg",
+      "bytes": 475,
+      "sha256": "4ec6f545b7d8dbd3aead698150644077037b36d4732aad806938319b9ff1325f"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/bucaro.webp",
+      "bytes": 3690,
+      "sha256": "270eab98a941330520ef55c44322acb002b20a3564e6506692b4cf1b5f754b56"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/farol.webp",
+      "bytes": 4588,
+      "sha256": "6dc809e0b4f25a7d1a49f45dc715c914dd153cb6df5f8b7933eff92e430830bd"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/florero-gota.webp",
+      "bytes": 2700,
+      "sha256": "2a4780b257c64e8d9bb62e62288283cb24f0d3a1df994b3c921000190b0c7ffa"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/florero.webp",
+      "bytes": 1924,
+      "sha256": "7e985c44dd7f8dd94ffa18e9c5562c8dea1f5fa631f08ddd98fcd055e683bdf8"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/jardinera-copa.webp",
+      "bytes": 4086,
+      "sha256": "afa81fb08387b297d4129f83e9ca4c93e72b05d7858e8b675ff5dd862370602e"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/jardinera.webp",
+      "bytes": 1896,
+      "sha256": "225ca73f54f92b5e5d5a6a4f3f8512d09f2b06ce9e0b3bf34c714b8267fdabc2"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/portavelas.webp",
+      "bytes": 4316,
+      "sha256": "c1984ae25fa2e0dcf24d3c6539578c7f64f089b7215e824f6f7fe3dc54716372"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/repisa-metal.webp",
+      "bytes": 1752,
+      "sha256": "0b63c0cd3f9d5b3a9473e6947f50e1c6656988f2b2259ecfe11d98c95c0d6182"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/vaso-conico.webp",
+      "bytes": 3746,
+      "sha256": "5fbb4b87794ea7b145a24c66da0ee3894d9799d9db4e36cf1a5f7eb163c547fc"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/vaso-estriado.webp",
+      "bytes": 3802,
+      "sha256": "556bfa54dbacf12142d5a5d2720b372f359c13cb652e1cb1a027061dd7dc3b3a"
+    },
+    {
+      "path": "assets/funerario/accesorios/portavelas.svg",
+      "bytes": 591,
+      "sha256": "44a3605408067aebf51ca7fa272da053dc07872e6f36d1f27ac945db42f59f63"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/bucaro.webp",
+      "bytes": 34512,
+      "sha256": "c8c1a95d3fb0b51b743df8c22b19898a4c5c66a64263e6d6d6cb6aa5507e7ae3"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/farol.webp",
+      "bytes": 39102,
+      "sha256": "4c0e77003f6366e99a1d31cc95ae764df62557f92ca250526afe42d1dceedb2a"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/florero-gota.webp",
+      "bytes": 26778,
+      "sha256": "410534a8f0863abe53ceaec6f7769f2cf55d5845221092777a268b76c0939b38"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/florero.webp",
+      "bytes": 12670,
+      "sha256": "7f4638dd02ef7437cd66255c7cb6997ec977caa8c1d5314bf60432c03cc836e0"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/jardinera-copa.webp",
+      "bytes": 36092,
+      "sha256": "bd9be886fe7b0809989965fda0dab7589ff0c5cb607f5a4c79c3b90932f99f57"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/jardinera.webp",
+      "bytes": 13706,
+      "sha256": "0d0e260bdf40133a1bab018e117ebb57a702f219e45d61b752ce042c3e6dfd60"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/portavelas.webp",
+      "bytes": 62476,
+      "sha256": "bae31dc35ce4e8eb741329e4de32cc5d9de7a8bc0bb086837848ab62c580e8f0"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/repisa-metal.webp",
+      "bytes": 10598,
+      "sha256": "f4d47eb375a8fbff4f848f3f33a9382da3b5114cc3030f22222dd55c01c8229f"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/vaso-conico.webp",
+      "bytes": 41432,
+      "sha256": "be0444e763c243017bf51ae769f096570e191b07c3f31e22a519fc796a759440"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/vaso-estriado.webp",
+      "bytes": 35156,
+      "sha256": "17b5ad9c9cfb7aaa2b3b4523094f3cfc899d6329e7d1182f38440260b8317dde"
+    },
+    {
+      "path": "assets/funerario/accesorios/repisa-metal.svg",
+      "bytes": 434,
+      "sha256": "3da9dbd7b653bd1c7cd4791af7cf303dd2e6d45eaf7022b44335d359e15654a7"
+    },
+    {
+      "path": "assets/funerario/accesorios/vaso-conico.svg",
+      "bytes": 512,
+      "sha256": "c9a4dc21476a4b70d96ad51de26eea327b6a20eb332041018a6f8b5f8061f0b6"
+    },
+    {
+      "path": "assets/funerario/accesorios/vaso-estriado.svg",
+      "bytes": 556,
+      "sha256": "bb4bba98d55713a5aff93735ec71f1566043551eaaac6ee2534b12c2c1f0e08e"
+    },
+    {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 48692,
-      "sha256": "3658505dd2ed87fc21c9bf685e458f6d1adb66d082096201cea812eb776f772a"
+      "bytes": 58412,
+      "sha256": "511bc2c05b46bc710feb8f15089c879eadddc23ba99a407828d0c1977754d39b"
+    },
+    {
+      "path": "assets/funerario/configuracion/modelos-comerciales.json",
+      "bytes": 6526,
+      "sha256": "dea78deaa454997c31400053522eb997b996149b904bdc6c0a3c4c78cce9a7fa"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",

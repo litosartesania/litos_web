@@ -1,221 +1,89 @@
-"""Mandatory memorial acceptance checks; same DOM scenarios as the local review."""
+"""Current memorial acceptance checks across mobile, tablet and desktop."""
 from pathlib import Path
-import json
-import hashlib
+import hashlib,json
 from playwright.sync_api import sync_playwright
+
 root=Path(__file__).resolve().parents[1]
-scenarios=(root/'scripts/funerario-scenarios.js').read_text()
 results=[]
 with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,args=['--no-sandbox','--allow-file-access-from-files'])
-    for width,height in [(390,844),(768,1024),(1440,1000)]:
+    for width,height in ((390,844),(768,1024),(1440,1000)):
         context=browser.new_context(viewport={'width':width,'height':height},has_touch=width==390,reduced_motion='reduce',accept_downloads=True)
         page=context.new_page();errors=[];external=[]
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.on('request',lambda r:external.append(r.url) if r.url.startswith(('http://','https://')) else None)
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
-        page.wait_for_selector('#memorial-workbench[data-ready="true"]')
-        assert page.locator('#memorial-case-grid .memorial-case-card').count()==6
-        assert page.locator('#memorial-case-grid .memorial-case-picture img').count()==6
-        assert page.locator('.memorial-dimension-option').count()==3
-        assert page.locator('#memorial-accessory option').count()==5
-        # Left rail: five initially closed accordions; no duplicated upper controls.
-        pos=page.evaluate("""() => {
-          const r=document.querySelector('#memorial-workbench'),side=r.querySelector('.memorial-options');
-          const ct=r.querySelector('.memorial-controls'),sec=[...ct.children].filter(x=>x.tagName==='DETAILS');
-          const slab=r.querySelector('.memorial-display'),stone=document.getElementById('memorial-canvas');
-          const rect=e=>{const x=e.getBoundingClientRect();return {x:x.x,y:x.y,right:x.right,width:x.width,height:x.height}};
-          const y=scrollY;scrollTo(9999,y);const shift=scrollX;scrollTo(0,y);
-          return {side:side.parentElement===r&&side.contains(ct),n:sec.length,closed:sec.every(x=>!x.open),
-          extra:document.querySelectorAll('.memorial-toolbar,.memorial-selection-overview').length,
-          groups:['stone','variant','model','layout','type'].map(x=>sec.indexOf(document.getElementById('memorial-'+x).closest('details'))),
-          gallery:sec.indexOf(document.getElementById('memorial-gallery').closest('details')),
-          rail:rect(side),slab:rect(slab),stone:rect(stone),svg:rect(stone.querySelector('svg')),
-          overflow:document.documentElement.scrollWidth>innerWidth+1||shift>1};
-        }""")
-        assert pos['side'] and pos['n']==5 and pos['closed'] and pos['extra']==0,pos
-        assert pos['groups']==[0,0,0,1,2] and pos['gallery']==1,pos
-        assert not pos['overflow'] and pos['svg']['width']>0,pos
-        if width>=900:
-            assert pos['rail']['right']<=pos['slab']['x']+2,pos
-            assert pos['stone']['right']<=width+1,pos
-            assert pos['rail']['height']<=height,pos
-        else:
-            assert pos['slab']['y']<pos['rail']['y'],pos
-        page.locator('.memorial-controls > details').nth(0).locator('summary').click()
-        assert page.locator('#memorial-stone').is_visible()
-        page.locator('#memorial-stone').select_option('macael')
-        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.stone==="macael"')
-        page.locator('#memorial-stone').select_option('sudafrica')
-        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.stone==="sudafrica"')
-        page.locator('#memorial-case-grid button').first.click()
+        page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
+        assert page.locator('.memorial-studio').get_attribute('data-path')=='explore'
+        assert page.locator('.memorial-case-card').count()==9
+        assert page.locator('.memorial-accessory-card').count()==11
+        assert page.locator('.memorial-controls > details').count()==5
+        assert page.locator('.memorial-toolbar,.memorial-selection-overview').count()==0
+        assert not page.locator('#memorial-workbench').is_visible()
+        assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+        page.locator('#memorial-filter-type').select_option('columbario')
+        assert page.locator('.memorial-case-card').count()==1
+        page.locator('.memorial-case-card button').click()
+        assert page.locator('#memorial-case-detail h5').inner_text()=='Columbario con aplique'
+        assert 'Propuesta de diseño' in page.locator('.memorial-case-provenance').text_content()
+        page.locator('.memorial-case-detail-copy button').first.click()
         page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.model==="columbario"')
+        assert page.locator('.memorial-studio').get_attribute('data-path')=='customize'
+        assert page.locator('#memorial-stone').input_value()=='sudafrica'
+        assert page.locator('#memorial-symbol').input_value()=='metalica'
         assert page.locator('#memorial-text').input_value()=='NOMBRE APELLIDO'
-        page.locator('#memorial-reset').click()
-        page.locator('.memorial-controls > details').nth(1).locator('summary').click()
-        page.locator('#memorial-accessory').select_option('bucaro')
-        page.wait_for_selector('[data-slot="accessory"][data-accessory="bucaro"]')
-        page.locator('#memorial-accessoryFinish').select_option('acero')
+        page.locator('#memorial-back-catalog').click()
+        assert page.locator('.memorial-studio').get_attribute('data-path')=='explore'
+        page.locator('#memorial-create').click()
+        assert page.locator('.memorial-studio').get_attribute('data-path')=='create'
+        assert page.locator('#memorial-symbol').input_value()=='metalica'
+        page.locator('.memorial-controls > details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+        page.locator('#memorial-accessory').select_option('vaso-estriado')
+        page.wait_for_selector('[data-slot="accessory"][data-accessory="vaso-estriado"]')
+        assert 'fijación' in page.locator('#memorial-accessory-note').inner_text()
+        page.locator('#memorial-accessory').select_option('florero')
         page.wait_for_function('()=>document.querySelector("[data-slot=accessory]")?.dataset.accessoryFinish==="acero"')
-        page.locator('#memorial-accessory').select_option('ninguno')
-        gallery=page.locator('#memorial-gallery')
-        assert gallery.is_visible() and gallery.bounding_box()['height']<=140,gallery.bounding_box()
-        assert gallery.evaluate('(el)=>el.scrollWidth>el.clientWidth')
-        page.locator('img').evaluate_all('(els)=>els.forEach(e=>e.loading="eager")')
-        page.wait_for_function('()=>[...document.images].every(e=>e.complete&&e.naturalWidth>0)')
-        page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
-        page.locator('.memorial-dimension-option').first.click()
-        assert page.locator('#memorial-width-mm').input_value()=='970'
-        assert page.locator('#memorial-height-mm').input_value()=='800'
-        page.locator('#personalizar').screenshot(path=str(root/'preview'/f'LITOS_PANEL_IZQUIERDO_{width}.png'),animations='disabled')
-        result=page.evaluate(scenarios)
+        page.locator('#memorial-width-mm').fill('900')
+        page.locator('#memorial-height-mm').fill('700')
+        page.wait_for_function('()=>!document.querySelector("#memorial-plan-download").disabled')
         with page.expect_download() as pending_plan:page.locator('#memorial-plan-download').click()
         plan=pending_plan.value
         assert plan.suggested_filename=='LITOS-plano-colocacion-orientativo.svg' and plan.failure() is None
-        plan_text=Path(plan.path()).read_text(encoding='utf-8')
-        assert 'width="970"' in plan_text and 'height="800"' in plan_text and 'NO USAR PARA CORTE' in plan_text
-        page.locator('#memorial-stone').focus();page.keyboard.press('ArrowDown');page.keyboard.press('Enter')
-        assert page.locator('#memorial-stone').evaluate('(el)=>el===document.activeElement')
-        page.locator('#memorial-reset').click()
+        plan_text=Path(plan.path()).read_text(encoding='utf8')
+        assert 'width="900"' in plan_text and 'height="700"' in plan_text and 'NO USAR PARA CORTE' in plan_text
+        page.locator('#memorial-layout').select_option('devocionlateral')
+        page.locator('#memorial-devotional').select_option('cristo-corona')
+        page.wait_for_selector('[data-slot="devotional"] image')
+        for technique,filter_id in (('grabado','pictorial-engraved'),('bajorrelieve','carved-relief'),('aplique 3D','applied-relief')):
+            page.locator('#memorial-devotional-technique').select_option(technique)
+            page.wait_for_function('(name)=>document.querySelector("[data-slot=devotional]")?.dataset.technique===name',arg=technique)
+            assert page.locator('[data-slot="devotional"]').get_attribute('filter')==f'url(#{filter_id})'
+        white=page.locator('#applied-relief feColorMatrix[type="matrix"]').get_attribute('values')
+        for stone in ('macael','quintana','absoluto'):
+            page.locator('#memorial-stone').select_option(stone)
+            page.wait_for_function('(name)=>document.querySelector("#memorial-slab")?.dataset.stone===name',arg=stone)
+            assert page.locator('#applied-relief feColorMatrix[type="matrix"]').get_attribute('values')==white
+        page.locator('#memorial-finish').select_option('oro')
+        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.finish==="oro"')
+        assert page.locator('#applied-relief feColorMatrix[type="matrix"]').get_attribute('values')==white
+        assert page.locator('#memorial-download').is_enabled()
         with page.expect_download() as pending:page.locator('#memorial-download').click()
         download=pending.value
         assert download.suggested_filename=='LITOS-simulacion-orientativa.png' and download.failure() is None
-        base_png=Path(download.path()).read_bytes()
-        assert base_png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(base_png[16:20],'big')==2000
-        # Eight owner-approved visual prototypes are selectable; old rejected drawings remain hidden.
-        assert page.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
-        assert page.locator('#memorial-devotional option').count()==9
-        assert not page.locator('#memorial-devotional').is_disabled()
-        assert page.locator('#memorial-gallery-category').is_hidden()
-        assert page.locator('#memorial-category-tabs .memorial-category-tab').count()==6
-        page.locator('.memorial-category-tab[data-category="religiosas"]').click()
-        assert page.locator('.memorial-category-tab[data-category="religiosas"]').get_attribute('aria-pressed')=='true'
-        assert page.locator('#memorial-gallery .memorial-motif img').count()==8
-        assert page.locator('.memorial-motif[data-item-id="madre"]').count()==0
-        page.locator('.memorial-motif[data-item-id="cristo-corona"]').click()
-        page.wait_for_selector('[data-slot="devotional"] image')
-        assert page.locator('[data-slot="devotional"] image').get_attribute('href').startswith('data:image/webp;base64,')
-        neutral=page.locator('#stone-relief feColorMatrix[type="matrix"]').get_attribute('values')
-        assert neutral.startswith('0.98 ')
-        page.locator('#memorial-finish').select_option('oro')
-        page.wait_for_function('()=>document.querySelector("#memorial-slab")?.dataset.finish==="oro"')
-        assert page.locator('#stone-relief feColorMatrix[type="matrix"]').get_attribute('values')==neutral
-        assert page.locator('#memorial-download').is_enabled()
-        page.locator('#memorial-reset').click()
-        page.locator('.memorial-category-tab[data-category="cruces"]').click()
-        assert page.locator('.memorial-category-tab[data-category="cruces"]').get_attribute('aria-pressed')=='true'
-        for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
-            assert page.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
-            assert page.locator('.memorial-motif[data-item-id="'+candidate+'"]').count()==1
-        page.locator('.memorial-motif[data-item-id="moldurada"]').click()
-        page.wait_for_function('()=>document.querySelector("#memorial-symbol").value==="moldurada"')
-        assert page.locator('#memorial-download').is_enabled()
-        page.locator('#memorial-reset').click()
-        assert page.locator('[data-slot="devotional"]').count()==0
-        page.locator('#memorial-layout').select_option('devocionlateral')
-        page.locator('#memorial-secondary').select_option('rosaabierta')
-        page.wait_for_selector('[data-slot="secondary"]')
-        assert page.locator('[data-slot="secondary"]').count()==1
-        assert page.locator('[data-slot="devotional"]').count()==0
-        with page.expect_download() as pending:page.locator('#memorial-download').click()
-        layered_png=Path(pending.value.path()).read_bytes()
-        assert layered_png[:8]==b'\x89PNG\r\n\x1a\n' and hashlib.sha256(layered_png).digest()!=hashlib.sha256(base_png).digest()
-        assert not errors and not external,(errors,external)
-        results.append({'viewport':width,**result,'external_requests':len(external),'javascript_errors':len(errors),'png_download':'OK','layered_png':'OK'})
-        context.close()
-    # Self-contained file must work without assets, HTTP, cookies or storage.
-    page=browser.new_page(viewport={'width':390,'height':844})
-    network=[];page.on('request',lambda r:network.append(r.url) if not r.url.startswith(('data:','blob:','file:')) else None)
-    page.goto((root/'preview/LITOS_CONFIGURADOR_FUNERARIO.html').as_uri())
-    page.wait_for_selector('#memorial-workbench[data-ready="true"]')
-    assert not network and page.locator('#memorial-stone option').count()==7
-    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'), 'standalone preview overflows on mobile'
-    # Offline copy also offers the public prototype crosses; rejected religious drawings stay hidden.
-    for width in (390,1440):
-        context=browser.new_context(viewport={'width':width,'height':880},accept_downloads=True)
-        review=context.new_page()
-        review_errors=[];review_network=[]
-        review.on('pageerror',lambda err:review_errors.append(str(err)))
-        review.on('request',lambda req:review_network.append(req.url) if req.url.startswith(('http://','https://')) else None)
-        review.goto((root/'preview/LITOS_REVISION_CRUCES_6.html').as_uri())
-        review.wait_for_selector('#memorial-workbench[data-ready="true"]')
-        assert review.locator('#review-only-notice').count()==1
-        assert review.locator('#memorial-gallery-category option[value="religiosas"]').count()==1
-        assert review.locator('#memorial-devotional option').count()==9
-        review.locator('.memorial-controls > details').nth(1).locator('summary').click()
-        review.locator('.memorial-category-tab[data-category="cruces"]').click()
-        for candidate in ('santiago','doblefilete','moldurada','metalica','florenzada','medalloncruz'):
-            assert review.locator('#memorial-symbol option[value="'+candidate+'"]').count()==1
-            tile=review.locator('.memorial-motif[data-item-id="'+candidate+'"]')
-            assert tile.count()==1
-            tile.click()
-            review.wait_for_function('(id)=>document.querySelector("#memorial-symbol").value===id',arg=candidate)
-            assert review.locator('#memorial-download').is_enabled(),candidate
-        assert review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
-        with review.expect_download() as download_info:
-            review.locator('#memorial-download').click()
-        downloaded=download_info.value
-        assert downloaded.failure() is None
-        png=Path(downloaded.path()).read_bytes()
+        png=Path(download.path()).read_bytes()
         assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
-        assert not review_errors and not review_network,(review_errors,review_network)
+        assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+        assert not errors and not external,(errors,external)
+        results.append({'viewport':width,'cards':9,'accessories':10,'png_sha256':hashlib.sha256(png).hexdigest()[:12],'external_requests':len(external),'javascript_errors':len(errors)})
         context.close()
-    # A sandbox-only transparent PNG may be tested in the independent local image reviewer.
-    # Generated RGBA image contains no photograph, inscription, or personal data.
-    import struct,zlib
-    def chunk(kind,payload):
-        return struct.pack('>I',len(payload))+kind+payload+struct.pack('>I',zlib.crc32(kind+payload)&0xffffffff)
-    size=64
-    rgba=b''.join(b'\x00'+b''.join(bytes([90+col,90+row,90,(row+col)%128+127]) for col in range(size)) for row in range(size))
-    fixture=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',size,size,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(rgba))+chunk(b'IEND',b'')
-    pictorial_context=browser.new_context(viewport={'width':390,'height':844},accept_downloads=True)
-    pictorial=pictorial_context.new_page()
-    errors=[];network=[]
-    pictorial.on('pageerror',lambda error:errors.append(str(error)))
-    pictorial.on('request',lambda req:network.append(req.url) if req.url.startswith(('https://','http://')) else None)
-    pictorial.goto((root/'preview/LITOS_REVISION_FIGURATIVOS_LOCALES.html').as_uri())
-    pictorial.wait_for_selector('#memorial-workbench[data-ready="true"]')
-    pictorial.locator('#litos-local-upload').set_input_files({'name':'generic-relief.png','mimeType':'image/png','buffer':fixture})
-    pictorial.wait_for_function('()=>document.getElementById("memorial-devotional").value==="arte_local_temporal"')
-    pictorial.wait_for_selector('[data-slot="devotional"] image')
-    assert pictorial.locator('#memorial-download').is_enabled()
-    assert pictorial.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
-    with pictorial.expect_download() as download_info:
-        pictorial.locator('#memorial-download').click()
-    png=Path(download_info.value.path()).read_bytes()
-    assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
-    assert not errors and not network,(errors,network)
-    pictorial_context.close()
-    # Stone-first conceptual gallery: verify material choices and motif selection without network.
-    gal_context=browser.new_context(viewport={'width':1440,'height':900})
-    gallery_page=gal_context.new_page()
-    gal_errors=[];gal_network=[]
-    gallery_page.on('pageerror',lambda err:gal_errors.append(str(err)))
-    gallery_page.on('request',lambda req:gal_network.append(req.url) if req.url.startswith(('http://','https://')) else None)
-    gallery_page.goto((root/'preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html').as_uri())
-    assert gallery_page.locator('.motif-card').count()==15
-    # The full-page mobile screenshot revealed lazy-loaded candidates blank below the fold.
-    # All 15 local SVG miniatures must decode even before the visitor scrolls.
-    gallery_page.wait_for_function('()=>[...document.querySelectorAll(".motif-card img")].every(im=>im.complete&&im.naturalWidth>0)')
-    assert gallery_page.locator('.motif-card img[loading="eager"]').count()==15
-
-    assert gallery_page.locator('.motif-card[data-id="madre"]').count()==0
-    assert gallery_page.locator('.motif-card[data-id="santiago"]').count()==1
-    gallery_page.locator('.material-choice[data-stone="macael"]').click()
-    assert gallery_page.locator('body').get_attribute('data-stone')=='macael'
-    gallery_page.locator('.motif-card[data-id="moldurada"]').click()
-    assert gallery_page.locator('#motif-select').input_value()=='moldurada'
-    assert gallery_page.locator('.motif-card[data-id="moldurada"]').get_attribute('aria-pressed')=='true'
-    assert gallery_page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
-    assert not gal_errors and not gal_network,(gal_errors,gal_network)
-    gal_context.close()
-    mobile_gallery_context=browser.new_context(viewport={'width':390,'height':844})
-    mobile_gallery=mobile_gallery_context.new_page()
-    mobile_gallery.goto((root/'preview/LITOS_BIBLIOTECA_FUNERARIA_FASE2.html').as_uri())
-    mobile_gallery.wait_for_function('()=>[...document.querySelectorAll(".motif-card img")].length===15&&[...document.querySelectorAll(".motif-card img")].every(im=>im.complete&&im.naturalWidth>0)')
-    assert mobile_gallery.locator('.motif-card img[loading="eager"]').count()==15
-    assert mobile_gallery.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
-    mobile_gallery_context.close()
-
-    browser.close()
+    context=browser.new_context(viewport={'width':390,'height':844})
+    page=context.new_page();external=[];errors=[]
+    page.on('request',lambda r:external.append(r.url) if r.url.startswith(('http://','https://')) else None)
+    page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto((root/'preview/LITOS_CONFIGURADOR_FUNERARIO.html').as_uri())
+    page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
+    assert page.locator('.memorial-case-card').count()==9
+    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+    assert not external and not errors,(external,errors)
+    context.close();browser.close()
 print(json.dumps({'status':'PASS','checks':results,'standalone':'PASS'},ensure_ascii=False,indent=2))

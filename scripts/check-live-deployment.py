@@ -6,6 +6,7 @@ from pathlib import Path
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 
@@ -16,15 +17,14 @@ MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
-assert len(MEMORIAL["files"]) == 100
+assert len(MEMORIAL["files"]) == 131
+# Read the release URLs from the actual HTML; do not keep a second, stale version string.
+MEMORIAL_URLS = re.findall(r'(?:href|src)="((?:styles\.css|funerario-[a-z]+\.js)\?v=[^"]+)"', (ROOT/'funerario.html').read_text())
+assert len(MEMORIAL_URLS) == 5
 FILES = {
     "funerario.html": (
         'id="memorial-workbench"',
-        'styles.css?v=funerario-escaparate-20261019',
-        'src="funerario-recursos.js?v=funerario-escaparate-20261019"',
-        'src="funerario-compositor.js?v=funerario-escaparate-20261019"',
-        'src="funerario-exportar.js?v=funerario-escaparate-20261019"',
-        'src="funerario-personalizador.js?v=funerario-escaparate-20261019"',
+        *MEMORIAL_URLS,
         "Recreación digital orientativa",
     ),
     "mobiliario.html": (
@@ -94,7 +94,7 @@ def check(attempt):
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
-    for name in ("funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
+    for name in ("funerario.html", "styles.css", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
         expected = (ROOT / name).read_bytes()
         actual = read_live(name, attempt)
         assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
