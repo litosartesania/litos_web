@@ -36,7 +36,7 @@ with sync_playwright() as p:
   # architecture, and remain editable with only invented inscription text.
   structure={
    'portada-arcos-dos-campos':('arcos-gemelos','path[data-architecture-component^=arch]',2),
-   'portada-pilastras-medallon':('pilastras-altas','rect',5),
+   'portada-pilastras-medallon':('pilastras-altas','rect',4),
    'panteon-modular-anillas':('losa-anillas','circle[data-architecture-component=ring]',2)
   }
   if model['id'] in structure:
