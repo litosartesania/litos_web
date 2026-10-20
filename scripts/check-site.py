@@ -286,14 +286,14 @@ assert not parsers['index.html'].forms and parsers['index.html'].cards==0 and 'i
 for page,count in [('funerario.html',3)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
- assert not p.forms and 'id="precios"' in htmls[page]
- assert 'No son precios de venta ni ofertas de LITOS' in htmls[page]
+ assert not p.forms and 'id="precios"' not in htmls[page]
+ assert 'id="contacto"' not in htmls[page]
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
 assert 'funerario-personalizador.js' in htmls['funerario.html']
 assert not any(token in (root/'funerario-personalizador.js').read_text(encoding='utf8') for token in ('fetch(', 'localStorage', 'sessionStorage', 'XMLHttpRequest', 'sendBeacon', 'innerHTML', 'document.cookie'))
-assert 'id="precios"' in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
+assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
@@ -310,7 +310,7 @@ assert htmls['mobiliario.html'].count('class="piece-card"')==6
 assert htmls['mobiliario.html'].count('class="piece-amount"')==6
 assert all(htmls['mobiliario.html'].count('src="assets/catalogo/litos-'+x+'.webp"')==1 for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
 assert all('–' not in x and '€' in x for x in ["4.600 €","2.200 €","3.500 €","1.900 €","2.500 €","1.200 €"])
-assert 'No son precios de venta ni ofertas de LITOS' in htmls['mobiliario.html']
+assert 'class="section-hero hero-furniture"' not in htmls['mobiliario.html']
 for page in pages:
  assert 'href="aviso-legal.html"' in htmls[page],(page,'missing legal link')
  assert 'href="privacidad.html"' in htmls[page],(page,'missing privacy link')
@@ -329,9 +329,9 @@ for page in ('index.html','funerario.html','mobiliario.html'):
  assert 'href="#contacto"' not in htmls[page],(page,'lead link forbidden')
  assert 'id="contact-form"' not in htmls[page],(page,'form ID forbidden')
  assert 'solicitar presupuesto' not in htmls[page].lower(),(page,'outdated CTA')
- assert 'no acepta encargos' in htmls[page].lower() or 'no aceptamos encargos' in htmls[page].lower(),(page,'current availability missing')
-assert 'no acepta pedidos' in htmls['privacidad.html'].lower() and 'no contiene formularios' in htmls['privacidad.html'].lower()
-assert 'no acepta encargos' in htmls['aviso-legal.html'].lower()
+ assert 'class="project-status"' not in htmls[page] and 'class="made-to-measure"' not in htmls[page],(page,'obsolete blocks')
+assert 'No integra formularios de envío' in htmls['privacidad.html']
+assert 'no procesa pagos' in htmls['aviso-legal.html']
 css=(root/'styles.css').read_text();js=(root/'script.js').read_text()
 assert 'formResponse' not in js and 'fetch(' not in (root/'catalogo-precios.js').read_text() and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
 for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
@@ -341,7 +341,7 @@ if '--production' in sys.argv:
  assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
  assert all('mailto:' not in htmls[p] for p in pages), 'release blocked: mail contact or lead collection present'
  assert all(not parsers[p].forms for p in pages), 'release blocked: form present'
- assert 'no acepta encargos' in htmls['aviso-legal.html'].lower(), 'release blocked: commercial scope not declared'
+ assert 'no procesa pagos' in htmls['aviso-legal.html'], 'release blocked: legal payment scope missing'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
  assert 'Colección conceptual · 21 productos · 9 piedras · 21 planos' in htmls['mobiliario.html']

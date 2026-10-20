@@ -714,3 +714,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Auditoría estática: `scripts/check-site.py` comprueba que las cinco cabeceras tengan el mismo HTML al omitir `aria-current`; QA Playwright comprueba links, estado activo y comportamiento fijo tras scroll en móvil, tableta y escritorio.
 - Se separa de la PR #77 del catálogo histórico para no arriesgar sus geometrías y recursos. Mantener privadas todas las fotografías de encargos; esta actualización solo cambia navegación pública, CSS y comprobaciones.
 - No publicar como éxito hasta CI del HEAD y verificación de Pages tras fusionar.
+
+## 20/10/2026 — Publicación aislada: retirada inmediata de bloques
+- Cambio solicitado con autorización expresa de publicar: retirar portada fotográfica de Mobiliario, secciones de referencias de mercado y proceso, grandes avisos de no recepción de encargos, cierre editorial de Inicio y encabezados duplicados de Arte Funerario. Se conserva íntegro el configurador y las fichas de catálogo.
+- No contiene formularios ni direcciones de contacto inventadas: el formulario funcional está en la PR #79 y necesita aprobación expresa de buzón comercial y revisión legal. Esta PR es la **publicación inmediata separada de limpieza de UI**.
+- Accesibilidad: h1/h2 funerarios permanecen para lectores de pantalla usando `visually-hidden`; en pantalla se accede a «Explorar modelos / Crear desde cero».
+- Actualizados los textos legales informativos: no hay pagos ni tratamiento de formularios en esta versión, sin incluir mensajes comerciales de indisponibilidad. Sin cambios de datos privados.
+- Ajustados `scripts/check-site.py`, `scripts/visual-qa.py`, `scripts/check-live-deployment.py` y el generador del estudio funerario. CI y captura responsive deben aprobarse antes de fusionar y comprobar GitHub Pages.
