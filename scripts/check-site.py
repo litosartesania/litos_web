@@ -248,6 +248,22 @@ for item in items:
 assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths)<2500000, 'non-variant site unexpectedly large'
 assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes, 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
+# Canonical global navigation must remain byte-equivalent across all pages
+# except the current-page accessibility marker.
+menu_blocks=[]
+for page in pages:
+ match=re.search(r'<header class="site-header" id="inicio">.*?</header><noscript>.*?</noscript><nav class="mobile-menu" id="mobile-menu"[^>]*>.*?</nav>',htmls[page],flags=re.S)
+ assert match,(page,'global navigation missing')
+ menu=match.group(0)
+ menu_blocks.append(menu.replace(' aria-current="page"',''))
+ for dest in ('index.html','funerario.html','mobiliario.html','funerario.html#personalizar'):
+  assert menu.count('href="'+dest+'"')>=2,(page,'missing shared link',dest)
+ expected_current=page if page in ('index.html','funerario.html','mobiliario.html') else None
+ current=re.findall(r'<a[^>]+aria-current="page"[^>]*>',menu)
+ assert len(current)==(1 if expected_current else 0)*3,(page,'incorrect current page',current)
+ if expected_current:
+  assert all('href="'+expected_current+'"' in tag for tag in current),(page,'active links')
+assert len(set(menu_blocks))==1,'LITOS navigation differs between site pages'
 parsers={}
 for page,html in htmls.items():
  p=Inspect();p.feed(html);parsers[page]=p
