@@ -2,7 +2,13 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const c=JSON.parse(readFileSync('assets/funerario/configuracion/catalogo.json','utf8'));
 const options=list=>list.map(x=>`<option value="${x.id}">${x.label||x.name}</option>`).join('');
-const select=(id,label,list)=>`<label for="memorial-${id}">${label}</label><select id="memorial-${id}">${options(list)}</select>`;
+const visualCategories={symbol:'cruces',devotional:'religiosas',ornament:'flores',secondary:'secondary',separator:'separadores',frame:'marcos'};
+const select=(id,label,list)=>{
+  const opts=options(list);
+  if(!visualCategories[id])return `<label for="memorial-${id}">${label}</label><select id="memorial-${id}">${opts}</select>`;
+  const group=visualCategories[id];
+  return `<section class="memorial-motif-section" data-motif-section="${group}" aria-labelledby="memorial-motif-heading-${group}"><h5 id="memorial-motif-heading-${group}" class="memorial-motif-heading">${label}</h5><select id="memorial-${id}" hidden tabindex="-1" aria-hidden="true">${opts}</select><div class="memorial-gallery" id="memorial-gallery-${group}" role="group" aria-label="Elegir ${label.toLowerCase()}"></div></section>`;
+};
 const none={id:'ninguno',name:'Ninguno'};
 const publicOrnaments=c.ornaments.filter(x=>x.publicSelectable!==false);
 const ornaments=category=>[none,...publicOrnaments.filter(x=>category.includes(x.category))];
@@ -33,7 +39,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
    </div></details>
    <details><summary><span>02</span> Composición y símbolos</summary><div class="memorial-panel">
     ${select('layout','Composición',c.layouts.filter(x=>x.publicSelectable!==false))}
-    <div class="memorial-library"><p class="memorial-library-title">Biblioteca visual de motivos</p><select id="memorial-gallery-category" aria-label="Categoría de motivos" hidden><option value="cruces">Cruces</option>${publicOrnaments.some(x=>x.category==="religiosas")?'<option value="religiosas">Imágenes religiosas</option>':""}<option value="flores">Flores y símbolos</option><option value="secondary">Motivo adicional</option><option value="marcos">Marcos</option><option value="separadores">Separadores</option></select><div id="memorial-category-tabs" class="memorial-category-tabs" role="group" aria-label="Familias de motivos"></div><div id="memorial-gallery" class="memorial-gallery" role="group" aria-label="Motivos disponibles"></div><p class="memorial-note">Interpretaciones genéricas aprobadas para simulación visual. Acabados y fabricación pendientes de validación; las fotografías reales permanecen privadas.</p></div>
+    
     ${select('symbol','Cruz',[{id:'ninguno',name:'Sin cruz'},...publicOrnaments.filter(x=>x.category==='cruces')])}
     <details class="memorial-advanced"><summary>Ajustar posición y tamaño de la cruz</summary>${placement('symbol','Cruz')}</details>
     ${select('devotional','Imagen religiosa',[{id:'ninguno',name:'Sin imagen religiosa'},...publicOrnaments.filter(x=>x.category==='religiosas')])}
@@ -45,7 +51,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
     <details class="memorial-advanced"><summary>Ajustar motivo adicional</summary>${placement('secondary','Motivo adicional')}</details>
     ${select('separator','Separador',ornaments(['separadores']))}
     ${select('frame','Marco',ornaments(['marcos']))}
-    <div class="memorial-accessories"><h5>Floreros y complementos</h5><p class="memorial-note">Formas originales orientativas. Material, dimensiones, montaje y disponibilidad requieren confirmación del taller.</p><div id="memorial-accessory-gallery" class="memorial-accessory-gallery" role="group" aria-label="Complementos visuales"></div><label for="memorial-accessory">Complemento</label><select id="memorial-accessory"><option value="ninguno">Sin complemento</option>${c.accessories.map(a=>`<option value="${a.id}">${a.name}</option>`).join('')}</select><p id="memorial-accessory-note" class="memorial-note"></p><label for="memorial-accessorySide">Colocación</label><select id="memorial-accessorySide"><option value="right">Inferior derecha</option><option value="left">Inferior izquierda</option><option value="center">Inferior centro</option><option value="free">Posición libre</option></select><details class="memorial-advanced"><summary>Ajustar tamaño y posición del complemento</summary>${placement('accessory','Complemento')}</details><label for="memorial-accessoryFinish">Material ilustrativo</label><select id="memorial-accessoryFinish"><option value="bronce">Bronce</option><option value="acero">Acero</option><option value="piedra">Piedra</option></select></div>
+    <p class="memorial-note memorial-motif-disclaimer">Motivos orientativos de creación genérica. Los prototipos requieren validación de material y fabricación.</p><div class="memorial-accessories"><h5>Floreros y complementos</h5><p class="memorial-note">Formas originales orientativas. Material, dimensiones, montaje y disponibilidad requieren confirmación del taller.</p><div id="memorial-accessory-gallery" class="memorial-accessory-gallery" role="group" aria-label="Complementos visuales"></div><label for="memorial-accessory">Complemento</label><select id="memorial-accessory"><option value="ninguno">Sin complemento</option>${c.accessories.map(a=>`<option value="${a.id}">${a.name}</option>`).join('')}</select><p id="memorial-accessory-note" class="memorial-note"></p><label for="memorial-accessorySide">Colocación</label><select id="memorial-accessorySide"><option value="right">Inferior derecha</option><option value="left">Inferior izquierda</option><option value="center">Inferior centro</option><option value="free">Posición libre</option></select><details class="memorial-advanced"><summary>Ajustar tamaño y posición del complemento</summary>${placement('accessory','Complemento')}</details><label for="memorial-accessoryFinish">Material ilustrativo</label><select id="memorial-accessoryFinish"><option value="bronce">Bronce</option><option value="acero">Acero</option><option value="piedra">Piedra</option></select></div>
     <label class="memorial-check"><input id="memorial-guides" type="checkbox"> Ver zonas de composición</label>
     <p class="memorial-note">Cada motivo puede llegar a los cuatro bordes. Comprueba los avisos si se superpone con la inscripción.</p>
    </div></details>
@@ -67,7 +73,7 @@ const ui=`<section class="memorial-studio" id="personalizar" aria-labelledby="me
 let html=readFileSync('funerario.html','utf8');
 html=html.replace(/<section class="memorial-studio"[\s\S]*?<\/section>(?=<div class="catalog-grid">)/,ui);
 html=html.replace(/<script src="funerario-(?:recursos|compositor|exportar|personalizador)\.js(?:\?[^"]+)?"><\/script>/g,'');
-html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=funerario-tipologias-20261020-v7');
-html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=funerario-tipologias-20261020-v7"></script>`).join('')+'</body>');
+html=html.replace(/styles\.css\?v=funerario-[^"]+/,'styles.css?v=motivos-integrados-20261020');
+html=html.replace('</body>', ['recursos','compositor','exportar','personalizador'].map(n=>`<script src="funerario-${n}.js?v=motivos-integrados-20261020"></script>`).join('')+'</body>');
 writeFileSync('funerario.html',html);
 console.log('Updated existing studio; no other page replaced.');
