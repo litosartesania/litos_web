@@ -190,9 +190,11 @@
     const surface=add(svg,'g',{'data-layer':'surface'});
     add(surface,'path',{d:shape,transform:'translate(11 14)',fill:material.dark?'#161817':'#a29e95',filter:'url(#slab-shadow)'});
     add(surface,'path',{d:shape,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':10,'stroke-linejoin':'round'});
-    const geometry=add(svg,'g',{'data-layer':'geometry'});
+    const geometry=add(svg,'g',{'data-layer':'geometry','data-architecture':model.architecture});
     add(geometry,'path',{d:shape,fill:'none',stroke:material.dark?'#a9aaa4':'#fffef9','stroke-width':1.4,opacity:.42});
-    if(model.architecture==='pilastras'){
+    if(model.architecture==='pilastras'||model.architecture==='pilastras-altas'){
+      // Architectural elements are recreated as stone relief, never as a copied
+      // private photograph or a physically certified manufacturing profile.
       for(const x of [face.x-20,face.x+face.w-6]){
         add(geometry,'rect',{x,y:face.y-10,width:26,height:face.h+22,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':3});
         for(let k=1;k<5;k++)add(geometry,'path',{d:`M${x+k*5},${face.y+8}V${face.y+face.h-8}`,stroke:k%2?'#ffffff':'#000000','stroke-width':2,opacity:.18});
@@ -206,7 +208,32 @@
         for(const x of [face.x-13,face.x+face.w-9])add(geometry,'rect',{x,y:face.y,width:22,height:face.h,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':2});
       }
     }
-    if(model.architecture==='losa')add(geometry,'path',{d:`M${face.x},${face.y+face.h+15}H${face.x+face.w+11}`,stroke:'#353632','stroke-width':5,opacity:.8});
+    if(model.architecture==='arcos-gemelos'){
+      const color=material.dark?'#ccc8bc':'#6c6962';
+      add(geometry,'rect',{x:face.x+face.w*.025,y:face.y+face.h*.05,
+        width:face.w*.95,height:face.h*.90,rx:2,fill:'none',
+        stroke:color,'stroke-width':2.1,opacity:.46,filter:'url(#engraved)'});
+      for(let column=0;column<2;column++){
+        const x=face.x+face.w*(.085+column*.46),w=face.w*.37;
+        const top=face.y+face.h*.17,bottom=face.y+face.h*.86;
+        add(geometry,'path',{d:`M${x},${bottom}V${top+face.h*.24}Q${x+w/2},${top-face.h*.12} ${x+w},${top+face.h*.24}V${bottom}`,
+          fill:'none',stroke:color,'stroke-width':2.8,opacity:.43,filter:'url(#engraved)',
+          'data-architecture-component':column?'arch-right':'arch-left'});
+      }
+    }
+    if(model.architecture==='losa'||model.architecture==='losa-anillas')
+      add(geometry,'path',{d:`M${face.x},${face.y+face.h+15}H${face.x+face.w+11}`,stroke:'#353632','stroke-width':5,opacity:.8});
+    if(model.architecture==='losa-anillas'){
+      add(geometry,'rect',{x:face.x+face.w*.045,y:face.y+face.h*.085,
+        width:face.w*.91,height:face.h*.83,rx:3,fill:'none',
+        stroke:material.dark?'#bebbb3':'#aaa49b','stroke-width':2.5,filter:'url(#engraved)'});
+      for(const anchor of [.11,.89]){
+        const x=face.x+face.w*anchor,y=face.y+face.h*.18;
+        add(geometry,'circle',{cx:x,cy:y-3,r:9,stroke:'#565b5c','stroke-width':3.5,fill:'none',
+          filter:'url(#metal-applique)','data-architecture-component':'ring'});
+        add(geometry,'circle',{cx:x,cy:y-13,r:4,fill:'#9aa0a0',stroke:'#565b5c','stroke-width':1});
+      }
+    }
     if(state.fixings){
       const pos=[[.065,.08],[.935,.08],[.065,.92],[.935,.92]];
       for(const [px,py] of pos){

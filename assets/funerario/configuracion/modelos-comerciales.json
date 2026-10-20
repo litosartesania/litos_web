@@ -275,6 +275,157 @@
           }
         }
       }
+    },
+    {
+      "id": "portada-arcos-dos-campos",
+      "title": "Portada de arcos gemelos",
+      "type": "portada",
+      "stoneFamily": "clara",
+      "style": "arquitectonico",
+      "technique": "grabado",
+      "ornamentation": "cruz",
+      "accessoryCategory": "bucaro",
+      "note": "Placa clara con dos hornacinas incisas, cruz vertical en una y letras en la otra. Complemento independiente de apoyo, orientativo.",
+      "provenance": "inspirado",
+      "state": {
+        "stone": "macael",
+        "model": "portada-arcos-gemelos",
+        "layout": "lateral",
+        "symbol": "doblefilete",
+        "devotional": "ninguno",
+        "ornament": "ninguno",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "marcellus",
+        "finish": "relieve",
+        "accessory": "vaso-conico",
+        "accessorySide": "free",
+        "accessoryFinish": "piedra",
+        "fixings": false,
+        "textSize": 80,
+        "leading": 118,
+        "align": "center",
+        "symbolPlacement": {
+          "x": 18,
+          "y": 58,
+          "scale": 178
+        },
+        "accessoryPlacement": {
+          "x": 0,
+          "y": 100,
+          "scale": 86
+        },
+        "fields": {
+          "header": {
+            "visible": false
+          },
+          "epitaph": {
+            "text": "EN NUESTRA MEMORIA",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          }
+        }
+      }
+    },
+    {
+      "id": "portada-pilastras-medallon",
+      "title": "Portada alta de pilastras y medallón",
+      "type": "doble",
+      "stoneFamily": "clara",
+      "style": "clasico",
+      "technique": "bajorrelieve",
+      "ornamentation": "imagen religiosa",
+      "accessoryCategory": "jardineras",
+      "note": "Composición vertical con pilastras acanaladas, cornisa y medallón tallado en la misma piedra; jardinera baja orientativa.",
+      "provenance": "inspirado",
+      "state": {
+        "stone": "macael",
+        "model": "pilastras-altas",
+        "layout": "medallonsuperior",
+        "symbol": "ninguno",
+        "devotional": "medallon-mariano",
+        "ornament": "ninguno",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "aldine",
+        "finish": "relieve",
+        "accessory": "jardinera",
+        "accessorySide": "center",
+        "accessoryFinish": "piedra",
+        "fixings": false,
+        "textSize": 83,
+        "leading": 118,
+        "align": "center",
+        "devotionalPlacement": {
+          "x": 50,
+          "y": 50,
+          "scale": 112
+        },
+        "accessoryPlacement": {
+          "x": 50,
+          "y": 100,
+          "scale": 100
+        },
+        "fields": {
+          "header": {
+            "visible": false
+          },
+          "epitaph": {
+            "text": "SIEMPRE EN EL RECUERDO",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          }
+        }
+      }
+    },
+    {
+      "id": "panteon-modular-anillas",
+      "title": "Placa modular con anillas",
+      "type": "panteon",
+      "stoneFamily": "clara",
+      "style": "sobrio",
+      "technique": "grabado",
+      "ornamentation": "marco",
+      "accessoryCategory": "ninguno",
+      "note": "Placa horizontal de mármol con rebaje perimetral, anillas de sujeción y fijaciones visibles. Diseño conceptual de un módulo individual.",
+      "provenance": "inspirado",
+      "state": {
+        "stone": "macael",
+        "model": "placa-anillas",
+        "layout": "centrado",
+        "symbol": "ninguno",
+        "devotional": "ninguno",
+        "ornament": "ninguno",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "marcellus",
+        "finish": "relieve",
+        "accessory": "ninguno",
+        "fixings": true,
+        "textSize": 78,
+        "leading": 110,
+        "align": "center",
+        "fields": {
+          "header": {
+            "text": "D. E. P.",
+            "visible": true
+          },
+          "epitaph": {
+            "text": "SIEMPRE PRESENTE",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          }
+        }
+      }
     }
   ]
 }

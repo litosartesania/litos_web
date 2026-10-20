@@ -698,3 +698,12 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Incluida navegación equivalente en el menú móvil y en `noscript`; se marca la especialidad actual mediante `aria-current="page"`. Se conservan los controladores del menú de `script.js`; no se introduce ningún proveedor, recurso remoto ni dato privado.
 - Prueba Playwright añadida: enlaces de ambas especialidades, marca actual, menú móvil y cabecera fijada al desplazar 720px en 390/820/1440px. La cabecera está acotada a `.litos-funerary-page` para no alterar las otras secciones.
 - Publicar únicamente después de comprobar la CI de la rama y, tras fusionar, verificar GitHub Pages. Los trabajos históricos privados no se incluyen en esta mejora.
+
+## 20/10/2026 — Tres familias funerarias reconstruidas desde evidencia privada
+- Inspección visual puntual de **fotografías privadas de producto**, sin publicar ninguna imagen original ni su contexto identificativo, y contrastada con el índice de clasificación privada. Las referencias analizadas muestran: una portada alta de pilastras estriadas y medallón integrado, una placa de dos arcos rebajados con símbolo y escritura en campos distintos, y placas horizontales modulares con anillas y fijaciones.
+- Tres geometrías SVG **nuevas y originales**: `arcos-gemelos` (dos vanos fresados), `pilastras-altas` (formato vertical con molduras) y `losa-anillas` (placa horizontal con dos anillas esquemáticas). Se distinguen por su estructura en el motor, no por recoloración.
+- Tres modelos de escaparate totalmente ficticios: «Portada de arcos gemelos», «Portada alta de pilastras y medallón» y «Placa modular con anillas». **No replican fotos ni nombres, fechas o dedicatorias reales.** El medallón y los complementos son recursos conceptuales propios ya presentes en el proyecto.
+- Catálogo esperado: 10 geometrías seleccionables, 13 presets comerciales, 10 complementos. Se conserva la selección de piedra, tamaños y posiciones en cada preset.
+- Faltan por acreditar medidas de fabricación, tipografías exactas, profundidad real del tallado, anclajes y disponibilidad. No son planos ejecutivos.
+- La revisión total del archivo histórico privado sigue pendiente: estos tres modelos **no** equivalen a una auditoría exhaustiva de todas las fotografías.
+- Pruebas actualizadas en `check-funerario.py`, `qa-funerario.py`, `qa-funerario-redesign.py` y `visual-qa.py`; validar GitHub Actions del HEAD antes de cualquier publicación. No modificar repositorios ajenos ni copiar fuentes privadas a GitHub.
