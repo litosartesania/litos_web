@@ -29,7 +29,7 @@ FILES = {
     ),
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261015-macetero8",
+        "styles.css?v=litos-contacto-20261020-v1",
         "catalogo-precios.js?v=stone-20261015-bandeja8",
         "Por ahora no aceptamos encargos.",
         "Colección conceptual · 21 productos · 9 piedras · 21 planos",
