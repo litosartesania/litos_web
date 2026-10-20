@@ -730,3 +730,11 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Formulario en Inicio, Arte funerario y Mobiliario, con nombre, email, categoría, mensaje, lectura de privacidad, accesibilidad y validación. Destino comercial declarado: `litos.artesania@gmail.com`. No hay endpoint, backend, analítica ni almacenamiento en GitHub: el visitante abre un borrador `mailto:` y debe enviarlo manualmente desde su correo.
 - Aviso legal y privacidad adaptados para explicar el flujo por correo. **NO publicar sin verificar identificación del responsable legal del sitio y la política de tratamiento aplicable.** `scripts/check-site.py --production` sigue bloqueando el despliegue intencionadamente hasta documentar esa validación; la vista de revisión no equivale a producción.
 - Tests de estructura, galería local y contacto/preview actualizados. Pendiente ejecutar CI de GitHub Actions y revisar capturas móvil/escritorio. No se ha fusionado ni desplegado.
+
+## 20/10/2026 — Continuación de PR81: punto de recuperación
+- Se preservó el avance local anterior en una rama independiente y se retomó exactamente la cabeza de PR81. No se mezcló PR79.
+- Causa de la CI fallida: los botones nuevos reutilizaban `data-slot`, reservado a las capas SVG. La figura sí existía; la consulta encontraba el botón. Los botones usan ahora `data-motif-slot`; regresión comprueba unicidad de la figura durante las tres técnicas.
+- Tres complementos originales adicionales (cono de acero, cilindro blanco y jarrón de granito), con miniatura y render transparente; árbol figurativo original disponible como motivo adicional. Se conservan los diez recursos anteriores. Total provisional: 13 complementos, 58 motivos, 142 archivos públicos permitidos.
+- Carga diferida extendida a motivos no religiosos y restauración del revisor offline tras retirar el selector global. Ningún original privado ni inscripción real añadido.
+- Punto guardado a petición del propietario para evitar pérdida de trabajo: auditoría estática e integridad pasan; pruebas de navegador y revisión de proporciones en curso. No representa finalización de la iteración.
+- Sigue bloqueada la publicación del formulario por identificación legal pendiente. Mantener PR81 en revisión; no eludir `--production`.

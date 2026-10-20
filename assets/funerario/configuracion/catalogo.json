@@ -1689,6 +1689,36 @@
       "category": "simbolos",
       "path": "assets/funerario/ornamentos/simbolos/pergamino.svg",
       "publicSelectable": true
+    },
+    {
+      "id": "arbol-memoria",
+      "name": "Olivo de la memoria",
+      "category": "simbolos",
+      "path": "assets/funerario/ornamentos/simbolos/renders/arbol-memoria.webp",
+      "thumbnailPath": "assets/funerario/ornamentos/simbolos/miniaturas/arbol-memoria.webp",
+      "format": "image/webp",
+      "digitalSize": [
+        640,
+        753
+      ],
+      "simulatedTechnique": "grabado",
+      "publicSelectable": true,
+      "commercialReady": false,
+      "compatibleLayouts": [
+        "centrado",
+        "lateral",
+        "superior",
+        "separadores",
+        "devocionlateral",
+        "medallonsuperior",
+        "relievelateral",
+        "crucifijolateral",
+        "relievesuperior"
+      ],
+      "rights": "Imagen original generada para LITOS; no contiene fotografías privadas ni imágenes de catálogos ajenos.",
+      "validation": "Grabado figurativo conceptual; detalle mínimo y técnica pendientes de prueba en piedra.",
+      "visualReview": "Propuesta original para revisión en configurador.",
+      "technicalValidation": "Pendiente de taller."
     }
   ],
   "accessories": [
@@ -1911,6 +1941,72 @@
       "dimensionsMm": null,
       "commercialReady": false,
       "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "florero-conico-acero",
+      "name": "Florero mural cónico",
+      "category": "floreros",
+      "mount": "mural; fijación por validar",
+      "finishes": [
+        "acero"
+      ],
+      "aspect": 0.6075,
+      "path": "assets/funerario/accesorios/florero-conico-acero.svg",
+      "renderPath": "assets/funerario/accesorios/renders/florero-conico-acero.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/florero-conico-acero.webp",
+      "digitalSize": [
+        486,
+        800
+      ],
+      "renderMaterial": "acero",
+      "rights": "Imagen original generada para LITOS; no contiene fotografías privadas ni imágenes de catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Recreación original; dimensiones, suministro y montaje pendientes de validación del taller."
+    },
+    {
+      "id": "florero-cilindrico-blanco",
+      "name": "Florero cilíndrico blanco",
+      "category": "floreros",
+      "mount": "mural; fijación por validar",
+      "finishes": [
+        "piedra"
+      ],
+      "aspect": 0.65875,
+      "path": "assets/funerario/accesorios/florero-cilindrico-blanco.svg",
+      "renderPath": "assets/funerario/accesorios/renders/florero-cilindrico-blanco.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/florero-cilindrico-blanco.webp",
+      "digitalSize": [
+        527,
+        800
+      ],
+      "renderMaterial": "piedra",
+      "rights": "Imagen original generada para LITOS; no contiene fotografías privadas ni imágenes de catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Recreación original; dimensiones, suministro y montaje pendientes de validación del taller."
+    },
+    {
+      "id": "jarron-granito",
+      "name": "Jarrón de granito oscuro",
+      "category": "búcaros y jarrones",
+      "mount": "mural; fijación por validar",
+      "finishes": [
+        "piedra"
+      ],
+      "aspect": 0.67,
+      "path": "assets/funerario/accesorios/jarron-granito.svg",
+      "renderPath": "assets/funerario/accesorios/renders/jarron-granito.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/jarron-granito.webp",
+      "digitalSize": [
+        536,
+        800
+      ],
+      "renderMaterial": "piedra",
+      "rights": "Imagen original generada para LITOS; no contiene fotografías privadas ni imágenes de catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Recreación original; dimensiones, suministro y montaje pendientes de validación del taller."
     }
   ],
   "techniques": [

@@ -17,7 +17,7 @@ MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
-assert len(MEMORIAL["files"]) == 131
+assert len(MEMORIAL["files"]) == 142
 # Read the release URLs from the actual HTML; do not keep a second, stale version string.
 MEMORIAL_URLS = re.findall(r'(?:href|src)="((?:styles\.css|funerario-[a-z]+\.js)\?v=[^"]+)"', (ROOT/'funerario.html').read_text())
 assert len(MEMORIAL_URLS) == 5

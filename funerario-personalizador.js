@@ -152,7 +152,7 @@
     pictorialLoads.set(item.path,promise);
     promise.catch(error=>pictorialErrors.set(item.path,error)).finally(()=>{
       pictorialLoads.delete(item.path);
-      if(state.devotional===item.id||state.accessory===item.id)requestRender();
+      if(['symbol','devotional','ornament','secondary','accessory'].some(slot=>state[slot]===item.id))requestRender();
       renderCaseGallery();
     });
   }
@@ -283,7 +283,7 @@
       for(const item of [{id:'ninguno',name:'Sin elemento'},...items]){
         const selected=state[slot]===item.id;
         const button=document.createElement('button');button.type='button';button.className='memorial-motif';
-        button.dataset.itemId=item.id;button.dataset.slot=slot;button.setAttribute('aria-pressed',String(selected));
+        button.dataset.itemId=item.id;button.dataset.motifSlot=slot;button.setAttribute('aria-pressed',String(selected));
         button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+item.name+(item.commercialReady===false?', prototipo sin validar':''));
         const image=document.createElement('span');image.className='memorial-motif-image';
         if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
@@ -321,7 +321,9 @@
   renderGallery(true);
   function render(){
     if(!ready)return;
-    const figure=publicOrnaments.find(item=>item.id===state.devotional&&item.format==='image/webp');
+    const figures=['symbol','devotional','ornament','secondary'].map(slot=>publicOrnaments.find(item=>item.id===state[slot]&&item.format==='image/webp')).filter(Boolean);
+    for(const figure of figures)if(!pictorialErrors.has(figure.path))loadPictorial(figure);
+    const figure=figures.find(item=>!resources[item.path]);
     const accessory=catalog.accessories.find(item=>item.id===state.accessory);
     const waitingPath=figure&&!resources[figure.path]?figure.path:accessory?.renderPath&&!resources[accessory.renderPath]?accessory.renderPath:null;
     if(waitingPath){

@@ -255,10 +255,10 @@
     if(placedDevotional)boxes.push({kind:'devotional',id:state.devotional,...placedDevotional});
     else if(state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)warnings.push('La imagen religiosa necesita una composición con zona propia.');
     const flowerEntry=catalog.ornaments.find(o=>o.id===state.ornament&&(o.category==='flores'||o.category==='simbolos'));
-    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,finish.color,'ornament',face);
+    const placedFlower=ornament(ornaments,state.ornament,flowerEntry?.category,flowerBox,state.ornamentPlacement,finish.color,'ornament',face,undefined,material.dark);
     if(placedFlower)boxes.push({kind:'ornament',id:state.ornament,...placedFlower});
     const secondaryEntry=catalog.ornaments.find(o=>o.id===state.secondary&&(o.category==='flores'||o.category==='simbolos'));
-    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},finish.color,'secondary',face);
+    const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},finish.color,'secondary',face,undefined,material.dark);
     if(placedSecondary)boxes.push({kind:'secondary',id:state.secondary,...placedSecondary});
     else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
     const optionalAccessory=accessory(add(svg,'g',{'data-layer':'accessories'}),state,face);

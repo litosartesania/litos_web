@@ -12,12 +12,12 @@ with sync_playwright() as p:
  # Accessory shop must work independently from the technical configurator.
  page.locator('#memorial-browse-accessories').click()
  page.locator('[data-accessory-category-filter="floreros"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==2
- assert page.locator('#memorial-accessory-shop-count').inner_text()=='2 complementos en esta categoría'
+ assert page.locator('.memorial-shop-item:visible').count()==4
+ assert page.locator('#memorial-accessory-shop-count').inner_text()=='4 complementos en esta categoría'
  page.locator('[data-accessory-category-filter="búcaros y jarrones"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==3
+ assert page.locator('.memorial-shop-item:visible').count()==4
  page.locator('[data-accessory-category-filter="todos"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==10
+ assert page.locator('.memorial-shop-item:visible').count()==13
  page.locator('.memorial-shop-item[data-accessory-choice="florero"]').click()
  page.wait_for_selector('[data-slot=accessory][data-accessory=florero]')
  assert page.locator('#memorial-accessory').input_value()=='florero'
