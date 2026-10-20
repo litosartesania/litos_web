@@ -721,3 +721,12 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Accesibilidad: h1/h2 funerarios permanecen para lectores de pantalla usando `visually-hidden`; en pantalla se accede a «Explorar modelos / Crear desde cero».
 - Actualizados los textos legales informativos: no hay pagos ni tratamiento de formularios en esta versión, sin incluir mensajes comerciales de indisponibilidad. Sin cambios de datos privados.
 - Ajustados `scripts/check-site.py`, `scripts/visual-qa.py`, `scripts/check-live-deployment.py` y el generador del estudio funerario. CI y captura responsive deben aprobarse antes de fusionar y comprobar GitHub Pages.
+
+
+## 20/10/2026 — Motivos visuales integrados y contacto comercial (rama de revisión)
+
+- Rama exclusiva `work/funerario-galerias-contacto-20261020` creada desde main posterior a PR #80; no se modificaron otros repositorios, pedidos, datos internos ni fotografías originales.
+- «02 · Composición y símbolos»: se elimina el selector global duplicado de la biblioteca. Las seis categorías Cruz, Imágenes religiosas, Flores y símbolos, Motivo adicional, Separadores y Marcos contienen ahora su propia galería visual de tarjetas. El elemento se aplica inmediatamente; se conservan los controles internos de estado, tamaño, posición y composición. Se actualiza `tools/build-funerario-ui.mjs` para no regenerar la interfaz antigua.
+- Formulario en Inicio, Arte funerario y Mobiliario, con nombre, email, categoría, mensaje, lectura de privacidad, accesibilidad y validación. Destino comercial declarado: `litos.artesania@gmail.com`. No hay endpoint, backend, analítica ni almacenamiento en GitHub: el visitante abre un borrador `mailto:` y debe enviarlo manualmente desde su correo.
+- Aviso legal y privacidad adaptados para explicar el flujo por correo. **NO publicar sin verificar identificación del responsable legal del sitio y la política de tratamiento aplicable.** `scripts/check-site.py --production` sigue bloqueando el despliegue intencionadamente hasta documentar esa validación; la vista de revisión no equivale a producción.
+- Tests de estructura, galería local y contacto/preview actualizados. Pendiente ejecutar CI de GitHub Actions y revisar capturas móvil/escritorio. No se ha fusionado ni desplegado.
