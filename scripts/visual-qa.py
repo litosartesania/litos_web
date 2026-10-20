@@ -239,8 +239,8 @@ with sync_playwright() as app:
      page.locator('[data-category-filter="Todos"]').click()
      assert page.locator('.piece-card:visible').count()==21
     assert page.locator('form').count()==0
-    assert page.locator('.project-status').count()==1
-    assert page.get_by_text('Por ahora no aceptamos encargos.').count()==1
+    assert page.locator('.project-status').count()==0
+    assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
    else:
     assert page.locator('.legal-content h2').count()>3
     assert page.locator('form').count()==0
