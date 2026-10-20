@@ -71,8 +71,8 @@ with sync_playwright() as app:
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
      assert page.locator('#memorial-workbench').count()==1
-      assert page.locator('.memorial-motif-section').count()==6
-      assert page.locator('#memorial-gallery-category').count()==0
+     assert page.locator('.memorial-motif-section').count()==6
+     assert page.locator('#memorial-gallery-category').count()==0
      assert page.locator('#memorial-model option').count()==10
      assert page.locator('#memorial-stone option').count()==7
      assert page.locator('#memorial-type option').count()==10
