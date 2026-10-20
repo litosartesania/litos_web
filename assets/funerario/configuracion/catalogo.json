@@ -157,10 +157,10 @@
         0.11,
         0.19,
         0.78,
-        0.643298969072165
+        0.65
       ],
       "architecture": "recta",
-      "note": "Proporción conceptual 97:80; sin medida de fabricación."
+      "note": "Proporción ilustrativa; introduce las medidas verificadas de la pieza."
     },
     {
       "id": "doble",
@@ -209,6 +209,30 @@
       ],
       "architecture": "losa",
       "note": "Losa horizontal conceptual; sin especificación constructiva."
+    },
+    {
+      "id": "cornisa",
+      "name": "Nicho con cornisa y repisa",
+      "face": [
+        0.15,
+        0.22,
+        0.7,
+        0.56
+      ],
+      "architecture": "cornisa",
+      "note": "Arquitectura recreada de manera orientativa; cotas y sección por validar."
+    },
+    {
+      "id": "repisa",
+      "name": "Nicho con repisa frontal",
+      "face": [
+        0.13,
+        0.2,
+        0.74,
+        0.6
+      ],
+      "architecture": "repisa",
+      "note": "Repisa ilustrativa; anclajes, canto y medidas por validar."
     }
   ],
   "layouts": [
@@ -1627,6 +1651,254 @@
       "category": "simbolos",
       "path": "assets/funerario/ornamentos/simbolos/pergamino.svg",
       "publicSelectable": true
+    }
+  ],
+  "accessories": [
+    {
+      "id": "bucaro",
+      "name": "Búcaro clásico",
+      "category": "búcaros y jarrones",
+      "mount": "apoyo o fijación por confirmar",
+      "finishes": [
+        "bronce"
+      ],
+      "aspect": 0.62,
+      "path": "assets/funerario/accesorios/bucaro.svg",
+      "renderPath": "assets/funerario/accesorios/renders/bucaro.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/bucaro.webp",
+      "digitalSize": [
+        640,
+        640
+      ],
+      "renderMaterial": "bronce",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "vaso-estriado",
+      "name": "Vaso estriado",
+      "category": "búcaros y jarrones",
+      "mount": "apoyo o fijación por confirmar",
+      "finishes": [
+        "bronce"
+      ],
+      "aspect": 0.65,
+      "path": "assets/funerario/accesorios/vaso-estriado.svg",
+      "renderPath": "assets/funerario/accesorios/renders/vaso-estriado.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/vaso-estriado.webp",
+      "digitalSize": [
+        610,
+        640
+      ],
+      "renderMaterial": "bronce",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "vaso-conico",
+      "name": "Vaso cónico bajo",
+      "category": "búcaros y jarrones",
+      "mount": "apoyo por confirmar",
+      "finishes": [
+        "piedra"
+      ],
+      "aspect": 1.05,
+      "path": "assets/funerario/accesorios/vaso-conico.svg",
+      "renderPath": "assets/funerario/accesorios/renders/vaso-conico.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/vaso-conico.webp",
+      "digitalSize": [
+        640,
+        427
+      ],
+      "renderMaterial": "piedra",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "florero",
+      "name": "Florero mural",
+      "category": "floreros",
+      "mount": "mural; fijación por validar",
+      "finishes": [
+        "acero"
+      ],
+      "aspect": 0.66,
+      "path": "assets/funerario/accesorios/florero.svg",
+      "renderPath": "assets/funerario/accesorios/renders/florero.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/florero.webp",
+      "digitalSize": [
+        427,
+        640
+      ],
+      "renderMaterial": "acero",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "florero-gota",
+      "name": "Florero de gota",
+      "category": "floreros",
+      "mount": "mural; fijación por validar",
+      "finishes": [
+        "bronce"
+      ],
+      "aspect": 0.62,
+      "path": "assets/funerario/accesorios/florero-gota.svg",
+      "renderPath": "assets/funerario/accesorios/renders/florero-gota.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/florero-gota.webp",
+      "digitalSize": [
+        427,
+        640
+      ],
+      "renderMaterial": "bronce",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "jardinera",
+      "name": "Jardinera recta",
+      "category": "jardineras",
+      "mount": "apoyo; base por validar",
+      "finishes": [
+        "piedra"
+      ],
+      "aspect": 1.8,
+      "path": "assets/funerario/accesorios/jardinera.svg",
+      "renderPath": "assets/funerario/accesorios/renders/jardinera.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/jardinera.webp",
+      "digitalSize": [
+        640,
+        266
+      ],
+      "renderMaterial": "piedra",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "jardinera-copa",
+      "name": "Jardinera de copa",
+      "category": "jardineras",
+      "mount": "apoyo; base por validar",
+      "finishes": [
+        "bronce"
+      ],
+      "aspect": 1.2,
+      "path": "assets/funerario/accesorios/jardinera-copa.svg",
+      "renderPath": "assets/funerario/accesorios/renders/jardinera-copa.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/jardinera-copa.webp",
+      "digitalSize": [
+        640,
+        427
+      ],
+      "renderMaterial": "bronce",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "farol",
+      "name": "Farol de cubierta",
+      "category": "faroles y luz",
+      "mount": "apoyo o colgante por validar",
+      "finishes": [
+        "bronce"
+      ],
+      "aspect": 0.68,
+      "path": "assets/funerario/accesorios/farol.svg",
+      "renderPath": "assets/funerario/accesorios/renders/farol.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/farol.webp",
+      "digitalSize": [
+        427,
+        640
+      ],
+      "renderMaterial": "bronce",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "portavelas",
+      "name": "Portavelas compacto",
+      "category": "faroles y luz",
+      "mount": "apoyo por confirmar",
+      "finishes": [
+        "piedra"
+      ],
+      "aspect": 1,
+      "path": "assets/funerario/accesorios/portavelas.svg",
+      "renderPath": "assets/funerario/accesorios/renders/portavelas.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/portavelas.webp",
+      "digitalSize": [
+        640,
+        620
+      ],
+      "renderMaterial": "piedra",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    },
+    {
+      "id": "repisa-metal",
+      "name": "Repisa de apoyo",
+      "category": "repisas y soportes",
+      "mount": "mural; cargas y anclaje por validar",
+      "finishes": [
+        "acero"
+      ],
+      "aspect": 1.8,
+      "path": "assets/funerario/accesorios/repisa-metal.svg",
+      "renderPath": "assets/funerario/accesorios/renders/repisa-metal.webp",
+      "thumbnailPath": "assets/funerario/accesorios/miniaturas/repisa-metal.webp",
+      "digitalSize": [
+        640,
+        320
+      ],
+      "renderMaterial": "acero",
+      "rights": "Imagen original generada con image_gen para este proyecto; no procede de fotografías privadas ni catálogos ajenos.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Concepto visual: forma, acabado, compatibilidad y montaje pendientes de confirmación del taller."
+    }
+  ],
+  "techniques": [
+    {
+      "id": "grabado",
+      "name": "Grabado / incisión",
+      "depth": "integrado en la superficie",
+      "validation": "Simulación orientativa"
+    },
+    {
+      "id": "bajorrelieve",
+      "name": "Bajorrelieve tallado",
+      "depth": "misma piedra, volumen bajo",
+      "validation": "Simulación orientativa"
+    },
+    {
+      "id": "aplique 3D",
+      "name": "Aplique independiente",
+      "depth": "pieza separada con sombra de contacto",
+      "validation": "Material y anclaje por confirmar"
+    },
+    {
+      "id": "metal",
+      "name": "Aplique metálico",
+      "depth": "pieza separada con reflejos",
+      "validation": "Aleación y anclaje por confirmar"
     }
   ]
 }

@@ -40,7 +40,7 @@
     }
     return lines;
   }
-  function ornament(group,id,category,box,placement,color,slot,face){
+  function ornament(group,id,category,box,placement,color,slot,face,techniqueOverride,surfaceDark=false){
     if(id==='ninguno'||!box)return;
     const entry=catalog.ornaments.find(x=>x.id===id&&x.category===category);
     if(!entry||entry.publicSelectable===false)return;
@@ -59,9 +59,10 @@
     const travel=(value,first,home,last)=>value<=50?first+(home-first)*value/50:home+(last-home)*(value-50)/50;
     const x=travel(clamp(placement.x,0,100),face.x,homeX,face.x+face.w-width);
     const y=travel(clamp(placement.y,0,100),face.y,homeY,face.y+face.h-height);
-    const technique=entry.simulatedTechnique||'incisión';
-    const filterName=raster?'stone-relief':technique.includes('aplique metálico')?'metal-applique':technique.includes('talla')?'carved-relief':'engraved';
+    const technique=techniqueOverride||entry.simulatedTechnique||'grabado';
+    const filterName=technique==='aplique 3D'?'applied-relief':technique==='bajorrelieve'||technique.includes('talla')?'carved-relief':technique==='metal'||technique.includes('aplique metálico')?'metal-applique':raster?'pictorial-engraved':'engraved';
     const g=add(group,'g',{'data-ornament':category+':'+id,'data-slot':slot,'data-zone':JSON.stringify(box),'data-technique':technique,color,fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round',filter:`url(#${filterName})`});
+    if(raster&&technique==='grabado')g.style.mixBlendMode=surfaceDark?'screen':'multiply';
     // Only vetted repository SVG paths are imported, never user content.
     const artWidth=raster&&entry.digitalSize?entry.digitalSize[0]:100;
     const artHeight=raster&&entry.digitalSize?entry.digitalSize[1]:100;
@@ -72,32 +73,26 @@
     }else for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
     return {x,y,w:width,h:height};
   }
-  // Original schematic accessories; real fixings and dimensions require workshop review.
+  // Independent original silhouettes; no accessory dimensions or fixings are certified.
   function accessory(group,state,face){
     const kind=state.accessory||'ninguno';
-    if(!['bucaro','jardinera','florero','farol'].includes(kind))return null;
-    const colors={bronce:['#b09262','#5d4428','#e5cc93'],acero:['#bec7cd','#57636d','#e9f0f2'],piedra:['#8d8c87','#50504d','#ddd9cf']};
-    const [fill,edge,light]=colors[state.accessoryFinish]||colors.bronce;
-    const w=Math.min(face.w*.155,104),h=Math.min(face.h*.18,130);
-    const x=state.accessorySide==='left'?face.x+face.w*.035:face.x+face.w-w-face.w*.035,y=face.y+face.h-h-face.h*.035;
-    const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':state.accessoryFinish||'bronce',fill,stroke:edge,'stroke-width':2});
-    const X=v=>x+v*w,Y=v=>y+v*h;
-    add(g,'ellipse',{cx:X(.5),cy:Y(.97),rx:w*.45,ry:h*.03,fill:'#26211d',stroke:'none',opacity:.2});
-    if(kind==='bucaro'){
-      add(g,'path',{d:`M${X(.22)} ${Y(.12)}H${X(.78)}L${X(.67)} ${Y(.88)}Q${X(.5)} ${Y(.99)} ${X(.33)} ${Y(.88)}Z`});
-      add(g,'ellipse',{cx:X(.5),cy:Y(.13),rx:w*.29,ry:h*.08,fill:edge,stroke:light});
-      add(g,'path',{d:`M${X(.4)} ${Y(.27)}V${Y(.75)}`,stroke:light,'stroke-width':3,fill:'none'});
-    }else if(kind==='jardinera'){
-      add(g,'path',{d:`M${X(.03)} ${Y(.32)}H${X(.97)}L${X(.85)} ${Y(.89)}H${X(.15)}Z`});
-      add(g,'rect',{x:X(.01),y:Y(.26),width:w*.98,height:h*.1,fill:light,rx:3});
-    }else if(kind==='florero'){
-      add(g,'path',{d:`M${X(.25)} ${Y(.14)}H${X(.75)}L${X(.63)} ${Y(.81)}H${X(.37)}Z`});
-      add(g,'ellipse',{cx:X(.5),cy:Y(.15),rx:w*.25,ry:h*.07,fill:edge,stroke:light});
-      add(g,'rect',{x:X(.2),y:Y(.83),width:w*.6,height:h*.1,fill:edge,rx:2});
-    }else{
-      add(g,'rect',{x:X(.23),y:Y(.37),width:w*.54,height:h*.46,fill:edge,rx:3});
-      add(g,'path',{d:`M${X(.14)} ${Y(.37)}L${X(.5)} ${Y(.1)}L${X(.86)} ${Y(.37)}Z`,fill});
-      add(g,'rect',{x:X(.32),y:Y(.43),width:w*.36,height:h*.32,fill:'#f3d698',stroke:light,rx:2});
+    const item=catalog.accessories?.find(x=>x.id===kind);
+    if(!item)return null;
+    const finish=item.finishes.includes(state.accessoryFinish)?state.accessoryFinish:item.finishes[0];
+    const colors={bronce:['#ad8d5f','#574329','#e6cc95'],acero:['#adb8bd','#4c5b62','#e7eef0'],piedra:['#c6c2b9','#77736c','#efebe2']};
+    const [fill,edge,light]=colors[finish];
+    const w=Math.min(face.w*(item.aspect>1.4?.20:.14),item.aspect>1.4?156:104);
+    const h=Math.min(face.h*.27,w/item.aspect);
+    const x=state.accessorySide==='left'?face.x-w*.58:face.x+face.w-w*.42;
+    const y=face.y+face.h-h-face.h*.018;
+    const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':finish,filter:'url(#accessory-contact)'});
+    add(g,'ellipse',{cx:x+w*.5,cy:y+h*.96,rx:w*.42,ry:Math.max(2,h*.035),fill:'#181714',opacity:.32});
+    const render=resources[item.renderPath]||resources[item.thumbnailPath];
+    if(render){add(g,'image',{href:render,x,y,width:w,height:h,preserveAspectRatio:'xMidYMid meet'});}
+    else{
+      const source=new DOMParser().parseFromString(resources[item.path],'image/svg+xml').documentElement;
+      const nested=add(g,'svg',{x,y,width:w,height:h,viewBox:'0 0 100 100',style:`color:${fill};--edge:${edge};--shine:${light}`,'aria-hidden':'true'});
+      for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
     }
     return {kind:'accessory',id:kind,x,y,w,h};
   }
@@ -114,6 +109,14 @@
     const material=find(catalog.materials,state.stone),model=find(catalog.models,state.model),layout=find(catalog.layouts,state.layout),font=find(catalog.fonts,state.type);
     const variant=find(material.variants,state.variant);
     const face={x:model.face[0]*1000,y:model.face[1]*1000,w:model.face[2]*1000,h:model.face[3]*1000};
+    if(state.dimensions?.widthMm&&state.dimensions?.heightMm){
+      const ratio=state.dimensions.widthMm/state.dimensions.heightMm;
+      if(Number.isFinite(ratio)&&ratio>0){
+        const centerX=face.x+face.w/2,centerY=face.y+face.h/2;
+        if(ratio>face.w/face.h)face.h=face.w/ratio;else face.w=face.h*ratio;
+        face.x=centerX-face.w/2;face.y=centerY-face.h/2;
+      }
+    }
     const finish=paint(state.finish,material.dark);
     const svg=node('svg',{xmlns:NS,viewBox:'0 0 1000 1000',width:1000,height:1000,role:'img','aria-labelledby':'memorial-svg-title memorial-svg-description','data-model':model.id,'data-stone':material.id,'data-variant':variant.id,'data-type':font.id,'data-finish':finish.id,'data-layout':layout.id});
     add(svg,'title',{id:'memorial-svg-title'},'Composición orientativa en '+material.name);
@@ -131,18 +134,29 @@
     const filter=add(defs,'filter',{id:'engraved',x:'-12%',y:'-15%',width:'125%',height:'135%','color-interpolation-filters':'sRGB'});
     add(filter,'feDropShadow',{dx:finish.id==='relieve'?1:-.45,dy:finish.id==='relieve'?1.5:-.55,stdDeviation:.25,'flood-color':finish.shadow,'flood-opacity':.65});
     add(filter,'feDropShadow',{dx:.3,dy:.65,stdDeviation:.2,'flood-color':finish.light,'flood-opacity':.45});
-    const relief=add(defs,'filter',{id:'stone-relief',x:'-12%',y:'-12%',width:'124%',height:'128%','color-interpolation-filters':'sRGB'});
+    const incisedImage=add(defs,'filter',{id:'pictorial-engraved',x:'-5%',y:'-5%',width:'110%',height:'110%','color-interpolation-filters':'sRGB'});
+    add(incisedImage,'feColorMatrix',{type:'saturate',values:0});
+    add(incisedImage,'feComponentTransfer');
+    const incisedTransfer=incisedImage.lastChild;
+    for(const key of ['R','G','B'])add(incisedTransfer,'feFunc'+key,{type:'linear',slope:material.dark?.32:.24,intercept:material.dark?.39:.28});
+    add(incisedTransfer,'feFuncA',{type:'linear',slope:.82});
+    const relief=add(defs,'filter',{id:'applied-relief',x:'-22%',y:'-22%',width:'144%',height:'150%','color-interpolation-filters':'sRGB'});
     add(relief,'feColorMatrix',{type:'saturate',values:0});
-    // Religious reliefs retain an off-white grayscale independent of stone and lettering.
-    add(relief,'feColorMatrix',{type:'matrix',values:'0.98 0 0 0 0 0 0.97 0 0 0 0 0 0.95 0 0 0 0 0 1 0'});
-    add(relief,'feDropShadow',{dx:1.2,dy:1.7,stdDeviation:1.1,'flood-color':'#11100e','flood-opacity':.43});
-    add(relief,'feDropShadow',{dx:-.6,dy:-.8,stdDeviation:.6,'flood-color':'#fffdf6','flood-opacity':.3});
+    // The independent white applique keeps its own material on every stone.
+    add(relief,'feColorMatrix',{type:'matrix',values:'0.46 0 0 0 0.52 0 0.45 0 0 0.51 0 0 0.44 0 0.49 0 0 0 1 0'});
+    add(relief,'feDropShadow',{dx:4.2,dy:5.4,stdDeviation:3.2,'flood-color':'#11100e','flood-opacity':.65});
+    add(relief,'feDropShadow',{dx:-.8,dy:-1.1,stdDeviation:.5,'flood-color':'#fffdf6','flood-opacity':.42});
     const carved=add(defs,'filter',{id:'carved-relief',x:'-18%',y:'-18%',width:'136%',height:'136%'});
+    add(carved,'feColorMatrix',{type:'saturate',values:0});
+    const stoneTone=material.dark?'0.12':'0.52',stoneSlope=material.dark?'0.30':'0.39';
+    add(carved,'feColorMatrix',{type:'matrix',values:`${stoneSlope} 0 0 0 ${stoneTone} 0 ${stoneSlope} 0 0 ${stoneTone} 0 0 ${stoneSlope} 0 ${stoneTone} 0 0 0 1 0`});
     add(carved,'feDropShadow',{dx:1.1,dy:1.4,stdDeviation:.7,'flood-color':'#171616','flood-opacity':.62});
     add(carved,'feDropShadow',{dx:-.7,dy:-.8,stdDeviation:.45,'flood-color':'#ffffff','flood-opacity':.52});
     const mount=add(defs,'filter',{id:'metal-applique',x:'-25%',y:'-25%',width:'150%',height:'150%'});
     add(mount,'feDropShadow',{dx:2,dy:2.5,stdDeviation:1.4,'flood-color':'#0d0e0d','flood-opacity':.72});
     add(mount,'feDropShadow',{dx:-.9,dy:-1.1,stdDeviation:.5,'flood-color':'#ffffff','flood-opacity':.55});
+    const contact=add(defs,'filter',{id:'accessory-contact',x:'-35%',y:'-35%',width:'170%',height:'180%'});
+    add(contact,'feDropShadow',{dx:2.5,dy:4,stdDeviation:2,'flood-color':'#11100e','flood-opacity':.62});
     const pattern=add(defs,'pattern',{id:'stone',patternUnits:'userSpaceOnUse',x:face.x,y:face.y,width:Math.max(face.w,face.h),height:Math.max(face.w,face.h)});
     add(pattern,'image',{href:resources[variant.path],x:0,y:0,width:Math.max(face.w,face.h),height:Math.max(face.w,face.h),preserveAspectRatio:'xMidYMid meet'});
     const shape=model.architecture==='arco'?`M${face.x},${face.y+80} Q${face.x+face.w/2},${face.y-60} ${face.x+face.w},${face.y+80} V${face.y+face.h} H${face.x}Z`:`M${face.x},${face.y}H${face.x+face.w}V${face.y+face.h}H${face.x}Z`;
@@ -159,6 +173,13 @@
         for(let k=1;k<5;k++)add(geometry,'path',{d:`M${x+k*5},${face.y+8}V${face.y+face.h-8}`,stroke:k%2?'#ffffff':'#000000','stroke-width':2,opacity:.18});
       }
       for(const [y,h] of [[face.y-24,27],[face.y+face.h,22]])add(geometry,'rect',{x:face.x-40,y,width:face.w+80,height:h,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':4});
+    }
+    if(model.architecture==='cornisa'||model.architecture==='repisa'){
+      add(geometry,'rect',{x:face.x-16,y:face.y+face.h,width:face.w+32,height:24,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':3});
+      if(model.architecture==='cornisa'){
+        add(geometry,'rect',{x:face.x-28,y:face.y-27,width:face.w+56,height:30,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':4});
+        for(const x of [face.x-13,face.x+face.w-9])add(geometry,'rect',{x,y:face.y,width:22,height:face.h,fill:'url(#stone)',stroke:'url(#bevel)','stroke-width':2});
+      }
     }
     if(model.architecture==='losa')add(geometry,'path',{d:`M${face.x},${face.y+face.h+15}H${face.x+face.w+11}`,stroke:'#353632','stroke-width':5,opacity:.8});
     if(state.fixings){
@@ -178,7 +199,7 @@
     const secondaryBox=layout.secondary?zone(face,layout.secondary):null;
     const placedSymbol=ornament(symbols,state.symbol,'cruces',symbolBox,state.symbolPlacement,finish.color,'symbol',face);
     if(placedSymbol)boxes.push({kind:'symbol',id:state.symbol,...placedSymbol});
-    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},'#f0efe8','devotional',face);
+    const placedDevotional=ornament(symbols,state.devotional||'ninguno','religiosas',devotionalBox,state.devotionalPlacement||{x:50,y:50,scale:85},'#f0efe8','devotional',face,state.devotionalTechnique||'aplique 3D',material.dark);
     if(placedDevotional)boxes.push({kind:'devotional',id:state.devotional,...placedDevotional});
     else if(state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)warnings.push('La imagen religiosa necesita una composición con zona propia.');
     const flowerEntry=catalog.ornaments.find(o=>o.id===state.ornament&&(o.category==='flores'||o.category==='simbolos'));
@@ -188,7 +209,7 @@
     const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},finish.color,'secondary',face);
     if(placedSecondary)boxes.push({kind:'secondary',id:state.secondary,...placedSecondary});
     else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
-    const optionalAccessory=accessory(ornaments,state,face);
+    const optionalAccessory=accessory(add(svg,'g',{'data-layer':'accessories'}),state,face);
     if(optionalAccessory)boxes.push(optionalAccessory);
     const firstSeparator=separator(ornaments,state.separator,zone(face,layout.separator),finish.color);
     if(firstSeparator)boxes.push({kind:'separator',id:state.separator,...firstSeparator});

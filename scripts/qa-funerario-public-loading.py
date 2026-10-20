@@ -19,13 +19,13 @@ try:
   page.on('request',lambda request:requests.append(request.url))
   page.on('pageerror',lambda error:errors.append(str(error)))
   page.goto(f'http://127.0.0.1:{server.server_port}/funerario.html#personalizar')
-  page.wait_for_selector('#memorial-workbench[data-ready="true"]')
+  page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
+  page.locator('#memorial-create').click()
   def full_art():return [u for u in requests if '/relieves/' in urlsplit(u).path and '/miniaturas/' not in u]
   assert not full_art(),full_art()
   assert page.locator('#memorial-layout option').count()==9
   assert page.locator('#memorial-devotional option').count()==9
-  page.locator('.memorial-controls > details').nth(1).locator('summary').click()
-  page.locator('.memorial-controls > details').nth(0).locator('summary').click()
+  page.locator('.memorial-controls > details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
   page.locator('.memorial-category-tab[data-category="religiosas"]').click()
   page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery img")].length===8&&[...document.querySelectorAll("#memorial-gallery img")].every(x=>x.complete&&x.naturalWidth>0)')
   assert not full_art(),full_art()

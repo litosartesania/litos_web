@@ -16,7 +16,7 @@ MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
-assert len(MEMORIAL["files"]) == 100
+assert len(MEMORIAL["files"]) == 131
 FILES = {
     "funerario.html": (
         'id="memorial-workbench"',
