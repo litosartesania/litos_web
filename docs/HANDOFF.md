@@ -678,3 +678,11 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Acceso visible «Ver floreros y complementos» desde el inicio del configurador: muestra las diez imágenes originales con elección directa y carga sobre la composición conservada. Se mantienen los ajustes de posición y tamaño.
 - Auditoría estática/privacidad y prueba de navegación a 390/1440 px: catálogo de complementos, imágenes cargadas, selección y carga del florero, sin errores ni desbordamiento. Los originales privados permanecen fuera de Git y de Pages.
 - La revisión del archivo y de la referencia externa continúa en un avance posterior; no se presenta esta mejora de acceso como investigación terminada.
+
+## 20/10/2026 — Proporciones de composición anonimizadas (revisión)
+- Se examinó, únicamente en Drive privado, una fotografía de obra funeraria y su ficha de taller asociada. **No se trasladó ninguna fotografía, inscripción, nombre, fecha, enlace privado ni identificador del trabajo al repositorio público.**
+- Se añadió un décimo ejemplo comercial enteramente genérico: nicho de piedra blanca, cruz incisa vertical de doble filete a la izquierda, letras más contenidas a la derecha y florero metálico mural abajo. Texto y fechas de ejemplo ficticios. Las cotas son orientativas: no significan estándar del taller ni disponibilidad acreditada.
+- Corrección de causa raíz: `presetState` solo copiaba atributos escalares, por lo que perdía el tamaño/posición particular de los motivos, del florero y las cotas al pulsar «Personalizar este modelo». Ahora copia y acota los controles de colocación, dimensiones y visibilidad de los campos ficticios.
+- Una silueta larga no debe renderizarse siempre dentro de un contenedor cuadrado. El perfil `doblefilete` incorpora un aspecto vertical validado en metadatos y se representa sin el anterior encajado cuadrado.
+- Pruebas de regresión: conteo de 10 modelos y comprobación del ejemplo con controles restaurados, cruz vertical, florero y captura de la escena. Ejecutar CI del HEAD de la PR; no certificar producción antes de su resultado.
+- Toda ficha privada y los originales permanecen privados. Los modelos son **recreaciones**, no fotografías ni expedientes públicos de encargos particulares.

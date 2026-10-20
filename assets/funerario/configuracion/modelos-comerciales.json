@@ -218,6 +218,63 @@
         "finish": "oro",
         "accessory": "florero"
       }
+    },
+    {
+      "id": "nicho-cruz-incisa-florero",
+      "title": "Cruz vertical y florero lateral",
+      "type": "nicho",
+      "stoneFamily": "clara",
+      "style": "sobrio",
+      "technique": "grabado",
+      "ornamentation": "cruz",
+      "accessoryCategory": "florero",
+      "note": "Recreación nueva con cruz de doble filete alta a la izquierda, texto más pequeño a la derecha y florero mural inferior. Proporciones y cotas orientativas; confirmar fabricación.",
+      "provenance": "inspirado",
+      "state": {
+        "stone": "macael",
+        "model": "nicho",
+        "layout": "lateral",
+        "symbol": "doblefilete",
+        "devotional": "ninguno",
+        "ornament": "ninguno",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "marcellus",
+        "finish": "relieve",
+        "accessory": "florero",
+        "accessorySide": "free",
+        "accessoryFinish": "acero",
+        "textSize": 78,
+        "leading": 116,
+        "align": "center",
+        "symbolPlacement": {
+          "x": 16,
+          "y": 65,
+          "scale": 180
+        },
+        "accessoryPlacement": {
+          "x": 100,
+          "y": 100,
+          "scale": 75
+        },
+        "dimensions": {
+          "widthMm": 1080,
+          "heightMm": 720
+        },
+        "fields": {
+          "header": {
+            "visible": false
+          },
+          "epitaph": {
+            "text": "D. E. P.",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          }
+        }
+      }
     }
   ]
 }

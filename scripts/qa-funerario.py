@@ -15,7 +15,7 @@ with sync_playwright() as p:
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
         page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
         assert page.locator('.memorial-studio').get_attribute('data-path')=='explore'
-        assert page.locator('.memorial-case-card').count()==9
+        assert page.locator('.memorial-case-card').count()==10
         assert page.locator('.memorial-accessory-card').count()==11
         assert page.locator('.memorial-controls > details').count()==5
         assert page.locator('.memorial-toolbar,.memorial-selection-overview').count()==0
@@ -82,7 +82,7 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto((root/'preview/LITOS_CONFIGURADOR_FUNERARIO.html').as_uri())
     page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
-    assert page.locator('.memorial-case-card').count()==9
+    assert page.locator('.memorial-case-card').count()==10
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     assert not external and not errors,(external,errors)
     context.close();browser.close()

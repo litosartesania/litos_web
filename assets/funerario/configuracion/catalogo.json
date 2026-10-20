@@ -1248,7 +1248,9 @@
       "commercialReady": false,
       "publicSelectable": true,
       "visualReview": "Publicación como simulación orientativa aprobada el 18/10/2026. Diseño y fabricación todavía sin validar.",
-      "simulatedTechnique": "incisión de doble filete"
+      "simulatedTechnique": "incisión de doble filete",
+      "displayAspect": 0.7,
+      "displayShape": "vertical"
     },
     {
       "id": "moldurada",

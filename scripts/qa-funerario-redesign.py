@@ -18,12 +18,28 @@ with sync_playwright() as p:
   for field in ['stone','model','layout','symbol','devotional','ornament','frame','type','finish','accessory']:
    assert page.locator('#memorial-'+field).input_value()==model['state'][field],(model['id'],field)
   assert model['title'] in page.locator('#memorial-caption').inner_text()
+  if model['id']=='nicho-cruz-incisa-florero':
+   # Relative geometry and fictitious lettering must travel with a selected case.
+   assert page.locator('#memorial-symbol-scale').input_value()=='180'
+   assert page.locator('#memorial-symbol-x').input_value()=='16'
+   assert page.locator('#memorial-symbol-y').input_value()=='65'
+   assert page.locator('#memorial-accessory-x').input_value()=='100'
+   assert page.locator('#memorial-accessory-scale').input_value()=='75'
+   assert page.locator('#memorial-width-mm').input_value()=='1080'
+   assert page.locator('#memorial-height-mm').input_value()=='720'
+   assert not page.locator('#memorial-show-header').is_checked()
+   assert page.locator('#memorial-field-epitaph').input_value()=='D. E. P.'
+   bounds=page.locator('[data-slot=symbol] svg').evaluate('(e)=>({w:+e.getAttribute("width"),h:+e.getAttribute("height"),ratio:e.getAttribute("preserveAspectRatio")})')
+   assert bounds['h']>bounds['w']*1.2 and bounds['ratio']=='none',bounds
+   assert page.locator('[data-slot=accessory][data-accessory=florero]').count()==1
+   page.locator('#memorial-canvas').scroll_into_view_if_needed()
+   page.screenshot(path=str(root/'preview/LITOS_NICHO_CRUZ_VERTICAL.png'))
   page.locator('#memorial-back-catalog').click()
  page.locator('#memorial-filter-type').select_option('panteon')
  page.locator('#memorial-filter-stone').select_option('oscura')
  assert page.locator('.memorial-case-card').count()==0
  page.locator('#memorial-filter-reset').click()
- assert page.locator('.memorial-case-card').count()==9
+ assert page.locator('.memorial-case-card').count()==10
  page.locator('#memorial-create').click()
  page.locator('#memorial-reset').click()
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
