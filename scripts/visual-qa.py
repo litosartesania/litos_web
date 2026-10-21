@@ -251,7 +251,7 @@ with sync_playwright() as app:
     assert form.count()==1 and form.locator('[name="privacidad"]').count()==1
     assert form.locator('button[type="submit"]').is_disabled()
     assert form.get_attribute('inert') is not None
-    assert page.locator('.public-preview-note').is_visible()
+    assert page.locator('.public-preview-note').count()==0
     if width in (390,1440):
      out=root/'contact-screenshots';out.mkdir(parents=True,exist_ok=True)
      form.screenshot(path=str(out/f'CONTACTO_{file[:-5]}_{width}.png'))
