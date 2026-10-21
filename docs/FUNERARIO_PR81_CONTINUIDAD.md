@@ -51,3 +51,9 @@ No se presenta la web externa como extraída por completo. Las imágenes y texto
 2. Verificar CI del nuevo HEAD; la CI anterior no cubre estos archivos.
 3. Completar fotocerámicas, libros volumétricos y varios complementos simultáneos, conservando el catálogo actual.
 4. Ampliar mediciones privadas por imagen y deduplicación; no convertir proporciones visuales en cotas de fabricación ni afirmar que todo el archivo ya está reproducido.
+
+## 21/10/2026 — Pieza de libro
+
+El avance posterior incorpora un **libro abierto vectorial original** como complemento de piedra. Se dibuja como pieza con lomo, páginas y cantos visibles, conserva controles de tamaño y posición y se incluye en el plano y la exportación. Nuevo modelo ficticio de inspiración, sin inscripciones reales. El catálogo queda en 16 modelos, 14 complementos y 144 recursos. La pieza es conceptual: volumen y montaje requieren validación de taller.
+
+La CI del commit anterior `81f1723` terminó correctamente en la ejecución 39483744412. La CI del nuevo HEAD debe comprobarse por separado. El requisito legal de producción permanece bloqueado.

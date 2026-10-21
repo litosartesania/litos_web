@@ -2218,6 +2218,24 @@
       "dimensionsMm": null,
       "commercialReady": false,
       "validation": "Recreación original; dimensiones, suministro y montaje pendientes de validación del taller."
+    },
+    {
+      "id": "libro-piedra",
+      "name": "Libro abierto de piedra",
+      "category": "libros y placas",
+      "mount": "apoyo o anclaje por determinar",
+      "finishes": [
+        "piedra"
+      ],
+      "aspect": 1.5,
+      "path": "assets/funerario/accesorios/libro-piedra.svg",
+      "renderPath": "assets/funerario/accesorios/libro-piedra.svg",
+      "thumbnailPath": "assets/funerario/accesorios/libro-piedra.svg",
+      "renderMaterial": "piedra",
+      "rights": "Vector original creado para LITOS; sin texto, nombres ni fotografías de terceros.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Pieza visual orientativa; medidas, espesor, soporte y suministro por confirmar con el taller."
     }
   ],
   "techniques": [

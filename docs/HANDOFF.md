@@ -745,3 +745,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - PASS local: build/allowlist/hashes, cinco páginas responsive, vista autónoma, PNG/SVG, 2.400 combinaciones sin desbordamientos, quince presets, trece accesorios, nueve comparaciones de técnica y recuperación ante fallo del árbol/complemento. Capturas nuevas en `preview/PR81-*.png`.
 - Investigación realizada, límites de cobertura, pendientes y evidencia: `docs/FUNERARIO_PR81_CONTINUIDAD.md`. No se afirma medición individual exhaustiva del archivo ni extracción completa del catálogo externo.
 - `--production` sigue bloqueado por verificación legal pendiente. No fusionado ni desplegado. Comprobar CI del HEAD actualizado antes de cualquier publicación.
+
+## 21/10/2026 — Libro funerario original y CI del avance anterior
+- CI de PR81 en el HEAD `81f1723`: ejecución 39483744412 completada correctamente. Se confirma la vista previa, no la publicación en Pages.
+- Añadido libro abierto de piedra como complemento vectorial original, con lomo, cantos y páginas independientes. Se puede filtrar, escoger, mover, redimensionar, ver en plano orientativo y exportar junto a la composición. Modelo ficticio «Libro abierto y medallón». Total: 16 modelos, 14 complementos, 144 recursos públicos.
+- Corregida la vista autónoma para que el SVG del libro no se etiquete ni se decodifique como WebP; miniaturas del escaparate y configurador comprobadas. No se usó obra, fotografía, epígrafe o diseño de terceros.
+- Validación local: build, hashes, cinco páginas y vista offline PASS; regresión de 2.400 combinaciones, 16 modelos, 14 complementos, plano y técnicas PASS a 320/390/768/1440. Capturas en `preview/PR81-libro-piedra-*.png`.
+- Pieza conceptual: espesor, medidas, material real, anclaje y fabricación quedan por confirmar. La fotocerámica y varias piezas simultáneas siguen pendientes. La verificación legal del formulario aún impide publicar PR81.

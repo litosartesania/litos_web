@@ -17,7 +17,7 @@ with sync_playwright() as p:
  page.locator('[data-accessory-category-filter="búcaros y jarrones"]').click()
  assert page.locator('.memorial-shop-item:visible').count()==4
  page.locator('[data-accessory-category-filter="todos"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==13
+ assert page.locator('.memorial-shop-item:visible').count()==14
  page.locator('.memorial-shop-item[data-accessory-choice="florero"]').click()
  page.wait_for_selector('[data-slot=accessory][data-accessory=florero]')
  assert page.locator('#memorial-accessory').input_value()=='florero'
@@ -70,7 +70,7 @@ with sync_playwright() as p:
  page.locator('#memorial-filter-stone').select_option('oscura')
  assert page.locator('.memorial-case-card').count()==0
  page.locator('#memorial-filter-reset').click()
- assert page.locator('.memorial-case-card').count()==15
+ assert page.locator('.memorial-case-card').count()==16
  page.locator('#memorial-create').click()
  page.locator('#memorial-reset').click()
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
@@ -86,9 +86,12 @@ with sync_playwright() as p:
  assert page.locator('.memorial-accessory-card img').evaluate_all('(imgs)=>imgs.every(i=>{const a=i.getBoundingClientRect(),b=i.closest("button").lastElementChild.getBoundingClientRect();return a.bottom<=b.top+1})'),'accessory thumbnails overlap labels'
  for item in page.evaluate('window.LitosMemorialData.catalog.accessories'):
   page.locator('#memorial-accessory').select_option(item['id'])
-  page.wait_for_selector('[data-accessory="'+item['id']+'"] image')
+  page.wait_for_selector('[data-accessory="'+item['id']+'"] '+('svg' if item['id']=='libro-piedra' else 'image'))
   page.wait_for_function('()=>!document.querySelector("#memorial-download").disabled')
-  assert page.locator('[data-slot=accessory] image').get_attribute('href').startswith('data:image/webp;')
+  if item['id']=='libro-piedra':
+   assert page.locator('[data-slot=accessory] svg path').count()>=7
+  else:
+   assert page.locator('[data-slot=accessory] image').get_attribute('href').startswith('data:image/webp;')
   boxes=[]
   for scale,x,y in [(25,0,0),(250,100,100)]:
    for key,value in [('scale',scale),('x',x),('y',y)]:
@@ -135,4 +138,4 @@ with sync_playwright() as p:
   page.screenshot(path=str(root/f'preview/LITOS_PR72_{w}.png'))
  assert not errors,errors
  browser.close()
-print(json.dumps({'status':'PASS','presets':len(models),'accessories':13,'viewports':[320,390,768,1440],'regression':scenarios,'techniques':9,'errors':errors}))
+print(json.dumps({'status':'PASS','presets':len(models),'accessories':14,'viewports':[320,390,768,1440],'regression':scenarios,'techniques':9,'errors':errors}))

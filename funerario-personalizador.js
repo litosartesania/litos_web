@@ -182,7 +182,7 @@
     for(const item of [{id:'ninguno',name:'Sin complemento'},...catalog.accessories]){
       const button=document.createElement('button');button.type='button';button.className='memorial-accessory-card';button.setAttribute('aria-pressed',String(state.accessory===item.id));
       const picture=document.createElement('span');picture.className='memorial-accessory-card-image';
-      if(item.path){const img=document.createElement('img');img.src=resources[item.thumbnailPath]||'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(resources[item.path]);img.alt='';img.loading='lazy';picture.append(img);}else picture.textContent='—';
+      if(item.path){const img=document.createElement('img');const thumbnail=resources[item.thumbnailPath];img.src=thumbnail?.startsWith('data:image/')?thumbnail:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(thumbnail||resources[item.path]);img.alt='';img.loading='lazy';picture.append(img);}else picture.textContent='—';
       const name=document.createElement('span');name.textContent=item.name;button.append(picture,name);
       button.addEventListener('click',()=>{state.accessory=item.id;$('accessory').value=item.id;renderAccessoryGallery();requestRender();});
       fragment.append(button);
@@ -192,7 +192,7 @@
     if(shop&&!shop.childElementCount){
       const filterBar=document.createElement('div');filterBar.className='memorial-shop-filters';
       filterBar.setAttribute('role','group');filterBar.setAttribute('aria-label','Categoría de complementos');
-      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes']];
+      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes'],['libros y placas','Libros y placas']];
       for(const [key,name] of groups){
         if(key!=='todos'&&!catalog.accessories.some(item=>item.category===key))continue;
         const filter=document.createElement('button');filter.type='button';
@@ -205,7 +205,7 @@
       shop.before(filterBar,counter);
       for(const item of catalog.accessories){
         const button=document.createElement('button');button.type='button';button.className='memorial-shop-item';button.dataset.accessoryChoice=item.id;button.dataset.category=item.category;
-        const img=document.createElement('img');img.src=resources[item.thumbnailPath];img.alt='';img.width=160;img.height=160;img.loading='lazy';
+        const img=document.createElement('img');const thumb=resources[item.thumbnailPath];img.src=thumb?.startsWith('data:image/')?thumb:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(thumb||resources[item.path]);img.alt='';img.width=160;img.height=160;img.loading='lazy';
         const name=document.createElement('strong');name.textContent=item.name;
         const action=document.createElement('span');action.textContent='Añadir a mi lápida';button.append(img,name,action);
         button.addEventListener('click',()=>{state.accessory=item.id;sync();renderAccessoryGallery();requestRender();mode('customize');steps[1].open=true;root.scrollIntoView({block:'start'});status(item.name+' añadido a tu composición.');});shop.append(button);

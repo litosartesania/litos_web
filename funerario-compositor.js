@@ -98,7 +98,7 @@
     const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':finish,'data-bounds':JSON.stringify({x,y,w,h}),filter:'url(#accessory-contact)'});
     add(g,'ellipse',{cx:x+w*.5,cy:y+h*.96,rx:w*.42,ry:Math.max(2,h*.035),fill:'#181714',opacity:.32});
     const render=resources[item.renderPath]||resources[item.thumbnailPath];
-    if(render){add(g,'image',{href:render,x,y,width:w,height:h,preserveAspectRatio:'xMidYMid meet'});}
+    if(render?.startsWith('data:image/')){add(g,'image',{href:render,x,y,width:w,height:h,preserveAspectRatio:'xMidYMid meet'});}
     else{
       const source=new DOMParser().parseFromString(resources[item.path],'image/svg+xml').documentElement;
       const nested=add(g,'svg',{x,y,width:w,height:h,viewBox:'0 0 100 100',style:`color:${fill};--edge:${edge};--shine:${light}`,'aria-hidden':'true'});
