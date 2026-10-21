@@ -58,6 +58,8 @@ jobs:
           python3 scripts/qa-funerario.py
           python3 scripts/qa-funerario-phase3.py
           python3 scripts/qa-funerario-public-loading.py
+          python3 scripts/qa-funerario-redesign.py
+          python3 scripts/qa-funerario-ceramic.py
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

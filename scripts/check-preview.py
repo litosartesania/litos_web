@@ -41,10 +41,10 @@ assert 'name="robots" content="noindex,nofollow"' in html
 assert 'window.LITOS_CATALOG_INFO' in html, 'interactive catalog code must be embedded'
 for page in ('index.html','funerario.html','mobiliario.html'):
  assert (root/page).is_file(),page
-assert (root/'index.html').read_text().count('data-litos-contact')==1
+assert (root/'index.html').read_text().count('data-litos-contact ')==1
 for page in ('funerario.html','mobiliario.html'):
  content=(root/page).read_text()
- assert content.count('data-litos-contact')==1 and 'type="submit" disabled' in content
+ assert content.count('data-litos-contact ')==1 and 'type="submit" disabled' in content
 gallery=root/'LITOS_BIBLIOTECA_FUNERARIA_FASE2.html'
 assert gallery.is_file(), 'phase 2 gallery missing'
 gp=Inspector();gp.feed(gallery.read_text(encoding='utf-8'))

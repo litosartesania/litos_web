@@ -301,7 +301,7 @@ assert picker and picker.group(1).count('<option value=')==10 and picker.group(1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=litos-motivos-contacto-20261020' in htmls['mobiliario.html']
+assert 'styles.css?v=litos-public-preview-20261021' in htmls['mobiliario.html']
 assert 'catalogo-precios.js?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
@@ -331,22 +331,31 @@ assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls
 for page in ('index.html','funerario.html','mobiliario.html'):
  assert len(parsers[page].forms)==1,(page,'one contact form expected')
  form=parsers[page].forms[0]
- assert form.get('id')=='contact-form' and 'data-litos-contact' in form,(page,'local mail form expected')
+ assert form.get('id')=='contact-form' and 'data-litos-contact' in form,(page,'contact mockup expected')
  assert not form.get('action') and not form.get('method'),(page,'network submit forbidden')
  assert 'type="submit" disabled' in htmls[page],(page,'fail closed without JavaScript')
+ assert 'data-litos-contact-preview' in form and 'inert' in form and form.get('aria-hidden')=='true',(page,'mockup must be noninteractive')
+ assert 'data-litos-public-preview="true"' in htmls[page] and 'no vende piezas ni acepta encargos' in htmls[page],(page,'noncommercial status must be visible')
+ assert 'mailto:' not in htmls[page],(page,'commercial email link forbidden in public preview')
  assert 'id="contact-privacy"' in htmls[page],(page,'consent missing')
  assert 'solicitar presupuesto' not in htmls[page].lower(),(page,'outdated CTA')
  assert 'class="project-status"' not in htmls[page] and 'class="made-to-measure"' not in htmls[page],(page,'obsolete blocks')
-assert 'Incluye un formulario que únicamente prepara un borrador' in htmls['privacidad.html']
+assert 'El formulario visible es una maqueta inactiva' in htmls['privacidad.html']
 assert 'no procesa pagos' in htmls['aviso-legal.html']
 css=(root/'styles.css').read_text();js=(root/'script.js').read_text()
 assert 'formResponse' not in js and 'fetch(' not in (root/'catalogo-precios.js').read_text() and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
+assert 'mailto:' not in js and 'window.location.assign' not in js and 'submit.disabled = true' in js
 for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
  if not link.startswith(('data:','#','https:','http:')):assert (root/link).is_file(),link
 if '--production' in sys.argv:
  assert not any('[[PENDIENTE_' in html for html in htmls.values()), 'release blocked: missing verified legal identity/address/tax ID'
  assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
- assert 'data-litos-legal-identity-verified="true"' in htmls['aviso-legal.html'], 'release blocked: legal identity and responsible party have not been verified'
+ if 'data-litos-legal-identity-verified="true"' not in htmls['aviso-legal.html']:
+  assert all('data-litos-public-preview="true"' in htmls[page] for page in pages), 'release blocked: legal identity missing and noncommercial preview not declared'
+  assert 'actualmente no vende piezas ni acepta encargos' in htmls['aviso-legal.html'], 'release blocked: current noncommercial scope missing'
+  assert 'ni genera ingresos directos o indirectos' in htmls['aviso-legal.html'], 'release blocked: economic activity claim unclear'
+  assert all('data-litos-contact-preview inert' in htmls[page] and 'mailto:' not in htmls[page] for page in ('index.html','funerario.html','mobiliario.html')), 'release blocked: contact mockup must remain fully inoperative'
+  assert 'mailto:' not in js and 'window.location.assign' not in js, 'release blocked: active email handler'
  assert 'no procesa pagos' in htmls['aviso-legal.html'], 'release blocked: legal payment scope missing'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'

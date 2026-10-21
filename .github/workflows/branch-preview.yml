@@ -38,17 +38,8 @@ jobs:
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site
           python3 scripts/check-funerario.py
-      - name: Validate publication safety gate without deploying
-        run: |
-          if python3 scripts/check-site.py _site --production > /tmp/litos-release-gate.log 2>&1; then
-            echo "::error::Missing legal verification incorrectly passed production gate"
-            exit 1
-          fi
-          if ! grep -q 'release blocked: legal identity and responsible party have not been verified' /tmp/litos-release-gate.log; then
-            cat /tmp/litos-release-gate.log
-            exit 1
-          fi
-          echo "Preview only; production blocked pending responsible-party verification"
+      - name: Validate noncommercial publication gate without deploying
+        run: python3 scripts/check-site.py _site --production
       - name: Set up Chromium for responsive visual QA
         run: |
           python3 -m pip install playwright

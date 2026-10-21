@@ -64,6 +64,10 @@ El configurador permite seleccionar un segundo complemento, con controles propio
 
 La captura local `preview/PR81-dos-floreros-canvas.png` confirma la composición visual; el archivo de previsualización se genera localmente y no es material de producción. Build, allowlist, sintaxis, regresión de 2.400 combinaciones y pruebas de exportación/carga local pasan. La fabricación, dimensiones reales y anclajes siguen pendientes de validación del taller. La producción permanece bloqueada por la identificación legal indicada en el relevo.
 
+## 21/10/2026 — Versión pública informativa solicitada
+
+El propietario confirma que LITOS no vende ni acepta encargos, también fuera de la web, y solicita publicar el configurador con el formulario visible pero no operativo. Esta versión conserva el diseño del formulario como maqueta inerte: los campos no admiten entrada, el botón no se habilita, no se genera un correo y no hay enlaces de contacto comercial. Las tres páginas principales muestran el estado del proyecto. Aviso legal y privacidad se ajustan a esta fase personal. La puerta de producción exige esta condición íntegra mientras no haya identidad legal verificada. No se presentará como página comercial activa.
+
 ## 21/10/2026 — Fotocerámica local
 
 Se añadió un óvalo de porcelana conceptual como pieza independiente y un modelo ficticio. La foto opcional se procesa solo en el navegador y se incluye en la descarga PNG del visitante; al quitarla o restablecer la composición desaparece de memoria. El recurso público es un óvalo vacío creado para LITOS. No se utilizan retratos históricos, terceros ni nombres propios. QA sintética en `scripts/qa-funerario-ceramic.py`, incluida en la PR.

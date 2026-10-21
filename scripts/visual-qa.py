@@ -10,7 +10,7 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=litos-motivos-contacto-20261020"' in html
+  assert 'href="styles.css?v=litos-public-preview-20261021"' in html
   assert 'src="catalogo-precios.js?v=stone-20261015-bandeja8"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
@@ -20,8 +20,8 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=litos-motivos-contacto-20261020">','<style>'+css+'</style>')
- html=html.replace('<script src="script.js?v=litos-contacto-20261020"></script>','<script>'+js+'</script>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=litos-public-preview-20261021">','<style>'+css+'</style>')
+ html=html.replace('<script src="script.js?v=litos-public-preview-20261021"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
   html=html.replace('<script src="catalogo-precios.js?v=stone-20261015-bandeja8"></script>','<script>'+catalog+'</script>')
@@ -249,7 +249,9 @@ with sync_playwright() as app:
    if file in ('index.html','funerario.html','mobiliario.html'):
     form=page.locator('#contact-form')
     assert form.count()==1 and form.locator('[name="privacidad"]').count()==1
-    assert form.locator('button[type="submit"]').is_enabled()
+    assert form.locator('button[type="submit"]').is_disabled()
+    assert form.get_attribute('inert') is not None
+    assert page.locator('.public-preview-note').is_visible()
     if width in (390,1440):
      out=root/'contact-screenshots';out.mkdir(parents=True,exist_ok=True)
      form.screenshot(path=str(out/f'CONTACTO_{file[:-5]}_{width}.png'))
