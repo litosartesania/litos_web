@@ -8,9 +8,24 @@
       "sha256": "8bfb194cf12595a59868dcc537edd78a2b266d4e77fb80038264deea6dd40f8b"
     },
     {
+      "path": "assets/funerario/accesorios/ceramica-oval.svg",
+      "bytes": 439,
+      "sha256": "a1d392bbcc1c9f030b3f3d7291a2e635b5586235bd8f56c68198551afd06101a"
+    },
+    {
       "path": "assets/funerario/accesorios/farol.svg",
       "bytes": 613,
       "sha256": "16f82a37c5677fb26f3dcc3e53a57753705b82ee7c40b9abc8cd3addb973faa6"
+    },
+    {
+      "path": "assets/funerario/accesorios/florero-cilindrico-blanco.svg",
+      "bytes": 285,
+      "sha256": "c416bdd8c395a420e8000c23ffce0472df45477fd66d9e9a4cf4db6821642c3d"
+    },
+    {
+      "path": "assets/funerario/accesorios/florero-conico-acero.svg",
+      "bytes": 280,
+      "sha256": "2592f1666fb1491faacb00904d254140eae2096e963d990a9a8670bedc0c48e4"
     },
     {
       "path": "assets/funerario/accesorios/florero-gota.svg",
@@ -33,6 +48,16 @@
       "sha256": "4ec6f545b7d8dbd3aead698150644077037b36d4732aad806938319b9ff1325f"
     },
     {
+      "path": "assets/funerario/accesorios/jarron-granito.svg",
+      "bytes": 284,
+      "sha256": "b97196748d91e444c57656b7d5b9492ebf5d842c49dbeb8bc4ab9096645959b3"
+    },
+    {
+      "path": "assets/funerario/accesorios/libro-piedra.svg",
+      "bytes": 972,
+      "sha256": "bab07f296998aff2654f132c83e5090d5f0dcf5c0d30d094208415bc8f3a94bb"
+    },
+    {
       "path": "assets/funerario/accesorios/miniaturas/bucaro.webp",
       "bytes": 3690,
       "sha256": "270eab98a941330520ef55c44322acb002b20a3564e6506692b4cf1b5f754b56"
@@ -41,6 +66,16 @@
       "path": "assets/funerario/accesorios/miniaturas/farol.webp",
       "bytes": 4588,
       "sha256": "6dc809e0b4f25a7d1a49f45dc715c914dd153cb6df5f8b7933eff92e430830bd"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/florero-cilindrico-blanco.webp",
+      "bytes": 2228,
+      "sha256": "5d74db3e1bb67c5e87b200e307279611c421dbdf2aa46672def3115470d6650a"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/florero-conico-acero.webp",
+      "bytes": 3014,
+      "sha256": "ca10971a68cf9200ba7859d5dc775341b8d7d6506c9a32cd6b99f5bf35d5d0bb"
     },
     {
       "path": "assets/funerario/accesorios/miniaturas/florero-gota.webp",
@@ -61,6 +96,11 @@
       "path": "assets/funerario/accesorios/miniaturas/jardinera.webp",
       "bytes": 1896,
       "sha256": "225ca73f54f92b5e5d5a6a4f3f8512d09f2b06ce9e0b3bf34c714b8267fdabc2"
+    },
+    {
+      "path": "assets/funerario/accesorios/miniaturas/jarron-granito.webp",
+      "bytes": 5412,
+      "sha256": "4e612b9be0d6947402addc2ea4eb55971b171c02cab2de37656f01ed37dfcd4e"
     },
     {
       "path": "assets/funerario/accesorios/miniaturas/portavelas.webp",
@@ -98,6 +138,16 @@
       "sha256": "4c0e77003f6366e99a1d31cc95ae764df62557f92ca250526afe42d1dceedb2a"
     },
     {
+      "path": "assets/funerario/accesorios/renders/florero-cilindrico-blanco.webp",
+      "bytes": 18076,
+      "sha256": "db5a5a74489ed22fcd5c75e4b0d8f0857a66dc7d8907deef2d842066c2cd9141"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/florero-conico-acero.webp",
+      "bytes": 22422,
+      "sha256": "114cef40928bdd6666c9a029b8b2898fea27f47d71ef52ca424ad03de0e3580b"
+    },
+    {
       "path": "assets/funerario/accesorios/renders/florero-gota.webp",
       "bytes": 26778,
       "sha256": "410534a8f0863abe53ceaec6f7769f2cf55d5845221092777a268b76c0939b38"
@@ -116,6 +166,11 @@
       "path": "assets/funerario/accesorios/renders/jardinera.webp",
       "bytes": 13706,
       "sha256": "0d0e260bdf40133a1bab018e117ebb57a702f219e45d61b752ce042c3e6dfd60"
+    },
+    {
+      "path": "assets/funerario/accesorios/renders/jarron-granito.webp",
+      "bytes": 88388,
+      "sha256": "9fe52afe436060cf2dcbe0072405601011e20655e24d4567000ad478d67683de"
     },
     {
       "path": "assets/funerario/accesorios/renders/portavelas.webp",
@@ -154,13 +209,13 @@
     },
     {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 58412,
-      "sha256": "511bc2c05b46bc710feb8f15089c879eadddc23ba99a407828d0c1977754d39b"
+      "bytes": 68314,
+      "sha256": "d9a4606b63bf04d1a109872e3c1e056644c89d780f206dc77fc138aea9814b32"
     },
     {
       "path": "assets/funerario/configuracion/modelos-comerciales.json",
-      "bytes": 6526,
-      "sha256": "dea78deaa454997c31400053522eb997b996149b904bdc6c0a3c4c78cce9a7fa"
+      "bytes": 20123,
+      "sha256": "185e38641bd079cf08c211e0ae2b866ab14fe7c922905fc0ec1bc2071724c78c"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",
@@ -356,6 +411,11 @@
       "path": "assets/funerario/ornamentos/cruces/florenzada.svg",
       "bytes": 728,
       "sha256": "615b9680b1a4ccada334a1b011a5a4899bd1bbdfd86facf75b98b5a21a444519"
+    },
+    {
+      "path": "assets/funerario/ornamentos/cruces/incisaalta.svg",
+      "bytes": 229,
+      "sha256": "3c7a01dbaa11180b4e5e04be5156923ebd72e949dd0af7e74fb276995d5f1a52"
     },
     {
       "path": "assets/funerario/ornamentos/cruces/latina.svg",
@@ -638,6 +698,11 @@
       "sha256": "76d6e00c280b4cac4f1d1afb13f61f74c6dc68bcf3b97d43606e58016e8cfd81"
     },
     {
+      "path": "assets/funerario/ornamentos/simbolos/miniaturas/arbol-memoria.webp",
+      "bytes": 17608,
+      "sha256": "ee55a30c3a5acf1e6d96af1110c7df102d585c09174d30f91b70809bc6952d45"
+    },
+    {
       "path": "assets/funerario/ornamentos/simbolos/olivo.svg",
       "bytes": 431,
       "sha256": "09e270dd413dadd4f5b64f904ee36f88c03bfb2eedd80ca8fc4e29b495c88b49"
@@ -651,6 +716,11 @@
       "path": "assets/funerario/ornamentos/simbolos/pergamino.svg",
       "bytes": 414,
       "sha256": "87ba6e7d2c99882c49394d250c97cbc0975c9231b817659c3dd8dd2e4b693bc1"
+    },
+    {
+      "path": "assets/funerario/ornamentos/simbolos/renders/arbol-memoria.webp",
+      "bytes": 234324,
+      "sha256": "602c502088790c4a8893947b2769a730a23022f2a612c8e029d87ee0af1f6338"
     },
     {
       "path": "assets/funerario/ornamentos/simbolos/vela.svg",

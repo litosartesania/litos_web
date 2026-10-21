@@ -53,4 +53,10 @@ if (hero && !reduceMotion && window.matchMedia('(pointer: fine)').matches) {
   }, { passive: true });
 }
 
-// No commercial contact form handlers: LITOS does not accept orders or quotations.
+// El cajón de contacto es una maqueta durante la fase sin actividad comercial.
+// La navegación nunca prepara correos ni transmite lo introducido en el DOM.
+for (const form of document.querySelectorAll('[data-litos-contact-preview]')) {
+  form.addEventListener('submit', (event) => event.preventDefault());
+  const submit = form.querySelector('button[type="submit"]');
+  if (submit) submit.disabled = true;
+}

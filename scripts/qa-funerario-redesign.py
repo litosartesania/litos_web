@@ -12,12 +12,12 @@ with sync_playwright() as p:
  # Accessory shop must work independently from the technical configurator.
  page.locator('#memorial-browse-accessories').click()
  page.locator('[data-accessory-category-filter="floreros"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==2
- assert page.locator('#memorial-accessory-shop-count').inner_text()=='2 complementos en esta categoría'
+ assert page.locator('.memorial-shop-item:visible').count()==4
+ assert page.locator('#memorial-accessory-shop-count').inner_text()=='4 complementos en esta categoría'
  page.locator('[data-accessory-category-filter="búcaros y jarrones"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==3
+ assert page.locator('.memorial-shop-item:visible').count()==4
  page.locator('[data-accessory-category-filter="todos"]').click()
- assert page.locator('.memorial-shop-item:visible').count()==10
+ assert page.locator('.memorial-shop-item:visible').count()==15
  page.locator('.memorial-shop-item[data-accessory-choice="florero"]').click()
  page.wait_for_selector('[data-slot=accessory][data-accessory=florero]')
  assert page.locator('#memorial-accessory').input_value()=='florero'
@@ -47,18 +47,22 @@ with sync_playwright() as p:
    assert page.locator('#memorial-text').input_value()=='NOMBRE APELLIDO'
   if model['id']=='nicho-cruz-incisa-florero':
    # Relative geometry and fictitious lettering must travel with a selected case.
-   assert page.locator('#memorial-symbol-scale').input_value()=='180'
-   assert page.locator('#memorial-symbol-x').input_value()=='16'
-   assert page.locator('#memorial-symbol-y').input_value()=='65'
-   assert page.locator('#memorial-accessory-x').input_value()=='100'
-   assert page.locator('#memorial-accessory-scale').input_value()=='75'
+   assert page.locator('#memorial-symbol-scale').input_value()=='100'
+   assert page.locator('#memorial-symbol-x').input_value()=='50'
+   assert page.locator('#memorial-symbol-y').input_value()=='50'
+   assert page.locator('#memorial-accessory-x').input_value()=='91'
+   assert page.locator('#memorial-accessory-scale').input_value()=='46'
    assert page.locator('#memorial-width-mm').input_value()=='1080'
    assert page.locator('#memorial-height-mm').input_value()=='720'
    assert not page.locator('#memorial-show-header').is_checked()
    assert page.locator('#memorial-field-epitaph').input_value()=='D. E. P.'
    bounds=page.locator('[data-slot=symbol] svg').evaluate('(e)=>({w:+e.getAttribute("width"),h:+e.getAttribute("height"),ratio:e.getAttribute("preserveAspectRatio")})')
    assert bounds['h']>bounds['w']*1.2 and bounds['ratio']=='none',bounds
-   assert page.locator('[data-slot=accessory][data-accessory=florero]').count()==1
+   assert page.locator('[data-slot=accessory][data-accessory=florero-conico-acero]').count()==1
+   name_ratio=float(page.locator('[data-field=name]').get_attribute('data-height-ratio'))
+   assert .045<=name_ratio<=.0551,name_ratio
+   assert page.locator('[data-field=name] tspan').count()==3
+   assert page.locator('[data-field=dates] tspan').count()==2
    page.locator('#memorial-canvas').scroll_into_view_if_needed()
    page.screenshot(path=str(root/'preview/LITOS_NICHO_CRUZ_VERTICAL.png'))
   page.locator('#memorial-back-catalog').click()
@@ -66,10 +70,28 @@ with sync_playwright() as p:
  page.locator('#memorial-filter-stone').select_option('oscura')
  assert page.locator('.memorial-case-card').count()==0
  page.locator('#memorial-filter-reset').click()
- assert page.locator('.memorial-case-card').count()==13
+ assert page.locator('.memorial-case-card').count()==18
  page.locator('#memorial-create').click()
  page.locator('#memorial-reset').click()
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+ # Two physical pieces retain separate controls, layers and metric labels.
+ page.locator('#memorial-accessory').select_option('florero-conico-acero')
+ page.locator('#memorial-accessory2').select_option('florero-cilindrico-blanco')
+ page.wait_for_selector('[data-slot=accessory][data-accessory=florero-conico-acero] image')
+ page.wait_for_selector('[data-slot=accessory2][data-accessory=florero-cilindrico-blanco] image')
+ page.locator('#memorial-accessory2-x').evaluate('(el)=>{el.value=0;el.dispatchEvent(new Event("input"))}')
+ page.locator('#memorial-accessory-x').evaluate('(el)=>{el.value=100;el.dispatchEvent(new Event("input"))}')
+ page.locator('#memorial-width-mm').fill('1080')
+ page.locator('#memorial-height-mm').fill('720')
+ page.wait_for_function('()=>!document.querySelector("#memorial-plan-download").disabled')
+ first=json.loads(page.locator('[data-slot=accessory]').get_attribute('data-bounds'))
+ second=json.loads(page.locator('[data-slot=accessory2]').get_attribute('data-bounds'))
+ assert first['x']>second['x'],(first,second)
+ assert page.locator('#memorial-plan-measures').inner_text().count('Florero')>=2
+ assert page.locator('#memorial-plan-preview [id^=ELEMENTO_]').count()>=2
+ page.locator('#memorial-accessory2').select_option('ninguno')
+ page.wait_for_function('()=>document.querySelectorAll("[data-slot=accessory2]").length===0')
+ page.locator('#memorial-reset').click()
  # Shared regression scenarios retain full-face cross movement, typography and safe layouts.
  scenarios=page.evaluate((root/'scripts/funerario-scenarios.js').read_text())
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
@@ -82,9 +104,15 @@ with sync_playwright() as p:
  assert page.locator('.memorial-accessory-card img').evaluate_all('(imgs)=>imgs.every(i=>{const a=i.getBoundingClientRect(),b=i.closest("button").lastElementChild.getBoundingClientRect();return a.bottom<=b.top+1})'),'accessory thumbnails overlap labels'
  for item in page.evaluate('window.LitosMemorialData.catalog.accessories'):
   page.locator('#memorial-accessory').select_option(item['id'])
-  page.wait_for_selector('[data-accessory="'+item['id']+'"] image')
+  page.wait_for_selector('[data-accessory="'+item['id']+'"] '+('svg' if item['id'] in ('libro-piedra','ceramica-oval') else 'image'))
   page.wait_for_function('()=>!document.querySelector("#memorial-download").disabled')
-  assert page.locator('[data-slot=accessory] image').get_attribute('href').startswith('data:image/webp;')
+  if item['id']=='libro-piedra':
+   assert page.locator('[data-slot=accessory] svg path').count()>=7
+  elif item['id']=='ceramica-oval':
+   assert page.locator('[data-slot=accessory] svg ellipse').count()>=3
+   assert page.locator('#memorial-ceramic-upload').is_visible()
+  else:
+   assert page.locator('[data-slot=accessory] image').get_attribute('href').startswith('data:image/webp;')
   boxes=[]
   for scale,x,y in [(25,0,0),(250,100,100)]:
    for key,value in [('scale',scale),('x',x),('y',y)]:
@@ -99,7 +127,7 @@ with sync_playwright() as p:
   assert page.locator('#memorial-accessory-x').input_value()=='0'
  # Same source artwork, three different depth behaviours, on three stones.
  page.locator('#memorial-reset').click()
- page.locator('#memorial-devotional').select_option('cristo-corona')
+ page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
  page.wait_for_selector('[data-slot=devotional] image')
  figures=[]
  for stone in ['absoluto','macael','quintana']:
@@ -131,4 +159,4 @@ with sync_playwright() as p:
   page.screenshot(path=str(root/f'preview/LITOS_PR72_{w}.png'))
  assert not errors,errors
  browser.close()
-print(json.dumps({'status':'PASS','presets':len(models),'accessories':10,'viewports':[320,390,768,1440],'regression':scenarios,'techniques':9,'errors':errors}))
+print(json.dumps({'status':'PASS','presets':len(models),'accessories':15,'viewports':[320,390,768,1440],'regression':scenarios,'techniques':9,'errors':errors}))

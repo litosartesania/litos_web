@@ -21,7 +21,8 @@ with sync_playwright() as pw:
         assert page.locator('#material-picker option').count()==10
         assert page.locator('#detail-material-picker option').count()==10
         assert page.locator('.product-open').count()==21
-        assert page.locator('form').count()==0
+        assert page.locator('form[data-litos-contact-preview][inert]').count()==1
+        assert page.locator('form button[type="submit"]').is_disabled()
         boxes=[cards.nth(i).bounding_box() for i in range(6)]
         assert all(box and box['width']>165 for box in boxes),(width,boxes)
         close=lambda a,b: abs(a-b)<4

@@ -27,6 +27,7 @@ jobs:
           node --check funerario-exportar.js
           node --check tools/build-preview.mjs
           node --check tools/build-standalone.mjs
+          node --check tools/build-funerario-ui.mjs
           node --check tools/extend-funerario-phase2.mjs
           node --check tools/extend-funerario-phase3.mjs
           node --check tools/build-funerario-phase3-gallery.mjs
@@ -37,7 +38,7 @@ jobs:
           sh scripts/build-site.sh
           python3 scripts/check-site.py _site
           python3 scripts/check-funerario.py
-      - name: Validate publication safety gate without deploying
+      - name: Validate noncommercial publication gate without deploying
         run: python3 scripts/check-site.py _site --production
       - name: Set up Chromium for responsive visual QA
         run: |
@@ -63,6 +64,8 @@ jobs:
         run: python3 scripts/qa-funerario-public-loading.py
       - name: Verify every preset, accessory bounds and progressive mobile controls
         run: python3 scripts/qa-funerario-redesign.py
+      - name: Verify optional ceramic image stays local and exports safely
+        run: python3 scripts/qa-funerario-ceramic.py
       - name: Upload local review package (not a Pages deployment)
         uses: actions/upload-artifact@v4
         with:
@@ -70,6 +73,12 @@ jobs:
           path: |
             preview/LITOS_PREVISUALIZACION_AUTONOMA.html
             preview/LITOS_CONFIGURADOR_FUNERARIO.html
+            contact-screenshots/CONTACTO_index_390.png
+            contact-screenshots/CONTACTO_index_1440.png
+            contact-screenshots/CONTACTO_funerario_390.png
+            contact-screenshots/CONTACTO_funerario_1440.png
+            contact-screenshots/CONTACTO_mobiliario_390.png
+            contact-screenshots/CONTACTO_mobiliario_1440.png
             preview/LITOS_TECNICAS_PR72.html
             preview/LITOS_PR72_320.png
             preview/LITOS_PR72_390.png

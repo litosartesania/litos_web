@@ -17,23 +17,33 @@ MANIFESTS = [json.loads((ROOT / p).read_text(encoding="utf-8")) for p in ("docs/
 assert [len(m["items"]) for m in MANIFESTS] == [10, 8, 9, 9, 9, 9, 9]
 ITEMS = [i for m in MANIFESTS for i in m["items"]]
 MEMORIAL = json.loads((ROOT / "docs/FUNERARIO_ASSETS_MANIFEST.json").read_text(encoding="utf-8"))
-assert len(MEMORIAL["files"]) == 131
+assert len(MEMORIAL["files"]) == 145
 # Read the release URLs from the actual HTML; do not keep a second, stale version string.
 MEMORIAL_URLS = re.findall(r'(?:href|src)="((?:styles\.css|funerario-[a-z]+\.js)\?v=[^"]+)"', (ROOT/'funerario.html').read_text())
 assert len(MEMORIAL_URLS) == 5
 FILES = {
+    "index.html": (
+        'data-litos-public-preview="true"',
+        'data-litos-contact-preview inert',
+        'Proyecto personal en estudio',
+    ),
     "funerario.html": (
         'id="memorial-workbench"',
         *MEMORIAL_URLS,
         "Recreación digital orientativa",
+        'data-litos-contact-preview inert',
     ),
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=stone-20261015-macetero8",
+        "styles.css?v=litos-public-preview-20261021",
         "catalogo-precios.js?v=stone-20261015-bandeja8",
         "Colección conceptual · 21 productos · 9 piedras · 21 planos",
         'class="catalog-workspace"',
+        'data-litos-contact-preview inert',
     ),
+    "aviso-legal.html": ("actualmente no vende piezas ni acepta encargos", "formulario de contacto se conserva como maqueta visual"),
+    "privacidad.html": ("El formulario visible es una maqueta inactiva", "GitHub Pages"),
+    "script.js": ("submit.disabled = true",),
     "styles.css": (
         ".memorial-studio",
         ".material-preview",
@@ -57,7 +67,10 @@ FILES = {
     ),
 }
 FORBIDDEN = {
-    "mobiliario.html": ("simulación digital de tonalidad", "<form", "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
+    "index.html": ('href="mailto:',),
+    "funerario.html": ('href="mailto:',),
+    "mobiliario.html": ("simulación digital de tonalidad", 'href="mailto:', "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
+    "script.js": ("mailto:", "window.location.assign"),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
                    ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
     "catalogo-precios.js": ("--stone-photo-filter", "const visual=",
@@ -93,7 +106,7 @@ def check(attempt):
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
-    for name in ("funerario.html", "styles.css", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
+    for name in ("index.html", "funerario.html", "mobiliario.html", "aviso-legal.html", "privacidad.html", "styles.css", "script.js", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
         expected = (ROOT / name).read_bytes()
         actual = read_live(name, attempt)
         assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
@@ -202,7 +215,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages HTML/CSS/JS, memorial configurator and 82 public memorial assets, 63 historical PNGs, 80 new original PNGs, 8 Bandeja PNGs, 8 Macetero PNGs, 9 historical drawings, 12 new illustrative drawings, 11 corrected assets and 14 additional travertine originals plus eight Mesa auxiliar pedestal originals, all hash-verified.", flush=True)
+        print("PASS: live Pages five HTML views, CSS/JS, memorial configurator, 145 public memorial assets and catalog source images hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

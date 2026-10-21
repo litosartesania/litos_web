@@ -24,13 +24,13 @@ try:
   def full_art():return [u for u in requests if '/relieves/' in urlsplit(u).path and '/miniaturas/' not in u]
   assert not full_art(),full_art()
   assert not any('/accesorios/renders/' in u for u in requests),requests
-  assert page.locator('#memorial-layout option').count()==9
+  assert page.locator('#memorial-layout option').count()==12
   assert page.locator('#memorial-devotional option').count()==9
   page.locator('.memorial-controls > details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
-  page.locator('.memorial-category-tab[data-category="religiosas"]').click()
-  page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery img")].length===8&&[...document.querySelectorAll("#memorial-gallery img")].every(x=>x.complete&&x.naturalWidth>0)')
+  page.locator('#memorial-gallery-religiosas').scroll_into_view_if_needed()
+  page.wait_for_function('()=>[...document.querySelectorAll("#memorial-gallery-religiosas img")].length===8&&[...document.querySelectorAll("#memorial-gallery-religiosas img")].every(x=>x.complete&&x.naturalWidth>0)')
   assert not full_art(),full_art()
-  page.locator('.memorial-motif[data-item-id="cristo-corona"]').click()
+  page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
   page.wait_for_selector('[data-slot="devotional"] image')
   assert len(full_art())==1 and full_art()[0].endswith('/cristo-corona.webp'),full_art()
   assert page.locator('[data-slot="devotional"] image').get_attribute('href').startswith('data:image/webp;base64,')
@@ -47,6 +47,19 @@ try:
   page.locator('#memorial-accessory').select_option('bucaro')
   page.wait_for_selector('[data-accessory="bucaro"] image')
   assert page.locator('[data-accessory="bucaro"] image').get_attribute('href').startswith('data:image/webp;')
+  page.wait_for_function('()=>!document.querySelector("#memorial-download").disabled')
+  # Non-religious raster: lazy load, retry and export use the same full asset.
+  assert not any('/simbolos/renders/' in u for u in requests)
+  page.route('**/simbolos/renders/arbol-memoria.webp',lambda route:route.abort())
+  tree=page.locator('#memorial-gallery-flores [data-item-id="arbol-memoria"]')
+  tree.click()
+  page.wait_for_function('()=>document.querySelector("#memorial-status").textContent.includes("No se pudo cargar")')
+  assert page.locator('#memorial-download').is_disabled()
+  page.unroute('**/simbolos/renders/arbol-memoria.webp')
+  tree.click()
+  page.wait_for_selector('[data-slot=ornament] image')
+  assert page.locator('[data-slot=ornament]').get_attribute('filter')=='url(#pictorial-engraved)'
+  assert page.locator('[data-slot=ornament] image').get_attribute('href').startswith('data:image/webp;base64,')
   page.wait_for_function('()=>!document.querySelector("#memorial-download").disabled')
   page.locator('#memorial-text').evaluate('(el)=>{el.value="TEXTO DE PRUEBA PRIVADO";el.dispatchEvent(new Event("input",{bubbles:true}))}')
   with page.expect_download() as pending:page.locator('#memorial-download').click()

@@ -10,7 +10,7 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=stone-20261015-macetero8"' in html
+  assert 'href="styles.css?v=litos-public-preview-20261021"' in html
   assert 'src="catalogo-precios.js?v=stone-20261015-bandeja8"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
@@ -20,8 +20,8 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=stone-20261015-macetero8">','<style>'+css+'</style>')
- html=html.replace('<script src="script.js"></script>','<script>'+js+'</script>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=litos-public-preview-20261021">','<style>'+css+'</style>')
+ html=html.replace('<script src="script.js?v=litos-public-preview-20261021"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
   html=html.replace('<script src="catalogo-precios.js?v=stone-20261015-bandeja8"></script>','<script>'+catalog+'</script>')
@@ -65,12 +65,14 @@ with sync_playwright() as app:
    if file=='index.html':
     assert page.locator('a.path[href="funerario.html"]').count()==1
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
-    assert page.locator('form').count()==0
+    assert page.locator('form').count()==1
    elif file in ('funerario.html','mobiliario.html'):
     if file=='funerario.html':
      assert page.locator('.catalog-card').count()==3
      assert page.locator('.catalog-price').count()==3
      assert page.locator('#memorial-workbench').count()==1
+     assert page.locator('.memorial-motif-section').count()==6
+     assert page.locator('#memorial-gallery-category').count()==0
      assert page.locator('#memorial-model option').count()==10
      assert page.locator('#memorial-stone option').count()==7
      assert page.locator('#memorial-type option').count()==10
@@ -81,7 +83,7 @@ with sync_playwright() as app:
      page.locator('#memorial-stone').select_option('macael')
      page.locator('#memorial-type').select_option('inglesa')
      page.locator('#memorial-finish').select_option('relieve')
-     page.locator('#memorial-ornament').select_option('olivo')
+     page.locator('#memorial-gallery-flores .memorial-motif[data-item-id="olivo"]').click()
      page.locator('details').nth(3).evaluate('(e)=>e.open=true')
      page.locator('#memorial-text').fill('SIEMPRE EN NUESTRA MEMORIA')
      page.wait_for_function("()=>document.querySelector('#memorial-slab')?.dataset.type==='inglesa'")
@@ -91,7 +93,7 @@ with sync_playwright() as app:
      assert page.locator('[data-ornament="simbolos:olivo"]').count()==1
      page.locator('#memorial-text').fill('<img src=x onerror=alert(1)>')
      assert page.locator('#memorial-rendered img').count()==0
-     assert page.locator('form').count()==0
+     assert page.locator('form').count()==1
     else:
      assert page.locator('.piece-card').count()==21
      assert page.locator('.piece-photos img').count()==0
@@ -238,12 +240,21 @@ with sync_playwright() as app:
      assert page.locator('.piece-card:visible').count()==3
      page.locator('[data-category-filter="Todos"]').click()
      assert page.locator('.piece-card:visible').count()==21
-    assert page.locator('form').count()==0
+    assert page.locator('form').count()==1
     assert page.locator('.project-status').count()==0
     assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
    else:
     assert page.locator('.legal-content h2').count()>3
     assert page.locator('form').count()==0
+   if file in ('index.html','funerario.html','mobiliario.html'):
+    form=page.locator('#contact-form')
+    assert form.count()==1 and form.locator('[name="privacidad"]').count()==1
+    assert form.locator('button[type="submit"]').is_disabled()
+    assert form.get_attribute('inert') is not None
+    assert page.locator('.public-preview-note').is_visible()
+    if width in (390,1440):
+     out=root/'contact-screenshots';out.mkdir(parents=True,exist_ok=True)
+     form.screenshot(path=str(out/f'CONTACTO_{file[:-5]}_{width}.png'))
    print('PASS',file,width)
    page.close()
  browser.close()

@@ -14,7 +14,7 @@
   root.prepend(sidebar);
   if(controls)sidebar.append(controls);
   const previewShortcut=document.createElement('button');previewShortcut.type='button';previewShortcut.className='memorial-preview-shortcut';previewShortcut.textContent='Ver mi lápida ↑';previewShortcut.addEventListener('click',()=>{$('canvas').scrollIntoView({block:'start'});});sidebar.prepend(previewShortcut);
-  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',devotionalTechnique:'aplique 3D',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',accessoryPlacement:{x:100,y:100,scale:100},fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},dimensions:null,fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
+  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',devotionalTechnique:'aplique 3D',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',accessoryPlacement:{x:100,y:100,scale:100},accessory2:'ninguno',accessory2Finish:'bronce',accessory2Placement:{x:0,y:100,scale:100},ceramicImage:null,fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},dimensions:null,fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
 
   // Public, anonymous families. No original photograph or private order metadata is bundled.
@@ -29,7 +29,7 @@
     }
     // Restore each model's deliberate visual proportions, not merely its material
     // and ornament IDs. Only allow numeric placement controls from our public JSON.
-    for(const id of ['symbol','devotional','ornament','secondary','accessory']){
+    for(const id of ['symbol','devotional','ornament','secondary','accessory','accessory2']){
       const key=id+'Placement',placement=preset.state[key];
       if(!placement||typeof placement!=='object'||Array.isArray(placement))continue;
       for(const part of ['x','y','scale']){
@@ -80,11 +80,15 @@
     const image=document.createElement('img');image.alt='';image.loading='lazy';
     try{
       const candidate=presetState(preset);
-      const figure=publicOrnaments.find(x=>x.id===candidate.devotional);
-      const missing=figure?.format==='image/webp'&&!resources[figure.path];
-      if(missing){const thumb=resources[figure.thumbnailPath];if(thumb)resources[figure.path]=thumb;else candidate.devotional='ninguno';}
+      const borrowed=[];
+      for(const slot of ['symbol','devotional','ornament','secondary']){
+        const figure=publicOrnaments.find(x=>x.id===candidate[slot]);
+        if(figure?.format!=='image/webp'||resources[figure.path])continue;
+        const thumb=resources[figure.thumbnailPath];
+        if(thumb){resources[figure.path]=thumb;borrowed.push(figure.path);}else candidate[slot]='ninguno';
+      }
       let picture;
-      try{picture=window.LitosMemorialComposer.compose(candidate);}finally{if(missing)delete resources[figure.path];}
+      try{picture=window.LitosMemorialComposer.compose(candidate);}finally{for(const path of borrowed)delete resources[path];}
       image.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(picture.svg));
     }catch(error){image.alt='Recreación no disponible';}
     return image;
@@ -152,11 +156,11 @@
     pictorialLoads.set(item.path,promise);
     promise.catch(error=>pictorialErrors.set(item.path,error)).finally(()=>{
       pictorialLoads.delete(item.path);
-      if(state.devotional===item.id||state.accessory===item.id)requestRender();
+      if(['symbol','devotional','ornament','secondary','accessory','accessory2'].some(slot=>state[slot]===item.id))requestRender();
       renderCaseGallery();
     });
   }
-  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame',accessory:'accessory',accessorySide:'accessorySide',accessoryFinish:'accessoryFinish',align:'align'};
+  const selections={stone:'stone',variant:'variant',model:'model',layout:'layout',type:'type',finish:'finish',symbol:'symbol',devotional:'devotional',ornament:'ornament',secondary:'secondary',separator:'separator',frame:'frame',accessory:'accessory',accessorySide:'accessorySide',accessoryFinish:'accessoryFinish',accessory2:'accessory2',align:'align'};
   let activeAccessoryFilter='todos';
   function applyAccessoryFilter(){
     const shop=$('accessory-shop-grid');if(!shop)return;
@@ -178,7 +182,7 @@
     for(const item of [{id:'ninguno',name:'Sin complemento'},...catalog.accessories]){
       const button=document.createElement('button');button.type='button';button.className='memorial-accessory-card';button.setAttribute('aria-pressed',String(state.accessory===item.id));
       const picture=document.createElement('span');picture.className='memorial-accessory-card-image';
-      if(item.path){const img=document.createElement('img');img.src=resources[item.thumbnailPath]||'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(resources[item.path]);img.alt='';img.loading='lazy';picture.append(img);}else picture.textContent='—';
+      if(item.path){const img=document.createElement('img');const thumbnail=resources[item.thumbnailPath];img.src=thumbnail?.startsWith('data:image/')?thumbnail:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(thumbnail||resources[item.path]);img.alt='';img.loading='lazy';picture.append(img);}else picture.textContent='—';
       const name=document.createElement('span');name.textContent=item.name;button.append(picture,name);
       button.addEventListener('click',()=>{state.accessory=item.id;$('accessory').value=item.id;renderAccessoryGallery();requestRender();});
       fragment.append(button);
@@ -188,7 +192,7 @@
     if(shop&&!shop.childElementCount){
       const filterBar=document.createElement('div');filterBar.className='memorial-shop-filters';
       filterBar.setAttribute('role','group');filterBar.setAttribute('aria-label','Categoría de complementos');
-      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes']];
+      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes'],['libros y placas','Libros y placas'],['cerámicas y retratos','Cerámicas y retratos']];
       for(const [key,name] of groups){
         if(key!=='todos'&&!catalog.accessories.some(item=>item.category===key))continue;
         const filter=document.createElement('button');filter.type='button';
@@ -201,7 +205,7 @@
       shop.before(filterBar,counter);
       for(const item of catalog.accessories){
         const button=document.createElement('button');button.type='button';button.className='memorial-shop-item';button.dataset.accessoryChoice=item.id;button.dataset.category=item.category;
-        const img=document.createElement('img');img.src=resources[item.thumbnailPath];img.alt='';img.width=160;img.height=160;img.loading='lazy';
+        const img=document.createElement('img');const thumb=resources[item.thumbnailPath];img.src=thumb?.startsWith('data:image/')?thumb:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(thumb||resources[item.path]);img.alt='';img.width=160;img.height=160;img.loading='lazy';
         const name=document.createElement('strong');name.textContent=item.name;
         const action=document.createElement('span');action.textContent='Añadir a mi lápida';button.append(img,name,action);
         button.addEventListener('click',()=>{state.accessory=item.id;sync();renderAccessoryGallery();requestRender();mode('customize');steps[1].open=true;root.scrollIntoView({block:'start'});status(item.name+' añadido a tu composición.');});shop.append(button);
@@ -210,11 +214,34 @@
     applyAccessoryFilter();
     const selected=catalog.accessories.find(x=>x.id===state.accessory);
     if(selected?.renderPath)loadPictorial({...selected,path:selected.renderPath,format:'image/webp'});
+    const second=catalog.accessories.find(x=>x.id===state.accessory2);
+    if(second?.renderPath)loadPictorial({...second,path:second.renderPath,format:'image/webp'});
+    $('ceramic-upload').hidden=state.accessory!=='ceramica-oval'&&state.accessory2!=='ceramica-oval';
+    $('ceramic-clear').hidden=!state.ceramicImage;
     $('accessory-note').textContent=selected?`${selected.category} · ${selected.mount}. Medidas y disponibilidad pendientes de validación.`:'Elige un complemento para consultar sus condiciones de montaje.';
     const finish=$('accessoryFinish');
     for(const option of finish.options)option.disabled=Boolean(selected&&!selected.finishes.includes(option.value));
     if(selected&&!selected.finishes.includes(state.accessoryFinish)){state.accessoryFinish=selected.finishes[0];finish.value=state.accessoryFinish;}
   }
+  // Optional portrait stays in memory; the file is decoded and reduced locally.
+  $('ceramic-file').addEventListener('change',async()=>{
+    const input=$('ceramic-file'),file=input.files?.[0];if(!file)return;
+    let localUrl;
+    try{
+      if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>5000000||file.size<100)throw Error('Elige una imagen PNG, JPG o WebP de hasta 5 MB.');
+      localUrl=URL.createObjectURL(file);
+      const picture=new Image();picture.src=localUrl;await picture.decode();
+      if(picture.naturalWidth<32||picture.naturalHeight<32||picture.naturalWidth>4096||picture.naturalHeight>4096)throw Error('La imagen debe medir entre 32 y 4096 píxeles por lado.');
+      const scale=Math.min(1,1000/Math.max(picture.naturalWidth,picture.naturalHeight));
+      const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(picture.naturalWidth*scale));canvas.height=Math.max(1,Math.round(picture.naturalHeight*scale));
+      canvas.getContext('2d').drawImage(picture,0,0,canvas.width,canvas.height);
+      state.ceramicImage=canvas.toDataURL('image/jpeg',.84);
+      if(state.accessory!=='ceramica-oval'&&state.accessory2!=='ceramica-oval'){state.accessory='ceramica-oval';$('accessory').value=state.accessory;}
+      renderAccessoryGallery();requestRender();status('Imagen añadida solo a esta vista. La puedes quitar antes de descargar.');
+    }catch(error){status(error.message);}
+    finally{if(localUrl)URL.revokeObjectURL(localUrl);input.value='';}
+  });
+  $('ceramic-clear').addEventListener('click',()=>{state.ceramicImage=null;renderAccessoryGallery();requestRender();status('Imagen quitada de esta composición.');});
   $('devotional-technique').addEventListener('change',()=>{state.devotionalTechnique=$('devotional-technique').value;requestRender();});
   const swatches=[];
   for(const material of catalog.materials){
@@ -240,7 +267,7 @@
       const face=scene.face,rounded=value=>Math.round(value*10)/10;
       for(const box of scene.boxes){
         const row=document.createElement('li');
-        const item=box.id?(box.kind==='accessory'?catalog.accessories:catalog.ornaments).find(candidate=>candidate.id===box.id):null;
+        const item=box.id?(box.kind.startsWith('accessory')?catalog.accessories:catalog.ornaments).find(candidate=>candidate.id===box.id):null;
         const field=box.kind.startsWith('text:')?catalog.fields.find(candidate=>'text:'+candidate.id===box.kind):null;
         const label=field?'Texto: '+field.label:item?.name||({frame:'Marco',separator:'Separador',secondSeparator:'Separador 2'}[box.kind]||box.kind);
         row.textContent=`${label}: X ${rounded((box.x-face.x)/face.w*width)} · Y ${rounded((box.y-face.y)/face.h*height)} · ${rounded(box.w/face.w*width)} × ${rounded(box.h/face.h*height)} mm`;
@@ -264,88 +291,70 @@
     loadPictorial(item);
     renderGallery();requestRender();
   }
-  // The cards are the selection control. Categories only navigate between card groups;
-  // avoid a second large dropdown above the same visual options.
-  const categoryTabs=$('category-tabs');
-  function buildCategoryTabs(){
-    if(!categoryTabs)return;
-    const select=$('gallery-category'),fragment=document.createDocumentFragment();
-    const categories=new Set();
-    for(const option of select.options){
-      if(categories.has(option.value))continue;
-      categories.add(option.value);
-      const button=document.createElement('button');
-      button.type='button';
-      button.className='memorial-category-tab';
-      button.dataset.category=option.value;
-      button.textContent=option.label;
-      button.setAttribute('aria-pressed',String(select.value===option.value));
-      button.addEventListener('click',()=>{
-        if(select.value===option.value)return;
-        select.value=option.value;
-        select.dispatchEvent(new Event('change',{bubbles:true}));
-      });
-      fragment.append(button);
-    }
-    categoryTabs.replaceChildren(fragment);
-  }
+  // Independent image choices live inside each related setting; no second selector bar.
   function renderGallery(force=false){
-    const group=$('gallery-category').value,slot=gallerySlot[group];
-    if(categoryTabs)for(const button of categoryTabs.querySelectorAll('button')){
-      button.setAttribute('aria-pressed',String(button.dataset.category===group));
-    }
-    if(!force&&$('gallery').dataset.group===group){
-      for(const button of $('gallery').querySelectorAll('button')){
-        const selected=state[slot]===button.dataset.itemId;
-        const item=publicOrnaments.find(candidate=>candidate.id===button.dataset.itemId);
-        button.setAttribute('aria-pressed',String(selected));
-        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent+(item?.commercialReady===false?', prototipo sin validar':''));
+    for(const [group,slot] of Object.entries(gallerySlot)){
+      const host=document.getElementById('memorial-gallery-'+group);
+      if(!host)continue;
+      if(!force&&host.dataset.ready==='true'){
+        for(const button of host.querySelectorAll('button[data-item-id]')){
+          const selected=state[slot]===button.dataset.itemId;
+          const item=publicOrnaments.find(candidate=>candidate.id===button.dataset.itemId);
+          button.setAttribute('aria-pressed',String(selected));
+          button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+button.querySelector('.memorial-motif-name').textContent+(item?.commercialReady===false?', prototipo sin validar':''));
+        }
+        continue;
       }
-      return;
-    }
-    const items=publicOrnaments.filter(item=>galleryGroups[group].includes(item.category));
-    const fragment=document.createDocumentFragment();
-    const choices=[{id:'ninguno',name:'Sin elemento',category:''},...items];
-    for(const item of choices){
-      const button=document.createElement('button');button.type='button';button.className='memorial-motif';
-      button.dataset.itemId=item.id;button.dataset.slot=slot;button.setAttribute('aria-pressed',String(state[slot]===item.id));
-      button.setAttribute('aria-label',(state[slot]===item.id?'Seleccionado: ':'Elegir: ')+item.name+(item.commercialReady===false?', prototipo sin validar':''));
-      const image=document.createElement('span');image.className='memorial-motif-image';
-      if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
-      else{const art=document.createElement('img');const source=resources[item.path];art.src=item.thumbnailPath?(resources[item.thumbnailPath]||item.thumbnailPath):((source||'').startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source));art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);}
-      const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
-      button.append(image,label);
-      if(item.commercialReady===false){
-        const note=document.createElement('small');note.className='memorial-motif-pending';
-        note.textContent='Prototipo sin validar';button.append(note);
-        button.title=item.validation;
+      const items=publicOrnaments.filter(item=>galleryGroups[group].includes(item.category));
+      const fragment=document.createDocumentFragment();
+      for(const item of [{id:'ninguno',name:'Sin elemento'},...items]){
+        const selected=state[slot]===item.id;
+        const button=document.createElement('button');button.type='button';button.className='memorial-motif';
+        button.dataset.itemId=item.id;button.dataset.motifSlot=slot;button.setAttribute('aria-pressed',String(selected));
+        button.setAttribute('aria-label',(selected?'Seleccionado: ':'Elegir: ')+item.name+(item.commercialReady===false?', prototipo sin validar':''));
+        const image=document.createElement('span');image.className='memorial-motif-image';
+        if(item.id==='ninguno'){image.textContent='—';image.setAttribute('aria-hidden','true');}
+        else{
+          const art=document.createElement('img'),source=resources[item.path];
+          art.src=item.thumbnailPath?(resources[item.thumbnailPath]||item.thumbnailPath):((source||'').startsWith('data:image/')?source:'data:image/svg+xml,'+encodeURIComponent(source));
+          art.alt='';art.loading='lazy';art.width=68;art.height=68;image.append(art);
+        }
+        const label=document.createElement('span');label.className='memorial-motif-name';label.textContent=item.name;
+        button.append(image,label);
+        if(item.commercialReady===false){
+          const note=document.createElement('small');note.className='memorial-motif-pending';
+          note.textContent='Prototipo sin validar';button.append(note);button.title=item.validation;
+        }
+        button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
       }
-      button.addEventListener('click',()=>selectMotif(slot,item.id));fragment.append(button);
+      host.replaceChildren(fragment);host.dataset.ready='true';
     }
-    $('gallery').replaceChildren(fragment);$('gallery').dataset.group=group;
   }
   const religiousReady=publicOrnaments.some(item=>item.category==='religiosas');
   if(!religiousReady){
-    const religiousOption=$('gallery-category').querySelector('option[value="religiosas"]');
-    if(religiousOption)religiousOption.remove();
     $('devotional').replaceChildren(new Option('Imágenes en revisión','ninguno'));
     $('devotional').disabled=true;
-    const label=document.querySelector('label[for="memorial-devotional"]');
-    if(label)label.textContent='Imágenes religiosas · en preparación';
-    const note=document.createElement('p');
-    note.className='memorial-note';
-    note.textContent='Estamos renovando los grabados religiosos; no están disponibles en esta versión orientativa.';
-    $('devotional').after(note);
+    const heading=document.getElementById('memorial-motif-heading-religiosas');
+    if(heading)heading.textContent='Imágenes religiosas · en preparación';
+    const section=document.querySelector('[data-motif-section="religiosas"]');
+    if(section){
+      const note=document.createElement('p');note.className='memorial-note';
+      note.textContent='Estamos renovando los grabados religiosos; no están disponibles en esta versión orientativa.';
+      section.append(note);
+    }
     const placement=$('devotional-scale').closest('fieldset');
     if(placement)placement.hidden=true;
   }
-  buildCategoryTabs();
-  $('gallery-category').addEventListener('change',()=>renderGallery(true));
+  renderGallery(true);
   function render(){
     if(!ready)return;
-    const figure=publicOrnaments.find(item=>item.id===state.devotional&&item.format==='image/webp');
-    const accessory=catalog.accessories.find(item=>item.id===state.accessory);
-    const waitingPath=figure&&!resources[figure.path]?figure.path:accessory?.renderPath&&!resources[accessory.renderPath]?accessory.renderPath:null;
+    const figures=['symbol','devotional','ornament','secondary'].map(slot=>publicOrnaments.find(item=>item.id===state[slot]&&item.format==='image/webp')).filter(Boolean);
+    for(const figure of figures)if(!pictorialErrors.has(figure.path))loadPictorial(figure);
+    const figure=figures.find(item=>!resources[item.path]);
+    const accessories=['accessory','accessory2'].map(slot=>catalog.accessories.find(item=>item.id===state[slot])).filter(Boolean);
+    for(const item of accessories)if(item.renderPath&&!pictorialErrors.has(item.renderPath))loadPictorial({...item,path:item.renderPath,format:'image/webp'});
+    const pendingAccessory=accessories.find(item=>item.renderPath&&!resources[item.renderPath]);
+    const waitingPath=figure&&!resources[figure.path]?figure.path:pendingAccessory?.renderPath||null;
     if(waitingPath){
       scene=null;$('download').disabled=true;$('plan-download').disabled=true;$('plan-preview').replaceChildren();$('plan-measures').replaceChildren();
       root.setAttribute('aria-busy','true');
@@ -363,9 +372,9 @@
       $('material-note').textContent=scene.material.description+' '+scene.material.status+(scene.material.id==='italia'?' · Variedad comercial exacta sin identificar.':'');
       $('model-note').textContent=scene.model.note;
       swatches.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.stone===state.stone)));
-      for(const prefix of ['symbol','devotional','ornament','secondary','accessory'])document.getElementById(prefix+'-scale-value').textContent=state[prefix+'Placement'].scale+' %';
+      for(const prefix of ['symbol','devotional','ornament','secondary','accessory','accessory2'])document.getElementById(prefix+'-scale-value').textContent=state[prefix+'Placement'].scale+' %';
       $('size-value').textContent=state.textSize+' %';$('leading-value').textContent=state.leading+' %';
-      for(const prefix of ['symbol','devotional','ornament','secondary','accessory']){
+      for(const prefix of ['symbol','devotional','ornament','secondary','accessory','accessory2']){
         const disabled=state[prefix]==='ninguno';
         for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).disabled=disabled;
       }
@@ -388,7 +397,7 @@
           return;
         }
       }
-      state[key]=next;if(key==='accessorySide'&&next!=='free'){state.accessoryPlacement.x=next==='left'?0:next==='center'?50:100;state.accessoryPlacement.y=100;$('accessory-x').value=state.accessoryPlacement.x;$('accessory-y').value=100;}if(key==='accessory'||key==='accessoryFinish')renderAccessoryGallery();requestRender();
+      state[key]=next;if(key==='accessorySide'&&next!=='free'){state.accessoryPlacement.x=next==='left'?0:next==='center'?50:100;state.accessoryPlacement.y=100;$('accessory-x').value=state.accessoryPlacement.x;$('accessory-y').value=100;}if(key==='accessory'||key==='accessoryFinish'||key==='accessory2')renderAccessoryGallery();requestRender();
     }
   });
   for(const id of ['fixings','guides'])$(id).addEventListener('change',()=>{state[id]=$(id).checked;requestRender();});
@@ -411,7 +420,7 @@
     $('height-mm').dispatchEvent(new Event('input',{bubbles:true}));
     status('Medida observada en muestra histórica. Verificar las cotas reales con el taller.');
   });
-  for(const prefix of ['symbol','devotional','ornament','secondary','accessory'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);if(prefix==='accessory'){state.accessorySide='free';$('accessorySide').value='free';}requestRender();});
+  for(const prefix of ['symbol','devotional','ornament','secondary','accessory','accessory2'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).addEventListener('input',()=>{state[prefix+'Placement'][suffix]=Number($(prefix+'-'+suffix).value);if(prefix==='accessory'){state.accessorySide='free';$('accessorySide').value='free';}requestRender();});
   for(const field of catalog.fields){
     const input=field.id==='name'?$('text'):$('field-'+field.id);
     input.addEventListener('input',()=>{state.fields[field.id].text=input.value.slice(0,field.max);requestRender();});
@@ -422,7 +431,7 @@
     $('devotional-technique').value=state.devotionalTechnique;
     for(const id of ['fixings','guides'])$(id).checked=state[id];
     $('size').value=state.textSize;$('leading').value=state.leading;
-    for(const prefix of ['symbol','devotional','ornament','secondary','accessory'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).value=state[prefix+'Placement'][suffix];
+    for(const prefix of ['symbol','devotional','ornament','secondary','accessory','accessory2'])for(const suffix of ['x','y','scale'])$(prefix+'-'+suffix).value=state[prefix+'Placement'][suffix];
     for(const field of catalog.fields){(field.id==='name'?$('text'):$('field-'+field.id)).value=state.fields[field.id].text;$('show-'+field.id).checked=state.fields[field.id].visible;}
     $('width-mm').value=state.dimensions?.widthMm||'';$('height-mm').value=state.dimensions?.heightMm||'';
     renderAccessoryGallery();

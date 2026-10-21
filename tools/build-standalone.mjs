@@ -54,12 +54,12 @@ const script=String.raw`
    view.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>set(false)));
    document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});
  });
- if (document.querySelector('form')) throw new Error('Unexpected form in informational preview');
+ // Contact forms remain disabled in the offline review; no mail handlers run.
  window.addEventListener('hashchange',()=>show(selected()));
  window.addEventListener('popstate',()=>show(selected()));
  show(selected());
 })();`;
-const html='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>LITOS — Vista previa</title><style>'+css+'</style><style>[data-view][hidden]{display:none!important}.preview-label{position:fixed;bottom:0;right:0;z-index:2147483646;background:#261f19;color:#fff;padding:7px 11px;font:12px sans-serif;pointer-events:none}</style></head><body>'+bodies.join('')+'<div role="status" class="preview-label">LITOS · VISTA PREVIA · <span id="preview-view">inicio</span> · sin encargos</div><script>'+script+'</script></body></html>';
+const html='<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>LITOS — Vista previa</title><style>'+css+'</style><style>[data-view][hidden]{display:none!important}.preview-label{position:fixed;bottom:0;right:0;z-index:2147483646;background:#261f19;color:#fff;padding:7px 11px;font:12px sans-serif;pointer-events:none}</style></head><body>'+bodies.join('')+'<div role="status" class="preview-label">LITOS · VISTA PREVIA · <span id="preview-view">inicio</span> · sin envío de mensajes</div><script>'+script+'</script></body></html>';
 writeFileSync('preview/LITOS_PREVISUALIZACION_AUTONOMA.html',html.replace('</body>','<script>'+['recursos','compositor','exportar','personalizador'].map(n=>readFileSync('preview/funerario-'+n+'.js','utf8')).join('\n')+'</script><script>'+readFileSync('preview/catalogo-precios.js','utf8').replace(/const approvedVariants=Object\.freeze\(\{[\s\S]*?\}\);/, 'const approvedVariants=Object.freeze({});').replace(/const approvedTechnicalDrawings=Object\.freeze\(\{[\s\S]*?\}\);/, 'const approvedTechnicalDrawings=Object.freeze({});')+'</script></body>'));
 console.log('Standalone offline preview built, embedded assets and five linked views');
 

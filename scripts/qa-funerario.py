@@ -15,8 +15,8 @@ with sync_playwright() as p:
         page.goto((root/'_site/funerario.html').as_uri()+'#personalizar')
         page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
         assert page.locator('.memorial-studio').get_attribute('data-path')=='explore'
-        assert page.locator('.memorial-case-card').count()==13
-        assert page.locator('.memorial-accessory-card').count()==11
+        assert page.locator('.memorial-case-card').count()==18
+        assert page.locator('.memorial-accessory-card').count()==16
         assert page.locator('.memorial-controls > details').count()==5
         assert page.locator('.memorial-toolbar,.memorial-selection-overview').count()==0
         assert not page.locator('#memorial-workbench').is_visible()
@@ -52,11 +52,13 @@ with sync_playwright() as p:
         plan_text=Path(plan.path()).read_text(encoding='utf8')
         assert 'width="900"' in plan_text and 'height="700"' in plan_text and 'NO USAR PARA CORTE' in plan_text
         page.locator('#memorial-layout').select_option('devocionlateral')
-        page.locator('#memorial-devotional').select_option('cristo-corona')
+        page.locator('#memorial-gallery-religiosas .memorial-motif[data-item-id="cristo-corona"]').click()
         page.wait_for_selector('[data-slot="devotional"] image')
         for technique,filter_id in (('grabado','pictorial-engraved'),('bajorrelieve','carved-relief'),('aplique 3D','applied-relief')):
             page.locator('#memorial-devotional-technique').select_option(technique)
-            page.wait_for_function('(name)=>document.querySelector("[data-slot=devotional]")?.dataset.technique===name',arg=technique)
+            assert page.locator('button[data-slot]').count()==0
+            assert page.locator('[data-slot=devotional]').count()==1
+            page.wait_for_function('(name)=>document.querySelector("[data-slot=devotional]")?.dataset.technique===name',arg=technique,timeout=5500)
             assert page.locator('[data-slot="devotional"]').get_attribute('filter')==f'url(#{filter_id})'
         white=page.locator('#applied-relief feColorMatrix[type="matrix"]').get_attribute('values')
         for stone in ('macael','quintana','absoluto'):
@@ -74,7 +76,7 @@ with sync_playwright() as p:
         assert png[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(png[16:20],'big')==2000
         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
         assert not errors and not external,(errors,external)
-        results.append({'viewport':width,'cards':9,'accessories':10,'png_sha256':hashlib.sha256(png).hexdigest()[:12],'external_requests':len(external),'javascript_errors':len(errors)})
+        results.append({'viewport':width,'catalog_models':page.evaluate('window.LitosMemorialData.catalog.commercialModels.length'),'accessories':page.locator('.memorial-accessory-card').count()-1,'png_sha256':hashlib.sha256(png).hexdigest()[:12],'external_requests':len(external),'javascript_errors':len(errors)})
         context.close()
     context=browser.new_context(viewport={'width':390,'height':844})
     page=context.new_page();external=[];errors=[]
@@ -82,7 +84,7 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto((root/'preview/LITOS_CONFIGURADOR_FUNERARIO.html').as_uri())
     page.wait_for_selector('#memorial-workbench[data-ready="true"]',state='attached')
-    assert page.locator('.memorial-case-card').count()==13
+    assert page.locator('.memorial-case-card').count()==18
     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
     assert not external and not errors,(external,errors)
     context.close();browser.close()

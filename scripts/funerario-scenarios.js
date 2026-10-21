@@ -5,7 +5,7 @@ async () => {
   const raf=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
   const select=async(id,value)=>{
     const el=document.getElementById('memorial-'+id);el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));await raf();
-    const figure=id==='devotional'&&catalog.ornaments.find(x=>x.id===value&&x.format==='image/webp');
+    const figure=['devotional','ornament','secondary'].includes(id)&&catalog.ornaments.find(x=>x.id===value&&x.format==='image/webp');
     if(figure){
       const deadline=Date.now()+10000;
       while(!window.LitosMemorialData.resources[figure.path]&&Date.now()<deadline)await new Promise(resolve=>setTimeout(resolve,30));
@@ -31,16 +31,12 @@ async () => {
     await select(target,'ninguno');
     assert(!document.querySelector(`[data-ornament="${item.category}:${item.id}"]`),'ornament removable: '+item.id);
   }
-  assert(document.querySelector('#memorial-gallery-category option[value="religiosas"]'),'figurative group available');
+  assert(document.querySelector('#memorial-gallery-religiosas'),'figurative group available');
   assert(document.querySelectorAll('#memorial-devotional option').length===9,'eight approved visual prototypes');
   assert(!document.getElementById('memorial-devotional').disabled,'devotional selector available');
   assert(!document.querySelector('[data-slot="devotional"]'),'devotional scene empty');
-  document.getElementById('memorial-gallery-category').value='religiosas';
-  document.getElementById('memorial-gallery-category').dispatchEvent(new Event('change'));
-  assert(document.querySelectorAll('#memorial-gallery .memorial-motif img').length===8,'eight figurative thumbnails');
-  document.getElementById('memorial-gallery-category').value='flores';
-  document.getElementById('memorial-gallery-category').dispatchEvent(new Event('change'));
-  const galleryChoice=document.querySelector('#memorial-gallery [data-item-id="rosaabierta"]');
+  assert(document.querySelectorAll('#memorial-gallery-religiosas .memorial-motif img').length===8,'eight figurative thumbnails');
+  const galleryChoice=document.querySelector('#memorial-gallery-flores [data-item-id="rosaabierta"]');
   assert(galleryChoice&&galleryChoice.querySelector('img').src.startsWith('data:image/svg+xml,'),'neutral ornament gallery');
   galleryChoice.click();await raf();
   assert(document.querySelector('[data-ornament="flores:rosaabierta"]'),'gallery selects neutral floral ornament');
@@ -85,12 +81,12 @@ async () => {
     }
     const textBoxes=scene.boxes.filter(b=>b.kind.startsWith('text:'));
     for(const decor of scene.boxes.filter(b=>['symbol','devotional','ornament','secondary'].includes(b.kind)))for(const text of textBoxes){
-      assert(decor.x+decor.w<=text.x||text.x+text.w<=decor.x||decor.y+decor.h<=text.y||text.y+text.h<=decor.y,'symbol/text overlap');
+      assert(decor.x+decor.w<=text.x||text.x+text.w<=decor.x||decor.y+decor.h<=text.y||text.y+text.h<=decor.y,`symbol/text overlap: ${model.id}/${layout.id}/${font.id}/${decor.kind}/${text.kind}`);
     }
     const decorative=scene.boxes.filter(b=>['symbol','devotional','ornament','secondary'].includes(b.kind));
     for(let a=0;a<decorative.length;a++)for(let b=a+1;b<decorative.length;b++){
       const one=decorative[a],two=decorative[b];
-      assert(one.x+one.w<=two.x||two.x+two.w<=one.x||one.y+one.h<=two.y||two.y+two.h<=one.y,'motif/motif overlap');
+      assert(one.x+one.w<=two.x||two.x+two.w<=one.x||one.y+one.h<=two.y||two.y+two.h<=one.y,`motif/motif overlap: ${model.id}/${layout.id}/${font.id}`);
     }
     compositions++;
   }

@@ -721,3 +721,58 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Accesibilidad: h1/h2 funerarios permanecen para lectores de pantalla usando `visually-hidden`; en pantalla se accede a «Explorar modelos / Crear desde cero».
 - Actualizados los textos legales informativos: no hay pagos ni tratamiento de formularios en esta versión, sin incluir mensajes comerciales de indisponibilidad. Sin cambios de datos privados.
 - Ajustados `scripts/check-site.py`, `scripts/visual-qa.py`, `scripts/check-live-deployment.py` y el generador del estudio funerario. CI y captura responsive deben aprobarse antes de fusionar y comprobar GitHub Pages.
+
+
+## 20/10/2026 — Motivos visuales integrados y contacto comercial (rama de revisión)
+
+- Rama exclusiva `work/funerario-galerias-contacto-20261020` creada desde main posterior a PR #80; no se modificaron otros repositorios, pedidos, datos internos ni fotografías originales.
+- «02 · Composición y símbolos»: se elimina el selector global duplicado de la biblioteca. Las seis categorías Cruz, Imágenes religiosas, Flores y símbolos, Motivo adicional, Separadores y Marcos contienen ahora su propia galería visual de tarjetas. El elemento se aplica inmediatamente; se conservan los controles internos de estado, tamaño, posición y composición. Se actualiza `tools/build-funerario-ui.mjs` para no regenerar la interfaz antigua.
+- Formulario en Inicio, Arte funerario y Mobiliario, con nombre, email, categoría, mensaje, lectura de privacidad, accesibilidad y validación. Destino comercial declarado: `litos.artesania@gmail.com`. No hay endpoint, backend, analítica ni almacenamiento en GitHub: el visitante abre un borrador `mailto:` y debe enviarlo manualmente desde su correo.
+- Aviso legal y privacidad adaptados para explicar el flujo por correo. **NO publicar sin verificar identificación del responsable legal del sitio y la política de tratamiento aplicable.** `scripts/check-site.py --production` sigue bloqueando el despliegue intencionadamente hasta documentar esa validación; la vista de revisión no equivale a producción.
+- Tests de estructura, galería local y contacto/preview actualizados. Pendiente ejecutar CI de GitHub Actions y revisar capturas móvil/escritorio. No se ha fusionado ni desplegado.
+
+## 20/10/2026 — Continuación de PR81: punto de recuperación
+- Se preservó el avance local anterior en una rama independiente y se retomó exactamente la cabeza de PR81. No se mezcló PR79.
+- Causa de la CI fallida: los botones nuevos reutilizaban `data-slot`, reservado a las capas SVG. La figura sí existía; la consulta encontraba el botón. Los botones usan ahora `data-motif-slot`; regresión comprueba unicidad de la figura durante las tres técnicas.
+- Tres complementos originales adicionales (cono de acero, cilindro blanco y jarrón de granito), con miniatura y render transparente; árbol figurativo original disponible como motivo adicional. Se conservan los diez recursos anteriores. Total provisional: 13 complementos, 58 motivos, 142 archivos públicos permitidos.
+- Carga diferida extendida a motivos no religiosos y restauración del revisor offline tras retirar el selector global. Ningún original privado ni inscripción real añadido.
+- Punto guardado a petición del propietario para evitar pérdida de trabajo: auditoría estática e integridad pasan; pruebas de navegador y revisión de proporciones en curso. No representa finalización de la iteración.
+- Sigue bloqueada la publicación del formulario por identificación legal pendiente. Mantener PR81 en revisión; no eludir `--production`.
+
+## 20/10/2026 — Segundo avance guardado: catálogo y proporciones
+- PR81 conservada; PR79 sin integrar. Punto remoto anterior: `a50456e`. Nuevas proporciones y controles mantienen textos y posiciones al elegir modelo.
+- 15 modelos, 12 distribuciones, 13 complementos, 59 motivos y 143 archivos públicos. Cruz incisa sencilla, árbol grabado, tres floreros propios y texto dimensionado por altura de placa. Originales privados permanecen fuera del repo.
+- PASS local: build/allowlist/hashes, cinco páginas responsive, vista autónoma, PNG/SVG, 2.400 combinaciones sin desbordamientos, quince presets, trece accesorios, nueve comparaciones de técnica y recuperación ante fallo del árbol/complemento. Capturas nuevas en `preview/PR81-*.png`.
+- Investigación realizada, límites de cobertura, pendientes y evidencia: `docs/FUNERARIO_PR81_CONTINUIDAD.md`. No se afirma medición individual exhaustiva del archivo ni extracción completa del catálogo externo.
+- `--production` sigue bloqueado por verificación legal pendiente. No fusionado ni desplegado. Comprobar CI del HEAD actualizado antes de cualquier publicación.
+
+## 21/10/2026 — Libro funerario original y CI del avance anterior
+- CI de PR81 en el HEAD `81f1723`: ejecución 39483744412 completada correctamente. Se confirma la vista previa, no la publicación en Pages.
+- Añadido libro abierto de piedra como complemento vectorial original, con lomo, cantos y páginas independientes. Se puede filtrar, escoger, mover, redimensionar, ver en plano orientativo y exportar junto a la composición. Modelo ficticio «Libro abierto y medallón». Total: 16 modelos, 14 complementos, 144 recursos públicos.
+- Corregida la vista autónoma para que el SVG del libro no se etiquete ni se decodifique como WebP; miniaturas del escaparate y configurador comprobadas. No se usó obra, fotografía, epígrafe o diseño de terceros.
+- Validación local: build, hashes, cinco páginas y vista offline PASS; regresión de 2.400 combinaciones, 16 modelos, 14 complementos, plano y técnicas PASS a 320/390/768/1440. Capturas en `preview/PR81-libro-piedra-*.png`.
+- Pieza conceptual: espesor, medidas, material real, anclaje y fabricación quedan por confirmar. La fotocerámica y varias piezas simultáneas siguen pendientes. La verificación legal del formulario aún impide publicar PR81.
+
+## 21/10/2026 — Fotocerámica oval con imagen local (avance incremental)
+- Añadido complemento vectorial original de fotocerámica oval y un modelo genérico ficticio. La imagen opcional se elige en el navegador, se valida como PNG/JPG/WebP de hasta 5 MB, se reduce localmente y solo vive en memoria de esa pestaña. Se puede quitar o limpiar al restablecer el modelo.
+- El óvalo conserva borde de porcelana, sombra y fotografía recortada; se mueve y escala con los controles existentes y aparece en el plano de colocación como pieza acotada. La imagen elegida entra solo en la descarga PNG solicitada. No se añade a Git, al paquete estático, a URL ni a una petición externa.
+- Catálogo: 17 modelos, 15 complementos, 145 archivos públicos. Se mantiene la distinción entre pieza conceptual y producto de taller certificado.
+- QA: cinco páginas y allowlist PASS; 2.400 composiciones, 15 complementos y 17 modelos en 320/390/768/1440 PASS; prueba sintética reproducible añadida a CI para carga, exportación, borrado y ausencia de solicitudes externas. Captura local con imagen sintética, nunca retrato privado.
+
+## 2026-10-21 — Dos complementos en la PR81
+
+- Segundo complemento con controles de posición y escala independientes; ambos se reflejan en visor, plano y exportación. Modelo genérico de dos floreros laterales con texto ficticio. 18 modelos, 15 complementos, 145 recursos públicos.
+- Fotocerámica local soportada también en la segunda posición. Avisos de superposición entre piezas y con texto. Captura local de la nueva composición revisada, sin fotografías privadas.
+- Build, auditoría de sitio, controles de privacidad, 2.400 combinaciones y pruebas de navegador/exportación PASS. CI del anterior HEAD de fotocerámica `4e512a3` completada correctamente (ejecución 39551810797). La CI de este nuevo avance se verificará tras subirlo.
+- Se trabaja únicamente en la rama borrador PR81 del repositorio `litosartesania/litos_web`. No fusionar ni desplegar: la identidad legal/responsable sigue pendiente y el guard de producción debe permanecer activo.
+
+## 2026-10-21 — Autorización de publicación como muestra personal sin actividad económica
+
+- El propietario pide publicar la nueva web y confirma expresamente que LITOS continúa sin vender ni aceptar encargos, también fuera del sitio. No aporta todavía los datos de identificación para una publicación comercial. Solicita conservar el diseño del formulario como **maqueta no operativa**.
+- Esta decisión reemplaza para esta versión la propuesta de activar consultas por `mailto:`. Los tres formularios permanecen visibles e inertes, sin envío ni apertura de correo; se retiran los enlaces de contacto comercial. Inicio, funerario y mobiliario declaran el estado sin ventas ni encargos; aviso legal y privacidad describen la muestra personal y el tratamiento técnico de GitHub Pages.
+- Se mantiene el bloqueo de `--production` para cualquier versión comercial. La vía de muestra pública solo pasa con declaración expresa de ausencia de actividad económica, formulario inerte, botón deshabilitado, ausencia de correo comercial y páginas legales coherentes. Si cambia la actividad, no reactivar contacto ni ventas sin identidad legal y revisión de privacidad.
+- La referencia empleada es la FAQ oficial LSSI sobre páginas personales sin actividad económica y sobre páginas de empresas que promocionan productos aunque no vendan en línea: https://lssi.digital.gob.es/lssi/la-ley/preguntas-frecuentes . Esta clasificación se basa en el estado confirmado por el propietario; no es certificación jurídica permanente.
+- Pendiente de este relevo: ejecutar QA de la variante pública, CI en PR81, fusionar solo tras éxito, esperar Pages y verificar contenido y recursos servidos. No marcar como publicado hasta completar la comprobación HTTP.
+- Validación local posterior: build de 397 archivos permitidos, guard `--production`, cinco páginas a 390/820/1440, catálogo de 21 productos, 18 modelos funerarios y 2.400 composiciones, fotocerámica local y preview autónoma PASS. El guard rechazó tres mutaciones de prueba: enlace de correo activo, botón habilitado y ausencia de declaración no comercial. No se introdujeron datos legales ficticios.
+- El verificador de Pages se actualizó para exigir las cinco vistas, el formulario inerte y los hashes de HTML/CSS/JS y 145 recursos funerarios. Su ejecución contra un servidor local de `_site` pasó de extremo a extremo; el despliegue público requerirá una ejecución posterior independiente.
+- Pendientes: simultaneidad de complementos, validación de dimensiones/materiales/montajes por taller, ampliación de archivo privado. Producción sigue bloqueada por la identificación legal del responsable del formulario.

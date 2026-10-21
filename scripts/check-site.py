@@ -226,7 +226,7 @@ for p in plans:
 
 memorial_manifest=json.loads((root.parent/'docs/FUNERARIO_ASSETS_MANIFEST.json').read_text())
 memorial_paths={i['path'] for i in memorial_manifest['files']}|{'funerario-recursos.js','funerario-compositor.js','funerario-exportar.js'}
-assert len(memorial_manifest['files'])==131
+assert len(memorial_manifest['files'])==145
 review_manifest=json.loads((root.parent/'docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json').read_text())
 assert len(review_manifest['files'])==0
 figure_paths={i['path'] for i in memorial_manifest['files'] if '/ornamentos/religiosas/relieves/' in i['path']}
@@ -236,7 +236,7 @@ for i in memorial_manifest['files']:
  assert len(b)==i['bytes'] and hashlib.sha256(b).hexdigest()==i['sha256'],i['path']
 memorial_bytes=sum((root/p).stat().st_size for p in memorial_paths)
 # Includes ten original accessory renders and their thumbnails; full images load on selection.
-assert memorial_bytes<4200000,'memorial resource budget exceeded'
+assert memorial_bytes<4600000,'memorial resource budget exceeded'
 expected.update(memorial_paths)
 actual={x.relative_to(root).as_posix() for x in root.rglob('*') if x.is_file()}
 assert actual==expected,(actual^expected)
@@ -281,23 +281,27 @@ for page,html in htmls.items():
     target=Inspect();target.feed(htmls.get(name,(root/name).read_text()))
     assert unquote(u.fragment) in target.ids
   elif u.fragment:assert unquote(u.fragment) in p.ids,(page,uri)
- assert not p.forms,(page,'informational-only website must not include forms')
-assert not parsers['index.html'].forms and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
+ assert len(p.forms)==(1 if page in ('index.html','funerario.html','mobiliario.html') else 0),(page,'unexpected form count')
+assert len(parsers['index.html'].forms)==1 and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
 for page,count in [('funerario.html',3)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
- assert not p.forms and 'id="precios"' not in htmls[page]
- assert 'id="contacto"' not in htmls[page]
+ assert len(p.forms)==1 and 'id="precios"' not in htmls[page]
+ assert 'id="contacto"' in htmls[page]
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
 assert 'funerario-personalizador.js' in htmls['funerario.html']
+assert all('id="memorial-gallery-'+group+'"' in htmls['funerario.html'] for group in ('cruces','religiosas','flores','secondary','marcos','separadores')), 'motif galleries missing'
+assert 'id="memorial-gallery-category"' not in htmls['funerario.html'], 'obsolete duplicate tab/gallery remains'
 assert not any(token in (root/'funerario-personalizador.js').read_text(encoding='utf8') for token in ('fetch(', 'localStorage', 'sessionStorage', 'XMLHttpRequest', 'sendBeacon', 'innerHTML', 'document.cookie'))
-assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html'] and htmls['mobiliario.html'].count('<option value=')==10 and htmls['mobiliario.html'].count('value="plano-tecnico"')==1
+assert 'id="precios"' not in htmls['mobiliario.html'] and 'id="material-picker"' in htmls['mobiliario.html']
+picker=re.search(r'<select id="material-picker"[^>]*>(.*?)</select>',htmls['mobiliario.html'],re.S)
+assert picker and picker.group(1).count('<option value=')==10 and picker.group(1).count('value="plano-tecnico"')==1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=stone-20261015-macetero8' in htmls['mobiliario.html']
+assert 'styles.css?v=litos-public-preview-20261021' in htmls['mobiliario.html']
 assert 'catalogo-precios.js?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
@@ -325,22 +329,33 @@ assert 'class="memorial-studio"' not in htmls['mobiliario.html']
 assert 'id="memorial-workbench"' not in htmls['mobiliario.html']
 assert 'arte funerario' in htmls['index.html'].lower() and 'mobiliario' in htmls['index.html'].lower()
 for page in ('index.html','funerario.html','mobiliario.html'):
- assert not parsers[page].forms,(page,'lead collection forbidden')
- assert 'href="#contacto"' not in htmls[page],(page,'lead link forbidden')
- assert 'id="contact-form"' not in htmls[page],(page,'form ID forbidden')
+ assert len(parsers[page].forms)==1,(page,'one contact form expected')
+ form=parsers[page].forms[0]
+ assert form.get('id')=='contact-form' and 'data-litos-contact' in form,(page,'contact mockup expected')
+ assert not form.get('action') and not form.get('method'),(page,'network submit forbidden')
+ assert 'type="submit" disabled' in htmls[page],(page,'fail closed without JavaScript')
+ assert 'data-litos-contact-preview' in form and 'inert' in form and form.get('aria-hidden')=='true',(page,'mockup must be noninteractive')
+ assert 'data-litos-public-preview="true"' in htmls[page] and 'no vende piezas ni acepta encargos' in htmls[page],(page,'noncommercial status must be visible')
+ assert 'mailto:' not in htmls[page],(page,'commercial email link forbidden in public preview')
+ assert 'id="contact-privacy"' in htmls[page],(page,'consent missing')
  assert 'solicitar presupuesto' not in htmls[page].lower(),(page,'outdated CTA')
  assert 'class="project-status"' not in htmls[page] and 'class="made-to-measure"' not in htmls[page],(page,'obsolete blocks')
-assert 'No integra formularios de envío' in htmls['privacidad.html']
+assert 'El formulario visible es una maqueta inactiva' in htmls['privacidad.html']
 assert 'no procesa pagos' in htmls['aviso-legal.html']
 css=(root/'styles.css').read_text();js=(root/'script.js').read_text()
 assert 'formResponse' not in js and 'fetch(' not in (root/'catalogo-precios.js').read_text() and 'fonts.googleapis.com' not in css and 'new FormData(' not in js
+assert 'mailto:' not in js and 'window.location.assign' not in js and 'submit.disabled = true' in js
 for link in re.findall(r'url\([\'" ]?([^\)\'" ]+)',css):
  if not link.startswith(('data:','#','https:','http:')):assert (root/link).is_file(),link
 if '--production' in sys.argv:
  assert not any('[[PENDIENTE_' in html for html in htmls.values()), 'release blocked: missing verified legal identity/address/tax ID'
  assert not any('pendiente de completar' in html.lower() or 'pendiente de validación' in html.lower() for html in (htmls['aviso-legal.html'],htmls['privacidad.html'])), 'release blocked: provisional legal drafts'
- assert all('mailto:' not in htmls[p] for p in pages), 'release blocked: mail contact or lead collection present'
- assert all(not parsers[p].forms for p in pages), 'release blocked: form present'
+ if 'data-litos-legal-identity-verified="true"' not in htmls['aviso-legal.html']:
+  assert all('data-litos-public-preview="true"' in htmls[page] for page in pages), 'release blocked: legal identity missing and noncommercial preview not declared'
+  assert 'actualmente no vende piezas ni acepta encargos' in htmls['aviso-legal.html'], 'release blocked: current noncommercial scope missing'
+  assert 'ni genera ingresos directos o indirectos' in htmls['aviso-legal.html'], 'release blocked: economic activity claim unclear'
+  assert all('data-litos-contact-preview inert' in htmls[page] and 'mailto:' not in htmls[page] for page in ('index.html','funerario.html','mobiliario.html')), 'release blocked: contact mockup must remain fully inoperative'
+  assert 'mailto:' not in js and 'window.location.assign' not in js, 'release blocked: active email handler'
  assert 'no procesa pagos' in htmls['aviso-legal.html'], 'release blocked: legal payment scope missing'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
