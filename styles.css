@@ -1247,3 +1247,9 @@ html { scroll-padding-top: 94px; }
 .memorial-controls .memorial-motif-section .memorial-motif-image img{width:55px;height:55px}
 .memorial-controls .memorial-motif-disclaimer{font-size:.68rem;color:#675a4e}
 @media(max-width:600px){.memorial-controls .memorial-motif-section .memorial-motif{flex-basis:94px;max-width:94px}}
+
+/* The visitor's optional ceramic image stays local to the configurator. */
+.memorial-ceramic-upload:not([hidden]){display:grid;gap:.6rem;padding:1rem;background:#f5f0e8;border:1px solid #c7bbab;margin:.75rem 0 1rem}
+.memorial-ceramic-upload label{font-weight:600}
+.memorial-ceramic-upload input[type=file]{width:100%;max-width:100%;font:inherit}
+.memorial-ceramic-upload button{justify-self:start;min-height:40px;padding:.55rem .9rem;border:1px solid #8d7661;background:#fffaf2;color:#342d25}

@@ -605,6 +605,37 @@
           "scale": 95
         }
       }
+    },
+    {
+      "id": "nicho-ceramica-oval",
+      "title": "Óvalo cerámico y florero",
+      "type": "nicho",
+      "stoneFamily": "oscura",
+      "style": "clasico",
+      "technique": "aplique 3D",
+      "ornamentation": "imagen religiosa",
+      "accessoryCategory": "cerámicas y retratos",
+      "note": "Fotocerámica opcional, elegida solo en tu dispositivo. El óvalo vacío es una maqueta; medidas y fabricación por validar.",
+      "provenance": "propuesta",
+      "state": {
+        "stone": "absoluto",
+        "model": "nicho",
+        "layout": "devocionlateral",
+        "symbol": "ninguno",
+        "devotional": "ninguno",
+        "ornament": "ninguno",
+        "frame": "fino",
+        "type": "aldine",
+        "finish": "blanco",
+        "accessory": "ceramica-oval",
+        "accessoryFinish": "porcelana",
+        "accessorySide": "free",
+        "accessoryPlacement": {
+          "x": 27,
+          "y": 32,
+          "scale": 135
+        }
+      }
     }
   ]
 }

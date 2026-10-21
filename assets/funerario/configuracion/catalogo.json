@@ -2236,6 +2236,24 @@
       "dimensionsMm": null,
       "commercialReady": false,
       "validation": "Pieza visual orientativa; medidas, espesor, soporte y suministro por confirmar con el taller."
+    },
+    {
+      "id": "ceramica-oval",
+      "name": "Fotocerámica oval",
+      "category": "cerámicas y retratos",
+      "mount": "fijación mural por determinar",
+      "finishes": [
+        "porcelana"
+      ],
+      "aspect": 0.76,
+      "path": "assets/funerario/accesorios/ceramica-oval.svg",
+      "renderPath": "assets/funerario/accesorios/ceramica-oval.svg",
+      "thumbnailPath": "assets/funerario/accesorios/ceramica-oval.svg",
+      "renderMaterial": "porcelana",
+      "rights": "Contorno vectorial original. La imagen opcional procede del archivo que la persona seleccione localmente, no del archivo histórico del taller.",
+      "dimensionsMm": null,
+      "commercialReady": false,
+      "validation": "Marco, medida, impresión, anclaje y suministro pendientes de validación del taller."
     }
   ],
   "techniques": [

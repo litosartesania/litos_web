@@ -8,6 +8,11 @@
       "sha256": "8bfb194cf12595a59868dcc537edd78a2b266d4e77fb80038264deea6dd40f8b"
     },
     {
+      "path": "assets/funerario/accesorios/ceramica-oval.svg",
+      "bytes": 439,
+      "sha256": "a1d392bbcc1c9f030b3f3d7291a2e635b5586235bd8f56c68198551afd06101a"
+    },
+    {
       "path": "assets/funerario/accesorios/farol.svg",
       "bytes": 613,
       "sha256": "16f82a37c5677fb26f3dcc3e53a57753705b82ee7c40b9abc8cd3addb973faa6"
@@ -204,13 +209,13 @@
     },
     {
       "path": "assets/funerario/configuracion/catalogo.json",
-      "bytes": 67501,
-      "sha256": "06567cab68c29a0c0adc3e1ee81ae83d7234409c94e4027c6c6b79e200192f13"
+      "bytes": 68314,
+      "sha256": "d9a4606b63bf04d1a109872e3c1e056644c89d780f206dc77fc138aea9814b32"
     },
     {
       "path": "assets/funerario/configuracion/modelos-comerciales.json",
-      "bytes": 17392,
-      "sha256": "2204ad45a24029d5294f0bf03fe44e2757c549de02dbdcb66318a2a2401fba06"
+      "bytes": 18371,
+      "sha256": "7b5701d8c68434b1b509f18325e7f3ec82486adc1074842bbebf2990750b3775"
     },
     {
       "path": "assets/funerario/fuentes/cinzel-OFL.txt",

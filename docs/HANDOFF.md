@@ -752,3 +752,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Corregida la vista autónoma para que el SVG del libro no se etiquete ni se decodifique como WebP; miniaturas del escaparate y configurador comprobadas. No se usó obra, fotografía, epígrafe o diseño de terceros.
 - Validación local: build, hashes, cinco páginas y vista offline PASS; regresión de 2.400 combinaciones, 16 modelos, 14 complementos, plano y técnicas PASS a 320/390/768/1440. Capturas en `preview/PR81-libro-piedra-*.png`.
 - Pieza conceptual: espesor, medidas, material real, anclaje y fabricación quedan por confirmar. La fotocerámica y varias piezas simultáneas siguen pendientes. La verificación legal del formulario aún impide publicar PR81.
+
+## 21/10/2026 — Fotocerámica oval con imagen local (avance incremental)
+- Añadido complemento vectorial original de fotocerámica oval y un modelo genérico ficticio. La imagen opcional se elige en el navegador, se valida como PNG/JPG/WebP de hasta 5 MB, se reduce localmente y solo vive en memoria de esa pestaña. Se puede quitar o limpiar al restablecer el modelo.
+- El óvalo conserva borde de porcelana, sombra y fotografía recortada; se mueve y escala con los controles existentes y aparece en el plano de colocación como pieza acotada. La imagen elegida entra solo en la descarga PNG solicitada. No se añade a Git, al paquete estático, a URL ni a una petición externa.
+- Catálogo: 17 modelos, 15 complementos, 145 archivos públicos. Se mantiene la distinción entre pieza conceptual y producto de taller certificado.
+- QA: cinco páginas y allowlist PASS; 2.400 composiciones, 15 complementos y 17 modelos en 320/390/768/1440 PASS; prueba sintética reproducible añadida a CI para carga, exportación, borrado y ausencia de solicitudes externas. Captura local con imagen sintética, nunca retrato privado.
+- Pendientes: simultaneidad de complementos, validación de dimensiones/materiales/montajes por taller, ampliación de archivo privado. Producción sigue bloqueada por la identificación legal del responsable del formulario.

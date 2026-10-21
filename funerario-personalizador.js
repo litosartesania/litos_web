@@ -14,7 +14,7 @@
   root.prepend(sidebar);
   if(controls)sidebar.append(controls);
   const previewShortcut=document.createElement('button');previewShortcut.type='button';previewShortcut.className='memorial-preview-shortcut';previewShortcut.textContent='Ver mi lápida ↑';previewShortcut.addEventListener('click',()=>{$('canvas').scrollIntoView({block:'start'});});sidebar.prepend(previewShortcut);
-  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',devotionalTechnique:'aplique 3D',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',accessoryPlacement:{x:100,y:100,scale:100},fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},dimensions:null,fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
+  const initial=()=>({stone:'sudafrica',variant:'1',model:'nicho',layout:'centrado',type:'aldine',finish:'auto',symbol:'clasica',devotional:'ninguno',devotionalTechnique:'aplique 3D',ornament:'olivo',secondary:'ninguno',separator:'linea',frame:'fino',accessory:'ninguno',accessorySide:'right',accessoryFinish:'bronce',accessoryPlacement:{x:100,y:100,scale:100},ceramicImage:null,fixings:false,guides:false,textSize:100,leading:130,align:'center',symbolPlacement:{x:50,y:50,scale:85},devotionalPlacement:{x:50,y:50,scale:85},ornamentPlacement:{x:50,y:50,scale:85},secondaryPlacement:{x:50,y:50,scale:85},dimensions:null,fields:Object.fromEntries(catalog.fields.map(f=>[f.id,{text:f.default,visible:true}]))});
   let state=initial(),scene,ready=false,exporting=false,frame;
 
   // Public, anonymous families. No original photograph or private order metadata is bundled.
@@ -192,7 +192,7 @@
     if(shop&&!shop.childElementCount){
       const filterBar=document.createElement('div');filterBar.className='memorial-shop-filters';
       filterBar.setAttribute('role','group');filterBar.setAttribute('aria-label','Categoría de complementos');
-      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes'],['libros y placas','Libros y placas']];
+      const groups=[['todos','Todos'],['floreros','Floreros'],['búcaros y jarrones','Búcaros y jarrones'],['jardineras','Jardineras'],['faroles y luz','Faroles y luz'],['repisas y soportes','Repisas y soportes'],['libros y placas','Libros y placas'],['cerámicas y retratos','Cerámicas y retratos']];
       for(const [key,name] of groups){
         if(key!=='todos'&&!catalog.accessories.some(item=>item.category===key))continue;
         const filter=document.createElement('button');filter.type='button';
@@ -214,11 +214,32 @@
     applyAccessoryFilter();
     const selected=catalog.accessories.find(x=>x.id===state.accessory);
     if(selected?.renderPath)loadPictorial({...selected,path:selected.renderPath,format:'image/webp'});
+    $('ceramic-upload').hidden=state.accessory!=='ceramica-oval';
+    $('ceramic-clear').hidden=!state.ceramicImage;
     $('accessory-note').textContent=selected?`${selected.category} · ${selected.mount}. Medidas y disponibilidad pendientes de validación.`:'Elige un complemento para consultar sus condiciones de montaje.';
     const finish=$('accessoryFinish');
     for(const option of finish.options)option.disabled=Boolean(selected&&!selected.finishes.includes(option.value));
     if(selected&&!selected.finishes.includes(state.accessoryFinish)){state.accessoryFinish=selected.finishes[0];finish.value=state.accessoryFinish;}
   }
+  // Optional portrait stays in memory; the file is decoded and reduced locally.
+  $('ceramic-file').addEventListener('change',async()=>{
+    const input=$('ceramic-file'),file=input.files?.[0];if(!file)return;
+    let localUrl;
+    try{
+      if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>5000000||file.size<100)throw Error('Elige una imagen PNG, JPG o WebP de hasta 5 MB.');
+      localUrl=URL.createObjectURL(file);
+      const picture=new Image();picture.src=localUrl;await picture.decode();
+      if(picture.naturalWidth<32||picture.naturalHeight<32||picture.naturalWidth>4096||picture.naturalHeight>4096)throw Error('La imagen debe medir entre 32 y 4096 píxeles por lado.');
+      const scale=Math.min(1,1000/Math.max(picture.naturalWidth,picture.naturalHeight));
+      const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(picture.naturalWidth*scale));canvas.height=Math.max(1,Math.round(picture.naturalHeight*scale));
+      canvas.getContext('2d').drawImage(picture,0,0,canvas.width,canvas.height);
+      state.ceramicImage=canvas.toDataURL('image/jpeg',.84);
+      if(state.accessory!=='ceramica-oval'){state.accessory='ceramica-oval';$('accessory').value=state.accessory;}
+      renderAccessoryGallery();requestRender();status('Imagen añadida solo a esta vista. La puedes quitar antes de descargar.');
+    }catch(error){status(error.message);}
+    finally{if(localUrl)URL.revokeObjectURL(localUrl);input.value='';}
+  });
+  $('ceramic-clear').addEventListener('click',()=>{state.ceramicImage=null;renderAccessoryGallery();requestRender();status('Imagen quitada de esta composición.');});
   $('devotional-technique').addEventListener('change',()=>{state.devotionalTechnique=$('devotional-technique').value;requestRender();});
   const swatches=[];
   for(const material of catalog.materials){

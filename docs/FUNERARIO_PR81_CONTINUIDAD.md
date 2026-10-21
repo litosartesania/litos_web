@@ -57,3 +57,9 @@ No se presenta la web externa como extraída por completo. Las imágenes y texto
 El avance posterior incorpora un **libro abierto vectorial original** como complemento de piedra. Se dibuja como pieza con lomo, páginas y cantos visibles, conserva controles de tamaño y posición y se incluye en el plano y la exportación. Nuevo modelo ficticio de inspiración, sin inscripciones reales. El catálogo queda en 16 modelos, 14 complementos y 144 recursos. La pieza es conceptual: volumen y montaje requieren validación de taller.
 
 La CI del commit anterior `81f1723` terminó correctamente en la ejecución 39483744412. La CI del nuevo HEAD debe comprobarse por separado. El requisito legal de producción permanece bloqueado.
+
+## 21/10/2026 — Fotocerámica local
+
+Se añadió un óvalo de porcelana conceptual como pieza independiente y un modelo ficticio. La foto opcional se procesa solo en el navegador y se incluye en la descarga PNG del visitante; al quitarla o restablecer la composición desaparece de memoria. El recurso público es un óvalo vacío creado para LITOS. No se utilizan retratos históricos, terceros ni nombres propios. QA sintética en `scripts/qa-funerario-ceramic.py`, incluida en la PR.
+
+Quedan **17 modelos, 15 complementos y 145 archivos públicos**. Su cerámica, impresión, anclaje, medidas y disponibilidad comercial requieren confirmación del taller.

@@ -85,7 +85,7 @@
     const item=catalog.accessories?.find(x=>x.id===kind);
     if(!item)return null;
     const finish=item.finishes.includes(state.accessoryFinish)?state.accessoryFinish:item.finishes[0];
-    const colors={bronce:['#ad8d5f','#574329','#e6cc95'],acero:['#adb8bd','#4c5b62','#e7eef0'],piedra:['#c6c2b9','#77736c','#efebe2']};
+    const colors={bronce:['#ad8d5f','#574329','#e6cc95'],acero:['#adb8bd','#4c5b62','#e7eef0'],piedra:['#c6c2b9','#77736c','#efebe2'],porcelana:['#eeece6','#aeadab','#ffffff']};
     const [fill,edge,light]=colors[finish];
     const placement=state.accessoryPlacement||{x:state.accessorySide==='left'?0:100,y:100,scale:100};
     const aspect=item.digitalSize?item.digitalSize[0]/item.digitalSize[1]:item.aspect;
@@ -102,7 +102,14 @@
     else{
       const source=new DOMParser().parseFromString(resources[item.path],'image/svg+xml').documentElement;
       const nested=add(g,'svg',{x,y,width:w,height:h,viewBox:'0 0 100 100',style:`color:${fill};--edge:${edge};--shine:${light}`,'aria-hidden':'true'});
-      for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
+      if(kind==='ceramica-oval'&&state.ceramicImage?.startsWith('data:image/')){
+        const clip=add(nested,'clipPath',{id:'ceramic-photo-clip'});
+        add(clip,'ellipse',{cx:50,cy:48,rx:23.5,ry:35});
+        add(nested,'ellipse',{cx:50,cy:53,rx:30,ry:43,fill:'#252424',opacity:.24});
+        add(nested,'ellipse',{cx:50,cy:48,rx:30,ry:43,fill:'#f4f3ee',stroke:'#a9a9a3','stroke-width':1.5});
+        add(nested,'image',{href:state.ceramicImage,x:26,y:12,width:48,height:72,preserveAspectRatio:'xMidYMid slice','clip-path':'url(#ceramic-photo-clip)'});
+        add(nested,'ellipse',{cx:50,cy:48,rx:24,ry:35.5,fill:'none',stroke:'#faf9f3','stroke-width':1.8});
+      }else for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
     }
     return {kind:'accessory',id:kind,x,y,w,h};
   }
