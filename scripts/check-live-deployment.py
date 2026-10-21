@@ -26,6 +26,9 @@ FILES = {
         'data-litos-public-preview="true"',
         'data-litos-contact-preview inert',
         '<main id="contenido"><section class="hero"',
+        '<h1 id="hero-title">Productos en piedra natural</h1>',
+        'class="hero-actions"',
+        'class="landing-choices" id="rutas" aria-label="Categorías del catálogo"',
     ),
     "funerario.html": (
         'id="memorial-workbench"',
@@ -67,7 +70,7 @@ FILES = {
     ),
 }
 FORBIDDEN = {
-    "index.html": ('href="mailto:', "public-preview-note"),
+    "index.html": ('href="mailto:', "public-preview-note", "La piedra.<br>El oficio.", "Cada proyecto merece su propio espacio.", "landing-heading"),
     "funerario.html": ('href="mailto:', "public-preview-note"),
     "mobiliario.html": ("public-preview-note", "simulación digital de tonalidad", 'href="mailto:', "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
     "script.js": ("mailto:", "window.location.assign"),

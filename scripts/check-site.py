@@ -283,6 +283,12 @@ for page,html in htmls.items():
   elif u.fragment:assert unquote(u.fragment) in p.ids,(page,uri)
  assert len(p.forms)==(1 if page in ('index.html','funerario.html','mobiliario.html') else 0),(page,'unexpected form count')
 assert len(parsers['index.html'].forms)==1 and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
+assert '<h1 id="hero-title">Productos en piedra natural</h1>' in htmls['index.html']
+assert '<section class="landing-choices" id="rutas" aria-label="Categorías del catálogo"><div class="paths">' in htmls['index.html']
+assert all('href="'+dest+'"' in htmls['index.html'] for dest in ('funerario.html','mobiliario.html'))
+assert all(bad not in htmls['index.html'] for bad in ('La piedra.<br>El oficio.', 'Cada proyecto merece su propio espacio.', 'Explore nuestras especialidades', 'landing-heading'))
+assert 'src="assets/hero-workshop.webp"' in htmls['index.html']
+assert 'class="hero-actions"' in htmls['index.html']
 for page,count in [('funerario.html',3)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
