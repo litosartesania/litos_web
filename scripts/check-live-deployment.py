@@ -25,7 +25,7 @@ FILES = {
     "index.html": (
         'data-litos-public-preview="true"',
         'data-litos-contact-preview inert',
-        'Proyecto personal en estudio',
+        '<main id="contenido"><section class="hero"',
     ),
     "funerario.html": (
         'id="memorial-workbench"',
@@ -67,9 +67,9 @@ FILES = {
     ),
 }
 FORBIDDEN = {
-    "index.html": ('href="mailto:',),
-    "funerario.html": ('href="mailto:',),
-    "mobiliario.html": ("simulación digital de tonalidad", 'href="mailto:', "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
+    "index.html": ('href="mailto:', "public-preview-note"),
+    "funerario.html": ('href="mailto:', "public-preview-note"),
+    "mobiliario.html": ("public-preview-note", "simulación digital de tonalidad", 'href="mailto:', "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
     "script.js": ("mailto:", "window.location.assign"),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
                    ".catalog-mobiliario .material-heading > p{visibility:hidden}"),
