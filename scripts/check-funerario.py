@@ -9,7 +9,7 @@ review_manifest=json.loads((root/'docs/FUNERARIO_REVIEW_ASSETS_MANIFEST.json').r
 assert len(catalog['materials'])==7 and sum(len(m['variants']) for m in catalog['materials'])==14
 assert len(catalog['ornaments'])==59 and len(catalog['fonts'])==10
 assert len(catalog['layouts'])==12 and len(catalog['models'])==10
-assert len(commercial['models'])==17 and len(catalog['accessories'])==15
+assert len(commercial['models'])==18 and len(catalog['accessories'])==15
 assert len(manifest['files'])==145 and len(review_manifest['files'])==0
 face=catalog['models'][0]['face'];assert 0<face[2]<=1 and 0<face[3]<=1
 bundle=(root/'funerario-recursos.js').read_text()
@@ -46,6 +46,7 @@ for item in commercial['models']:
     assert item['state']['model'] in {x['id'] for x in catalog['models']}
     assert item['state']['stone'] in {x['id'] for x in catalog['materials']}
     assert item['state']['accessory'] in {'ninguno',*(x['id'] for x in catalog['accessories'])}
+    assert item['state'].get('accessory2','ninguno') in {'ninguno',*(x['id'] for x in catalog['accessories'])}
 assert sum('commercialReady' in item for item in catalog['ornaments'])==29
 assert all(o.get('commercialReady') is False for o in catalog['ornaments'] if o.get('publicSelectable') is False)
 # Rejected visuals remain available for review but are not public choices.
@@ -76,4 +77,4 @@ assert 'SIMULACIÓN ORIENTATIVA' in (root/'funerario-compositor.js').read_text()
 assert 'LITOS-simulacion-orientativa.png' in (root/'funerario-exportar.js').read_text()
 assert set(pack['resources'])=={v['path'] for m in catalog['materials'] for v in m['variants']}|{f['path'] for f in catalog['fonts']}|{o['path'] for o in catalog['ornaments'] if o.get('format')!='image/webp'}|{p for a in catalog['accessories'] for p in (a['path'],a['thumbnailPath'])}|{o['thumbnailPath'] for o in catalog['ornaments'] if o['id'] in {p['state'].get(slot) for p in commercial['models'] for slot in ['symbol','devotional','ornament','secondary']} and o.get('thumbnailPath')}
 assert {x['path'] for x in manifest['files'] if '/ornamentos/religiosas/relieves/' in x['path']}=={p for o in catalog['ornaments'] if o['id'] in figuratives for p in (o['path'],o['thumbnailPath'])}
-print('PASS: 145 public assets, 17 commercial models, 15 accessory resources, 8 selectable relief prototypes loaded on demand, 5 rejected drawings hidden and local-only runtime')
+print('PASS: 145 public assets, 18 commercial models, 15 accessory resources, 8 selectable relief prototypes loaded on demand, 5 rejected drawings hidden and local-only runtime')

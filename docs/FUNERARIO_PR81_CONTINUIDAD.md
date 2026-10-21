@@ -26,9 +26,9 @@ Consulta pública: [accesorios](https://lapidasmadrid.es/accesorios/), [libros](
 | Familia observada | Estado en esta versión |
 | --- | --- |
 | Figuras religiosas y medallones | Ocho originales propios; grabado, tallado y aplique diferenciados |
-| Floreros, búcaros, jardineras y piezas de luz | Trece complementos originales; tres nuevos en esta continuación |
-| Libros y pergaminos | Motivos vectoriales genéricos existentes; pendiente libro como objeto volumétrico y variantes |
-| Fotocerámicas y portafotos | Pendiente catálogo específico y fotografía temporal local con exportación privada |
+| Floreros, búcaros, jardineras y piezas de luz | Trece complementos originales; dos posiciones independientes en la composición |
+| Libros y pergaminos | Libro abierto vectorial original añadido; variantes volumétricas pendientes |
+| Fotocerámicas y portafotos | Óvalo cerámico original con imagen temporal local y exportación en el dispositivo; catálogo ampliado pendiente |
 | Inscripciones | Diez fuentes con licencia; no se afirma equivalencia con las tipografías comerciales ajenas |
 | Nichos y columbarios | Geometrías propias existentes; pendiente comparación sistemática de esas dos galerías externas |
 
@@ -49,7 +49,7 @@ No se presenta la web externa como extraída por completo. Las imágenes y texto
 
 1. **Producción bloqueada** por identificación legal del responsable pendiente; `check-site.py _site --production` falla por el motivo esperado. No eliminar el gate ni fusionar esta PR para eludirlo.
 2. Verificar CI del nuevo HEAD; la CI anterior no cubre estos archivos.
-3. Completar fotocerámicas, libros volumétricos y varios complementos simultáneos, conservando el catálogo actual.
+3. Ampliar variantes de libros y fotocerámicas y comprobar dimensiones y montajes con el taller.
 4. Ampliar mediciones privadas por imagen y deduplicación; no convertir proporciones visuales en cotas de fabricación ni afirmar que todo el archivo ya está reproducido.
 
 ## 21/10/2026 — Pieza de libro
@@ -57,6 +57,12 @@ No se presenta la web externa como extraída por completo. Las imágenes y texto
 El avance posterior incorpora un **libro abierto vectorial original** como complemento de piedra. Se dibuja como pieza con lomo, páginas y cantos visibles, conserva controles de tamaño y posición y se incluye en el plano y la exportación. Nuevo modelo ficticio de inspiración, sin inscripciones reales. El catálogo queda en 16 modelos, 14 complementos y 144 recursos. La pieza es conceptual: volumen y montaje requieren validación de taller.
 
 La CI del commit anterior `81f1723` terminó correctamente en la ejecución 39483744412. La CI del nuevo HEAD debe comprobarse por separado. El requisito legal de producción permanece bloqueado.
+
+## 21/10/2026 — Dos complementos independientes
+
+El configurador permite seleccionar un segundo complemento, con controles propios de tamaño y posición que recorren la cara completa. Ambos se representan en capas separadas, aparecen por separado en el plano acotado y se incluyen en la exportación. Se avisa si se solapan con texto o entre sí. Nuevo modelo genérico «Dos floreros laterales» con dos piezas originales de acero y datos ficticios. Total: **18 modelos, 15 complementos y 145 recursos públicos**. La fotocerámica local también puede ocupar la segunda posición sin cambiar la primera.
+
+La captura local `preview/PR81-dos-floreros-canvas.png` confirma la composición visual; el archivo de previsualización se genera localmente y no es material de producción. Build, allowlist, sintaxis, regresión de 2.400 combinaciones y pruebas de exportación/carga local pasan. La fabricación, dimensiones reales y anclajes siguen pendientes de validación del taller. La producción permanece bloqueada por la identificación legal indicada en el relevo.
 
 ## 21/10/2026 — Fotocerámica local
 

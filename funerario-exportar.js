@@ -63,12 +63,12 @@
     add(svg,'text',{x:ox-15,y:oy+height/2,transform:`rotate(-90 ${ox-15} ${oy+height/2})`,'text-anchor':'middle','font-family':'Arial, sans-serif','font-size':5,fill:'#453d36'},height+' mm');
     const position=box=>({x:(box.x-f.x)/f.w*width,y:(box.y-f.y)/f.h*height,w:box.w/f.w*width,h:box.h/f.h*height});
     const fmt=value=>Number(value.toFixed(1));
-    const names={symbol:'Cruz',devotional:'Imagen',ornament:'Motivo',secondary:'Adicional',separator:'Separador',secondSeparator:'Separador 2',frame:'Marco',accessory:'Complemento'};
+    const names={symbol:'Cruz',devotional:'Imagen',ornament:'Motivo',secondary:'Adicional',separator:'Separador',secondSeparator:'Separador 2',frame:'Marco',accessory:'Complemento 1',accessory2:'Complemento 2'};
     const catalog=window.LitosMemorialData.catalog;
     const labels=[];
     scene.boxes.forEach((box,index)=>{
       const p=position(box),kind=box.kind;
-      const item=box.id?(kind==='accessory'?catalog.accessories:catalog.ornaments).find(entry=>entry.id===box.id):null;
+      const item=box.id?(kind.startsWith('accessory')?catalog.accessories:catalog.ornaments).find(entry=>entry.id===box.id):null;
       const inscription=kind.startsWith('text:')?scene.inscription.find(field=>'text:'+field.id===kind):null;
       const label=inscription?'Texto · '+inscription.label:(names[kind]||kind)+(item?' · '+item.name:'');
       const color=kind.startsWith('text:')?'#536784':kind==='frame'?'#8a7561':'#986749';

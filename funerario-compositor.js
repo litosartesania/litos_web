@@ -80,14 +80,15 @@
     return {x,y,w:width,h:height};
   }
   // Independent original silhouettes; no accessory dimensions or fixings are certified.
-  function accessory(group,state,face){
-    const kind=state.accessory||'ninguno';
+  function accessory(group,state,face,slot='accessory'){
+    const kind=state[slot]||'ninguno';
     const item=catalog.accessories?.find(x=>x.id===kind);
     if(!item)return null;
-    const finish=item.finishes.includes(state.accessoryFinish)?state.accessoryFinish:item.finishes[0];
+    const selectedFinish=state[slot+'Finish'];
+    const finish=item.finishes.includes(selectedFinish)?selectedFinish:item.finishes[0];
     const colors={bronce:['#ad8d5f','#574329','#e6cc95'],acero:['#adb8bd','#4c5b62','#e7eef0'],piedra:['#c6c2b9','#77736c','#efebe2'],porcelana:['#eeece6','#aeadab','#ffffff']};
     const [fill,edge,light]=colors[finish];
-    const placement=state.accessoryPlacement||{x:state.accessorySide==='left'?0:100,y:100,scale:100};
+    const placement=state[slot+'Placement']||{x:state.accessorySide==='left'?0:100,y:100,scale:100};
     const aspect=item.digitalSize?item.digitalSize[0]/item.digitalSize[1]:item.aspect;
     const base=Math.min(face.w*(aspect>1.4?.25:.18),aspect>1.4?180:140);
     const w=Math.min(base*clamp(placement.scale,25,250)/100,face.w*.6,face.h*.65*aspect);
@@ -95,7 +96,7 @@
     const first=Math.max(24,face.x-w*.58),last=Math.min(976-w,face.x+face.w-w*.42);
     const x=first+(last-first)*clamp(placement.x,0,100)/100;
     const y=face.y+(face.h-h)*clamp(placement.y,0,100)/100;
-    const g=add(group,'g',{'data-slot':'accessory','data-accessory':kind,'data-accessory-finish':finish,'data-bounds':JSON.stringify({x,y,w,h}),filter:'url(#accessory-contact)'});
+    const g=add(group,'g',{'data-slot':slot,'data-accessory':kind,'data-accessory-finish':finish,'data-bounds':JSON.stringify({x,y,w,h}),filter:'url(#accessory-contact)'});
     add(g,'ellipse',{cx:x+w*.5,cy:y+h*.96,rx:w*.42,ry:Math.max(2,h*.035),fill:'#181714',opacity:.32});
     const render=resources[item.renderPath]||resources[item.thumbnailPath];
     if(render?.startsWith('data:image/')){add(g,'image',{href:render,x,y,width:w,height:h,preserveAspectRatio:'xMidYMid meet'});}
@@ -103,15 +104,16 @@
       const source=new DOMParser().parseFromString(resources[item.path],'image/svg+xml').documentElement;
       const nested=add(g,'svg',{x,y,width:w,height:h,viewBox:'0 0 100 100',style:`color:${fill};--edge:${edge};--shine:${light}`,'aria-hidden':'true'});
       if(kind==='ceramica-oval'&&state.ceramicImage?.startsWith('data:image/')){
-        const clip=add(nested,'clipPath',{id:'ceramic-photo-clip'});
+        const clipId=slot+'-ceramic-photo-clip';
+        const clip=add(nested,'clipPath',{id:clipId});
         add(clip,'ellipse',{cx:50,cy:48,rx:23.5,ry:35});
         add(nested,'ellipse',{cx:50,cy:53,rx:30,ry:43,fill:'#252424',opacity:.24});
         add(nested,'ellipse',{cx:50,cy:48,rx:30,ry:43,fill:'#f4f3ee',stroke:'#a9a9a3','stroke-width':1.5});
-        add(nested,'image',{href:state.ceramicImage,x:26,y:12,width:48,height:72,preserveAspectRatio:'xMidYMid slice','clip-path':'url(#ceramic-photo-clip)'});
+        add(nested,'image',{href:state.ceramicImage,x:26,y:12,width:48,height:72,preserveAspectRatio:'xMidYMid slice','clip-path':`url(#${clipId})`});
         add(nested,'ellipse',{cx:50,cy:48,rx:24,ry:35.5,fill:'none',stroke:'#faf9f3','stroke-width':1.8});
       }else for(const child of source.children)if(child.localName!=='title')nested.append(document.importNode(child,true));
     }
-    return {kind:'accessory',id:kind,x,y,w,h};
+    return {kind:slot,id:kind,x,y,w,h};
   }
   function separator(group,id,box,color){
     if(id==='ninguno')return;
@@ -268,8 +270,11 @@
     const placedSecondary=ornament(ornaments,state.secondary||'ninguno',secondaryEntry?.category,secondaryBox,state.secondaryPlacement||{x:50,y:50,scale:85},finish.color,'secondary',face,undefined,material.dark);
     if(placedSecondary)boxes.push({kind:'secondary',id:state.secondary,...placedSecondary});
     else if(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox)warnings.push('El motivo adicional necesita una composición con zona propia.');
-    const optionalAccessory=accessory(add(svg,'g',{'data-layer':'accessories'}),state,face);
-    if(optionalAccessory)boxes.push(optionalAccessory);
+    const accessoryLayer=add(svg,'g',{'data-layer':'accessories'});
+    for(const slot of ['accessory','accessory2']){
+      const placed=accessory(accessoryLayer,state,face,slot);
+      if(placed)boxes.push(placed);
+    }
     const firstSeparator=separator(ornaments,state.separator,zone(face,layout.separator),finish.color);
     if(firstSeparator)boxes.push({kind:'separator',id:state.separator,...firstSeparator});
     if(layout.secondSeparator){const second=separator(ornaments,state.separator,zone(face,layout.secondSeparator),finish.color);if(second)boxes.push({kind:'secondSeparator',id:state.separator,...second});}
@@ -342,8 +347,9 @@
     const texts=boxes.filter(b=>b.kind.startsWith('text:'));
     const intersects=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
     if(movable.some(a=>texts.some(b=>intersects(a,b))))warnings.push('Un motivo se superpone con la inscripción. Revisa su posición antes de usar el plano.');
-    const addedAccessory=boxes.find(b=>b.kind==='accessory');
-    if(addedAccessory&&texts.some(b=>intersects(addedAccessory,b)))warnings.push('El complemento se superpone con el texto; revisa su colocación real.');
+    const addedAccessories=boxes.filter(b=>b.kind==='accessory'||b.kind==='accessory2');
+    if(addedAccessories.some(a=>texts.some(b=>intersects(a,b))))warnings.push('Un complemento se superpone con el texto; revisa su colocación real.');
+    if(addedAccessories.length===2&&intersects(addedAccessories[0],addedAccessories[1]))warnings.push('Los dos complementos se superponen; revisa su colocación real.');
     if(movable.some((a,i)=>movable.slice(i+1).some(b=>intersects(a,b))))warnings.push('Dos motivos se superponen. Revisa la composición.');
     return {svg,face,runs,boxes,inscription:active.map(field=>({id:field.id,label:field.label,text:state.fields[field.id].text})),finish,material,model,layout,font,adjusted,warnings,truncated,unrendered: Boolean((state.devotional&&state.devotional!=='ninguno'&&!devotionalBox)||(state.secondary&&state.secondary!=='ninguno'&&!secondaryBox))};
   }

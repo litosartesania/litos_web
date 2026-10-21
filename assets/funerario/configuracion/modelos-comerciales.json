@@ -636,6 +636,70 @@
           "scale": 135
         }
       }
+    },
+    {
+      "id": "nicho-dos-floreros",
+      "title": "Dos floreros laterales",
+      "type": "nicho",
+      "stoneFamily": "clara",
+      "style": "sobrio",
+      "technique": "grabado",
+      "ornamentation": "cruz",
+      "accessoryCategory": "floreros",
+      "note": "Dos floreros originales colocados de forma independiente; inscripción ficticia. Proporciones y anclajes pendientes de validar.",
+      "provenance": "propuesta",
+      "state": {
+        "stone": "macael",
+        "model": "nicho",
+        "layout": "cruzalta",
+        "symbol": "incisaalta",
+        "devotional": "ninguno",
+        "ornament": "ninguno",
+        "secondary": "ninguno",
+        "separator": "ninguno",
+        "frame": "ninguno",
+        "type": "aldine",
+        "finish": "auto",
+        "accessory": "florero-conico-acero",
+        "accessoryFinish": "acero",
+        "accessorySide": "free",
+        "accessoryPlacement": {
+          "x": 5,
+          "y": 95,
+          "scale": 75
+        },
+        "accessory2": "florero-conico-acero",
+        "accessory2Finish": "acero",
+        "accessory2Placement": {
+          "x": 95,
+          "y": 95,
+          "scale": 75
+        },
+        "dimensions": {
+          "widthMm": 1080,
+          "heightMm": 720
+        },
+        "fields": {
+          "header": {
+            "visible": false
+          },
+          "name": {
+            "text": "NOMBRE\nAPELLIDO",
+            "visible": true
+          },
+          "dates": {
+            "text": "DD / MM / AAAA\nDD / MM / AAAA",
+            "visible": true
+          },
+          "epitaph": {
+            "text": "D. E. P.",
+            "visible": true
+          },
+          "extra": {
+            "visible": false
+          }
+        }
+      }
     }
   ]
 }

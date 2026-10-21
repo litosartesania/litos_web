@@ -70,10 +70,28 @@ with sync_playwright() as p:
  page.locator('#memorial-filter-stone').select_option('oscura')
  assert page.locator('.memorial-case-card').count()==0
  page.locator('#memorial-filter-reset').click()
- assert page.locator('.memorial-case-card').count()==17
+ assert page.locator('.memorial-case-card').count()==18
  page.locator('#memorial-create').click()
  page.locator('#memorial-reset').click()
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+ # Two physical pieces retain separate controls, layers and metric labels.
+ page.locator('#memorial-accessory').select_option('florero-conico-acero')
+ page.locator('#memorial-accessory2').select_option('florero-cilindrico-blanco')
+ page.wait_for_selector('[data-slot=accessory][data-accessory=florero-conico-acero] image')
+ page.wait_for_selector('[data-slot=accessory2][data-accessory=florero-cilindrico-blanco] image')
+ page.locator('#memorial-accessory2-x').evaluate('(el)=>{el.value=0;el.dispatchEvent(new Event("input"))}')
+ page.locator('#memorial-accessory-x').evaluate('(el)=>{el.value=100;el.dispatchEvent(new Event("input"))}')
+ page.locator('#memorial-width-mm').fill('1080')
+ page.locator('#memorial-height-mm').fill('720')
+ page.wait_for_function('()=>!document.querySelector("#memorial-plan-download").disabled')
+ first=json.loads(page.locator('[data-slot=accessory]').get_attribute('data-bounds'))
+ second=json.loads(page.locator('[data-slot=accessory2]').get_attribute('data-bounds'))
+ assert first['x']>second['x'],(first,second)
+ assert page.locator('#memorial-plan-measures').inner_text().count('Florero')>=2
+ assert page.locator('#memorial-plan-preview [id^=ELEMENTO_]').count()>=2
+ page.locator('#memorial-accessory2').select_option('ninguno')
+ page.wait_for_function('()=>document.querySelectorAll("[data-slot=accessory2]").length===0')
+ page.locator('#memorial-reset').click()
  # Shared regression scenarios retain full-face cross movement, typography and safe layouts.
  scenarios=page.evaluate((root/'scripts/funerario-scenarios.js').read_text())
  page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')

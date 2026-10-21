@@ -758,4 +758,11 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - El óvalo conserva borde de porcelana, sombra y fotografía recortada; se mueve y escala con los controles existentes y aparece en el plano de colocación como pieza acotada. La imagen elegida entra solo en la descarga PNG solicitada. No se añade a Git, al paquete estático, a URL ni a una petición externa.
 - Catálogo: 17 modelos, 15 complementos, 145 archivos públicos. Se mantiene la distinción entre pieza conceptual y producto de taller certificado.
 - QA: cinco páginas y allowlist PASS; 2.400 composiciones, 15 complementos y 17 modelos en 320/390/768/1440 PASS; prueba sintética reproducible añadida a CI para carga, exportación, borrado y ausencia de solicitudes externas. Captura local con imagen sintética, nunca retrato privado.
+
+## 2026-10-21 — Dos complementos en la PR81
+
+- Segundo complemento con controles de posición y escala independientes; ambos se reflejan en visor, plano y exportación. Modelo genérico de dos floreros laterales con texto ficticio. 18 modelos, 15 complementos, 145 recursos públicos.
+- Fotocerámica local soportada también en la segunda posición. Avisos de superposición entre piezas y con texto. Captura local de la nueva composición revisada, sin fotografías privadas.
+- Build, auditoría de sitio, controles de privacidad, 2.400 combinaciones y pruebas de navegador/exportación PASS. CI del anterior HEAD de fotocerámica `4e512a3` completada correctamente (ejecución 39551810797). La CI de este nuevo avance se verificará tras subirlo.
+- Se trabaja únicamente en la rama borrador PR81 del repositorio `litosartesania/litos_web`. No fusionar ni desplegar: la identidad legal/responsable sigue pendiente y el guard de producción debe permanecer activo.
 - Pendientes: simultaneidad de complementos, validación de dimensiones/materiales/montajes por taller, ampliación de archivo privado. Producción sigue bloqueada por la identificación legal del responsable del formulario.

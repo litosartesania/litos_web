@@ -44,6 +44,15 @@ try:
    assert Path(pending.value.path()).read_bytes()[:8]==b'\x89PNG\r\n\x1a\n'
    page.locator('#memorial-ceramic-clear').click()
    page.wait_for_function('()=>!document.querySelector("[data-accessory=ceramica-oval] image")')
+   page.locator('#memorial-accessory').select_option('ninguno')
+   page.locator('.memorial-controls details').evaluate_all('(els)=>els.forEach(e=>e.open=true)')
+   page.locator('#memorial-accessory2').select_option('ceramica-oval')
+   assert page.locator('#memorial-ceramic-upload').is_visible()
+   page.locator('#memorial-ceramic-file').set_input_files(str(fixture))
+   page.wait_for_selector('[data-slot=accessory2][data-accessory=ceramica-oval] image')
+   assert page.locator('#memorial-accessory').input_value()=='ninguno'
+   page.locator('#memorial-ceramic-clear').click()
+   page.wait_for_function('()=>!document.querySelector("[data-slot=accessory2] image")')
    assert not errors,errors
    assert all(u.startswith('blob:') or urlsplit(u).hostname=='127.0.0.1' for u in requests),requests
    browser.close()
