@@ -1,0 +1,68 @@
+{
+  "schema": "litos-concept-candidates-v1",
+  "created": "2026-10-31",
+  "state": "pending_images_technical_and_rights_validation",
+  "note": "Referencias visuales aportadas en conversación. Imágenes no publicadas, derechos no verificados. No son trabajos acreditados de LITOS. Este fichero no se incluye en la build pública.",
+  "public_catalog_active_models": 21,
+  "candidates": [
+    {
+      "id": "mesa-auxiliar-base-cruzada",
+      "proposed_catalog_number": 22,
+      "name": "Mesa auxiliar de piedra con base cruzada",
+      "family": "Mesas",
+      "subtype": "Mesa auxiliar / consola compacta",
+      "description": "Tablero rectangular de piedra natural con cantos rectos y soportes verticales de planos cruzados. Pieza monomaterial de estética arquitectónica.",
+      "reference_materials": [
+        "Travertino beige"
+      ],
+      "material_variants_policy": "9 piedras del catálogo solo tras generar y verificar imágenes y viabilidad de cada versión",
+      "dimensions_cm": null,
+      "price_eur": null,
+      "manufacturing_notes": [
+        "Definir espesores y peso",
+        "Comprobar estabilidad y vuelco",
+        "Diseñar unión y apoyo de los planos cruzados",
+        "Verificar selección de bloque/tabla y acabados de canto"
+      ],
+      "reference_photo": "primera imagen de la conversación del 31-10-2026",
+      "original_photo_publication_allowed": false,
+      "published_visual_assets": [],
+      "status": "Borrador, no visible en web"
+    },
+    {
+      "id": "mesa-centro-mosaico-geometrico",
+      "proposed_catalog_number": 23,
+      "name": "Mesa de centro con mosaico geométrico",
+      "family": "Mesas",
+      "subtype": "Mesa de centro decorativa",
+      "description": "Mesa cuadrada con tablero de taracea o mosaico geométrico de piedra polícroma y estructura de madera oscura; patrón a diseñar de forma original, sin reproducir el de la fotografía.",
+      "reference_materials": [
+        "Mármol o piedra crema",
+        "Piedra verde oscura",
+        "Piedra rojiza",
+        "Madera oscura"
+      ],
+      "material_variants_policy": "Composición mixta fija: no aplicar automáticamente el selector monomaterial de nueve piedras",
+      "dimensions_cm": null,
+      "price_eur": null,
+      "manufacturing_notes": [
+        "Diseñar patrón geométrico propio con suficiente diferenciación de la referencia",
+        "Definir tamaño de teselas y tolerancias",
+        "Comprobar compatibilidad piedra-madera, adhesivos y dilataciones",
+        "Controlar peso del tablero y resistencia de la estructura"
+      ],
+      "reference_photo": "segunda imagen de la conversación del 31-10-2026",
+      "original_photo_publication_allowed": false,
+      "published_visual_assets": [],
+      "status": "Borrador, no visible en web"
+    }
+  ],
+  "release_conditions": [
+    "Imágenes comerciales nuevas y autorizadas, sin reutilizar fotografías de origen ajeno",
+    "Medidas y viabilidad técnica revisadas",
+    "Sin inventar precios ni aseverar fabricación por LITOS",
+    "Adaptación del selector de material para piezas de composición mixta",
+    "Actualización de pruebas del catálogo; validación visual y privacidad previa a publicación",
+    "No modificar main ni desplegar sin revisión"
+  ]
+}
