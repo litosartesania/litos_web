@@ -30,26 +30,26 @@
       "status": "Borrador, no visible en web"
     },
     {
-      "id": "mesa-centro-mosaico-geometrico",
+      "id": "mesa-parchis-taracea-piedra",
       "proposed_catalog_number": 23,
-      "name": "Mesa de centro con mosaico geométrico",
+      "name": "Mesa de parchís con tablero de piedra",
       "family": "Mesas",
-      "subtype": "Mesa de centro decorativa",
-      "description": "Mesa cuadrada con tablero de taracea o mosaico geométrico de piedra polícroma y estructura de madera oscura; patrón a diseñar de forma original, sin reproducir el de la fotografía.",
+      "subtype": "Mesa de juegos / parchís",
+      "description": "Mesa de juegos cuadrada cuyo tablero representa un parchís de cuatro jugadores mediante taracea de piedra de varios colores, con casillas, recorridos y zonas de salida y llegada; estructura de madera oscura.",
       "reference_materials": [
         "Mármol o piedra crema",
         "Piedra verde oscura",
         "Piedra rojiza",
         "Madera oscura"
       ],
-      "material_variants_policy": "Composición mixta fija: no aplicar automáticamente el selector monomaterial de nueve piedras",
+      "material_variants_policy": "Composición multicolor y madera: no aplicar el selector monomaterial de nueve piedras. Comprobar y diseñar un tablero de parchís jugable con casillas y recorridos correctos.",
       "dimensions_cm": null,
       "price_eur": null,
       "manufacturing_notes": [
-        "Diseñar patrón geométrico propio con suficiente diferenciación de la referencia",
-        "Definir tamaño de teselas y tolerancias",
-        "Comprobar compatibilidad piedra-madera, adhesivos y dilataciones",
-        "Controlar peso del tablero y resistencia de la estructura"
+        "Diseñar y verificar geometría de parchís jugable para cuatro jugadores, no solo un motivo decorativo",
+        "Definir piedra, teselas, juntas, inserciones y acabado de la superficie de juego",
+        "Comprobar unión piedra-madera, peso, estabilidad y resistencia",
+        "No copiar exactamente el diseño ornamental de la fotografía de referencia"
       ],
       "reference_photo": "segunda imagen de la conversación del 31-10-2026",
       "original_photo_publication_allowed": false,
