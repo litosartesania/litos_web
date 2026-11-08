@@ -45,7 +45,7 @@ FILES = {
         'data-litos-contact-preview inert',
     ),
     "grabados.html": (
-        "Palabras e imágenes,",
+        "Inscripciones en piedra",
         "Mural «Si…»",
         "Placa «Si…»",
         "Paisaje grabado en piedra",
@@ -127,10 +127,16 @@ def check(attempt):
         expected = (ROOT / name).read_bytes()
         actual = read_live(name, attempt)
         assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
-    for name in ("si-mural-jardin","si-placa-a3","paisaje-grabado","velero-grabado"):
-        asset="assets/grabados/"+name+".svg"
+    for name,size,digest in (
+      ("si-mural-jardin",460550,"87b5e291c68c5e035b53cdc78874709db7bbd358c2113f540ec1e67836c15d9a"),
+      ("si-placa-a3",378416,"c0028d4d2a8dfbe911bf30f91bcb14932020378b836e80787f2a579ee3fca7a9"),
+      ("paisaje-grabado",419776,"b2d9da7322f0ab8f766e2614c3f6d0f51c9605534d73c106cb7d3e929e0c24b9"),
+      ("velero-grabado",333050,"f6984692c5c6a0ffe13aed8192ff323bd6b34e7d08225c57928189633e11c850"),
+    ):
+        asset="assets/grabados/"+name+".webp"
         data=read_live(asset,attempt)
-        assert hashlib.sha256(data).digest()==hashlib.sha256((ROOT/asset).read_bytes()).digest(),(asset,"SVG asset mismatch")
+        assert len(data)==size and hashlib.sha256(data).hexdigest()==digest,(asset,"published photo mismatch")
+    assert b'engraving-hero' not in read_live("grabados.html",attempt), "removed hero block reappeared"
     # Confirm that GitHub Pages serves exactly the full-resolution owner-approved files.
     for asset, sha, size in (
       ("assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png","ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258",3624006),

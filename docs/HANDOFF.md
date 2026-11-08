@@ -799,3 +799,9 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Sobre el poema de Kipling: se usa solo título y autor, no el texto íntegro de una traducción cuya titularidad no está acreditada. Antes de grabar, comprobar derechos de la traducción, composición y legibilidad. A3 solo para composición abreviada; poema largo exige tamaño mayor. Las medidas son orientativas sin aprobación de taller.
 - Sitio público en modo muestra no comercial, sin servicios externos añadidos, sin pedidos, formularios ni costes; no se modifica el contacto inerte ya existente. Assets y HTML añadidos a la allowlist de Pages. QA de seis páginas, cuatro motivos, navegación activa y móvil, y verificación HTTP/SHA-256 de SVG.
 - Pendiente: CI, preview, merge, Pages y verificación del despliegue real.
+
+## 08/11/2026 — Corrección visual de Grabados e inscripciones
+- Retirado por solicitud el bloque superior «Palabras e imágenes, grabadas en piedra» con placa decorativa; la página abre directamente con productos.
+- Cuatro imágenes conceptuales fotorrealistas aprobadas en conversación, convertidas a WebP sin alterar el dibujo y publicadas bajo assets/grabados, sustituyendo ilustraciones SVG. No son fotografías de trabajos ejecutados ni imágenes privadas.
+- Mural 1448×1086, placa A3 1122×1402, paisaje 1448×1086, velero 1448×1086. El contenido de los grabados de texto es ilustrativo: **no usar la transcripción generada como fichero de producción**. Validar traducción, maquetación y ortografía antes del grabado.
+- Incorporados hashes SHA-256 y comprobación pública de los cuatro WebP, QA móvil/escritorio y aserción de ausencia de hero.
