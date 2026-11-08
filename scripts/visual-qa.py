@@ -10,8 +10,8 @@ def inline(page):
  if page=='mobiliario.html':
   assert 'simulación digital de tonalidad' not in html
   assert 'Explora las imágenes conceptuales originales' in html
-  assert 'href="styles.css?v=litos-public-preview-20261021"' in html
-  assert 'src="catalogo-precios.js?v=stone-20261015-bandeja8"' in html
+  assert 'href="styles.css?v=litos-hq-20261108"' in html
+  assert 'src="catalogo-precios.js?v=stone-hq-20261108"' in html
  css=(site/'styles.css').read_text()
  js=(site/'script.js').read_text()
  assets=['hero-workshop.webp','workshop-strip.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp','limestone-texture.webp']+['catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"]]
@@ -20,11 +20,11 @@ def inline(page):
   css=css.replace('url("assets/'+asset+'")','url("'+uri+'")')
   html=html.replace('src="assets/'+asset+'"','src="'+uri+'"')
  html=html.replace('<link rel="stylesheet" href="styles.css">','<style>'+css+'</style>')
- html=html.replace('<link rel="stylesheet" href="styles.css?v=litos-public-preview-20261021">','<style>'+css+'</style>')
+ html=html.replace('<link rel="stylesheet" href="styles.css?v=litos-hq-20261108">','<style>'+css+'</style>')
  html=html.replace('<script src="script.js?v=litos-public-preview-20261021"></script>','<script>'+js+'</script>')
  if page=='mobiliario.html':
   catalog=(site/'catalogo-precios.js').read_text()
-  html=html.replace('<script src="catalogo-precios.js?v=stone-20261015-bandeja8"></script>','<script>'+catalog+'</script>')
+  html=html.replace('<script src="catalogo-precios.js?v=stone-hq-20261108"></script>','<script>'+catalog+'</script>')
  return re.sub(r'<link rel="icon"[^>]+>','',html)
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
@@ -106,8 +106,14 @@ with sync_playwright() as app:
      assert page.locator('.piece-card').count()==23
      assert page.locator('.piece-photos img').count()==0
      assert page.locator('.piece-amount').count()==23
-     for model in ('mesa-auxiliar-base-cruzada','mesa-parchis-taracea-piedra'):
-      assert page.locator(f'[data-product="{model}"] .special-concept-figure img').count()==1
+     for model,wh in (('mesa-auxiliar-base-cruzada',(1408,1408)),('mesa-parchis-taracea-piedra',(1122,1402))):
+      image=page.locator(f'[data-product="{model}"] .special-concept-figure img')
+      assert image.count()==1
+      assert image.get_attribute('src')=='assets/catalogo/conceptos/20261108/'+model+'.png'
+      image.evaluate('(im)=>{im.loading="eager"}')
+      image.evaluate('(im)=>im.decode()')
+      assert image.evaluate('(im)=>[im.naturalWidth,im.naturalHeight]')==list(wh)
+      assert image.evaluate('(im)=>getComputedStyle(im).objectFit')=='contain'
       assert page.locator(f'[data-product="{model}"] .piece-amount').inner_text()=='Sin precio publicado'
       assert page.locator(f'[data-product="{model}"] .piece-comparison a').count()==0
      assert page.locator('#material-picker option').count()==10
