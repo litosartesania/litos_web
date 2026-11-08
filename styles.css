@@ -1261,6 +1261,9 @@ html { scroll-padding-top: 94px; }
 
 /* Dos nuevos conceptos de mobiliario: imágenes originales generadas, sin variantes simuladas. */
 .special-concept-figure{margin:0;overflow:hidden}
-.special-concept-figure img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;filter:none}
+.special-concept-figure img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;filter:none;background:#211d19}
 .special-concept-figure figcaption{padding:.55rem .65rem;color:var(--limestone-light);font-size:.73rem;line-height:1.5}
 .piece-card[data-product="mesa-auxiliar-base-cruzada"] .piece-amount,.piece-card[data-product="mesa-parchis-taracea-piedra"] .piece-amount{font-size:clamp(1.2rem,2vw,1.5rem)}
+
+/* La ficha ampliada conserva el encuadre completo de los PNG HQ. */
+.product-dialog .detail-stage .special-concept-figure img{max-height:65dvh;object-fit:contain}

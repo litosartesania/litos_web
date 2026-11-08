@@ -38,8 +38,8 @@ FILES = {
     ),
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=litos-public-preview-20261021",
-        "catalogo-precios.js?v=stone-20261015-bandeja8",
+        "styles.css?v=litos-hq-20261108",
+        "catalogo-precios.js?v=stone-hq-20261108",
         "Colección conceptual · 23 productos · 9 piedras · 21 planos",
         'class="catalog-workspace"',
         'data-litos-contact-preview inert',
@@ -66,6 +66,8 @@ FILES = {
         "mesa-centro-mon__calacatta",
         "mesa-centro-red__calacatta",
         "macetero__verde-alpi",
+        "mesa-auxiliar-base-cruzada.png",
+        "mesa-parchis-taracea-piedra.png",
         "tonalMockup:false",
     ),
 }
@@ -113,6 +115,13 @@ def check(attempt):
         expected = (ROOT / name).read_bytes()
         actual = read_live(name, attempt)
         assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
+    # Confirm that GitHub Pages serves exactly the full-resolution owner-approved files.
+    for asset, sha, size in (
+      ("assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png","ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258",3624006),
+      ("assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.png","2f9da44af9a54d0f19695cebd4dfaef5e8cea982894117ad46c08029f05dc054",3851042),
+    ):
+        data=read_live(asset,attempt)
+        assert len(data)==size and hashlib.sha256(data).hexdigest()==sha,(asset,"invalid live HQ PNG")
     for item in MEMORIAL["files"]:
         path = item["path"]
         assert path.startswith("assets/funerario/") and ".." not in Path(path).parts, ("unexpected memorial path", path)

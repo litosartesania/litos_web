@@ -1,9 +1,9 @@
 {
   "schema": "litos-concept-candidates-v1",
   "created": "2026-10-31",
-  "state": "prepared_in_review_branch",
-  "note": "Nuevas representaciones conceptuales generadas para revisión; no se suben fotos de referencia. Sin precios o medidas. La publicación depende de validación de CI y Pages.",
-  "public_catalog_active_models": 21,
+  "state": "full_resolution_png_integrated_pending_release",
+  "note": "Los dos productos están incluidos en el catálogo de 23 modelos. Se sustituyen miniaturas degradadas por los PNG de alta resolución proporcionados por el usuario, verificados con SHA-256. No se publica fotografía original de un encargo, precio ni medida no confirmados.",
+  "public_catalog_active_models": 23,
   "candidates": [
     {
       "id": "mesa-auxiliar-base-cruzada",
@@ -27,9 +27,15 @@
       "reference_photo": "primera imagen de la conversación del 31-10-2026",
       "original_photo_publication_allowed": false,
       "published_visual_assets": [
-        "assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.webp"
+        "assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png"
       ],
-      "status": "Incluido en rama para revisión, no confirmado en producción"
+      "status": "PNG HQ integrado en rama de revisión; pendiente de publicación y verificación",
+      "image_integrity": {
+        "width_px": 1408,
+        "height_px": 1408,
+        "bytes": 3624006,
+        "sha256": "ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258"
+      }
     },
     {
       "id": "mesa-parchis-taracea-piedra",
@@ -56,9 +62,15 @@
       "reference_photo": "segunda imagen de la conversación del 31-10-2026",
       "original_photo_publication_allowed": false,
       "published_visual_assets": [
-        "assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.webp"
+        "assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.png"
       ],
-      "status": "Incluido en rama para revisión, no confirmado en producción"
+      "status": "PNG HQ integrado en rama de revisión; pendiente de publicación y verificación",
+      "image_integrity": {
+        "width_px": 1122,
+        "height_px": 1402,
+        "bytes": 3851042,
+        "sha256": "2f9da44af9a54d0f19695cebd4dfaef5e8cea982894117ad46c08029f05dc054"
+      }
     }
   ],
   "release_conditions": [

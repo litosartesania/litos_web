@@ -25,7 +25,15 @@ class Inspect(HTMLParser):
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js','funerario-personalizador.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
-expected.update('assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.webp','mesa-parchis-taracea-piedra.webp'))
+expected.update('assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.png','mesa-parchis-taracea-piedra.png'))
+# Original PNG integrity: reject thumbnails, recompressions and wrong products.
+for asset, expected_bytes, sha256, wh in (
+ ('assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png',3624006,'ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258',(1408,1408)),
+ ('assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.png',3851042,'2f9da44af9a54d0f19695cebd4dfaef5e8cea982894117ad46c08029f05dc054',(1122,1402)),
+):
+ b=(root/asset).read_bytes()
+ assert len(b)==expected_bytes and hashlib.sha256(b).hexdigest()==sha256,(asset,'wrong original image')
+ assert b[:8]==bytes((137,80,78,71,13,10,26,10)) and (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==wh,(asset,'wrong image dimensions')
 manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json','docs/LOTE_9_MESA_OVAL_20261012.json','docs/LOTE_9_MESA_REDONDA_20261012.json','docs/LOTE_9_MESA_RECTANGULAR_20261012.json','docs/LOTE_9_MESA_CENTRO_MON_20261012.json','docs/LOTE_9_MESA_CENTRO_RED_20261012.json')]
 assert [len(m['items']) for m in manifests]==[10,8,9,9,9,9,9]
 items=[i for m in manifests for i in m['items']]
@@ -308,8 +316,8 @@ assert picker and picker.group(1).count('<option value=')==10 and picker.group(1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=litos-public-preview-20261021' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-20261015-bandeja8' in htmls['mobiliario.html']
+assert 'styles.css?v=litos-hq-20261108' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-hq-20261108' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)

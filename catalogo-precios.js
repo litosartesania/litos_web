@@ -58,8 +58,8 @@ const showTechnical=(card)=>{
  }
 };
 const specialConcepts=Object.freeze({
- "mesa-auxiliar-base-cruzada":{src:"assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.webp",material:"travertino beige"},
- "mesa-parchis-taracea-piedra":{src:"assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.webp",material:"composición multicolor"}
+ "mesa-auxiliar-base-cruzada":{src:"assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png",material:"travertino beige",width:1408,height:1408},
+ "mesa-parchis-taracea-piedra":{src:"assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.png",material:"composición multicolor",width:1122,height:1402}
 });
 const showMaterial=(card,material)=>{
  const concept=specialConcepts[card.dataset.product];
@@ -68,13 +68,13 @@ const showMaterial=(card,material)=>{
   if(host.dataset.view!==key){
    host.replaceChildren();
    const fig=document.createElement('figure');fig.className='special-concept-figure';
-   const img=document.createElement('img');img.src=concept.src;img.width=360;img.height=360;
+   const img=document.createElement('img');img.src=concept.src;img.width=concept.width;img.height=concept.height;
    img.loading='lazy';img.decoding='async';img.alt='Representación conceptual generada de '+card.querySelector('h3').textContent;
    const cap=document.createElement('figcaption');fig.append(img,cap);host.append(fig);host.dataset.view=key;
   }
   host.querySelector('figcaption').textContent=card.dataset.product==='mesa-parchis-taracea-piedra'
-   ?'Imagen generada · Taracea de piedra y madera · Diseño del juego pendiente de verificación'
-   :'Imagen generada en travertino beige · No corresponde a la piedra '+material[1]+' salvo si se selecciona travertino';
+   ?'Imagen conceptual · Taracea de piedra y estructura de madera'
+   :'Imagen conceptual · Travertino beige · No es una obra ejecutada';
   return;
  }
 
