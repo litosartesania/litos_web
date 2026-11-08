@@ -215,13 +215,13 @@ with sync_playwright() as pw:
         page.locator('[data-category-filter="Baño"]').click()
         assert page.locator('.piece-card:visible').count()==3,(width,'family filter not retained')
         page.locator('[data-category-filter="Todos"]').click()
-        assert page.locator('.piece-card:visible').count()==21
+        assert page.locator('.piece-card:visible').count()==23
         assert page.evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth+1'),(width,'horizontal overflow')
         assert not errors,(width,errors)
         if width in (390,820,1440,1600):
             page.locator('#catalogo').scroll_into_view_if_needed()
             page.screenshot(path=str(out/f'catalogo-grid-{width}.png'),animations='disabled')
-        print('PASS',width,'gallery columns, left filters, 21 cards, synced modal, ESC, image fallback, filters')
+        print('PASS',width,'gallery columns, left filters, 23 cards, synced modal, ESC, image fallback, filters')
         page.close()
     browser.close()
 
