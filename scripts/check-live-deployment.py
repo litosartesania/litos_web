@@ -40,7 +40,7 @@ FILES = {
         "Elige la piedra para consultar imágenes conceptuales específicas",
         "styles.css?v=litos-public-preview-20261021",
         "catalogo-precios.js?v=stone-20261015-bandeja8",
-        "Colección conceptual · 21 productos · 9 piedras · 21 planos",
+        "Colección conceptual · 23 productos · 9 piedras · 21 planos",
         'class="catalog-workspace"',
         'data-litos-contact-preview inert',
     ),
