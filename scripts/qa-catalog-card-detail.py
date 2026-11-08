@@ -78,7 +78,7 @@ with sync_playwright() as pw:
         assert drawing.evaluate('(im)=>im.naturalWidth===1600&&im.naturalHeight===1200')
         assert drawing.evaluate('(im)=>getComputedStyle(im).objectFit')=='contain'
         assert page.locator('.piece-grid .technical-drawing-figure img').count()==21
-        assert page.locator('.piece-grid .technical-placeholder').count()==0
+        assert page.locator('.piece-grid .technical-placeholder').count()==2
         assert page.locator('#detail-price').inner_text()==last_price
         assert 'Negro Marquina' in page.locator('#detail-stone').inner_text()
         if width in (390,1440):page.screenshot(path=str(out/f'plano-mon-detalle-{width}.png'),animations='disabled')
