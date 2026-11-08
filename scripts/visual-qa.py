@@ -103,9 +103,13 @@ with sync_playwright() as app:
      assert page.locator('#memorial-rendered img').count()==0
      assert page.locator('form').count()==1
     else:
-     assert page.locator('.piece-card').count()==21
+     assert page.locator('.piece-card').count()==23
      assert page.locator('.piece-photos img').count()==0
-     assert page.locator('.piece-amount').count()==21
+     assert page.locator('.piece-amount').count()==23
+     for model in ('mesa-auxiliar-base-cruzada','mesa-parchis-taracea-piedra'):
+      assert page.locator(f'[data-product="{model}"] .special-concept-figure img').count()==1
+      assert page.locator(f'[data-product="{model}"] .piece-amount').inner_text()=='Sin precio publicado'
+      assert page.locator(f'[data-product="{model}"] .piece-comparison a').count()==0
      assert page.locator('#material-picker option').count()==10
      assert page.evaluate('window.LITOS_CATALOG_INFO.materials')==9
      assert page.locator('#material-color').get_attribute('title')=='Abrir selector de piedras'
@@ -226,7 +230,7 @@ with sync_playwright() as app:
      # Technical view is a tenth presentation option, NOT a tenth stone.
      last_price=page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()
      page.locator('#material-picker').select_option('plano-tecnico')
-     assert page.locator('.technical-placeholder').count()==0
+     assert page.locator('.technical-placeholder').count()==2
      assert page.locator('.technical-drawing-figure img').count()==21
      for image in page.locator('.technical-drawing-figure img').all():
       image.evaluate('(el)=>{el.loading="eager"}')
@@ -234,7 +238,7 @@ with sync_playwright() as app:
       assert image.evaluate("(el)=>el.naturalWidth===(el.src.includes('/revisiones/20261013/planos/')?1448:1600)&&el.naturalHeight===(el.src.includes('/revisiones/20261013/planos/')?1086:1200)")
      assert page.locator('#material-source').is_hidden()
      assert all(page.locator(f'[data-product="{id}"] .technical-drawing-figure img').get_attribute('src')=='assets/catalogo/revisiones/20261013/planos-12-seleccion/'+id+'.png' for id in ('mesa-aux-bal','consola-rect','banco-rect','lavabo-sobre','encimera-bano','encimera-cocina','balda','panel','bandeja','peana','cuenco','macetero'))
-     assert page.locator('#catalog-count').inner_text().endswith('(21/21 disponibles)')
+     assert page.locator('#catalog-count').inner_text().endswith('(21/23 disponibles)')
      assert page.locator('[data-product="mesa-comedor-oval"] .piece-amount').inner_text()==last_price
      assert page.locator('.technical-drawing-figure img').count()==21
      for corrected in ('mesa-comedor-oval','consola-esc'):
@@ -242,12 +246,12 @@ with sync_playwright() as app:
       assert revised.get_attribute('src')=='assets/catalogo/revisiones/20261013/planos/'+corrected+'.png'
       revised.evaluate('(e)=>e.decode()')
      page.locator('#material-picker').select_option('verde-alpi')
-     assert page.locator('.technical-placeholder').count()==0
+     assert page.locator('.technical-placeholder').count()==2
      assert page.locator('#material-source').is_visible()
      page.locator('[data-category-filter="Baño"]').click()
      assert page.locator('.piece-card:visible').count()==3
      page.locator('[data-category-filter="Todos"]').click()
-     assert page.locator('.piece-card:visible').count()==21
+     assert page.locator('.piece-card:visible').count()==23
     assert page.locator('form').count()==1
     assert page.locator('.project-status').count()==0
     assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
