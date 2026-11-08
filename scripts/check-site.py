@@ -7,7 +7,7 @@ from urllib.parse import unquote,urlsplit
 import ast
 root=Path(sys.argv[1] if len(sys.argv)>1 else '_site').resolve()
 ast.parse((root.parent/'scripts/check-live-deployment.py').read_text(encoding='utf-8'), filename='scripts/check-live-deployment.py')
-pages=['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']
+pages=['index.html','funerario.html','mobiliario.html','grabados.html','aviso-legal.html','privacidad.html']
 class Inspect(HTMLParser):
  def __init__(self):
   super().__init__(); self.ids=set();self.hrefs=[];self.assets=[];self.forms=[];self.cards=0;self.prices=0
@@ -27,6 +27,14 @@ expected=set(pages+['styles.css','script.js','funerario-personalizador.js','cata
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
 hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.png','mesa-parchis-taracea-piedra.png','ajedrez-blanco-negro.webp','ajedrez-blanco-verde.webp','ajedrez-blanco-rojo.webp')}
 expected.update(hq_images)
+engraving_paths={'assets/grabados/'+name+'.svg' for name in ('si-mural-jardin','si-placa-a3','paisaje-grabado','velero-grabado')}
+expected.update(engraving_paths)
+for item in engraving_paths:
+ data=(root/item).read_text(encoding='utf-8')
+ assert data.startswith('<svg xmlns="http://www.w3.org/2000/svg"'),(item,'invalid SVG')
+ assert 'http://' not in data.replace('http://www.w3.org/2000/svg','') and 'https://' not in data,(item,'external references not allowed')
+ assert '<script' not in data and '<foreignObject' not in data,(item,'scripts forbidden')
+
 # Original PNG integrity: reject thumbnails, recompressions and wrong products.
 for asset, expected_bytes, sha256, wh in (
  ('assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png',3624006,'ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258',(1408,1408)),
@@ -265,7 +273,7 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths-hq_images)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths-hq_images-engraving_paths)<2500000, 'non-variant site unexpectedly large'
 assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes+sum((root/p).stat().st_size for p in hq_images), 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 # Canonical global navigation must remain byte-equivalent across all pages
@@ -276,9 +284,9 @@ for page in pages:
  assert match,(page,'global navigation missing')
  menu=match.group(0)
  menu_blocks.append(menu.replace(' aria-current="page"',''))
- for dest in ('index.html','funerario.html','mobiliario.html','funerario.html#personalizar'):
+ for dest in ('index.html','funerario.html','mobiliario.html','grabados.html','funerario.html#personalizar'):
   assert menu.count('href="'+dest+'"')>=2,(page,'missing shared link',dest)
- expected_current=page if page in ('index.html','funerario.html','mobiliario.html') else None
+ expected_current=page if page in ('index.html','funerario.html','mobiliario.html','grabados.html') else None
  current=re.findall(r'<a[^>]+aria-current="page"[^>]*>',menu)
  assert len(current)==(1 if expected_current else 0)*3,(page,'incorrect current page',current)
  if expected_current:
@@ -305,7 +313,7 @@ for page,html in htmls.items():
 assert len(parsers['index.html'].forms)==1 and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
 assert '<h1 id="hero-title">Productos en piedra natural</h1>' in htmls['index.html']
 assert '<section class="landing-choices" id="rutas" aria-label="Categorías del catálogo"><div class="paths">' in htmls['index.html']
-assert all('href="'+dest+'"' in htmls['index.html'] for dest in ('funerario.html','mobiliario.html'))
+assert all('href="'+dest+'"' in htmls['index.html'] for dest in ('funerario.html','mobiliario.html','grabados.html'))
 assert all(bad not in htmls['index.html'] for bad in ('La piedra.<br>El oficio.', 'Cada proyecto merece su propio espacio.', 'Explore nuestras especialidades', 'landing-heading'))
 assert 'src="assets/hero-workshop.webp"' in htmls['index.html']
 assert 'class="hero-actions"' in htmls['index.html']
@@ -314,6 +322,10 @@ for page,count in [('funerario.html',3)]:
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)
  assert len(p.forms)==1 and 'id="precios"' not in htmls[page]
  assert 'id="contacto"' in htmls[page]
+assert htmls['grabados.html'].count('class="engraving-card"')==4,'four independent engraving studies required'
+assert all(token in htmls['grabados.html'] for token in ('Mural «Si…»','Placa «Si…»','Paisaje grabado en piedra','Velero grabado en piedra','data-litos-public-preview="true"'))
+assert 'id="contact-form"' not in htmls['grabados.html'] and 'mailto:' not in htmls['grabados.html']
+assert len(parsers['grabados.html'].forms)==0
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
@@ -390,5 +402,5 @@ if '--production' in sys.argv:
  assert 'Explora 21 conceptos en una galería' not in htmls['mobiliario.html']
  assert 'Imagen conceptual · Línea en estudio' not in htmls['mobiliario.html']
  assert 'Imágenes conceptuales, no portfolio ejecutado' not in htmls['mobiliario.html']
-print(f'PASS: five pages, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 14 selected travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
+print(f'PASS: six pages, four engraving studies, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 14 selected travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
 

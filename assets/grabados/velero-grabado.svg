@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img"><title>Velero de líneas depuradas grabado sobre una placa de mármol blanco</title><defs>
+<linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ad9b80"/><stop offset=".54" stop-color="#91846d"/><stop offset="1" stop-color="#5e6152"/></linearGradient>
+<linearGradient id="stone" x1=".05" y1="0" x2=".93" y2="1"><stop stop-color="#faf8f3"/><stop offset=".45" stop-color="#e8e4dc"/><stop offset="1" stop-color="#f4f1e9"/></linearGradient>
+<linearGradient id="door" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#2a2d2b"/><stop offset="1" stop-color="#151917"/></linearGradient>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c6c2ae"/><stop offset="1" stop-color="#ddd0ba"/></linearGradient>
+<filter id="shade" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="12"/><feOffset dx="7" dy="14"/><feComponentTransfer><feFuncA type="linear" slope=".34"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<pattern id="marbling" width="450" height="330" patternUnits="userSpaceOnUse">
+<path d="M-40 82 C70 38 105 151 197 107 S335 47 470 116 M-80 281 C97 175 154 331 276 255 S393 173 490 222" fill="none" stroke="#a19d92" stroke-width="2.2" opacity=".23"/>
+<path d="M-20 94 C50 69 108 147 206 121 S355 84 466 127 M-15 307 C70 231 142 320 256 269 S420 228 477 218" fill="none" stroke="#c4b4a7" stroke-width=".95" opacity=".47"/>
+</pattern>
+<pattern id="wall-grain" width="19" height="19" patternUnits="userSpaceOnUse"><path d="M1 3l2 -1 M14 10l3 1" fill="none" stroke="#e1d4b9" stroke-width=".9" opacity=".12"/></pattern>
+</defs><rect width="1200" height="900" fill="#77796f"/><path d="M0 180H1200 M0 530H1200 M340 0V900 M850 0V900" stroke="#303d36" stroke-opacity=".16" stroke-width="3"/><g transform="translate(72,875) scale(1.02)" fill="none" stroke="#394b34" stroke-width="9" opacity="0.25"><path d="M0 0 C32 -80 40 -154 54 -240 M0 -33C-62 -91 -77 -136 -88 -198 M12 -85 C69 -126 108 -141 141 -164"/><g fill="#4d6446" stroke="none"><ellipse cx="-83" cy="-190" rx="16" ry="35" transform="rotate(-24 -83 -190)"/><ellipse cx="61" cy="-233" rx="15" ry="37" transform="rotate(18 61 -233)"/><ellipse cx="125" cy="-173" rx="14" ry="30" transform="rotate(55 125 -173)"/><ellipse cx="-54" cy="-124" rx="17" ry="39" transform="rotate(-60 -54 -124)"/><ellipse cx="74" cy="-145" rx="15" ry="31" transform="rotate(50 74 -145)"/></g></g><g filter="url(#shade)"><rect x="135" y="136" width="930" height="624" fill="url(#stone)" stroke="#d0c8ba" stroke-width="4"/><rect x="135" y="136" width="930" height="624" fill="url(#marbling)" opacity=".84"/>
+<g stroke="#424b49" fill="none" stroke-linejoin="round" stroke-linecap="round">
+<path d="M602 281V558" stroke-width="7" opacity=".85"/>
+<path d="M588 303L440 526H587Z" stroke-width="6" fill="#909e9a" fill-opacity=".055"/>
+<path d="M624 318V524H836Z" stroke-width="6" fill="#788683" fill-opacity=".045"/>
+<path d="M341 556Q585 579 854 554L806 602Q574 630 395 601Z" stroke-width="7" fill="#586665" fill-opacity=".06"/>
+<path d="M416 575H793" stroke-width="2.5" opacity=".55"/>
+<path d="M591 272h15 M602 272v-32" stroke-width="4" opacity=".65"/>
+<path d="M235 553c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="3.5" opacity="0.66" fill="none"/><path d="M250 567c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="2.2" opacity="0.625" fill="none"/><path d="M265 581c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="2.2" opacity="0.5900000000000001" fill="none"/><path d="M235 595c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="3.5" opacity="0.555" fill="none"/><path d="M250 609c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="2.2" opacity="0.52" fill="none"/><path d="M265 623c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="2.2" opacity="0.485" fill="none"/><path d="M235 637c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="3.5" opacity="0.45" fill="none"/><path d="M250 651c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="2.2" opacity="0.41500000000000004" fill="none"/><path d="M265 665c80 -20 129 19 213 -2s137 12 200 -3s115 11 221 -5" stroke="#57636a" stroke-width="2.2" opacity="0.38" fill="none"/>
+</g>
+<g stroke="#70807b" stroke-width="2" opacity=".48"><path d="M469 476l115 -174 M489 489l101 -157 M640 358l147 139 M645 386l123 114"/></g>
+</g></svg>

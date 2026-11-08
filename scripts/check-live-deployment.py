@@ -44,6 +44,14 @@ FILES = {
         'class="catalog-workspace"',
         'data-litos-contact-preview inert',
     ),
+    "grabados.html": (
+        "Palabras e imágenes,",
+        "Mural «Si…»",
+        "Placa «Si…»",
+        "Paisaje grabado en piedra",
+        "Velero grabado en piedra",
+        'data-litos-public-preview="true"',
+    ),
     "aviso-legal.html": ("actualmente no vende piezas ni acepta encargos", "formulario de contacto se conserva como maqueta visual"),
     "privacidad.html": ("El formulario visible es una maqueta inactiva", "GitHub Pages"),
     "script.js": ("submit.disabled = true",),
@@ -77,6 +85,7 @@ FILES = {
 FORBIDDEN = {
     "index.html": ('href="mailto:', "public-preview-note", "La piedra.<br>El oficio.", "Cada proyecto merece su propio espacio.", "landing-heading"),
     "funerario.html": ('href="mailto:', "public-preview-note"),
+    "grabados.html": ('mailto:', 'href="tel:', "public-preview-note", "data-litos-contact-preview",),
     "mobiliario.html": ("public-preview-note", "simulación digital de tonalidad", 'href="mailto:', "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
     "script.js": ("mailto:", "window.location.assign"),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
@@ -114,10 +123,14 @@ def check(attempt):
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
-    for name in ("index.html", "funerario.html", "mobiliario.html", "aviso-legal.html", "privacidad.html", "styles.css", "script.js", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
+    for name in ("index.html", "funerario.html", "mobiliario.html", "grabados.html", "aviso-legal.html", "privacidad.html", "styles.css", "script.js", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
         expected = (ROOT / name).read_bytes()
         actual = read_live(name, attempt)
         assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
+    for name in ("si-mural-jardin","si-placa-a3","paisaje-grabado","velero-grabado"):
+        asset="assets/grabados/"+name+".svg"
+        data=read_live(asset,attempt)
+        assert hashlib.sha256(data).digest()==hashlib.sha256((ROOT/asset).read_bytes()).digest(),(asset,"SVG asset mismatch")
     # Confirm that GitHub Pages serves exactly the full-resolution owner-approved files.
     for asset, sha, size in (
       ("assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png","ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258",3624006),
@@ -238,7 +251,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages five HTML views, CSS/JS, memorial configurator, 145 public memorial assets and catalog source images hash-verified.", flush=True)
+        print("PASS: live Pages six HTML views, CSS/JS, memorial configurator, 145 public memorial assets and catalog source images hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)

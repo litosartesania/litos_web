@@ -792,3 +792,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Se conserva el selector general de nueve piedras para los modelos existentes; las combinaciones del ajedrez se escogen mediante sus propios botones. Se mantienen precios y medidas sin inventar, formulario inerte y sin comercio electrónico.
 - scripts/build-site.sh y check-site.py conservan la allowlist. QA de navegador valida los tres colores y el modal; check-live-deployment.py comprueba hashes servidos desde Pages.
 - Pendiente: CI de ambas auditorías, revisión de PR, fusión y despliegue con comprobación en web pública.
+
+## 08/11/2026 — Nueva línea pública «Grabados e inscripciones»
+- Página independiente `grabados.html`, accesible desde la navegación común de LITOS y como tercer acceso en la portada. Quedan aislados los apartados funerario y mobiliario.
+- Cuatro diseños conceptuales y anónimos creados como SVG escalables en `assets/grabados/`: mural rectangular de jardín «Si…» (estudio modular aprox. 240×140 cm), placa A3 en mármol blanco con letras doradas, paisaje grabado y velero grabado. Son maquetas técnicas ilustrativas, no fotografías ni encargos realizados; no se utiliza LITOS Interno.
+- Sobre el poema de Kipling: se usa solo título y autor, no el texto íntegro de una traducción cuya titularidad no está acreditada. Antes de grabar, comprobar derechos de la traducción, composición y legibilidad. A3 solo para composición abreviada; poema largo exige tamaño mayor. Las medidas son orientativas sin aprobación de taller.
+- Sitio público en modo muestra no comercial, sin servicios externos añadidos, sin pedidos, formularios ni costes; no se modifica el contacto inerte ya existente. Assets y HTML añadidos a la allowlist de Pages. QA de seis páginas, cuatro motivos, navegación activa y móvil, y verificación HTTP/SHA-256 de SVG.
+- Pendiente: CI, preview, merge, Pages y verificación del despliegue real.

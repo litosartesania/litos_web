@@ -29,7 +29,7 @@ def inline(page):
 with sync_playwright() as app:
  browser=app.chromium.launch(headless=True,args=['--no-sandbox','--disable-dev-shm-usage','--allow-file-access-from-files'])
  for width,height in [(390,844),(820,1180),(1440,900)]:
-  for file in ['index.html','funerario.html','mobiliario.html','aviso-legal.html','privacidad.html']:
+  for file in ['index.html','funerario.html','mobiliario.html','grabados.html','aviso-legal.html','privacidad.html']:
    page=browser.new_page(viewport={'width':width,'height':height},reduced_motion='reduce')
    errors=[]
    page.on('pageerror',lambda e:errors.append(str(e)))
@@ -41,11 +41,11 @@ with sync_playwright() as app:
    assert not errors,(file,width,errors)
    # All public pages must share the SAME global LITOS header.
    header=page.locator('header.site-header')
-   expected_links=['index.html','funerario.html','mobiliario.html','funerario.html#personalizar']
+   expected_links=['index.html','funerario.html','mobiliario.html','grabados.html','funerario.html#personalizar']
    assert header.locator('.desktop-nav a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'desktop nav')
    assert page.locator('.mobile-menu a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'mobile nav')
    assert header.locator('a.wordmark[href="index.html"]').count()==1
-   selected={'index.html':'index.html','funerario.html':'funerario.html','mobiliario.html':'mobiliario.html'}.get(file)
+   selected={'index.html':'index.html','funerario.html':'funerario.html','mobiliario.html':'mobiliario.html','grabados.html':'grabados.html'}.get(file)
    marked=header.locator('.desktop-nav a[aria-current="page"]').evaluate_all('(els)=>els.map(e=>e.getAttribute("href"))')
    assert marked==([selected] if selected else []),(file,'current page',marked)
    assert header.evaluate('(e)=>getComputedStyle(e).position')=='sticky',(file,'sticky header')
@@ -59,6 +59,7 @@ with sync_playwright() as app:
     assert page.locator('.mobile-menu').is_visible()
     assert page.locator('.mobile-menu a[href="index.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="mobiliario.html"]').is_visible()
+    assert page.locator('.mobile-menu a[href="grabados.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="funerario.html#personalizar"]').is_visible()
     page.keyboard.press('Escape')
     assert not page.locator('.mobile-menu').is_visible()
@@ -67,6 +68,7 @@ with sync_playwright() as app:
     assert page.locator('.landing-heading').count()==0
     assert page.locator('a.path[href="funerario.html"]').count()==1
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
+    assert page.locator('a.path[href="grabados.html"]').count()==1
     assert page.locator('.hero-actions a[href="funerario.html"]').is_visible()
     assert page.locator('.hero-actions a[href="mobiliario.html"]').is_visible()
     hero_box=page.locator('.hero').bounding_box()
@@ -279,6 +281,19 @@ with sync_playwright() as app:
     assert page.locator('form').count()==1
     assert page.locator('.project-status').count()==0
     assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
+   elif file=='grabados.html':
+    assert page.locator('h1#engraving-title').count()==1
+    assert page.locator('.engraving-card').count()==4
+    assert page.locator('.engraving-picture img').count()==4
+    assert page.locator('#inscripciones .engraving-card').count()==2
+    assert page.locator('#dibujos .engraving-card').count()==2
+    assert page.locator('.engraving-card details').count()==4
+    if width==390:
+     first=page.locator('.engraving-card details').first
+     first.locator('summary').click()
+     assert first.evaluate('(el)=>el.open')
+     assert page.locator('.engraving-grid').first.evaluate('(el)=>getComputedStyle(el).gridTemplateColumns.split(" ").length')==1
+    assert page.locator('form').count()==0
    else:
     assert page.locator('.legal-content h2').count()>3
     assert page.locator('form').count()==0
