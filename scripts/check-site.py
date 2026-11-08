@@ -25,6 +25,7 @@ class Inspect(HTMLParser):
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js','funerario-personalizador.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
+expected.update('assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.webp','mesa-parchis-taracea-piedra.webp'))
 manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json','docs/LOTE_9_MESA_OVAL_20261012.json','docs/LOTE_9_MESA_REDONDA_20261012.json','docs/LOTE_9_MESA_RECTANGULAR_20261012.json','docs/LOTE_9_MESA_CENTRO_MON_20261012.json','docs/LOTE_9_MESA_CENTRO_RED_20261012.json')]
 assert [len(m['items']) for m in manifests]==[10,8,9,9,9,9,9]
 items=[i for m in manifests for i in m['items']]
