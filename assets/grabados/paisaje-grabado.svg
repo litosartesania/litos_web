@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img"><title>Bajorrelieve de paisaje montañoso con agua grabado sobre placa de piedra</title><defs>
+<linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ad9b80"/><stop offset=".54" stop-color="#91846d"/><stop offset="1" stop-color="#5e6152"/></linearGradient>
+<linearGradient id="stone" x1=".05" y1="0" x2=".93" y2="1"><stop stop-color="#faf8f3"/><stop offset=".45" stop-color="#e8e4dc"/><stop offset="1" stop-color="#f4f1e9"/></linearGradient>
+<linearGradient id="door" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#2a2d2b"/><stop offset="1" stop-color="#151917"/></linearGradient>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c6c2ae"/><stop offset="1" stop-color="#ddd0ba"/></linearGradient>
+<filter id="shade" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="12"/><feOffset dx="7" dy="14"/><feComponentTransfer><feFuncA type="linear" slope=".34"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<pattern id="marbling" width="450" height="330" patternUnits="userSpaceOnUse">
+<path d="M-40 82 C70 38 105 151 197 107 S335 47 470 116 M-80 281 C97 175 154 331 276 255 S393 173 490 222" fill="none" stroke="#a19d92" stroke-width="2.2" opacity=".23"/>
+<path d="M-20 94 C50 69 108 147 206 121 S355 84 466 127 M-15 307 C70 231 142 320 256 269 S420 228 477 218" fill="none" stroke="#c4b4a7" stroke-width=".95" opacity=".47"/>
+</pattern>
+<pattern id="wall-grain" width="19" height="19" patternUnits="userSpaceOnUse"><path d="M1 3l2 -1 M14 10l3 1" fill="none" stroke="#e1d4b9" stroke-width=".9" opacity=".12"/></pattern>
+</defs><rect width="1200" height="900" fill="url(#wall)"/><rect width="1200" height="900" fill="url(#wall-grain)"/><path d="M0 655H1200 M0 130H1200 M340 0V900 M822 0V900" stroke="#564b3e" stroke-width="2" opacity=".14"/><g transform="translate(85,880) scale(1.2)" fill="none" stroke="#394b34" stroke-width="9" opacity="0.44"><path d="M0 0 C32 -80 40 -154 54 -240 M0 -33C-62 -91 -77 -136 -88 -198 M12 -85 C69 -126 108 -141 141 -164"/><g fill="#4d6446" stroke="none"><ellipse cx="-83" cy="-190" rx="16" ry="35" transform="rotate(-24 -83 -190)"/><ellipse cx="61" cy="-233" rx="15" ry="37" transform="rotate(18 61 -233)"/><ellipse cx="125" cy="-173" rx="14" ry="30" transform="rotate(55 125 -173)"/><ellipse cx="-54" cy="-124" rx="17" ry="39" transform="rotate(-60 -54 -124)"/><ellipse cx="74" cy="-145" rx="15" ry="31" transform="rotate(50 74 -145)"/></g></g><g filter="url(#shade)"><rect x="98" y="148" width="1004" height="593" fill="url(#stone)" stroke="#d0c8ba" stroke-width="4"/><rect x="98" y="148" width="1004" height="593" fill="url(#marbling)" opacity=".84"/><path d="M154 618H1043" stroke="#b3aa98" stroke-width="3" opacity=".65"/>
+<g fill="none" stroke="#4f5753" stroke-linejoin="round" stroke-linecap="round">
+<path d="M161 527 L339 316 411 400 512 275 646 445 731 339 945 533" stroke-width="7" opacity=".78"/>
+<path d="M265 399L339 316 402 397 M456 348L512 275 569 350 M693 390L731 339 773 391" stroke-width="4.5" opacity=".7"/>
+<path d="M164 557Q300 533 425 559T700 559T1040 544 M164 592Q335 569 487 592T802 591T1040 580 M188 624Q430 613 650 623T1011 615" stroke-width="3.1" opacity=".6"/>
+<path d="M198 545l47 -140 48 146 M228 466l-31 24 M233 452l34 30 M880 548l44 -127 49 130 M910 464l-32 22 M918 455l30 20" stroke-width="4.2" opacity=".85"/>
+<path d="M178 680h270 M516 678h305 M873 674h138" stroke-width="2" opacity=".35"/></g>
+<path d="M380 531Q496 490 607 523T857 525" stroke="#343b37" stroke-width="2" fill="none" opacity=".37"/>
+<circle cx="822" cy="316" r="45" fill="none" stroke="#8d8e83" stroke-width="3" opacity=".62"/>
+<g stroke="#73786c" opacity=".4" stroke-width="1.7"><path d="M313 462l95 -110 M333 481l94 -102 M574 392l-46 -57 M575 417l-33 -45 M708 427l-41 -39 M777 470l31 -50"/></g>
+</g></svg>
