@@ -116,9 +116,9 @@ for asset in mesa-auxiliar-base-cruzada.png mesa-parchis-taracea-piedra.png ajed
  cp "assets/catalogo/conceptos/20261108/$asset" "$site/assets/catalogo/conceptos/20261108/$asset"
 done
 
-# Four new, original, anonymous SVG examples of inscriptions and artistic engraving.
+# Four original approved high-resolution engraving concept photos (WebP).
 mkdir -p "$site/assets/grabados"
-for art in si-mural-jardin.svg si-placa-a3.svg paisaje-grabado.svg velero-grabado.svg; do
+for art in si-mural-jardin.webp si-placa-a3.webp paisaje-grabado.webp velero-grabado.webp; do
  cp "assets/grabados/$art" "$site/assets/grabados/$art"
 done
 

@@ -282,7 +282,9 @@ with sync_playwright() as app:
     assert page.locator('.project-status').count()==0
     assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
    elif file=='grabados.html':
-    assert page.locator('h1#engraving-title').count()==1
+    assert page.locator('.engraving-hero').count()==0
+    assert page.locator('h1#inscripciones-title').count()==1
+    assert page.locator('.engraving-picture img').evaluate_all('(xs)=>xs.every(x=>x.currentSrc.endsWith(".webp")&&x.naturalWidth>=1000)')
     assert page.locator('.engraving-card').count()==4
     assert page.locator('.engraving-picture img').count()==4
     assert page.locator('#inscripciones .engraving-card').count()==2

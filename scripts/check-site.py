@@ -27,13 +27,18 @@ expected=set(pages+['styles.css','script.js','funerario-personalizador.js','cata
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
 hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.png','mesa-parchis-taracea-piedra.png','ajedrez-blanco-negro.webp','ajedrez-blanco-verde.webp','ajedrez-blanco-rojo.webp')}
 expected.update(hq_images)
-engraving_paths={'assets/grabados/'+name+'.svg' for name in ('si-mural-jardin','si-placa-a3','paisaje-grabado','velero-grabado')}
+engraving_paths={'assets/grabados/'+name+'.webp' for name in ('si-mural-jardin','si-placa-a3','paisaje-grabado','velero-grabado')}
 expected.update(engraving_paths)
-for item in engraving_paths:
- data=(root/item).read_text(encoding='utf-8')
- assert data.startswith('<svg xmlns="http://www.w3.org/2000/svg"'),(item,'invalid SVG')
- assert 'http://' not in data.replace('http://www.w3.org/2000/svg','') and 'https://' not in data,(item,'external references not allowed')
- assert '<script' not in data and '<foreignObject' not in data,(item,'scripts forbidden')
+# Approved original generated-photo concepts; reject low-res thumbnails.
+for filename,byte_count,sha256 in (
+ ('si-mural-jardin.webp',460550,'87b5e291c68c5e035b53cdc78874709db7bbd358c2113f540ec1e67836c15d9a'),
+ ('si-placa-a3.webp',378416,'c0028d4d2a8dfbe911bf30f91bcb14932020378b836e80787f2a579ee3fca7a9'),
+ ('paisaje-grabado.webp',419776,'b2d9da7322f0ab8f766e2614c3f6d0f51c9605534d73c106cb7d3e929e0c24b9'),
+ ('velero-grabado.webp',333050,'f6984692c5c6a0ffe13aed8192ff323bd6b34e7d08225c57928189633e11c850'),
+):
+ blob=(root/'assets/grabados'/filename).read_bytes()
+ assert len(blob)==byte_count and hashlib.sha256(blob).hexdigest()==sha256,(filename,'asset mismatch')
+ assert blob[:4]==b'RIFF' and blob[8:12]==b'WEBP',(filename,'not a WebP image')
 
 # Original PNG integrity: reject thumbnails, recompressions and wrong products.
 for asset, expected_bytes, sha256, wh in (
@@ -274,7 +279,7 @@ for item in items:
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
 assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths-hq_images-engraving_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes+sum((root/p).stat().st_size for p in hq_images), 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes+sum((root/p).stat().st_size for p in hq_images)+sum((root/p).stat().st_size for p in engraving_paths), 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 # Canonical global navigation must remain byte-equivalent across all pages
 # except the current-page accessibility marker.
@@ -323,6 +328,8 @@ for page,count in [('funerario.html',3)]:
  assert len(p.forms)==1 and 'id="precios"' not in htmls[page]
  assert 'id="contacto"' in htmls[page]
 assert htmls['grabados.html'].count('class="engraving-card"')==4,'four independent engraving studies required'
+assert 'engraving-hero' not in htmls['grabados.html'],'removed promotional block must not reappear'
+assert '<h1 id="inscripciones-title">Inscripciones en piedra</h1>' in htmls['grabados.html']
 assert all(token in htmls['grabados.html'] for token in ('Mural «Si…»','Placa «Si…»','Paisaje grabado en piedra','Velero grabado en piedra','data-litos-public-preview="true"'))
 assert 'id="contact-form"' not in htmls['grabados.html'] and 'mailto:' not in htmls['grabados.html']
 assert len(parsers['grabados.html'].forms)==0
