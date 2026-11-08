@@ -13,7 +13,7 @@ const picker=root.querySelector('#material-picker');
 const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
 const materialHelp=root.querySelector('.material-heading > p');
-if(materialHelp){materialHelp.textContent='Mesas de comedor y de centro, consola escultórica y banco escultórico muestran una imagen específica para cada piedra. La mesa de base cruzada y el parchís tienen una imagen conceptual fija. El ajedrez dispone de tres combinaciones propias de mármol. El selector general de piedras no sustituye imágenes de esos modelos; los precios publicados siguen siendo orientativos.';}
+if(materialHelp){materialHelp.textContent='Mesas de comedor y de centro, consola escultórica y banco escultórico muestran una imagen específica para cada piedra. La mesa de base cruzada y el parchís tienen una imagen conceptual fija. El ajedrez dispone de tres combinaciones propias de mármol. Las demás fotos no muestran necesariamente la piedra elegida. El selector general de piedras no sustituye imágenes de esos modelos y los precios publicados siguen siendo orientativos.';}
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 // Only files that passed source-image and material-specific visual QA belong here.
