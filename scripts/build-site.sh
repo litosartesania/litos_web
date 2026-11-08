@@ -110,6 +110,12 @@ for stone in caliza macael carrara marquina granito cuarcita calacatta verde-alp
  cp "assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__${stone}.png" "$site/assets/catalogo/revisiones/20261015/macetero-8-candidatas/macetero__${stone}.png"
 done
 
+# Two generated, anonymous furniture concepts, not photographs of third-party work.
+mkdir -p "$site/assets/catalogo/conceptos/20261108"
+for asset in mesa-auxiliar-base-cruzada.webp mesa-parchis-taracea-piedra.webp; do
+ cp "assets/catalogo/conceptos/20261108/$asset" "$site/assets/catalogo/conceptos/20261108/$asset"
+done
+
 # Generic memorial layers: explicit, hash-verified public allowlist.
 node tools/build-funerario-resources.mjs
 python3 scripts/stage-funerario.py "$site"

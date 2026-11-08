@@ -1,0 +1,72 @@
+{
+  "schema": "litos-concept-candidates-v1",
+  "created": "2026-10-31",
+  "state": "prepared_in_review_branch",
+  "note": "Nuevas representaciones conceptuales generadas para revisión; no se suben fotos de referencia. Sin precios o medidas. La publicación depende de validación de CI y Pages.",
+  "public_catalog_active_models": 21,
+  "candidates": [
+    {
+      "id": "mesa-auxiliar-base-cruzada",
+      "proposed_catalog_number": 22,
+      "name": "Mesa auxiliar de piedra con base cruzada",
+      "family": "Mesas",
+      "subtype": "Mesa auxiliar / consola compacta",
+      "description": "Tablero rectangular de piedra natural con cantos rectos y soportes verticales de planos cruzados. Pieza monomaterial de estética arquitectónica.",
+      "reference_materials": [
+        "Travertino beige"
+      ],
+      "material_variants_policy": "9 piedras del catálogo solo tras generar y verificar imágenes y viabilidad de cada versión",
+      "dimensions_cm": null,
+      "price_eur": null,
+      "manufacturing_notes": [
+        "Definir espesores y peso",
+        "Comprobar estabilidad y vuelco",
+        "Diseñar unión y apoyo de los planos cruzados",
+        "Verificar selección de bloque/tabla y acabados de canto"
+      ],
+      "reference_photo": "primera imagen de la conversación del 31-10-2026",
+      "original_photo_publication_allowed": false,
+      "published_visual_assets": [
+        "assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.webp"
+      ],
+      "status": "Incluido en rama para revisión, no confirmado en producción"
+    },
+    {
+      "id": "mesa-parchis-taracea-piedra",
+      "proposed_catalog_number": 23,
+      "name": "Mesa de parchís con tablero de piedra",
+      "family": "Mesas",
+      "subtype": "Mesa de juegos / parchís",
+      "description": "Mesa de juegos cuadrada cuyo tablero representa un parchís de cuatro jugadores mediante taracea de piedra de varios colores, con casillas, recorridos y zonas de salida y llegada; estructura de madera oscura.",
+      "reference_materials": [
+        "Mármol o piedra crema",
+        "Piedra verde oscura",
+        "Piedra rojiza",
+        "Madera oscura"
+      ],
+      "material_variants_policy": "Composición multicolor y madera: no aplicar el selector monomaterial de nueve piedras. Comprobar y diseñar un tablero de parchís jugable con casillas y recorridos correctos.",
+      "dimensions_cm": null,
+      "price_eur": null,
+      "manufacturing_notes": [
+        "Diseñar y verificar geometría de parchís jugable para cuatro jugadores, no solo un motivo decorativo",
+        "Definir piedra, teselas, juntas, inserciones y acabado de la superficie de juego",
+        "Comprobar unión piedra-madera, peso, estabilidad y resistencia",
+        "No copiar exactamente el diseño ornamental de la fotografía de referencia"
+      ],
+      "reference_photo": "segunda imagen de la conversación del 31-10-2026",
+      "original_photo_publication_allowed": false,
+      "published_visual_assets": [
+        "assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.webp"
+      ],
+      "status": "Incluido en rama para revisión, no confirmado en producción"
+    }
+  ],
+  "release_conditions": [
+    "Imágenes comerciales nuevas y autorizadas, sin reutilizar fotografías de origen ajeno",
+    "Medidas y viabilidad técnica revisadas",
+    "Sin inventar precios ni aseverar fabricación por LITOS",
+    "Adaptación del selector de material para piezas de composición mixta",
+    "Actualización de pruebas del catálogo; validación visual y privacidad previa a publicación",
+    "No modificar main ni desplegar sin revisión"
+  ]
+}

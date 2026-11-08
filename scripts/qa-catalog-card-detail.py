@@ -16,11 +16,11 @@ with sync_playwright() as pw:
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto(url,wait_until='domcontentloaded')
         cards=page.locator('.piece-card:visible')
-        assert cards.count()==21,(width,cards.count())
+        assert cards.count()==23,(width,cards.count())
         assert page.locator('.category-filter-bar button').count()==7
         assert page.locator('#material-picker option').count()==10
         assert page.locator('#detail-material-picker option').count()==10
-        assert page.locator('.product-open').count()==21
+        assert page.locator('.product-open').count()==23
         assert page.locator('form[data-litos-contact-preview][inert]').count()==1
         assert page.locator('form button[type="submit"]').is_disabled()
         boxes=[cards.nth(i).bounding_box() for i in range(6)]
@@ -78,7 +78,7 @@ with sync_playwright() as pw:
         assert drawing.evaluate('(im)=>im.naturalWidth===1600&&im.naturalHeight===1200')
         assert drawing.evaluate('(im)=>getComputedStyle(im).objectFit')=='contain'
         assert page.locator('.piece-grid .technical-drawing-figure img').count()==21
-        assert page.locator('.piece-grid .technical-placeholder').count()==0
+        assert page.locator('.piece-grid .technical-placeholder').count()==2
         assert page.locator('#detail-price').inner_text()==last_price
         assert 'Negro Marquina' in page.locator('#detail-stone').inner_text()
         if width in (390,1440):page.screenshot(path=str(out/f'plano-mon-detalle-{width}.png'),animations='disabled')
@@ -215,13 +215,13 @@ with sync_playwright() as pw:
         page.locator('[data-category-filter="Baño"]').click()
         assert page.locator('.piece-card:visible').count()==3,(width,'family filter not retained')
         page.locator('[data-category-filter="Todos"]').click()
-        assert page.locator('.piece-card:visible').count()==21
+        assert page.locator('.piece-card:visible').count()==23
         assert page.evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth+1'),(width,'horizontal overflow')
         assert not errors,(width,errors)
         if width in (390,820,1440,1600):
             page.locator('#catalogo').scroll_into_view_if_needed()
             page.screenshot(path=str(out/f'catalogo-grid-{width}.png'),animations='disabled')
-        print('PASS',width,'gallery columns, left filters, 21 cards, synced modal, ESC, image fallback, filters')
+        print('PASS',width,'gallery columns, left filters, 23 cards, synced modal, ESC, image fallback, filters')
         page.close()
     browser.close()
 
