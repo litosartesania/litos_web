@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 site="${1:-_site}"
 case "$site" in _site|./_site) ;; *) echo "Only _site allowed" >&2; exit 1;; esac
 rm -rf -- "$site"; mkdir -p "$site/assets" "$site/assets/catalogo"
-for file in index.html funerario.html mobiliario.html aviso-legal.html privacidad.html styles.css script.js funerario-personalizador.js catalogo-precios.js; do cp "$file" "$site/$file"; done
+for file in index.html funerario.html mobiliario.html grabados.html aviso-legal.html privacidad.html styles.css script.js funerario-personalizador.js catalogo-precios.js; do cp "$file" "$site/$file"; done
 for asset in favicon.svg hero-workshop.webp workshop-strip.webp limestone-texture.webp concept-mesa.webp concept-lavabo.webp concept-objetos.webp; do cp "assets/$asset" "$site/assets/$asset"; done
 for asset in litos-banco-01.webp litos-banco-02.webp litos-consola-01.webp litos-consola-02.webp litos-lavabo-01.webp litos-lavabo-02.webp litos-mesa-auxiliar-01.webp litos-mesa-auxiliar-02.webp litos-mesa-centro-01.webp litos-mesa-centro-02.webp litos-mesa-comedor-01.webp litos-mesa-comedor-02.webp; do cp "assets/catalogo/$asset" "$site/assets/catalogo/$asset"; done
 # Copy only the ten validated original PNGs, unchanged.
@@ -114,6 +114,12 @@ done
 mkdir -p "$site/assets/catalogo/conceptos/20261108"
 for asset in mesa-auxiliar-base-cruzada.png mesa-parchis-taracea-piedra.png ajedrez-blanco-negro.webp ajedrez-blanco-verde.webp ajedrez-blanco-rojo.webp; do
  cp "assets/catalogo/conceptos/20261108/$asset" "$site/assets/catalogo/conceptos/20261108/$asset"
+done
+
+# Four new, original, anonymous SVG examples of inscriptions and artistic engraving.
+mkdir -p "$site/assets/grabados"
+for art in si-mural-jardin.svg si-placa-a3.svg paisaje-grabado.svg velero-grabado.svg; do
+ cp "assets/grabados/$art" "$site/assets/grabados/$art"
 done
 
 # Generic memorial layers: explicit, hash-verified public allowlist.

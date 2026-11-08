@@ -1279,3 +1279,50 @@ html { scroll-padding-top: 94px; }
 .chess-variant:focus-visible{outline:2px solid var(--limestone-light);outline-offset:3px}
 .product-dialog .detail-stage .chess-figure img{max-height:65dvh;object-fit:contain}
 .product-dialog .detail-material-row[hidden]{display:none!important}
+
+
+/* Grabados e inscripciones: colección conceptual no funeraria. */
+.landing-choices .paths{grid-template-columns:repeat(3,minmax(0,1fr))}
+.path-gravings{color:#e9e2d8;background:#393a35}
+.path-gravings:hover{background:#494943}
+.engraving-page{background:#171615;color:#e9e4db}
+.engraving-page :is(.engraving-hero,.engraving-section){scroll-margin-top:80px}
+.engraving-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(245px,.65fr);align-items:center;gap:clamp(2rem,5vw,6rem);min-height:clamp(520px,66vh,740px);padding:clamp(4rem,7vw,7rem) var(--gutter);background:radial-gradient(ellipse at 92% 11%,#39352f,transparent 55%),#191715;border-bottom:1px solid #494136}
+.engraving-hero-inner{max-width:800px}
+.engraving-hero .catalog-eyebrow{color:#bd9b6f;font-size:.76rem;letter-spacing:.18em}
+.engraving-hero h1{margin:1.4rem 0 1.2rem;font:400 clamp(2.9rem,6vw,6.75rem)/.99 var(--serif);letter-spacing:-.046em}
+.engraving-hero h1 em{color:#cfbfaa;font-weight:400}
+.engraving-hero-inner>p:not(.catalog-eyebrow){max-width:55ch;line-height:1.7;color:#c7beb4}
+.engraving-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.engraving-links a{padding:.77rem 1.05rem;border:1px solid #776c61;text-decoration:none;color:#f0e7dd;font-size:.85rem}
+.engraving-links a:hover,.engraving-links a:focus-visible{background:#35302b;border-color:#b6986f}
+.engraving-links span{margin-left:1rem}
+.engraving-hero-mark{display:grid;align-content:center;justify-items:center;gap:1.4rem;min-height:370px;padding:2rem 1rem;border:9px solid #c6c0b3;outline:2px solid #b0a99a;color:#635945;background:#e6e1d7 url("assets/limestone-texture.webp") center/360px;box-shadow:18px 20px 48px #06060577;transform:rotate(-1.5deg)}
+.engraving-hero-mark span:first-child{font:400 clamp(3.7rem,7vw,7rem)/1 var(--serif);letter-spacing:.08em}
+.engraving-hero-mark i{display:block;width:min(80%,260px);height:1px;background:#ad9879;box-shadow:0 16px #baaa97,0 32px #baaa97,0 48px #baaa97,0 64px #baaa97,0 80px #baaa97}
+.engraving-hero-mark span:last-child{margin-top:5rem;letter-spacing:.3em;font-size:.65rem}
+.engraving-section{padding:clamp(3.5rem,7vw,7rem) var(--gutter);border-bottom:1px solid #433d36}
+.engraving-section:nth-of-type(3){background:#211e1b}
+.engraving-heading{display:grid;grid-template-columns:minmax(160px,.28fr) minmax(0,1fr);gap:2rem;margin:0 0 2.8rem}
+.engraving-step{margin:0;color:#b89875;font-size:.72rem;letter-spacing:.17em;font-weight:600}
+.engraving-heading h2{margin:0 0 .7rem;font:400 clamp(2.4rem,4.6vw,5rem)/1.05 var(--serif);letter-spacing:-.03em}
+.engraving-heading div>p{max-width:690px;margin:0;color:#beb7ad;font-size:.96rem;line-height:1.7}
+.engraving-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.35rem;max-width:1500px;margin:auto}
+.engraving-card{min-width:0;display:flex;flex-direction:column;border:1px solid #4e4841;background:#1c1b19}
+.engraving-picture{margin:0;padding:1rem 1rem 0}
+.engraving-picture img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#807968}
+.engraving-picture figcaption{margin:.7rem 0 .1rem;color:#a79e91;line-height:1.45;font-size:.73rem}
+.engraving-card-content{padding:1.35rem 1.3rem 1.8rem;flex:1;display:flex;flex-direction:column}
+.engraving-index{margin:0 0 .7rem;color:#bb9b73;font-size:.7rem;letter-spacing:.14em}
+.engraving-card h3{margin:0 0 .8rem;font:400 clamp(1.65rem,2.8vw,2.85rem)/1.08 var(--serif)}
+.engraving-card-content>p:not(.engraving-index){max-width:58ch;margin:0;color:#c9c0b6;line-height:1.72;font-size:.94rem}
+.engraving-card details{margin-top:auto;padding-top:1.45rem}
+.engraving-card summary{cursor:pointer;color:#e6d5c3;border-top:1px solid #63584c;padding-top:1rem;font-size:.86rem}
+.engraving-card details ul{margin:1rem 0 0;padding-left:1.3rem;color:#d0c8bc;font-size:.87rem;line-height:1.65}
+.engraving-card details li+li{margin-top:.35rem}
+.engraving-note{display:grid;grid-template-columns:220px minmax(250px,.8fr) minmax(320px,1.1fr);gap:2rem;padding:clamp(3rem,6vw,6rem) var(--gutter);background:#e9e3d8;color:#292724}
+.engraving-note .engraving-step{color:#7f6247}
+.engraving-note h2{margin:0;font:400 clamp(2rem,3.5vw,3.75rem)/1.1 var(--serif)}
+.engraving-note div p{margin:0 0 1rem;color:#4b443b;line-height:1.7}
+@media(max-width:1080px){.landing-choices .paths{grid-template-columns:repeat(2,minmax(0,1fr))}.landing-choices .path-gravings{grid-column:1/-1}.engraving-hero{grid-template-columns:1fr minmax(190px,.45fr)}.engraving-hero-mark{min-height:300px}.engraving-note{grid-template-columns:1fr 2fr}.engraving-note div{grid-column:2}}
+@media(max-width:760px){.landing-choices .paths{grid-template-columns:1fr}.landing-choices .path-gravings{grid-column:auto}.engraving-hero{grid-template-columns:1fr;min-height:0}.engraving-hero h1{font-size:clamp(2.85rem,12vw,4.9rem)}.engraving-hero-mark{min-height:210px;transform:none;max-width:370px;width:100%;margin:auto}.engraving-hero-mark span:first-child{font-size:3.8rem}.engraving-hero-mark span:last-child{margin-top:3.8rem}.engraving-heading,.engraving-grid{grid-template-columns:1fr}.engraving-heading{gap:1rem}.engraving-note{grid-template-columns:1fr}.engraving-note div{grid-column:auto}.engraving-card-content{padding:1.1rem}}
