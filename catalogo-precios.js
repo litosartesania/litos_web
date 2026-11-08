@@ -158,7 +158,7 @@ function render(){
   if(!card.hidden)count++;
   const base=Number(card.dataset.base),raw=base*(.7+.3*m[2]/70);
   card.querySelector('.piece-amount').textContent=Number.isFinite(base)?formatter.format(Math.round(raw/10)*10):'Sin precio publicado';
-  card.querySelector('.card-material').textContent=m[1];
+  const label=card.querySelector('.card-material');if(label)label.textContent=m[1];
   if(technical)showTechnical(card);else showMaterial(card,m);
  }
  root.querySelector('#catalog-count').textContent=technical?
