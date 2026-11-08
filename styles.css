@@ -1258,3 +1258,9 @@ html { scroll-padding-top: 94px; }
 .memorial-ceramic-upload label{font-weight:600}
 .memorial-ceramic-upload input[type=file]{width:100%;max-width:100%;font:inherit}
 .memorial-ceramic-upload button{justify-self:start;min-height:40px;padding:.55rem .9rem;border:1px solid #8d7661;background:#fffaf2;color:#342d25}
+
+/* Dos nuevos conceptos de mobiliario: imágenes originales generadas, sin variantes simuladas. */
+.special-concept-figure{margin:0;overflow:hidden}
+.special-concept-figure img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;filter:none}
+.special-concept-figure figcaption{padding:.55rem .65rem;color:var(--limestone-light);font-size:.73rem;line-height:1.5}
+.piece-card[data-product="mesa-auxiliar-base-cruzada"] .piece-amount,.piece-card[data-product="mesa-parchis-taracea-piedra"] .piece-amount{font-size:clamp(1.2rem,2vw,1.5rem)}
