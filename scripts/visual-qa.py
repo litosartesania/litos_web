@@ -107,7 +107,7 @@ with sync_playwright() as app:
      assert page.locator('.piece-photos img').count()==0
      assert page.locator('.piece-amount').count()==24
      # Product 24: user-approved chess images and three synchronized variants.
-     chess=page.locator('[data-product="ajedrez-marmol"]')
+     chess=page.locator('.piece-grid [data-product="ajedrez-marmol"]')
      assert chess.count()==1 and chess.locator('.chess-variant').count()==3
      for name in ('blanco-negro','blanco-verde','blanco-rojo'):
       chess.locator(f'[data-chess-variant="{name}"]').click()
