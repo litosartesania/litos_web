@@ -246,7 +246,7 @@ with sync_playwright() as app:
       assert revised.get_attribute('src')=='assets/catalogo/revisiones/20261013/planos/'+corrected+'.png'
       revised.evaluate('(e)=>e.decode()')
      page.locator('#material-picker').select_option('verde-alpi')
-     assert page.locator('.technical-placeholder').count()==2
+     assert page.locator('.technical-placeholder').count()==0
      assert page.locator('#material-source').is_visible()
      page.locator('[data-category-filter="Baño"]').click()
      assert page.locator('.piece-card:visible').count()==3
