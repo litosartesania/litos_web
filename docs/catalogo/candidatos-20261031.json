@@ -1,8 +1,8 @@
 {
   "schema": "litos-concept-candidates-v1",
   "created": "2026-10-31",
-  "state": "pending_images_technical_and_rights_validation",
-  "note": "Referencias visuales aportadas en conversación. Imágenes no publicadas, derechos no verificados. No son trabajos acreditados de LITOS. Este fichero no se incluye en la build pública.",
+  "state": "prepared_in_review_branch",
+  "note": "Nuevas representaciones conceptuales generadas para revisión; no se suben fotos de referencia. Sin precios o medidas. La publicación depende de validación de CI y Pages.",
   "public_catalog_active_models": 21,
   "candidates": [
     {
@@ -26,8 +26,10 @@
       ],
       "reference_photo": "primera imagen de la conversación del 31-10-2026",
       "original_photo_publication_allowed": false,
-      "published_visual_assets": [],
-      "status": "Borrador, no visible en web"
+      "published_visual_assets": [
+        "assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.webp"
+      ],
+      "status": "Incluido en rama para revisión, no confirmado en producción"
     },
     {
       "id": "mesa-parchis-taracea-piedra",
@@ -53,8 +55,10 @@
       ],
       "reference_photo": "segunda imagen de la conversación del 31-10-2026",
       "original_photo_publication_allowed": false,
-      "published_visual_assets": [],
-      "status": "Borrador, no visible en web"
+      "published_visual_assets": [
+        "assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.webp"
+      ],
+      "status": "Incluido en rama para revisión, no confirmado en producción"
     }
   ],
   "release_conditions": [
