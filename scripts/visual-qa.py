@@ -68,7 +68,7 @@ with sync_playwright() as app:
     assert page.locator('.landing-heading').count()==0
     assert page.locator('a.path[href="funerario.html"]').count()==1
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
-     assert page.locator('a.path[href="grabados.html"]').count()==1
+    assert page.locator('a.path[href="grabados.html"]').count()==1
     assert page.locator('.hero-actions a[href="funerario.html"]').is_visible()
     assert page.locator('.hero-actions a[href="mobiliario.html"]').is_visible()
     hero_box=page.locator('.hero').bounding_box()
