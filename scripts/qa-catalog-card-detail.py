@@ -16,11 +16,11 @@ with sync_playwright() as pw:
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.goto(url,wait_until='domcontentloaded')
         cards=page.locator('.piece-card:visible')
-        assert cards.count()==21,(width,cards.count())
+        assert cards.count()==23,(width,cards.count())
         assert page.locator('.category-filter-bar button').count()==7
         assert page.locator('#material-picker option').count()==10
         assert page.locator('#detail-material-picker option').count()==10
-        assert page.locator('.product-open').count()==21
+        assert page.locator('.product-open').count()==23
         assert page.locator('form[data-litos-contact-preview][inert]').count()==1
         assert page.locator('form button[type="submit"]').is_disabled()
         boxes=[cards.nth(i).bounding_box() for i in range(6)]
