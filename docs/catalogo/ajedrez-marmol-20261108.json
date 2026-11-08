@@ -1,0 +1,41 @@
+{
+  "schema": "litos-concept-product-v1",
+  "id": "ajedrez-marmol",
+  "catalog_number": 24,
+  "name": "Juego de ajedrez de mármol",
+  "category": "Objetos",
+  "status": "concepto, no se atribuye a trabajos ejecutados",
+  "material": "mármol natural",
+  "description": "Tablero de ajedrez con piezas modernas y geométricas de mármol. Tres combinaciones: blanco/negro, blanco/verde y blanco/rojo.",
+  "variant_selection": "Selector propio del producto, no dependiente del selector general de nueve piedras",
+  "price_eur": null,
+  "dimensions_cm": null,
+  "feasibility": "Pendiente de validación técnica por el taller",
+  "imagery": "Imágenes aprobadas por el usuario en esta conversación, convertidas a WebP conservando la resolución de 1536x1024",
+  "images": [
+    {
+      "id": "blanco-negro",
+      "path": "assets/catalogo/conceptos/20261108/ajedrez-blanco-negro.webp",
+      "bytes": 243856,
+      "sha256": "fa5dace3fe083efe6f3c88e260d3d887ba9bd3951a045c5901c892182117b496"
+    },
+    {
+      "id": "blanco-verde",
+      "path": "assets/catalogo/conceptos/20261108/ajedrez-blanco-verde.webp",
+      "bytes": 211498,
+      "sha256": "4641587bd0f09621ca3a98766717d6f8bcee1ce2e66baa7a420cb6d13a4d3957"
+    },
+    {
+      "id": "blanco-rojo",
+      "path": "assets/catalogo/conceptos/20261108/ajedrez-blanco-rojo.webp",
+      "bytes": 204944,
+      "sha256": "881943bf4d95937957576f663b8bed582767bd9c4ea14a06592eb04afea8f010"
+    }
+  ],
+  "caveats": [
+    "Diseño conceptual y fotografía generada, no obra realizada por LITOS",
+    "No afirmar dimensiones ni precios sin validación",
+    "Controlar geometría y reglamento de 8x8 antes de fabricar",
+    "Mantener 32 piezas completas de ambos colores al elaborar especificaciones"
+  ]
+}

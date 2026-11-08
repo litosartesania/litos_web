@@ -783,3 +783,12 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Dos imágenes minúsculas anteriores (1944 y 3346 bytes) se retiran por degradación visual. Assets sustitutos: assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png y mesa-parchis-taracea-piedra.png. Selector de materiales y precios no se falsean; imágenes conceptuales identificadas.
 - Se incorporan verificaciones SHA-256 y dimensiones en QA estático y de navegador y se comprueban los archivos servidos por GitHub Pages. Se conserva el formulario inerte y el build con allowlist. No se modifica ningún otro repositorio.
 - Pendiente de este commit: auditoría CI, merge seguro de PR y comprobación HTTP del despliegue público.
+
+
+## 08/11/2026 — Juego de ajedrez: blanco/negro, blanco/verde y blanco/rojo
+- Nuevo modelo n.º 24: Juego de ajedrez de mármol, categoría Objetos; tres combinaciones dentro de una ficha, botones accesibles y estado sincronizado con el modal.
+- Se usan exclusivamente los tres renders aprobados en el chat, SIN generación adicional. Compresión WebP de calidad 91 sobre imágenes originales de 1536x1024, con verificación del hash SHA-256 y bytes. Se consideran propuestas conceptuales, no encargos reales.
+- Archivos: ajedrez-blanco-negro.webp (243856 B), ajedrez-blanco-verde.webp (211498 B), ajedrez-blanco-rojo.webp (204944 B). Manifiesto docs/catalogo/ajedrez-marmol-20261108.json.
+- Se conserva el selector general de nueve piedras para los modelos existentes; las combinaciones del ajedrez se escogen mediante sus propios botones. Se mantienen precios y medidas sin inventar, formulario inerte y sin comercio electrónico.
+- scripts/build-site.sh y check-site.py conservan la allowlist. QA de navegador valida los tres colores y el modal; check-live-deployment.py comprueba hashes servidos desde Pages.
+- Pendiente: CI de ambas auditorías, revisión de PR, fusión y despliegue con comprobación en web pública.

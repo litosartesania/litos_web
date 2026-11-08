@@ -1267,3 +1267,15 @@ html { scroll-padding-top: 94px; }
 
 /* La ficha ampliada conserva el encuadre completo de los PNG HQ. */
 .product-dialog .detail-stage .special-concept-figure img{max-height:65dvh;object-fit:contain}
+
+/* Ajedrez de mármol: un producto conceptual con tres variantes. */
+.chess-figure img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+.chess-variants{display:flex;gap:.4rem;flex-wrap:wrap;padding:.6rem .65rem .85rem}
+.chess-variant{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem .52rem;min-height:36px;background:transparent;border:1px solid rgba(240,233,226,.25);color:var(--limestone-light);font:inherit;font-size:.72rem;line-height:1.2;cursor:pointer}
+.chess-variant:before{content:"";display:inline-block;width:.77rem;height:.77rem;flex:0 0 .77rem;border-radius:50%;border:1px solid rgba(240,233,226,.5);background:linear-gradient(130deg,#f3efe8 0 50%,#252428 50%)}
+.chess-variant[data-chess-variant="blanco-verde"]:before{background:linear-gradient(130deg,#f3efe8 0 50%,#14513d 50%)}
+.chess-variant[data-chess-variant="blanco-rojo"]:before{background:linear-gradient(130deg,#f3efe8 0 50%,#923e30 50%)}
+.chess-variant[aria-pressed="true"]{border-color:var(--bronze);background:rgba(240,233,226,.1)}
+.chess-variant:focus-visible{outline:2px solid var(--limestone-light);outline-offset:3px}
+.product-dialog .detail-stage .chess-figure img{max-height:65dvh;object-fit:contain}
+.product-dialog .detail-material-row[hidden]{display:none!important}

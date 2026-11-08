@@ -25,7 +25,7 @@ class Inspect(HTMLParser):
   if tag=='p' and 'catalog-price' in a.get('class','').split():self.prices+=1
 expected=set(pages+['styles.css','script.js','funerario-personalizador.js','catalogo-precios.js']+[f'assets/{x}' for x in ['favicon.svg','hero-workshop.webp','workshop-strip.webp','limestone-texture.webp','concept-mesa.webp','concept-lavabo.webp','concept-objetos.webp']])
 expected.update('assets/catalogo/litos-'+x+'.webp' for x in ["banco-01","banco-02","consola-01","consola-02","lavabo-01","lavabo-02","mesa-auxiliar-01","mesa-auxiliar-02","mesa-centro-01","mesa-centro-02","mesa-comedor-01","mesa-comedor-02"])
-hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.png','mesa-parchis-taracea-piedra.png')}
+hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxiliar-base-cruzada.png','mesa-parchis-taracea-piedra.png','ajedrez-blanco-negro.webp','ajedrez-blanco-verde.webp','ajedrez-blanco-rojo.webp')}
 expected.update(hq_images)
 # Original PNG integrity: reject thumbnails, recompressions and wrong products.
 for asset, expected_bytes, sha256, wh in (
@@ -35,6 +35,16 @@ for asset, expected_bytes, sha256, wh in (
  b=(root/asset).read_bytes()
  assert len(b)==expected_bytes and hashlib.sha256(b).hexdigest()==sha256,(asset,'wrong original image')
  assert b[:8]==bytes((137,80,78,71,13,10,26,10)) and (int.from_bytes(b[16:20],'big'),int.from_bytes(b[20:24],'big'))==wh,(asset,'wrong image dimensions')
+# Three chess renders approved by the user, never replaced by generated thumbnails.
+for filename,size,digest in (
+ ('ajedrez-blanco-negro.webp',243856,'fa5dace3fe083efe6f3c88e260d3d887ba9bd3951a045c5901c892182117b496'),
+ ('ajedrez-blanco-verde.webp',211498,'4641587bd0f09621ca3a98766717d6f8bcee1ce2e66baa7a420cb6d13a4d3957'),
+ ('ajedrez-blanco-rojo.webp',204944,'881943bf4d95937957576f663b8bed582767bd9c4ea14a06592eb04afea8f010'),
+):
+ p=root/'assets/catalogo/conceptos/20261108'/filename
+ blob=p.read_bytes()
+ assert len(blob)==size and hashlib.sha256(blob).hexdigest()==digest,(filename,'hash mismatch')
+ assert blob[:4]==b'RIFF' and blob[8:12]==b'WEBP',(filename,'invalid WebP')
 manifests=[json.loads((root.parent/p).read_text(encoding='utf-8')) for p in ('docs/LOTE_10_IMAGENES_20261011.json','docs/LOTE_8_IMAGENES_20261011.json','docs/LOTE_9_MESA_OVAL_20261012.json','docs/LOTE_9_MESA_REDONDA_20261012.json','docs/LOTE_9_MESA_RECTANGULAR_20261012.json','docs/LOTE_9_MESA_CENTRO_MON_20261012.json','docs/LOTE_9_MESA_CENTRO_RED_20261012.json')]
 assert [len(m['items']) for m in manifests]==[10,8,9,9,9,9,9]
 items=[i for m in manifests for i in m['items']]
@@ -317,8 +327,8 @@ assert picker and picker.group(1).count('<option value=')==10 and picker.group(1
 assert htmls['mobiliario.html'].count('class="catalog-workspace"')==1, 'sidebar layout missing'
 assert 'id="material-color"' in htmls['mobiliario.html'] and 'value="verde-alpi"' in htmls['mobiliario.html']
 assert 'simulación digital de tonalidad' not in htmls['mobiliario.html']
-assert 'styles.css?v=litos-hq-20261108' in htmls['mobiliario.html']
-assert 'catalogo-precios.js?v=stone-hq-20261108' in htmls['mobiliario.html']
+assert 'styles.css?v=litos-ajedrez-20261108' in htmls['mobiliario.html']
+assert 'catalogo-precios.js?v=stone-ajedrez-20261108' in htmls['mobiliario.html']
 assert 'material-preview' in (root/'catalogo-precios.js').read_text() and 'tonalMockup:false' in (root/'catalogo-precios.js').read_text()
 assert 'referenceByProduct' in (root/'catalogo-precios.js').read_text() and 'concept-availability' in (root/'catalogo-precios.js').read_text()
 assert all((root/'catalogo-precios.js').read_text().count(item['path'])==(0 if item['path'].startswith('assets/catalogo/variantes/consola-esc__') else 1) for item in items)
@@ -376,7 +386,7 @@ if '--production' in sys.argv:
  assert 'no procesa pagos' in htmls['aviso-legal.html'], 'release blocked: legal payment scope missing'
  assert 'publicidad remunerada' in htmls['aviso-legal.html'].lower(), 'release blocked: economic purpose unclear'
  assert 'GitHub Pages' in htmls['privacidad.html'] and 'IP' in htmls['privacidad.html'], 'release blocked: technical data processing not described'
- assert 'Colección conceptual · 23 productos · 9 piedras · 21 planos' in htmls['mobiliario.html']
+ assert 'Colección conceptual · 24 productos · 9 piedras · 21 planos' in htmls['mobiliario.html']
  assert 'Explora 21 conceptos en una galería' not in htmls['mobiliario.html']
  assert 'Imagen conceptual · Línea en estudio' not in htmls['mobiliario.html']
  assert 'Imágenes conceptuales, no portfolio ejecutado' not in htmls['mobiliario.html']

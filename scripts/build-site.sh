@@ -112,7 +112,7 @@ done
 
 # Original full-resolution, user-supplied generated concepts; exact PNG bytes hash-verified.
 mkdir -p "$site/assets/catalogo/conceptos/20261108"
-for asset in mesa-auxiliar-base-cruzada.png mesa-parchis-taracea-piedra.png; do
+for asset in mesa-auxiliar-base-cruzada.png mesa-parchis-taracea-piedra.png ajedrez-blanco-negro.webp ajedrez-blanco-verde.webp ajedrez-blanco-rojo.webp; do
  cp "assets/catalogo/conceptos/20261108/$asset" "$site/assets/catalogo/conceptos/20261108/$asset"
 done
 

@@ -4,7 +4,7 @@
 */
 (()=>{'use strict';const root=document.querySelector('.catalog-mobiliario');if(!root)return;
 const materials=[["travertino","Travertino beige",70,"#cdb69a","https://preciom2.com/guias/revestimientos/piedra-natural/"],["caliza","Caliza Campaspero",50,"#dfccb1","https://canustone.com/"],["macael","Mármol Blanco Macael",97,"#eeebe6","https://interpiedrahispanica.es/wp-content/uploads/2025/05/TARIFA-BLANCO-MACAEL-MADRID-FEBRERO-2025.pdf"],["carrara","Mármol Carrara",120,"#dddde0","https://preciom2.com/guias/revestimientos/marmol-blanco-carrara/"],["marquina","Mármol Negro Marquina",125,"#343231","https://preciom2.com/guias/revestimientos/marmol-blanco-carrara/"],["granito","Granito gris",65,"#99958f","https://preciom2.com/guias/revestimientos/piedra-natural/"],["cuarcita","Cuarcita común",55,"#aeaaa0","https://preciom2.com/guias/revestimientos/piedra-natural/"],["calacatta","Mármol Calacatta Gold",221,"#f3ebdc","https://www.tiendadelmarmol.com/es/piedranatural/marmol-lujo-calacatta-gold-precio-m2"],["verde-alpi","Mármol Verde Alpi",262,"#174735","https://colourofstone.com/es/shop/piedra-natural/azulejos/verde-alpi/"]];
-const products=[["mesa-comedor-oval","Mesa de comedor ovalada","Mesas",4600,"mesa-comedor","west","Mesa de gran formato con apoyos escultóricos",1],["mesa-comedor-red","Mesa de comedor redonda","Mesas",1600,"","west","Tablero circular y pedestal cilíndrico central; concepto visual",1],["mesa-comedor-rect","Mesa de comedor rectangular","Mesas",2700,"","west","Sobre rectangular de cantos redondeados y dos soportes cilíndricos de igual diámetro; concepto visual",1],["mesa-centro-mon","Mesa de centro monolítica","Mesas",2200,"mesa-centro","west","Centro de salón con presencia mineral",1],["mesa-centro-red","Mesa de centro circular","Mesas",2000,"","west","Centro de salón en formato circular",1],["mesa-aux-ped","Mesa auxiliar pedestal","Mesas",1200,"mesa-auxiliar","west","Sobre y apoyo mineral de pequeño formato",1],["mesa-aux-bal","Mesa auxiliar con baldas","Mesas",1050,"","west","Mesa de apoyo con dos superficies",1],["consola-esc","Consola escultórica","Consolas",3500,"consola","nat","Consola de volumen arquitectónico",1],["consola-rect","Consola recta","Consolas",2440,"","one","Consola de sobre rectangular",1],["banco-esc","Banco escultórico","Bancos",1900,"banco","bench","Banco de piedra con cantos orgánicos",1],["banco-rect","Banco lineal","Bancos",1900,"","bench","Asiento rectilíneo mineral, viabilidad pendiente",0],["lavabo-ped","Lavabo pedestal","Baño",2500,"lavabo","basin","Pieza de baño con taza y pie",1],["lavabo-sobre","Lavabo de sobreponer","Baño",310,"","san","Lavabo circular de travertino Ø40 cm",1],["encimera-bano","Encimera de baño","Baño",650,"","slab","Encimera suspendida con lavabo integrado; concepto visual",0],["encimera-cocina","Encimera de cocina","Arquitectura",1600,"","slab","Superficie de cocina; montaje no incluido",0],["balda","Balda / repisa de piedra","Arquitectura",250,"","bald","Pieza de balda con canto trabajado",0],["panel","Panel de revestimiento (m²)","Arquitectura",140,"","slab","Importe por m², no por objeto",0],["bandeja","Bandeja de piedra","Objetos",180,"","tray","Bandeja de travertino; comparable directo",1],["peana","Peana escultórica","Objetos",750,"","pedestal","Referente indirecto, precio modelado",0],["cuenco","Cuenco decorativo","Objetos",95,"","small","Pieza tallada pequeña, analogía de accesorio",0],["macetero","Macetero mineral","Objetos",360,"","slab","Macetero de piedra con olivo decorativo; concepto visual",0],["mesa-auxiliar-base-cruzada","Mesa auxiliar de piedra con base cruzada","Mesas",null,"","", "Tablero rectangular de piedra natural con apoyos verticales cruzados; diseño conceptual sin medidas ni precio confirmados",0],["mesa-parchis-taracea-piedra","Mesa de parchís en piedra natural","Mesas",null,"","", "Mesa de juego con tablero de taracea multicolor y estructura de madera oscura; tablero decorativo pendiente de verificación de jugabilidad",0]];
+const products=[["mesa-comedor-oval","Mesa de comedor ovalada","Mesas",4600,"mesa-comedor","west","Mesa de gran formato con apoyos escultóricos",1],["mesa-comedor-red","Mesa de comedor redonda","Mesas",1600,"","west","Tablero circular y pedestal cilíndrico central; concepto visual",1],["mesa-comedor-rect","Mesa de comedor rectangular","Mesas",2700,"","west","Sobre rectangular de cantos redondeados y dos soportes cilíndricos de igual diámetro; concepto visual",1],["mesa-centro-mon","Mesa de centro monolítica","Mesas",2200,"mesa-centro","west","Centro de salón con presencia mineral",1],["mesa-centro-red","Mesa de centro circular","Mesas",2000,"","west","Centro de salón en formato circular",1],["mesa-aux-ped","Mesa auxiliar pedestal","Mesas",1200,"mesa-auxiliar","west","Sobre y apoyo mineral de pequeño formato",1],["mesa-aux-bal","Mesa auxiliar con baldas","Mesas",1050,"","west","Mesa de apoyo con dos superficies",1],["consola-esc","Consola escultórica","Consolas",3500,"consola","nat","Consola de volumen arquitectónico",1],["consola-rect","Consola recta","Consolas",2440,"","one","Consola de sobre rectangular",1],["banco-esc","Banco escultórico","Bancos",1900,"banco","bench","Banco de piedra con cantos orgánicos",1],["banco-rect","Banco lineal","Bancos",1900,"","bench","Asiento rectilíneo mineral, viabilidad pendiente",0],["lavabo-ped","Lavabo pedestal","Baño",2500,"lavabo","basin","Pieza de baño con taza y pie",1],["lavabo-sobre","Lavabo de sobreponer","Baño",310,"","san","Lavabo circular de travertino Ø40 cm",1],["encimera-bano","Encimera de baño","Baño",650,"","slab","Encimera suspendida con lavabo integrado; concepto visual",0],["encimera-cocina","Encimera de cocina","Arquitectura",1600,"","slab","Superficie de cocina; montaje no incluido",0],["balda","Balda / repisa de piedra","Arquitectura",250,"","bald","Pieza de balda con canto trabajado",0],["panel","Panel de revestimiento (m²)","Arquitectura",140,"","slab","Importe por m², no por objeto",0],["bandeja","Bandeja de piedra","Objetos",180,"","tray","Bandeja de travertino; comparable directo",1],["peana","Peana escultórica","Objetos",750,"","pedestal","Referente indirecto, precio modelado",0],["cuenco","Cuenco decorativo","Objetos",95,"","small","Pieza tallada pequeña, analogía de accesorio",0],["macetero","Macetero mineral","Objetos",360,"","slab","Macetero de piedra con olivo decorativo; concepto visual",0],["mesa-auxiliar-base-cruzada","Mesa auxiliar de piedra con base cruzada","Mesas",null,"","", "Tablero rectangular de piedra natural con apoyos verticales cruzados; diseño conceptual sin medidas ni precio confirmados",0],["mesa-parchis-taracea-piedra","Mesa de parchís en piedra natural","Mesas",null,"","", "Mesa de juego con tablero de taracea multicolor y estructura de madera oscura; tablero decorativo pendiente de verificación de jugabilidad",0],["ajedrez-marmol","Juego de ajedrez de mármol","Objetos",null,"","","Tablero de mármol con piezas de diseño geométrico moderno; combinaciones de blanco con negro, verde o rojo",0]];
 const links={"west":"https://www.westwing.es/muebles/~travertino/","one":"https://www.1stdibs.com/es/muebles/mesas/mesas-de-consola/mesa-consola-contempor%C3%A1nea-de-travertino/id-f_40367552/","nat":"https://www.naturshome.es/producto/consola-de-travertino/","san":"https://www.sanitino.es/sapho-blok-lavabo-de-piedra-de-400-mm-de-diametro-travertino-beige-pulido-2401-01","tray":"https://t-domecq.com/producto/bandeja-rectangular-con-bordes-de-travertino/","slab":"https://preciom2.com/guias/revestimientos/piedra-natural/","pedestal":"https://www.1stdibs.com/es/muebles/mesas/pedestales/pedestal-de-m%C3%A1rmol-travertino-redondo-facetado-italiano-de-mediados-del-siglo-xx-mina/id-f_34574532/","basin":"https://www.leroymerlin.es/productos/banos/lavabos/lavabo-sobreponer/lavabos-de-travertino-p.html","bench":"https://artemest.com/es-es/products/banco-de-exterior-de-piedra-travertino-gris-tempore","bald":"https://memorialspain.com/products/marmol-blanco-macael-pulido-lapida-columbario","small":"https://www2.hm.com/es_es/productpage.1216320002.html"};
 const grid=root.querySelector('.piece-grid');
 const sourcePhotos=[...grid.querySelectorAll('.piece-photos')];
@@ -13,7 +13,7 @@ const picker=root.querySelector('#material-picker');
 const filters=[...root.querySelectorAll('[data-category-filter]')];
 if(!grid||!picker) return;
 const materialHelp=root.querySelector('.material-heading > p');
-if(materialHelp){materialHelp.textContent='Mesas de comedor y de centro, consola escultórica y banco escultórico muestran una imagen específica para cada piedra. Los 21 modelos anteriores incluyen una imagen propia por piedra y los 2 nuevos tienen una imagen conceptual fija; para otras piedras las fotos restantes no muestran necesariamente la piedra elegida y los precios siguen siendo orientativos.';}
+if(materialHelp){materialHelp.textContent='Mesas de comedor y de centro, consola escultórica y banco escultórico muestran una imagen específica para cada piedra. La mesa de base cruzada y el parchís tienen una imagen conceptual fija. El ajedrez dispone de tres combinaciones propias de mármol. El selector general de piedras no sustituye imágenes de esos modelos; los precios publicados siguen siendo orientativos.';}
 const formatter=new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0});
 const safe=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 // Only files that passed source-image and material-specific visual QA belong here.
@@ -61,7 +61,39 @@ const specialConcepts=Object.freeze({
  "mesa-auxiliar-base-cruzada":{src:"assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png",material:"travertino beige",width:1408,height:1408},
  "mesa-parchis-taracea-piedra":{src:"assets/catalogo/conceptos/20261108/mesa-parchis-taracea-piedra.png",material:"composición multicolor",width:1122,height:1402}
 });
+const chessVariants=Object.freeze([
+ {id:'blanco-negro',name:'Blanco y negro',src:'assets/catalogo/conceptos/20261108/ajedrez-blanco-negro.webp'},
+ {id:'blanco-verde',name:'Blanco y verde',src:'assets/catalogo/conceptos/20261108/ajedrez-blanco-verde.webp'},
+ {id:'blanco-rojo',name:'Blanco y rojo',src:'assets/catalogo/conceptos/20261108/ajedrez-blanco-rojo.webp'}
+]);
+let chessVariantId='blanco-negro';
 const showMaterial=(card,material)=>{
+ if(card.dataset.product==='ajedrez-marmol'){
+  const host=card.querySelector('.material-preview');
+  const option=chessVariants.find(v=>v.id===chessVariantId);
+  const key='chess__'+option.id;
+  if(host.dataset.view!==key){
+   host.replaceChildren();
+   const fig=document.createElement('figure');fig.className='special-concept-figure chess-figure';
+   const img=document.createElement('img');
+   img.src=option.src;img.width=1536;img.height=1024;img.loading='lazy';img.decoding='async';
+   img.alt='Juego de ajedrez de mármol '+option.name.toLowerCase()+', tablero y piezas modernas';
+   const caption=document.createElement('figcaption');
+   caption.textContent='Imagen conceptual · Mármol '+option.name.toLowerCase()+' · No es una obra ejecutada';
+   fig.append(img,caption);
+   const choices=document.createElement('div');choices.className='chess-variants';choices.setAttribute('role','group');
+   choices.setAttribute('aria-label','Elegir combinación de mármol del ajedrez');
+   for(const variant of chessVariants){
+    const button=document.createElement('button');button.type='button';button.className='chess-variant';
+    button.dataset.chessVariant=variant.id;button.textContent=variant.name;
+    button.setAttribute('aria-pressed',String(variant.id===option.id));
+    choices.append(button);
+   }
+   host.append(fig,choices);host.dataset.view=key;
+  }
+  return;
+ }
+
  const concept=specialConcepts[card.dataset.product];
  if(concept){
   const host=card.querySelector('.material-preview'),key='concept__'+card.dataset.product;
@@ -123,7 +155,7 @@ dialog.innerHTML='<div class="detail-panel">'+
  '<div class="detail-layout">'+
  '<div class="detail-stage"><h3 class="detail-image-alt-title"></h3><div class="material-preview" aria-label="Vista completa de la pieza y del material"></div></div>'+
  '<div class="detail-copy"><p class="piece-index" id="detail-index"></p><h2 id="detail-product-title"></h2><p id="detail-summary"></p>'+
- '<div class="detail-benchmark"><span>Referencia estimada · <span id="detail-stone"></span></span><strong id="detail-price"></strong></div>'+
+ '<div class="detail-benchmark"><span><span id="detail-benchmark-label">Referencia estimada · </span><span id="detail-stone"></span></span><strong id="detail-price"></strong></div>'+
  '<p id="detail-comparable"></p><a id="detail-source" target="_blank" rel="noopener noreferrer">Consultar referencia de mercado ↗</a>'+
  '<p class="detail-disclaimer">Visualización conceptual, no obra ejecutada. Las cifras son comparables de terceros o extrapolaciones; no son tarifas de LITOS ni una oferta comercial.</p>'+
  '</div></div></div>';
@@ -169,7 +201,7 @@ function render(){
   if(technical)showTechnical(detailStage);else showMaterial(detailStage,m);
   const current=grid.querySelector('[data-product="'+detailStage.dataset.product+'"]');
   if(current)dialog.querySelector('#detail-price').textContent=current.querySelector('.piece-amount').textContent;
-  dialog.querySelector('#detail-stone').textContent=detailStage.dataset.product==='mesa-parchis-taracea-piedra'?'composición multicolor':m[1];
+  dialog.querySelector('#detail-stone').textContent=detailStage.dataset.product==='ajedrez-marmol'?(chessVariants.find(v=>v.id===chessVariantId)?.name||'Blanco y negro'):detailStage.dataset.product==='mesa-parchis-taracea-piedra'?'composición multicolor':m[1];
  }
 }
 function openDetail(card){
@@ -179,10 +211,12 @@ function openDetail(card){
  detailStage.dataset.product=p[0];
  detailStage.querySelector('.material-preview').removeAttribute('data-view');
  detailStage.querySelector('.detail-image-alt-title').textContent=p[1];
- dialog.querySelector('#detail-index').textContent=p[2]+' · '+(p[7]?'Referencia comparable':'Estimación extrapolada');
+ dialog.querySelector('#detail-index').textContent=p[2]+' · '+(p[3]===null?'Concepto':p[7]?'Referencia comparable':'Estimación extrapolada');
+ dialog.querySelector('.detail-material-row').hidden=p[0]==='ajedrez-marmol';
+ dialog.querySelector('#detail-benchmark-label').textContent=p[3]===null?'Combinación · ':'Referencia estimada · ';
  dialog.querySelector('#detail-product-title').textContent=p[1];
  dialog.querySelector('#detail-summary').textContent=p[6]+'.';
- dialog.querySelector('#detail-comparable').textContent=p[3]===null?'Diseño conceptual sin precio ni dimensiones acreditadas. La viabilidad y las reglas del juego se verificarán antes de ofertarlo.':p[7]?'Estimación basada en artículo o familia comparable; precio real no confirmado.':'Extrapolación sin un comparable idéntico; viabilidad y precio real sin confirmar.';
+ dialog.querySelector('#detail-comparable').textContent=p[0]==='ajedrez-marmol'?'Tres combinaciones de mármol. Las imágenes son conceptuales; dimensiones, fabricación y precio requieren validación técnica.':p[3]===null?'Diseño conceptual sin precio ni dimensiones acreditadas. Características técnicas pendientes de comprobar.':p[7]?'Estimación basada en artículo o familia comparable; precio real no confirmado.':'Extrapolación sin un comparable idéntico; viabilidad y precio real sin confirmar.';
  dialog.querySelector('#detail-source').hidden=p[3]===null;
  if(p[3]!==null)dialog.querySelector('#detail-source').href=links[p[5]];
  detailPicker.value=picker.value;
@@ -191,11 +225,17 @@ function openDetail(card){
  dialog.querySelector('.detail-close').focus();
 }
 grid.addEventListener('click',event=>{
+ const choice=event.target.closest('[data-chess-variant]');
+ if(choice){chessVariantId=choice.dataset.chessVariant;render();return;}
  const card=event.target.closest('.product-model');
  if(card&&!event.target.closest('a'))openDetail(card);
 });
 dialog.querySelector('.detail-close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+dialog.addEventListener('click',event=>{
+ const choice=event.target.closest('[data-chess-variant]');
+ if(choice){chessVariantId=choice.dataset.chessVariant;render();return;}
+ if(event.target===dialog)dialog.close();
+});
 dialog.addEventListener('close',()=>{
  detailStage.dataset.product='';
  if(detailOpener&&detailOpener.isConnected)detailOpener.focus({preventScroll:true});

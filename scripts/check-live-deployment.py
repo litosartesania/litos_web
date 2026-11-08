@@ -38,9 +38,9 @@ FILES = {
     ),
     "mobiliario.html": (
         "Elige la piedra para consultar imágenes conceptuales específicas",
-        "styles.css?v=litos-hq-20261108",
-        "catalogo-precios.js?v=stone-hq-20261108",
-        "Colección conceptual · 23 productos · 9 piedras · 21 planos",
+        "styles.css?v=litos-ajedrez-20261108",
+        "catalogo-precios.js?v=stone-ajedrez-20261108",
+        "Colección conceptual · 24 productos · 9 piedras · 21 planos",
         'class="catalog-workspace"',
         'data-litos-contact-preview inert',
     ),
@@ -68,6 +68,9 @@ FILES = {
         "macetero__verde-alpi",
         "mesa-auxiliar-base-cruzada.png",
         "mesa-parchis-taracea-piedra.png",
+        "ajedrez-blanco-negro.webp",
+        "ajedrez-blanco-verde.webp",
+        "ajedrez-blanco-rojo.webp",
         "tonalMockup:false",
     ),
 }
@@ -122,6 +125,14 @@ def check(attempt):
     ):
         data=read_live(asset,attempt)
         assert len(data)==size and hashlib.sha256(data).hexdigest()==sha,(asset,"invalid live HQ PNG")
+    for name,digest,size in (
+      ("ajedrez-blanco-negro.webp","fa5dace3fe083efe6f3c88e260d3d887ba9bd3951a045c5901c892182117b496",243856),
+      ("ajedrez-blanco-verde.webp","4641587bd0f09621ca3a98766717d6f8bcee1ce2e66baa7a420cb6d13a4d3957",211498),
+      ("ajedrez-blanco-rojo.webp","881943bf4d95937957576f663b8bed582767bd9c4ea14a06592eb04afea8f010",204944),
+    ):
+        target="assets/catalogo/conceptos/20261108/"+name
+        data=read_live(target,attempt)
+        assert len(data)==size and hashlib.sha256(data).hexdigest()==digest,(target,"published asset mismatch")
     for item in MEMORIAL["files"]:
         path = item["path"]
         assert path.startswith("assets/funerario/") and ".." not in Path(path).parts, ("unexpected memorial path", path)
