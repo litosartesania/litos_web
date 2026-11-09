@@ -805,3 +805,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Cuatro imágenes conceptuales fotorrealistas aprobadas en conversación, convertidas a WebP sin alterar el dibujo y publicadas bajo assets/grabados, sustituyendo ilustraciones SVG. No son fotografías de trabajos ejecutados ni imágenes privadas.
 - Mural 1448×1086, placa A3 1122×1402, paisaje 1448×1086, velero 1448×1086. El contenido de los grabados de texto es ilustrativo: **no usar la transcripción generada como fichero de producción**. Validar traducción, maquetación y ortografía antes del grabado.
 - Incorporados hashes SHA-256 y comprobación pública de los cuatro WebP, QA móvil/escritorio y aserción de ausencia de hero.
+
+## 09/11/2026 — Murales de teselas en LITOS Comercial
+- Página independiente `teselas.html`, añadida a la navegación común de siete páginas y como cuarta tarjeta en la portada. Catálogo de 4 propuestas: geométrica rosa de los vientos, paisaje mediterráneo, olivo y composición abstracta.
+- Se crean originales gráficos mosaicos de teselas con piedra conceptual sobre muro, cada uno 1600x1100 WebP. No son trabajos ejecutados ni fotografías de clientes. Fichas con ampliación por archivo local, detalles orientativos, estado conceptual y precio no publicado.
+- Sin servicios de pago, backend, encargos ni envío de formularios. No se promete durabilidad exterior ni sistema de instalación sin validación de peso, soporte, juntas y piedra por el taller.
+- Archivos auditables por SHA-256 y tamaño, allowlist explícita de Pages y pruebas de siete rutas en móvil/escritorio más verificación posterior HTTP de imágenes y HTML.
+- Pendiente de esta rama: CI, revisión visual, merge y Pages verificado.
