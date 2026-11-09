@@ -577,3 +577,11 @@ El usuario aprueba su exhibición en `litos_web` como simulación orientativa, c
 - En pantallas de hasta 760 px se restablece `mask-image:none` para preservar el diseño móvil y su degradado vertical. Se cambia la query de versión del CSS para evitar caché obsoleta.
 - Verificación estática: selectores sustituidos exactamente una vez, reglas de máscara móvil presentes y query CSS actualizada. La comprobación visual real en distintos dispositivos y la comprobación de despliegue deben completarse antes de afirmar que está publicado.
 - Exclusivamente `litosartesania/litos_web`; sin contenido privado añadido ni cambios fuera de esta web.
+
+
+## 2026-11-09 — Portada: categorías y botones duplicados
+- Eliminados de la cabecera de `index.html` los dos accesos «Ver arte funerario» y «Ver mobiliario y objetos». Las tarjetas inferiores continúan siendo los accesos principales a las especialidades.
+- Nuevo orden de las cuatro tarjetas: mobiliario y objetos; grabados e inscripciones; murales de teselas; arte funerario al final. Se preservan sus enlaces y estilos.
+- Los menús compartidos (escritorio, móvil y `noscript`) adoptan el mismo orden en las siete páginas, sin alterar sus enlaces ni su estado `aria-current`.
+- CSS obsoleto de botones retirado; query de versión del CSS de portada actualizada. Añadidas aserciones al control estático y QA responsive para impedir que reaparezcan botones o se revierta el orden.
+- Sin imágenes ni datos personales nuevos; solo repositorio `litosartesania/litos_web`.
