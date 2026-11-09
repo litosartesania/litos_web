@@ -122,9 +122,9 @@ for art in si-mural-jardin.webp si-placa-a3.webp paisaje-grabado.webp velero-gra
  cp "assets/grabados/$art" "$site/assets/grabados/$art"
 done
 
-# Four anonymous original mosaic concept images, fixed explicit allowlist.
+# Approved anonymous mosaic concept images, fixed explicit allowlist.
 mkdir -p "$site/assets/teselas"
-for art in hero-velero.webp motivos-geometricos.webp paisajes.webp elementos-naturales.webp inspiracion-clasica.webp; do
+for art in hero-velero.webp motivos-geometricos.webp paisajes.webp elementos-naturales.webp inspiracion-clasica.webp mosaico-piscina-peces-circular.webp; do
  cp "assets/teselas/$art" "$site/assets/teselas/$art"
 done
 
