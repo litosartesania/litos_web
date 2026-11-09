@@ -1,0 +1,50 @@
+{
+  "schema": "litos-concept-line-v1",
+  "id": "murales-de-teselas",
+  "name": "Murales de teselas",
+  "page": "teselas.html",
+  "status": "línea conceptual, no ejecutada",
+  "price_eur": null,
+  "dimensions": null,
+  "technical_review_required": [
+    "Tipos y colores reales de piedra disponibles",
+    "Tamaño de tesela y espesor",
+    "Soporte, peso, sistema de montaje y transporte",
+    "Adhesivo, junta y ambiente de instalación",
+    "Estudio de legibilidad del dibujo al tamaño real"
+  ],
+  "items": [
+    {
+      "id": "geometrico",
+      "path": "assets/teselas/teselas-geometrico.webp",
+      "width_px": 1600,
+      "height_px": 1100,
+      "bytes": 388994,
+      "sha256": "cc756acaa79e27781a0fe9b45aa7799df2f40f63d0c4437d9e3cdaa66e2556ae"
+    },
+    {
+      "id": "paisaje",
+      "path": "assets/teselas/teselas-paisaje.webp",
+      "width_px": 1600,
+      "height_px": 1100,
+      "bytes": 431030,
+      "sha256": "4a7544345c18313a79b4415b185762ec2db73e737e8160b1ab4c90adfb31c567"
+    },
+    {
+      "id": "olivo",
+      "path": "assets/teselas/teselas-olivo.webp",
+      "width_px": 1600,
+      "height_px": 1100,
+      "bytes": 373498,
+      "sha256": "68abadffa4ea1754f94801d14ded45cba1d94438a79117ce23d4f69879a9b37b"
+    },
+    {
+      "id": "abstracto",
+      "path": "assets/teselas/teselas-abstracto.webp",
+      "width_px": 1600,
+      "height_px": 1100,
+      "bytes": 405960,
+      "sha256": "9a59095b482d2edef8290622702440ceb5c648d930fc89f6f95c7e049c289dd9"
+    }
+  ]
+}

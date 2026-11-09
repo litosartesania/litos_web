@@ -7,7 +7,7 @@ from urllib.parse import unquote,urlsplit
 import ast
 root=Path(sys.argv[1] if len(sys.argv)>1 else '_site').resolve()
 ast.parse((root.parent/'scripts/check-live-deployment.py').read_text(encoding='utf-8'), filename='scripts/check-live-deployment.py')
-pages=['index.html','funerario.html','mobiliario.html','grabados.html','aviso-legal.html','privacidad.html']
+pages=['index.html','funerario.html','mobiliario.html','grabados.html','teselas.html','aviso-legal.html','privacidad.html']
 class Inspect(HTMLParser):
  def __init__(self):
   super().__init__(); self.ids=set();self.hrefs=[];self.assets=[];self.forms=[];self.cards=0;self.prices=0
@@ -29,6 +29,8 @@ hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxilia
 expected.update(hq_images)
 engraving_paths={'assets/grabados/'+name+'.webp' for name in ('si-mural-jardin','si-placa-a3','paisaje-grabado','velero-grabado')}
 expected.update(engraving_paths)
+tessera_paths={'assets/teselas/teselas-'+name+'.webp' for name in ('geometrico','paisaje','olivo','abstracto')}
+expected.update(tessera_paths)
 # Approved original generated-photo concepts; reject low-res thumbnails.
 for filename,byte_count,sha256 in (
  ('si-mural-jardin.webp',460550,'87b5e291c68c5e035b53cdc78874709db7bbd358c2113f540ec1e67836c15d9a'),
@@ -39,6 +41,17 @@ for filename,byte_count,sha256 in (
  blob=(root/'assets/grabados'/filename).read_bytes()
  assert len(blob)==byte_count and hashlib.sha256(blob).hexdigest()==sha256,(filename,'asset mismatch')
  assert blob[:4]==b'RIFF' and blob[8:12]==b'WEBP',(filename,'not a WebP image')
+
+# Tessera concept images are fixed original WebPs, never tiny placeholders.
+for model,byte_count,sha256 in (
+ ('geometrico',388994,'cc756acaa79e27781a0fe9b45aa7799df2f40f63d0c4437d9e3cdaa66e2556ae'),
+ ('paisaje',431030,'4a7544345c18313a79b4415b185762ec2db73e737e8160b1ab4c90adfb31c567'),
+ ('olivo',373498,'68abadffa4ea1754f94801d14ded45cba1d94438a79117ce23d4f69879a9b37b'),
+ ('abstracto',405960,'9a59095b482d2edef8290622702440ceb5c648d930fc89f6f95c7e049c289dd9'),
+):
+ data=(root/'assets/teselas'/('teselas-'+model+'.webp')).read_bytes()
+ assert len(data)==byte_count and hashlib.sha256(data).hexdigest()==sha256,(model,'mosaic asset altered')
+ assert data[:4]==b'RIFF' and data[8:12]==b'WEBP',(model,'not WebP')
 
 # Original PNG integrity: reject thumbnails, recompressions and wrong products.
 for asset, expected_bytes, sha256, wh in (
@@ -278,8 +291,8 @@ for item in items:
  data=f.read_bytes()
  assert len(data)==item['size_bytes'], ('wrong PNG size',item['path'])
  assert hashlib.sha256(data).hexdigest()==item['sha256'], ('wrong PNG SHA-256',item['path'])
-assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths-hq_images-engraving_paths)<2500000, 'non-variant site unexpectedly large'
-assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes+sum((root/p).stat().st_size for p in hq_images)+sum((root/p).stat().st_size for p in engraving_paths), 'site package unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual-variants-plan_paths-review_paths-selection_paths-extra_paths-new_drawings-mesa_aux_paths-mesa_bal_paths-new80_paths-bandeja_paths-macetero_paths-memorial_paths-hq_images-engraving_paths-tessera_paths)<2500000, 'non-variant site unexpectedly large'
+assert sum((root/p).stat().st_size for p in actual)<sum(i['size_bytes'] for i in items)+sum(p['size_bytes'] for p in plans)+sum(i['size_bytes'] for i in corrections)+sum(i['size_bytes'] for i in selection)+sum(i['size_bytes'] for i in extra_selection)+sum(i['size_bytes'] for i in selected_drawings)+sum(i['size_bytes'] for i in mesa_aux_photos)+sum(i['size_bytes'] for i in mesa_bal_photos)+sum(i['size_bytes'] for i in new80)+sum(i['size_bytes'] for i in bandeja_images)+sum(i['size_bytes'] for i in macetero_images)+2500000+memorial_bytes+sum((root/p).stat().st_size for p in hq_images)+sum((root/p).stat().st_size for p in engraving_paths)+sum((root/p).stat().st_size for p in tessera_paths), 'site package unexpectedly large'
 htmls={p:(root/p).read_text() for p in pages}
 # Canonical global navigation must remain byte-equivalent across all pages
 # except the current-page accessibility marker.
@@ -289,9 +302,9 @@ for page in pages:
  assert match,(page,'global navigation missing')
  menu=match.group(0)
  menu_blocks.append(menu.replace(' aria-current="page"',''))
- for dest in ('index.html','funerario.html','mobiliario.html','grabados.html','funerario.html#personalizar'):
+ for dest in ('index.html','funerario.html','mobiliario.html','grabados.html','teselas.html','funerario.html#personalizar'):
   assert menu.count('href="'+dest+'"')>=2,(page,'missing shared link',dest)
- expected_current=page if page in ('index.html','funerario.html','mobiliario.html','grabados.html') else None
+ expected_current=page if page in ('index.html','funerario.html','mobiliario.html','grabados.html','teselas.html') else None
  current=re.findall(r'<a[^>]+aria-current="page"[^>]*>',menu)
  assert len(current)==(1 if expected_current else 0)*3,(page,'incorrect current page',current)
  if expected_current:
@@ -318,7 +331,7 @@ for page,html in htmls.items():
 assert len(parsers['index.html'].forms)==1 and parsers['index.html'].cards==0 and 'id="precios"' not in htmls['index.html']
 assert '<h1 id="hero-title">Productos en piedra natural</h1>' in htmls['index.html']
 assert '<section class="landing-choices" id="rutas" aria-label="Categorías del catálogo"><div class="paths">' in htmls['index.html']
-assert all('href="'+dest+'"' in htmls['index.html'] for dest in ('funerario.html','mobiliario.html','grabados.html'))
+assert all('href="'+dest+'"' in htmls['index.html'] for dest in ('funerario.html','mobiliario.html','grabados.html','teselas.html'))
 assert all(bad not in htmls['index.html'] for bad in ('La piedra.<br>El oficio.', 'Cada proyecto merece su propio espacio.', 'Explore nuestras especialidades', 'landing-heading'))
 assert 'src="assets/hero-workshop.webp"' in htmls['index.html']
 assert 'class="hero-actions"' in htmls['index.html']
@@ -333,6 +346,11 @@ assert '<h1 id="inscripciones-title">Inscripciones en piedra</h1>' in htmls['gra
 assert all(token in htmls['grabados.html'] for token in ('Mural «Si…»','Placa «Si…»','Paisaje grabado en piedra','Velero grabado en piedra','data-litos-public-preview="true"'))
 assert 'id="contact-form"' not in htmls['grabados.html'] and 'mailto:' not in htmls['grabados.html']
 assert len(parsers['grabados.html'].forms)==0
+assert htmls['teselas.html'].count('class="tessera-card"')==4,'four mosaic models required'
+assert '<h1 id="tessera-title">Murales de teselas</h1>' in htmls['teselas.html']
+assert all(('data-tessera-model="'+name+'"') in htmls['teselas.html'] for name in ('geometrico','paisaje','olivo','abstracto'))
+assert len(parsers['teselas.html'].forms)==0 and 'mailto:' not in htmls['teselas.html']
+assert 'Diseño conceptual' in htmls['teselas.html'] and 'Sin precio publicado' in htmls['teselas.html']
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
@@ -409,5 +427,5 @@ if '--production' in sys.argv:
  assert 'Explora 21 conceptos en una galería' not in htmls['mobiliario.html']
  assert 'Imagen conceptual · Línea en estudio' not in htmls['mobiliario.html']
  assert 'Imágenes conceptuales, no portfolio ejecutado' not in htmls['mobiliario.html']
-print(f'PASS: six pages, four engraving studies, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 14 selected travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
+print(f'PASS: seven pages, four mosaic models, four engraving studies, nine material options, 12 source WebP, 63 historical PNG SHA-256 + 14 selected travertine original PNG SHA-256, no tint or collection; {len(actual)} allowlisted files')
 

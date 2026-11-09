@@ -52,6 +52,14 @@ FILES = {
         "Velero grabado en piedra",
         'data-litos-public-preview="true"',
     ),
+    "teselas.html": (
+        '<h1 id="tessera-title">Murales de teselas</h1>',
+        "Rosa de los vientos",
+        "Paisaje mediterráneo",
+        "Olivo mediterráneo",
+        "Composición abstracta",
+        'data-litos-public-preview="true"',
+    ),
     "aviso-legal.html": ("actualmente no vende piezas ni acepta encargos", "formulario de contacto se conserva como maqueta visual"),
     "privacidad.html": ("El formulario visible es una maqueta inactiva", "GitHub Pages"),
     "script.js": ("submit.disabled = true",),
@@ -86,6 +94,7 @@ FORBIDDEN = {
     "index.html": ('href="mailto:', "public-preview-note", "La piedra.<br>El oficio.", "Cada proyecto merece su propio espacio.", "landing-heading"),
     "funerario.html": ('href="mailto:', "public-preview-note"),
     "grabados.html": ('mailto:', 'href="tel:', "public-preview-note", "data-litos-contact-preview",),
+    "teselas.html": ('mailto:', 'href="tel:', "public-preview-note", "data-litos-contact-preview",),
     "mobiliario.html": ("public-preview-note", "simulación digital de tonalidad", 'href="mailto:', "Imagen conceptual · Línea en estudio, no portfolio ejecutado.", "Explora 21 conceptos en una galería", "Imágenes conceptuales, no portfolio ejecutado"),
     "script.js": ("mailto:", "window.location.assign"),
     "styles.css": ("--stone-photo-filter", "--stone-preview-tint",
@@ -123,7 +132,7 @@ def check(attempt):
                 expected_count=0 if item["path"].startswith("assets/catalogo/variantes/consola-esc__") else 1
                 if content.count(item["path"]) != expected_count:
                     raise AssertionError(f"{file}: missing/duplicated PNG map: {item['path']}")
-    for name in ("index.html", "funerario.html", "mobiliario.html", "grabados.html", "aviso-legal.html", "privacidad.html", "styles.css", "script.js", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
+    for name in ("index.html", "funerario.html", "mobiliario.html", "grabados.html", "teselas.html", "aviso-legal.html", "privacidad.html", "styles.css", "script.js", "funerario-recursos.js", "funerario-compositor.js", "funerario-exportar.js", "funerario-personalizador.js"):
         expected = (ROOT / name).read_bytes()
         actual = read_live(name, attempt)
         assert hashlib.sha256(actual).digest() == hashlib.sha256(expected).digest(), ("memorial module mismatch", name)
@@ -137,6 +146,16 @@ def check(attempt):
         data=read_live(asset,attempt)
         assert len(data)==size and hashlib.sha256(data).hexdigest()==digest,(asset,"published photo mismatch")
     assert b'engraving-hero' not in read_live("grabados.html",attempt), "removed hero block reappeared"
+    # Every published mosaic image must be identical to its reviewed concept source.
+    for name,size,digest in (
+      ("geometrico",388994,"cc756acaa79e27781a0fe9b45aa7799df2f40f63d0c4437d9e3cdaa66e2556ae"),
+      ("paisaje",431030,"4a7544345c18313a79b4415b185762ec2db73e737e8160b1ab4c90adfb31c567"),
+      ("olivo",373498,"68abadffa4ea1754f94801d14ded45cba1d94438a79117ce23d4f69879a9b37b"),
+      ("abstracto",405960,"9a59095b482d2edef8290622702440ceb5c648d930fc89f6f95c7e049c289dd9"),
+    ):
+        path="assets/teselas/teselas-"+name+".webp"
+        data=read_live(path,attempt)
+        assert len(data)==size and hashlib.sha256(data).hexdigest()==digest,(path,"invalid public mosaic")
     # Confirm that GitHub Pages serves exactly the full-resolution owner-approved files.
     for asset, sha, size in (
       ("assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png","ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258",3624006),
