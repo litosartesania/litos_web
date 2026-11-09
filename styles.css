@@ -1337,6 +1337,14 @@ html { scroll-padding-top: 94px; }
 .tessera-gallery{padding:20px 3.4vw 72px;background:#fdfaf6;scroll-margin-top:85px}
 .tessera-gallery h2{font:400 clamp(2rem,2.65vw,2.55rem)/1.12 var(--serif);letter-spacing:-.025em;color:#151310;margin:0 0 24px}
 .tessera-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:start}
+
+/* New aquatic mosaic appears as a featured fifth model without shrinking the four existing cards. */
+.tessera-card[data-tessera-model="piscina-peces"]{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.48fr) minmax(0,.8fr);gap:clamp(18px,4vw,60px);align-items:center;padding:clamp(15px,2.2vw,30px);background:#eee8df}
+.tessera-card[data-tessera-model="piscina-peces"] .tessera-visual{aspect-ratio:4/3}
+.tessera-card[data-tessera-model="piscina-peces"] .tessera-card-copy{padding:12px}
+.tessera-card[data-tessera-model="piscina-peces"] h3{font-size:clamp(1.75rem,2.5vw,2.5rem)}
+.tessera-card[data-tessera-model="piscina-peces"] p{max-width:43ch;line-height:1.7}
+@media(max-width:760px){.tessera-card[data-tessera-model="piscina-peces"]{display:block;padding:12px}.tessera-card[data-tessera-model="piscina-peces"] .tessera-card-copy{padding:16px 4px 6px}}
 .tessera-card{min-width:0;background:transparent;color:#1c1916}
 .tessera-visual{display:block;overflow:hidden;aspect-ratio:1.45;background:#d6c5ab;outline-offset:3px}
 .tessera-visual img{display:block;width:100%;height:100%;object-fit:cover;filter:none;transition:transform .25s ease}
