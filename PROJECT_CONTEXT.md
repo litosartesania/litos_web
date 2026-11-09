@@ -569,3 +569,11 @@ El usuario aprueba su exhibición en `litos_web` como simulación orientativa, c
 - El propietario mostró que el resumen fijo ocupaba demasiado espacio y que el Medallón de Cristo parecía translúcido sobre Negro Sudáfrica. La causa visual era la mezcla `screen` con opacidad 0,85 aplicada a los WebP sobre piedra oscura.
 - El resumen completo pasa a ser desplegable, con una línea de selección de 49 px siempre visible. La galería usa una sola fila desplazable de unos 116 px y mantiene sus avisos de prototipo accesibles. El relieve conserva su fondo transparente, pero la figura se dibuja opaca con sombra de contacto.
 - Las pruebas locales comprueban el ancho real en modo táctil, las ocho figuras sobre tres piedras y tres composiciones, y la igualdad visual del PNG exportado. La aprobación comercial y técnica continúa pendiente.
+
+
+## 2026-11-09 — Ajuste visual de la cabecera de murales de teselas
+- Incidencia: el usuario detectó un corte vertical brusco entre el fondo marrón del texto y la fotografía del mural en `teselas.html` (captura de la versión pública).
+- Solución en rama aislada `fix/teselas-hero-degradado-20261109`: aumentar la cobertura de la imagen al 70%, aplicar una máscara alfa horizontal progresiva y suavizar el degradado superpuesto de izquierda a derecha. La imagen original permanece intacta.
+- En pantallas de hasta 760 px se restablece `mask-image:none` para preservar el diseño móvil y su degradado vertical. Se cambia la query de versión del CSS para evitar caché obsoleta.
+- Verificación estática: selectores sustituidos exactamente una vez, reglas de máscara móvil presentes y query CSS actualizada. La comprobación visual real en distintos dispositivos y la comprobación de despliegue deben completarse antes de afirmar que está publicado.
+- Exclusivamente `litosartesania/litos_web`; sin contenido privado añadido ni cambios fuera de esta web.
