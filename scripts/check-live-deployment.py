@@ -54,10 +54,11 @@ FILES = {
     ),
     "teselas.html": (
         '<h1 id="tessera-title">Murales de teselas</h1>',
-        "Rosa de los vientos",
-        "Paisaje mediterráneo",
-        "Olivo mediterráneo",
-        "Composición abstracta",
+        "Motivos geométricos",
+        "Paisajes",
+        "Elementos naturales",
+        "Inspiración clásica",
+        "Arte en piedra, pieza a pieza.",
         'data-litos-public-preview="true"',
     ),
     "aviso-legal.html": ("actualmente no vende piezas ni acepta encargos", "formulario de contacto se conserva como maqueta visual"),
@@ -146,16 +147,17 @@ def check(attempt):
         data=read_live(asset,attempt)
         assert len(data)==size and hashlib.sha256(data).hexdigest()==digest,(asset,"published photo mismatch")
     assert b'engraving-hero' not in read_live("grabados.html",attempt), "removed hero block reappeared"
-    # Every published mosaic image must be identical to its reviewed concept source.
+    # Verify the five exact crops of the approved visual, without published staging files.
     for name,size,digest in (
-      ("geometrico",388994,"cc756acaa79e27781a0fe9b45aa7799df2f40f63d0c4437d9e3cdaa66e2556ae"),
-      ("paisaje",431030,"4a7544345c18313a79b4415b185762ec2db73e737e8160b1ab4c90adfb31c567"),
-      ("olivo",373498,"68abadffa4ea1754f94801d14ded45cba1d94438a79117ce23d4f69879a9b37b"),
-      ("abstracto",405960,"9a59095b482d2edef8290622702440ceb5c648d930fc89f6f95c7e049c289dd9"),
+      ("hero-velero",202704,"fc819c5244b1a387c91d5d1820caa5180799c76a9b1f3697190744acac16f0fc"),
+      ("motivos-geometricos",145396,"8d9745d465b6727023f6cd3b5f236206d1849a4c854b75ee4d54cda247ee02c5"),
+      ("paisajes",142576,"0cd067453ecf0d7eeb2ebeee4f4159adebace083c2a68c9ef3202708165e48f5"),
+      ("elementos-naturales",147860,"f7a8cda7c9cdf02cf0f5cad4b19511c2626f75118b76f1fda0a915437aaf0493"),
+      ("inspiracion-clasica",147818,"ef13564a21a9f5d499391aa81fde1f09062584f1ee18e0b18a4190c2f98c4a8c"),
     ):
-        path="assets/teselas/teselas-"+name+".webp"
-        data=read_live(path,attempt)
-        assert len(data)==size and hashlib.sha256(data).hexdigest()==digest,(path,"invalid public mosaic")
+        asset="assets/teselas/"+name+".webp"
+        b=read_live(asset,attempt)
+        assert len(b)==size and hashlib.sha256(b).hexdigest()==digest,(asset,"image differs from approved design")
     # Confirm that GitHub Pages serves exactly the full-resolution owner-approved files.
     for asset, sha, size in (
       ("assets/catalogo/conceptos/20261108/mesa-auxiliar-base-cruzada.png","ca4040d010f7268dc727ff15868408f1a76c78cba122fd71f55c7161ef5e1258",3624006),
@@ -276,7 +278,7 @@ for attempt in range(1, 25):
             data=read_live(p['path'],attempt)
             assert len(data)==p['size_bytes'] and hashlib.sha256(data).hexdigest()==p['sha256'], 'drawing SHA-256 mismatch'
 
-        print("PASS: live Pages six HTML views, CSS/JS, memorial configurator, 145 public memorial assets and catalog source images hash-verified.", flush=True)
+        print("PASS: live Pages seven HTML views, CSS/JS, memorial configurator, 145 public memorial assets and catalog source images hash-verified.", flush=True)
         sys.exit(0)
     except (AssertionError, URLError, HTTPError, TimeoutError, UnicodeDecodeError) as exc:
         print(f"WAIT {attempt}/24: {exc}", flush=True)
