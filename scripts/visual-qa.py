@@ -284,6 +284,14 @@ with sync_playwright() as app:
     assert page.locator('.project-status').count()==0
     assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
    elif file=='teselas.html':
+    # Regression: the sailboat must fade into the brown copy panel, never end in a hard vertical edge.
+    mask=page.locator('.tessera-hero-image').evaluate('(x)=>getComputedStyle(x).maskImage || getComputedStyle(x).webkitMaskImage')
+    if width<=760:
+     assert mask=='none',(width,'mobile hero must retain its vertical fade',mask)
+    else:
+     assert 'linear-gradient' in mask,(width,'desktop hero requires a feathered image edge',mask)
+     backdrop=page.locator('.tessera-hero').evaluate('(x)=>getComputedStyle(x,"::before").backgroundImage')
+     assert 'linear-gradient' in backdrop,(width,'copy overlay gradient is missing',backdrop)
     assert page.locator('h1#tessera-title').count()==1
     assert page.locator('.tessera-hero').count()==1
     assert page.locator('.tessera-hero-image').evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==[841,437]
