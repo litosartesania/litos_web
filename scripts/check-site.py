@@ -338,7 +338,8 @@ assert '<section class="landing-choices" id="rutas" aria-label="Categorías del 
 assert all('href="'+dest+'"' in htmls['index.html'] for dest in ('funerario.html','mobiliario.html','grabados.html','teselas.html'))
 assert all(bad not in htmls['index.html'] for bad in ('La piedra.<br>El oficio.', 'Cada proyecto merece su propio espacio.', 'Explore nuestras especialidades', 'landing-heading'))
 assert 'src="assets/hero-workshop.webp"' in htmls['index.html']
-assert 'class="hero-actions"' in htmls['index.html']
+assert 'class="hero-actions"' not in htmls['index.html'], 'duplicate hero buttons must remain removed'
+assert re.findall(r'<a class="path path-[^"]+" href="([^"]+)">',htmls['index.html'])==['mobiliario.html','grabados.html','teselas.html','funerario.html'], 'four home categories must end with funeral art'
 for page,count in [('funerario.html',3)]:
  p=parsers[page]
  assert p.cards==count and p.prices==count,(page,p.cards,p.prices)

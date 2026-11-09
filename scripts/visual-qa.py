@@ -41,7 +41,7 @@ with sync_playwright() as app:
    assert not errors,(file,width,errors)
    # All public pages must share the SAME global LITOS header.
    header=page.locator('header.site-header')
-   expected_links=['index.html','funerario.html','mobiliario.html','grabados.html','teselas.html','funerario.html#personalizar']
+   expected_links=['index.html','mobiliario.html','grabados.html','teselas.html','funerario.html','funerario.html#personalizar']
    assert header.locator('.desktop-nav a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'desktop nav')
    assert page.locator('.mobile-menu a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'mobile nav')
    assert header.locator('a.wordmark[href="index.html"]').count()==1
@@ -71,11 +71,10 @@ with sync_playwright() as app:
     assert page.locator('a.path[href="mobiliario.html"]').count()==1
     assert page.locator('a.path[href="grabados.html"]').count()==1
     assert page.locator('a.path[href="teselas.html"]').count()==1
-    assert page.locator('.hero-actions a[href="funerario.html"]').is_visible()
-    assert page.locator('.hero-actions a[href="mobiliario.html"]').is_visible()
+    assert page.locator('.hero-actions').count()==0
+    assert page.locator('.landing-choices .paths > a.path').evaluate_all('(xs)=>xs.map(x=>x.getAttribute("href"))')==['mobiliario.html','grabados.html','teselas.html','funerario.html'],(width,'landing category order')
     hero_box=page.locator('.hero').bounding_box()
     assert hero_box['height']<=570,(width,hero_box)
-    assert page.locator('.hero-actions a').evaluate_all('(xs)=>xs.every(x=>{const r=x.getBoundingClientRect(),p=x.closest(".hero").getBoundingClientRect();return r.top>=p.top && r.bottom<p.bottom-6})'),(width,'hero CTAs fit')
     assert page.locator('.landing-choices').bounding_box()['y']-hero_box['y']-hero_box['height']<=2
     assert page.locator('form').count()==1
    elif file in ('funerario.html','mobiliario.html'):
