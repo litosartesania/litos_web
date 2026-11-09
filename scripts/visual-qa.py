@@ -60,7 +60,7 @@ with sync_playwright() as app:
     assert page.locator('.mobile-menu a[href="index.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="mobiliario.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="grabados.html"]').is_visible()
-     assert page.locator('.mobile-menu a[href="teselas.html"]').is_visible()
+    assert page.locator('.mobile-menu a[href="teselas.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="funerario.html#personalizar"]').is_visible()
     page.keyboard.press('Escape')
     assert not page.locator('.mobile-menu').is_visible()
