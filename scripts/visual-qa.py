@@ -41,10 +41,11 @@ with sync_playwright() as app:
    assert not errors,(file,width,errors)
    # All public pages must share the SAME global LITOS header.
    header=page.locator('header.site-header')
-   expected_links=['index.html','mobiliario.html','grabados.html','teselas.html','funerario.html','funerario.html#personalizar']
+   expected_links=['index.html','mobiliario.html','grabados.html','teselas.html','funerario.html']
    assert header.locator('.desktop-nav a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'desktop nav')
    assert page.locator('.mobile-menu a').evaluate_all('(els)=>els.map(x=>x.getAttribute("href"))')==expected_links,(file,'mobile nav')
    assert header.locator('a.wordmark[href="index.html"]').count()==1
+   assert page.get_by_role('link',name='Ver modelos',exact=True).count()==0,(file,width,'obsolete Ver modelos button')
    selected={'index.html':'index.html','funerario.html':'funerario.html','mobiliario.html':'mobiliario.html','grabados.html':'grabados.html','teselas.html':'teselas.html'}.get(file)
    marked=header.locator('.desktop-nav a[aria-current="page"]').evaluate_all('(els)=>els.map(e=>e.getAttribute("href"))')
    assert marked==([selected] if selected else []),(file,'current page',marked)
@@ -61,7 +62,6 @@ with sync_playwright() as app:
     assert page.locator('.mobile-menu a[href="mobiliario.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="grabados.html"]').is_visible()
     assert page.locator('.mobile-menu a[href="teselas.html"]').is_visible()
-    assert page.locator('.mobile-menu a[href="funerario.html#personalizar"]').is_visible()
     page.keyboard.press('Escape')
     assert not page.locator('.mobile-menu').is_visible()
    if file=='index.html':
@@ -293,6 +293,7 @@ with sync_playwright() as app:
      assert 'linear-gradient' in backdrop,(width,'copy overlay gradient is missing',backdrop)
     assert page.locator('h1#tessera-title').count()==1
     assert page.locator('.tessera-hero').count()==1
+    assert page.locator('.tessera-hero-link').count()==0,(width,'tessera hero CTA must not return')
     assert page.locator('.tessera-hero-image').evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==[841,437]
     assert page.locator('.tessera-feature').count()==4
     assert page.locator('.tessera-card').count()==4

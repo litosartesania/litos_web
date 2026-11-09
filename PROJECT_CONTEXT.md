@@ -585,3 +585,10 @@ El usuario aprueba su exhibición en `litos_web` como simulación orientativa, c
 - Los menús compartidos (escritorio, móvil y `noscript`) adoptan el mismo orden en las siete páginas, sin alterar sus enlaces ni su estado `aria-current`.
 - CSS obsoleto de botones retirado; query de versión del CSS de portada actualizada. Añadidas aserciones al control estático y QA responsive para impedir que reaparezcan botones o se revierta el orden.
 - Sin imágenes ni datos personales nuevos; solo repositorio `litosartesania/litos_web`.
+
+
+## 2026-11-09 — Retirada de todos los botones «Ver modelos»
+- Eliminados los enlaces «Ver modelos» del menú común de las siete páginas públicas (escritorio, móvil y `noscript`).
+- Eliminado también el botón «Ver modelos» de la cabecera de `teselas.html`; el catálogo se mantiene accesible mediante desplazamiento natural.
+- Eliminados estilos huérfanos `.nav-contact` y `.tessera-hero-link`. Conservada la navegación entre especialidades y el catálogo.
+- Añadidas comprobaciones estáticas y pruebas responsive para evitar la reaparición. No se modifica información privada ni otros repositorios.
