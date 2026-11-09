@@ -296,8 +296,14 @@ with sync_playwright() as app:
     assert page.locator('.tessera-hero-link').count()==0,(width,'tessera hero CTA must not return')
     assert page.locator('.tessera-hero-image').evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==[841,437]
     assert page.locator('.tessera-feature').count()==4
-    assert page.locator('.tessera-card').count()==4
-    assert page.locator('.tessera-visual img').count()==4
+    assert page.locator('.tessera-card').count()==5
+    assert page.locator('.tessera-visual img').count()==5
+    aquatic=page.locator('.tessera-card[data-tessera-model="piscina-peces"]')
+    assert aquatic.count()==1
+    assert aquatic.locator('img').get_attribute('src')=='assets/teselas/mosaico-piscina-peces-circular.webp'
+    assert aquatic.locator('img').evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==[1448,1086]
+    assert aquatic.locator('a.tessera-visual').get_attribute('href')=='assets/teselas/mosaico-piscina-peces-circular.webp'
+    assert 'Simulación' in aquatic.locator('img').get_attribute('alt')
     assert page.locator('.tessera-process-grid>div').count()==4
     for model,photo,wh in (
      ('geometrico','motivos-geometricos',(682,472)),
