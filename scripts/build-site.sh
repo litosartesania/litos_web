@@ -124,7 +124,7 @@ done
 
 # Four anonymous original mosaic concept images, fixed explicit allowlist.
 mkdir -p "$site/assets/teselas"
-for art in teselas-geometrico.webp teselas-paisaje.webp teselas-olivo.webp teselas-abstracto.webp; do
+for art in hero-velero.webp motivos-geometricos.webp paisajes.webp elementos-naturales.webp inspiracion-clasica.webp; do
  cp "assets/teselas/$art" "$site/assets/teselas/$art"
 done
 

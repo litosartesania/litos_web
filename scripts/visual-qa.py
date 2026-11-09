@@ -285,18 +285,27 @@ with sync_playwright() as app:
     assert page.locator('.made-to-measure').count()==0 and page.locator('.page-pricing').count()==0
    elif file=='teselas.html':
     assert page.locator('h1#tessera-title').count()==1
+    assert page.locator('.tessera-hero').count()==1
+    assert page.locator('.tessera-hero-image').evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==[841,437]
+    assert page.locator('.tessera-feature').count()==4
     assert page.locator('.tessera-card').count()==4
     assert page.locator('.tessera-visual img').count()==4
     assert page.locator('.tessera-process-grid>div').count()==4
-    for name in ('geometrico','paisaje','olivo','abstracto'):
-     im=page.locator(f'[data-tessera-model="{name}"] .tessera-visual img')
-     assert im.evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==[1600,1100]
-     assert im.get_attribute('src')==f'assets/teselas/teselas-{name}.webp'
+    for model,photo,wh in (
+     ('geometrico','motivos-geometricos',(682,472)),
+     ('paisaje','paisajes',(686,472)),
+     ('olivo','elementos-naturales',(684,472)),
+     ('clasico','inspiracion-clasica',(686,472)),
+    ):
+     im=page.locator(f'[data-tessera-model="{model}"] .tessera-visual img')
+     assert im.evaluate('(x)=>[x.naturalWidth,x.naturalHeight]')==list(wh)
+     assert im.get_attribute('src')==f'assets/teselas/{photo}.webp'
+    if width==1440:
+     assert page.locator('.tessera-grid').evaluate('(x)=>getComputedStyle(x).gridTemplateColumns.split(" ").length')==4
+     assert page.locator('.tessera-features').evaluate('(x)=>getComputedStyle(x).gridTemplateColumns.split(" ").length')==4
     if width==390:
-     accordion=page.locator('.tessera-card details').first
-     accordion.locator('summary').click()
-     assert accordion.evaluate('(x)=>x.open')
      assert page.locator('.tessera-grid').evaluate('(x)=>getComputedStyle(x).gridTemplateColumns.split(" ").length')==1
+     assert page.locator('.tessera-features').evaluate('(x)=>getComputedStyle(x).gridTemplateColumns.split(" ").length')==2
     assert page.locator('form').count()==0
    elif file=='grabados.html':
     assert page.locator('.engraving-hero').count()==0

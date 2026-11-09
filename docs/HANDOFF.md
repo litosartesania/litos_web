@@ -812,3 +812,10 @@ Rama `work/funerario-fase2-20261018` desde el `main` con PR #55 fusionada. La au
 - Sin servicios de pago, backend, encargos ni envío de formularios. No se promete durabilidad exterior ni sistema de instalación sin validación de peso, soporte, juntas y piedra por el taller.
 - Archivos auditables por SHA-256 y tamaño, allowlist explícita de Pages y pruebas de siete rutas en móvil/escritorio más verificación posterior HTTP de imágenes y HTML.
 - Pendiente de esta rama: CI, revisión visual, merge y Pages verificado.
+
+## 09/11/2026 — Diseño de Murales de teselas según referencia aprobada
+- Se recupera la captura visual aprobada para reproducir la composición: cabecera fotográfica del velero a la derecha, lema «Arte en piedra, pieza a pieza», botón «Ver modelos», cuatro beneficios sobre franja clara y cuatro motivos en cuadrícula horizontal con fondos crema.
+- Los cuatro modelos son: Motivos geométricos, Paisajes, Elementos naturales e Inspiración clásica (en lugar del cuarto abstracto de la primera propuesta). El contenido técnico, precios no definidos y limitaciones de fabricación se mantienen en una sección secundaria accesible.
+- Los cinco activos recortados proceden exclusivamente de la maqueta aprobada por el usuario. No se usan fotos de obras reales, clientes ni LITOS Interno. No se publica la captura completa ni herramientas temporales.
+- Assets: `assets/teselas/hero-velero.webp`, `motivos-geometricos.webp`, `paisajes.webp`, `elementos-naturales.webp`, `inspiracion-clasica.webp`. Guardados en WebP con hashes y tamaños verificados en CI y Pages. Imágenes de tarjetas se han remuestreado desde la captura: no afirmar resolución fotográfica original.
+- La cabecera común de LITOS se mantiene en todas las páginas. Las afirmaciones de resistencia al exterior se condicionan a la idoneidad técnica de cada piedra y fijación; no se activa la contratación.

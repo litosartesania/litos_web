@@ -29,7 +29,7 @@ hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxilia
 expected.update(hq_images)
 engraving_paths={'assets/grabados/'+name+'.webp' for name in ('si-mural-jardin','si-placa-a3','paisaje-grabado','velero-grabado')}
 expected.update(engraving_paths)
-tessera_paths={'assets/teselas/teselas-'+name+'.webp' for name in ('geometrico','paisaje','olivo','abstracto')}
+tessera_paths={'assets/teselas/'+name+'.webp' for name in ('hero-velero','motivos-geometricos','paisajes','elementos-naturales','inspiracion-clasica')}
 expected.update(tessera_paths)
 # Approved original generated-photo concepts; reject low-res thumbnails.
 for filename,byte_count,sha256 in (
@@ -42,16 +42,20 @@ for filename,byte_count,sha256 in (
  assert len(blob)==byte_count and hashlib.sha256(blob).hexdigest()==sha256,(filename,'asset mismatch')
  assert blob[:4]==b'RIFF' and blob[8:12]==b'WEBP',(filename,'not a WebP image')
 
-# Tessera concept images are fixed original WebPs, never tiny placeholders.
-for model,byte_count,sha256 in (
- ('geometrico',388994,'cc756acaa79e27781a0fe9b45aa7799df2f40f63d0c4437d9e3cdaa66e2556ae'),
- ('paisaje',431030,'4a7544345c18313a79b4415b185762ec2db73e737e8160b1ab4c90adfb31c567'),
- ('olivo',373498,'68abadffa4ea1754f94801d14ded45cba1d94438a79117ce23d4f69879a9b37b'),
- ('abstracto',405960,'9a59095b482d2edef8290622702440ceb5c648d930fc89f6f95c7e049c289dd9'),
+# Approved reference design crops: exact expected file lengths, dimensions and hashes.
+for model,byte_count,sha256,wh in (
+ ('hero-velero',202704,'fc819c5244b1a387c91d5d1820caa5180799c76a9b1f3697190744acac16f0fc',(841,437)),
+ ('motivos-geometricos',145396,'8d9745d465b6727023f6cd3b5f236206d1849a4c854b75ee4d54cda247ee02c5',(682,472)),
+ ('paisajes',142576,'0cd067453ecf0d7eeb2ebeee4f4159adebace083c2a68c9ef3202708165e48f5',(686,472)),
+ ('elementos-naturales',147860,'f7a8cda7c9cdf02cf0f5cad4b19511c2626f75118b76f1fda0a915437aaf0493',(684,472)),
+ ('inspiracion-clasica',147818,'ef13564a21a9f5d499391aa81fde1f09062584f1ee18e0b18a4190c2f98c4a8c',(686,472)),
 ):
- data=(root/'assets/teselas'/('teselas-'+model+'.webp')).read_bytes()
- assert len(data)==byte_count and hashlib.sha256(data).hexdigest()==sha256,(model,'mosaic asset altered')
- assert data[:4]==b'RIFF' and data[8:12]==b'WEBP',(model,'not WebP')
+ f=root/'assets/teselas'/(model+'.webp')
+ binary=f.read_bytes()
+ assert len(binary)==byte_count and hashlib.sha256(binary).hexdigest()==sha256,(model,'approved mosaic image altered')
+ assert binary[:4]==b'RIFF' and binary[8:12]==b'WEBP',(model,'not WebP')
+# No original full-page screenshot or temporary transfer assets may enter the public build.
+assert not any('staging' in path for path in (str(x) for x in root.rglob('*'))),'temporary transfer leaked into publication'
 
 # Original PNG integrity: reject thumbnails, recompressions and wrong products.
 for asset, expected_bytes, sha256, wh in (
@@ -348,9 +352,11 @@ assert 'id="contact-form"' not in htmls['grabados.html'] and 'mailto:' not in ht
 assert len(parsers['grabados.html'].forms)==0
 assert htmls['teselas.html'].count('class="tessera-card"')==4,'four mosaic models required'
 assert '<h1 id="tessera-title">Murales de teselas</h1>' in htmls['teselas.html']
-assert all(('data-tessera-model="'+name+'"') in htmls['teselas.html'] for name in ('geometrico','paisaje','olivo','abstracto'))
+assert all(('data-tessera-model="'+name+'"') in htmls['teselas.html'] for name in ('geometrico','paisaje','olivo','clasico'))
 assert len(parsers['teselas.html'].forms)==0 and 'mailto:' not in htmls['teselas.html']
-assert 'Diseño conceptual' in htmls['teselas.html'] and 'Sin precio publicado' in htmls['teselas.html']
+assert all(p in htmls['teselas.html'] for p in ('Arte en piedra, pieza a pieza.', 'Piedra natural','Trabajo artesanal','Alta durabilidad','Espacios versátiles','Inspiración clásica'))
+assert 'Diseños conceptuales' not in htmls['teselas.html'] or 'Sin precio publicado' in htmls['teselas.html']
+assert 'Imágenes conceptuales' in htmls['teselas.html'] and 'Sin precio publicado' in htmls['teselas.html']
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
