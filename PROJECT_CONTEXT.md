@@ -592,3 +592,11 @@ El usuario aprueba su exhibición en `litos_web` como simulación orientativa, c
 - Eliminado también el botón «Ver modelos» de la cabecera de `teselas.html`; el catálogo se mantiene accesible mediante desplazamiento natural.
 - Eliminados estilos huérfanos `.nav-contact` y `.tessera-hero-link`. Conservada la navegación entre especialidades y el catálogo.
 - Añadidas comprobaciones estáticas y pruebas responsive para evitar la reaparición. No se modifica información privada ni otros repositorios.
+
+
+## 2026-11-09 — Nuevo modelo de teselas para fondos de piscina y fuentes
+- Se incorpora la imagen conceptual aprobada por el usuario: medallón circular con peces, ondas azules y cenefa griega, visualizado bajo el agua en una piscina clásica.
+- Archivo público optimizado `assets/teselas/mosaico-piscina-peces-circular.webp`, 1448×1086, 496100 bytes; SHA-256 `1c0edee7d1bdbc9159f8c0ab6b8b9a2648b545a8bf1da0367bbd3656ccbe64cb`, Git blob `37951e9b26eb715f11b9ab7187c5dceb250555c5`.
+- Quinto modelo de la galería de `teselas.html`, destacado a ancho completo para no encoger los cuatro modelos ya aprobados; se mantiene el visor de imagen ampliada y el diseño responsive.
+- La ficha identifica la imagen como simulación; en uso sumergido deben validarse piedra, juntas, impermeabilización y colocación. No se afirma que LITOS haya ejecutado el trabajo ni que los materiales mostrados estén garantizados.
+- Actualizados allowlists de build/auditoría con hash y dimensiones y QA visual de la quinta ficha. Sin originales de clientes ni datos familiares o comerciales privados.
