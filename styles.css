@@ -32,8 +32,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .desktop-nav a { position: relative; padding: .45rem 0; font-size: .8rem; line-height: 1; text-decoration: none; }
 .desktop-nav a::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; content: ""; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s ease; }
 .desktop-nav a:hover::after, .desktop-nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
-.desktop-nav .nav-contact { padding: .8rem 1rem; border: 1px solid var(--line-dark); }
-.desktop-nav .nav-contact::after { display: none; }
 .menu-button { display: none; align-items: center; gap: .75rem; padding: .65rem 0; color: inherit; border: 0; background: none; cursor: pointer; }
 .menu-label { font-size: .8rem; }
 .menu-lines { display: grid; width: 26px; gap: 7px; }
@@ -1329,8 +1327,6 @@ html { scroll-padding-top: 94px; }
 .tessera-hero h1{font:400 clamp(3rem,5.45vw,5.4rem)/1.03 var(--serif);letter-spacing:-.035em;margin:0;white-space:nowrap}
 .tessera-tagline{font:italic 400 clamp(1.65rem,2.65vw,2.6rem)/1.24 var(--serif);margin:5px 0 22px;color:#eee3d6}
 .tessera-hero-intro{font:.98rem/1.64 var(--sans);max-width:560px;color:#eee6dd;margin:0 0 25px}
-.tessera-hero-link{display:inline-flex;gap:50px;align-items:center;justify-content:space-between;padding:14px 24px;border:1px solid #e9e0d5;color:#fbf6f0;text-decoration:none;font-size:.9rem;min-width:185px}
-.tessera-hero-link:hover,.tessera-hero-link:focus-visible{background:rgba(255,255,255,.12);outline-offset:3px}
 .tessera-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;align-items:center;background:linear-gradient(120deg,#faf8f5,#f3eee7);min-height:102px;padding:17px 4.1vw;border-bottom:1px solid #eee8df}
 .tessera-feature{min-width:0;display:flex;align-items:center;justify-content:center;gap:19px;padding:0 19px;color:#292522;min-height:58px}
 .tessera-feature:not(:last-child){border-right:1px solid #cdbfae}
