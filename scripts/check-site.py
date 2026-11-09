@@ -306,7 +306,7 @@ for page in pages:
  assert match,(page,'global navigation missing')
  menu=match.group(0)
  menu_blocks.append(menu.replace(' aria-current="page"',''))
- for dest in ('index.html','funerario.html','mobiliario.html','grabados.html','teselas.html','funerario.html#personalizar'):
+ for dest in ('index.html','funerario.html','mobiliario.html','grabados.html','teselas.html'):
   assert menu.count('href="'+dest+'"')>=2,(page,'missing shared link',dest)
  expected_current=page if page in ('index.html','funerario.html','mobiliario.html','grabados.html','teselas.html') else None
  current=re.findall(r'<a[^>]+aria-current="page"[^>]*>',menu)
@@ -314,6 +314,7 @@ for page in pages:
  if expected_current:
   assert all('href="'+expected_current+'"' in tag for tag in current),(page,'active links')
 assert len(set(menu_blocks))==1,'LITOS navigation differs between site pages'
+assert all('Ver modelos' not in htmls[page] and 'nav-contact' not in htmls[page] for page in pages),'obsolete Ver modelos link in public HTML'
 parsers={}
 for page,html in htmls.items():
  p=Inspect();p.feed(html);parsers[page]=p
