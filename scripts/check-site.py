@@ -29,7 +29,7 @@ hq_images={'assets/catalogo/conceptos/20261108/'+name for name in ('mesa-auxilia
 expected.update(hq_images)
 engraving_paths={'assets/grabados/'+name+'.webp' for name in ('si-mural-jardin','si-placa-a3','paisaje-grabado','velero-grabado')}
 expected.update(engraving_paths)
-tessera_paths={'assets/teselas/'+name+'.webp' for name in ('hero-velero','motivos-geometricos','paisajes','elementos-naturales','inspiracion-clasica')}
+tessera_paths={'assets/teselas/'+name+'.webp' for name in ('hero-velero','motivos-geometricos','paisajes','elementos-naturales','inspiracion-clasica','mosaico-piscina-peces-circular')}
 expected.update(tessera_paths)
 # Approved original generated-photo concepts; reject low-res thumbnails.
 for filename,byte_count,sha256 in (
@@ -49,6 +49,7 @@ for model,byte_count,sha256,wh in (
  ('paisajes',142576,'0cd067453ecf0d7eeb2ebeee4f4159adebace083c2a68c9ef3202708165e48f5',(686,472)),
  ('elementos-naturales',147860,'f7a8cda7c9cdf02cf0f5cad4b19511c2626f75118b76f1fda0a915437aaf0493',(684,472)),
  ('inspiracion-clasica',147818,'ef13564a21a9f5d499391aa81fde1f09062584f1ee18e0b18a4190c2f98c4a8c',(686,472)),
+ ('mosaico-piscina-peces-circular',496100,'1c0edee7d1bdbc9159f8c0ab6b8b9a2648b545a8bf1da0367bbd3656ccbe64cb',(1448,1086)),
 ):
  f=root/'assets/teselas'/(model+'.webp')
  binary=f.read_bytes()
@@ -352,13 +353,14 @@ assert '<h1 id="inscripciones-title">Inscripciones en piedra</h1>' in htmls['gra
 assert all(token in htmls['grabados.html'] for token in ('Mural «Si…»','Placa «Si…»','Paisaje grabado en piedra','Velero grabado en piedra','data-litos-public-preview="true"'))
 assert 'id="contact-form"' not in htmls['grabados.html'] and 'mailto:' not in htmls['grabados.html']
 assert len(parsers['grabados.html'].forms)==0
-assert htmls['teselas.html'].count('class="tessera-card"')==4,'four mosaic models required'
+assert htmls['teselas.html'].count('class="tessera-card"')==5,'five mosaic models required'
 assert '<h1 id="tessera-title">Murales de teselas</h1>' in htmls['teselas.html']
-assert all(('data-tessera-model="'+name+'"') in htmls['teselas.html'] for name in ('geometrico','paisaje','olivo','clasico'))
+assert all(('data-tessera-model="'+name+'"') in htmls['teselas.html'] for name in ('geometrico','paisaje','olivo','clasico','piscina-peces'))
 assert len(parsers['teselas.html'].forms)==0 and 'mailto:' not in htmls['teselas.html']
 assert all(p in htmls['teselas.html'] for p in ('Arte en piedra, pieza a pieza.', 'Piedra natural','Trabajo artesanal','Alta durabilidad','Espacios versátiles','Inspiración clásica'))
 assert 'Diseños conceptuales' not in htmls['teselas.html'] or 'Sin precio publicado' in htmls['teselas.html']
 assert 'Imágenes conceptuales' in htmls['teselas.html'] and 'Sin precio publicado' in htmls['teselas.html']
+assert 'mosaico-piscina-peces-circular.webp' in htmls['teselas.html'] and 'El uso sumergido requiere comprobar' in htmls['teselas.html'], 'pool mosaic disclosures missing'
 assert 'id="memorial-workbench"' in htmls['funerario.html'] and 'id="memorial-text"' in htmls['funerario.html']
 assert 'Lápida de columbario' in htmls['funerario.html'] and 'Lápida con portada' in htmls['funerario.html'] and 'Losa para panteón' in htmls['funerario.html']
 assert 'no son estándares' in htmls['funerario.html']
